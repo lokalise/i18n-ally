@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      color: #a7b9d1;
+      background: #2d323c;
+    }
+
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .main-container {
+      padding: 20px;
+    }
+
+    .main-container .header {
+      margin-bottom: 20px;
+    }
+    .main-container .header h2 {
+      margin: 0;
+      padding: 0 0 15px 0;
+      border-bottom: 1px solid #4e5b71;
+      display: flex;
+    }
+
+    .main-container .header h2:hover button {
+      opacity: 1;
+    }
+    .main-container .header h2 button {
+      margin-left: auto;
+      opacity: .3;
+    }
+
+    .i18n-table .item {
+      margin-bottom: 15px;
+      padding: 12px 15px;
+      border-radius: 5px;
+      background: #1f2329;
+    }
+
+    .i18n-table .item input:hover {
+      border-bottom-color: #4e5b71;
+    }
+
+    .i18n-table .item:hover button {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .i18n-table .item input {
+      border-bottom-color: transparent;
+    }
+
+    .i18n-table .item input:focus {
+      border-bottom-color: #2e7cf1;
+    }
+
+    .i18n-table .item > h4 {
+      margin: 0 0  5px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .i18n-table .item > h4 span {
+      padding: 0 0 3px 0;
+    }
+
+
+    .i18n-table .item > h4 button {
+      margin-left: auto;
+      opacity: .3;
+      transform: translate(0, 5px);
+    }
+
+    .i18n-table .item > ul {
+      display: flex;
+      flex-flow: column wrap;
+    }
+
+    .i18n-table .item > ul > li {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .i18n-table .item > ul > li span {
+      width: 40px;
+    }
+
+
+    input {
+      width: 100%;
+      color: #a7b9d1;
+      border: none;
+      border-bottom: 1px solid #273750;
+      padding: 5px 8px;
+      background: transparent;
+      transition: .3s;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+
+    button {
+      background: #2e7cf1;
+      border: none;
+      color: #f6f9ff;
+      padding: 5px 8px;
+      border-radius: 3px;
+      transition: .3s;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="main-container">
+      <div class="header"><h2><span>src/utils/TransCenter.ts</span> <button>一键根据ZH翻译</button></h2></div>
+      <ul class="i18n-table">
+          <li class="item">
+            <h4><span>common.document.title </span> <button>根据ZH翻译</button></h4>
+            
+            <ul>
+              <li><span>EN</span> <input type="text" value="" /></li>
+              <li><span>TW</span> <input type="text" value="标题文字文字" /></li>
+              <li><span>ZH</span> <input type="text" value="标题文字文字" /></li>
+            </ul>
+          </li>
+          <li class="item">
+            <h4><span>common.document.title </span> <button>根据ZH翻译</button></h4>
+            
+            <ul>
+              <li><span>EN</span> <input type="text" value="" /></li>
+              <li><span>TW</span> <input type="text" value="标题文字文字" /></li>
+              <li><span>ZH</span> <input type="text" value="标题文字文字" /></li>
+            </ul>
+          </li>
+          <li class="item">
+            <h4><span>common.document.title </span> <button>根据ZH翻译</button></h4>
+            
+            <ul>
+              <li><span>EN</span> <input type="text" value="" /></li>
+              <li><span>TW</span> <input type="text" value="标题文字文字" /></li>
+              <li><span>ZH</span> <input type="text" value="标题文字文字" /></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
