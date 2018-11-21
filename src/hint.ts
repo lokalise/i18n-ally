@@ -10,7 +10,7 @@ class HintProvider implements vscode.HoverProvider {
     const key = KeyDetector.getKey(document, position)
     if (!key) return
 
-    const mkStr = I18nParser.getTransByKey(key, document.fileName)
+    const mkStr = I18nParser.transByKey(key, document.fileName)
       .map(item => `**${item.lng.toUpperCase()}:** ${item.str || '-'}`)
       .join('  \n')
     return new vscode.Hover(`${mkStr}`)

@@ -1,6 +1,6 @@
 {
-  "defaultSeverity": "error",
-  "extends": ["tslint-react"],
+  "defaultSeverity": "warning",
+  "extends": [],
   "jsRules": {},
   "rules": {
     "no-console": false,

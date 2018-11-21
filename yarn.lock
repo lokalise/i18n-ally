@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@types/blueimp-md5@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@types/blueimp-md5/-/blueimp-md5-2.7.0.tgz#404222806800478ca2782e8ad46590aba7f14627"
+  integrity sha1-QEIigGgAR4yieC6K1GWQq6fxRic=
+
 "@types/lodash@^4.14.118":
   version "4.14.118"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.118.tgz#247bab39bfcc6d910d4927c6e06cbc70ec376f27"
@@ -16,6 +21,11 @@
   version "10.12.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.9.tgz#a07bfa74331471e1dc22a47eb72026843f7b95c8"
   integrity sha512-eajkMXG812/w3w4a1OcBlaTwsFPO5F7fJ/amy+tieQxEMWBlbV1JGSjkFM+zkHNf81Cad+dfIRA+IBkvmvdAeA==
+
+"@types/node@^9.3.0":
+  version "9.6.39"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.39.tgz#111cb4f5591cb6945aad34733b4e40bfd59b58fc"
+  integrity sha512-c3OkjgNpSMdHan56WhklP0FMOk5ocilKz2Mpa0NOGzu8jw5YERjCf9FG0epYB1+TxScv/oI4uJ204u2mUg7Hcw==
 
 ajv@^6.5.5:
   version "6.5.5"
@@ -188,6 +198,11 @@ block-stream@*:
   integrity sha1-E+v+d4oDIFz+A3UUgeu0szAMEmo=
   dependencies:
     inherits "~2.0.0"
+
+blueimp-md5@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.10.0.tgz#02f0843921f90dca14f5b8920a38593201d6964d"
+  integrity sha512-EkNUOi7tpV68TqjpiUz9D9NcT8um2+qtgntmMbi5UKssVX2m/2PLqotcric0RE63pB3HPN/fjf3cKHN2ufGSUQ==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -1744,6 +1759,16 @@ tough-cookie@~2.4.3:
   dependencies:
     psl "^1.1.24"
     punycode "^1.4.1"
+
+translation.js@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/translation.js/-/translation.js-0.7.5.tgz#97e871d78318770930773f297fffb40c4209b053"
+  integrity sha1-l+hx14MYdwkwdz8pf/+0DEIJsFM=
+  dependencies:
+    "@types/blueimp-md5" "^2.7.0"
+    "@types/node" "^9.3.0"
+    blueimp-md5 "^2.10.0"
+    tslib "^1.8.1"
 
 tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.3"

@@ -1,10 +1,18 @@
 import * as vscode from 'vscode'
+import KeyDetector from './KeyDetector'
+import lngs from './lngs'
 
 const lodash = require('lodash')
 const path = require('path')
 const fs = require('fs')
 
+interface transItem {
+  lng: string
+  str: string
+}
+
 class I18nParser {
+  // 基于当前文件名，找到最新的 i18n 文件夹
   static getTransPathByFilePath(filePath: string): string | undefined {
     if (!vscode.workspace.workspaceFolders) return
 
@@ -23,8 +31,8 @@ class I18nParser {
     return transPath[0]
   }
 
-  static getTransList(fileName: string): { path: string; name: string }[] {
-    const transPath = I18nParser.getTransPathByFilePath(fileName)
+  static getTransList(filePath: string): { path: string; name: string }[] {
+    const transPath = I18nParser.getTransPathByFilePath(filePath)
     if (!transPath) return []
 
     const transList = fs
@@ -38,14 +46,29 @@ class I18nParser {
       })
       .filter((item: any) => !!item.path)
 
-    return transList
+    return transList.sort(() => 1)
   }
 
-  static getTransByKey(
+  static normalizeLng(lng) {
+    return lngs.reduce((acc, cur) => {
+      if (Array.isArray(cur) && cur[1].includes(lng)) {
+        acc = cur[0]
+      } else if (
+        typeof cur === 'string' &&
+        acc.toUpperCase() === cur.toUpperCase()
+      ) {
+        acc = cur
+      }
+
+      return acc
+    }, lng)
+  }
+
+  static transByKey(
     key: string,
-    fileName: string
-  ): { lng: string; str: string }[] {
-    const transList = I18nParser.getTransList(fileName)
+    filePath: string // 因为可能存在多个项目，所以需要传入当前文件的位置
+  ): transItem[] {
+    const transList = I18nParser.getTransList(filePath)
     const [lngFileName, ...lngKey] = key.split('.')
 
     return transList.map(listItem => {
@@ -54,8 +77,20 @@ class I18nParser {
       const lngFile = fs.existsSync(lngFilePath) ? require(lngFilePath) : {}
 
       return {
-        lng: listItem.name,
+        lng: I18nParser.normalizeLng(listItem.name),
         str: lodash.get(lngFile, lngKey),
+      }
+    })
+  }
+
+  static transByFile(filePath: string) {
+    const keys = KeyDetector.getKeyByFile(filePath)
+
+    return keys.map(key => {
+      return {
+        key,
+        filePath,
+        items: this.transByKey(key, filePath),
       }
     })
   }

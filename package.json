@@ -63,6 +63,7 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "translation.js": "^0.7.5"
   }
 }
