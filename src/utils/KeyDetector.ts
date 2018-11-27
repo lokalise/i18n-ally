@@ -1,6 +1,5 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
-import I18nParser from './I18nParser'
 
 const keyReg = /(?:\$t|this\.t|i18n\.t)\(['"]([^]+?)['"][^]*?\)/g
 

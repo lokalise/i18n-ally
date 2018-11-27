@@ -4,8 +4,7 @@ import * as path from 'path'
 import { google } from 'translation.js'
 
 import Common from './utils/Common'
-import I18nParser from './utils/I18nParser'
-import KeyDetector from './utils/KeyDetector'
+import i18nFiles from './utils/i18nFiles'
 
 const EVENT_MAP = {
   ready: 'ready',
@@ -44,7 +43,7 @@ export class TransCenter {
             type: EVENT_MAP.allI18n,
             data: {
               filePath: shortFileName,
-              i18n: I18nParser.transByFile(filePath),
+              i18n: i18nFiles.getTrans(filePath),
             },
           })
           break
@@ -52,14 +51,18 @@ export class TransCenter {
         case EVENT_MAP.trans:
           data.forEach(async i18nItem => {
             try {
-              const transItemsResult = await this.transByGoogle(i18nItem.items)
+              const transItemsResult = await i18nFiles.getTransByGoogle(
+                i18nItem.transItems
+              )
+              const newI18nItem = {
+                ...i18nItem,
+                transItems: transItemsResult,
+              }
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: {
-                  ...i18nItem,
-                  items: transItemsResult,
-                },
+                data: newI18nItem,
               })
+              i18nFiles.writeTrans(filePath, newI18nItem)
             } catch (err) {
               console.error('trans error', err)
               webview.postMessage({
@@ -71,7 +74,7 @@ export class TransCenter {
           break
 
         case EVENT_MAP.writeTrans:
-          console.log(data)
+          i18nFiles.writeTrans(filePath, data)
           break
 
         default:
@@ -79,27 +82,6 @@ export class TransCenter {
       }
     }
     webview.onDidReceiveMessage(onMessage)
-  }
-
-  transByGoogle(transItems): Promise<any> {
-    const cnItem = transItems.find(transItem => transItem.lng === 'zh-CN')
-
-    const tasks = transItems.map(transItem => {
-      if (transItem.lng === 'zh-CN') return transItem
-
-      return google
-        .translate({
-          from: 'zh-CN',
-          to: transItem.lng,
-          text: cnItem.str,
-        })
-        .then(res => {
-          transItem.str = res.result[0]
-          return transItem
-        })
-    })
-
-    return Promise.all(tasks)
   }
 }
 

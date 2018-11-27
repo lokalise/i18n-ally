@@ -173,14 +173,15 @@
           </h4>
 
           <ul>
-            <li v-for="transItem in i18nItem.items" :key="transItem.lng">
+            <li v-for="transItem in i18nItem.transItems" :key="transItem.lng">
               <span class="lng" :class="{active: transItem.lng === 'zh-CN'}">{{
                 transItem.lng
               }}</span>
               <input
-                onblur="writeTrans(transItem)"
+                @blur="writeTrans(i18nItem)"
                 type="text"
-                v-model="transItem.str"
+                v-model="transItem.data"
+                placeholder="空"
               />
             </li>
           </ul>

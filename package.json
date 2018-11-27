@@ -36,7 +36,7 @@
       "type": "object",
       "title": "Vue-i18n",
       "properties": {
-        "vue-i18n.transPaths": {
+        "vue-i18n.i18nPaths": {
           "type": "array",
           "default": [
             "./crm/src/locales",

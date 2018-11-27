@@ -1,10 +1,12 @@
 import * as vscode from 'vscode'
 
 export function activate(ctx: vscode.ExtensionContext) {
-  console.log('Vue-i18n is active')
+  if (!vscode.workspace.workspaceFolders) return
 
-  require('./hint').default(ctx)
-  require('./transCenter').default(ctx)
+  console.log('Vue-i18n is active')
+  ;[require('./hint').default, require('./transCenter').default].forEach(
+    module => module(ctx)
+  )
 }
 
 export function deactivate() {}
