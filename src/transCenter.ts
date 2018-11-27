@@ -14,27 +14,44 @@ const EVENT_MAP = {
 }
 
 export class TransCenter {
+  panel: vscode.WebviewPanel = null
+  filePath: string = null
+  shortFileName: string = null
+
   constructor(filePath: string) {
-    const shortFileName = filePath
+    this.filePath = filePath
+    this.shortFileName = filePath
       .split(path.sep)
       .slice(-3)
       .join(path.sep)
 
-    const panel = vscode.window.createWebviewPanel(
+    this.panel = vscode.window.createWebviewPanel(
       'transCenter',
-      `翻译-${shortFileName}`,
+      `翻译-${this.shortFileName}`,
       vscode.ViewColumn.Beside,
       {
         enableScripts: true,
         retainContextWhenHidden: true,
       }
     )
-    const { webview } = panel
+
+    const { webview } = this.panel
 
     webview.html = fs.readFileSync(
       path.resolve(Common.extension.extensionPath, 'static/transCenter.html'),
       'utf-8'
     )
+
+    this.initMessage()
+    this.initFileWatcher()
+  }
+
+  initMessage() {
+    const {
+      panel: { webview },
+      shortFileName,
+      filePath,
+    } = this
 
     const onMessage = ({ type, data }) => {
       switch (type) {
@@ -81,7 +98,31 @@ export class TransCenter {
         //
       }
     }
+
     webview.onDidReceiveMessage(onMessage)
+  }
+
+  initFileWatcher() {
+    const {
+      panel,
+      panel: { webview },
+      shortFileName,
+      filePath,
+    } = this
+    const watcher = vscode.workspace.createFileSystemWatcher(filePath)
+
+    const updateI18n = () => {
+      webview.postMessage({
+        type: EVENT_MAP.allI18n,
+        data: {
+          filePath: shortFileName,
+          i18n: i18nFiles.getTrans(filePath),
+        },
+      })
+    }
+
+    watcher.onDidChange(updateI18n)
+    panel.onDidDispose(() => watcher.dispose())
   }
 }
 
