@@ -64,7 +64,7 @@ export class TransCenter {
               })
               i18nFiles.writeTrans(filePath, newI18nItem)
             } catch (err) {
-              console.error('trans error', err)
+              console.error(err)
               webview.postMessage({
                 type: EVENT_MAP.trans,
                 data: i18nItem,

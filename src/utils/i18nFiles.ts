@@ -100,15 +100,22 @@ class I18nFile {
         lngItem.originLng,
         `${name}.json`
       )
+      const i18nItem = {
+        ...lngItem,
+        data: {},
+      }
 
       try {
-        result.push({
-          ...lngItem,
-          data: JSON.parse(fs.readFileSync(filePath, 'utf-8')),
-        })
+        const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+        const isObject =
+          Reflect.apply(Object.prototype.toString, data, []) ===
+          '[object Object]'
+
+        i18nItem.data = isObject ? data : {}
       } catch (err) {
         console.error(err)
       }
+      result.push(i18nItem)
     })
 
     return result
