@@ -21,6 +21,11 @@
     "i18n"
   ],
   "icon": "static/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/think2011/vscode-vue-i18n.git"
+  },
+  "homepage": "https://github.com/think2011/vscode-vue-i18n",
   "main": "./out/extension",
   "contributes": {
     "commands": {
