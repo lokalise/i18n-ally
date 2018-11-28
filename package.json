@@ -7,7 +7,6 @@
   "engines": {
     "vscode": "^1.29.0"
   },
-  "preview": true,
   "categories": [
     "Other"
   ],
