@@ -68,7 +68,7 @@ export class TransCenter {
         case EVENT_MAP.trans:
           data.forEach(async i18nItem => {
             try {
-              const transItemsResult = await i18nFiles.getTransByGoogle(
+              const transItemsResult = await i18nFiles.getTransByApi(
                 i18nItem.transItems
               )
               const newI18nItem = {

@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
 import { set as _Set, get as _Get } from 'lodash'
-import { google } from 'translation.js'
+import { google, baidu } from 'translation.js'
 
 import lngs from './lngs'
 import KeyDetector from './KeyDetector'
@@ -188,8 +188,8 @@ class I18nFiles {
     const rootPath = I18nFiles.getRelativePathByFilePath(filePath)
     return this.i18nFiles.get(rootPath)
   }
-
-  getTransByGoogle(transItems: ITransItem[]): Promise<ITransItem[]> {
+  
+  getTransByApi(transItems: ITransItem[]): Promise<ITransItem[]> {
     const cnItem = transItems.find(transItem => transItem.lng === 'zh-CN')
 
     const tasks = transItems.map(transItem => {
