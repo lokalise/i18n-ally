@@ -12,7 +12,7 @@ export default [
   'bg',
   'ca',
   'ceb',
-  ['zh-CN', ['zh-CN', 'zh', 'ZH', 'cn', 'CN']],
+  ['zh-CN', ['zh-CN', 'zh-cn', 'zh', 'ZH', 'cn', 'CN']],
   ['zh-TW', ['zh-TW', 'zh-HK', 'zh-hk', 'hk', 'tw', 'zh-tw', 'TW']],
   'co',
   'hr',

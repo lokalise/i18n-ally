@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
 import { set as _Set, get as _Get } from 'lodash'
-import { google, baidu } from 'translation.js'
+import { google, baidu, youdao } from 'translation.js'
 
 import lngs from './lngs'
 import KeyDetector from './KeyDetector'
@@ -184,27 +184,41 @@ class I18nFiles {
     return i18nRootPath
   }
 
+  async transByApi(params, plans: any[]) {
+    const plan = plans.shift()
+
+    try {
+      return await plan(params)
+    } catch (err) {
+      return plans.length
+        ? this.transByApi(params, plans)
+        : Promise.reject('所有翻译接口都失效了')
+    }
+  }
+
   private getI18nFileByPath(filePath: string) {
     const rootPath = I18nFiles.getRelativePathByFilePath(filePath)
     return this.i18nFiles.get(rootPath)
   }
-  
+
   getTransByApi(transItems: ITransItem[]): Promise<ITransItem[]> {
     const cnItem = transItems.find(transItem => transItem.lng === 'zh-CN')
 
     const tasks = transItems.map(transItem => {
       if (transItem.lng === 'zh-CN') return transItem
 
-      return google
-        .translate({
+      const plans = [google.translate, baidu.translate, youdao.translate]
+      return this.transByApi(
+        {
           from: 'zh-CN',
           to: transItem.lng,
           text: cnItem.data,
-        })
-        .then(res => {
-          transItem.data = res.result[0] || cnItem.data
-          return transItem
-        })
+        },
+        plans
+      ).then(res => {
+        transItem.data = res.result[0] || cnItem.data
+        return transItem
+      })
     })
 
     return Promise.all(tasks)
