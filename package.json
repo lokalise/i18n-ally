@@ -12,7 +12,9 @@
   ],
   "preview": true,
   "activationEvents": [
-    "onLanguage:vue"
+    "onLanguage:vue",
+    "onLanguage:javascript",
+    "onLanguage:typescript"
   ],
   "keywords": [
     "vue",
@@ -40,6 +42,16 @@
       "editor/title": [
         {
           "when": "resourceLangId == vue",
+          "command": "extension.vue-i18n.transCenter",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == javascript",
+          "command": "extension.vue-i18n.transCenter",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == typescript",
           "command": "extension.vue-i18n.transCenter",
           "group": "navigation"
         }
