@@ -148,7 +148,7 @@ class I18nFile {
       return {
         ...fileItem,
         i18nKey,
-        data: _Get(fileItem.data, keyPath),
+        data: keyPath.length ? _Get(fileItem.data, keyPath) : fileItem.data,
       }
     })
   }
