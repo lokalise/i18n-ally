@@ -30,16 +30,27 @@
   "homepage": "https://github.com/think2011/vscode-vue-i18n",
   "main": "./out/extension",
   "contributes": {
-    "commands": {
-      "command": "extension.vue-i18n.transCenter",
-      "title": "翻译当前文件的i18n",
-      "icon": {
-        "light": "./static/icon-translate.svg",
-        "dark": "./static/icon-translate.svg"
+    "commands": [
+      {
+        "command": "extension.vue-i18n.transCenter",
+        "title": "翻译当前文件的i18n",
+        "icon": {
+          "light": "./static/icon-translate.svg",
+          "dark": "./static/icon-translate.svg"
+        }
+      },
+      {
+        "command": "extension.vue-i18n.config",
+        "title": "vue-i18n: config"
       }
-    },
+    ],
     "menus": {
       "editor/title": [
+        {
+          "when": "resourceLangId == vue-html",
+          "command": "extension.vue-i18n.transCenter",
+          "group": "navigation"
+        },
         {
           "when": "resourceLangId == vue",
           "command": "extension.vue-i18n.transCenter",
@@ -62,11 +73,8 @@
       "title": "Vue-i18n",
       "properties": {
         "vue-i18n.i18nPaths": {
-          "type": "array",
-          "default": [
-            "./crm/src/locales",
-            "./sales/src/locales"
-          ],
+          "type": "string",
+          "default": "",
           "description": "翻译文件的目录（相对于根目录）"
         }
       }

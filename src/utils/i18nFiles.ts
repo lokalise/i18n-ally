@@ -6,6 +6,7 @@ import { google, baidu, youdao } from 'translation.js'
 
 import lngs from './lngs'
 import KeyDetector from './KeyDetector'
+import Common from './Common'
 
 interface II18nItem {
   key: string
@@ -155,22 +156,33 @@ class I18nFile {
 }
 
 class I18nFiles {
-  i18nFiles = new Map<String, I18nFile>()
+  private _i18nFiles = new Map<String, I18nFile>()
+
+  get i18nFiles() {
+    Common.i18nPaths.forEach(i18nPath => {
+      const rootPath = vscode.workspace.workspaceFolders[0].uri.path
+      const absI18nPath = path.resolve(rootPath, i18nPath)
+
+      if (this._i18nFiles.has(absI18nPath)) return
+
+      this._i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
+    })
+
+    return this._i18nFiles
+  }
 
   constructor() {
-    vscode.workspace
-      .getConfiguration('vue-i18n')
-      .i18nPaths.forEach(i18nPath => {
-        const rootPath = vscode.workspace.workspaceFolders[0].uri.path
-        const absI18nPath = path.resolve(rootPath, i18nPath)
+    Common.i18nPaths.forEach(i18nPath => {
+      const rootPath = vscode.workspace.workspaceFolders[0].uri.path
+      const absI18nPath = path.resolve(rootPath, i18nPath)
 
-        this.i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
-      })
+      this.i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
+    })
   }
 
   static getRelativePathByFilePath(filePath: string) {
     const rootPath = vscode.workspace.workspaceFolders[0].uri.path
-    const i18nPaths = vscode.workspace.getConfiguration('vue-i18n').i18nPaths
+    const i18nPaths = Common.i18nPaths
 
     const i18nRootPath = i18nPaths
       .map((pathItem: string) => path.resolve(rootPath, pathItem))

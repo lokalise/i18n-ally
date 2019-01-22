@@ -4,6 +4,7 @@ export function activate(ctx: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders) return
   console.log('Vue-i18n is active')
   ;[
+    require('./guide').default,
     require('./hint').default,
     require('./completion').default,
     require('./transCenter').default,
