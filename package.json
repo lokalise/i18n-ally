@@ -2,7 +2,7 @@
   "name": "vue-i18n",
   "displayName": "Vue i18n - Alpha",
   "description": "帮你更好的写vue i18n，目前是 alpha 版本",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publisher": "think2011",
   "engines": {
     "vscode": "^1.29.0"
