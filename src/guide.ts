@@ -2,8 +2,13 @@ import * as vscode from 'vscode'
 import Common from './utils/Common'
 
 class Guide {
-  constructor(force?: boolean) {
-    if (force || !Common.i18nPaths.length) {
+  ctx = null
+
+  constructor(ctx: vscode.ExtensionContext, force?: boolean) {
+    this.ctx = ctx
+
+    const isInited = ctx.workspaceState.get('inited')
+    if (force || !isInited) {
       this.init()
     }
   }
@@ -17,11 +22,10 @@ class Guide {
 
     if (result !== okText) {
       vscode.window.showInformationMessage(
-        '你随时可以执行命令【vue-i18n:config】初始化配置',
-        {
-          modal: true,
-        }
+        '你随时可以执行命令【vue-i18n:config】初始化配置'
       )
+
+      this.ctx.workspaceState.update('inited', true)
       return
     }
 
@@ -33,7 +37,7 @@ class Guide {
   async pickDir(): Promise<string[]> {
     let dirs = await vscode.window.showOpenDialog({
       defaultUri: vscode.Uri.file(vscode.workspace.rootPath),
-      canSelectFolders: true,
+      canSelectFolders: true
     })
 
     if (dirs) {
@@ -59,9 +63,9 @@ export default (ctx: vscode.ExtensionContext) => {
   const cmd = vscode.commands.registerCommand(
     'extension.vue-i18n.config',
     (uri: vscode.Uri) => {
-      new Guide(true)
+      new Guide(ctx, true)
     }
   )
 
-  new Guide()
+  new Guide(ctx)
 }
