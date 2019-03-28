@@ -158,6 +158,7 @@
             {{transTasks.length ? '翻译中' : `批量根据zh-CN翻译` }}
           </button>
         </h2>
+        <small>{{ i18nPath }}</small>
       </div>
 
       <ul class="i18n-table">
@@ -191,75 +192,84 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
     <script>
-      const vscode = acquireVsCodeApi()
+      const vscode = acquireVsCodeApi();
 
       const EVENT_MAP = {
-        ready: 'ready',
-        allI18n: 'allI18n',
-        trans: 'trans',
-        writeTrans: 'writeTrans',
-      }
+        ready: "ready",
+        allI18n: "allI18n",
+        trans: "trans",
+        writeTrans: "writeTrans"
+      };
 
       window.app = new Vue({
-        el: '#app',
+        el: "#app",
         data() {
           return {
             filePath: null,
             i18n: [],
             loadingMap: {},
             transTasks: [],
-            emitTransTimer: null,
+            emitTransTimer: null
+          };
+        },
+        computed: {
+          i18nPath() {
+            if (!this.i18n.length) {
+              return "";
+            }
+
+            return this.i18n[0].transItems[0].rootPath;
           }
         },
         created() {
-          window.addEventListener('message', ({ data: eventData }) => {
-            const { data, type } = eventData
+          window.addEventListener("message", ({ data: eventData }) => {
+            const { data, type } = eventData;
             switch (type) {
               case EVENT_MAP.allI18n:
-                this.filePath = data.filePath
-                this.i18n = data.i18n
-                break
+                this.filePath = data.filePath;
+                this.i18n = data.i18n;
+                break;
 
               case EVENT_MAP.trans:
                 const matchIndex = this.i18n.findIndex(
                   i18nItem => i18nItem.key === data.key
-                )
+                );
 
-                this.$set(this.i18n, matchIndex, data)
-                this.$delete(this.loadingMap, data.key)
-                break
+                this.$set(this.i18n, matchIndex, data);
+                this.$delete(this.loadingMap, data.key);
+                break;
 
               default:
               //
             }
-          })
+          });
         },
         methods: {
           batchTrans() {
-            this.i18n.forEach(i18Item => this.trans(i18Item))
+            this.i18n.forEach(i18Item => this.trans(i18Item));
           },
           trans(i18nItem) {
-            if (this.loadingMap[i18nItem.key]) return
+            if (this.loadingMap[i18nItem.key]) return;
 
-            this.$set(this.loadingMap, i18nItem.key, true)
-            this.transTasks.push(i18nItem)
+            this.$set(this.loadingMap, i18nItem.key, true);
+            this.transTasks.push(i18nItem);
 
-            clearTimeout(this.emitTransTimer)
+            clearTimeout(this.emitTransTimer);
             this.emitTransTimer = setTimeout(() => {
               vscode.postMessage({
                 type: EVENT_MAP.trans,
-                data: this.transTasks,
-              })
-              this.transTasks = []
-            }, 300)
+                data: this.transTasks
+              });
+              this.transTasks = [];
+            }, 300);
           },
           writeTrans(i18nItem) {
-            vscode.postMessage({ type: EVENT_MAP.writeTrans, data: i18nItem })
-          },
-        },
-      })
+            vscode.postMessage({ type: EVENT_MAP.writeTrans, data: i18nItem });
+          }
+        }
+      });
 
-      vscode.postMessage({ type: EVENT_MAP.ready })
+      vscode.postMessage({ type: EVENT_MAP.ready });
     </script>
   </body>
 </html>
