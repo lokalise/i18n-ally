@@ -10,11 +10,22 @@ class HintProvider implements vscode.HoverProvider {
     const key = KeyDetector.getKey(document, position)
     if (!key) return
 
-    const mkStr = i18nFiles
-      .getTrans(document.fileName, key)
+    const transData = i18nFiles.getTrans(document.fileName, key) || []
+
+    const transText = transData
       .map(item => `**${item.lng}:** ${item.data || '-'}`)
       .join('  \n')
-    return new vscode.Hover(`${mkStr}`)
+
+    const transBtn = transText
+      ? '[翻译](command:extension.vue-i18n.transCenter) | '
+      : ''
+    const markdownText = new vscode.MarkdownString(
+      `${transText ||
+        key}\n\n---\n\n${transBtn}[配置](command:extension.vue-i18n.config)`
+    )
+    markdownText.isTrusted = true
+
+    return new vscode.Hover(markdownText)
   }
 }
 

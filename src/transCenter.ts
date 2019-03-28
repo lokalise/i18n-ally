@@ -1,7 +1,6 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
-import { google } from 'translation.js'
 
 import Common from './utils/Common'
 import i18nFiles from './utils/i18nFiles'
@@ -10,7 +9,7 @@ const EVENT_MAP = {
   ready: 'ready',
   allI18n: 'allI18n',
   trans: 'trans',
-  writeTrans: 'writeTrans',
+  writeTrans: 'writeTrans'
 }
 
 export class TransCenter {
@@ -31,7 +30,7 @@ export class TransCenter {
       vscode.ViewColumn.Beside,
       {
         enableScripts: true,
-        retainContextWhenHidden: true,
+        retainContextWhenHidden: true
       }
     )
 
@@ -50,7 +49,7 @@ export class TransCenter {
     const {
       panel: { webview },
       shortFileName,
-      filePath,
+      filePath
     } = this
 
     const onMessage = ({ type, data }) => {
@@ -60,8 +59,8 @@ export class TransCenter {
             type: EVENT_MAP.allI18n,
             data: {
               filePath: shortFileName,
-              i18n: i18nFiles.getTrans(filePath),
-            },
+              i18n: i18nFiles.getTrans(filePath)
+            }
           })
           break
 
@@ -73,18 +72,18 @@ export class TransCenter {
               )
               const newI18nItem = {
                 ...i18nItem,
-                transItems: transItemsResult,
+                transItems: transItemsResult
               }
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: newI18nItem,
+                data: newI18nItem
               })
               i18nFiles.writeTrans(filePath, newI18nItem)
             } catch (err) {
               console.error(err)
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: i18nItem,
+                data: i18nItem
               })
             }
           })
@@ -107,7 +106,7 @@ export class TransCenter {
       panel,
       panel: { webview },
       shortFileName,
-      filePath,
+      filePath
     } = this
     const watcher = vscode.workspace.createFileSystemWatcher(filePath)
 
@@ -116,8 +115,8 @@ export class TransCenter {
         type: EVENT_MAP.allI18n,
         data: {
           filePath: shortFileName,
-          i18n: i18nFiles.getTrans(filePath),
-        },
+          i18n: i18nFiles.getTrans(filePath)
+        }
       })
     }
 
@@ -129,8 +128,8 @@ export class TransCenter {
 export default (ctx: vscode.ExtensionContext) => {
   const cmd = vscode.commands.registerCommand(
     'extension.vue-i18n.transCenter',
-    (uri: vscode.Uri) => {
-      new TransCenter(uri.path)
+    () => {
+      new TransCenter(vscode.window.activeTextEditor.document.fileName)
     }
   )
 
