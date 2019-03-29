@@ -1,8 +1,7 @@
 import * as vscode from 'vscode'
-import Common from './utils/Common'
 
 export async function activate(ctx: vscode.ExtensionContext) {
-  if (!vscode.workspace.workspaceFolders || !(await Common.isVueProject())) {
+  if (!vscode.workspace.workspaceFolders) {
     return
   }
 
