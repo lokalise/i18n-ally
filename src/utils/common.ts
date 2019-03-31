@@ -8,6 +8,10 @@ export default class Common {
     return vscode.extensions.getExtension('think2011.vue-i18n')
   }
 
+  public static get hasI18nPaths() {
+    return !!Common.i18nPaths.length
+  }
+
   static get i18nPaths() {
     const paths = Common.getConfig('i18nPaths')
 
@@ -22,5 +26,19 @@ export default class Common {
     return vscode.workspace
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
+  }
+
+  public static isVueProject(): Boolean {
+    const projectUrl = vscode.workspace.workspaceFolders[0].uri.path
+
+    try {
+      const {
+        dependencies,
+        devDependencies
+      } = require(`${projectUrl}/package.json`)
+      return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
+    } catch (err) {
+      return false
+    }
   }
 }

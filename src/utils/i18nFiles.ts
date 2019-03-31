@@ -60,7 +60,7 @@ class I18nFiles {
     }
   }
 
-  private getI18nFileByPath(filePath: string) {
+  public getI18nFileByPath(filePath: string) {
     const rootPath = I18nFiles.getRelativePathByFilePath(filePath)
     return this.i18nFiles.get(rootPath)
   }

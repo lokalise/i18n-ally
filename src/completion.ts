@@ -27,7 +27,7 @@ class completionProvider implements vscode.CompletionItemProvider {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  vscode.languages.registerCompletionItemProvider(
+  return vscode.languages.registerCompletionItemProvider(
     ['vue', 'javascript', 'typescript'],
     new completionProvider(),
     '.'

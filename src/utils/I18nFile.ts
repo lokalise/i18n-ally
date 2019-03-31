@@ -16,6 +16,7 @@ export interface ITransItem {
   path: string
   data: string
   isDirectory: boolean
+  i18nKey?: string
 }
 
 class I18nFile {
@@ -67,7 +68,7 @@ class I18nFile {
     return i18nList
   }
 
-  watchChange(i18nPath: string) {
+  private watchChange(i18nPath: string) {
     const watcher = vscode.workspace.createFileSystemWatcher(`${i18nPath}/**`)
 
     const updateFile = (type, { path: filePath }) => {
@@ -116,13 +117,11 @@ class I18nFile {
 
       return isObject ? data : {}
     } catch (err) {
-      throw new Error(err)
+      return {}
     }
   }
 
   writeTransByKey(i18nKey: string, transItems: ITransItem[]) {
-    const [fileName, ...keyPath] = i18nKey.split('.')
-
     transItems.forEach(transItem => {
       const data = this.files[transItem.path]
       const [, ...keyPath] = i18nKey.split('.')

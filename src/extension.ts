@@ -9,6 +9,7 @@ export async function activate(ctx: vscode.ExtensionContext) {
   [
     require('./guide').default,
     require('./hint').default,
+    require('./extract').default,
     require('./completion').default,
     require('./transCenter').default
   ].forEach(module => ctx.subscriptions.push(module(ctx)))
