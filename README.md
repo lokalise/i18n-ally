@@ -20,7 +20,7 @@
 
 ![](static/demo-3.gif)
 
-### ♠ 也可以写好文案，再生成翻译
+### ♠ 也可以写好文案，再生成翻译 (选中后按下 command+.(OS X) 快捷键)
 
 ![](static/demo-4.gif)
 
