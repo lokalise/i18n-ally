@@ -30,14 +30,14 @@ const transAndRefactor = async ({ filePath, text, type, range }) => {
 
   // 已有翻译检测
   if (firstTransData.data) {
-    const isReplace = '覆盖'
-    await vscode.window.showInformationMessage(
+    const okText = '覆盖'
+    const isReplace = await vscode.window.showInformationMessage(
       `已有对应翻译【${firstTransData.data}】, 覆盖吗？`,
       { modal: true },
-      isReplace
+      okText
     )
 
-    if (!isReplace) {
+    if (isReplace !== okText) {
       return
     }
   }
