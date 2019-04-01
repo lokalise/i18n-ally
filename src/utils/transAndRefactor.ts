@@ -57,10 +57,8 @@ const transAndRefactor = async ({ filePath, text, type, range }) => {
   i18nFile.writeTransByKey(key, transByApiData)
 
   // 提示翻译
-  const result = transData
-    .filter(item => item !== transZhCN)
-    .map(item => item.data)
-  vscode.window.showInformationMessage(`翻译结果: ${result.join('|')}`)
+  const transEn = transData.find(item => item.lng === 'en')
+  transEn && vscode.window.showInformationMessage(`翻译结果: ${transEn.data}`)
 }
 
 export default transAndRefactor
