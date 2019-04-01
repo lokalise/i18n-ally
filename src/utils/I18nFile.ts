@@ -122,13 +122,17 @@ class I18nFile {
   }
 
   writeTransByKey(i18nKey: string, transItems: ITransItem[]) {
-    transItems.forEach(transItem => {
-      const data = this.files[transItem.path]
-      const [, ...keyPath] = i18nKey.split('.')
+    const writeFileAll = transItems.map(transItem => {
+      return new Promise((resolve, reject) => {
+        const data = this.files[transItem.path]
+        const [, ...keyPath] = i18nKey.split('.')
 
-      set(data, transItem.isDirectory ? keyPath : i18nKey, transItem.data)
-      fs.writeFileSync(transItem.path, JSON.stringify(data, null, 2))
+        set(data, transItem.isDirectory ? keyPath : i18nKey, transItem.data)
+        fs.writeFile(transItem.path, JSON.stringify(data, null, 2), resolve)
+      })
     })
+
+    return Promise.all(writeFileAll)
   }
 
   getTransByKey(i18nKey: string) {
