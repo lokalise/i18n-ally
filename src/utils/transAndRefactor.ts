@@ -55,7 +55,7 @@ const transAndRefactor = async ({
   // 替换内容
   vscode.window.activeTextEditor.edit(editBuilder => {
     const value =
-      type === SAVE_TYPE.$t ? `{{ $t('${key}') }}` : `i18n.t('${key}')`
+      type === SAVE_TYPE.$t ? `{{$t('${key}')}}` : `i18n.t('${key}')`
 
     if (type === SAVE_TYPE.i18n) {
       const newStart = range.start.with(
