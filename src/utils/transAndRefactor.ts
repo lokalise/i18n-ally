@@ -7,7 +7,17 @@ export enum SAVE_TYPE {
   i18n
 }
 
-const transAndRefactor = async ({ filePath, text, type, range }) => {
+const transAndRefactor = async ({
+  filePath,
+  text,
+  type,
+  range
+}: {
+  filePath: string;
+  text: string;
+  type: SAVE_TYPE;
+  range: vscode.Range;
+}) => {
   let key = await vscode.window.showInputBox({
     prompt: `请输入要保存的路径 (内容:${text})`,
     placeHolder: '示例:home.document.title'
@@ -46,6 +56,16 @@ const transAndRefactor = async ({ filePath, text, type, range }) => {
   vscode.window.activeTextEditor.edit(editBuilder => {
     const value =
       type === SAVE_TYPE.$t ? `{{ $t('${key}') }}` : `i18n.t('${key}')`
+
+    if (type === SAVE_TYPE.i18n) {
+      const newStart = range.start.with(
+        range.start.line,
+        range.start.character - 1
+      )
+      const newEnd = range.end.with(range.end.line, range.end.character + 1)
+      range = range.with(newStart, newEnd)
+    }
+
     editBuilder.replace(range, value)
   })
 
