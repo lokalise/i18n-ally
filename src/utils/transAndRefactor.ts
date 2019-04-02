@@ -35,7 +35,7 @@ const transAndRefactor = async ({
   let key = await vscode.window.showInputBox({
     prompt: `请输入要保存的路径 (例如:home.document.title)`,
     valueSelection: undefined,
-    value: `${defaultKey.join('-')}.${Common.getUid()}`
+    value: `${defaultKey.join('_')}.${Common.getUid()}`
   })
 
   if (!key) {
