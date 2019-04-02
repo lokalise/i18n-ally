@@ -1,6 +1,7 @@
-import { join } from 'path'
+import * as path from 'path'
 import * as vscode from 'vscode'
 import i18nFiles from './i18nFiles'
+import Common from './Common'
 
 export enum SAVE_TYPE {
   $t,
@@ -18,9 +19,23 @@ const transAndRefactor = async ({
   type: SAVE_TYPE;
   range: vscode.Range;
 }) => {
+  let relativeName: any = path
+    .relative(
+      vscode.workspace.rootPath,
+      vscode.window.activeTextEditor.document.fileName
+    )
+    .split(path.sep)
+    .splice(1)
+    .join(path.sep)
+  relativeName = path.parse(relativeName)
+
+  const defaultKey = relativeName.dir.split(path.sep).filter(key => key)
+  defaultKey.push(relativeName.name)
+
   let key = await vscode.window.showInputBox({
-    prompt: `请输入要保存的路径 (内容:${text})`,
-    placeHolder: '示例:home.document.title'
+    prompt: `请输入要保存的路径 (例如:home.document.title)`,
+    valueSelection: undefined,
+    value: `${defaultKey.join('-')}.${Common.getUid()}`
   })
 
   if (!key) {

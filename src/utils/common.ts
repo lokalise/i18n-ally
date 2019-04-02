@@ -41,4 +41,10 @@ export default class Common {
       return false
     }
   }
+
+  public static getUid(len = 6): string {
+    return Math.random()
+      .toString(36)
+      .substr(2, len)
+  }
 }
