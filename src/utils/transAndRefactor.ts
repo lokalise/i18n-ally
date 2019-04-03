@@ -19,23 +19,25 @@ const transAndRefactor = async ({
   type: SAVE_TYPE;
   range: vscode.Range;
 }) => {
-  let relativeName: any = path
-    .relative(
-      vscode.workspace.rootPath,
-      vscode.window.activeTextEditor.document.fileName
-    )
-    .split(path.sep)
-    .splice(1)
-    .join(path.sep)
+  let relativeName: any = path.relative(
+    vscode.workspace.rootPath,
+    vscode.window.activeTextEditor.document.fileName
+  )
   relativeName = path.parse(relativeName)
 
-  const defaultKey = relativeName.dir.split(path.sep).filter(key => key)
+  // splice(1) 去掉 src 目录
+  // splice(2) 最多提取2层的目录
+  const defaultKey = relativeName.dir
+    .split(path.sep)
+    .splice(1)
+    .filter(key => key)
+    .splice(-2)
   defaultKey.push(relativeName.name)
 
   let key = await vscode.window.showInputBox({
     prompt: `请输入要保存的路径 (例如:home.document.title)`,
     valueSelection: undefined,
-    value: `${defaultKey.join('_')}.${Common.getUid()}`
+    value: `${defaultKey.join('.')}.${Common.getUid()}`
   })
 
   if (!key) {
