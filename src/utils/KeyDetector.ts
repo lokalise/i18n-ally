@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 
-const keyReg = /(?:\$t|\$tc|\$te|this\.t|i18n\.t|[^\w]t)\(['"]([^]+?)['"]/g
+const keyReg = /(?:\$t|\$tc|\$d|\$n|\$te|this\.t|i18n\.t|[^\w]t)\(['"]([^]+?)['"]/g
 
 export default class {
   static getKeyByFile(filePath: string) {
