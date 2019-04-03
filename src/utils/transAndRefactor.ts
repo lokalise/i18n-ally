@@ -26,13 +26,16 @@ const transAndRefactor = async ({
   relativeName = path.parse(relativeName)
 
   // splice(1) 去掉 src 目录
-  // splice(2) 最多提取2层的目录
   let defaultKey = relativeName.dir
     .split(path.sep)
     .splice(1)
     .filter(key => key)
-    .splice(-2)
     .concat(relativeName.name)
+
+  if (defaultKey.length > 1) {
+    defaultKey = defaultKey.splice(1)
+  }
+
   defaultKey = `${defaultKey.join('.')}.${Common.getUid()}`
 
   let key = await vscode.window.showInputBox({
