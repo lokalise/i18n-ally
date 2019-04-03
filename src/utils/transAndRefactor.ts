@@ -27,17 +27,18 @@ const transAndRefactor = async ({
 
   // splice(1) 去掉 src 目录
   // splice(2) 最多提取2层的目录
-  const defaultKey = relativeName.dir
+  let defaultKey = relativeName.dir
     .split(path.sep)
     .splice(1)
     .filter(key => key)
     .splice(-2)
-  defaultKey.push(relativeName.name)
+    .concat(relativeName.name)
+  defaultKey = `${defaultKey.join('.')}.${Common.getUid()}`
 
   let key = await vscode.window.showInputBox({
     prompt: `请输入要保存的路径 (例如:home.document.title)`,
-    valueSelection: undefined,
-    value: `${defaultKey.join('.')}.${Common.getUid()}`
+    valueSelection: [defaultKey.lastIndexOf('.') + 1, defaultKey.length],
+    value: defaultKey
   })
 
   if (!key) {
