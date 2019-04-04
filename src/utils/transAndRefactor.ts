@@ -8,6 +8,12 @@ export enum SAVE_TYPE {
   i18n
 }
 
+const lineToUpperCase = str => {
+  return str.replace(/(-\w)/g, $1 => {
+    return $1[1].toUpperCase()
+  })
+}
+
 const transAndRefactor = async ({
   filePath,
   text,
@@ -31,8 +37,9 @@ const transAndRefactor = async ({
     .splice(1)
     .filter(key => key)
     .concat(relativeName.name)
+    .map(lineToUpperCase)
 
-  if (defaultKey.length > 1) {
+  if (defaultKey.length > 2) {
     defaultKey = defaultKey.splice(1)
   }
 
