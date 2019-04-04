@@ -39,7 +39,7 @@ const transAndRefactor = async ({
     .concat(relativeName.name)
     .map(lineToUpperCase)
 
-  if (defaultKey.length > 2) {
+  if (defaultKey.length > 1) {
     defaultKey = defaultKey.splice(1)
   }
 
