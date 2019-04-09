@@ -31,7 +31,11 @@ class HintProvider implements vscode.HoverProvider {
 
 export default (ctx: vscode.ExtensionContext) => {
   return vscode.languages.registerHoverProvider(
-    ['vue', 'javascript', 'typescript'],
+    [
+      { language: 'vue', scheme: '*' },
+      { language: 'javascript', scheme: '*' },
+      { language: 'typescript', scheme: '*' }
+    ],
     new HintProvider()
   )
 }

@@ -47,7 +47,11 @@ class ExtractProvider implements vscode.CodeActionProvider {
 export default (ctx: vscode.ExtensionContext) => {
   return [
     vscode.languages.registerCodeActionsProvider(
-      ['vue', 'javascript', 'typescript'],
+      [
+        { language: 'vue', scheme: '*' },
+        { language: 'javascript', scheme: '*' },
+        { language: 'typescript', scheme: '*' }
+      ],
       new ExtractProvider(),
       {
         providedCodeActionKinds: [vscode.CodeActionKind.Refactor]
