@@ -56,7 +56,7 @@ function annotation(ctx: vscode.ExtensionContext) {
   [
     vscode.window.onDidChangeActiveTextEditor,
     vscode.workspace.onDidChangeTextDocument
-  ].forEach(onCahnge => {
+  ].forEach((onCahnge: any) => {
     onCahnge(debounceUpdate, null, ctx.subscriptions)
   })
 
