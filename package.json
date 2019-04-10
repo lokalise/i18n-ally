@@ -2,7 +2,7 @@
   "name": "vue-i18n",
   "displayName": "Vue i18n - Alpha",
   "description": "帮你更好的写vue i18n，目前是 alpha 版本",
-  "version": "0.10.10",
+  "version": "0.11.10",
   "publisher": "think2011",
   "engines": {
     "vscode": "^1.29.0"
@@ -88,7 +88,7 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.118",
+    "@types/lodash": "^4.14.123",
     "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.9",
     "tslint": "^5.8.0",
