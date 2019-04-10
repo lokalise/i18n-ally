@@ -10,7 +10,7 @@
 
 ### ♠ 方便查看对应的翻译
 
-![](static/demo-5.gif)
+![](static/demo-5.png)
 ![](static/demo-1.gif)
 
 ### ♠ 方便基于中文翻译其他语言
