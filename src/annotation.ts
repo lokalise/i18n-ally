@@ -38,8 +38,8 @@ function annotation(ctx: vscode.ExtensionContext) {
         ),
         renderOptions: {
           after: {
-            color: 'rgba(153, 153, 153, 0.8)',
-            contentText: zhText ? `◽️${zhText}` : '🔖无翻译',
+            color: 'rgba(153, 153, 153, .7)',
+            contentText: zhText ? `◽️${zhText}` : '⚠️无翻译',
             fontWeight: 'normal',
             fontStyle: 'normal'
           }
