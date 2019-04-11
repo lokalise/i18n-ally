@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 import { debounce } from 'lodash'
 import { KEY_REG } from './utils/KeyDetector'
 import i18nFiles from './utils/i18nFiles'
+import Common from './utils/Common'
 
 const textEditorDecorationType = vscode.window.createTextEditorDecorationType(
   {}
@@ -58,6 +59,17 @@ function annotation(ctx: vscode.ExtensionContext) {
     vscode.workspace.onDidChangeTextDocument
   ].forEach((onCahnge: any) => {
     onCahnge(debounceUpdate, null, ctx.subscriptions)
+  })
+
+  Common.i18nPaths.forEach(i18nPath => {
+    const i18nDirWatcher = vscode.workspace.createFileSystemWatcher(
+      `${i18nPath}/**`
+    )
+
+    i18nDirWatcher.onDidChange(debounceUpdate)
+    i18nDirWatcher.onDidCreate(debounceUpdate)
+    i18nDirWatcher.onDidDelete(debounceUpdate)
+    ctx.subscriptions.push(i18nDirWatcher)
   })
 
   update()
