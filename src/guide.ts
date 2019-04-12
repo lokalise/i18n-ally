@@ -23,7 +23,8 @@ class Guide {
 
     const dirs = await this.pickDir()
     Common.setConfig('i18nPaths', dirs.join(','))
-    vscode.window.showInformationMessage('vue-i18n: 配置好了')
+
+    this.success()
   }
 
   async pickDir(): Promise<string[]> {
@@ -37,6 +38,21 @@ class Guide {
       .filter(dir => dir)
 
     return mergeDirs.filter((dir, index) => mergeDirs.indexOf(dir) === index)
+  }
+
+  async success() {
+    const okText = '继续配置'
+    const result = await vscode.window.showInformationMessage(
+      'vue-i18n: 配置好了，还有其他目录吗？',
+      okText,
+      '没有了'
+    )
+
+    if (result !== okText) {
+      return
+    }
+
+    this.init()
   }
 }
 
