@@ -12,7 +12,7 @@ class I18nFiles {
 
   get i18nFiles() {
     Common.i18nPaths.forEach(i18nPath => {
-      const rootPath = vscode.workspace.workspaceFolders[0].uri.path
+      const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       if (this.i18nBox.has(absI18nPath)) return
@@ -25,7 +25,7 @@ class I18nFiles {
 
   constructor() {
     Common.i18nPaths.forEach(i18nPath => {
-      const rootPath = vscode.workspace.workspaceFolders[0].uri.path
+      const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       this.i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
@@ -33,7 +33,7 @@ class I18nFiles {
   }
 
   static getRelativePathByFilePath(filePath: string) {
-    const rootPath = vscode.workspace.workspaceFolders[0].uri.path
+    const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
     const i18nPaths = Common.i18nPaths
 
     const i18nRootPath = i18nPaths
