@@ -18,6 +18,11 @@ export default class Common {
     return paths ? paths.split(',') : []
   }
 
+  static updateI18nPaths(paths: string[]) {
+    const i18nPaths = [...new Set(Common.i18nPaths.concat(paths))]
+    Common.setConfig('i18nPaths', i18nPaths.join(','))
+  }
+
   static getConfig(key): any {
     return vscode.workspace.getConfiguration().get(`${configPrefix}.${key}`)
   }

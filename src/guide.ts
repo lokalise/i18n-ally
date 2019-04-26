@@ -22,7 +22,7 @@ class Guide {
     }
 
     const dirs = await this.pickDir()
-    Common.setConfig('i18nPaths', dirs.join(','))
+    Common.updateI18nPaths(dirs)
 
     this.success()
   }
@@ -32,12 +32,8 @@ class Guide {
       defaultUri: vscode.Uri.file(vscode.workspace.rootPath),
       canSelectFolders: true
     })
-    const mergeDirs = Common.getConfig('i18nPaths')
-      .split(',')
-      .concat(dirs.map(dirItem => dirItem.path))
-      .filter(dir => dir)
 
-    return mergeDirs.filter((dir, index) => mergeDirs.indexOf(dir) === index)
+    return dirs.map(dirItem => dirItem.path)
   }
 
   async success() {
