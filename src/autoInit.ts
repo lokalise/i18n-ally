@@ -23,7 +23,7 @@ class AutoInit {
   async autoSet() {
     const rootPath = vscode.workspace.rootPath
     const pattern = [`${rootPath}/**/(locales|locale)`]
-    const result: string[] = await fg(pattern, {
+    const result: any[] = await fg(pattern, {
       ignore: ['**/node_modules'],
       onlyDirectories: true
     })
