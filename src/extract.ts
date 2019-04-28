@@ -5,7 +5,7 @@ import transAndRefactor, { SAVE_TYPE } from './utils/transAndRefactor'
 class ExtractProvider implements vscode.CodeActionProvider {
   public async provideCodeActions(): Promise<vscode.Command[]> {
     const editor = vscode.window.activeTextEditor
-    if (!editor || !Common.hasI18nPaths || !(await Common.isVueProject())) {
+    if (!editor || !Common.hasI18nPaths) {
       return
     }
 
