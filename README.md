@@ -1,4 +1,6 @@
-# vue-i18n
+# Vue i18n Ally
+
+Forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n)
 
 为什么要做这个插件？因为写 i18n 真的很啰嗦很麻烦啊 (╯‵□′)╯︵┻━┻
 
