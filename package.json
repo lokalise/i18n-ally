@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n-ally",
   "displayName": "Vue i18n Ally",
-  "description": "帮你更好的写vue i18n，目前是 alpha 版本",
+  "description": "Forked from think2011/vscode-vue-i18n, with some feature changes",
   "version": "0.1.0",
   "publisher": "antfu",
   "engines": {
@@ -103,16 +103,16 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.123",
-    "@types/mocha": "^2.2.42",
-    "@types/node": "^10.12.9",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^12.0.0",
     "rimraf": "^2.6.3",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.21"
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "vscode": "^1.1.33"
   },
   "dependencies": {
     "fast-glob": "^2.2.6",
     "lodash": "^4.17.11",
-    "translation.js": "^0.7.5"
+    "translation.js": "^0.7.8"
   }
 }
