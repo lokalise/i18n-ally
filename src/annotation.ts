@@ -8,12 +8,11 @@ const textEditorDecorationType = vscode.window.createTextEditorDecorationType(
   {}
 )
 
-function annotation(ctx: vscode.ExtensionContext) {
-  function update() {
+function annotation (ctx: vscode.ExtensionContext) {
+  function update () {
     const activeTextEditor = vscode.window.activeTextEditor
-    if (!activeTextEditor) {
+    if (!activeTextEditor)
       return
-    }
 
     const { document } = activeTextEditor
     const text = document.getText()
@@ -21,15 +20,14 @@ function annotation(ctx: vscode.ExtensionContext) {
 
     // 从文本里遍历生成中文注释
     let match = null
-    while ((match = KEY_REG.exec(text))) {
+    while (match = KEY_REG.exec(text)) {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
       const trans = i18nFiles.getTrans(document.fileName, key)
 
-      if (!trans) {
+      if (!trans)
         return
-      }
 
       const [{ data: zhText }] = trans
       const decoration = {
@@ -42,9 +40,9 @@ function annotation(ctx: vscode.ExtensionContext) {
             color: 'rgba(153, 153, 153, .7)',
             contentText: zhText ? `◽️${zhText}` : '""',
             fontWeight: 'normal',
-            fontStyle: 'normal'
-          }
-        }
+            fontStyle: 'normal',
+          },
+        },
       }
       decorations.push(decoration)
 
@@ -56,7 +54,7 @@ function annotation(ctx: vscode.ExtensionContext) {
 
   [
     vscode.window.onDidChangeActiveTextEditor,
-    vscode.workspace.onDidChangeTextDocument
+    vscode.workspace.onDidChangeTextDocument,
   ].forEach((onChange: any) => {
     onChange(debounceUpdate, null, ctx.subscriptions)
   })

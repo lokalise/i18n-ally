@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { set, get } from 'lodash'
 
-import Common from './common';
+import Common from './common'
 
 export interface II18nItem {
   key: string
@@ -23,12 +23,12 @@ class I18nFile {
   files = {}
   rootPath = null
 
-  constructor(rootPath) {
+  constructor (rootPath) {
     this.rootPath = rootPath
     this.watchChange(rootPath)
   }
 
-  getLngs() {
+  getLngs () {
     const rootPath = this.rootPath
     const i18nList = fs
       .readdirSync(rootPath)
@@ -40,7 +40,7 @@ class I18nFile {
           rootPath,
           path: filePath,
           isDirectory,
-          lng: Common.normalizeLng(originLng)
+          lng: Common.normalizeLng(originLng),
         }
       })
       .filter((item: any) => !!item.lng)
@@ -51,7 +51,7 @@ class I18nFile {
     return i18nList
   }
 
-  private watchChange(i18nPath: string) {
+  private watchChange (i18nPath: string) {
     const watcher = vscode.workspace.createFileSystemWatcher(`${i18nPath}/**`)
 
     const updateFile = (type, { path: filePath }) => {
@@ -77,13 +77,13 @@ class I18nFile {
     watcher.onDidDelete(updateFile.bind(this, 'del'))
   }
 
-  getLngFilesByKey(i18nKey: string) {
+  getLngFilesByKey (i18nKey: string) {
     return this.getLngs().map(lngItem => {
       if (lngItem.isDirectory) {
         const [fileName] = i18nKey.split('.')
         return {
           ...lngItem,
-          path: path.join(lngItem.path, `${fileName}.json`)
+          path: path.join(lngItem.path, `${fileName}.json`),
         }
       }
 
@@ -91,7 +91,7 @@ class I18nFile {
     })
   }
 
-  readFile(i18nFilePath: string) {
+  readFile (i18nFilePath: string) {
     try {
       const data = JSON.parse(fs.readFileSync(i18nFilePath, 'utf-8'))
       const isObject =
@@ -99,12 +99,13 @@ class I18nFile {
         '[object Object]'
 
       return isObject ? data : {}
-    } catch (err) {
+    }
+    catch (err) {
       return {}
     }
   }
 
-  writeTransByKey(i18nKey: string, transItems: ITransItem[]) {
+  writeTransByKey (i18nKey: string, transItems: ITransItem[]) {
     const writeFileAll = transItems.map(transItem => {
       return new Promise((resolve, reject) => {
         const data = this.files[transItem.path]
@@ -118,11 +119,11 @@ class I18nFile {
     return Promise.all(writeFileAll)
   }
 
-  getTransByKey(i18nKey: string) {
+  getTransByKey (i18nKey: string) {
     const result = this.getLngFilesByKey(i18nKey).map(item => {
-      if (!this.files[item.path]) {
+      if (!this.files[item.path])
         this.files[item.path] = this.readFile(item.path)
-      }
+
 
       const data = this.files[item.path]
       const [, ...keyPath] = i18nKey.split('.')
@@ -130,7 +131,7 @@ class I18nFile {
       return {
         ...item,
         i18nKey,
-        data: get(data, item.isDirectory ? keyPath : i18nKey)
+        data: get(data, item.isDirectory ? keyPath : i18nKey),
       }
     })
 

@@ -4,71 +4,73 @@ import lngs from './lngs'
 const configPrefix = 'vue-i18n-ally'
 
 export default class Common {
-  static get extension(): vscode.Extension<any> {
-    return vscode.extensions.getExtension('antfu.vue-i18n-ally')
+  static get extension (): vscode.Extension<any> {
+    return vscode.extensions.getExtension('antfu.vue-i18n-ally') as vscode.Extension<any>
   }
 
-  public static get hasI18nPaths() {
+  static get hasI18nPaths () {
     return !!Common.i18nPaths.length
   }
 
-  static get i18nPaths() {
+  static get i18nPaths () {
     const paths = Common.getConfig('i18nPaths')
 
     return paths ? paths.split(',') : []
   }
 
-  static updateI18nPaths(paths: string[]) {
+  static updateI18nPaths (paths: string[]) {
     const i18nPaths = [...new Set(Common.i18nPaths.concat(paths))]
     Common.setConfig('i18nPaths', i18nPaths.join(','))
   }
 
-  static getSourceLocale() {
+  static getSourceLocale () {
     return Common.normalizeLng(Common.getConfig('sourceLocale')) || 'en'
   }
 
-  static getConfig(key: string): any {
+  static getConfig (key: string): any {
     return vscode.workspace.getConfiguration().get(`${configPrefix}.${key}`)
   }
 
-  static setConfig(key: string, value, isGlobal = false) {
+  static setConfig (key: string, value: any, isGlobal = false) {
     return vscode.workspace
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
   }
 
-  static normalizeLng(lng) {
+  static normalizeLng (lng: string) {
     const result = lngs.find((lngItem: string | string[]) => {
-      if (Array.isArray(lngItem) && lngItem[1].includes(lng)) {
+      if (Array.isArray(lngItem) && lngItem[1].includes(lng))
         return true
-      }
 
       if (
         typeof lngItem === 'string' &&
         lng.toUpperCase() === lngItem.toUpperCase()
-      ) {
+      )
         return true
-      }
     })
 
     return result ? (Array.isArray(result) ? result[0] : result) : ''
   }
 
-  public static isVueProject(): Boolean {
+  public static isVueProject (): boolean {
+    if (!vscode.workspace.workspaceFolders)
+      return false
     const projectUrl = vscode.workspace.workspaceFolders[0].uri.fsPath
 
     try {
+      /* eslint-disabled @typescir */
       const {
         dependencies,
-        devDependencies
+        devDependencies,
       } = require(`${projectUrl}/package.json`)
       return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
-    } catch (err) {
+    }
+    catch (err) {
       return false
     }
   }
 
-  public static getUid(len = 6): string {
+  public static getUid (len = 6): string {
     return Math.random()
       .toString(36)
       .substr(2, len)

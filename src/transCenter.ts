@@ -9,7 +9,7 @@ const EVENT_MAP = {
   ready: 'ready',
   allI18n: 'allI18n',
   trans: 'trans',
-  writeTrans: 'writeTrans'
+  writeTrans: 'writeTrans',
 }
 
 export class TransCenter {
@@ -17,7 +17,7 @@ export class TransCenter {
   filePath: string = null
   shortFileName: string = null
 
-  constructor(filePath: string) {
+  constructor (filePath: string) {
     this.filePath = filePath
     this.shortFileName = filePath
       .split(path.sep)
@@ -30,7 +30,7 @@ export class TransCenter {
       vscode.ViewColumn.Beside,
       {
         enableScripts: true,
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       }
     )
 
@@ -45,11 +45,11 @@ export class TransCenter {
     this.initFileWatcher()
   }
 
-  initMessage() {
+  initMessage () {
     const {
       panel: { webview },
       shortFileName,
-      filePath
+      filePath,
     } = this
 
     const onMessage = ({ type, data }) => {
@@ -60,8 +60,8 @@ export class TransCenter {
             data: {
               filePath: shortFileName,
               i18n: i18nFiles.getTrans(filePath),
-              sourceLocale: Common.getSourceLocale()
-            }
+              sourceLocale: Common.getSourceLocale(),
+            },
           })
           break
 
@@ -73,18 +73,19 @@ export class TransCenter {
               )
               const newI18nItem = {
                 ...i18nItem,
-                transItems: transItemsResult
+                transItems: transItemsResult,
               }
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: newI18nItem
+                data: newI18nItem,
               })
               i18nFiles.writeTrans(filePath, newI18nItem)
-            } catch (err) {
+            }
+            catch (err) {
               console.error(err)
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: i18nItem
+                data: i18nItem,
               })
             }
           })
@@ -102,12 +103,12 @@ export class TransCenter {
     webview.onDidReceiveMessage(onMessage)
   }
 
-  initFileWatcher() {
+  initFileWatcher () {
     const {
       panel,
       panel: { webview },
       shortFileName,
-      filePath
+      filePath,
     } = this
     const watcher = vscode.workspace.createFileSystemWatcher(filePath)
 
@@ -116,8 +117,8 @@ export class TransCenter {
         type: EVENT_MAP.allI18n,
         data: {
           filePath: shortFileName,
-          i18n: i18nFiles.getTrans(filePath)
-        }
+          i18n: i18nFiles.getTrans(filePath),
+        },
       })
     }
 

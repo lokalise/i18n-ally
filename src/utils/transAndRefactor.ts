@@ -18,12 +18,12 @@ const transAndRefactor = async ({
   filePath,
   text,
   type,
-  range
+  range,
 }: {
-  filePath: string;
-  text: string;
-  type: SAVE_TYPE;
-  range: vscode.Range;
+  filePath: string
+  text: string
+  type: SAVE_TYPE
+  range: vscode.Range
 }) => {
   let relativeName: any = path.relative(
     vscode.workspace.rootPath,
@@ -39,21 +39,19 @@ const transAndRefactor = async ({
     .concat(relativeName.name)
     .map(lineToUpperCase)
 
-  if (defaultKey.length > 1) {
+  if (defaultKey.length > 1)
     defaultKey = defaultKey.splice(1)
-  }
 
   defaultKey = `${defaultKey.join('.')}.${Common.getUid()}`
 
   let key = await vscode.window.showInputBox({
-    prompt: `请输入要保存的路径 (例如:home.document.title)`,
+    prompt: '请输入要保存的路径 (例如:home.document.title)',
     valueSelection: [defaultKey.lastIndexOf('.') + 1, defaultKey.length],
-    value: defaultKey
+    value: defaultKey,
   })
 
-  if (!key) {
+  if (!key)
     return
-  }
 
   const i18nFile = i18nFiles.getI18nFileByPath(filePath)
   let transData: any = i18nFile.getTransByKey(key)
@@ -75,9 +73,8 @@ const transAndRefactor = async ({
       okText
     )
 
-    if (isReplace !== okText) {
+    if (isReplace !== okText)
       return
-    }
   }
 
   // 替换内容

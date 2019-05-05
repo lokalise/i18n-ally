@@ -7,18 +7,19 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
-    /* Strict Type-Checking Option */
-    "strict": false /* enable all strict type-checking options */,
-    /* Additional Checks */
-    "noUnusedLocals": false /* Report errors on unused locals. */
-    // "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-    // "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-    // "noUnusedParameters": true,  /* Report errors on unused parameters. */
+    "strict": true,
+    "noUnusedLocals": false,
   },
 
   "rootDir": "src",
   "paths": {
-    "lib/*": [".", "./src"]
+    "lib/*": [
+      ".", 
+      "./src"
+    ]
   },
-  "exclude": ["node_modules", ".vscode-test"]
+  "exclude": [
+    "node_modules", 
+    ".vscode-test"
+  ]
 }

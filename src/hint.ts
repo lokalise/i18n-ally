@@ -3,7 +3,7 @@ import KeyDetector from './utils/KeyDetector'
 import i18nFiles from './utils/i18nFiles'
 
 class HintProvider implements vscode.HoverProvider {
-  public provideHover(
+  public provideHover (
     document: vscode.TextDocument,
     position: vscode.Position
   ) {
@@ -34,7 +34,7 @@ export default (ctx: vscode.ExtensionContext) => {
     [
       { language: 'vue', scheme: '*' },
       { language: 'javascript', scheme: '*' },
-      { language: 'typescript', scheme: '*' }
+      { language: 'typescript', scheme: '*' },
     ],
     new HintProvider()
   )

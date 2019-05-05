@@ -2,8 +2,8 @@ import * as vscode from 'vscode'
 import KeyDetector from './utils/KeyDetector'
 import i18nFiles from './utils/i18nFiles'
 
-class completionProvider implements vscode.CompletionItemProvider {
-  public provideCompletionItems(
+class CompletionProvider implements vscode.CompletionItemProvider {
+  public provideCompletionItems (
     document: vscode.TextDocument,
     position: vscode.Position
   ) {
@@ -31,9 +31,9 @@ export default (ctx: vscode.ExtensionContext) => {
     [
       { language: 'vue', scheme: '*' },
       { language: 'javascript', scheme: '*' },
-      { language: 'typescript', scheme: '*' }
+      { language: 'typescript', scheme: '*' },
     ],
-    new completionProvider(),
+    new CompletionProvider(),
     '.'
   )
 }

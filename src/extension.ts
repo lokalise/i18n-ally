@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import Common from './utils/Common'
 
-export async function activate(ctx: vscode.ExtensionContext) {
+export async function activate (ctx: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders || !(await Common.isVueProject())) {
     console.log('vue-i18n is inactive')
     return
@@ -15,8 +15,8 @@ export async function activate(ctx: vscode.ExtensionContext) {
     require('./extract').default,
     require('./completion').default,
     require('./transCenter').default,
-    require('./annotation').default
+    require('./annotation').default,
   ].forEach(module => ctx.subscriptions.push(module(ctx)))
 }
 
-export function deactivate() {}
+export function deactivate () {}
