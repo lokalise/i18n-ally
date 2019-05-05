@@ -34,7 +34,7 @@ export default class Common {
   }
 
   public static isVueProject(): Boolean {
-    const projectUrl = vscode.workspace.workspaceFolders[0].uri.path
+    const projectUrl = vscode.workspace.workspaceFolders[0].uri.fsPath
 
     try {
       const {
