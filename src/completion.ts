@@ -8,12 +8,18 @@ class CompletionProvider implements vscode.CompletionItemProvider {
     position: vscode.Position
   ) {
     let key = KeyDetector.getKey(document, position)
-    if (!key || !/\.$/.test(key)) return
+    if (!key || !/\.$/.test(key))
+      return
 
     key = key.slice(0, -1)
-    const transData = i18nFiles.getTrans(document.fileName, key)[0].data
+    const trans = i18nFiles.getTransByKey(document.fileName, key)
+    if (!trans)
+      return
 
-    if (!transData) return
+    const transData = trans[0].data
+
+    if (!transData)
+      return
 
     return Object.keys(transData).map(key => {
       return new vscode.CompletionItem(

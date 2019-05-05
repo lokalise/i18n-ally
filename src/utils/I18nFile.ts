@@ -5,7 +5,7 @@ import { set, get } from 'lodash'
 
 import Common from './common'
 
-export interface II18nItem {
+export interface KeyLocales {
   key: string
   transItems: ITransItem[]
 }
@@ -20,10 +20,10 @@ export interface ITransItem {
 }
 
 class I18nFile {
-  files = {}
-  rootPath = null
+  files: {[s: string]: object} = {}
+  rootPath: string
 
-  constructor (rootPath) {
+  constructor (rootPath: string) {
     this.rootPath = rootPath
     this.watchChange(rootPath)
   }
@@ -43,9 +43,9 @@ class I18nFile {
           lng: Common.normalizeLng(originLng),
         }
       })
-      .filter((item: any) => !!item.lng)
+      .filter(item => !!item.lng)
       .sort(item => {
-        return item.lng === Common.getSourceLocale() ? -1 : 1
+        return item.lng === Common.sourceLocale ? -1 : 1
       })
 
     return i18nList
@@ -54,7 +54,7 @@ class I18nFile {
   private watchChange (i18nPath: string) {
     const watcher = vscode.workspace.createFileSystemWatcher(`${i18nPath}/**`)
 
-    const updateFile = (type, { path: filePath }) => {
+    const updateFile = (type: string, { path: filePath }: {path: string}) => {
       const { ext } = path.parse(filePath)
       if (ext !== '.json') return
 
@@ -91,7 +91,7 @@ class I18nFile {
     })
   }
 
-  readFile (i18nFilePath: string) {
+  readFile (i18nFilePath: string): object {
     try {
       const data = JSON.parse(fs.readFileSync(i18nFilePath, 'utf-8'))
       const isObject =
@@ -112,7 +112,11 @@ class I18nFile {
         const [, ...keyPath] = i18nKey.split('.')
 
         set(data, transItem.isDirectory ? keyPath : i18nKey, transItem.data)
-        fs.writeFile(transItem.path, JSON.stringify(data, null, 2), resolve)
+        fs.writeFile(
+          transItem.path,
+          JSON.stringify(data, null, 2),
+          () => resolve()
+        )
       })
     })
 
@@ -123,7 +127,6 @@ class I18nFile {
     const result = this.getLngFilesByKey(i18nKey).map(item => {
       if (!this.files[item.path])
         this.files[item.path] = this.readFile(item.path)
-
 
       const data = this.files[item.path]
       const [, ...keyPath] = i18nKey.split('.')

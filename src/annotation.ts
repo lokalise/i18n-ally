@@ -24,12 +24,12 @@ function annotation (ctx: vscode.ExtensionContext) {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = i18nFiles.getTrans(document.fileName, key)
+      const trans = i18nFiles.getTransByKey(document.fileName, key)
 
       if (!trans)
         return
 
-      const [{ data: zhText }] = trans
+      const text = (trans.find(t => t.lng === Common.displayLocale) || { data: '' }).data || ''
       const decoration = {
         range: new vscode.Range(
           document.positionAt(index),
@@ -38,7 +38,7 @@ function annotation (ctx: vscode.ExtensionContext) {
         renderOptions: {
           after: {
             color: 'rgba(153, 153, 153, .7)',
-            contentText: zhText ? `◽️${zhText}` : '""',
+            contentText: `◽️${text || '""'}`,
             fontWeight: 'normal',
             fontStyle: 'normal',
           },

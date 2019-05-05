@@ -1,18 +1,17 @@
-import * as vscode from 'vscode'
 import * as path from 'path'
-import { set as _Set, get as _Get } from 'lodash'
 import { google, baidu, youdao } from 'translation.js'
 
 import KeyDetector from './KeyDetector'
 import Common from './Common'
-import I18nFile, { ITransItem, II18nItem } from './i18nFile'
+import I18nFile, { ITransItem, KeyLocales } from './i18nFile'
+import { TranslateResult, StringOrTranslateOptions } from 'translation.js/declaration/api/types'
 
 class I18nFiles {
   private i18nBox = new Map<string, I18nFile>()
 
   get i18nFiles () {
     Common.i18nPaths.forEach(i18nPath => {
-      const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
+      const rootPath = Common.rootPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       if (this.i18nBox.has(absI18nPath)) return
@@ -25,7 +24,7 @@ class I18nFiles {
 
   constructor () {
     Common.i18nPaths.forEach(i18nPath => {
-      const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
+      const rootPath = Common.rootPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       this.i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
@@ -33,7 +32,7 @@ class I18nFiles {
   }
 
   static getRelativePathByFilePath (filePath: string) {
-    const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
+    const rootPath = Common.rootPath
     const i18nPaths = Common.i18nPaths
 
     const i18nRootPath = i18nPaths
@@ -48,16 +47,20 @@ class I18nFiles {
     return i18nRootPath
   }
 
-  async transByApi (params, plans: any[]) {
+  async transByApi (
+    params: StringOrTranslateOptions,
+    plans: ((options: StringOrTranslateOptions) => Promise<TranslateResult>)[]
+  ): Promise<TranslateResult> {
     const plan = plans.shift()
+
+    if (!plan)
+      throw new Error('所有翻译接口都失效了')
 
     try {
       return await plan(params)
     }
     catch (err) {
-      return plans.length
-        ? this.transByApi(params, plans)
-        : Promise.reject('所有翻译接口都失效了')
+      return await this.transByApi(params, plans)
     }
   }
 
@@ -67,8 +70,8 @@ class I18nFiles {
   }
 
   getTransByApi (transItems: ITransItem[]): Promise<ITransItem[]> {
-    const sourceLocale = Common.getSourceLocale()
-    const cnItem = transItems.find(transItem => transItem.lng === sourceLocale)
+    const sourceLocale = Common.sourceLocale
+    const sourceItem = transItems.find(transItem => transItem.lng === sourceLocale)
 
     const tasks = transItems.map(transItem => {
       if (transItem.lng === sourceLocale) return transItem
@@ -78,11 +81,11 @@ class I18nFiles {
         {
           from: sourceLocale,
           to: transItem.lng,
-          text: cnItem.data,
+          text: sourceItem.data,
         },
         plans
       ).then(res => {
-        transItem.data = res.result[0] || cnItem.data
+        transItem.data = res.result[0] || sourceItem.data
         return transItem
       })
     })
@@ -90,27 +93,33 @@ class I18nFiles {
     return Promise.all(tasks)
   }
 
-  getTrans (filePath: string, i18nKey?: string) {
+  getTransByKey (filePath: string, i18nKey: string) {
     const i18nFile = this.getI18nFileByPath(filePath)
 
     if (!i18nFile)
       return
 
-    if (i18nKey)
-      return i18nFile.getTransByKey(i18nKey)
+    return i18nFile.getTransByKey(i18nKey)
+  }
+
+  getTrans (filePath: string) {
+    const i18nFile = this.getI18nFileByPath(filePath)
+
+    if (!i18nFile)
+      return
 
     const keys = KeyDetector.getKeyByFile(filePath)
     return keys.map(key => {
       return {
         key,
-        transItems: this.getTrans(filePath, key),
+        transItems: this.getTransByKey(filePath, key),
       }
     })
   }
 
-  writeTrans (filePath: string, i18nItem: II18nItem) {
+  writeTrans (filePath: string, keylocales: KeyLocales) {
     const i18nFile = this.getI18nFileByPath(filePath)
-    i18nFile.writeTransByKey(i18nItem.key, i18nItem.transItems)
+    i18nFile.writeTransByKey(keylocales.key, keylocales.transItems)
   }
 }
 

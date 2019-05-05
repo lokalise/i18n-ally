@@ -23,8 +23,16 @@ export default class Common {
     Common.setConfig('i18nPaths', i18nPaths.join(','))
   }
 
-  static getSourceLocale () {
-    return Common.normalizeLng(Common.getConfig('sourceLocale')) || 'en'
+  static get rootPath () {
+    return vscode.workspace.workspaceFolders[0].uri.fsPath
+  }
+
+  static get displayLocale () {
+    return Common.normalizeLng(Common.getConfig('displayLocale')) || 'en'
+  }
+
+  static get sourceLocale () {
+    return Common.normalizeLng(Common.getConfig('sourceLocale')) || this.displayLocale || 'en'
   }
 
   static getConfig (key: string): any {
@@ -55,7 +63,7 @@ export default class Common {
   public static isVueProject (): boolean {
     if (!vscode.workspace.workspaceFolders)
       return false
-    const projectUrl = vscode.workspace.workspaceFolders[0].uri.fsPath
+    const projectUrl = this.rootPath
 
     try {
       /* eslint-disabled @typescir */

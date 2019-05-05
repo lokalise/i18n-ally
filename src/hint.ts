@@ -10,7 +10,7 @@ class HintProvider implements vscode.HoverProvider {
     const key = KeyDetector.getKey(document, position)
     if (!key) return
 
-    const transData = i18nFiles.getTrans(document.fileName, key) || []
+    const transData = i18nFiles.getTransByKey(document.fileName, key) || []
 
     const transText = transData
       .map(item => `**${item.lng}:** ${item.data || '-'}`)

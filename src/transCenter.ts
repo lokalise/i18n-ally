@@ -13,9 +13,9 @@ const EVENT_MAP = {
 }
 
 export class TransCenter {
-  panel: vscode.WebviewPanel = null
-  filePath: string = null
-  shortFileName: string = null
+  panel: vscode.WebviewPanel
+  filePath: string
+  shortFileName: string
 
   constructor (filePath: string) {
     this.filePath = filePath
@@ -52,7 +52,7 @@ export class TransCenter {
       filePath,
     } = this
 
-    const onMessage = ({ type, data }) => {
+    const onMessage = ({ type, data }: {type: string; data: any}) => {
       switch (type) {
         case EVENT_MAP.ready:
           webview.postMessage({
@@ -60,7 +60,7 @@ export class TransCenter {
             data: {
               filePath: shortFileName,
               i18n: i18nFiles.getTrans(filePath),
-              sourceLocale: Common.getSourceLocale(),
+              sourceLocale: Common.sourceLocale,
             },
           })
           break
