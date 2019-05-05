@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import { join } from 'path'
+import lngs from './lngs'
 
 const configPrefix = 'vue-i18n'
 
@@ -23,6 +24,10 @@ export default class Common {
     Common.setConfig('i18nPaths', i18nPaths.join(','))
   }
 
+  static getSourceLocale() {
+    return Common.normalizeLng(Common.getConfig('sourceLocale')) || 'zh-CN'
+  }
+
   static getConfig(key): any {
     return vscode.workspace.getConfiguration().get(`${configPrefix}.${key}`)
   }
@@ -31,6 +36,23 @@ export default class Common {
     return vscode.workspace
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
+  }
+
+  static normalizeLng(lng) {
+    const result = lngs.find((lngItem: string | string[]) => {
+      if (Array.isArray(lngItem) && lngItem[1].includes(lng)) {
+        return true
+      }
+
+      if (
+        typeof lngItem === 'string' &&
+        lng.toUpperCase() === lngItem.toUpperCase()
+      ) {
+        return true
+      }
+    })
+
+    return result ? (Array.isArray(result) ? result[0] : result) : ''
   }
 
   public static isVueProject(): Boolean {

@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { set, get } from 'lodash'
 
-import lngs from './lngs'
+import Common from './common';
 
 export interface II18nItem {
   key: string
@@ -28,23 +28,6 @@ class I18nFile {
     this.watchChange(rootPath)
   }
 
-  private static normalizeLng(lng) {
-    const result = lngs.find((lngItem: string | string[]) => {
-      if (Array.isArray(lngItem) && lngItem[1].includes(lng)) {
-        return true
-      }
-
-      if (
-        typeof lngItem === 'string' &&
-        lng.toUpperCase() === lngItem.toUpperCase()
-      ) {
-        return true
-      }
-    })
-
-    return result ? (Array.isArray(result) ? result[0] : result) : ''
-  }
-
   getLngs() {
     const rootPath = this.rootPath
     const i18nList = fs
@@ -57,12 +40,12 @@ class I18nFile {
           rootPath,
           path: filePath,
           isDirectory,
-          lng: I18nFile.normalizeLng(originLng)
+          lng: Common.normalizeLng(originLng)
         }
       })
       .filter((item: any) => !!item.lng)
       .sort(item => {
-        return item.lng === 'zh-CN' ? -1 : 1
+        return item.lng === Common.getSourceLocale() ? -1 : 1
       })
 
     return i18nList

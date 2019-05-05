@@ -155,7 +155,7 @@
         <h2>
           <span>{{ filePath }}</span>
           <button @click="batchTrans()">
-            {{transTasks.length ? '翻译中' : `批量根据zh-CN翻译` }}
+            {{transTasks.length ? '翻译中' : `批量根据${sourceLocale}翻译` }}
           </button>
         </h2>
         <small>{{ i18nPath }}</small>
@@ -169,13 +169,13 @@
               @click="trans(i18nItem)"
               :disabled="loadingMap[i18nItem.key]"
             >
-              {{loadingMap[i18nItem.key] ? `翻译中..` : `根据zh-CN翻译`}}
+              {{loadingMap[i18nItem.key] ? `翻译中..` : `根据${sourceLocale}翻译`}}
             </button>
           </h4>
 
           <ul>
             <li v-for="transItem in i18nItem.transItems" :key="transItem.lng">
-              <span class="lng" :class="{active: transItem.lng === 'zh-CN'}">{{
+              <span class="lng" :class="{active: transItem.lng === sourceLocale}">{{
                 transItem.lng
               }}</span>
               <input
@@ -209,7 +209,8 @@
             i18n: [],
             loadingMap: {},
             transTasks: [],
-            emitTransTimer: null
+            emitTransTimer: null,
+            sourceLocale: 'zh-CN'
           };
         },
         computed: {
@@ -228,6 +229,7 @@
               case EVENT_MAP.allI18n:
                 this.filePath = data.filePath;
                 this.i18n = data.i18n;
+                this.sourceLocale = data.sourceLocale;
                 break;
 
               case EVENT_MAP.trans:

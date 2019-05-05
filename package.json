@@ -80,6 +80,11 @@
           "type": "string",
           "default": "",
           "description": "翻译文件的目录（相对于根目录）"
+        },
+        "vue-i18n.sourceLocale": {
+          "type": "string",
+          "default": "zh-CN",
+          "description": "机器翻译源语言"
         }
       }
     }

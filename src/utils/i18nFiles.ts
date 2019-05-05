@@ -66,15 +66,17 @@ class I18nFiles {
   }
 
   getTransByApi(transItems: ITransItem[]): Promise<ITransItem[]> {
-    const cnItem = transItems.find(transItem => transItem.lng === 'zh-CN')
+    const sourceLocale =  Common.getSourceLocale()
+    const cnItem = transItems.find(transItem => transItem.lng === sourceLocale)
 
     const tasks = transItems.map(transItem => {
-      if (transItem.lng === 'zh-CN') return transItem
+
+      if (transItem.lng === sourceLocale) return transItem
 
       const plans = [google.translate, baidu.translate, youdao.translate]
       return this.transByApi(
         {
-          from: 'zh-CN',
+          from: sourceLocale,
           to: transItem.lng,
           text: cnItem.data
         },

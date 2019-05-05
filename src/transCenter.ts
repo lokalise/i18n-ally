@@ -59,7 +59,8 @@ export class TransCenter {
             type: EVENT_MAP.allI18n,
             data: {
               filePath: shortFileName,
-              i18n: i18nFiles.getTrans(filePath)
+              i18n: i18nFiles.getTrans(filePath),
+              sourceLocale: Common.getSourceLocale()
             }
           })
           break

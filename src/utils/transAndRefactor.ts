@@ -98,7 +98,7 @@ const transAndRefactor = async ({
   })
 
   // 写入翻译
-  const transZhCN = transData.find(item => item.lng === 'zh-CN')
+  const transZhCN = transData.find(item => item.lng === Common.getSourceLocale())
   transZhCN.data = text
 
   const transByApiData = await i18nFiles.getTransByApi(transData)
