@@ -35,7 +35,7 @@ class AutoInit {
 export default (ctx: vscode.ExtensionContext) => {
   const autoInit = new AutoInit(ctx)
 
-  return vscode.commands.registerCommand('extension.vue-i18n.auto-init', () => {
+  return vscode.commands.registerCommand('extension.vue-i18n-ally.auto-init', () => {
     autoInit.autoSet()
   })
 }

@@ -32,7 +32,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.vue-i18n.transCenter",
+        "command": "extension.vue-i18n-ally.transCenter",
         "title": "翻译当前文件的i18n",
         "icon": {
           "light": "./static/icon-translate.svg",
@@ -40,11 +40,11 @@
         }
       },
       {
-        "command": "extension.vue-i18n.config",
+        "command": "extension.vue-i18n-ally.config",
         "title": "vue-i18n: 手动配置路径"
       },
       {
-        "command": "extension.vue-i18n.auto-init",
+        "command": "extension.vue-i18n-ally.auto-init",
         "title": "vue-i18n: 自动配置路径"
       }
     ],
@@ -52,22 +52,22 @@
       "editor/title": [
         {
           "when": "resourceLangId == vue-html",
-          "command": "extension.vue-i18n.transCenter",
+          "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
           "when": "resourceLangId == vue",
-          "command": "extension.vue-i18n.transCenter",
+          "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
           "when": "resourceLangId == javascript",
-          "command": "extension.vue-i18n.transCenter",
+          "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
           "when": "resourceLangId == typescript",
-          "command": "extension.vue-i18n.transCenter",
+          "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         }
       ]
@@ -76,12 +76,12 @@
       "type": "object",
       "title": "Vue-i18n",
       "properties": {
-        "vue-i18n.i18nPaths": {
+        "vue-i18n-ally.i18nPaths": {
           "type": "string",
           "default": "",
           "description": "翻译文件的目录（相对于根目录）"
         },
-        "vue-i18n.sourceLocale": {
+        "vue-i18n-ally.sourceLocale": {
           "type": "string",
           "default": "zh-CN",
           "description": "机器翻译源语言"

@@ -128,7 +128,7 @@ export class TransCenter {
 
 export default (ctx: vscode.ExtensionContext) => {
   const cmd = vscode.commands.registerCommand(
-    'extension.vue-i18n.transCenter',
+    'extension.vue-i18n-ally.transCenter',
     () => {
       new TransCenter(vscode.window.activeTextEditor.document.fileName)
     }

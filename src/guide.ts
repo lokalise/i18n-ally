@@ -53,7 +53,7 @@ class Guide {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  return vscode.commands.registerCommand('extension.vue-i18n.config', () => {
+  return vscode.commands.registerCommand('extension.vue-i18n-ally.config', () => {
     new Guide(ctx)
   })
 }

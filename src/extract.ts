@@ -17,7 +17,7 @@ class ExtractProvider implements vscode.CodeActionProvider {
 
     return [
       {
-        command: 'extension.vue-i18n.transAndSave',
+        command: 'extension.vue-i18n-ally.transAndSave',
         title: '提取文案为$t',
         arguments: [
           {
@@ -29,7 +29,7 @@ class ExtractProvider implements vscode.CodeActionProvider {
         ]
       },
       {
-        command: 'extension.vue-i18n.transAndSave',
+        command: 'extension.vue-i18n-ally.transAndSave',
         title: '提取文案为i18n.t',
         arguments: [
           {
@@ -58,7 +58,7 @@ export default (ctx: vscode.ExtensionContext) => {
       }
     ),
     vscode.commands.registerCommand(
-      'extension.vue-i18n.transAndSave',
+      'extension.vue-i18n-ally.transAndSave',
       transAndRefactor
     )
   ]

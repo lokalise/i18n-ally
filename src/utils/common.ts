@@ -2,11 +2,11 @@ import * as vscode from 'vscode'
 import { join } from 'path'
 import lngs from './lngs'
 
-const configPrefix = 'vue-i18n'
+const configPrefix = 'vue-i18n-ally'
 
 export default class Common {
   static get extension(): vscode.Extension<any> {
-    return vscode.extensions.getExtension('think2011.vue-i18n')
+    return vscode.extensions.getExtension('antfu.vue-i18n-ally')
   }
 
   public static get hasI18nPaths() {

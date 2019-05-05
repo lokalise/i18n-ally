@@ -17,11 +17,11 @@ class HintProvider implements vscode.HoverProvider {
       .join('  \n')
 
     const transBtn = transText
-      ? '[翻译](command:extension.vue-i18n.transCenter) | '
+      ? '[翻译](command:extension.vue-i18n-ally.transCenter) | '
       : ''
     const markdownText = new vscode.MarkdownString(
       `${transText ||
-        key}\n\n---\n\n${transBtn}[配置](command:extension.vue-i18n.config)`
+        key}\n\n---\n\n${transBtn}[配置](command:extension.vue-i18n-ally.config)`
     )
     markdownText.isTrusted = true
 
