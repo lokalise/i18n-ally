@@ -182,7 +182,7 @@
                 @blur="writeTrans(i18nItem)"
                 type="text"
                 v-model="transItem.data"
-                placeholder="空"
+                placeholder="(empty)"
               />
             </li>
           </ul>
@@ -210,7 +210,7 @@
             loadingMap: {},
             transTasks: [],
             emitTransTimer: null,
-            sourceLocale: 'zh-CN'
+            sourceLocale: 'en'
           };
         },
         computed: {

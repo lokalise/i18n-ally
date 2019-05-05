@@ -41,11 +41,11 @@
       },
       {
         "command": "extension.vue-i18n-ally.config",
-        "title": "vue-i18n: 手动配置路径"
+        "title": "vue-i18n-ally: 手动配置路径"
       },
       {
         "command": "extension.vue-i18n-ally.auto-init",
-        "title": "vue-i18n: 自动配置路径"
+        "title": "vue-i18n-ally: 自动配置路径"
       }
     ],
     "menus": {
@@ -74,17 +74,22 @@
     },
     "configuration": {
       "type": "object",
-      "title": "Vue-i18n",
+      "title": "Vue i18n Ally",
       "properties": {
         "vue-i18n-ally.i18nPaths": {
           "type": "string",
-          "default": "",
-          "description": "翻译文件的目录（相对于根目录）"
+          "default": "locales",
+          "description": "Path to locales directory (relative to project root)"
         },
         "vue-i18n-ally.sourceLocale": {
           "type": "string",
-          "default": "zh-CN",
-          "description": "机器翻译源语言"
+          "default": "en",
+          "description": "Source locale for machine translation"
+        },
+        "vue-i18n-ally.displayLocale": {
+          "type": "string",
+          "default": "en",
+          "description": "Default display locale"
         }
       }
     }

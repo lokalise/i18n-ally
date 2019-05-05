@@ -40,7 +40,7 @@ function annotation(ctx: vscode.ExtensionContext) {
         renderOptions: {
           after: {
             color: 'rgba(153, 153, 153, .7)',
-            contentText: zhText ? `◽️${zhText}` : '⚠️无翻译',
+            contentText: zhText ? `◽️${zhText}` : '""',
             fontWeight: 'normal',
             fontStyle: 'normal'
           }
@@ -57,8 +57,8 @@ function annotation(ctx: vscode.ExtensionContext) {
   [
     vscode.window.onDidChangeActiveTextEditor,
     vscode.workspace.onDidChangeTextDocument
-  ].forEach((onCahnge: any) => {
-    onCahnge(debounceUpdate, null, ctx.subscriptions)
+  ].forEach((onChange: any) => {
+    onChange(debounceUpdate, null, ctx.subscriptions)
   })
 
   Common.i18nPaths.forEach(i18nPath => {

@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import { join } from 'path'
 import lngs from './lngs'
 
 const configPrefix = 'vue-i18n-ally'
@@ -25,14 +24,14 @@ export default class Common {
   }
 
   static getSourceLocale() {
-    return Common.normalizeLng(Common.getConfig('sourceLocale')) || 'zh-CN'
+    return Common.normalizeLng(Common.getConfig('sourceLocale')) || 'en'
   }
 
-  static getConfig(key): any {
+  static getConfig(key: string): any {
     return vscode.workspace.getConfiguration().get(`${configPrefix}.${key}`)
   }
 
-  static setConfig(key, value, isGlobal = false) {
+  static setConfig(key: string, value, isGlobal = false) {
     return vscode.workspace
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
