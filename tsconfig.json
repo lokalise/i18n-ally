@@ -7,7 +7,7 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
-    "strict": true,
+    //"strict": true,
     "noUnusedLocals": false,
   },
 

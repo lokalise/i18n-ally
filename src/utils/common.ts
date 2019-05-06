@@ -27,11 +27,11 @@ export default class Common {
     return vscode.workspace.workspaceFolders[0].uri.fsPath
   }
 
-  static get displayLocale () {
+  static get displayLocale (): string {
     return Common.normalizeLng(Common.getConfig('displayLocale')) || 'en'
   }
 
-  static get sourceLocale () {
+  static get sourceLocale (): string {
     return Common.normalizeLng(Common.getConfig('sourceLocale')) || this.displayLocale || 'en'
   }
 
@@ -45,7 +45,7 @@ export default class Common {
       .update(`${configPrefix}.${key}`, value, isGlobal)
   }
 
-  static normalizeLng (lng: string) {
+  static normalizeLng (lng: string): string {
     const result = lngs.find((lngItem: string | string[]) => {
       if (Array.isArray(lngItem) && lngItem[1].includes(lng))
         return true
@@ -57,7 +57,7 @@ export default class Common {
         return true
     })
 
-    return result ? (Array.isArray(result) ? result[0] : result) : ''
+    return result ? (Array.isArray(result) ? result[0].toString() : result) : ''
   }
 
   public static isVueProject (): boolean {
