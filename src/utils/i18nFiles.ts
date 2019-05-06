@@ -69,12 +69,13 @@ class I18nFiles {
     return this.i18nFiles.get(rootPath)
   }
 
-  getTransByApi (transItems: LocaleValue[]): Promise<LocaleValue[]> {
+  getTransByApi (transItems: LocaleValue[], override = false): Promise<LocaleValue[]> {
     const sourceLocale = Common.sourceLocale
     const sourceItem = transItems.find(transItem => transItem.lng === sourceLocale)
 
     const tasks = transItems.map(transItem => {
       if (transItem.lng === sourceLocale) return transItem
+      if (!override && transItem.data) return transItem
 
       const plans = [google.translate, baidu.translate, youdao.translate]
       return this.transByApi(
