@@ -7,10 +7,10 @@ import Common from './common'
 
 export interface KeyLocales {
   key: string
-  transItems: ITransItem[]
+  transItems: LocaleValue[]
 }
 
-export interface ITransItem {
+export interface LocaleValue {
   rootPath: string
   lng: string
   path: string
@@ -105,7 +105,7 @@ class I18nFile {
     }
   }
 
-  writeTransByKey (i18nKey: string, transItems: ITransItem[]) {
+  writeTransByKey (i18nKey: string, transItems: LocaleValue[]) {
     const writeFileAll = transItems.map(transItem => {
       return new Promise((resolve, reject) => {
         const data = this.files[transItem.path]

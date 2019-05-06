@@ -3,7 +3,7 @@ import { google, baidu, youdao } from 'translation.js'
 
 import KeyDetector from './KeyDetector'
 import Common from './Common'
-import I18nFile, { ITransItem, KeyLocales } from './i18nFile'
+import I18nFile, { LocaleValue, KeyLocales } from './i18nFile'
 import { TranslateResult, StringOrTranslateOptions } from 'translation.js/declaration/api/types'
 
 class I18nFiles {
@@ -69,7 +69,7 @@ class I18nFiles {
     return this.i18nFiles.get(rootPath)
   }
 
-  getTransByApi (transItems: ITransItem[]): Promise<ITransItem[]> {
+  getTransByApi (transItems: LocaleValue[]): Promise<LocaleValue[]> {
     const sourceLocale = Common.sourceLocale
     const sourceItem = transItems.find(transItem => transItem.lng === sourceLocale)
 

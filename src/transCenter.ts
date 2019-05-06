@@ -30,6 +30,8 @@ export class TransCenter {
       vscode.ViewColumn.Beside,
       {
         enableScripts: true,
+        enableFindWidget: true,
+        enableCommandUris: true,
         retainContextWhenHidden: true,
       }
     )

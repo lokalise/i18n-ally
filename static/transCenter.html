@@ -24,10 +24,8 @@
     body {
       margin: 0;
       padding: 0;
-      color: #a7b9d1;
-      background: #2d323c;
     }
-
+    
     ul,
     li {
       margin: 0;
@@ -61,11 +59,11 @@
       margin-bottom: 15px;
       padding: 12px 15px;
       border-radius: 5px;
-      background: #1f2329;
+      background: var(--vscode-activityBar-background);
     }
 
     .i18n-table .item input:hover {
-      border-bottom-color: #4e5b71;
+      border-bottom-color: var(--vscode-editor-foreground);
     }
 
     .i18n-table .item:hover button {
@@ -77,7 +75,7 @@
     }
 
     .i18n-table .item input:focus {
-      border-bottom-color: #2e7cf1;
+      border-bottom-color: var(--vscode-settings-textInputForeground);
     }
 
     .i18n-table .item > h4 {
@@ -88,7 +86,8 @@
 
     .i18n-table .item > h4 span {
       padding: 0 0 3px 0;
-      color: #79a4de;
+      color: var(--vscode-color-link-foreground);
+      font-family: monospace;
     }
 
     .i18n-table .item > h4 button {
@@ -98,7 +97,7 @@
 
     .i18n-table .item > h4 button[disabled] {
       opacity: 1;
-      color: #ccc;
+      color: var(--vscode-editor-foreground);
       background: #555;
       cursor: progress;
     }
@@ -119,16 +118,22 @@
       width: 50px;
     }
 
+    .i18n-table .item .lng {
+      text-align: right;
+      font-family: monospace;
+      margin: 0 5px 0 0;
+    }
+
     .i18n-table .item .lng.active {
-      color: #c7c7c7;
+      color: var(--vscode-settings-textInputForeground);
       font-weight: bold;
     }
 
     input {
       width: 100%;
-      color: #a7b9d1;
+      color: var(--vscode-settings-textInputForeground);
       border: none;
-      border-bottom: 1px solid #273750;
+      border-bottom: 1px solid var(--vscode-editor-foreground);
       padding: 5px 8px;
       background: transparent;
       transition: 0.3s;
@@ -137,12 +142,13 @@
 
     input:focus {
       outline: none;
+      color: var(--vscode-activityBar-foreground);
     }
 
     button {
-      background: #2e7cf1;
+      background: var(--vscode-titleBar-activeBackground);
       border: none;
-      color: #f6f9ff;
+      color: var(--vscode-titleBar-activeForeground);
       padding: 5px 8px;
       border-radius: 3px;
       transition: 0.3s;
