@@ -69,15 +69,30 @@ class I18nFiles {
     return this.i18nFiles.get(rootPath)
   }
 
-  getTransByApi (transItems: LocaleValue[], override = false): Promise<LocaleValue[]> {
+  getTransByApi (transItems: LocaleValue[], locales?: string | string[], override = false): Promise<LocaleValue[]> {
     const sourceLocale = Common.sourceLocale
     const sourceItem = transItems.find(transItem => transItem.lng === sourceLocale)
 
+    if (!sourceItem)
+      return Promise.resolve(transItems)
+
+    if (typeof locales === 'string')
+      locales = [locales]
+
     const tasks = transItems.map(transItem => {
       if (transItem.lng === sourceLocale) return transItem
+
+      // Only tranlate specific locales, if set
+      if (locales && !locales.includes(transItem.lng)) return transItem
+
+      // Skip fields already have data
       if (!override && transItem.data) return transItem
 
-      const plans = [google.translate, baidu.translate, youdao.translate]
+      const plans = [
+        google.translate,
+        baidu.translate,
+        youdao.translate,
+      ]
       return this.transByApi(
         {
           from: sourceLocale,
@@ -86,7 +101,7 @@ class I18nFiles {
         },
         plans
       ).then(res => {
-        transItem.data = res.result[0] || sourceItem.data
+        transItem.data = res.result[0] || ''
         return transItem
       })
     })
