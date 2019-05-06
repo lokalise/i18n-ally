@@ -47,12 +47,9 @@
       display: flex;
     }
 
-    .main-container .header h2:hover button {
-      opacity: 1;
-    }
     .main-container .header h2 button {
       margin-left: auto;
-      opacity: 0.3;
+      width: 250px;
     }
 
     .i18n-table .item {
@@ -64,10 +61,6 @@
 
     .i18n-table .item input:hover {
       border-bottom-color: var(--vscode-editor-foreground);
-    }
-
-    .i18n-table .item:hover button {
-      opacity: 1;
     }
 
     .i18n-table .item input {
@@ -92,14 +85,7 @@
 
     .i18n-table .item > h4 button {
       margin-left: auto;
-      opacity: 0.3;
-    }
-
-    .i18n-table .item > h4 button[disabled] {
-      opacity: 1;
-      color: var(--vscode-editor-foreground);
-      background: #555;
-      cursor: progress;
+      width: 200px;
     }
 
     .i18n-table .item > ul {
@@ -116,6 +102,10 @@
 
     .i18n-table .item > ul > li span {
       width: 50px;
+    }
+
+    .i18n-table .item > ul > li button {
+      width: 150px;
     }
 
     .i18n-table .item .lng {
@@ -153,6 +143,17 @@
       border-radius: 3px;
       transition: 0.3s;
       cursor: pointer;
+      opacity: 0.9;
+    }
+
+    button:hover{
+      opacity: 1;
+    }
+
+    button[disabled] {
+      opacity: 0.2;
+      cursor: default;
+      pointer-events: none;
     }
   </style>
   <body>
@@ -161,7 +162,7 @@
         <h2>
           <span>{{ filePath }}</span>
           <button @click="batchTrans()">
-            {{transTasks.length ? '翻译中' : `批量根据${sourceLocale}翻译` }}
+            {{transTasks.length ? '翻译中' : `Translate all text based on "${sourceLocale}"` }}
           </button>
         </h2>
         <small>{{ i18nPath }}</small>
@@ -175,21 +176,27 @@
               @click="trans(i18nItem)"
               :disabled="loadingMap[i18nItem.key]"
             >
-              {{loadingMap[i18nItem.key] ? `翻译中..` : `根据${sourceLocale}翻译`}}
+              {{loadingMap[i18nItem.key] ? `Translating...` : `Translate based on "${sourceLocale}"`}}
             </button>
           </h4>
 
           <ul>
             <li v-for="transItem in i18nItem.transItems" :key="transItem.lng">
-              <span class="lng" :class="{active: transItem.lng === sourceLocale}">{{
-                transItem.lng
-              }}</span>
+              <span class="lng" :class="{active: transItem.lng === sourceLocale}">
+                {{ transItem.lng }}
+              </span>
               <input
                 @blur="writeTrans(i18nItem)"
                 type="text"
                 v-model="transItem.data"
                 placeholder="(empty)"
               />
+              <button
+                @click="transSingleLocale(i18nItem, transItem.lng)"
+                :disabled="transItem.lng === sourceLocale || loadingMap[`${i18nItem.key}.${transItem.lng}`]"
+              >
+                {{loadingMap[`${i18nItem.key}.${transItem.lng}`] ? `Translating..` : `Translate`}}
+              </button>
             </li>
           </ul>
         </li>
@@ -243,8 +250,30 @@
                   i18nItem => i18nItem.key === data.key
                 );
 
-                this.$set(this.i18n, matchIndex, data);
-                this.$delete(this.loadingMap, data.key);
+                let { locales } = eventData
+
+                console.log('TRAMS', data, locales, this.loadingMap, this.i18n)
+
+                if (!locales) {
+                  // Translate all
+                  this.$set(this.i18n, matchIndex, data);
+                  this.$delete(this.loadingMap, data.key);
+                }
+                else {
+                  // Translate by locales
+                  if (typeof locales === 'string')
+                    locales = [locales]
+                  for (const locale of locales) {
+                    console.log(locale)
+                    this.$delete(this.loadingMap, `${data.key}.${locale}`);
+                    const target = this.i18n[matchIndex].transItems.find(t=>t.lng === locale)
+                    const result = data.transItems.find(t=>t.lng === locale)
+                    console.log(target, result)
+                    
+                    target.data = result.data
+                  }
+                }
+                
                 break;
 
               default:
@@ -260,7 +289,23 @@
             if (this.loadingMap[i18nItem.key]) return;
 
             this.$set(this.loadingMap, i18nItem.key, true);
-            this.transTasks.push(i18nItem);
+            this.transTasks.push({ item: i18nItem });
+
+            clearTimeout(this.emitTransTimer);
+            this.emitTransTimer = setTimeout(() => {
+              vscode.postMessage({
+                type: EVENT_MAP.trans,
+                data: this.transTasks
+              });
+              this.transTasks = [];
+            }, 300);
+          },
+          transSingleLocale(i18nItem, locale) {
+            const loadingKey = i18nItem.key+'.'+locale
+            if (this.loadingMap[loadingKey]) return;
+
+            this.$set(this.loadingMap, loadingKey, true);
+            this.transTasks.push({ item: i18nItem, locales: locale });
 
             clearTimeout(this.emitTransTimer);
             this.emitTransTimer = setTimeout(() => {

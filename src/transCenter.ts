@@ -10,6 +10,7 @@ const EVENT_MAP = {
   allI18n: 'allI18n',
   trans: 'trans',
   writeTrans: 'writeTrans',
+  transSingle: 'transSingle',
 }
 
 export class TransCenter {
@@ -68,18 +69,21 @@ export class TransCenter {
           break
 
         case EVENT_MAP.trans:
-          data.forEach(async i18nItem => {
+          data.forEach(async ({ item, locales }) => {
             try {
               const transItemsResult = await i18nFiles.getTransByApi(
-                i18nItem.transItems
+                item.transItems,
+                locales,
+                !!locales
               )
               const newI18nItem = {
-                ...i18nItem,
+                ...item,
                 transItems: transItemsResult,
               }
               webview.postMessage({
                 type: EVENT_MAP.trans,
                 data: newI18nItem,
+                locales,
               })
               i18nFiles.writeTrans(filePath, newI18nItem)
             }
@@ -87,7 +91,8 @@ export class TransCenter {
               console.error(err)
               webview.postMessage({
                 type: EVENT_MAP.trans,
-                data: i18nItem,
+                data: item,
+                locales,
               })
             }
           })
