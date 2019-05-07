@@ -7,3 +7,4 @@ src/**
 tsconfig.json
 vsc-extension-quickstart.md
 tslint.json
+sample/**
