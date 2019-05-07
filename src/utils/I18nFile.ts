@@ -54,7 +54,7 @@ class I18nFile {
   private watchChange (i18nPath: string) {
     const watcher = vscode.workspace.createFileSystemWatcher(`${i18nPath}/**`)
 
-    const updateFile = (type: string, { path: filePath }: {path: string}) => {
+    const updateFile = (type: string, { fsPath: filePath }: { fsPath: string }) => {
       const { ext } = path.parse(filePath)
       if (ext !== '.json') return
 
