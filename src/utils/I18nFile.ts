@@ -114,7 +114,7 @@ class I18nFile {
         set(data, transItem.isDirectory ? keyPath : i18nKey, transItem.data)
         fs.writeFile(
           transItem.path,
-          JSON.stringify(data, null, 2),
+          `${JSON.stringify(data, null, 2)}\n`,
           () => resolve()
         )
       })

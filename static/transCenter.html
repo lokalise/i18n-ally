@@ -252,8 +252,6 @@
 
                 let { locales } = eventData
 
-                console.log('TRAMS', data, locales, this.loadingMap, this.i18n)
-
                 if (!locales) {
                   // Translate all
                   this.$set(this.i18n, matchIndex, data);
@@ -264,11 +262,9 @@
                   if (typeof locales === 'string')
                     locales = [locales]
                   for (const locale of locales) {
-                    console.log(locale)
                     this.$delete(this.loadingMap, `${data.key}.${locale}`);
                     const target = this.i18n[matchIndex].transItems.find(t=>t.lng === locale)
                     const result = data.transItems.find(t=>t.lng === locale)
-                    console.log(target, result)
                     
                     target.data = result.data
                   }
