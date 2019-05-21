@@ -9,3 +9,8 @@
 Forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n)
 
 🚧 This project is under heavy construction, please use wisely...
+
+## 🐞 Known issuses
+
+- [ ] Workspace is not compatible with this plugin for now, please try to open the project alone if you are facing errors.
+- [ ] Dependency `vue-i18n` is required to installed on the root of the project to make this plugin works(#3).
