@@ -27,7 +27,7 @@ export class TransCenter {
 
     this.panel = vscode.window.createWebviewPanel(
       'transCenter',
-      `翻译-${this.shortFileName}`,
+      `Translating-${this.shortFileName}`,
       vscode.ViewColumn.Beside,
       {
         enableScripts: true,
@@ -135,6 +135,8 @@ export class TransCenter {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
+  vscode.commands.executeCommand('setContext', 'vueI18nEnabled', true)
+
   const cmd = vscode.commands.registerCommand(
     'extension.vue-i18n-ally.transCenter',
     () => {

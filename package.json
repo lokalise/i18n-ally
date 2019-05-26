@@ -41,32 +41,32 @@
       },
       {
         "command": "extension.vue-i18n-ally.config",
-        "title": "vue-i18n-ally: 手动配置路径"
+        "title": "vue-i18n-ally: Configure locales path"
       },
       {
         "command": "extension.vue-i18n-ally.auto-init",
-        "title": "vue-i18n-ally: 自动配置路径"
+        "title": "vue-i18n-ally: Auto detect locale path"
       }
     ],
     "menus": {
       "editor/title": [
         {
-          "when": "resourceLangId == vue-html",
+          "when": "vueI18nEnabled && resourceLangId == vue-html",
           "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
-          "when": "resourceLangId == vue",
+          "when": "vueI18nEnabled && resourceLangId == vue",
           "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
-          "when": "resourceLangId == javascript",
+          "when": "vueI18nEnabled && resourceLangId == javascript",
           "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         },
         {
-          "when": "resourceLangId == typescript",
+          "when": "vueI18nEnabled && resourceLangId == typescript",
           "command": "extension.vue-i18n-ally.transCenter",
           "group": "navigation"
         }
