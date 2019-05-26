@@ -3,7 +3,7 @@ import * as fg from 'fast-glob'
 import * as path from 'path'
 import Common from './utils/Common'
 
-class AutoInit {
+class AutoDetectLocales {
   ctx: vscode.ExtensionContext
 
   constructor (ctx: vscode.ExtensionContext) {
@@ -11,8 +11,8 @@ class AutoInit {
   }
 
   async init () {
-    const i18nPaths = Common.i18nPaths
-    if (i18nPaths.length)
+    const localesPaths = Common.localesPaths
+    if (localesPaths.length)
       return
 
     this.autoSet()
@@ -28,19 +28,19 @@ class AutoInit {
 
     result = result.map(r => path.relative(rootPath, r))
 
-    Common.updateI18nPaths(result)
+    Common.updateLocalesPaths(result)
 
     await vscode.window.showInformationMessage(
-      `VueI18n locales path auto set to ${result.join(';').toString()}`,
+      `VueI18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
     )
   }
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  const autoInit = new AutoInit(ctx)
-  autoInit.init()
+  const detector = new AutoDetectLocales(ctx)
+  detector.init()
 
   return vscode.commands.registerCommand('extension.vue-i18n-ally.auto-detect-locales', () => {
-    autoInit.autoSet()
+    detector.autoSet()
   })
 }

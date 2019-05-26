@@ -59,7 +59,7 @@ function annotation (ctx: vscode.ExtensionContext) {
     onChange(debounceUpdate, null, ctx.subscriptions)
   })
 
-  Common.i18nPaths.forEach(i18nPath => {
+  Common.localesPaths.forEach(i18nPath => {
     const i18nDirWatcher = vscode.workspace.createFileSystemWatcher(
       `${i18nPath}/**`
     )

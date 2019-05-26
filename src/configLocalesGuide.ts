@@ -19,7 +19,7 @@ class Guide {
       return
 
     const dirs = await this.pickDir()
-    Common.updateI18nPaths(dirs)
+    Common.updateLocalesPaths(dirs)
 
     this.success()
   }

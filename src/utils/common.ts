@@ -9,18 +9,18 @@ export default class Common {
   }
 
   static get hasI18nPaths () {
-    return !!Common.i18nPaths.length
+    return !!Common.localesPaths.length
   }
 
-  static get i18nPaths () {
-    const paths = Common.getConfig('i18nPaths')
+  static get localesPaths (): string[] {
+    const paths = Common.getConfig('localesPaths')
 
     return paths ? paths.split(',') : []
   }
 
-  static updateI18nPaths (paths: string[]) {
-    const i18nPaths = [...new Set(Common.i18nPaths.concat(paths))]
-    Common.setConfig('i18nPaths', i18nPaths.join(','))
+  static updateLocalesPaths (paths: string[]) {
+    const localesPaths = [...new Set(Common.localesPaths.concat(paths))]
+    Common.setConfig('localesPaths', localesPaths.join(','))
   }
 
   static get rootPath () {

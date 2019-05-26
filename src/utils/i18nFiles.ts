@@ -10,7 +10,7 @@ class I18nFiles {
   private i18nBox = new Map<string, I18nFile>()
 
   get i18nFiles () {
-    Common.i18nPaths.forEach(i18nPath => {
+    Common.localesPaths.forEach(i18nPath => {
       const rootPath = Common.rootPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
@@ -23,7 +23,7 @@ class I18nFiles {
   }
 
   constructor () {
-    Common.i18nPaths.forEach(i18nPath => {
+    Common.localesPaths.forEach(i18nPath => {
       const rootPath = Common.rootPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
@@ -33,9 +33,9 @@ class I18nFiles {
 
   static getRelativePathByFilePath (filePath: string) {
     const rootPath = Common.rootPath
-    const i18nPaths = Common.i18nPaths
+    const localesPaths = Common.localesPaths
 
-    const i18nRootPath = i18nPaths
+    const i18nRootPath = localesPaths
       .map((pathItem: string) => path.resolve(rootPath, pathItem))
       .sort((a: string, b: string) =>
         // 通过对比哪个更接近来确定符合要求的目录

@@ -61,7 +61,7 @@
       "type": "object",
       "title": "Vue i18n Ally",
       "properties": {
-        "vue-i18n-ally.i18nPaths": {
+        "vue-i18n-ally.localesPaths": {
           "type": "string",
           "default": "",
           "description": "Path to locales directory (relative to project root)"
