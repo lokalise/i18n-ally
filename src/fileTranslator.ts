@@ -13,7 +13,7 @@ const EVENT_MAP = {
   transSingle: 'transSingle',
 }
 
-export class TransCenter {
+export class FileTranslator {
   panel: vscode.WebviewPanel
   filePath: string
   shortFileName: string
@@ -24,9 +24,17 @@ export class TransCenter {
       .split(path.sep)
       .slice(-3)
       .join(path.sep)
+  }
 
+  init () {
+    this.initPanel()
+    this.initMessage()
+    this.initFileWatcher()
+  }
+
+  initPanel () {
     this.panel = vscode.window.createWebviewPanel(
-      'transCenter',
+      'file-translator',
       `Translating-${this.shortFileName}`,
       vscode.ViewColumn.Beside,
       {
@@ -40,12 +48,9 @@ export class TransCenter {
     const { webview } = this.panel
 
     webview.html = fs.readFileSync(
-      path.resolve(Common.extension.extensionPath, 'static/transCenter.html'),
+      path.resolve(Common.extension.extensionPath, 'static/file-translator.html'),
       'utf-8'
     )
-
-    this.initMessage()
-    this.initFileWatcher()
   }
 
   initMessage () {
@@ -138,9 +143,11 @@ export default (ctx: vscode.ExtensionContext) => {
   vscode.commands.executeCommand('setContext', 'vueI18nEnabled', true)
 
   const cmd = vscode.commands.registerCommand(
-    'extension.vue-i18n-ally.transCenter',
+    'extension.vue-i18n-ally.file-translator',
     () => {
-      new TransCenter(vscode.window.activeTextEditor.document.fileName)
+      const filename = vscode.window.activeTextEditor.document.fileName
+      const translator = new FileTranslator(filename)
+      translator.init()
     }
   )
 

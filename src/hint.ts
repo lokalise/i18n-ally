@@ -17,7 +17,7 @@ class HintProvider implements vscode.HoverProvider {
       .join('  \n')
 
     const transBtn = transText
-      ? '[翻译](command:extension.vue-i18n-ally.transCenter) | '
+      ? '[翻译](command:extension.vue-i18n-ally.file-translator) | '
       : ''
     const markdownText = new vscode.MarkdownString(
       `${transText ||

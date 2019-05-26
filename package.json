@@ -32,7 +32,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.vue-i18n-ally.transCenter",
+        "command": "extension.vue-i18n-ally.file-translator",
         "title": "翻译当前文件的i18n",
         "icon": {
           "light": "./static/icon-translate.svg",
@@ -52,22 +52,22 @@
       "editor/title": [
         {
           "when": "vueI18nEnabled && resourceLangId == vue-html",
-          "command": "extension.vue-i18n-ally.transCenter",
+          "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
         },
         {
           "when": "vueI18nEnabled && resourceLangId == vue",
-          "command": "extension.vue-i18n-ally.transCenter",
+          "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
         },
         {
           "when": "vueI18nEnabled && resourceLangId == javascript",
-          "command": "extension.vue-i18n-ally.transCenter",
+          "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
         },
         {
           "when": "vueI18nEnabled && resourceLangId == typescript",
-          "command": "extension.vue-i18n-ally.transCenter",
+          "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
         }
       ]
