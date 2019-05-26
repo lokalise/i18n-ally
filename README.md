@@ -17,7 +17,7 @@ Forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-
 3. Configure your `locales` path. There are three ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `VueI18n Ally: Auto detect locales path` then press enter.
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `VueI18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually. This field can be a string or an array of string.
+   - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually.
 
 ## 🐞 Known issuses
 

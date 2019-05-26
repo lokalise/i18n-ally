@@ -6,14 +6,12 @@ class Guide {
 
   constructor (ctx: vscode.ExtensionContext) {
     this.ctx = ctx
-
-    this.init()
   }
 
   async init () {
-    const okText = '立即配置'
+    const okText = 'Config Now'
     const result = await vscode.window.showInformationMessage(
-      'vue-i18n: 项目里的locales文件夹在哪？',
+      'Locate the `locales` directory in your project',
       okText
     )
 
@@ -36,22 +34,16 @@ class Guide {
   }
 
   async success () {
-    const okText = '继续配置'
-    const result = await vscode.window.showInformationMessage(
-      'vue-i18n: 配置好了，还有其他目录吗？',
-      okText,
-      '没有了'
+    await vscode.window.showInformationMessage(
+      'Locales path successfully configured.',
     )
-
-    if (result !== okText)
-      return
-
-    this.init()
   }
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  return vscode.commands.registerCommand('extension.vue-i18n-ally.config', () => {
-    new Guide(ctx)
-  })
+  return vscode.commands.registerCommand('extension.vue-i18n-ally.config-locales',
+    () => {
+      const guide = new Guide(ctx)
+      guide.init()
+    })
 }

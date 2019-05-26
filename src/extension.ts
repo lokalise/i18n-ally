@@ -9,8 +9,8 @@ export async function activate (ctx: vscode.ExtensionContext) {
 
   console.log('Vue-i18n is active')
   ;[
-    require('./autoInit').default,
-    require('./guide').default,
+    require('./autoDetectLocales').default,
+    require('./configLocalesGuide').default,
     require('./hint').default,
     require('./extract').default,
     require('./completion').default,
