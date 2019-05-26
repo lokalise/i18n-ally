@@ -10,12 +10,18 @@ Forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-
 
 🚧 This project is under heavy construction, please use wisely...
 
-## Installation
+## 🌟 Features
+
+- Inline text display
+- i18n key autocomplete
+- Friendly UI for managing translations
+- One-click machine translation
+
+## ⚙ Installation
 
 1. Make sure [`vue-i18n`] is installed in your root directory
 2. Install this extension
-3. Configure your `locales` path. There are three ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `VueI18n Ally: Auto detect locales path` then press enter.
+3. `locales` path should be detected automatically. You can also configure it manually. There are two ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `VueI18n Ally: Manual configure locales path` then press enter and follow the guide.
    - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually.
 

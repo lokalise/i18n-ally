@@ -66,10 +66,10 @@ export default class Common {
     const projectUrl = this.rootPath
 
     try {
-      /* eslint-disabled @typescir */
       const {
         dependencies,
         devDependencies,
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       } = require(`${projectUrl}/package.json`)
       return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
     }
