@@ -29,7 +29,7 @@ function annotation (ctx: vscode.ExtensionContext) {
       if (!trans)
         return
 
-      const text = (trans.find(t => t.lng === Common.displayLocale) || { data: '' }).data || ''
+      const text = (trans.find(t => t.lng === Common.displayLanguage) || { data: '' }).data || ''
       const decoration = {
         range: new vscode.Range(
           document.positionAt(index),

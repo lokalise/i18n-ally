@@ -68,7 +68,7 @@ export class FileTranslator {
             data: {
               filePath: shortFileName,
               i18n: i18nFiles.getTrans(filePath),
-              sourceLocale: Common.sourceLocale,
+              sourceLanguage: Common.sourceLanguage,
             },
           })
           break

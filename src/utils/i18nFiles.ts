@@ -70,8 +70,8 @@ class I18nFiles {
   }
 
   getTransByApi (transItems: LocaleValue[], locales?: string | string[], override = false): Promise<LocaleValue[]> {
-    const sourceLocale = Common.sourceLocale
-    const sourceItem = transItems.find(transItem => transItem.lng === sourceLocale)
+    const sourceLanguage = Common.sourceLanguage
+    const sourceItem = transItems.find(transItem => transItem.lng === sourceLanguage)
 
     if (!sourceItem)
       return Promise.resolve(transItems)
@@ -80,7 +80,7 @@ class I18nFiles {
       locales = [locales]
 
     const tasks = transItems.map(transItem => {
-      if (transItem.lng === sourceLocale) return transItem
+      if (transItem.lng === sourceLanguage) return transItem
 
       // Only tranlate specific locales, if set
       if (locales && !locales.includes(transItem.lng)) return transItem
@@ -95,7 +95,7 @@ class I18nFiles {
       ]
       return this.transByApi(
         {
-          from: sourceLocale,
+          from: sourceLanguage,
           to: transItem.lng,
           text: sourceItem.data,
         },

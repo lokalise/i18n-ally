@@ -162,7 +162,7 @@
         <h2>
           <span>{{ filePath }}</span>
           <button @click="batchTrans()">
-            {{transTasks.length ? '翻译中' : `Translate all text based on "${sourceLocale}"` }}
+            {{transTasks.length ? '翻译中' : `Translate all text based on "${sourceLanguage}"` }}
           </button>
         </h2>
         <small>{{ i18nPath }}</small>
@@ -176,13 +176,13 @@
               @click="trans(i18nItem)"
               :disabled="loadingMap[i18nItem.key]"
             >
-              {{loadingMap[i18nItem.key] ? `Translating...` : `Translate based on "${sourceLocale}"`}}
+              {{loadingMap[i18nItem.key] ? `Translating...` : `Translate based on "${sourceLanguage}"`}}
             </button>
           </h4>
 
           <ul>
             <li v-for="transItem in i18nItem.transItems" :key="transItem.lng">
-              <span class="lng" :class="{active: transItem.lng === sourceLocale}">
+              <span class="lng" :class="{active: transItem.lng === sourceLanguage}">
                 {{ transItem.lng }}
               </span>
               <input
@@ -193,7 +193,7 @@
               />
               <button
                 @click="transSingleLocale(i18nItem, transItem.lng)"
-                :disabled="transItem.lng === sourceLocale || loadingMap[`${i18nItem.key}.${transItem.lng}`]"
+                :disabled="transItem.lng === sourceLanguage || loadingMap[`${i18nItem.key}.${transItem.lng}`]"
               >
                 {{loadingMap[`${i18nItem.key}.${transItem.lng}`] ? `Translating..` : `Translate`}}
               </button>
@@ -223,7 +223,7 @@
             loadingMap: {},
             transTasks: [],
             emitTransTimer: null,
-            sourceLocale: 'en'
+            sourceLanguage: 'en'
           };
         },
         computed: {
@@ -242,7 +242,7 @@
               case EVENT_MAP.allI18n:
                 this.filePath = data.filePath;
                 this.i18n = data.i18n;
-                this.sourceLocale = data.sourceLocale;
+                this.sourceLanguage = data.sourceLanguage;
                 break;
 
               case EVENT_MAP.trans:

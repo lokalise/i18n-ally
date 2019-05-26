@@ -27,12 +27,12 @@ export default class Common {
     return vscode.workspace.workspaceFolders[0].uri.fsPath
   }
 
-  static get displayLocale (): string {
-    return Common.normalizeLng(Common.getConfig('displayLocale')) || 'en'
+  static get displayLanguage (): string {
+    return Common.normalizeLng(Common.getConfig('displayLanguage')) || 'en'
   }
 
-  static get sourceLocale (): string {
-    return Common.normalizeLng(Common.getConfig('sourceLocale')) || this.displayLocale || 'en'
+  static get sourceLanguage (): string {
+    return Common.normalizeLng(Common.getConfig('sourceLanguage')) || this.displayLanguage || 'en'
   }
 
   static getConfig (key: string): any {

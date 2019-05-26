@@ -45,7 +45,7 @@ class I18nFile {
       })
       .filter(item => !!item.lng)
       .sort(item => {
-        return item.lng === Common.sourceLocale ? -1 : 1
+        return item.lng === Common.sourceLanguage ? -1 : 1
       })
 
     return i18nList
