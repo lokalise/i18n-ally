@@ -13,6 +13,7 @@ export async function activate (ctx: vscode.ExtensionContext) {
     require('./commands/extract').default,
     require('./commands/configLocalesGuide').default,
     require('./commands/configDisplayLanguage').default,
+    require('./commands/debug').default,
     require('./hint').default,
     require('./completion').default,
     require('./fileTranslator').default,

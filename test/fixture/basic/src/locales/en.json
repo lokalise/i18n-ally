@@ -1,3 +1,9 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "nested": {
+    "hello": "Hello again",
+    "foo": {
+      "bar": "foobar"
+    }
+  }
 }

@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'app',
+
+  mounted(){
+    console.log(this.$t('nested.foo.bar'))
+  }
 }
 </script>
 

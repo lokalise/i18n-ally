@@ -16,6 +16,9 @@
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
+            "env": {
+                "DEBUG": "vue-i18n-ally"
+            },
             "preLaunchTask": "npm: watch"
         },
         {

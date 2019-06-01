@@ -50,6 +50,10 @@
       {
         "command": "extension.vue-i18n-ally.config-display-language",
         "title": "VueI18n Ally: Change display language"
+      },
+      {
+        "command": "extension.vue-i18n-ally.debug",
+        "title": "VueI18n Ally: Debug"
       }
     ],
     "menus": {
@@ -108,6 +112,7 @@
   },
   "dependencies": {
     "fast-glob": "^2.2.6",
+    "flat": "^4.1.0",
     "lodash": "^4.17.11",
     "translation.js": "^0.7.8"
   }
