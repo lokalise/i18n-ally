@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 
-export const KEY_REG = /(?:\$t|\$tc|\$d|\$n|\$te|this\.t|i18n\.t|[^\w]t)\(['"]([^]+?)['"]/g
+export const KEY_REG = /(?:i18n[ (]path=|(?:\$t|\$tc|\$d|\$n|\$te|this\.t|i18n\.t|[^\w]t)\()['"]([^]+?)['"]/g
 
 export default class KeyDetector {
   static getKeyByContent (text: string) {
