@@ -4,9 +4,7 @@ import { KEY_REG } from './utils/KeyDetector'
 import i18nFiles from './utils/i18nFiles'
 import Common from './utils/Common'
 
-const textEditorDecorationType = vscode.window.createTextEditorDecorationType(
-  {}
-)
+const textEditorDecorationType = vscode.window.createTextEditorDecorationType({})
 
 function annotation (ctx: vscode.ExtensionContext) {
   function update () {
@@ -16,7 +14,7 @@ function annotation (ctx: vscode.ExtensionContext) {
 
     const { document } = activeTextEditor
     const text = document.getText()
-    const decorations = []
+    const decorations: vscode.DecorationOptions[] = []
 
     // 从文本里遍历生成中文注释
     let match = null
@@ -30,10 +28,10 @@ function annotation (ctx: vscode.ExtensionContext) {
         return
 
       const text = (trans.find(t => t.lng === Common.displayLanguage) || { data: '' }).data || ''
-      const decoration = {
+      const decoration: vscode.DecorationOptions = {
         range: new vscode.Range(
           document.positionAt(index),
-          document.positionAt(index + matchKey.length + 1)
+          document.positionAt(index + matchKey.length)
         ),
         renderOptions: {
           after: {

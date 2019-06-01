@@ -28,11 +28,15 @@ export default class Common {
   }
 
   static get displayLanguage (): string {
-    return Common.normalizeLng(Common.getConfig('displayLanguage')) || 'en'
+    return Common.normalizeLng(Common.getConfig('displayLanguage'))
+  }
+
+  static set displayLanguage (value) {
+    Common.setConfig('displayLanguage', Common.normalizeLng(value))
   }
 
   static get sourceLanguage (): string {
-    return Common.normalizeLng(Common.getConfig('sourceLanguage')) || this.displayLanguage || 'en'
+    return Common.normalizeLng(Common.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
   }
 
   static getConfig (key: string): any {
@@ -45,7 +49,7 @@ export default class Common {
       .update(`${configPrefix}.${key}`, value, isGlobal)
   }
 
-  static normalizeLng (lng: string): string {
+  static normalizeLng (lng: string, fallback = 'en'): string {
     const result = lngs.find((lngItem: string | string[]) => {
       if (Array.isArray(lngItem) && lngItem[1].includes(lng))
         return true
@@ -55,9 +59,11 @@ export default class Common {
         lng.toUpperCase() === lngItem.toUpperCase()
       )
         return true
+
+      return false
     })
 
-    return result ? (Array.isArray(result) ? result[0].toString() : result) : ''
+    return result ? (Array.isArray(result) ? result[0].toString() : result) : fallback
   }
 
   public static isVueProject (): boolean {

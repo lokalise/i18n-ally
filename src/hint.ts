@@ -16,11 +16,25 @@ class HintProvider implements vscode.HoverProvider {
       .map(item => `**${item.lng}:** ${item.data || '-'}`)
       .join('  \n')
 
-    const transBtn = transText
-      ? '[Translator](command:extension.vue-i18n-ally.file-translator) | '
-      : ''
+    const buttons: {name: string; command: string}[] = []
+    if (transText) {
+      buttons.push({
+        name: 'Translator',
+        command: 'extension.vue-i18n-ally.file-translator',
+      })
+    }
+    buttons.push({
+      name: 'Config',
+      command: 'extension.vue-i18n-ally.config-locales',
+    })
+    buttons.push({
+      name: 'Display Language',
+      command: 'extension.vue-i18n-ally.config-display-language',
+    })
+
+    const buttonsMarkdown = buttons.map(btn => `[${btn.name}](command:${btn.command})`).join(' | ')
     const markdownText = new vscode.MarkdownString(
-      `${transText || key}\n\n---\n\n${transBtn}[Config](command:extension.vue-i18n-ally.config-locales)`
+      `${transText || key}\n\n---\n\n${buttonsMarkdown}`
     )
     markdownText.isTrusted = true
 

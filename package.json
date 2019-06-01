@@ -46,6 +46,10 @@
       {
         "command": "extension.vue-i18n-ally.auto-detect-locales",
         "title": "VueI18n Ally: Auto detect locales path"
+      },
+      {
+        "command": "extension.vue-i18n-ally.config-display-language",
+        "title": "VueI18n Ally: Change display language"
       }
     ],
     "menus": {

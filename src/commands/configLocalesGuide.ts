@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import Common from './utils/Common'
+import Common from '../utils/Common'
 
 class Guide {
   ctx = null
