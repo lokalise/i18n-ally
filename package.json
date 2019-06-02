@@ -35,8 +35,8 @@
         "command": "extension.vue-i18n-ally.file-translator",
         "title": "Translate i18n content from current file",
         "icon": {
-          "light": "./static/icon-translate.svg",
-          "dark": "./static/icon-translate.svg"
+          "light": "./static/logo-menu.svg",
+          "dark": "./static/logo-menu.svg"
         }
       },
       {
@@ -62,6 +62,24 @@
           "when": "vueI18nEnabled && resourceLangId =~ /vue(-html)?|(type|java)script/",
           "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vue-i18n-ally",
+          "title": "Vue i18n Ally",
+          "icon": "./static/logo-view-container.svg",
+          "when": "vueI18nEnable"
+        }
+      ]
+    },
+    "views": {
+      "vue-i18n-ally": [
+        {
+          "id": "locales-tree",
+          "name": "Locales Tree"
         }
       ]
     },

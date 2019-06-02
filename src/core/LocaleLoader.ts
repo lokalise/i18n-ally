@@ -20,7 +20,10 @@ export interface ParsedFile {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface LocaleTreeNode extends Record<string, LocaleRecord> {}
+export interface LocaleTreeNode {
+  key: string
+  locales: Record<string, LocaleRecord>
+}
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LocaleTree extends Record<string, LocaleTreeNode> {}
@@ -41,9 +44,13 @@ export default class LocaleLoader {
     const tree: LocaleTree = {}
     for (const file of Object.values(this.files)) {
       for (const key of Object.keys(file.flatten)) {
-        if (!tree[key])
-          tree[key] = {}
-        tree[key][file.locale] = {
+        if (!tree[key]) {
+          tree[key] = {
+            key,
+            locales: {},
+          }
+        }
+        tree[key].locales[file.locale] = {
           key,
           value: file.flatten[key],
           locale: file.locale,
