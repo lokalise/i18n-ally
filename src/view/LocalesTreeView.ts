@@ -92,4 +92,9 @@ export default (ctx: vscode.ExtensionContext) => {
       vscode.window.showInformationMessage('I18n key copied')
     })
   })
+
+  vscode.commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: {node: LocaleRecord}) => {
+    const pendings = await Common.loader.MachineTranslateRecord(node)
+    console.log(pendings)
+  })
 }

@@ -5,6 +5,7 @@ import * as flat from 'flat'
 import Common from '../utils/Common'
 import * as vscode from 'vscode'
 import EventHandler from '../utils/EventHandler'
+import { MachinTranslate } from './MachineTranslate'
 
 export interface ParsedFile {
   filepath: string
@@ -74,6 +75,13 @@ export interface Coverage {
   total: number
 }
 
+export interface PendingWrite {
+  locale: string
+  keypath: string
+  filepath: string
+  value: string
+}
+
 export type LocaleLoaderEventType =
   | 'changed'
 
@@ -85,9 +93,6 @@ export default class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   async init () {
     await this.loadAll()
     this.update()
-
-    console.log(JSON.stringify(this.files, null, 2))
-    console.log(JSON.stringify(this.localeTree, null, 2))
   }
 
   get localesPaths () {
@@ -132,6 +137,27 @@ export default class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
     const node = this.getTranslationsByKey(key)
     return node && node.locales[Common.displayLanguage]
+  }
+
+  async MachineTranslateRecord (record: LocaleRecord, sourceLanguage?: string): Promise<PendingWrite|undefined> {
+    sourceLanguage = sourceLanguage || Common.sourceLanguage
+    if (record.locale === sourceLanguage)
+      return undefined
+    const sourceNode = this.getTranslationsByKey(record.keypath)
+    if (!sourceNode)
+      return undefined
+    const sourceRecord = sourceNode.locales[sourceLanguage]
+    if (!sourceRecord || !sourceRecord.value)
+      return undefined
+    const result = await MachinTranslate(sourceRecord.value, sourceLanguage, record.locale)
+    if (!result)
+      return undefined
+    return {
+      locale: record.locale,
+      value: result,
+      filepath: record.filepath,
+      keypath: record.keypath,
+    }
   }
 
   private getFileInfo (filepath: string) {
@@ -265,8 +291,8 @@ export default class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
         const node = tree.children[key]
         if (node.type === 'node') {
           node.locales[file.locale] = {
-            keypath,
-            keyname: getKeyname(keypath),
+            keypath: newKeyPath,
+            keyname: key,
             value,
             locale: file.locale,
             filepath: file.filepath,

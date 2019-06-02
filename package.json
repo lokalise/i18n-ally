@@ -56,6 +56,11 @@
         "command": "extension.vue-i18n-ally.copy-key",
         "title": "Copy i18n key",
         "icon": "./static/icon-copy.svg"
+      },
+      {
+        "command": "extension.vue-i18n-ally.translate-key",
+        "title": "Translate",
+        "icon": "./static/icon-translate.svg"
       }
     ],
     "menus": {
@@ -70,6 +75,11 @@
         {
           "command": "extension.vue-i18n-ally.copy-key",
           "when": "view == locales-tree && viewItem == node",
+          "group": "inline"
+        },
+        {
+          "command": "extension.vue-i18n-ally.translate-key",
+          "when": "view == locales-tree && viewItem == record",
           "group": "inline"
         }
       ]
