@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
 import * as ncp from 'copy-paste'
-import LocaleLoader, { LocaleNode, LocaleRecord, LocaleTree } from '../core/LocaleLoader'
+import { LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
 import Common from '../utils/Common'
 
 export class Item extends vscode.TreeItem {

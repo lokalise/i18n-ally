@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import Common from './utils/Common'
-import LocaleLoader from './core/LocaleLoader'
+import { LocaleLoader } from './core'
 
 export async function activate (ctx: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders || !(await Common.isVueProject())) {

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import LanguageCodes from './LanguageCodes'
-import LocaleLoader from '../core/LocaleLoader'
+import { LocaleLoader } from '../core'
 
 const configPrefix = 'vue-i18n-ally'
 

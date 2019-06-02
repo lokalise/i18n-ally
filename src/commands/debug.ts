@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import LocaleLoader from '../core/LocaleLoader'
+import { LocaleLoader } from '../core'
 
 export default (ctx: vscode.ExtensionContext) => {
   return vscode.commands.registerCommand('extension.vue-i18n-ally.debug',
