@@ -1,11 +1,11 @@
-import * as path from 'path'
 import * as vscode from 'vscode'
-import * as ncp from 'copy-paste'
+import * as clipboardy from 'clipboardy'
 import { LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
 import Common from '../utils/Common'
 
 export class Item extends vscode.TreeItem {
   constructor (
+    private ctx: vscode.ExtensionContext,
     public readonly node: LocaleNode | LocaleRecord | LocaleTree
   ) {
     super('')
@@ -43,9 +43,9 @@ export class Item extends vscode.TreeItem {
 
   get iconPath () {
     if (this.node.type === 'tree')
-      return path.resolve(__dirname, '../../static/icon-module.svg')
+      return this.ctx.asAbsolutePath('static/icon-module.svg')
     else if (this.node.type === 'node')
-      return path.resolve(__dirname, '../../static/icon-string.svg')
+      return this.ctx.asAbsolutePath('static/icon-string.svg')
     return undefined
   }
 
@@ -58,8 +58,10 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
   private _onDidChangeTreeData: vscode.EventEmitter<Item | undefined> = new vscode.EventEmitter<Item | undefined>();
   readonly onDidChangeTreeData: vscode.Event<Item | undefined> = this._onDidChangeTreeData.event;
   private loader: LocaleLoader
+  private ctx: vscode.ExtensionContext
 
-  constructor () {
+  constructor (ctx: vscode.ExtensionContext) {
+    this.ctx = ctx
     this.loader = Common.loader
     this.loader.addEventListener('changed', () => this.refresh())
   }
@@ -76,27 +78,27 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
     if (element) {
       if (element.node.type === 'tree') {
         return Object.values(element.node.children)
-          .map(r => new Item(r))
+          .map(r => new Item(this.ctx, r))
       }
       if (element.node.type === 'node') {
         return Object.values(this.loader.getShadowLocales(element.node))
-          .map(r => new Item(r))
+          .map(r => new Item(this.ctx, r))
       }
       return []
     }
     else {
-      return Object.values(this.loader.localeTree.children).map(node => new Item(node))
+      return Object.values(this.loader.localeTree.children)
+        .map(node => new Item(this.ctx, node))
     }
   }
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  const provider = new LocalesTreeProvider()
+  const provider = new LocalesTreeProvider(ctx)
   vscode.window.registerTreeDataProvider('locales-tree', provider)
   vscode.commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
-    ncp.copy(`$t('${node.keypath}')`, () => {
-      vscode.window.showInformationMessage('I18n key copied')
-    })
+    clipboardy.writeSync(`$t('${node.keypath}')`)
+    vscode.window.showInformationMessage('I18n key copied')
   })
 
   vscode.commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: {node: LocaleRecord}) => {

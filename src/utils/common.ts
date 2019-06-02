@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import LanguageCodes from './LanguageCodes'
 import { LocaleLoader } from '../core'
+import * as fs from 'fs'
 
 const configPrefix = 'vue-i18n-ally'
 
@@ -75,11 +76,11 @@ export default class Common {
     const projectUrl = this.rootPath
 
     try {
+      const rawPackageJSON = fs.readFileSync(`${projectUrl}/package.json`, 'utf-8')
       const {
         dependencies,
         devDependencies,
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      } = require(`${projectUrl}/package.json`)
+      } = JSON.parse(rawPackageJSON)
       return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
     }
     catch (err) {
