@@ -100,6 +100,7 @@ export default (ctx: vscode.ExtensionContext) => {
   })
 
   vscode.commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: {node: LocaleRecord}) => {
+    vscode.window.showWarningMessage('Working in progress...')
     const pendings = await Common.loader.MachineTranslateRecord(node)
     console.log(pendings)
   })
