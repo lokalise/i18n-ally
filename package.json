@@ -34,10 +34,7 @@
       {
         "command": "extension.vue-i18n-ally.file-translator",
         "title": "Translate i18n content from current file",
-        "icon": {
-          "light": "./static/logo-menu.svg",
-          "dark": "./static/logo-menu.svg"
-        }
+        "icon": "./static/logo-menu.svg"
       },
       {
         "command": "extension.vue-i18n-ally.config-locales",
@@ -54,6 +51,11 @@
       {
         "command": "extension.vue-i18n-ally.debug",
         "title": "VueI18n Ally: Debug"
+      },
+      {
+        "command": "extension.vue-i18n-ally.copy-key",
+        "title": "Copy i18n key",
+        "icon": "./static/icon-copy.svg"
       }
     ],
     "menus": {
@@ -62,6 +64,13 @@
           "when": "vueI18nEnabled && resourceLangId =~ /vue(-html)?|(type|java)script/",
           "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "extension.vue-i18n-ally.copy-key",
+          "when": "view == locales-tree && viewItem == node",
+          "group": "inline"
         }
       ]
     },
@@ -121,6 +130,7 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
+    "@types/copy-paste": "^1.1.30",
     "@types/lodash": "^4.14.123",
     "@types/mocha": "^5.2.6",
     "@types/node": "^12.0.0",
@@ -137,6 +147,7 @@
     "vscode": "^1.1.33"
   },
   "dependencies": {
+    "copy-paste": "^1.3.0",
     "deepmerge": "^3.2.0",
     "fast-glob": "^2.2.6",
     "flat": "^4.1.0",

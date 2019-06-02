@@ -1,5 +1,6 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
+import * as ncp from 'copy-paste'
 import LocaleLoader, { LocaleNode, LocaleRecord, LocaleTree } from '../core/LocaleLoader'
 import Common from '../utils/Common'
 
@@ -56,10 +57,10 @@ export class Item extends vscode.TreeItem {
 
   get contextValue () {
     if (this.node instanceof LocaleTree)
-      return 'localeTree'
+      return 'tree'
     else if (this.node instanceof LocaleNode)
-      return 'localeNode'
-    return 'localeRecord'
+      return 'node'
+    return 'record'
   }
 }
 
@@ -94,4 +95,9 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
 export default (ctx: vscode.ExtensionContext) => {
   const provider = new LocalesTreeProvider(Common.loader)
   vscode.window.registerTreeDataProvider('locales-tree', provider)
+  vscode.commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
+    ncp.copy(`$t('${node.key}')`, () => {
+      vscode.window.showInformationMessage('I18n key copied')
+    })
+  })
 }
