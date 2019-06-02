@@ -21,7 +21,8 @@ export async function activate (ctx: vscode.ExtensionContext) {
     require('./completion').default,
     require('./fileTranslator').default,
     require('./annotation').default,
-    require('./view/LocalesTree').default,
+    require('./view/LocalesTreeView').default,
+    require('./view/CoverageView').default,
   ].forEach(module => ctx.subscriptions.push(module(ctx)))
 }
 

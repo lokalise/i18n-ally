@@ -44,8 +44,6 @@ export class Item extends vscode.TreeItem {
       return this.node.value
     return ''
   }
-
-  contextValue = 'dependency';
 }
 
 export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {

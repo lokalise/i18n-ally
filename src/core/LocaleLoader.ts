@@ -45,6 +45,13 @@ export class LocaleTree {
   ) {}
 }
 
+export interface Coverage {
+  locale: string
+  keys: string[]
+  translated: number
+  total: number
+}
+
 export default class LocaleLoader {
   files: Record<string, ParsedFile> = {}
   flattenLocaleTree: FlattenLocaleTree = {}
@@ -111,6 +118,20 @@ export default class LocaleLoader {
     await this.loadAll()
     this.updateLocalesTree()
     this.updateFlattenLocalesTree()
+  }
+
+  getCoverage (locale: string, keys?: string[]): Coverage {
+    keys = keys || Object.keys(this.flattenLocaleTree)
+    const total = keys.length
+    const translated = keys.filter(key => {
+      return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
+    })
+    return {
+      locale,
+      total,
+      translated: translated.length,
+      keys,
+    }
   }
 
   getTranslationsByKey (key: string): LocaleTreeNode | undefined {

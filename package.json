@@ -82,6 +82,10 @@
           "name": "File Locales"
         },
         {
+          "id": "locales-coverage",
+          "name": "Translate Progress"
+        },
+        {
           "id": "locales-tree",
           "name": "Locales Tree"
         }
