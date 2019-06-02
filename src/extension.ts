@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import Common from './utils/Common'
+import LocaleLoader from './core/LocaleLoader'
 
 export async function activate (ctx: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders || !(await Common.isVueProject())) {
@@ -7,6 +8,8 @@ export async function activate (ctx: vscode.ExtensionContext) {
     return
   }
 
+  Common.loader = new LocaleLoader()
+  await Common.loader.init()
   console.log('Vue-i18n is active')
   ;[
     require('./commands/autoDetectLocales').default,

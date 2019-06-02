@@ -8,18 +8,17 @@
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
     //"strict": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
   },
-
   "rootDir": "src",
   "paths": {
     "lib/*": [
-      ".", 
+      ".",
       "./src"
     ]
   },
   "exclude": [
-    "node_modules", 
+    "node_modules",
     ".vscode-test"
   ]
 }

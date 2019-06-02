@@ -1,9 +1,12 @@
 import * as vscode from 'vscode'
-import lngs from './lngs'
+import LanguageCodes from './LanguageCodes'
+import LocaleLoader from '../core/LocaleLoader'
 
 const configPrefix = 'vue-i18n-ally'
 
 export default class Common {
+  static loader: LocaleLoader
+
   static get extension (): vscode.Extension<any> {
     return vscode.extensions.getExtension('antfu.vue-i18n-ally') as vscode.Extension<any>
   }
@@ -50,7 +53,7 @@ export default class Common {
   }
 
   static normalizeLng (lng: string, fallback = 'en'): string {
-    const result = lngs.find((lngItem: string | string[]) => {
+    const result = LanguageCodes.find((lngItem: string | string[]) => {
       if (Array.isArray(lngItem) && lngItem[1].includes(lng))
         return true
 

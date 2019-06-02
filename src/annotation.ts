@@ -1,7 +1,6 @@
 import * as vscode from 'vscode'
 import { debounce } from 'lodash'
 import { KEY_REG } from './utils/KeyDetector'
-import i18nFiles from './utils/i18nFiles'
 import Common from './utils/Common'
 
 const textEditorDecorationType = vscode.window.createTextEditorDecorationType({})
@@ -22,12 +21,9 @@ function annotation (ctx: vscode.ExtensionContext) {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = i18nFiles.getTransByKey(document.fileName, key)
+      const trans = Common.loader.getDisplayingTranslateByKey(key)
 
-      if (!trans)
-        return
-
-      const text = (trans.find(t => t.lng === Common.displayLanguage) || { data: '' }).data || ''
+      const text = trans.value || ''
       const decoration: vscode.DecorationOptions = {
         range: new vscode.Range(
           document.positionAt(index),

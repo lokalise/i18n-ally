@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import { uniq } from 'lodash'
 import * as path from 'path'
 import * as flat from 'flat'
-import Common from '../utils/common'
+import Common from '../utils/Common'
 
 export interface LocaleRecord {
   key: string
@@ -19,13 +19,11 @@ export interface ParsedFile {
   flatten: object
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LocaleTreeNode {
   key: string
   locales: Record<string, LocaleRecord>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LocaleTree extends Record<string, LocaleTreeNode> {}
 
 export default class LocaleLoader {
@@ -64,6 +62,15 @@ export default class LocaleLoader {
   async init () {
     await this.loadAll()
     this.updateLocalesTree()
+  }
+
+  getTranslationsByKey (key: string): LocaleTreeNode | undefined {
+    return this.localeTree[key]
+  }
+
+  getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
+    const node = this.getTranslationsByKey(key)
+    return node && node.locales[Common.displayLanguage]
   }
 
   private async loadFile (filepath: string, locale: string, nested = false) {

@@ -1,7 +1,6 @@
-/* eslint-disable no-useless-constructor */
-/* eslint-disable @typescript-eslint/no-parameter-properties */
 import * as vscode from 'vscode'
 import LocaleLoader, { LocaleTreeNode } from '../core/LocaleLoader'
+import Common from '../utils/Common'
 
 export class Dependency extends vscode.TreeItem {
   constructor (
@@ -51,7 +50,6 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Dependency> 
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  this.loader = new LocaleLoader()
-  const provider = new LocalesTreeProvider(this.loader)
+  const provider = new LocalesTreeProvider(Common.loader)
   vscode.window.registerTreeDataProvider('locales-tree', provider)
 }

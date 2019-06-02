@@ -82,6 +82,7 @@ module.exports = {
     'vars-on-top': 'error',
     'require-await': 'off',
     'no-return-assign': 'off',
+    'no-useless-constructor': 'off',
 
     // TS
     '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
@@ -92,6 +93,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-parameter-properties': 'off',
 
     // vue-i18n
     'no-cond-assign': 'off',
