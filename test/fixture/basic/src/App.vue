@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <p>{{$t('hello')}}
+    <p>{{$t('not_exists')}}
   </div>
 </template>
 

@@ -19,9 +19,19 @@ export interface ParsedFile {
   flatten: object
 }
 
-export interface LocaleTreeNode {
-  key: string
-  locales: Record<string, LocaleRecord>
+export class LocaleTreeNode {
+  constructor (
+    public key: string,
+    public locales: Record<string, LocaleRecord>
+  ) {}
+
+  getValue (locale: string, fallback = '') {
+    return (this.locales[locale] && this.locales[locale].value) || fallback
+  }
+
+  get value () {
+    return this.getValue(Common.displayLanguage)
+  }
 }
 
 export interface LocaleTree extends Record<string, LocaleTreeNode> {}
@@ -42,12 +52,9 @@ export default class LocaleLoader {
     const tree: LocaleTree = {}
     for (const file of Object.values(this.files)) {
       for (const key of Object.keys(file.flatten)) {
-        if (!tree[key]) {
-          tree[key] = {
-            key,
-            locales: {},
-          }
-        }
+        if (!tree[key])
+          tree[key] = new LocaleTreeNode(key, {})
+
         tree[key].locales[file.locale] = {
           key,
           value: file.flatten[key],
@@ -94,16 +101,15 @@ export default class LocaleLoader {
   private async loadDirectory (rootPath: string) {
     const paths = await fs.readdir(rootPath)
     for (const filename of paths) {
-      const filePath = path.resolve(rootPath, filename)
-
       // filename starts with underscore will be ignored
-      if (filePath.startsWith('_'))
-        return
+      if (filename.startsWith('_'))
+        continue
 
+      const filePath = path.resolve(rootPath, filename)
       const isDirectory = (await fs.lstat(filePath)).isDirectory()
 
       if (!isDirectory && path.extname(filePath) !== '.json')
-        return
+        continue
 
       const locale = Common.normalizeLng(isDirectory ? filename : path.parse(filename).name, '')
 

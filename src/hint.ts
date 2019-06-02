@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import KeyDetector from './utils/KeyDetector'
-import i18nFiles from './utils/i18nFiles'
+import Common from './utils/Common'
 
 class HintProvider implements vscode.HoverProvider {
   public provideHover (
@@ -10,11 +10,11 @@ class HintProvider implements vscode.HoverProvider {
     const key = KeyDetector.getKey(document, position)
     if (!key) return
 
-    const transData = i18nFiles.getTransByKey(document.fileName, key) || []
+    const trans = Common.loader.getTranslationsByKey(key)
 
-    const transText = transData
-      .map(item => `**${item.lng}:** ${item.data || '-'}`)
-      .join('  \n')
+    const transText = Object.values(trans.locales)
+      .map(item => `**${item.locale}:** ${item.value || '-'}`)
+      .join('\n\n')
 
     const buttons: {name: string; command: string}[] = []
     if (transText) {

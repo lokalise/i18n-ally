@@ -21,9 +21,9 @@ function annotation (ctx: vscode.ExtensionContext) {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = Common.loader.getDisplayingTranslateByKey(key)
+      const trans = Common.loader.getTranslationsByKey(key)
 
-      const text = trans.value || ''
+      const text = (trans && trans.value) || ''
       const decoration: vscode.DecorationOptions = {
         range: new vscode.Range(
           document.positionAt(index),

@@ -6,6 +6,7 @@ export default (ctx: vscode.ExtensionContext) => {
     async () => {
       const loader = new LocaleLoader()
       await loader.init()
+      console.log(JSON.stringify(loader.files, null, 2))
       console.log(JSON.stringify(loader.localeTree, null, 2))
     })
 }
