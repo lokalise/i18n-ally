@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs'
-import { uniq, isObject, get } from 'lodash'
+import { uniq, isObject } from 'lodash'
 import * as path from 'path'
 import * as flat from 'flat'
 import Common from '../utils/Common'
@@ -112,12 +112,21 @@ export default class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     }
   }
 
-  getTranslationsByKey (key: string): LocaleNode | undefined {
-    return this.flattenLocaleTree[key]
+  getTranslationsByKey (keypath: string): LocaleNode | undefined {
+    return this.flattenLocaleTree[keypath]
   }
 
-  getTreeNodeByKey (key: string): LocaleNode | LocaleTree | undefined {
-    return get(this.localeTree, key)
+  getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
+    tree = tree || this.localeTree
+    const keys = keypath.split('.')
+    const root = keys[0]
+    const remaining = keys.slice(1).join('.')
+    const node = tree.children[root]
+    if (!remaining)
+      return node
+    if (node && node.type === 'tree')
+      return this.getTreeNodeByKey(remaining, node)
+    return undefined
   }
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {

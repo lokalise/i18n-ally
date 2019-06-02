@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import KeyDetector from './utils/KeyDetector'
-import i18nFiles from './utils/i18nFiles'
+import Common from './utils/Common'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
   public provideCompletionItems (
@@ -12,19 +12,15 @@ class CompletionProvider implements vscode.CompletionItemProvider {
       return
 
     key = key.slice(0, -1)
-    const trans = i18nFiles.getTransByKey(document.fileName, key)
-    if (!trans)
+    const trans = Common.loader.getTreeNodeByKey(key)
+
+    if (!trans || trans.type !== 'tree')
       return
 
-    const transData = trans[0].data
-
-    if (!transData)
-      return
-
-    return Object.keys(transData).map(key => {
+    return Object.values(trans.children).map(node => {
       return new vscode.CompletionItem(
-        key,
-        typeof transData[key] === 'object'
+        node.keyname,
+        node.type === 'tree'
           ? vscode.CompletionItemKind.Field
           : vscode.CompletionItemKind.Text
       )
