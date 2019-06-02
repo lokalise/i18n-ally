@@ -34,8 +34,10 @@ export class Item extends vscode.TreeItem {
   set collapsibleState (_) {}
 
   get description (): string {
-    if (this.node.type !== 'tree')
+    if (this.node.type === 'node')
       return this.node.value
+    if (this.node.type === 'record')
+      return this.node.value || '(empty)'
     return ''
   }
 
@@ -72,10 +74,14 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
 
   async getChildren (element?: Item) {
     if (element) {
-      if (element.node.type === 'tree')
-        return Object.values(element.node.children).map(r => new Item(r))
-      if (element.node.type === 'node')
-        return Object.values(element.node.locales).map(r => new Item(r))
+      if (element.node.type === 'tree') {
+        return Object.values(element.node.children)
+          .map(r => new Item(r))
+      }
+      if (element.node.type === 'node') {
+        return Object.values(this.loader.getShadowLocales(element.node))
+          .map(r => new Item(r))
+      }
       return []
     }
     else {

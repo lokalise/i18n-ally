@@ -15,5 +15,5 @@ export async function MachinTranslate (text: string, from: string, to: string) {
     }
   }
 
-  return result && result.text
+  return result && result.result.join('\n')
 }

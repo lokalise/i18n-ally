@@ -6,7 +6,7 @@ import Common from '../utils/Common'
 import * as vscode from 'vscode'
 import EventHandler from '../utils/EventHandler'
 import { MachinTranslate } from './MachineTranslate'
-import { getKeyname } from './utils'
+import { getKeyname, getFileInfo, replaceLocalePath } from './utils'
 import { LocaleTree, LocaleLoaderEventType, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 
 function newTree (keypath = ''): LocaleTree {
@@ -93,28 +93,30 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     }
   }
 
-  private getFileInfo (filepath: string) {
-    const info = path.parse(filepath)
-
-    let locale = Common.normalizeLng(info.name, '')
-    let nested = false
-    if (!locale) {
-      nested = true
-      locale = Common.normalizeLng(path.basename(info.dir), '')
-    }
-    if (!locale)
-      console.error(`Failed to get locale on file ${filepath}`)
-
-    return {
-      locale,
-      nested,
-    }
+  getShadowLocales (node: LocaleNode) {
+    const locales: Record<string, LocaleRecord> = {}
+    const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
+    this.locales.forEach(locale => {
+      if (node.locales[locale]) { locales[locale] = node.locales[locale] }
+      else {
+        locales[locale] = {
+          locale,
+          value: '',
+          shadow: true,
+          keyname: node.keyname,
+          keypath: node.keypath,
+          filepath: replaceLocalePath(sourceRecord.filepath, locale),
+          type: 'record',
+        }
+      }
+    })
+    return locales
   }
 
   private async loadFile (filepath: string) {
     try {
       console.log('LOADING', filepath)
-      const { locale, nested } = this.getFileInfo(filepath)
+      const { locale, nested } = getFileInfo(filepath)
       const raw = await fs.readFile(filepath, 'utf-8')
       const value = JSON.parse(raw)
       this.files[filepath] = {
