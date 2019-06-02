@@ -1,3 +1,4 @@
+import * as path from 'path'
 import * as vscode from 'vscode'
 import LocaleLoader, { LocaleTreeNode, LocaleRecord, LocaleTree } from '../core/LocaleLoader'
 import Common from '../utils/Common'
@@ -43,6 +44,14 @@ export class Item extends vscode.TreeItem {
     if (this.node instanceof LocaleRecord || this.node instanceof LocaleTreeNode)
       return this.node.value
     return ''
+  }
+
+  get iconPath () {
+    if (this.node instanceof LocaleTreeNode)
+      return path.resolve(__dirname, '../../static/icon-string.svg')
+    else if (this.node instanceof LocaleTree)
+      return path.resolve(__dirname, '../../static/icon-module.svg')
+    return undefined
   }
 }
 
