@@ -4,6 +4,7 @@ import * as path from 'path'
 import * as flat from 'flat'
 import Common from '../utils/Common'
 import * as vscode from 'vscode'
+import EventHandler from '../utils/EventHandler'
 
 export class LocaleRecord {
   constructor (
@@ -53,7 +54,10 @@ export interface Coverage {
   total: number
 }
 
-export default class LocaleLoader {
+export type LocaleLoaderEventType =
+  | 'changed'
+
+export default class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   files: Record<string, ParsedFile> = {}
   flattenLocaleTree: FlattenLocaleTree = {}
   localeTree: LocaleTree = new LocaleTree('', 'root')
@@ -237,6 +241,7 @@ export default class LocaleLoader {
   private update () {
     this.updateLocalesTree()
     this.updateFlattenLocalesTree()
+    this.dispatchEvent('changed')
   }
 
   private async loadAll () {

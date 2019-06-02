@@ -67,8 +67,12 @@ export class Item extends vscode.TreeItem {
 export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
   private _onDidChangeTreeData: vscode.EventEmitter<Item | undefined> = new vscode.EventEmitter<Item | undefined>();
   readonly onDidChangeTreeData: vscode.Event<Item | undefined> = this._onDidChangeTreeData.event;
+  private loader: LocaleLoader
 
-  constructor (private loader: LocaleLoader) { }
+  constructor () {
+    this.loader = Common.loader
+    this.loader.addEventListener('changed', () => this.refresh())
+  }
 
   refresh (): void {
     this._onDidChangeTreeData.fire()
@@ -93,7 +97,7 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  const provider = new LocalesTreeProvider(Common.loader)
+  const provider = new LocalesTreeProvider()
   vscode.window.registerTreeDataProvider('locales-tree', provider)
   vscode.commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
     ncp.copy(`$t('${node.key}')`, () => {

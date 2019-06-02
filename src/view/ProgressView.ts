@@ -20,8 +20,12 @@ export class Item extends vscode.TreeItem {
 export class ProgressProvider implements vscode.TreeDataProvider<Item> {
   private _onDidChangeTreeData: vscode.EventEmitter<Item | undefined> = new vscode.EventEmitter<Item | undefined>();
   readonly onDidChangeTreeData: vscode.Event<Item | undefined> = this._onDidChangeTreeData.event;
+  private loader: LocaleLoader
 
-  constructor (private loader: LocaleLoader) { }
+  constructor () {
+    this.loader = Common.loader
+    this.loader.addEventListener('changed', () => this.refresh())
+  }
 
   refresh (): void {
     this._onDidChangeTreeData.fire()
@@ -41,6 +45,6 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  const provider = new ProgressProvider(Common.loader)
+  const provider = new ProgressProvider()
   vscode.window.registerTreeDataProvider('locales-progress', provider)
 }
