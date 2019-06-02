@@ -89,24 +89,23 @@
         {
           "id": "vue-i18n-ally",
           "title": "Vue i18n Ally",
-          "icon": "./static/logo-view-container.svg",
-          "when": "vueI18nEnable"
+          "icon": "./static/logo-view-container.svg"
         }
       ]
     },
     "views": {
       "vue-i18n-ally": [
         {
-          "id": "file-locales-tree",
-          "name": "File Locales"
+          "id": "locales-tree-file",
+          "name": "File"
         },
         {
           "id": "locales-progress",
-          "name": "Translate Progress"
+          "name": "Progress"
         },
         {
           "id": "locales-tree",
-          "name": "Locales Tree"
+          "name": "Tree"
         }
       ]
     },

@@ -18,6 +18,7 @@ const config = {
   devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode',
+    clipboardy: 'clipboardy',
   },
   resolve: {
     extensions: ['.ts', '.js'],
