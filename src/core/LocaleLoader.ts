@@ -3,6 +3,7 @@ import { uniq, isObject } from 'lodash'
 import * as path from 'path'
 import * as flat from 'flat'
 import Common from '../utils/Common'
+import * as vscode from 'vscode'
 
 export class LocaleRecord {
   constructor (
@@ -57,6 +58,11 @@ export default class LocaleLoader {
   flattenLocaleTree: FlattenLocaleTree = {}
   localeTree: LocaleTree = new LocaleTree('', 'root')
 
+  async init () {
+    await this.loadAll()
+    this.update()
+  }
+
   get localesPaths () {
     return Common.localesPaths
   }
@@ -65,7 +71,121 @@ export default class LocaleLoader {
     return uniq(Object.values(this.files).map(f => f.locale))
   }
 
-  updateFlattenLocalesTree () {
+  getCoverage (locale: string, keys?: string[]): Coverage {
+    keys = keys || Object.keys(this.flattenLocaleTree)
+    const total = keys.length
+    const translated = keys.filter(key => {
+      return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
+    })
+    return {
+      locale,
+      total,
+      translated: translated.length,
+      keys,
+    }
+  }
+
+  getTranslationsByKey (key: string): LocaleNode | undefined {
+    return this.flattenLocaleTree[key]
+  }
+
+  getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
+    const node = this.getTranslationsByKey(key)
+    return node && node.locales[Common.displayLanguage]
+  }
+
+  private getFileInfo (filepath: string) {
+    const info = path.parse(filepath)
+
+    let locale = Common.normalizeLng(info.name, '')
+    let nested = false
+    if (!locale) {
+      nested = true
+      locale = Common.normalizeLng(path.basename(info.dir), '')
+    }
+    if (!locale)
+      console.error(`Failed to get locale on file ${filepath}`)
+
+    return {
+      locale,
+      nested,
+    }
+  }
+
+  private async loadFile (filepath: string) {
+    try {
+      console.log('LOADING', filepath)
+      const { locale, nested } = this.getFileInfo(filepath)
+      const raw = await fs.readFile(filepath, 'utf-8')
+      const value = JSON.parse(raw)
+      this.files[filepath] = {
+        filepath,
+        locale,
+        value,
+        nested,
+        flatten: flat(value),
+      }
+    }
+    catch (e) {
+      this.unsetFile(filepath)
+      console.error(e)
+    }
+  }
+
+  private unsetFile (filepath: string) {
+    delete this.files[filepath]
+  }
+
+  private async loadDirectory (rootPath: string) {
+    const paths = await fs.readdir(rootPath)
+    for (const filename of paths) {
+      // filename starts with underscore will be ignored
+      if (filename.startsWith('_'))
+        continue
+
+      const filePath = path.resolve(rootPath, filename)
+      const isDirectory = (await fs.lstat(filePath)).isDirectory()
+
+      if (!isDirectory && path.extname(filePath) !== '.json')
+        continue
+
+      if (!isDirectory) {
+        await this.loadFile(filePath)
+      }
+      else {
+        for (const p of await fs.readdir(filePath))
+          await this.loadFile(path.resolve(filePath, p))
+      }
+    }
+  }
+
+  private async watchOn (rootPath: string) {
+    const watcher = vscode.workspace.createFileSystemWatcher(`${rootPath}/**`)
+
+    const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
+      filepath = path.resolve(filepath)
+      const { ext } = path.parse(filepath)
+      if (ext !== '.json') return
+
+      switch (type) {
+        case 'del':
+          delete this.files[filepath]
+          this.update()
+          break
+
+        case 'change':
+        case 'create':
+          await this.loadFile(filepath)
+          this.update()
+          break
+      }
+    }
+    watcher.onDidChange(updateFile.bind(this, 'change'))
+    watcher.onDidCreate(updateFile.bind(this, 'create'))
+    watcher.onDidDelete(updateFile.bind(this, 'del'))
+  }
+
+  private updateFlattenLocalesTree () {
     const tree: FlattenLocaleTree = {}
     for (const file of Object.values(this.files)) {
       for (const key of Object.keys(file.flatten)) {
@@ -83,7 +203,7 @@ export default class LocaleLoader {
     this.flattenLocaleTree = tree
   }
 
-  updateLocalesTree () {
+  private updateLocalesTree () {
     const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree) => {
       tree = tree || new LocaleTree(keypath, keyname)
       for (const [key, value] of Object.entries(object)) {
@@ -114,82 +234,16 @@ export default class LocaleLoader {
     this.localeTree = tree
   }
 
-  async init () {
-    await this.loadAll()
+  private update () {
     this.updateLocalesTree()
     this.updateFlattenLocalesTree()
   }
 
-  getCoverage (locale: string, keys?: string[]): Coverage {
-    keys = keys || Object.keys(this.flattenLocaleTree)
-    const total = keys.length
-    const translated = keys.filter(key => {
-      return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
-    })
-    return {
-      locale,
-      total,
-      translated: translated.length,
-      keys,
-    }
-  }
-
-  getTranslationsByKey (key: string): LocaleNode | undefined {
-    return this.flattenLocaleTree[key]
-  }
-
-  getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
-    const node = this.getTranslationsByKey(key)
-    return node && node.locales[Common.displayLanguage]
-  }
-
-  private async loadFile (filepath: string, locale: string, nested = false) {
-    try {
-      console.log('LOADING', filepath)
-      const raw = await fs.readFile(filepath, 'utf-8')
-      const value = JSON.parse(raw)
-      this.files[filepath] = {
-        filepath,
-        locale,
-        value,
-        nested,
-        flatten: flat(value),
-      }
-    }
-    catch (e) {
-      console.error(e)
-    }
-  }
-
-  private async loadDirectory (rootPath: string) {
-    const paths = await fs.readdir(rootPath)
-    for (const filename of paths) {
-      // filename starts with underscore will be ignored
-      if (filename.startsWith('_'))
-        continue
-
-      const filePath = path.resolve(rootPath, filename)
-      const isDirectory = (await fs.lstat(filePath)).isDirectory()
-
-      if (!isDirectory && path.extname(filePath) !== '.json')
-        continue
-
-      const locale = Common.normalizeLng(isDirectory ? filename : path.parse(filename).name, '')
-
-      if (!isDirectory) {
-        await this.loadFile(filePath, locale)
-      }
-      else {
-        for (const p of await fs.readdir(filePath))
-          await this.loadFile(path.resolve(filePath, p), locale, true)
-      }
-    }
-  }
-
-  async loadAll () {
+  private async loadAll () {
     for (const pathname of this.localesPaths) {
       const fullpath = path.resolve(Common.rootPath, pathname)
       await this.loadDirectory(fullpath)
+      this.watchOn(fullpath)
     }
   }
 }

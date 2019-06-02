@@ -38,19 +38,19 @@
       },
       {
         "command": "extension.vue-i18n-ally.config-locales",
-        "title": "VueI18n Ally: Manual configure locales path"
+        "title": "Vue i18n Ally: Manual configure locales path"
       },
       {
         "command": "extension.vue-i18n-ally.auto-detect-locales",
-        "title": "VueI18n Ally: Auto detect locales path"
+        "title": "Vue i18n Ally: Auto detect locales path"
       },
       {
         "command": "extension.vue-i18n-ally.config-display-language",
-        "title": "VueI18n Ally: Change display language"
+        "title": "Vue i18n Ally: Change display language"
       },
       {
         "command": "extension.vue-i18n-ally.debug",
-        "title": "VueI18n Ally: Debug"
+        "title": "Vue i18n Ally: Debug"
       },
       {
         "command": "extension.vue-i18n-ally.copy-key",

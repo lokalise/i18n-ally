@@ -31,7 +31,7 @@ class AutoDetectLocales {
     Common.updateLocalesPaths(result)
 
     await vscode.window.showInformationMessage(
-      `VueI18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
+      `Vue i18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
     )
   }
 }
