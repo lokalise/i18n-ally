@@ -1,14 +1,16 @@
 import { promises as fs } from 'fs'
-import { uniq } from 'lodash'
+import { uniq, isObject } from 'lodash'
 import * as path from 'path'
 import * as flat from 'flat'
 import Common from '../utils/Common'
 
-export interface LocaleRecord {
-  key: string
-  value: string
-  locale: string
-  filepath: string
+export class LocaleRecord {
+  constructor (
+    public key: string,
+    public value: string,
+    public locale: string,
+    public filepath: string,
+  ) {}
 }
 
 export interface ParsedFile {
@@ -34,11 +36,19 @@ export class LocaleTreeNode {
   }
 }
 
-export interface LocaleTree extends Record<string, LocaleTreeNode> {}
+export interface FlattenLocaleTree extends Record<string, LocaleTreeNode> {}
+export class LocaleTree {
+  constructor (
+    public keypath: string,
+    public keyname: string,
+    public children: Record<string, LocaleTree|LocaleTreeNode> = {}
+  ) {}
+}
 
 export default class LocaleLoader {
   files: Record<string, ParsedFile> = {}
-  localeTree: LocaleTree = {}
+  flattenLocaleTree: FlattenLocaleTree = {}
+  localeTree: LocaleTree = new LocaleTree('', 'root')
 
   get localesPaths () {
     return Common.localesPaths
@@ -48,31 +58,63 @@ export default class LocaleLoader {
     return uniq(Object.values(this.files).map(f => f.locale))
   }
 
-  updateLocalesTree () {
-    const tree: LocaleTree = {}
+  updateFlattenLocalesTree () {
+    const tree: FlattenLocaleTree = {}
     for (const file of Object.values(this.files)) {
       for (const key of Object.keys(file.flatten)) {
         if (!tree[key])
           tree[key] = new LocaleTreeNode(key, {})
 
-        tree[key].locales[file.locale] = {
+        tree[key].locales[file.locale] = new LocaleRecord(
           key,
-          value: file.flatten[key],
-          locale: file.locale,
-          filepath: file.filepath,
-        }
+          file.flatten[key],
+          file.locale,
+          file.filepath,
+        )
       }
     }
+    this.flattenLocaleTree = tree
+  }
+
+  updateLocalesTree () {
+    const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree) => {
+      tree = tree || new LocaleTree(keypath, keyname)
+      for (const [key, value] of Object.entries(object)) {
+        if (isObject(value)) {
+          const originalTree = tree.children[key]
+          tree.children[key] = subTree(value, `${keypath}.${key}`, key, file, originalTree instanceof LocaleTree ? originalTree : undefined)
+          continue
+        }
+
+        if (!tree.children[key])
+          tree.children[key] = new LocaleTreeNode(key, {})
+        const node = tree.children[key]
+        if (node instanceof LocaleTreeNode) {
+          node.locales[file.locale] = new LocaleRecord(
+            key,
+            value,
+            file.locale,
+            file.filepath,
+          )
+        }
+      }
+      return tree
+    }
+
+    const tree = new LocaleTree('', 'root')
+    for (const file of Object.values(this.files))
+      subTree(file.value, '', 'root', file, tree)
     this.localeTree = tree
   }
 
   async init () {
     await this.loadAll()
     this.updateLocalesTree()
+    this.updateFlattenLocalesTree()
   }
 
   getTranslationsByKey (key: string): LocaleTreeNode | undefined {
-    return this.localeTree[key]
+    return this.flattenLocaleTree[key]
   }
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
