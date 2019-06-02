@@ -11,20 +11,12 @@ export class Item extends vscode.TreeItem {
     super('')
   }
 
-  get isNode () {
-    return this.node instanceof LocaleNode
-  }
-
   get tooltip (): string {
-    if (this.node instanceof LocaleTree)
-      return `${this.node.keypath}`
-    return `${this.node.key}`
+    return `${this.node.keypath}`
   }
 
   get label (): string {
-    if (this.node instanceof LocaleNode)
-      return this.node.key
-    else if (this.node instanceof LocaleRecord)
+    if (this.node.type === 'record')
       return this.node.locale
     else
       return this.node.keyname
@@ -33,7 +25,7 @@ export class Item extends vscode.TreeItem {
   set label (_) {}
 
   get collapsibleState () {
-    if (this.node instanceof LocaleRecord)
+    if (this.node.type === 'record')
       return vscode.TreeItemCollapsibleState.None
     else
       return vscode.TreeItemCollapsibleState.Collapsed
@@ -42,25 +34,21 @@ export class Item extends vscode.TreeItem {
   set collapsibleState (_) {}
 
   get description (): string {
-    if (this.node instanceof LocaleRecord || this.node instanceof LocaleNode)
+    if (this.node.type !== 'tree')
       return this.node.value
     return ''
   }
 
   get iconPath () {
-    if (this.node instanceof LocaleTree)
+    if (this.node.type === 'tree')
       return path.resolve(__dirname, '../../static/icon-module.svg')
-    else if (this.node instanceof LocaleNode)
+    else if (this.node.type === 'node')
       return path.resolve(__dirname, '../../static/icon-string.svg')
     return undefined
   }
 
   get contextValue () {
-    if (this.node instanceof LocaleTree)
-      return 'tree'
-    else if (this.node instanceof LocaleNode)
-      return 'node'
-    return 'record'
+    return this.node.type
   }
 }
 
@@ -84,9 +72,9 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
 
   async getChildren (element?: Item) {
     if (element) {
-      if (element.node instanceof LocaleTree)
+      if (element.node.type === 'tree')
         return Object.values(element.node.children).map(r => new Item(r))
-      if (element.node instanceof LocaleNode)
+      if (element.node.type === 'node')
         return Object.values(element.node.locales).map(r => new Item(r))
       return []
     }
@@ -100,7 +88,7 @@ export default (ctx: vscode.ExtensionContext) => {
   const provider = new LocalesTreeProvider()
   vscode.window.registerTreeDataProvider('locales-tree', provider)
   vscode.commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
-    ncp.copy(`$t('${node.key}')`, () => {
+    ncp.copy(`$t('${node.keypath}')`, () => {
       vscode.window.showInformationMessage('I18n key copied')
     })
   })
