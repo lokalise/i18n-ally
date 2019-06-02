@@ -13,9 +13,11 @@ export class Item extends vscode.TreeItem {
     const percent = (this.node.translated / this.node.total * 100).toFixed(2)
     return `${percent}% - ${this.node.translated}/${this.node.total}`
   }
+
+  contextValue = 'progressItem'
 }
 
-export class CoverageProvider implements vscode.TreeDataProvider<Item> {
+export class ProgressProvider implements vscode.TreeDataProvider<Item> {
   private _onDidChangeTreeData: vscode.EventEmitter<Item | undefined> = new vscode.EventEmitter<Item | undefined>();
   readonly onDidChangeTreeData: vscode.Event<Item | undefined> = this._onDidChangeTreeData.event;
 
@@ -39,6 +41,6 @@ export class CoverageProvider implements vscode.TreeDataProvider<Item> {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  const provider = new CoverageProvider(Common.loader)
-  vscode.window.registerTreeDataProvider('locales-coverage', provider)
+  const provider = new ProgressProvider(Common.loader)
+  vscode.window.registerTreeDataProvider('locales-progress', provider)
 }

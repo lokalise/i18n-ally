@@ -78,11 +78,11 @@
     "views": {
       "vue-i18n-ally": [
         {
-          "id": "current-file-locales-tree",
+          "id": "file-locales-tree",
           "name": "File Locales"
         },
         {
-          "id": "locales-coverage",
+          "id": "locales-progress",
           "name": "Translate Progress"
         },
         {

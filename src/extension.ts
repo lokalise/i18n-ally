@@ -22,7 +22,7 @@ export async function activate (ctx: vscode.ExtensionContext) {
     require('./fileTranslator').default,
     require('./annotation').default,
     require('./view/LocalesTreeView').default,
-    require('./view/CoverageView').default,
+    require('./view/ProgressView').default,
   ].forEach(module => ctx.subscriptions.push(module(ctx)))
 }
 
