@@ -21,7 +21,7 @@ export interface ParsedFile {
   flatten: object
 }
 
-export class LocaleTreeNode {
+export class LocaleNode {
   constructor (
     public key: string,
     public locales: Record<string, LocaleRecord>
@@ -36,12 +36,12 @@ export class LocaleTreeNode {
   }
 }
 
-export interface FlattenLocaleTree extends Record<string, LocaleTreeNode> {}
+export interface FlattenLocaleTree extends Record<string, LocaleNode> {}
 export class LocaleTree {
   constructor (
     public keypath: string,
     public keyname: string,
-    public children: Record<string, LocaleTree|LocaleTreeNode> = {}
+    public children: Record<string, LocaleTree|LocaleNode> = {}
   ) {}
 }
 
@@ -70,7 +70,7 @@ export default class LocaleLoader {
     for (const file of Object.values(this.files)) {
       for (const key of Object.keys(file.flatten)) {
         if (!tree[key])
-          tree[key] = new LocaleTreeNode(key, {})
+          tree[key] = new LocaleNode(key, {})
 
         tree[key].locales[file.locale] = new LocaleRecord(
           key,
@@ -94,9 +94,9 @@ export default class LocaleLoader {
         }
 
         if (!tree.children[key])
-          tree.children[key] = new LocaleTreeNode(key, {})
+          tree.children[key] = new LocaleNode(key, {})
         const node = tree.children[key]
-        if (node instanceof LocaleTreeNode) {
+        if (node instanceof LocaleNode) {
           node.locales[file.locale] = new LocaleRecord(
             key,
             value,
@@ -134,7 +134,7 @@ export default class LocaleLoader {
     }
   }
 
-  getTranslationsByKey (key: string): LocaleTreeNode | undefined {
+  getTranslationsByKey (key: string): LocaleNode | undefined {
     return this.flattenLocaleTree[key]
   }
 

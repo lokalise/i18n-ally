@@ -1,17 +1,17 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
-import LocaleLoader, { LocaleTreeNode, LocaleRecord, LocaleTree } from '../core/LocaleLoader'
+import LocaleLoader, { LocaleNode, LocaleRecord, LocaleTree } from '../core/LocaleLoader'
 import Common from '../utils/Common'
 
 export class Item extends vscode.TreeItem {
   constructor (
-    public readonly node: LocaleTreeNode | LocaleRecord | LocaleTree
+    public readonly node: LocaleNode | LocaleRecord | LocaleTree
   ) {
     super('')
   }
 
   get isNode () {
-    return this.node instanceof LocaleTreeNode
+    return this.node instanceof LocaleNode
   }
 
   get tooltip (): string {
@@ -21,7 +21,7 @@ export class Item extends vscode.TreeItem {
   }
 
   get label (): string {
-    if (this.node instanceof LocaleTreeNode)
+    if (this.node instanceof LocaleNode)
       return this.node.key
     else if (this.node instanceof LocaleRecord)
       return this.node.locale
@@ -41,17 +41,25 @@ export class Item extends vscode.TreeItem {
   set collapsibleState (_) {}
 
   get description (): string {
-    if (this.node instanceof LocaleRecord || this.node instanceof LocaleTreeNode)
+    if (this.node instanceof LocaleRecord || this.node instanceof LocaleNode)
       return this.node.value
     return ''
   }
 
   get iconPath () {
-    if (this.node instanceof LocaleTreeNode)
-      return path.resolve(__dirname, '../../static/icon-string.svg')
-    else if (this.node instanceof LocaleTree)
+    if (this.node instanceof LocaleTree)
       return path.resolve(__dirname, '../../static/icon-module.svg')
+    else if (this.node instanceof LocaleNode)
+      return path.resolve(__dirname, '../../static/icon-string.svg')
     return undefined
+  }
+
+  get contextValue () {
+    if (this.node instanceof LocaleTree)
+      return 'localeTree'
+    else if (this.node instanceof LocaleNode)
+      return 'localeNode'
+    return 'localeRecord'
   }
 }
 
@@ -73,7 +81,7 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
     if (element) {
       if (element.node instanceof LocaleTree)
         return Object.values(element.node.children).map(r => new Item(r))
-      if (element.node instanceof LocaleTreeNode)
+      if (element.node instanceof LocaleNode)
         return Object.values(element.node.locales).map(r => new Item(r))
       return []
     }
