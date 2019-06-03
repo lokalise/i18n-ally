@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "Vue i18n Ally",
   "description": "Forked from think2011/vscode-vue-i18n, with some feature changes",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
@@ -141,7 +141,36 @@
       }
     }
   },
+  "standard-version": {
+    "types": [
+      {
+        "type": "feat",
+        "section": "⚡Features"
+      },
+      {
+        "type": "fix",
+        "section": "🐞Bug Fixes"
+      },
+      {
+        "type": "test",
+        "section": "⚗Tests"
+      },
+      {
+        "type": "docs",
+        "section": "📚Documentations"
+      },
+      {
+        "type": "ci",
+        "hidden": true
+      }
+    ],
+    "scripts": {
+      "precommit": "git -c commit.gpgsign=false commit",
+      "pretag": "git -c tag.gpgsign=false tag"
+    }
+  },
   "scripts": {
+    "release": "standard-version",
     "vscode:prepublish": "webpack --mode production",
     "compile": "webpack --mode none",
     "watch": "webpack --mode none --watch",

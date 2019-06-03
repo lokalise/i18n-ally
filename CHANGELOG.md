@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/antfu/vscode-vue-i18n-ally/compare/v0.4.1...v0.5.0) (2019-06-03)
+
+### ⚡Features
+
+* key editing in sidebar ([bfd3c83](https://github.com/antfu/vscode-vue-i18n-ally/commit/bfd3c83))
+* file saving for new engine ([e3ed487](https://github.com/antfu/vscode-vue-i18n-ally/commit/e3ed487))
+
+### 🐞Bug Fixes
+
+* clipboard, close [#4](https://github.com/antfu/vscode-vue-i18n-ally/issues/4) ([66dcbce](https://github.com/antfu/vscode-vue-i18n-ally/commit/66dcbce))
+
+
 ## [0.4.0](https://github.com/antfu/vscode-vue-i18n-ally/compare/v0.3.0...v0.4.0) (2019-06-02)
 
 ### ⚡Features
