@@ -17,3 +17,6 @@ webpack.config.js
 
 # Externals
 !node_modules/clipboardy/**
+!node_modules/limax/**
+!node_modules/pinying/**
+!node_modules/nodejieba/**

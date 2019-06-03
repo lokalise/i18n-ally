@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 🐞Bug Fixes
 
-* extension will now activate on the sartup ([6f674d2](https://github.com/antfu/vue-i18n-ally/commit/6f674d2))
+* extension will now activate on startup ([6f674d2](https://github.com/antfu/vue-i18n-ally/commit/6f674d2))
 * goto file ignore non-existent key ([41e12c5](https://github.com/antfu/vue-i18n-ally/commit/41e12c5))
 * hide translate button on non-existent keys ([4bd703c](https://github.com/antfu/vue-i18n-ally/commit/4bd703c))
 * hint and annotation ([de14107](https://github.com/antfu/vue-i18n-ally/commit/de14107))
@@ -27,12 +27,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * change github url ([2d96500](https://github.com/antfu/vue-i18n-ally/commit/2d96500))
 * update readme ([a99a9ca](https://github.com/antfu/vue-i18n-ally/commit/a99a9ca))
-
-
-### BREAKING CHANGES
-
-* Removal of feature: file-translator
-
 
 
 ## [0.6.0](https://github.com/antfu/vue-i18n-ally/compare/v0.5.1...v0.6.0) (2019-06-03)

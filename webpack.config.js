@@ -19,6 +19,7 @@ const config = {
   externals: {
     vscode: 'commonjs vscode',
     clipboardy: 'clipboardy',
+    nodejieba: 'nodejieba',
   },
   resolve: {
     extensions: ['.ts', '.js'],
