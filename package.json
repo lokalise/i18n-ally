@@ -104,12 +104,14 @@
       ]
     },
     "views": {
-      "vue-i18n-ally": [
+      "explorer": [
         {
           "id": "locales-tree-file",
-          "name": "File",
-          "when": "vue-i18n-ally-enabled"
-        },
+          "name": "Vue i18n Keys",
+          "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
+        }
+      ],
+      "vue-i18n-ally": [
         {
           "id": "locales-progress",
           "name": "Progress",
