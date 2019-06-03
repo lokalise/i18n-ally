@@ -27,7 +27,6 @@ Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
    - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually.
 
 ## 📂 Supported locales directory structure
-
 You can have locales directory structured like this
 
     .
@@ -39,14 +38,13 @@ You can have locales directory structured like this
     |   ├── zh-TW.json
     |   ├── ...
     |   └── <contry-code>.json
-    |
     └── ...         # other files or your project
 
 or
 
     .
     ├── ...
-    ├── locales     # you can specify the folder path in the settings
+    ├── locales
     |   ├── en
     |   |   ├── common.json
     |   |   ├── buttons.json
@@ -60,11 +58,11 @@ or
     |       ├── common.json
     |       ├── buttons.json
     |       └── ...
-    |
-    └── ...         # other files or your project
+    └── ...
 
 
-Currently we only support `json` as your locales file type. If you would like use different formats, please open an issue or pull request. Also if you would like to have different
+Currently we only support `json` as your locales file type. If you would like use different formats, please open an issue or pull request.
+Also, if you would like to have different directory structures, it's also welcome to discuss.
 
 
 ## 🐞 Known issuses
@@ -73,10 +71,18 @@ Currently we only support `json` as your locales file type. If you would like us
 
 ## 📅 TODO
 
-- [ ] Vue inlined locales support
+- [x] Machine translating
+- [x] Locales Tree
+- [x] Translating progress
+- [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Hide/Show specific locales
-- [ ] Workspace support
+- [ ] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
 - [ ] JSON file annonation & hint
+- [ ] Analysis report
+- [ ] `$tc`, `$d`, `$n`, `v-t` support
+- [ ] YAML support
+- [ ] Screenshots
+- [ ] Underscore for i18n keys?
 
 ## 👨‍💻 Credits
 
