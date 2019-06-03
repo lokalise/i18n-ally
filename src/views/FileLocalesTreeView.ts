@@ -25,9 +25,10 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     const roots = super.getRoots()
     const realPaths = roots.map(i => i.node.keypath)
     if (this.includePaths) {
+      // create shadow nodes
       const shadowPaths = this.includePaths.filter(path => !realPaths.includes(path))
       for (const keypath of shadowPaths) {
-        const node = new LocaleNode(keypath, {})
+        const node = new LocaleNode(keypath, {}, true)
         roots.push(this.newItem(node))
       }
     }

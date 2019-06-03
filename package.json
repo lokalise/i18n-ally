@@ -78,19 +78,19 @@
       ],
       "view/item/context": [
         {
-          "command": "extension.vue-i18n-ally.copy-key",
-          "when": "view =~ /locales-tree/ && viewItem == node",
-          "group": "inline"
+          "command": "extension.vue-i18n-ally.translate-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /translate/",
+          "group": "inline@1"
         },
         {
-          "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /(record|node)$/",
-          "group": "inline"
+          "command": "extension.vue-i18n-ally.copy-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /node/",
+          "group": "inline@2"
         },
         {
           "command": "extension.vue-i18n-ally.edit-key",
           "when": "view =~ /locales-tree/ && viewItem =~ /record/",
-          "group": "inline"
+          "group": "inline@3"
         }
       ]
     },

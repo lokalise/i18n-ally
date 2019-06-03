@@ -57,9 +57,16 @@ export class Item extends TreeItem {
 
   get contextValue () {
     let isSource = false
-    if (this.node.type === 'record')
+    let isShadow = this.node.shadow
+    if (this.node.type === 'record') {
       isSource = this.node.locale === Common.sourceLanguage
-    return this.node.type + (isSource ? '-source' : '')
+      // record with filepath is not shadow
+      isShadow = !this.node.filepath
+    }
+    const isTree = this.node.type === 'tree'
+    const translatable = !isSource && !isShadow && !isTree
+
+    return this.node.type + (translatable ? '-translate' : '')
   }
 }
 
