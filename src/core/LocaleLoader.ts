@@ -73,8 +73,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     return node && node.locales[Common.displayLanguage]
   }
 
-  async MachineTranslateRecord (record: LocaleRecord, sourceLanguage?: string): Promise<PendingWrite|undefined> {
-    sourceLanguage = sourceLanguage || Common.sourceLanguage
+  private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string): Promise<PendingWrite|undefined> {
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
     const sourceNode = this.getTranslationsByKey(record.keypath)
@@ -98,6 +97,26 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     }
   }
 
+  private async MachineTranslateNode (node: LocaleNode, sourceLanguage: string): Promise<PendingWrite[]> {
+    const tasks = Object.values(this.getShadowLocales(node))
+      .filter(record => record.locale !== sourceLanguage)
+      .map(record => this.MachineTranslateRecord(record, sourceLanguage))
+
+    const pendings = await Promise.all(tasks)
+
+    return pendings
+  }
+
+  async MachineTranslate (node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
+    sourceLanguage = sourceLanguage || Common.sourceLanguage
+    if (node.type === 'node')
+      return await this.MachineTranslateNode(node, sourceLanguage)
+
+    const pending = await this.MachineTranslateRecord(node, sourceLanguage)
+
+    return [pending]
+  }
+
   getShadowLocales (node: LocaleNode) {
     const locales: Record<string, LocaleRecord> = {}
     const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
@@ -118,21 +137,24 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     return locales
   }
 
-  async writeToFile (pending: PendingWrite) {
-    try {
-      console.log('WRITNING', JSON.stringify(pending))
-      let original: object = {}
-      if (existsSync(pending.filepath)) {
-        const originalRaw = await fs.readFile(pending.filepath, 'utf-8')
-        original = JSON.parse(originalRaw)
-      }
-      set(original, pending.keypath, pending.value)
-      const writting = `${JSON.stringify(original, null, 2)}\n`
-      await fs.writeFile(pending.filepath, writting, 'utf-8')
+  async writeToSingleFile (pending: PendingWrite) {
+    console.log('WRITNING', JSON.stringify(pending))
+    let original: object = {}
+    if (existsSync(pending.filepath)) {
+      const originalRaw = await fs.readFile(pending.filepath, 'utf-8')
+      original = JSON.parse(originalRaw)
     }
-    catch (e) {
-      console.error(e)
-    }
+    set(original, pending.keypath, pending.value)
+    const writting = `${JSON.stringify(original, null, 2)}\n`
+    await fs.writeFile(pending.filepath, writting, 'utf-8')
+  }
+
+  async writeToFile (pendings: PendingWrite|PendingWrite[]) {
+    if (!Array.isArray(pendings))
+      pendings = [pendings]
+    pendings = pendings.filter(i => i)
+    for (const pending of pendings)
+      await this.writeToSingleFile(pending)
   }
 
   private async loadFile (filepath: string) {

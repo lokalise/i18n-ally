@@ -84,7 +84,7 @@
         },
         {
           "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view =~ /locales-tree/ && viewItem == record",
+          "when": "view =~ /locales-tree/ && viewItem =~ /(record|node)$/",
           "group": "inline"
         },
         {

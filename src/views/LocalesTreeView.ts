@@ -160,11 +160,14 @@ const m: ExtensionModule = (ctx) => {
       window.showInformationMessage('I18n key copied')
     }),
 
-    commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: {node: LocaleRecord}) => {
+    commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: Item) => {
+      if (node.type === 'tree')
+        return
+
       try {
-        const pending = await Common.loader.MachineTranslateRecord(node)
-        if (pending) {
-          await Common.loader.writeToFile(pending)
+        const pendings = await Common.loader.MachineTranslate(node)
+        if (pendings.length) {
+          await Common.loader.writeToFile(pendings)
           window.showInformationMessage('Translation saved!')
         }
       }
