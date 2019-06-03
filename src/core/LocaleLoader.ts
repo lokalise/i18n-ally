@@ -52,8 +52,18 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     }
   }
 
-  getTranslationsByKey (keypath: string): LocaleNode | undefined {
+  getNodeByKey (keypath: string): LocaleNode | undefined {
     return this.flattenLocaleTree[keypath]
+  }
+
+  getTranslationsByKey (keypath: string, shadow = true) {
+    const node = this.getNodeByKey(keypath)
+    if (!node)
+      return {}
+    if (shadow)
+      return this.getShadowLocales(node)
+    else
+      return node.locales
   }
 
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
@@ -92,7 +102,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
-    const node = this.getTranslationsByKey(key)
+    const node = this.getNodeByKey(key)
     return node && node.locales[Common.displayLanguage]
   }
 
@@ -121,7 +131,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string): Promise<PendingWrite|undefined> {
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
-    const sourceNode = this.getTranslationsByKey(record.keypath)
+    const sourceNode = this.getNodeByKey(record.keypath)
     if (!sourceNode)
       throw new AllyError(ErrorType.translating_empty_source_value)
     const sourceRecord = sourceNode.locales[sourceLanguage]
@@ -163,7 +173,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   getShadowFilePath (keypath: string, locale: string) {
-    const node = this.getTranslationsByKey(keypath)
+    const node = this.getNodeByKey(keypath)
     if (node) {
       const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
       if (sourceRecord && sourceRecord.filepath)
@@ -175,8 +185,12 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   getShadowLocales (node: LocaleNode) {
     const locales: Record<string, LocaleRecord> = {}
     this.locales.forEach(locale => {
-      if (node.locales[locale]) { locales[locale] = node.locales[locale] }
+      if (node.locales[locale]) {
+        // locales already exists
+        locales[locale] = node.locales[locale]
+      }
       else {
+        // create shadow locale
         locales[locale] = {
           locale,
           value: '',
@@ -199,7 +213,6 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     if (!filepath)
       throw new AllyError(ErrorType.filepath_not_specified)
 
-    console.log('WRITNING', JSON.stringify(pending))
     let original: object = {}
     if (existsSync(filepath)) {
       const originalRaw = await fs.readFile(filepath, 'utf-8')

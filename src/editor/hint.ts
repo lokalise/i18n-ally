@@ -14,29 +14,20 @@ class HintProvider implements HoverProvider {
     if (!key)
       return
 
-    const trans = Common.loader.getTranslationsByKey(key)
+    const locales = Common.loader.getTranslationsByKey(key, true)
 
-    if (!trans)
-      return
-
-    const transText = Object.values(trans.locales)
+    const transText = Object
+      .values(locales)
       .map(item => `**${item.locale}:** ${item.value || '-'}`)
       .join('\n\n')
 
+    if (!transText)
+      return
+
     const buttons: {name: string; command: string}[] = []
 
-    if (transText) {
-      buttons.push({
-        name: 'Translator',
-        command: 'extension.vue-i18n-ally.file-translator',
-      })
-    }
     buttons.push({
-      name: 'Config',
-      command: Command.config_locales,
-    })
-    buttons.push({
-      name: 'Display Language',
+      name: 'Change Display Language',
       command: Command.config_display_language,
     })
 

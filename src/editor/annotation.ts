@@ -22,7 +22,7 @@ const annotation: ExtensionModule = (ctx) => {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = Common.loader.getTranslationsByKey(key)
+      const trans = Common.loader.getNodeByKey(key)
 
       const text = (trans && trans.value) || ''
       const decoration: DecorationOptions = {
