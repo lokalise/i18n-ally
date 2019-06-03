@@ -4,7 +4,7 @@ import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
 // @ts-ignore
 import * as flat from 'flat'
-import { Global } from './Common'
+import { Global } from './Global'
 import EventHandler from './EventHandler'
 import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'

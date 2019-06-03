@@ -1,14 +1,12 @@
-import { Global } from '../core'
+import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
+import { Global, Commands, ExtractTextOptions } from '../core'
 import { ExtensionModule } from '../modules'
-import { Command, CodeActionProvider, window, commands, CodeActionKind, languages } from 'vscode'
-// TODO:new engine
-import transAndRefactor, { SAVE_TYPE } from '../legacy/transAndRefactor'
 import language_selectors from './language_selectors'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
     const editor = window.activeTextEditor
-    if (!editor || !Global.hasI18nPaths)
+    if (!editor || !Global.hasLocalesConfigured)
       return []
 
     const { selection } = editor
@@ -16,32 +14,17 @@ class ExtractProvider implements CodeActionProvider {
     if (!text || selection.start.line !== selection.end.line)
       return []
 
-    return [
-      {
-        command: 'extension.vue-i18n-ally.transAndSave',
-        title: '提取文案为$t',
-        arguments: [
-          {
-            filePath: editor.document.fileName,
-            text,
-            range: selection,
-            type: SAVE_TYPE.$t,
-          },
-        ],
-      },
-      {
-        command: 'extension.vue-i18n-ally.transAndSave',
-        title: '提取文案为i18n.t',
-        arguments: [
-          {
-            filePath: editor.document.fileName,
-            text,
-            range: selection,
-            type: SAVE_TYPE.i18n,
-          },
-        ],
-      },
-    ]
+    const options: ExtractTextOptions = {
+      filepath: editor.document.fileName,
+      text,
+      range: selection,
+    }
+
+    return [{
+      command: Commands.extract_text,
+      title: 'Extract text to vue-i18n locales',
+      arguments: [options],
+    }]
   }
 }
 
@@ -53,10 +36,6 @@ const m: ExtensionModule = () => {
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],
       }
-    ),
-    commands.registerCommand(
-      'extension.vue-i18n-ally.transAndSave',
-      transAndRefactor
     ),
   ]
 }

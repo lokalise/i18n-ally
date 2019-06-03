@@ -1,3 +1,4 @@
+import { Range } from 'vscode'
 import { getKeyname } from './utils'
 import { Global } from '.'
 
@@ -66,3 +67,9 @@ export interface PendingWrite {
 
 export type LocaleLoaderEventType =
   | 'changed'
+
+export interface ExtractTextOptions {
+  filepath: string
+  text: string
+  range: Range
+}

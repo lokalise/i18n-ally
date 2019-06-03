@@ -202,6 +202,7 @@
     "clipboardy": "^2.0.0",
     "fast-glob": "^2.2.6",
     "flat": "^4.1.0",
+    "limax": "^1.7.0",
     "lodash": "^4.17.11",
     "translation.js": "^0.7.8"
   }

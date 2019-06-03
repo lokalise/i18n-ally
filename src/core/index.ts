@@ -1,6 +1,6 @@
 export * from './types'
 export * from './Commands'
-export * from './Common'
+export * from './Global'
 export * from './utils'
 export * from './LocaleLoader'
 export * from './KeyDetector'

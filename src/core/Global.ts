@@ -8,7 +8,7 @@ const configPrefix = 'vue-i18n-ally'
 export class Global {
   static loader: LocaleLoader
 
-  static get hasI18nPaths () {
+  static get hasLocalesConfigured () {
     return !!Global.localesPaths.length
   }
 
