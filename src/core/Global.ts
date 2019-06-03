@@ -50,6 +50,8 @@ export class Global {
   }
 
   static normalizeLng (locale: string, fallback = 'en'): string {
+    if (!locale)
+      return fallback
     const result = LanguageCodes.find(
       (codes: string | string[]) => {
         if (Array.isArray(codes) && codes.includes(locale))
