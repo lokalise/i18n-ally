@@ -1,6 +1,6 @@
 import { ExtensionContext, window } from 'vscode'
 import { LocalesTreeProvider } from './LocalesTreeView'
-import { KeyDetector } from '../core'
+import { KeyDetector, LocaleNode } from '../core'
 import { ExtensionModule } from '../modules'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
@@ -15,6 +15,17 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
   loadCurrentDocument () {
     this.includePaths = KeyDetector.getKeyByContent(window.activeTextEditor.document.getText())
     this.refresh()
+  }
+
+  getRoots () {
+    const roots = super.getRoots()
+    const realPaths = roots.map(i => i.node.keypath)
+    const shadowPaths = this.includePaths.filter(path => !realPaths.includes(path))
+    for (const keypath of shadowPaths) {
+      const node = new LocaleNode(keypath, {})
+      roots.push(this.newItem(node))
+    }
+    return roots
   }
 }
 

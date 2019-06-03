@@ -117,9 +117,20 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     return [pending]
   }
 
+  getShadowFilePath (keypath: string, locale: string) {
+    const node = this.getTranslationsByKey(keypath)
+    if (node) {
+      const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
+      if (sourceRecord)
+        return replaceLocalePath(sourceRecord.filepath, locale)
+    }
+
+    // FIXME: trace up to guess
+    return 'unknown'
+  }
+
   getShadowLocales (node: LocaleNode) {
     const locales: Record<string, LocaleRecord> = {}
-    const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
     this.locales.forEach(locale => {
       if (node.locales[locale]) { locales[locale] = node.locales[locale] }
       else {
@@ -129,7 +140,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
           shadow: true,
           keyname: node.keyname,
           keypath: node.keypath,
-          filepath: replaceLocalePath(sourceRecord.filepath, locale),
+          filepath: this.getShadowFilePath(node.keypath, locale),
           type: 'record',
         }
       }
