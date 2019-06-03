@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/antfu/vue-i18n-ally/compare/v0.7.0...v0.7.1) (2019-06-03)
+
+
+### 🐞Bug Fixes
+
+* exclude "nodejieba" from webpack ([2f8c194](https://github.com/antfu/vue-i18n-ally/commit/2f8c194))
+
+
+
 ## [0.7.0](https://github.com/antfu/vue-i18n-ally/compare/v0.6.0...v0.7.0) (2019-06-03)
 
 
