@@ -4,7 +4,11 @@ import { KEY_REG } from '../core/KeyDetector'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 
-const textEditorDecorationType = window.createTextEditorDecorationType({})
+const noneDecorationType = window.createTextEditorDecorationType({})
+
+const underlineDecorationType = window.createTextEditorDecorationType({
+  textDecoration: 'underline',
+})
 
 const annotation: ExtensionModule = (ctx) => {
   function update () {
@@ -14,9 +18,10 @@ const annotation: ExtensionModule = (ctx) => {
 
     const { document } = activeTextEditor
     const text = document.getText()
-    const decorations: DecorationOptions[] = []
+    const annotations: DecorationOptions[] = []
+    const underlines: DecorationOptions[] = []
 
-    // 从文本里遍历生成中文注释
+    // get all keys of current file
     let match = null
     while (match = KEY_REG.exec(text)) {
       const index = match.index
@@ -25,10 +30,14 @@ const annotation: ExtensionModule = (ctx) => {
       const trans = Global.loader.getNodeByKey(key)
 
       const text = (trans && trans.value) || ''
-      const decoration: DecorationOptions = {
+
+      const end = index + match[0].length - 1
+      const start = end - match[1].length
+
+      annotations.push({
         range: new Range(
-          document.positionAt(index),
-          document.positionAt(index + matchKey.length)
+          document.positionAt(start - 1),
+          document.positionAt(end + 1)
         ),
         renderOptions: {
           after: {
@@ -38,11 +47,17 @@ const annotation: ExtensionModule = (ctx) => {
             fontStyle: 'normal',
           },
         },
-      }
-      decorations.push(decoration)
-
-      activeTextEditor.setDecorations(textEditorDecorationType, decorations)
+      })
+      underlines.push({
+        range: new Range(
+          document.positionAt(start),
+          document.positionAt(end)
+        ),
+      })
     }
+
+    activeTextEditor.setDecorations(noneDecorationType, annotations)
+    activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
   const debounceUpdate = debounce(update, 500)
