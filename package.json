@@ -170,6 +170,7 @@
   },
   "scripts": {
     "release": "standard-version",
+    "publish": "standard-version && vsce publish",
     "vscode:prepublish": "webpack --mode production",
     "compile": "webpack --mode none",
     "watch": "webpack --mode none --watch",
