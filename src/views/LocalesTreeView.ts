@@ -1,7 +1,6 @@
-import * as clipboardy from 'clipboardy'
 import { Common, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
 import { ExtensionModule } from '../modules'
-import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window, commands } from 'vscode'
+import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
 export type Node = LocaleNode | LocaleRecord | LocaleTree
 
@@ -152,51 +151,7 @@ export class LocalesTreeView {
 const m: ExtensionModule = (ctx) => {
   const provider = new LocalesTreeProvider(ctx)
 
-  return [
-    window.registerTreeDataProvider('locales-tree', provider),
-
-    commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
-      clipboardy.writeSync(`$t('${node.keypath}')`)
-      window.showInformationMessage('I18n key copied')
-    }),
-
-    commands.registerCommand('extension.vue-i18n-ally.translate-key', async ({ node }: Item) => {
-      if (node.type === 'tree')
-        return
-
-      try {
-        const pendings = await Common.loader.MachineTranslate(node)
-        if (pendings.length) {
-          await Common.loader.writeToFile(pendings)
-          window.showInformationMessage('Translation saved!')
-        }
-      }
-      catch (err) {
-        window.showErrorMessage(err.toString())
-      }
-    }),
-
-    commands.registerCommand('extension.vue-i18n-ally.edit-key', async ({ node }: {node: LocaleRecord}) => {
-      try {
-        const newvalue = await window.showInputBox({
-          value: node.value,
-          prompt: `Edit key "${node.keypath}" on ${node.locale}`,
-        })
-
-        if (newvalue !== undefined && newvalue !== node.value) {
-          await Common.loader.writeToFile({
-            value: newvalue,
-            keypath: node.keypath,
-            filepath: node.filepath,
-            locale: node.locale,
-          })
-        }
-      }
-      catch (err) {
-        window.showErrorMessage(err.toString())
-      }
-    }),
-  ]
+  return window.registerTreeDataProvider('locales-tree', provider)
 }
 
 export default m

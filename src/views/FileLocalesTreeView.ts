@@ -14,7 +14,6 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
 
   loadCurrentDocument () {
     this.includePaths = KeyDetector.getKeyByContent(window.activeTextEditor.document.getText())
-    console.log(this.includePaths)
     this.refresh()
   }
 }
