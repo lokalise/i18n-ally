@@ -1,5 +1,5 @@
 import { getKeyname } from './utils'
-import { Common } from '.'
+import { Global } from '.'
 
 export interface ParsedFile {
   filepath: string
@@ -36,7 +36,7 @@ export class LocaleNode {
   }
 
   get value () {
-    return this.getValue(Common.displayLanguage)
+    return this.getValue(Global.displayLanguage)
   }
 }
 

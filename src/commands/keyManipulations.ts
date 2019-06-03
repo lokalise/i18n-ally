@@ -1,27 +1,26 @@
 import { window, commands, workspace, Selection, TextEditorRevealType } from 'vscode'
 import * as clipboardy from 'clipboardy'
-import { Common } from '../core'
+import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
-import { Command } from './Command'
 
 const m: ExtensionModule = (ctx) => {
   return [
-    commands.registerCommand(Command.copy_key,
+    commands.registerCommand(Commands.copy_key,
       async ({ node }: LocaleTreeItem) => {
         await clipboardy.write(`$t('${node.keypath}')`)
         window.showInformationMessage('I18n key copied')
       }),
 
-    commands.registerCommand(Command.translate_key,
+    commands.registerCommand(Commands.translate_key,
       async ({ node }: LocaleTreeItem) => {
         if (node.type === 'tree')
           return
 
         try {
-          const pendings = await Common.loader.MachineTranslate(node)
+          const pendings = await Global.loader.MachineTranslate(node)
           if (pendings.length) {
-            await Common.loader.writeToFile(pendings)
+            await Global.loader.writeToFile(pendings)
             window.showInformationMessage('Translation saved!')
           }
         }
@@ -30,7 +29,7 @@ const m: ExtensionModule = (ctx) => {
         }
       }),
 
-    commands.registerCommand(Command.open_key,
+    commands.registerCommand(Commands.open_key,
       async ({ node }: LocaleTreeItem) => {
         if (node.type !== 'record')
           return
@@ -68,7 +67,7 @@ const m: ExtensionModule = (ctx) => {
         }
       }),
 
-    commands.registerCommand(Command.edit_key,
+    commands.registerCommand(Commands.edit_key,
       async ({ node }: LocaleTreeItem) => {
         if (node.type !== 'record')
           return
@@ -80,7 +79,7 @@ const m: ExtensionModule = (ctx) => {
           })
 
           if (newvalue !== undefined && newvalue !== node.value) {
-            await Common.loader.writeToFile({
+            await Global.loader.writeToFile({
               value: newvalue,
               keypath: node.keypath,
               filepath: node.filepath,

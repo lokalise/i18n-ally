@@ -1,18 +1,18 @@
 import { commands, window } from 'vscode'
-import { Common } from '../core'
+import { Global } from '../core'
 import { ExtensionModule } from '../modules'
-import { Command } from '.'
+import { Commands } from '.'
 
 const m: ExtensionModule = () => {
-  return commands.registerCommand(Command.config_display_language,
+  return commands.registerCommand(Commands.config_display_language,
     async () => {
-      const locales = Common.loader.locales
+      const locales = Global.loader.locales
       const result = await window.showQuickPick(locales, {
-        placeHolder: Common.displayLanguage,
+        placeHolder: Global.displayLanguage,
       })
 
       if (result)
-        Common.displayLanguage = result
+        Global.displayLanguage = result
     })
 }
 

@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { set, get } from 'lodash'
 
-import { Common } from '../core'
+import { Global } from '../core'
 
 export interface KeyLocales {
   key: string
@@ -40,12 +40,12 @@ class I18nFile {
           rootPath,
           path: filePath,
           isDirectory,
-          lng: Common.normalizeLng(originLng),
+          lng: Global.normalizeLng(originLng),
         }
       })
       .filter(item => !!item.lng)
       .sort(item => {
-        return item.lng === Common.sourceLanguage ? -1 : 1
+        return item.lng === Global.sourceLanguage ? -1 : 1
       })
 
     return i18nList

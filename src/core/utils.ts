@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { Common } from '.'
+import { Global } from '.'
 
 export function getKeyname (keypath: string) {
   const keys = keypath.split(/\./g)
@@ -11,11 +11,11 @@ export function getKeyname (keypath: string) {
 export function getFileInfo (filepath: string) {
   const info = path.parse(filepath)
 
-  let locale = Common.normalizeLng(info.name, '')
+  let locale = Global.normalizeLng(info.name, '')
   let nested = false
   if (!locale) {
     nested = true
-    locale = Common.normalizeLng(path.basename(info.dir), '')
+    locale = Global.normalizeLng(path.basename(info.dir), '')
   }
   if (!locale)
     console.error(`Failed to get locale on file ${filepath}`)
@@ -33,10 +33,10 @@ export function notEmpty<T> (value: T | null | undefined): value is T {
 export function replaceLocalePath (filepath: string, targetLocale: string): string {
   const info = path.parse(filepath)
 
-  if (Common.normalizeLng(info.name, ''))
+  if (Global.normalizeLng(info.name, ''))
     return path.resolve(info.dir, `${targetLocale}${info.ext}`)
 
-  if (Common.normalizeLng(path.basename(info.dir), ''))
+  if (Global.normalizeLng(path.basename(info.dir), ''))
     return path.resolve(path.dirname(info.dir), targetLocale, `${info.name}${info.ext}`)
 
   return ''

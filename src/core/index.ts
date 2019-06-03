@@ -1,4 +1,5 @@
 export * from './types'
+export * from './Commands'
 export * from './Common'
 export * from './utils'
 export * from './LocaleLoader'

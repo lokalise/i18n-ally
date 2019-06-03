@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { LocaleLoader, Coverage, Common } from '../core'
+import { LocaleLoader, Coverage, Global } from '../core'
 import { ExtensionModule } from '../modules'
 
 export class Item extends vscode.TreeItem {
@@ -23,7 +23,7 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
   private loader: LocaleLoader
 
   constructor () {
-    this.loader = Common.loader
+    this.loader = Global.loader
     this.loader.addEventListener('changed', () => this.refresh())
   }
 

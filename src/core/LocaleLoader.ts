@@ -4,7 +4,7 @@ import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
 // @ts-ignore
 import * as flat from 'flat'
-import { Common } from './Common'
+import { Global } from './Common'
 import EventHandler from './EventHandler'
 import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
@@ -31,7 +31,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   get localesPaths () {
-    return Common.localesPaths
+    return Global.localesPaths
   }
 
   get locales () {
@@ -103,7 +103,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
     const node = this.getNodeByKey(key)
-    return node && node.locales[Common.displayLanguage]
+    return node && node.locales[Global.displayLanguage]
   }
 
   getFilepathsOfLocale (locale: string) {
@@ -163,7 +163,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   async MachineTranslate (node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
-    sourceLanguage = sourceLanguage || Common.sourceLanguage
+    sourceLanguage = sourceLanguage || Global.sourceLanguage
     if (node.type === 'node')
       return await this.MachineTranslateNode(node, sourceLanguage)
 
@@ -175,7 +175,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   getShadowFilePath (keypath: string, locale: string) {
     const node = this.getNodeByKey(keypath)
     if (node) {
-      const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
+      const sourceRecord = node.locales[Global.sourceLanguage] || Object.values(node.locales)[0]
       if (sourceRecord && sourceRecord.filepath)
         return replaceLocalePath(sourceRecord.filepath, locale)
     }
@@ -369,7 +369,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   private async loadAll () {
-    const rootPath = Common.rootPath
+    const rootPath = Global.rootPath
     if (!rootPath)
       return
     for (const pathname of this.localesPaths) {

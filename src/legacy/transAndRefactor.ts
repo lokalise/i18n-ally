@@ -2,7 +2,7 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
 import i18nFiles from './i18nFiles'
-import { Common } from '../core'
+import { Global } from '../core'
 
 export enum SAVE_TYPE {
   $t,
@@ -48,7 +48,7 @@ const transAndRefactor = async ({
   if (defaultKey.length > 1)
     defaultKey = defaultKey.splice(1)
 
-  defaultKey = `${defaultKey.join('.')}.${Common.getUid()}`
+  defaultKey = `${defaultKey.join('.')}.${Global.getUid()}`
 
   let key = await vscode.window.showInputBox({
     prompt: '请输入要保存的路径 (例如:home.document.title)',
@@ -103,7 +103,7 @@ const transAndRefactor = async ({
 
   // 写入翻译
   // @ts-ignore
-  const transZhCN = transData.find(item => item.lng === Common.sourceLanguage)
+  const transZhCN = transData.find(item => item.lng === Global.sourceLanguage)
   transZhCN.data = text
 
   const transByApiData = await i18nFiles.getTransByApi(transData)

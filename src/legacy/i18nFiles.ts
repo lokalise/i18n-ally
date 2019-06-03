@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { google, baidu, youdao } from 'translation.js'
 
-import { Common, KeyDetector } from '../core'
+import { Global, KeyDetector } from '../core'
 import I18nFile, { LocaleValue, KeyLocales } from './I18nFile'
 import { TranslateResult, StringOrTranslateOptions } from 'translation.js/declaration/api/types'
 
@@ -9,8 +9,8 @@ class I18nFiles {
   private i18nBox = new Map<string, I18nFile>()
 
   get i18nFiles () {
-    Common.localesPaths.forEach(i18nPath => {
-      const rootPath = Common.rootPath
+    Global.localesPaths.forEach(i18nPath => {
+      const rootPath = Global.rootPath
 
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
@@ -23,8 +23,8 @@ class I18nFiles {
   }
 
   constructor () {
-    Common.localesPaths.forEach(i18nPath => {
-      const rootPath = Common.rootPath
+    Global.localesPaths.forEach(i18nPath => {
+      const rootPath = Global.rootPath
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       this.i18nFiles.set(absI18nPath, new I18nFile(absI18nPath))
@@ -32,11 +32,11 @@ class I18nFiles {
   }
 
   static getRelativePathByFilePath (filePath: string) {
-    const rootPath = Common.rootPath
+    const rootPath = Global.rootPath
     if (!rootPath)
       return
 
-    const localesPaths = Common.localesPaths
+    const localesPaths = Global.localesPaths
 
     const i18nRootPath = localesPaths
       .map((pathItem: string) => path.resolve(rootPath, pathItem))
@@ -74,7 +74,7 @@ class I18nFiles {
   }
 
   getTransByApi (transItems: LocaleValue[], locales?: string | string[], override = false): Promise<LocaleValue[]> {
-    const sourceLanguage = Common.sourceLanguage
+    const sourceLanguage = Global.sourceLanguage
     const sourceItem = transItems.find(transItem => transItem.lng === sourceLanguage)
 
     if (!sourceItem)

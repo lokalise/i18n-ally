@@ -6,7 +6,7 @@ import configLocalesGuide from './configLocalesGuide'
 import keyManipulations from './keyManipulations'
 import debug from './debug'
 
-export * from './Command'
+export * from '../core/Commands'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([

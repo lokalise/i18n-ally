@@ -1,7 +1,7 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
 import { KEY_REG } from '../core/KeyDetector'
-import { Common } from '../core'
+import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 
 const textEditorDecorationType = window.createTextEditorDecorationType({})
@@ -22,7 +22,7 @@ const annotation: ExtensionModule = (ctx) => {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = Common.loader.getNodeByKey(key)
+      const trans = Global.loader.getNodeByKey(key)
 
       const text = (trans && trans.value) || ''
       const decoration: DecorationOptions = {
@@ -51,7 +51,7 @@ const annotation: ExtensionModule = (ctx) => {
   disposables.push(window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions))
   disposables.push(workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions))
 
-  Common.loader.addEventListener('changed', update)
+  Global.loader.addEventListener('changed', update)
 
   update()
 

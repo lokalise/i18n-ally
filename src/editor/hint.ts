@@ -1,8 +1,8 @@
-import { Common, KeyDetector } from '../core'
+import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover } from 'vscode'
 import language_selectors from './language_selectors'
-import { Command } from '../commands'
+import { Commands } from '../commands'
 
 class HintProvider implements HoverProvider {
   public provideHover (
@@ -14,7 +14,7 @@ class HintProvider implements HoverProvider {
     if (!key)
       return
 
-    const locales = Common.loader.getTranslationsByKey(key, true)
+    const locales = Global.loader.getTranslationsByKey(key, true)
 
     const transText = Object
       .values(locales)
@@ -28,7 +28,7 @@ class HintProvider implements HoverProvider {
 
     buttons.push({
       name: 'Change Display Language',
-      command: Command.config_display_language,
+      command: Commands.config_display_language,
     })
 
     const buttonsMarkdown = buttons.map(btn => `[${btn.name}](command:${btn.command})`).join(' | ')

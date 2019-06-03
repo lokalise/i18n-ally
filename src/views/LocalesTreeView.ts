@@ -1,4 +1,4 @@
-import { Common, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
+import { Global, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
@@ -61,7 +61,7 @@ export class LocaleTreeItem extends TreeItem {
     let isSource = false
     const isShadow = this.node.shadow
     if (this.node.type === 'record')
-      isSource = this.node.locale === Common.sourceLanguage
+      isSource = this.node.locale === Global.sourceLanguage
 
     const isTree = this.node.type === 'tree'
     const hasFilepath = this.node.type === 'record' && !!this.node.filepath
@@ -91,7 +91,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     flatten = false,
   ) {
     this._flatten = flatten
-    this.loader = Common.loader
+    this.loader = Global.loader
     this.loader.addEventListener('changed', () => this.refresh())
   }
 

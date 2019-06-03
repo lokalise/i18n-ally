@@ -1,7 +1,7 @@
 import { window, workspace, Uri, ExtensionContext, commands } from 'vscode'
-import { Common } from '../core'
+import { Global } from '../core'
 import { ExtensionModule } from '../modules'
-import { Command } from '.'
+import { Commands } from '.'
 
 class Guide {
   constructor (public ctx: ExtensionContext) {}
@@ -17,7 +17,7 @@ class Guide {
       return
 
     const dirs = await this.pickDir()
-    Common.updateLocalesPaths(dirs)
+    Global.updateLocalesPaths(dirs)
 
     this.success()
   }
@@ -46,7 +46,7 @@ class Guide {
 }
 
 const m: ExtensionModule = (ctx) => {
-  return commands.registerCommand(Command.config_locales,
+  return commands.registerCommand(Commands.config_locales,
     () => {
       const guide = new Guide(ctx)
       guide.init()

@@ -5,22 +5,22 @@ import * as fs from 'fs'
 
 const configPrefix = 'vue-i18n-ally'
 
-export class Common {
+export class Global {
   static loader: LocaleLoader
 
   static get hasI18nPaths () {
-    return !!Common.localesPaths.length
+    return !!Global.localesPaths.length
   }
 
   static get localesPaths (): string[] {
-    const paths = Common.getConfig('localesPaths')
+    const paths = Global.getConfig('localesPaths')
 
     return paths ? paths.split(',') : []
   }
 
   static updateLocalesPaths (paths: string[]) {
-    const localesPaths = Array.from(new Set(Common.localesPaths.concat(paths)))
-    Common.setConfig('localesPaths', localesPaths.join(','))
+    const localesPaths = Array.from(new Set(Global.localesPaths.concat(paths)))
+    Global.setConfig('localesPaths', localesPaths.join(','))
   }
 
   static get rootPath () {
@@ -28,15 +28,15 @@ export class Common {
   }
 
   static get displayLanguage (): string {
-    return Common.normalizeLng(Common.getConfig('displayLanguage'))
+    return Global.normalizeLng(Global.getConfig('displayLanguage'))
   }
 
   static set displayLanguage (value) {
-    Common.setConfig('displayLanguage', Common.normalizeLng(value))
+    Global.setConfig('displayLanguage', Global.normalizeLng(value))
   }
 
   static get sourceLanguage (): string {
-    return Common.normalizeLng(Common.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
+    return Global.normalizeLng(Global.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
   }
 
   static getConfig (key: string): any {

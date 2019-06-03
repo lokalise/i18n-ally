@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { Common, KeyDetector } from '../core'
+import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
@@ -12,7 +12,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
       return
 
     key = key.slice(0, -1)
-    const trans = Common.loader.getTreeNodeByKey(key)
+    const trans = Global.loader.getTreeNodeByKey(key)
 
     if (!trans || trans.type !== 'tree')
       return

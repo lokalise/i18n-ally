@@ -1,4 +1,4 @@
-import { Common } from '../core'
+import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { Command, CodeActionProvider, window, commands, CodeActionKind, languages } from 'vscode'
 // TODO:new engine
@@ -8,7 +8,7 @@ import language_selectors from './language_selectors'
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
     const editor = window.activeTextEditor
-    if (!editor || !Common.hasI18nPaths)
+    if (!editor || !Global.hasI18nPaths)
       return []
 
     const { selection } = editor

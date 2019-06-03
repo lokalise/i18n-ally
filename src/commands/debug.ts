@@ -1,10 +1,10 @@
 import { commands } from 'vscode'
 import { LocaleLoader } from '../core'
 import { ExtensionModule } from '../modules'
-import { Command } from '.'
+import { Commands } from '.'
 
 const m: ExtensionModule = () => {
-  return commands.registerCommand(Command.debug,
+  return commands.registerCommand(Commands.debug,
     async () => {
       const loader = new LocaleLoader()
       await loader.init()

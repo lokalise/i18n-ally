@@ -1,9 +1,9 @@
 import * as fg from 'fast-glob'
 import * as path from 'path'
 import { ExtensionContext, workspace, window, commands } from 'vscode'
-import { Common } from '../core'
+import { Global } from '../core'
 import { ExtensionModule } from '../modules'
-import { Command } from '.'
+import { Commands } from '.'
 
 class AutoDetectLocales {
   ctx: ExtensionContext
@@ -13,7 +13,7 @@ class AutoDetectLocales {
   }
 
   async init () {
-    const localesPaths = Common.localesPaths
+    const localesPaths = Global.localesPaths
     if (localesPaths.length)
       return
 
@@ -33,7 +33,7 @@ class AutoDetectLocales {
 
     result = result.map(r => path.relative(rootPath, r))
 
-    Common.updateLocalesPaths(result)
+    Global.updateLocalesPaths(result)
 
     await window.showInformationMessage(
       `Vue i18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
@@ -45,7 +45,7 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
   const detector = new AutoDetectLocales(ctx)
   detector.init()
 
-  return commands.registerCommand(Command.config_locales_auto,
+  return commands.registerCommand(Commands.config_locales_auto,
     () => {
       detector.autoSet()
     })
