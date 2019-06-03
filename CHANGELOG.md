@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/antfu/vscode-vue-i18n-ally/compare/v0.5.1...v0.6.0) (2019-06-03)
+
+
+### ⚡Features
+
+* hide translate button for source record ([65f4fb9](https://github.com/antfu/vscode-vue-i18n-ally/commit/65f4fb9))
+* locale tree for current file ([576d333](https://github.com/antfu/vscode-vue-i18n-ally/commit/576d333))
+* machine translate for all locales of an i18n key ([ad08c81](https://github.com/antfu/vscode-vue-i18n-ally/commit/ad08c81))
+
+
+### 🐞Bug Fixes
+
+* actions for file locales tree ([5cb6d3a](https://github.com/antfu/vscode-vue-i18n-ally/commit/5cb6d3a))
+* disposable modules ([69b3bc8](https://github.com/antfu/vscode-vue-i18n-ally/commit/69b3bc8))
+
+
+
 ### [0.5.1](https://github.com/antfu/vscode-vue-i18n-ally/compare/v0.5.0...v0.5.1) (2019-06-03)
 
 
