@@ -4,7 +4,7 @@ import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider,
 
 export type Node = LocaleNode | LocaleRecord | LocaleTree
 
-export class Item extends TreeItem {
+export class LocaleTreeItem extends TreeItem {
   constructor (
     private ctx: ExtensionContext,
     public readonly node: Node,
@@ -70,11 +70,11 @@ export class Item extends TreeItem {
   }
 }
 
-export class LocalesTreeProvider implements TreeDataProvider<Item> {
+export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   private loader: LocaleLoader
   private _flatten: boolean
-  private _onDidChangeTreeData: EventEmitter<Item | undefined> = new EventEmitter<Item | undefined>();
-  readonly onDidChangeTreeData: Event<Item | undefined> = this._onDidChangeTreeData.event;
+  private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>();
+  readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event;
 
   constructor (
     private ctx: ExtensionContext,
@@ -90,12 +90,12 @@ export class LocalesTreeProvider implements TreeDataProvider<Item> {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: Item): TreeItem {
+  getTreeItem (element: LocaleTreeItem): TreeItem {
     return element
   }
 
   newItem (node: Node) {
-    return new Item(this.ctx, node, this.flatten)
+    return new LocaleTreeItem(this.ctx, node, this.flatten)
   }
 
   get flatten () {
@@ -130,7 +130,7 @@ export class LocalesTreeProvider implements TreeDataProvider<Item> {
       .map(node => this.newItem(node))
   }
 
-  async getChildren (element?: Item) {
+  async getChildren (element?: LocaleTreeItem) {
     if (!element)
       return this.getRoots()
 

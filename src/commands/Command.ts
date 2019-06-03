@@ -7,5 +7,6 @@ export enum Command {
 
   copy_key = 'extension.vue-i18n-ally.copy-key',
   translate_key = 'extension.vue-i18n-ally.translate-key',
-  edit_key = 'extension.vue-i18n-ally.edit-key'
+  edit_key = 'extension.vue-i18n-ally.edit-key',
+  open_key = 'extension.vue-i18n-ally.open-key',
 }

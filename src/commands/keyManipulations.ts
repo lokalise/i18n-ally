@@ -1,20 +1,20 @@
-import { window, commands } from 'vscode'
+import { window, commands, workspace } from 'vscode'
 import * as clipboardy from 'clipboardy'
-import { Common, LocaleNode, LocaleRecord } from '../core'
+import { Common } from '../core'
 import { ExtensionModule } from '../modules'
-import { Item } from '../views/LocalesTreeView'
+import { LocaleTreeItem } from '../views/LocalesTreeView'
 import { Command } from './Command'
 
 const m: ExtensionModule = (ctx) => {
   return [
     commands.registerCommand(Command.copy_key,
-      async ({ node }: { node: LocaleNode }) => {
+      async ({ node }: LocaleTreeItem) => {
         await clipboardy.write(`$t('${node.keypath}')`)
         window.showInformationMessage('I18n key copied')
       }),
 
     commands.registerCommand(Command.translate_key,
-      async ({ node }: Item) => {
+      async ({ node }: LocaleTreeItem) => {
         if (node.type === 'tree')
           return
 
@@ -30,8 +30,26 @@ const m: ExtensionModule = (ctx) => {
         }
       }),
 
+    commands.registerCommand(Command.open_key,
+      async ({ node }: LocaleTreeItem) => {
+        if (node.type !== 'record')
+          return
+
+        console.log('OPENING', node.filepath)
+
+        if (node.filepath) {
+          const document = await workspace.openTextDocument(node.filepath)
+          // eslint-disable-next-line
+          const editor = await window.showTextDocument(document)
+          // TODO: navigate to the key
+        }
+      }),
+
     commands.registerCommand(Command.edit_key,
-      async ({ node }: { node: LocaleRecord }) => {
+      async ({ node }: LocaleTreeItem) => {
+        if (node.type !== 'record')
+          return
+
         try {
           const newvalue = await window.showInputBox({
             value: node.value,
