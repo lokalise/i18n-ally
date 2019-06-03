@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "Vue i18n Ally",
   "description": "Forked from think2011/vscode-vue-i18n, with some feature changes",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
@@ -166,11 +166,7 @@
         "type": "ci",
         "hidden": true
       }
-    ],
-    "scripts": {
-      "precommit": "git -c commit.gpgsign=false commit",
-      "pretag": "git -c tag.gpgsign=false tag"
-    }
+    ]
   },
   "scripts": {
     "release": "standard-version",
