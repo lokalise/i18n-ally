@@ -149,8 +149,6 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     else if (element.node.type === 'node')
       nodes = Object.values(this.loader.getShadowLocales(element.node))
 
-    console.log(nodes)
-
     return nodes
       .filter(node => this.filter(node))
       .map(r => this.newItem(r))
