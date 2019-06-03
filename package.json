@@ -26,9 +26,10 @@
   "icon": "static/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/vscode-vue-i18n-ally"
+    "url": "https://github.com/antfu/vue-i18n-ally"
   },
-  "homepage": "https://github.com/antfu/vscode-vue-i18n-ally",
+  "homepage": "https://github.com/antfu/vue-i18n-ally",
+  "bugs": "https://github.com/antfu/vue-i18n-ally/issues",
   "main": "./dist/extension",
   "contributes": {
     "commands": [

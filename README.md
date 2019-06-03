@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/antfu/vscode-vue-i18n-ally/master/static/logo.png" alt="logo" width="150" align="right"/>
+<img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/static/logo.png" alt="logo" width="150" align="right"/>
 
 # Vue i18n Ally
 
@@ -8,7 +8,7 @@ Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/antfu.vue-i18n-ally.svg?style=flat-square)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/antfu.vue-i18n-ally.svg?style=flat-square)
 
-🚧 This project is under heavy construction, please use wisely...
+🚧 This project is under construction, please use wisely...
 
 ## ⚡ Features
 
@@ -84,6 +84,6 @@ This extension is original forked from [think2011/vscode-vue-i18n](https://githu
 
 ## License
 
-[MIT License](https://github.com/antfu/vscode-vue-i18n-ally/blob/master/LICENSE) © 2019 [Anthony Fu](https://github.com/antfu)
+[MIT License](https://github.com/antfu/vue-i18n-ally/blob/master/LICENSE) © 2019 [Anthony Fu](https://github.com/antfu)
 
 MIT License © 2018-2019 [think2011](https://github.com/think2011)
