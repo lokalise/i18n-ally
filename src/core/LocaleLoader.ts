@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs'
-import { uniq, isObject } from 'lodash'
+import { promises as fs, existsSync } from 'fs'
+import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
 import * as flat from 'flat'
 import Common from '../utils/Common'
@@ -8,6 +8,7 @@ import EventHandler from '../utils/EventHandler'
 import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath } from './utils'
 import { LocaleTree, LocaleLoaderEventType, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
+import { AllyError, ErrorType } from './Errors'
 
 function newTree (keypath = ''): LocaleTree {
   return {
@@ -75,21 +76,25 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   async MachineTranslateRecord (record: LocaleRecord, sourceLanguage?: string): Promise<PendingWrite|undefined> {
     sourceLanguage = sourceLanguage || Common.sourceLanguage
     if (record.locale === sourceLanguage)
-      return undefined
+      throw new AllyError(ErrorType.translating_same_locale)
     const sourceNode = this.getTranslationsByKey(record.keypath)
     if (!sourceNode)
-      return undefined
+      throw new AllyError(ErrorType.translating_empty_source_value)
     const sourceRecord = sourceNode.locales[sourceLanguage]
     if (!sourceRecord || !sourceRecord.value)
-      return undefined
-    const result = await MachinTranslate(sourceRecord.value, sourceLanguage, record.locale)
-    if (!result)
-      return undefined
-    return {
-      locale: record.locale,
-      value: result,
-      filepath: record.filepath,
-      keypath: record.keypath,
+      throw new AllyError(ErrorType.translating_empty_source_value)
+    try {
+      const result = await MachinTranslate(sourceRecord.value, sourceLanguage, record.locale)
+
+      return {
+        locale: record.locale,
+        value: result,
+        filepath: record.filepath,
+        keypath: record.keypath,
+      }
+    }
+    catch (e) {
+      throw new AllyError(ErrorType.translating_unknown_error, undefined, e)
     }
   }
 
@@ -111,6 +116,23 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
       }
     })
     return locales
+  }
+
+  async writeToFile (pending: PendingWrite) {
+    try {
+      console.log('WRITNING', JSON.stringify(pending))
+      let original: object = {}
+      if (existsSync(pending.filepath)) {
+        const originalRaw = await fs.readFile(pending.filepath, 'utf-8')
+        original = JSON.parse(originalRaw)
+      }
+      set(original, pending.keypath, pending.value)
+      const writting = `${JSON.stringify(original, null, 2)}\n`
+      await fs.writeFile(pending.filepath, writting, 'utf-8')
+    }
+    catch (e) {
+      console.error(e)
+    }
   }
 
   private async loadFile (filepath: string) {
