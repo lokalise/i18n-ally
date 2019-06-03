@@ -1,8 +1,9 @@
-import * as vscode from 'vscode'
+import { commands } from 'vscode'
 import { LocaleLoader } from '../core'
+import { ExtensionModule } from '../modules'
 
-export default (ctx: vscode.ExtensionContext) => {
-  return vscode.commands.registerCommand('extension.vue-i18n-ally.debug',
+const m: ExtensionModule = () => {
+  return commands.registerCommand('extension.vue-i18n-ally.debug',
     async () => {
       const loader = new LocaleLoader()
       await loader.init()
@@ -10,3 +11,5 @@ export default (ctx: vscode.ExtensionContext) => {
       console.log(JSON.stringify(loader.localeTree, null, 2))
     })
 }
+
+export default m

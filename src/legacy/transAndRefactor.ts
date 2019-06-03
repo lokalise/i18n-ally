@@ -1,7 +1,8 @@
+// TODO:new engine
 import * as path from 'path'
 import * as vscode from 'vscode'
 import i18nFiles from './i18nFiles'
-import Common from '../core/Common'
+import { Common } from '../core'
 
 export enum SAVE_TYPE {
   $t,

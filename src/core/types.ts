@@ -1,5 +1,5 @@
 import { getKeyname } from './utils'
-import Common from './Common'
+import { Common } from '.'
 
 export interface ParsedFile {
   filepath: string

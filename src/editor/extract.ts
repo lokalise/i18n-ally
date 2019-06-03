@@ -1,10 +1,12 @@
-import * as vscode from 'vscode'
-import Common from '../core/Common'
+import { Common } from '../core'
+import { ExtensionModule } from '../modules'
+import { Command, CodeActionProvider, window, commands, CodeActionKind, languages } from 'vscode'
+// TODO:new engine
 import transAndRefactor, { SAVE_TYPE } from '../legacy/transAndRefactor'
 
-class ExtractProvider implements vscode.CodeActionProvider {
-  public async provideCodeActions (): Promise<vscode.Command[]> {
-    const editor = vscode.window.activeTextEditor
+class ExtractProvider implements CodeActionProvider {
+  public async provideCodeActions (): Promise<Command[]> {
+    const editor = window.activeTextEditor
     if (!editor || !Common.hasI18nPaths)
       return
 
@@ -42,22 +44,22 @@ class ExtractProvider implements vscode.CodeActionProvider {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
-  return [
-    vscode.languages.registerCodeActionsProvider(
-      [
-        { language: 'vue', scheme: '*' },
-        { language: 'javascript', scheme: '*' },
-        { language: 'typescript', scheme: '*' },
-      ],
-      new ExtractProvider(),
-      {
-        providedCodeActionKinds: [vscode.CodeActionKind.Refactor],
-      }
-    ),
-    vscode.commands.registerCommand(
-      'extension.vue-i18n-ally.transAndSave',
-      transAndRefactor
-    ),
-  ]
+const m: ExtensionModule = () => {
+  languages.registerCodeActionsProvider(
+    [
+      { language: 'vue', scheme: '*' },
+      { language: 'javascript', scheme: '*' },
+      { language: 'typescript', scheme: '*' },
+    ],
+    new ExtractProvider(),
+    {
+      providedCodeActionKinds: [CodeActionKind.Refactor],
+    }
+  )
+  commands.registerCommand(
+    'extension.vue-i18n-ally.transAndSave',
+    transAndRefactor
+  )
 }
+
+export default m

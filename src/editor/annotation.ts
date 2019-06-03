@@ -1,19 +1,20 @@
-import * as vscode from 'vscode'
+import { window, DecorationOptions, Range, workspace } from 'vscode'
 import { debounce } from 'lodash'
 import { KEY_REG } from '../core/KeyDetector'
-import Common from '../core/Common'
+import { Common } from '../core'
+import { ExtensionModule } from '../modules'
 
-const textEditorDecorationType = vscode.window.createTextEditorDecorationType({})
+const textEditorDecorationType = window.createTextEditorDecorationType({})
 
-function annotation (ctx: vscode.ExtensionContext) {
+const annotation: ExtensionModule = (ctx) => {
   function update () {
-    const activeTextEditor = vscode.window.activeTextEditor
+    const activeTextEditor = window.activeTextEditor
     if (!activeTextEditor)
       return
 
     const { document } = activeTextEditor
     const text = document.getText()
-    const decorations: vscode.DecorationOptions[] = []
+    const decorations: DecorationOptions[] = []
 
     // 从文本里遍历生成中文注释
     let match = null
@@ -24,8 +25,8 @@ function annotation (ctx: vscode.ExtensionContext) {
       const trans = Common.loader.getTranslationsByKey(key)
 
       const text = (trans && trans.value) || ''
-      const decoration: vscode.DecorationOptions = {
-        range: new vscode.Range(
+      const decoration: DecorationOptions = {
+        range: new Range(
           document.positionAt(index),
           document.positionAt(index + matchKey.length)
         ),
@@ -44,25 +45,12 @@ function annotation (ctx: vscode.ExtensionContext) {
     }
   }
 
-  const debounceUpdate = debounce(update, 500);
+  const debounceUpdate = debounce(update, 500)
 
-  [
-    vscode.window.onDidChangeActiveTextEditor,
-    vscode.workspace.onDidChangeTextDocument,
-  ].forEach((onChange: any) => {
-    onChange(debounceUpdate, null, ctx.subscriptions)
-  })
+  window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions)
+  workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions)
 
-  Common.localesPaths.forEach(i18nPath => {
-    const i18nDirWatcher = vscode.workspace.createFileSystemWatcher(
-      `${i18nPath}/**`
-    )
-
-    i18nDirWatcher.onDidChange(debounceUpdate)
-    i18nDirWatcher.onDidCreate(debounceUpdate)
-    i18nDirWatcher.onDidDelete(debounceUpdate)
-    ctx.subscriptions.push(i18nDirWatcher)
-  })
+  Common.loader.addEventListener('changed', update)
 
   update()
 }

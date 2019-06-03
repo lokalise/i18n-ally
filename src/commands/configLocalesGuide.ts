@@ -1,16 +1,17 @@
-import * as vscode from 'vscode'
-import Common from '../core/Common'
+import { window, workspace, Uri, ExtensionContext, commands } from 'vscode'
+import { Common } from '../core'
+import { ExtensionModule } from '../modules'
 
 class Guide {
   ctx = null
 
-  constructor (ctx: vscode.ExtensionContext) {
+  constructor (ctx: ExtensionContext) {
     this.ctx = ctx
   }
 
   async init () {
     const okText = 'Config Now'
-    const result = await vscode.window.showInformationMessage(
+    const result = await window.showInformationMessage(
       'Locate the `locales` directory in your project',
       okText
     )
@@ -25,8 +26,8 @@ class Guide {
   }
 
   async pickDir (): Promise<string[]> {
-    const dirs = await vscode.window.showOpenDialog({
-      defaultUri: vscode.Uri.file(vscode.workspace.rootPath),
+    const dirs = await window.showOpenDialog({
+      defaultUri: Uri.file(workspace.rootPath),
       canSelectFolders: true,
     })
 
@@ -34,16 +35,18 @@ class Guide {
   }
 
   async success () {
-    await vscode.window.showInformationMessage(
+    await window.showInformationMessage(
       'Locales path successfully configured.',
     )
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
-  return vscode.commands.registerCommand('extension.vue-i18n-ally.config-locales',
+const m: ExtensionModule = (ctx) => {
+  return commands.registerCommand('extension.vue-i18n-ally.config-locales',
     () => {
       const guide = new Guide(ctx)
       guide.init()
     })
 }
+
+export default m

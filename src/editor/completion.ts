@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
-import KeyDetector from '../core/KeyDetector'
-import Common from '../core/Common'
+import { Common, KeyDetector } from '../core'
+import { ExtensionModule } from '../modules'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
   public provideCompletionItems (
@@ -28,7 +28,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
+const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   return vscode.languages.registerCompletionItemProvider(
     [
       { language: 'vue', scheme: '*' },
@@ -39,3 +39,5 @@ export default (ctx: vscode.ExtensionContext) => {
     '.'
   )
 }
+
+export default m

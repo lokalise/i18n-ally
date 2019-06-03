@@ -1,11 +1,11 @@
-import * as vscode from 'vscode'
-import KeyDetector from '../core/KeyDetector'
-import Common from '../core/Common'
+import { Common, KeyDetector } from '../core'
+import { ExtensionModule } from '../modules'
+import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover } from 'vscode'
 
-class HintProvider implements vscode.HoverProvider {
+class HintProvider implements HoverProvider {
   public provideHover (
-    document: vscode.TextDocument,
-    position: vscode.Position
+    document: TextDocument,
+    position: Position
   ) {
     const key = KeyDetector.getKey(document, position)
     if (!key) return
@@ -33,17 +33,17 @@ class HintProvider implements vscode.HoverProvider {
     })
 
     const buttonsMarkdown = buttons.map(btn => `[${btn.name}](command:${btn.command})`).join(' | ')
-    const markdownText = new vscode.MarkdownString(
+    const markdownText = new MarkdownString(
       `${transText || key}\n\n---\n\n${buttonsMarkdown}`
     )
     markdownText.isTrusted = true
 
-    return new vscode.Hover(markdownText)
+    return new Hover(markdownText)
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
-  return vscode.languages.registerHoverProvider(
+const m: ExtensionModule = () => {
+  return languages.registerHoverProvider(
     [
       { language: 'vue', scheme: '*' },
       { language: 'javascript', scheme: '*' },
@@ -52,3 +52,5 @@ export default (ctx: vscode.ExtensionContext) => {
     new HintProvider()
   )
 }
+
+export default m

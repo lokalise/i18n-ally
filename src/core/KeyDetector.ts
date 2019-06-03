@@ -3,7 +3,7 @@ import * as fs from 'fs'
 
 export const KEY_REG = /(?:i18n[ (]path=|(?:\$t|\$tc|\$d|\$n|\$te|this\.t|i18n\.t|[^\w]t)\()['"]([^]+?)['"]/g
 
-export default class KeyDetector {
+export class KeyDetector {
   static getKeyByContent (text: string) {
     const keys = (text.match(KEY_REG) || []).map(key =>
       key.replace(KEY_REG, '$1')

@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import Common from '../core/Common'
+import { Common } from '../core'
 import i18nFiles from './i18nFiles'
 
 const EVENT_MAP = {

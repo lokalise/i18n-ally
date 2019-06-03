@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { set, get } from 'lodash'
 
-import Common from '../core/Common'
+import { Common } from '../core'
 
 export interface KeyLocales {
   key: string

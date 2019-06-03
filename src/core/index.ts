@@ -1,3 +1,5 @@
 export * from './types'
+export * from './Common'
 export * from './utils'
 export * from './LocaleLoader'
+export * from './KeyDetector'

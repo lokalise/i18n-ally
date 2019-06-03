@@ -1,12 +1,12 @@
-import * as vscode from 'vscode'
-import Common from '../core/Common'
-import i18nFiles from '../legacy/i18nFiles'
+import { commands, window } from 'vscode'
+import { Common } from '../core'
+import { ExtensionModule } from '../modules'
 
-export default (ctx: vscode.ExtensionContext) => {
-  return vscode.commands.registerCommand('extension.vue-i18n-ally.config-display-language',
+const m: ExtensionModule = () => {
+  return commands.registerCommand('extension.vue-i18n-ally.config-display-language',
     async () => {
-      const locales = i18nFiles.getI18nFileByPath('').getLngs().map(l => l.lng)
-      const result = await vscode.window.showQuickPick(locales, {
+      const locales = Common.loader.locales
+      const result = await window.showQuickPick(locales, {
         placeHolder: Common.displayLanguage,
       })
 
@@ -14,3 +14,5 @@ export default (ctx: vscode.ExtensionContext) => {
         Common.displayLanguage = result
     })
 }
+
+export default m

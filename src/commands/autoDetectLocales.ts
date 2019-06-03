@@ -1,7 +1,8 @@
 import * as vscode from 'vscode'
 import * as fg from 'fast-glob'
 import * as path from 'path'
-import Common from '../core/Common'
+import { Common } from '../core'
+import { ExtensionModule } from '../modules'
 
 class AutoDetectLocales {
   ctx: vscode.ExtensionContext
@@ -36,7 +37,7 @@ class AutoDetectLocales {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
+const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   const detector = new AutoDetectLocales(ctx)
   detector.init()
 
@@ -44,3 +45,5 @@ export default (ctx: vscode.ExtensionContext) => {
     detector.autoSet()
   })
 }
+
+export default m

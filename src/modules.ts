@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
+import { ExtensionContext } from 'vscode'
 
 export interface ExtensionModule {
-  (ctx: vscode.ExtensionContext): void
+  (ctx: ExtensionContext): void
 }

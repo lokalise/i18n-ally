@@ -5,7 +5,7 @@ import * as fs from 'fs'
 
 const configPrefix = 'vue-i18n-ally'
 
-export default class Common {
+export class Common {
   static loader: LocaleLoader
 
   static get extension (): vscode.Extension<any> {

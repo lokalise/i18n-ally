@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
-import { LocaleLoader, Coverage } from '../core'
-import Common from '../core/Common'
+import { LocaleLoader, Coverage, Common } from '../core'
+import { ExtensionModule } from '../modules'
 
 export class Item extends vscode.TreeItem {
   constructor (
@@ -44,7 +44,9 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
+const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   const provider = new ProgressProvider()
   vscode.window.registerTreeDataProvider('locales-progress', provider)
 }
+
+export default m

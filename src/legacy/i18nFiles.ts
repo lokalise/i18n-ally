@@ -1,8 +1,7 @@
 import * as path from 'path'
 import { google, baidu, youdao } from 'translation.js'
 
-import KeyDetector from '../core/KeyDetector'
-import Common from '../core/Common'
+import { Common, KeyDetector } from '../core'
 import I18nFile, { LocaleValue, KeyLocales } from './I18nFile'
 import { TranslateResult, StringOrTranslateOptions } from 'translation.js/declaration/api/types'
 

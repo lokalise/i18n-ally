@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as clipboardy from 'clipboardy'
-import { LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
-import Common from '../core/Common'
+import { Common, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
+import { ExtensionModule } from '../modules'
 
 export class Item extends vscode.TreeItem {
   constructor (
@@ -93,7 +93,7 @@ export class LocalesTreeProvider implements vscode.TreeDataProvider<Item> {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
+const m: ExtensionModule = (ctx) => {
   const provider = new LocalesTreeProvider(ctx)
   vscode.window.registerTreeDataProvider('locales-tree', provider)
   vscode.commands.registerCommand('extension.vue-i18n-ally.copy-key', ({ node }: {node: LocaleNode}) => {
@@ -114,3 +114,5 @@ export default (ctx: vscode.ExtensionContext) => {
     }
   })
 }
+
+export default m
