@@ -1,9 +1,10 @@
 import { commands } from 'vscode'
 import { LocaleLoader } from '../core'
 import { ExtensionModule } from '../modules'
+import { Command } from '.'
 
 const m: ExtensionModule = () => {
-  return commands.registerCommand('extension.vue-i18n-ally.debug',
+  return commands.registerCommand(Command.debug,
     async () => {
       const loader = new LocaleLoader()
       await loader.init()

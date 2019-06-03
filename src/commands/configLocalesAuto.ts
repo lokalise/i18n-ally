@@ -1,13 +1,14 @@
-import * as vscode from 'vscode'
 import * as fg from 'fast-glob'
 import * as path from 'path'
+import { ExtensionContext, workspace, window, commands } from 'vscode'
 import { Common } from '../core'
 import { ExtensionModule } from '../modules'
+import { Command } from '.'
 
 class AutoDetectLocales {
-  ctx: vscode.ExtensionContext
+  ctx: ExtensionContext
 
-  constructor (ctx: vscode.ExtensionContext) {
+  constructor (ctx: ExtensionContext) {
     this.ctx = ctx
   }
 
@@ -20,7 +21,7 @@ class AutoDetectLocales {
   }
 
   async autoSet () {
-    const rootPath = vscode.workspace.rootPath
+    const rootPath = workspace.rootPath
     const pattern = [`${rootPath}/**/(locales|locale)`]
     let result: string[] = await fg(pattern, {
       ignore: ['**/node_modules'],
@@ -31,19 +32,20 @@ class AutoDetectLocales {
 
     Common.updateLocalesPaths(result)
 
-    await vscode.window.showInformationMessage(
+    await window.showInformationMessage(
       `Vue i18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
     )
   }
 }
 
-const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
+const m: ExtensionModule = (ctx: ExtensionContext) => {
   const detector = new AutoDetectLocales(ctx)
   detector.init()
 
-  return vscode.commands.registerCommand('extension.vue-i18n-ally.auto-detect-locales', () => {
-    detector.autoSet()
-  })
+  return commands.registerCommand(Command.config_locales_auto,
+    () => {
+      detector.autoSet()
+    })
 }
 
 export default m

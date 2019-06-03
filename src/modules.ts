@@ -1,5 +1,5 @@
-import { ExtensionContext } from 'vscode'
+import { ExtensionContext, Disposable } from 'vscode'
 
 export interface ExtensionModule {
-  (ctx: ExtensionContext): void
+  (ctx: ExtensionContext): Disposable | Disposable[] | void
 }

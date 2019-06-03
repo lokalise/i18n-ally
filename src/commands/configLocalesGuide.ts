@@ -1,6 +1,7 @@
 import { window, workspace, Uri, ExtensionContext, commands } from 'vscode'
 import { Common } from '../core'
 import { ExtensionModule } from '../modules'
+import { Command } from '.'
 
 class Guide {
   ctx = null
@@ -42,7 +43,7 @@ class Guide {
 }
 
 const m: ExtensionModule = (ctx) => {
-  return commands.registerCommand('extension.vue-i18n-ally.config-locales',
+  return commands.registerCommand(Command.config_locales,
     () => {
       const guide = new Guide(ctx)
       guide.init()

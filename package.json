@@ -41,7 +41,7 @@
         "title": "Vue i18n Ally: Manual configure locales path"
       },
       {
-        "command": "extension.vue-i18n-ally.auto-detect-locales",
+        "command": "extension.vue-i18n-ally.config-locales-auto",
         "title": "Vue i18n Ally: Auto detect locales path"
       },
       {
