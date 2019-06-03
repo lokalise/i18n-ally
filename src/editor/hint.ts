@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
-import KeyDetector from './utils/KeyDetector'
-import Common from './utils/Common'
+import KeyDetector from '../core/KeyDetector'
+import Common from '../core/Common'
 
 class HintProvider implements vscode.HoverProvider {
   public provideHover (

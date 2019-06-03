@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import { debounce } from 'lodash'
-import { KEY_REG } from './utils/KeyDetector'
-import Common from './utils/Common'
+import { KEY_REG } from '../core/KeyDetector'
+import Common from '../core/Common'
 
 const textEditorDecorationType = vscode.window.createTextEditorDecorationType({})
 

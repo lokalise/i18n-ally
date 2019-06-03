@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import { LocaleLoader, Coverage } from '../core'
-import Common from '../utils/Common'
+import Common from '../core/Common'
 
 export class Item extends vscode.TreeItem {
   constructor (

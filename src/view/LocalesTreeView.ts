@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as clipboardy from 'clipboardy'
 import { LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
-import Common from '../utils/Common'
+import Common from '../core/Common'
 
 export class Item extends vscode.TreeItem {
   constructor (

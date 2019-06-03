@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as fg from 'fast-glob'
 import * as path from 'path'
-import Common from '../utils/Common'
+import Common from '../core/Common'
 
 class AutoDetectLocales {
   ctx: vscode.ExtensionContext

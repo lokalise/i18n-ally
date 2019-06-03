@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
-import Common from '../utils/Common'
-import transAndRefactor, { SAVE_TYPE } from '../utils/transAndRefactor'
+import Common from '../core/Common'
+import transAndRefactor, { SAVE_TYPE } from '../legacy/transAndRefactor'
 
 class ExtractProvider implements vscode.CodeActionProvider {
   public async provideCodeActions (): Promise<vscode.Command[]> {

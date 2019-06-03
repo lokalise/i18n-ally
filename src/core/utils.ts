@@ -1,5 +1,5 @@
 import * as path from 'path'
-import Common from '../utils/Common'
+import Common from './Common'
 
 export function getKeyname (keypath: string) {
   const keys = keypath.split(/\./g)

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
-import Common from '../utils/Common'
-import i18nFiles from '../utils/i18nFiles'
+import Common from '../core/Common'
+import i18nFiles from '../legacy/i18nFiles'
 
 export default (ctx: vscode.ExtensionContext) => {
   return vscode.commands.registerCommand('extension.vue-i18n-ally.config-display-language',
