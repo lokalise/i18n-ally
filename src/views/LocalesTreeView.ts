@@ -40,9 +40,7 @@ export class LocaleTreeItem extends TreeItem {
   set collapsibleState (_) {}
 
   get description (): string {
-    if (this.node.type === 'node')
-      return this.node.value
-    if (this.node.type === 'record')
+    if (this.node.type === 'node' || this.node.type === 'record')
       return this.node.value || '(empty)'
     return ''
   }
