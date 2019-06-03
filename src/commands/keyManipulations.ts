@@ -1,4 +1,4 @@
-import { window, commands, workspace } from 'vscode'
+import { window, commands, workspace, Selection, TextEditorRevealType } from 'vscode'
 import * as clipboardy from 'clipboardy'
 import { Common } from '../core'
 import { ExtensionModule } from '../modules'
@@ -35,13 +35,36 @@ const m: ExtensionModule = (ctx) => {
         if (node.type !== 'record')
           return
 
-        console.log('OPENING', node.filepath)
-
         if (node.filepath) {
           const document = await workspace.openTextDocument(node.filepath)
-          // eslint-disable-next-line
           const editor = await window.showTextDocument(document)
-          // TODO: navigate to the key
+
+          const indent = 2 // TODO: get indent from system settings
+          const keys = node.keypath.split('.')
+
+          // build regex to locale the key in json file
+          let regexString = keys
+            .map((key, i) => `^[ \\t]{${(i + 1) * indent}}"${key}": ?`)
+            .join('[\\s\\S]*')
+          regexString += '"(.*)"'
+          const regex = new RegExp(regexString, 'gm')
+
+          const text = editor.document.getText()
+          const match = regex.exec(text)
+          if (match && match.length >= 2) {
+            const end = match.index + match[0].length - 1
+            const value = match[1]
+            const start = end - value.length
+            editor.selection = new Selection(
+              document.positionAt(end),
+              document.positionAt(start)
+            )
+            editor.revealRange(editor.selection, TextEditorRevealType.InCenter)
+            commands.executeCommand('workbench.action.focusActiveEditorGroup')
+          }
+          else {
+            window.showWarningMessage(`Failed to locale key "${node.keypath}"`)
+          }
         }
       }),
 
