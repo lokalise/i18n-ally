@@ -79,17 +79,17 @@
       "view/item/context": [
         {
           "command": "extension.vue-i18n-ally.copy-key",
-          "when": "view == locales-tree && viewItem == node",
+          "when": "view =~ /locales-tree/ && viewItem == node",
           "group": "inline"
         },
         {
           "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view == locales-tree && viewItem == record",
+          "when": "view =~ /locales-tree/ && viewItem == record",
           "group": "inline"
         },
         {
           "command": "extension.vue-i18n-ally.edit-key",
-          "when": "view == locales-tree && viewItem == record",
+          "when": "view =~ /locales-tree/ && viewItem == record",
           "group": "inline"
         }
       ]
