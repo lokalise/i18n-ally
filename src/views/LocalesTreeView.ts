@@ -93,6 +93,13 @@ export class LocalesTreeProvider implements TreeDataProvider<Item> {
   }
 }
 
+export class LocalesTreeView {
+  constructor (ctx: ExtensionContext) {
+    const treeDataProvider = new LocalesTreeProvider(ctx)
+    window.createTreeView('locales-tree', { treeDataProvider })
+  }
+}
+
 const m: ExtensionModule = (ctx) => {
   const provider = new LocalesTreeProvider(ctx)
   window.registerTreeDataProvider('locales-tree', provider)

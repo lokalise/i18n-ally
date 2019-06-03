@@ -71,7 +71,7 @@
     "menus": {
       "editor/title": [
         {
-          "when": "vueI18nEnabled && resourceLangId =~ /vue(-html)?|(type|java)script/",
+          "when": "vue-i18n-ally-enabled && resourceLangId =~ /vue(-html)?|(type|java)script/",
           "command": "extension.vue-i18n-ally.file-translator",
           "group": "navigation"
         }
@@ -107,15 +107,18 @@
       "vue-i18n-ally": [
         {
           "id": "locales-tree-file",
-          "name": "File"
+          "name": "File",
+          "when": "vue-i18n-ally-enabled"
         },
         {
           "id": "locales-progress",
-          "name": "Progress"
+          "name": "Progress",
+          "when": "vue-i18n-ally-enabled"
         },
         {
           "id": "locales-tree",
-          "name": "Tree"
+          "name": "Tree",
+          "when": "vue-i18n-ally-enabled"
         }
       ]
     },

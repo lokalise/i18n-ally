@@ -140,8 +140,6 @@ export class FileTranslator {
 }
 
 export default (ctx: vscode.ExtensionContext) => {
-  vscode.commands.executeCommand('setContext', 'vueI18nEnabled', true)
-
   const cmd = vscode.commands.registerCommand(
     'extension.vue-i18n-ally.file-translator',
     () => {

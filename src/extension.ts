@@ -1,5 +1,5 @@
 import { Common, LocaleLoader } from './core'
-import { ExtensionContext, workspace } from 'vscode'
+import { ExtensionContext, workspace, commands } from 'vscode'
 
 export async function activate (ctx: ExtensionContext) {
   if (!workspace.workspaceFolders || !(await Common.isVueProject())) {
@@ -9,6 +9,8 @@ export async function activate (ctx: ExtensionContext) {
 
   Common.loader = new LocaleLoader()
   await Common.loader.init()
+  commands.executeCommand('setContext', 'vue-i18n-ally-enabled', true)
+
   console.log('Vue-i18n is active')
   ;[
     require('./commands').default,
