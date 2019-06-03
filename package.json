@@ -12,6 +12,7 @@
   ],
   "preview": true,
   "activationEvents": [
+    "workspaceContains:package.json",
     "onLanguage:vue",
     "onLanguage:javascript",
     "onLanguage:typescript"
