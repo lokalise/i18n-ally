@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/antfu/vue-i18n-ally/compare/v0.6.0...v0.7.0) (2019-06-03)
+
+
+### ⚡Features
+
+* departed file translator ([3caaec6](https://github.com/antfu/vue-i18n-ally/commit/3caaec6))
+* editable for shadow keys ([1e02464](https://github.com/antfu/vue-i18n-ally/commit/1e02464))
+* extract text ([3a9e000](https://github.com/antfu/vue-i18n-ally/commit/3a9e000))
+* go to file ([19617e2](https://github.com/antfu/vue-i18n-ally/commit/19617e2))
+* navigate to key ([12691ff](https://github.com/antfu/vue-i18n-ally/commit/12691ff))
+* show non-existent keys in file tree ([4a49bda](https://github.com/antfu/vue-i18n-ally/commit/4a49bda))
+
+
+### 🐞Bug Fixes
+
+* extension will now activate on the sartup ([6f674d2](https://github.com/antfu/vue-i18n-ally/commit/6f674d2))
+* goto file ignore non-existent key ([41e12c5](https://github.com/antfu/vue-i18n-ally/commit/41e12c5))
+* hide translate button on non-existent keys ([4bd703c](https://github.com/antfu/vue-i18n-ally/commit/4bd703c))
+* hint and annotation ([de14107](https://github.com/antfu/vue-i18n-ally/commit/de14107))
+
+
+### 📚Documentations
+
+* change github url ([2d96500](https://github.com/antfu/vue-i18n-ally/commit/2d96500))
+* update readme ([a99a9ca](https://github.com/antfu/vue-i18n-ally/commit/a99a9ca))
+
+
+### BREAKING CHANGES
+
+* Removal of feature: file-translator
+
+
+
 ## [0.6.0](https://github.com/antfu/vue-i18n-ally/compare/v0.5.1...v0.6.0) (2019-06-03)
 
 
