@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "dir-locales"
+		},
+		{
+			"path": "basic"
+		},
+		{
+			"path": "no-vue-i18n"
+		}
+	],
+	"settings": {
+		"vue-i18n-ally.localesPaths": "locales"
+	}
+}

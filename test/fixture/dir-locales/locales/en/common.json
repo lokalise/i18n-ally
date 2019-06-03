@@ -4,6 +4,8 @@
     "hello": "Hello again",
     "foo": {
       "bar": "foobar"
-    }
-  }
+    },
+    "test": "Test"
+  },
+  "project": "dir-locales"
 }

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <p>{{$t('project')}}
     <p>{{$t('hello')}}
     <p>{{$t('not_exists')}}
   </div>
@@ -11,6 +12,7 @@ export default {
 
   mounted(){
     console.log(this.$t('nested.foo.bar'))
+    console.log(this.$t('nested.test'))
   }
 }
 </script>
