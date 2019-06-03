@@ -77,7 +77,7 @@ export class LocalesTreeProvider implements TreeDataProvider<Item> {
     this.loader.addEventListener('changed', () => this.refresh())
   }
 
-  private refresh (): void {
+  protected refresh (): void {
     this._onDidChangeTreeData.fire()
   }
 

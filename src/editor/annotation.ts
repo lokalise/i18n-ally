@@ -1,4 +1,4 @@
-import { window, DecorationOptions, Range, workspace } from 'vscode'
+import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
 import { KEY_REG } from '../core/KeyDetector'
 import { Common } from '../core'
@@ -47,12 +47,15 @@ const annotation: ExtensionModule = (ctx) => {
 
   const debounceUpdate = debounce(update, 500)
 
-  window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions)
-  workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions)
+  const disposables: Disposable[] = []
+  disposables.push(window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions))
+  disposables.push(workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions))
 
   Common.loader.addEventListener('changed', update)
 
   update()
+
+  return disposables
 }
 
 export default annotation
