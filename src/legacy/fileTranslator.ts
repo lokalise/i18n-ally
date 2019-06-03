@@ -4,6 +4,7 @@ import * as path from 'path'
 
 import { Common } from '../core'
 import i18nFiles from './i18nFiles'
+import { ExtensionModule } from '../modules'
 
 const EVENT_MAP = {
   ready: 'ready',
@@ -139,8 +140,8 @@ export class FileTranslator {
   }
 }
 
-export default (ctx: vscode.ExtensionContext) => {
-  const cmd = vscode.commands.registerCommand(
+const m: ExtensionModule = (ctx) => {
+  return vscode.commands.registerCommand(
     'extension.vue-i18n-ally.file-translator',
     () => {
       const filename = vscode.window.activeTextEditor.document.fileName
@@ -148,6 +149,6 @@ export default (ctx: vscode.ExtensionContext) => {
       translator.init()
     }
   )
-
-  ctx.subscriptions.push(cmd)
 }
+
+export default m

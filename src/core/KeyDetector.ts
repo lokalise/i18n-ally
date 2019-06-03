@@ -9,7 +9,7 @@ export class KeyDetector {
       key.replace(KEY_REG, '$1')
     )
 
-    return [...new Set(keys)]
+    return Array.from(new Set(keys))
   }
 
   static getKeyByFile (filePath: string) {

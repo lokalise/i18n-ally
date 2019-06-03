@@ -46,7 +46,7 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
 
 const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   const provider = new ProgressProvider()
-  vscode.window.registerTreeDataProvider('locales-progress', provider)
+  return vscode.window.registerTreeDataProvider('locales-progress', provider)
 }
 
 export default m

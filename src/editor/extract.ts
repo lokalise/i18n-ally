@@ -45,21 +45,23 @@ class ExtractProvider implements CodeActionProvider {
 }
 
 const m: ExtensionModule = () => {
-  languages.registerCodeActionsProvider(
-    [
-      { language: 'vue', scheme: '*' },
-      { language: 'javascript', scheme: '*' },
-      { language: 'typescript', scheme: '*' },
-    ],
-    new ExtractProvider(),
-    {
-      providedCodeActionKinds: [CodeActionKind.Refactor],
-    }
-  )
-  commands.registerCommand(
-    'extension.vue-i18n-ally.transAndSave',
-    transAndRefactor
-  )
+  return [
+    languages.registerCodeActionsProvider(
+      [
+        { language: 'vue', scheme: '*' },
+        { language: 'javascript', scheme: '*' },
+        { language: 'typescript', scheme: '*' },
+      ],
+      new ExtractProvider(),
+      {
+        providedCodeActionKinds: [CodeActionKind.Refactor],
+      }
+    ),
+    commands.registerCommand(
+      'extension.vue-i18n-ally.transAndSave',
+      transAndRefactor
+    ),
+  ]
 }
 
 export default m

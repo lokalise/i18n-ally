@@ -23,7 +23,7 @@ export class Common {
   }
 
   static updateLocalesPaths (paths: string[]) {
-    const localesPaths = [...new Set(Common.localesPaths.concat(paths))]
+    const localesPaths = Array.from(new Set(Common.localesPaths.concat(paths)))
     Common.setConfig('localesPaths', localesPaths.join(','))
   }
 
