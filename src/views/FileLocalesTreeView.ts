@@ -13,17 +13,23 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
   }
 
   loadCurrentDocument () {
-    this.includePaths = KeyDetector.getKeyByContent(window.activeTextEditor.document.getText())
+    const editor = window.activeTextEditor
+
+    this.includePaths = editor
+      ? KeyDetector.getKeyByContent(editor.document.getText())
+      : []
     this.refresh()
   }
 
   getRoots () {
     const roots = super.getRoots()
     const realPaths = roots.map(i => i.node.keypath)
-    const shadowPaths = this.includePaths.filter(path => !realPaths.includes(path))
-    for (const keypath of shadowPaths) {
-      const node = new LocaleNode(keypath, {})
-      roots.push(this.newItem(node))
+    if (this.includePaths) {
+      const shadowPaths = this.includePaths.filter(path => !realPaths.includes(path))
+      for (const keypath of shadowPaths) {
+        const node = new LocaleNode(keypath, {})
+        roots.push(this.newItem(node))
+      }
     }
     return roots
   }

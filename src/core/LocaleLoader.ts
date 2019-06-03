@@ -1,12 +1,13 @@
+import { workspace, window } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
+// @ts-ignore
 import * as flat from 'flat'
-import * as vscode from 'vscode'
 import { Common } from './Common'
 import EventHandler from './EventHandler'
 import { MachinTranslate } from './MachineTranslate'
-import { getKeyname, getFileInfo, replaceLocalePath } from './utils'
+import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
 import { LocaleTree, LocaleLoaderEventType, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
@@ -68,9 +69,53 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
     return undefined
   }
 
+  getClosestNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
+    tree = tree || this.localeTree
+    const keys = keypath.split('.')
+    const root = keys[0]
+    const remaining = keys.slice(1).join('.')
+    const node = tree.children[root]
+
+    if (node) {
+      // end of the search
+      if (node.type === 'node' || !remaining)
+        return node
+      // go deeper
+      if (node.type === 'tree')
+        return this.getClosestNodeByKey(remaining, node)
+    }
+    // still at the root, nothing found
+    if (tree === this.localeTree)
+      return undefined
+    // return last node
+    return tree
+  }
+
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
     const node = this.getTranslationsByKey(key)
     return node && node.locales[Common.displayLanguage]
+  }
+
+  getFilepathsOfLocale (locale: string) {
+    return Object.values(this.files)
+      .filter(f => f.locale === locale)
+      .map(f => f.filepath)
+  }
+
+  async requestMissingFilepath (locale: string, keypath: string) {
+    const paths = this.getFilepathsOfLocale(locale)
+    if (paths.length === 1)
+      return paths[0]
+    if (paths.length === 0) {
+      return await window.showInputBox({
+        prompt: `Enter the file path to store key "${keypath}"`,
+        placeHolder: `path/to/${locale}.json`,
+      })
+    }
+    return await window.showQuickPick(paths, {
+      placeHolder: `Select which file to store key "${keypath}"`,
+      ignoreFocusOut: true,
+    })
   }
 
   private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string): Promise<PendingWrite|undefined> {
@@ -104,7 +149,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
 
     const pendings = await Promise.all(tasks)
 
-    return pendings
+    return pendings.filter(notEmpty)
   }
 
   async MachineTranslate (node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
@@ -114,19 +159,17 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
 
     const pending = await this.MachineTranslateRecord(node, sourceLanguage)
 
-    return [pending]
+    return [pending].filter(notEmpty)
   }
 
   getShadowFilePath (keypath: string, locale: string) {
     const node = this.getTranslationsByKey(keypath)
     if (node) {
       const sourceRecord = node.locales[Common.sourceLanguage] || Object.values(node.locales)[0]
-      if (sourceRecord)
+      if (sourceRecord && sourceRecord.filepath)
         return replaceLocalePath(sourceRecord.filepath, locale)
     }
-
-    // FIXME: trace up to guess
-    return 'unknown'
+    return undefined
   }
 
   getShadowLocales (node: LocaleNode) {
@@ -149,15 +192,22 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   async writeToSingleFile (pending: PendingWrite) {
+    let filepath = pending.filepath
+    if (!filepath)
+      filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
+
+    if (!filepath)
+      throw new AllyError(ErrorType.filepath_not_specified)
+
     console.log('WRITNING', JSON.stringify(pending))
     let original: object = {}
-    if (existsSync(pending.filepath)) {
-      const originalRaw = await fs.readFile(pending.filepath, 'utf-8')
+    if (existsSync(filepath)) {
+      const originalRaw = await fs.readFile(filepath, 'utf-8')
       original = JSON.parse(originalRaw)
     }
     set(original, pending.keypath, pending.value)
     const writting = `${JSON.stringify(original, null, 2)}\n`
-    await fs.writeFile(pending.filepath, writting, 'utf-8')
+    await fs.writeFile(filepath, writting, 'utf-8')
   }
 
   async writeToFile (pendings: PendingWrite|PendingWrite[]) {
@@ -216,7 +266,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   private async watchOn (rootPath: string) {
-    const watcher = vscode.workspace.createFileSystemWatcher(`${rootPath}/**`)
+    const watcher = workspace.createFileSystemWatcher(`${rootPath}/**`)
 
     const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
       filepath = path.resolve(filepath)
@@ -306,8 +356,11 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   }
 
   private async loadAll () {
+    const rootPath = Common.rootPath
+    if (!rootPath)
+      return
     for (const pathname of this.localesPaths) {
-      const fullpath = path.resolve(Common.rootPath, pathname)
+      const fullpath = path.resolve(rootPath, pathname)
       await this.loadDirectory(fullpath)
       this.watchOn(fullpath)
     }

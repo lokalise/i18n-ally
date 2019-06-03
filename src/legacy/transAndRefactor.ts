@@ -9,7 +9,9 @@ export enum SAVE_TYPE {
   i18n
 }
 
+// @ts-ignore
 const lineToUpperCase = str => {
+  // @ts-ignore
   return str.replace(/(-\w)/g, $1 => {
     return $1[1].toUpperCase()
   })
@@ -27,7 +29,9 @@ const transAndRefactor = async ({
   range: vscode.Range
 }) => {
   let relativeName: any = path.relative(
+    // @ts-ignore
     vscode.workspace.rootPath,
+    // @ts-ignore
     vscode.window.activeTextEditor.document.fileName
   )
   relativeName = path.parse(relativeName)
@@ -36,6 +40,7 @@ const transAndRefactor = async ({
   let defaultKey = relativeName.dir
     .split(path.sep)
     .splice(1)
+    // @ts-ignore
     .filter(key => key)
     .concat(relativeName.name)
     .map(lineToUpperCase)
@@ -79,6 +84,7 @@ const transAndRefactor = async ({
   }
 
   // 替换内容
+  // @ts-ignore
   vscode.window.activeTextEditor.edit(editBuilder => {
     const value =
       type === SAVE_TYPE.$t ? `{{$t('${key}')}}` : `i18n.t('${key}')`
@@ -96,6 +102,7 @@ const transAndRefactor = async ({
   })
 
   // 写入翻译
+  // @ts-ignore
   const transZhCN = transData.find(item => item.lng === Common.sourceLanguage)
   transZhCN.data = text
 
@@ -103,6 +110,7 @@ const transAndRefactor = async ({
   i18nFile.writeTransByKey(key, transByApiData)
 
   // 提示翻译
+  // @ts-ignore
   const transEn = transData.find(item => item.lng === 'en')
   transEn && vscode.window.showInformationMessage(`翻译结果: ${transEn.data}`)
 }

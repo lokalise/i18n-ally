@@ -4,11 +4,7 @@ import { ExtensionModule } from '../modules'
 import { Command } from '.'
 
 class Guide {
-  ctx = null
-
-  constructor (ctx: ExtensionContext) {
-    this.ctx = ctx
-  }
+  constructor (public ctx: ExtensionContext) {}
 
   async init () {
     const okText = 'Config Now'
@@ -27,10 +23,17 @@ class Guide {
   }
 
   async pickDir (): Promise<string[]> {
+    const rootPath = workspace.rootPath
+    if (!rootPath)
+      return []
+
     const dirs = await window.showOpenDialog({
-      defaultUri: Uri.file(workspace.rootPath),
+      defaultUri: Uri.file(rootPath),
       canSelectFolders: true,
     })
+
+    if (!dirs)
+      return []
 
     return dirs.map(dirItem => dirItem.path)
   }

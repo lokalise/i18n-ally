@@ -17,7 +17,7 @@ export async function MachinTranslate (text: string, from: string, to: string) {
     }
   }
 
-  const result = trans_result && trans_result.result.join('\n')
+  const result = trans_result && (trans_result.result || []).join('\n')
 
   if (!result)
     throw errors

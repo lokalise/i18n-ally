@@ -6,7 +6,7 @@ export interface ParsedFile {
   locale: string
   value: object
   nested: boolean
-  flatten: object
+  flatten: Record<string, string>
 }
 
 export interface LocaleRecord {
@@ -14,7 +14,7 @@ export interface LocaleRecord {
   keyname: string
   value: string
   locale: string
-  filepath: string
+  filepath?: string
   shadow?: boolean
   type: 'record'
 }
@@ -24,8 +24,9 @@ export class LocaleNode {
   type: 'node' = 'node'
 
   constructor (
-    public keypath: string,
-    public locales: Record<string, LocaleRecord> = {}
+    public readonly keypath: string,
+    public readonly locales: Record<string, LocaleRecord> = {},
+    public readonly shadow = false
   ) {
     this.keyname = getKeyname(keypath)
   }
@@ -58,7 +59,7 @@ export interface Coverage {
 export interface PendingWrite {
   locale: string
   keypath: string
-  filepath: string
+  filepath?: string
   value: string
 }
 

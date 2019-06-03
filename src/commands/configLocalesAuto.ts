@@ -22,6 +22,9 @@ class AutoDetectLocales {
 
   async autoSet () {
     const rootPath = workspace.rootPath
+    if (!rootPath)
+      return
+
     const pattern = [`${rootPath}/**/(locales|locale)`]
     let result: string[] = await fg(pattern, {
       ignore: ['**/node_modules'],

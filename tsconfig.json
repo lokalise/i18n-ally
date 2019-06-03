@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "target": "es6",
     "outDir": "dist",
@@ -7,7 +8,7 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
-    //"strict": true,
+    "strict": true,
     "noUnusedLocals": true,
   },
   "rootDir": "src",

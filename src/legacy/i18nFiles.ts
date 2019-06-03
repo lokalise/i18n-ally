@@ -11,6 +11,7 @@ class I18nFiles {
   get i18nFiles () {
     Common.localesPaths.forEach(i18nPath => {
       const rootPath = Common.rootPath
+
       const absI18nPath = path.resolve(rootPath, i18nPath)
 
       if (this.i18nBox.has(absI18nPath)) return
@@ -32,6 +33,9 @@ class I18nFiles {
 
   static getRelativePathByFilePath (filePath: string) {
     const rootPath = Common.rootPath
+    if (!rootPath)
+      return
+
     const localesPaths = Common.localesPaths
 
     const i18nRootPath = localesPaths
@@ -65,6 +69,7 @@ class I18nFiles {
 
   public getI18nFileByPath (filePath: string) {
     const rootPath = I18nFiles.getRelativePathByFilePath(filePath)
+    // @ts-ignore
     return this.i18nFiles.get(rootPath)
   }
 
@@ -100,6 +105,7 @@ class I18nFiles {
         },
         plans
       ).then(res => {
+        // @ts-ignore
         transItem.data = res.result[0] || ''
         return transItem
       })

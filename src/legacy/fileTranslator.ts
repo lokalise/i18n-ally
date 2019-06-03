@@ -15,7 +15,7 @@ const EVENT_MAP = {
 }
 
 export class FileTranslator {
-  panel: vscode.WebviewPanel
+  panel!: vscode.WebviewPanel
   filePath: string
   shortFileName: string
 
@@ -75,6 +75,7 @@ export class FileTranslator {
           break
 
         case EVENT_MAP.trans:
+          // @ts-ignore
           data.forEach(async ({ item, locales }) => {
             try {
               const transItemsResult = await i18nFiles.getTransByApi(
@@ -144,6 +145,8 @@ const m: ExtensionModule = (ctx) => {
   return vscode.commands.registerCommand(
     'extension.vue-i18n-ally.file-translator',
     () => {
+      if (!vscode.window.activeTextEditor)
+        return
       const filename = vscode.window.activeTextEditor.document.fileName
       const translator = new FileTranslator(filename)
       translator.init()

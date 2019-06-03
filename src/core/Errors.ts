@@ -1,7 +1,8 @@
 export enum ErrorType {
   translating_same_locale,
   translating_unknown_error,
-  translating_empty_source_value
+  translating_empty_source_value,
+  filepath_not_specified,
 }
 
 export class AllyError extends Error {

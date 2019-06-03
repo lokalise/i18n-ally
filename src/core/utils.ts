@@ -26,6 +26,10 @@ export function getFileInfo (filepath: string) {
   }
 }
 
+export function notEmpty<T> (value: T | null | undefined): value is T {
+  return value !== null && value !== undefined
+}
+
 export function replaceLocalePath (filepath: string, targetLocale: string): string {
   const info = path.parse(filepath)
 

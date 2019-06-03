@@ -3,17 +3,18 @@ import { ExtensionModule } from '../modules'
 import { Command, CodeActionProvider, window, commands, CodeActionKind, languages } from 'vscode'
 // TODO:new engine
 import transAndRefactor, { SAVE_TYPE } from '../legacy/transAndRefactor'
+import language_selectors from './language_selectors'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
     const editor = window.activeTextEditor
     if (!editor || !Common.hasI18nPaths)
-      return
+      return []
 
     const { selection } = editor
     const text = editor.document.getText(selection)
     if (!text || selection.start.line !== selection.end.line)
-      return
+      return []
 
     return [
       {
@@ -47,11 +48,7 @@ class ExtractProvider implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      [
-        { language: 'vue', scheme: '*' },
-        { language: 'javascript', scheme: '*' },
-        { language: 'typescript', scheme: '*' },
-      ],
+      language_selectors,
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],

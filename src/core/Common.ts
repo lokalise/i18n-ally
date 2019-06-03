@@ -28,7 +28,7 @@ export class Common {
   }
 
   static get rootPath () {
-    return vscode.workspace.workspaceFolders[0].uri.fsPath
+    return vscode.workspace.rootPath || ''
   }
 
   static get displayLanguage (): string {
@@ -53,21 +53,26 @@ export class Common {
       .update(`${configPrefix}.${key}`, value, isGlobal)
   }
 
-  static normalizeLng (lng: string, fallback = 'en'): string {
-    const result = LanguageCodes.find((lngItem: string | string[]) => {
-      if (Array.isArray(lngItem) && lngItem[1].includes(lng))
-        return true
+  static normalizeLng (locale: string, fallback = 'en'): string {
+    const result = LanguageCodes.find(
+      (codes: string | string[]) => {
+        if (Array.isArray(codes) && codes.includes(locale))
+          return true
 
-      if (
-        typeof lngItem === 'string' &&
-        lng.toUpperCase() === lngItem.toUpperCase()
-      )
-        return true
+        if (
+          typeof codes === 'string' &&
+          locale.toUpperCase() === codes.toUpperCase()
+        )
+          return true
 
-      return false
-    })
+        return false
+      })
 
-    return result ? (Array.isArray(result) ? result[0].toString() : result) : fallback
+    return result
+      ? (Array.isArray(result)
+        ? result[0].toString()
+        : result)
+      : fallback
   }
 
   public static isVueProject (): boolean {
