@@ -57,7 +57,10 @@ export class Item extends TreeItem {
   }
 
   get contextValue () {
-    return this.node.type
+    let isSource = false
+    if (this.node.type === 'record')
+      isSource = this.node.locale === Common.sourceLanguage
+    return this.node.type + (isSource ? '-source' : '')
   }
 }
 
