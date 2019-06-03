@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, LanguageSelectors } from '../core'
 import { ExtensionModule } from '../modules'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
@@ -30,11 +30,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
 
 const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   return vscode.languages.registerCompletionItemProvider(
-    [
-      { language: 'vue', scheme: '*' },
-      { language: 'javascript', scheme: '*' },
-      { language: 'typescript', scheme: '*' },
-    ],
+    LanguageSelectors,
     new CompletionProvider(),
     '.'
   )

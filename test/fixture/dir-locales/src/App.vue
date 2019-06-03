@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <p>{{$t('hello')}}
-    <p>{{$t('not_exists')}}
+    <p>{{$t('project')}}</p>
+    <p>{{$t('hello')}}</p>
+    <p>{{$t('not_exists')}}</p>
   </div>
 </template>
 

@@ -1,7 +1,6 @@
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, LanguageSelectors } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover } from 'vscode'
-import language_selectors from './language_selectors'
 import { Commands } from '../commands'
 
 class HintProvider implements HoverProvider {
@@ -43,7 +42,7 @@ class HintProvider implements HoverProvider {
 
 const m: ExtensionModule = () => {
   return languages.registerHoverProvider(
-    language_selectors,
+    LanguageSelectors,
     new HintProvider()
   )
 }

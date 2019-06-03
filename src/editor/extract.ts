@@ -1,7 +1,6 @@
 import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
-import { Global, Commands, ExtractTextOptions } from '../core'
+import { Global, Commands, ExtractTextOptions, LanguageSelectors } from '../core'
 import { ExtensionModule } from '../modules'
-import language_selectors from './language_selectors'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
@@ -31,7 +30,7 @@ class ExtractProvider implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      language_selectors,
+      LanguageSelectors,
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],
