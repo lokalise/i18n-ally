@@ -10,6 +10,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     super(ctx, [], true)
     this.loadCurrentDocument()
     window.onDidChangeActiveTextEditor(() => this.loadCurrentDocument())
+    window.onDidChangeTextEditorSelection(() => this.loadCurrentDocument())
   }
 
   loadCurrentDocument () {
