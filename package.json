@@ -84,12 +84,12 @@
       "view/item/context": [
         {
           "command": "extension.vue-i18n-ally.open-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /record/",
+          "when": "view =~ /locales-tree/ && viewItem =~ /openable/",
           "group": "inline@1"
         },
         {
           "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /translate/",
+          "when": "view =~ /locales-tree/ && viewItem =~ /translatable/",
           "group": "inline@2"
         },
         {

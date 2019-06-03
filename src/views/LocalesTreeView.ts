@@ -56,17 +56,26 @@ export class LocaleTreeItem extends TreeItem {
   }
 
   get contextValue () {
-    let isSource = false
-    let isShadow = this.node.shadow
-    if (this.node.type === 'record') {
-      isSource = this.node.locale === Common.sourceLanguage
-      // record with filepath is not shadow
-      isShadow = !this.node.filepath
-    }
-    const isTree = this.node.type === 'tree'
-    const translatable = !isSource && !isShadow && !isTree
+    const values: string[] = [this.node.type]
 
-    return this.node.type + (translatable ? '-translate' : '')
+    let isSource = false
+    const isShadow = this.node.shadow
+    if (this.node.type === 'record')
+      isSource = this.node.locale === Common.sourceLanguage
+
+    const isTree = this.node.type === 'tree'
+    const hasFilepath = this.node.type === 'record' && !!this.node.filepath
+
+    const translatable = !isSource && !isTree && (!isShadow || hasFilepath)
+    const openable = hasFilepath
+
+    if (translatable)
+      values.push('translatable')
+
+    if (openable)
+      values.push('openable')
+
+    return values.join('-')
   }
 }
 
