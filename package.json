@@ -33,11 +33,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.vue-i18n-ally.file-translator",
-        "title": "Translate i18n content from current file",
-        "icon": "./static/logo-menu.svg"
-      },
-      {
         "command": "extension.vue-i18n-ally.config-locales",
         "title": "Vue i18n Ally: Manual configure locales path"
       },
@@ -75,13 +70,6 @@
       }
     ],
     "menus": {
-      "editor/title": [
-        {
-          "when": "vue-i18n-ally-enabled && resourceLangId =~ /vue(-html)?|(type|java)script/",
-          "command": "extension.vue-i18n-ally.file-translator",
-          "group": "navigation"
-        }
-      ],
       "view/item/context": [
         {
           "command": "extension.vue-i18n-ally.open-key",

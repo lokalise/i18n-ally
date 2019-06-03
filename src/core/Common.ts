@@ -8,10 +8,6 @@ const configPrefix = 'vue-i18n-ally'
 export class Common {
   static loader: LocaleLoader
 
-  static get extension (): vscode.Extension<any> {
-    return vscode.extensions.getExtension('antfu.vue-i18n-ally') as vscode.Extension<any>
-  }
-
   static get hasI18nPaths () {
     return !!Common.localesPaths.length
   }

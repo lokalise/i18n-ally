@@ -16,7 +16,6 @@ export async function activate (ctx: ExtensionContext) {
     require('./commands').default,
     require('./editor').default,
     require('./views').default,
-    require('./legacy/fileTranslator').default,
   ].forEach(module => ctx.subscriptions.push(module(ctx)))
 }
 
