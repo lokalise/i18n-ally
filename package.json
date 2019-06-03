@@ -61,6 +61,11 @@
         "command": "extension.vue-i18n-ally.translate-key",
         "title": "Translate",
         "icon": "./static/icon-translate.svg"
+      },
+      {
+        "command": "extension.vue-i18n-ally.edit-key",
+        "title": "Edit",
+        "icon": "./static/icon-edit.svg"
       }
     ],
     "menus": {
@@ -79,6 +84,11 @@
         },
         {
           "command": "extension.vue-i18n-ally.translate-key",
+          "when": "view == locales-tree && viewItem == record",
+          "group": "inline"
+        },
+        {
+          "command": "extension.vue-i18n-ally.edit-key",
           "when": "view == locales-tree && viewItem == record",
           "group": "inline"
         }
