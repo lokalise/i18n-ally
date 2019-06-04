@@ -43,7 +43,9 @@ class AutoDetectLocales {
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
   const detector = new AutoDetectLocales(ctx)
-  detector.init()
+
+  if (Global.enabled)
+    detector.init()
 
   return commands.registerCommand(Commands.config_locales_auto,
     () => {
