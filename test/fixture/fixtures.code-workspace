@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "no-vue-i18n"
+		},
+		{
+			"path": "yaml"
 		}
 	],
 	"settings": {

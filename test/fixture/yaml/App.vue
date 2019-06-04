@@ -1,0 +1,18 @@
+<template>
+  <div id="app">
+    <p>{{$t('project')}}</p>
+    <p>{{$t('not_exists')}}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app',
+
+  computed: {
+    foobar() {
+      return this.$t('nested.foo.bar')
+    }
+  }
+}
+</script>

@@ -1,0 +1,6 @@
+hello: Hello
+project: Basic
+nested:
+  hello: Hello again
+  foo:
+    bar: foobar
