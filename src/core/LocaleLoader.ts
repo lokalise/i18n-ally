@@ -1,4 +1,4 @@
-import { workspace, window, EventEmitter, Event } from 'vscode'
+import { workspace, window, EventEmitter, Event, Disposable } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
@@ -19,13 +19,17 @@ function newTree (keypath = ''): LocaleTree {
   }
 }
 
-export class LocaleLoader {
-  private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>();
-  readonly onDidChange: Event<undefined> = this._onDidChange.event;
+export class LocaleLoader extends Disposable {
+  private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
+  readonly onDidChange: Event<undefined> = this._onDidChange.event
 
   files: Record<string, ParsedFile> = {}
   flattenLocaleTree: FlattenLocaleTree = {}
   localeTree: LocaleTree = newTree()
+
+  constructor (public readonly rootpath: string) {
+    super(() => this.onDispose())
+  }
 
   async init () {
     await this.loadAll()
@@ -371,13 +375,14 @@ export class LocaleLoader {
   }
 
   private async loadAll () {
-    const rootPath = Global.rootPath
-    if (!rootPath)
-      return
     for (const pathname of this.localesPaths) {
-      const fullpath = path.resolve(rootPath, pathname)
+      const fullpath = path.resolve(this.rootpath, pathname)
       await this.loadDirectory(fullpath)
       this.watchOn(fullpath)
     }
+  }
+
+  private onDispose () {
+
   }
 }

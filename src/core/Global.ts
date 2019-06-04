@@ -1,22 +1,95 @@
-import { workspace, commands } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext } from 'vscode'
 import { LocaleLoader } from '.'
 import { uniq } from 'lodash'
-import { normalizeLocale } from './utils'
+import { normalizeLocale, isVueI18nProject } from './utils'
 
 const configPrefix = 'vue-i18n-ally'
 
 export class Global {
-  static loader: LocaleLoader
+  private static _loaders: Record<string, LocaleLoader> = {}
+  private static _rootpath: string
+  private static _enabled: boolean = false
+  static context: ExtensionContext
 
-  static async init () {
-    this.loader = new LocaleLoader()
-    await this.loader.init()
-    commands.executeCommand('setContext', 'vue-i18n-ally-enabled', true)
+  // events
+  private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
+  static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
+  private static _onDidChangeEnabled: EventEmitter<boolean> = new EventEmitter()
+  static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
+  private static _onDidChangeLoader: EventEmitter<LocaleLoader> = new EventEmitter()
+  static readonly onDidChangeLoader: Event<LocaleLoader> = Global._onDidChangeLoader.event
+
+  static async init (context: ExtensionContext) {
+    this.context = context
+
+    context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(e => this.updateRootPath()))
+    context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
+    context.subscriptions.push(window.onDidChangeTextEditorViewColumn(e => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
+    await this.updateRootPath()
+    await this.initLoader(this._rootpath)
+  }
+
+  private static async initLoader (rootpath: string) {
+    if (this._loaders[rootpath])
+      return this._loaders[rootpath]
+
+    const loader = new LocaleLoader(rootpath)
+    await loader.init()
+    this.context.subscriptions.push(loader.onDidChange(() => this._onDidChangeLoader.fire(loader)))
+    this.context.subscriptions.push(loader)
+    this._loaders[rootpath] = loader
+
+    return this._loaders[rootpath]
+  }
+
+  private static async updateRootPath () {
+    const editor = window.activeTextEditor
+    let rootpath = ''
+
+    if (!editor || !workspace.workspaceFolders || workspace.workspaceFolders.length === 0) {
+      rootpath = ''
+    }
+    else {
+      const resource = editor.document.uri
+      if (resource.scheme === 'file') {
+        const folder = workspace.getWorkspaceFolder(resource)
+        if (folder)
+          rootpath = folder.uri.fsPath
+      }
+    }
+
+    if (rootpath !== this._rootpath) {
+      this._rootpath = rootpath
+      const shouldEnabled = isVueI18nProject(rootpath)
+      this.setEnabled(shouldEnabled)
+      if (shouldEnabled)
+        await this.initLoader(rootpath)
+      this._onDidChangeRootPath.fire(rootpath)
+      this._onDidChangeLoader.fire(this.loader)
+    }
+  }
+
+  static get loader () {
+    return this._loaders[this._rootpath]
+  }
+
+  // enables
+  static get enabled () {
+    return this._enabled
+  }
+
+  private static setEnabled (value: boolean) {
+    if (this._enabled !== value) {
+      this._enabled = value
+      commands.executeCommand('setContext', 'vue-i18n-ally-enabled', value)
+      this._onDidChangeEnabled.fire()
+    }
   }
 
   static get rootPath () {
-    // TODO: dynamic change base on current workspace
-    return workspace.rootPath || ''
+    return this._rootpath || workspace.rootPath || ''
   }
 
   // languages

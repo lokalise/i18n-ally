@@ -11,7 +11,7 @@ export async function activate (ctx: ExtensionContext) {
     return
 
   // activate the extension
-  await Global.init()
+  await Global.init(ctx)
 
   const modules = [
     commandsModules,
