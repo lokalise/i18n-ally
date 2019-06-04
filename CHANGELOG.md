@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/antfu/vue-i18n-ally/compare/v0.9.0...v0.10.0) (2019-06-04)
+
+
+### ⚡ Features
+
+* **detect:** support different types of format ([cfc490d](https://github.com/antfu/vue-i18n-ally/commit/cfc490d))
+* **parser:** YAML support  🎉 ([e71c6ac](https://github.com/antfu/vue-i18n-ally/commit/e71c6ac))
+
+
+### 📚 Documentations
+
+* **fixture:** add yaml fixture ([6f63f9e](https://github.com/antfu/vue-i18n-ally/commit/6f63f9e))
+* update readme ([6e56de1](https://github.com/antfu/vue-i18n-ally/commit/6e56de1))
+
+
+
 ## [0.9.0](https://github.com/antfu/vue-i18n-ally/compare/v0.8.0...v0.9.0) (2019-06-04)
 
 
