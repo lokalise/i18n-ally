@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.11](https://github.com/antfu/vue-i18n-ally/compare/v0.10.0...v0.10.11) (2019-06-04)
+
+
+### 🐞 Bug Fixes
+
+* activationEvents ([a7c4f36](https://github.com/antfu/vue-i18n-ally/commit/a7c4f36))
+* add output channel for debug ([db40bd7](https://github.com/antfu/vue-i18n-ally/commit/db40bd7))
+* **deps:** remove "clipboardy" and use "env.clipboard" instead ([95936ed](https://github.com/antfu/vue-i18n-ally/commit/95936ed))
+* only detect locales on valid project ([3021267](https://github.com/antfu/vue-i18n-ally/commit/3021267))
+* root path change watcher ([35fb0bf](https://github.com/antfu/vue-i18n-ally/commit/35fb0bf))
+* typo ([41c076f](https://github.com/antfu/vue-i18n-ally/commit/41c076f))
+
+
+
 ## [0.10.0](https://github.com/antfu/vue-i18n-ally/compare/v0.9.0...v0.10.0) (2019-06-04)
 
 
