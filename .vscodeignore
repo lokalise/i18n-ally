@@ -1,18 +1,17 @@
 .vscode/**
 .vscode-test/**
 node_modules
-out/test/**
-out/**/*.map
+out/**
 dist/test/**
 dist/**/*.map
-src/
+src/**
 .gitignore
 .editorconfig
 .eslintrc.js
 .eslintignore
 tsconfig.json
 tslint.json
-test/
+test/**
 webpack.config.js
 
 # Externals
