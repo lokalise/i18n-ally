@@ -17,6 +17,7 @@ Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 - Friendly UI for managing locales
 - One-click machine translation
 - Extract text from code
+- JSON and YAML supported
 
 ## ⚙ Installation
 
@@ -72,11 +73,11 @@ If you would like use different file formats or directory structures, it welcome
 - [x] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
 - [x] Underscore for i18n keys?
 - [x] YAML support
+- [x] `$tc`, `$d`, `$n`, `v-t` support
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Source language indicator
 - [ ] Hide/Show specific locales
 - [ ] Analysis report
-- [ ] `$tc`, `$d`, `$n`, `v-t` support
 - [ ] Screenshots
 - [ ] JSON/YAML file annonation & hint
 
