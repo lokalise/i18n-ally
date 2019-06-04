@@ -18,7 +18,6 @@ const config = {
   devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode',
-    clipboardy: 'clipboardy',
     nodejieba: 'nodejieba',
   },
   resolve: {

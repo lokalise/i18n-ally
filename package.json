@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "Vue i18n Ally",
   "description": "Better Vue i18n experiences with VS Code",
-  "version": "0.10.0",
+  "version": "0.10.10",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
@@ -203,7 +203,6 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "clipboardy": "^2.0.0",
     "fast-glob": "^2.2.7",
     "flat": "^4.1.0",
     "js-yaml": "^3.13.1",

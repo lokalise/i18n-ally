@@ -1,5 +1,4 @@
-import { window, commands, workspace, Selection, TextEditorRevealType } from 'vscode'
-import * as clipboardy from 'clipboardy'
+import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
 import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
@@ -9,7 +8,8 @@ const m: ExtensionModule = (ctx) => {
   return [
     commands.registerCommand(Commands.copy_key,
       async ({ node }: LocaleTreeItem) => {
-        await clipboardy.write(`$t('${node.keypath}')`)
+        // @ts-ignore
+        await env.clipboard.writeText(`$t('${node.keypath}')`)
         window.showInformationMessage('I18n key copied')
       }),
 

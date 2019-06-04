@@ -15,5 +15,4 @@ test/**
 webpack.config.js
 
 # Externals
-!node_modules/clipboardy/**
 !node_modules/nodejieba/**
