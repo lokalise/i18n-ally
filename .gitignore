@@ -4,3 +4,6 @@ node_modules
 .vscode-test/
 *.vsix
 .DS_Store
+
+test/fixture/**/.vscode
+test/fixture/**/package-lock.json

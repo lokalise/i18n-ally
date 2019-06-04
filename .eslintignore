@@ -1,2 +1,3 @@
 out/
 dist/
+test/fixture/**/*.vue

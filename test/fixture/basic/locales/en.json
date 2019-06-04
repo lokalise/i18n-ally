@@ -1,5 +1,6 @@
 {
-  "hello": "Hello2",
+  "hello": "Hello",
+  "project": "Basic",
   "nested": {
     "hello": "Hello again",
     "foo": {
