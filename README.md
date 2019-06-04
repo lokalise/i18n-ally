@@ -23,46 +23,45 @@ Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 
 1. Install [`vue-i18n`](https://github.com/kazupon/vue-i18n) package if you haven't yet. `npm i vue-i18n` or `yarn add vue-i18n`
 2. Install this extension
-3. `locales` path should be detected automatically. You can also configure it manually. There are two ways to do that:
+3. `locales` path will be detected automatically. You can also configure it manually. There are two ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
    - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually.
 
-## 📂 Supported locales directory structure
+## 📂 Directory structure
+
 You can have locales directory structured like this
 
-    .
-    ├── ...
-    ├── locales     # you can specify the folder path in the settings
-    |   ├── en.json
-    |   ├── de.json
-    |   ├── zh-CN.json
-    |   ├── zh-TW.json
-    |   ├── ...
-    |   └── <contry-code>.json
-    └── ...         # other files or your project
+```
+  locales         # you can specify the folder path in the settings
+  ├── en.json
+  ├── de-DE.json
+  ├── zh-CN.yaml  # YAML is also supported
+  ├── zh-TW.yaml
+  ├── ...
+  └── <contry-code>.json
+```
 
 or
 
-    .
-    ├── ...
-    ├── path/to/locales
-    |   ├── en
-    |   |   ├── common.json
-    |   |   ├── buttons.json
-    |   |   ├── ...
-    |   |   └── <what_ever_you_want>.json
-    |   ├── de
-    |   |   ├── common.json
-    |   |   ├── buttons.json
-    |   |   └── ...
-    |   └── <contry-code>
-    |       ├── common.json
-    |       ├── buttons.json
-    |       └── ...
-    └── ...
-
+```
+  locales
+  ├── en
+  |   ├── common.json
+  |   ├── buttons.json
+  |   ├── ...
+  |   └── <filenames>.json
+  ├── de-DE
+  |   ├── common.json
+  |   ├── buttons.json
+  |   └── ...
+  └── <contry-code>
+      ├── common.json
+      ├── buttons.json
+      └── ...
+```
 
 Currently we support `json` or `yaml` as your locales file type.
+
 If you would like use different file formats or directory structures, it welcome to open an issue or pull request.
 
 ## 📅 TODO
@@ -80,6 +79,9 @@ If you would like use different file formats or directory structures, it welcome
 - [ ] Analysis report
 - [ ] Screenshots
 - [ ] JSON/YAML file annonation & hint
+- [ ] Annoation config (on/off, maxlength)
+- [ ] Force enabled on non-vue-i18n project
+- [ ] i18n for this plugin
 
 ## 👨‍💻 Credits
 
