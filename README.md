@@ -64,11 +64,6 @@ or
 Currently we only support `json` as your locales file type. If you would like use different formats, please open an issue or pull request.
 Also, if you would like to have different directory structures, it's also welcome to discuss.
 
-
-## 🐞 Known issuses
-
-- [ ] Workspace is not compatible with this plugin for now, please try to open the project alone if you are facing errors.
-
 ## 📅 TODO
 
 - [x] Machine translating
@@ -76,13 +71,13 @@ Also, if you would like to have different directory structures, it's also welcom
 - [x] Translating progress
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Hide/Show specific locales
-- [ ] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
+- [x] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
 - [ ] JSON file annonation & hint
 - [ ] Analysis report
 - [ ] `$tc`, `$d`, `$n`, `v-t` support
 - [ ] YAML support
 - [ ] Screenshots
-- [ ] Underscore for i18n keys?
+- [x] Underscore for i18n keys?
 
 ## 👨‍💻 Credits
 

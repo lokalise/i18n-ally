@@ -46,10 +46,6 @@
         "title": "Vue i18n Ally: Change display language"
       },
       {
-        "command": "extension.vue-i18n-ally.debug",
-        "title": "Vue i18n Ally: Debug"
-      },
-      {
         "command": "extension.vue-i18n-ally.copy-key",
         "title": "Copy i18n key",
         "icon": "./static/icon-copy.svg"
@@ -150,19 +146,23 @@
     "types": [
       {
         "type": "feat",
-        "section": "⚡Features"
+        "section": "⚡ Features"
       },
       {
         "type": "fix",
-        "section": "🐞Bug Fixes"
+        "section": "🐞 Bug Fixes"
+      },
+      {
+        "type": "refactor",
+        "section": "🔮 Refactor"
       },
       {
         "type": "test",
-        "section": "⚗Tests"
+        "section": "⚗ Tests"
       },
       {
         "type": "docs",
-        "section": "📚Documentations"
+        "section": "📚 Documentations"
       },
       {
         "type": "ci",
