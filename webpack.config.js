@@ -32,6 +32,11 @@ const config = {
         use: [
           {
             loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                'module': 'es6', // override `tsconfig.json` so that TypeScript emits native JavaScript modules.
+              },
+            },
           },
         ],
       },

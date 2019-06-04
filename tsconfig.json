@@ -1,25 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "module": "commonjs",
     "target": "es6",
-    "outDir": "dist",
-    "lib": ["es6", "es7"],
+    "outDir": "out",
     "sourceMap": true,
-    "moduleResolution": "node",
-    "typeRoots": ["node_modules/@types"],
     "strict": true,
+    "rootDir": "src",
+    "lib": ["es6", "es7"],
+    "moduleResolution": "node",
+    "typeRoots": [ "node_modules/@types" ],
     "noUnusedLocals": true,
   },
-  "rootDir": "src",
-  "paths": {
-    "lib/*": [
-      ".",
-      "./src"
-    ]
-  },
-  "exclude": [
-    "node_modules",
-    ".vscode-test"
+  "include": [
+    "src/**/*.ts",
+    "./node_modules/vscode/vscode.d.ts",
+    "./node_modules/vscode/lib/*",
   ]
 }
