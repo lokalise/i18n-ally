@@ -62,7 +62,7 @@ export class LocaleLoader extends Disposable {
     return this.flattenLocaleTree[keypath]
   }
 
-  getTranslationsByKey (keypath: string, shadow = true) {
+  getTranslaationsByKey (keypath: string, shadow = true) {
     const node = this.getNodeByKey(keypath)
     if (!node)
       return {}
@@ -179,6 +179,10 @@ export class LocaleLoader extends Disposable {
   }
 
   getShadowFilePath (keypath: string, locale: string) {
+    const paths = this.getFilepathsOfLocale(locale)
+    if (paths.length === 1)
+      return paths[0]
+
     const node = this.getNodeByKey(keypath)
     if (node) {
       const sourceRecord = node.locales[Global.sourceLanguage] || Object.values(node.locales)[0]
@@ -219,13 +223,19 @@ export class LocaleLoader extends Disposable {
     if (!filepath)
       throw new AllyError(ErrorType.filepath_not_specified)
 
+    const ext = path.extname(filepath)
+    const parser = Global.getMatchedParser(ext)
+    if (!parser)
+      throw new AllyError(ErrorType.unsupported_file_type, ext)
+
     let original: object = {}
     if (existsSync(filepath)) {
       const originalRaw = await fs.readFile(filepath, 'utf-8')
-      original = JSON.parse(originalRaw)
+      original = await parser.parse(originalRaw)
     }
     set(original, pending.keypath, pending.value)
-    const writting = `${JSON.stringify(original, null, 2)}\n`
+
+    const writting = await parser.dump(original)
     await fs.writeFile(filepath, writting, 'utf-8')
   }
 
@@ -242,7 +252,11 @@ export class LocaleLoader extends Disposable {
       console.log('LOADING', filepath)
       const { locale, nested } = getFileInfo(filepath)
       const raw = await fs.readFile(filepath, 'utf-8')
-      const value = JSON.parse(raw)
+      const ext = path.extname(filepath)
+      const parser = Global.getMatchedParser(ext)
+      if (!parser)
+        return new AllyError(ErrorType.unsupported_file_type, ext)
+      const value = await parser.parse(raw)
       this.files[filepath] = {
         filepath,
         locale,
@@ -271,7 +285,9 @@ export class LocaleLoader extends Disposable {
       const filePath = path.resolve(rootPath, filename)
       const isDirectory = (await fs.lstat(filePath)).isDirectory()
 
-      if (!isDirectory && path.extname(filePath) !== '.json')
+      const ext = path.extname(filePath)
+
+      if (!isDirectory && !Global.getMatchedParser(ext))
         continue
 
       if (!isDirectory) {
@@ -290,7 +306,8 @@ export class LocaleLoader extends Disposable {
     const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
       filepath = path.resolve(filepath)
       const { ext } = path.parse(filepath)
-      if (ext !== '.json') return
+      if (!Global.getMatchedParser(ext))
+        return
 
       switch (type) {
         case 'del':

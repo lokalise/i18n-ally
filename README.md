@@ -44,7 +44,7 @@ or
 
     .
     ├── ...
-    ├── locales
+    ├── path/to/locales
     |   ├── en
     |   |   ├── common.json
     |   |   ├── buttons.json
@@ -61,23 +61,24 @@ or
     └── ...
 
 
-Currently we only support `json` as your locales file type. If you would like use different formats, please open an issue or pull request.
-Also, if you would like to have different directory structures, it's also welcome to discuss.
+Currently we support `json` or `yaml` as your locales file type.
+If you would like use different file formats or directory structures, it welcome to open an issue or pull request.
 
 ## 📅 TODO
 
 - [x] Machine translating
 - [x] Locales Tree
 - [x] Translating progress
-- [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
-- [ ] Hide/Show specific locales
 - [x] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
-- [ ] JSON file annonation & hint
+- [x] Underscore for i18n keys?
+- [x] YAML support
+- [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
+- [ ] Source language indicator
+- [ ] Hide/Show specific locales
 - [ ] Analysis report
 - [ ] `$tc`, `$d`, `$n`, `v-t` support
-- [ ] YAML support
 - [ ] Screenshots
-- [x] Underscore for i18n keys?
+- [ ] JSON/YAML file annonation & hint
 
 ## 👨‍💻 Credits
 

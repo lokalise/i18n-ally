@@ -2,6 +2,8 @@ import { workspace, commands, window, EventEmitter, Event, ExtensionContext } fr
 import { LocaleLoader } from '.'
 import { uniq } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from './utils'
+import { JsonParser } from '../parsers/JsonParser'
+import { YamlParser } from '../parsers/YamlParser'
 
 const configPrefix = 'vue-i18n-ally'
 
@@ -10,6 +12,7 @@ export class Global {
   private static _rootpath: string
   private static _enabled: boolean = false
   static context: ExtensionContext
+  static parsers = [new JsonParser(), new YamlParser()]
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
@@ -73,6 +76,10 @@ export class Global {
 
   static get loader () {
     return this._loaders[this._rootpath]
+  }
+
+  static getMatchedParser (ext: string) {
+    return this.parsers.find(parser => parser.supports(ext))
   }
 
   // enables

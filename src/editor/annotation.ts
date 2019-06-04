@@ -65,7 +65,7 @@ const annotation: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []
   disposables.push(window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions))
   disposables.push(workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions))
-  disposables.push(Global.loader.onDidChange(update))
+  disposables.push(Global.onDidChangeLoader(update))
 
   update()
 

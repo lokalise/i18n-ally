@@ -1,5 +1,5 @@
 hello: Hello
-project: Basic
+project: YAML
 nested:
   hello: Hello again
   foo:

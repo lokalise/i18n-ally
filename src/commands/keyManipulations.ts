@@ -3,6 +3,7 @@ import * as clipboardy from 'clipboardy'
 import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
+import * as path from 'path'
 
 const m: ExtensionModule = (ctx) => {
   return [
@@ -38,25 +39,18 @@ const m: ExtensionModule = (ctx) => {
           const document = await workspace.openTextDocument(node.filepath)
           const editor = await window.showTextDocument(document)
 
-          const indent = 2 // TODO: get indent from system settings
-          const keys = node.keypath.split('.')
-
-          // build regex to locale the key in json file
-          let regexString = keys
-            .map((key, i) => `^[ \\t]{${(i + 1) * indent}}"${key}": ?`)
-            .join('[\\s\\S]*')
-          regexString += '"(.*)"'
-          const regex = new RegExp(regexString, 'gm')
+          const ext = path.extname(node.filepath)
+          const parser = Global.getMatchedParser(ext)
+          if (!parser)
+            return
 
           const text = editor.document.getText()
-          const match = regex.exec(text)
-          if (match && match.length >= 2) {
-            const end = match.index + match[0].length - 1
-            const value = match[1]
-            const start = end - value.length
+          const range = parser.navigateToKey(text, node.keypath)
+
+          if (range) {
             editor.selection = new Selection(
-              document.positionAt(end),
-              document.positionAt(start)
+              document.positionAt(range.end),
+              document.positionAt(range.start)
             )
             editor.revealRange(editor.selection, TextEditorRevealType.InCenter)
             commands.executeCommand('workbench.action.focusActiveEditorGroup')
