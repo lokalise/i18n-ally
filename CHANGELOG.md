@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/antfu/vue-i18n-ally/compare/v0.8.0...v0.9.0) (2019-06-04)
+
+
+### ⚡ Features
+
+* key underline ([bc48175](https://github.com/antfu/vue-i18n-ally/commit/bc48175))
+* workspace support ([eea0eb3](https://github.com/antfu/vue-i18n-ally/commit/eea0eb3))
+
+
+### 🐞 Bug Fixes
+
+* **tree:** file locales tree will now change with text changes ([1b14647](https://github.com/antfu/vue-i18n-ally/commit/1b14647))
+
+
+### 📚 Documentations
+
+* add todos ([819bb8f](https://github.com/antfu/vue-i18n-ally/commit/819bb8f))
+* update docs ([f5f0e89](https://github.com/antfu/vue-i18n-ally/commit/f5f0e89))
+
+
+### 🔮 Refactor
+
+* extract support language ids ([e6fad67](https://github.com/antfu/vue-i18n-ally/commit/e6fad67))
+* global ([d86b325](https://github.com/antfu/vue-i18n-ally/commit/d86b325))
+* move file locale tree to explorer ([662a550](https://github.com/antfu/vue-i18n-ally/commit/662a550))
+* simplified fixtures ([aa3f468](https://github.com/antfu/vue-i18n-ally/commit/aa3f468))
+* use vscode event ([3ecc8ff](https://github.com/antfu/vue-i18n-ally/commit/3ecc8ff))
+
+
+
 ## [0.8.0](https://github.com/antfu/vue-i18n-ally/compare/v0.7.1...v0.8.0) (2019-06-03)
 
 
