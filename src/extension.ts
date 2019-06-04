@@ -6,6 +6,8 @@ import editorModules from './editor'
 import viewsModules from './views'
 
 export async function activate (ctx: ExtensionContext) {
+  Global.outputChannel.appendLine('Activated')
+
   // activate the extension
   await Global.init(ctx)
 
@@ -18,4 +20,6 @@ export async function activate (ctx: ExtensionContext) {
   disposables.forEach(d => ctx.subscriptions.push(d))
 }
 
-export function deactivate () {}
+export function deactivate () {
+  Global.outputChannel.appendLine('Deactivated')
+}

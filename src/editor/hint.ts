@@ -8,6 +8,9 @@ class HintProvider implements HoverProvider {
     document: TextDocument,
     position: Position
   ) {
+    if (!Global.enabled)
+      return
+
     const key = KeyDetector.getKey(document, position)
 
     if (!key)

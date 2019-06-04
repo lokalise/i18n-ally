@@ -12,6 +12,9 @@ const underlineDecorationType = window.createTextEditorDecorationType({
 
 const annotation: ExtensionModule = (ctx) => {
   function update () {
+    if (!Global.enabled)
+      return
+
     const activeTextEditor = window.activeTextEditor
     if (!activeTextEditor)
       return

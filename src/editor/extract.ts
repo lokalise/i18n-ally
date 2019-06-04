@@ -4,8 +4,11 @@ import { ExtensionModule } from '../modules'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
+    if (!Global.enabled)
+      return []
+
     const editor = window.activeTextEditor
-    if (!editor || !Global.hasLocalesConfigured)
+    if (!editor)
       return []
 
     const { selection } = editor

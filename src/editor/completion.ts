@@ -7,6 +7,9 @@ class CompletionProvider implements vscode.CompletionItemProvider {
     document: vscode.TextDocument,
     position: vscode.Position
   ) {
+    if (!Global.enabled)
+      return
+
     let key = KeyDetector.getKey(document, position)
     if (!key || !/\.$/.test(key))
       return
