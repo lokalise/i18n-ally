@@ -223,6 +223,7 @@ export class LocaleLoader extends Disposable {
     if (!filepath)
       throw new AllyError(ErrorType.filepath_not_specified)
 
+    Global.outputChannel.appendLine(`Saving file ${filepath}`)
     const ext = path.extname(filepath)
     const parser = Global.getMatchedParser(ext)
     if (!parser)
@@ -249,7 +250,7 @@ export class LocaleLoader extends Disposable {
 
   private async loadFile (filepath: string) {
     try {
-      console.log('LOADING', filepath)
+      Global.outputChannel.appendLine(`Loading file ${filepath}`)
       const { locale, nested } = getFileInfo(filepath)
       const raw = await fs.readFile(filepath, 'utf-8')
       const ext = path.extname(filepath)
@@ -267,6 +268,7 @@ export class LocaleLoader extends Disposable {
     }
     catch (e) {
       this.unsetFile(filepath)
+      Global.outputChannel.appendLine(`Failed to load file ${e}`)
       console.error(e)
     }
   }

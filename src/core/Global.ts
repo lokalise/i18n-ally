@@ -1,4 +1,4 @@
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel } from 'vscode'
 import { LocaleLoader } from '.'
 import { uniq } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from './utils'
@@ -10,6 +10,7 @@ const configPrefix = 'vue-i18n-ally'
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
   private static _rootpath: string
+  private static _channel: OutputChannel;
   private static _enabled: boolean = false
   static context: ExtensionContext
   static parsers = [new JsonParser(), new YamlParser()]
@@ -66,9 +67,12 @@ export class Global {
     if (rootpath !== this._rootpath) {
       this._rootpath = rootpath
       const shouldEnabled = isVueI18nProject(rootpath)
+      this.outputChannel.appendLine(`\n----\nWorkspace root changed to "${rootpath}"`)
       this.setEnabled(shouldEnabled)
       if (shouldEnabled)
         await this.initLoader(rootpath)
+      else
+        this.outputChannel.appendLine('Workspace is not a vue-i18n project, extension disabled')
       this._onDidChangeRootPath.fire(rootpath)
       this._onDidChangeLoader.fire(this.loader)
     }
@@ -80,6 +84,12 @@ export class Global {
 
   static getMatchedParser (ext: string) {
     return this.parsers.find(parser => parser.supports(ext))
+  }
+
+  static get outputChannel (): OutputChannel {
+    if (!this._channel)
+      this._channel = window.createOutputChannel('Vue i18n Ally')
+    return this._channel
   }
 
   // enables
