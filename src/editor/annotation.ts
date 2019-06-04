@@ -19,7 +19,7 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
-    const { document } = activeTextEditor
+    const document = activeTextEditor.document
     const text = document.getText()
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []

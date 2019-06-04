@@ -28,7 +28,6 @@ export class Global {
 
     context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(e => this.updateRootPath()))
     context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
-    context.subscriptions.push(window.onDidChangeTextEditorViewColumn(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
     await this.updateRootPath()
@@ -52,19 +51,17 @@ export class Global {
     const editor = window.activeTextEditor
     let rootpath = ''
 
-    if (!editor || !workspace.workspaceFolders || workspace.workspaceFolders.length === 0) {
-      rootpath = ''
-    }
-    else {
-      const resource = editor.document.uri
-      if (resource.scheme === 'file') {
-        const folder = workspace.getWorkspaceFolder(resource)
-        if (folder)
-          rootpath = folder.uri.fsPath
-      }
+    if (!editor || !workspace.workspaceFolders || workspace.workspaceFolders.length === 0)
+      return
+
+    const resource = editor.document.uri
+    if (resource.scheme === 'file') {
+      const folder = workspace.getWorkspaceFolder(resource)
+      if (folder)
+        rootpath = folder.uri.fsPath
     }
 
-    if (rootpath !== this._rootpath) {
+    if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
       const shouldEnabled = isVueI18nProject(rootpath)
       this.outputChannel.appendLine(`\n----\nWorkspace root changed to "${rootpath}"`)
