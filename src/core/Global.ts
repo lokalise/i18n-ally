@@ -38,6 +38,7 @@ export class Global {
     if (this._loaders[rootpath])
       return this._loaders[rootpath]
 
+    this.outputChannel.appendLine(`Init loader "${rootpath}"`)
     const loader = new LocaleLoader(rootpath)
     await loader.init()
     this.context.subscriptions.push(loader.onDidChange(() => this._onDidChangeLoader.fire(loader)))
