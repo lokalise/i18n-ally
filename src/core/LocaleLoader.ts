@@ -62,7 +62,7 @@ export class LocaleLoader extends Disposable {
     return this.flattenLocaleTree[keypath]
   }
 
-  getTranslaationsByKey (keypath: string, shadow = true) {
+  getTranslationsByKey (keypath: string, shadow = true) {
     const node = this.getNodeByKey(keypath)
     if (!node)
       return {}
