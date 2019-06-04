@@ -90,7 +90,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   ) {
     this._flatten = flatten
     this.loader = Global.loader
-    this.loader.addEventListener('changed', () => this.refresh())
+    this.loader.onDidChange(() => this.refresh())
   }
 
   protected refresh (): void {

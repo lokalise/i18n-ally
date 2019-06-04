@@ -1,14 +1,13 @@
-import { workspace, window } from 'vscode'
+import { workspace, window, EventEmitter, Event } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import { uniq, isObject, set } from 'lodash'
 import * as path from 'path'
 // @ts-ignore
 import * as flat from 'flat'
 import { Global } from './Global'
-import EventHandler from './EventHandler'
 import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
-import { LocaleTree, LocaleLoaderEventType, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
+import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
 function newTree (keypath = ''): LocaleTree {
@@ -20,7 +19,10 @@ function newTree (keypath = ''): LocaleTree {
   }
 }
 
-export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
+export class LocaleLoader {
+  private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>();
+  readonly onDidChange: Event<undefined> = this._onDidChange.event;
+
   files: Record<string, ParsedFile> = {}
   flattenLocaleTree: FlattenLocaleTree = {}
   localeTree: LocaleTree = newTree()
@@ -365,7 +367,7 @@ export class LocaleLoader extends EventHandler<LocaleLoaderEventType> {
   private update () {
     this.updateLocalesTree()
     this.updateFlattenLocalesTree()
-    this.dispatchEvent('changed')
+    this._onDidChange.fire()
   }
 
   private async loadAll () {

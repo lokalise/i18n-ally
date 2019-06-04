@@ -65,9 +65,6 @@ export interface PendingWrite {
   value: string
 }
 
-export type LocaleLoaderEventType =
-  | 'changed'
-
 export interface ExtractTextOptions {
   filepath: string
   text: string

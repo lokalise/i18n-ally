@@ -24,7 +24,7 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
 
   constructor () {
     this.loader = Global.loader
-    this.loader.addEventListener('changed', () => this.refresh())
+    this.loader.onDidChange(() => this.refresh())
   }
 
   refresh (): void {
