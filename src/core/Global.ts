@@ -1,99 +1,65 @@
-import * as vscode from 'vscode'
-import LanguageCodes from '../meta/LanguageCodes'
+import { workspace, commands } from 'vscode'
 import { LocaleLoader } from '.'
-import * as fs from 'fs'
+import { uniq } from 'lodash'
+import { normalizeLocale } from './utils'
 
 const configPrefix = 'vue-i18n-ally'
 
 export class Global {
   static loader: LocaleLoader
 
-  static get hasLocalesConfigured () {
-    return !!Global.localesPaths.length
-  }
-
-  static get localesPaths (): string[] {
-    const paths = Global.getConfig('localesPaths')
-
-    return paths ? paths.split(',') : []
-  }
-
-  static updateLocalesPaths (paths: string[]) {
-    const localesPaths = Array.from(new Set(Global.localesPaths.concat(paths)))
-    Global.setConfig('localesPaths', localesPaths.join(','))
+  static async init () {
+    this.loader = new LocaleLoader()
+    await this.loader.init()
+    commands.executeCommand('setContext', 'vue-i18n-ally-enabled', true)
   }
 
   static get rootPath () {
-    return vscode.workspace.rootPath || ''
+    // TODO: dynamic change base on current workspace
+    return workspace.rootPath || ''
   }
 
+  // languages
   static get displayLanguage (): string {
-    return Global.normalizeLng(Global.getConfig('displayLanguage'))
+    return normalizeLocale(Global.getConfig('displayLanguage'))
   }
 
   static set displayLanguage (value) {
-    Global.setConfig('displayLanguage', Global.normalizeLng(value))
+    Global.setConfig('displayLanguage', normalizeLocale(value))
   }
 
   static get sourceLanguage (): string {
-    return Global.normalizeLng(Global.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
+    return normalizeLocale(Global.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
   }
 
-  static getConfig (key: string): any {
-    return vscode.workspace.getConfiguration().get(`${configPrefix}.${key}`)
+  // locales
+  static get localesPaths (): string[] {
+    const paths = Global.getConfig('localesPaths')
+    return paths ? paths.split(',') : []
   }
 
-  static setConfig (key: string, value: any, isGlobal = false) {
-    return vscode.workspace
+  static set localesPaths (paths: string[]) {
+    Global.setConfig('localesPaths', paths.join(','))
+  }
+
+  static updateLocalesPaths (paths: string[]) {
+    this.localesPaths = uniq(Global.localesPaths.concat(paths))
+  }
+
+  static get hasLocalesConfigured () {
+    return !!this.localesPaths.length
+  }
+
+  // config
+  private static getConfig (key: string): any {
+    return workspace
+      .getConfiguration()
+      .get(`${configPrefix}.${key}`)
+  }
+
+  private static setConfig (key: string, value: any, isGlobal = false) {
+    return workspace
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
-  }
-
-  static normalizeLng (locale: string, fallback = 'en'): string {
-    if (!locale)
-      return fallback
-    const result = LanguageCodes.find(
-      (codes: string | string[]) => {
-        if (Array.isArray(codes) && codes.includes(locale))
-          return true
-
-        if (
-          typeof codes === 'string' &&
-          locale.toUpperCase() === codes.toUpperCase()
-        )
-          return true
-
-        return false
-      })
-
-    return result
-      ? (Array.isArray(result)
-        ? result[0].toString()
-        : result)
-      : fallback
-  }
-
-  public static isVueProject (): boolean {
-    if (!vscode.workspace.workspaceFolders)
-      return false
-    const projectUrl = this.rootPath
-
-    try {
-      const rawPackageJSON = fs.readFileSync(`${projectUrl}/package.json`, 'utf-8')
-      const {
-        dependencies,
-        devDependencies,
-      } = JSON.parse(rawPackageJSON)
-      return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
-    }
-    catch (err) {
-      return false
-    }
-  }
-
-  public static getUid (len = 6): string {
-    return Math.random()
-      .toString(36)
-      .substr(2, len)
   }
 }
