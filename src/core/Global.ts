@@ -35,6 +35,9 @@ export class Global {
   }
 
   private static async initLoader (rootpath: string) {
+    if (!rootpath)
+      return
+
     if (this._loaders[rootpath])
       return this._loaders[rootpath]
 
@@ -61,6 +64,9 @@ export class Global {
       if (folder)
         rootpath = folder.uri.fsPath
     }
+
+    if (!rootpath && workspace.rootPath)
+      rootpath = workspace.rootPath
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
@@ -103,8 +109,19 @@ export class Global {
     }
   }
 
-  static get rootPath () {
-    return this._rootpath || workspace.rootPath || ''
+  // #region ====== Configurations ======
+
+  static get allLocales () {
+    return this.loader.locales
+  }
+
+  static get visibleLocales () {
+    return this.getVisibleLocales(this.allLocales)
+  }
+
+  static getVisibleLocales (locales: string[]) {
+    const ignored = this.ignoredLocales
+    return locales.filter(locale => !ignored.includes(locale))
   }
 
   // languages
@@ -124,6 +141,35 @@ export class Global {
   static set sourceLanguage (value) {
     Global.setConfig('sourceLanguage', normalizeLocale(value))
     this._onDidChangeLoader.fire(this.loader)
+  }
+
+  static get ignoredLocales (): string[] {
+    const ignored = Global.getConfig('ignoredLocales')
+    if (!ignored)
+      return []
+    if (ignored && typeof ignored === 'string')
+      return [ignored]
+    if (Array.isArray(ignored))
+      return ignored
+    return []
+  }
+
+  static set ignoredLocales (value) {
+    Global.setConfig('ignoredLocales', value, true)
+    this._onDidChangeLoader.fire(this.loader)
+  }
+
+  static toggleLocaleVisibility (locale: string, visible?: boolean) {
+    const ignored = this.ignoredLocales
+    if (visible == null)
+      visible = !ignored.includes(locale)
+    if (!visible) {
+      ignored.push(locale)
+      this.ignoredLocales = ignored
+    }
+    else {
+      this.ignoredLocales = ignored.filter(i => i !== locale)
+    }
   }
 
   // locales
@@ -156,4 +202,6 @@ export class Global {
       .getConfiguration()
       .update(`${configPrefix}.${key}`, value, isGlobal)
   }
+
+  // #endregion
 }

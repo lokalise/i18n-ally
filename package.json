@@ -76,6 +76,21 @@
         "command": "extension.vue-i18n-ally.open-key",
         "title": "Open locale file",
         "icon": "./static/icon-open-file.svg"
+      },
+      {
+        "command": "extension.vue-i18n-ally.locale-visibility-toggle",
+        "title": "Toggle locale visibility",
+        "icon": "./static/icon-eye.svg"
+      },
+      {
+        "command": "extension.vue-i18n-ally.locale-visibility-show",
+        "title": "Show locale",
+        "icon": "./static/icon-eye.svg"
+      },
+      {
+        "command": "extension.vue-i18n-ally.locale-visibility-hide",
+        "title": "Hide locale",
+        "icon": "./static/icon-eye-off.svg"
       }
     ],
     "menus": {
@@ -107,6 +122,16 @@
         {
           "command": "extension.vue-i18n-ally.set-source-language",
           "when": "false && view =~ /locales-progress/ && viewItem =~ /notsource/"
+        },
+        {
+          "command": "extension.vue-i18n-ally.locale-visibility-show",
+          "when": "view =~ /locales-progress/ && viewItem =~ /show/",
+          "group": "inline"
+        },
+        {
+          "command": "extension.vue-i18n-ally.locale-visibility-hide",
+          "when": "view =~ /locales-progress/ && viewItem =~ /hide/",
+          "group": "inline"
         }
       ]
     },
@@ -158,6 +183,10 @@
           "type": "string",
           "default": "en",
           "description": "Displaying language"
+        },
+        "vue-i18n-ally.ignoredLocales": {
+          "type": "array",
+          "description": "Locale codes to be ingored"
         }
       }
     }

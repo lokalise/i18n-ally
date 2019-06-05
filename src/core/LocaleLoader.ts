@@ -23,9 +23,9 @@ export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
   readonly onDidChange: Event<undefined> = this._onDidChange.event
 
-  files: Record<string, ParsedFile> = {}
-  flattenLocaleTree: FlattenLocaleTree = {}
-  localeTree: LocaleTree = newTree()
+  private _files: Record<string, ParsedFile> = {}
+  private _flattenLocaleTree: FlattenLocaleTree = {}
+  private _localeTree: LocaleTree = newTree()
 
   constructor (public readonly rootpath: string) {
     super(() => this.onDispose())
@@ -41,14 +41,22 @@ export class LocaleLoader extends Disposable {
   }
 
   get locales () {
-    return uniq(Object.values(this.files).map(f => f.locale))
+    return uniq(Object.values(this._files).map(f => f.locale))
+  }
+
+  get flattenLocaleTree () {
+    return this._flattenLocaleTree
+  }
+
+  get localeTree () {
+    return this._localeTree
   }
 
   getCoverage (locale: string, keys?: string[]): Coverage {
-    keys = keys || Object.keys(this.flattenLocaleTree)
+    keys = keys || Object.keys(this._flattenLocaleTree)
     const total = keys.length
     const translated = keys.filter(key => {
-      return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
+      return this._flattenLocaleTree[key] && this._flattenLocaleTree[key].getValue(locale)
     })
     return {
       locale,
@@ -59,7 +67,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getNodeByKey (keypath: string): LocaleNode | undefined {
-    return this.flattenLocaleTree[keypath]
+    return this._flattenLocaleTree[keypath]
   }
 
   getTranslationsByKey (keypath: string, shadow = true) {
@@ -73,7 +81,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
-    tree = tree || this.localeTree
+    tree = tree || this._localeTree
     const keys = keypath.split('.')
     const root = keys[0]
     const remaining = keys.slice(1).join('.')
@@ -86,7 +94,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getClosestNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
-    tree = tree || this.localeTree
+    tree = tree || this._localeTree
     const keys = keypath.split('.')
     const root = keys[0]
     const remaining = keys.slice(1).join('.')
@@ -101,7 +109,7 @@ export class LocaleLoader extends Disposable {
         return this.getClosestNodeByKey(remaining, node)
     }
     // still at the root, nothing found
-    if (tree === this.localeTree)
+    if (tree === this._localeTree)
       return undefined
     // return last node
     return tree
@@ -113,7 +121,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getFilepathsOfLocale (locale: string) {
-    return Object.values(this.files)
+    return Object.values(this._files)
       .filter(f => f.locale === locale)
       .map(f => f.filepath)
   }
@@ -194,24 +202,26 @@ export class LocaleLoader extends Disposable {
 
   getShadowLocales (node: LocaleNode) {
     const locales: Record<string, LocaleRecord> = {}
-    this.locales.forEach(locale => {
-      if (node.locales[locale]) {
+
+    Global.getVisibleLocales(this.locales)
+      .forEach(locale => {
+        if (node.locales[locale]) {
         // locales already exists
-        locales[locale] = node.locales[locale]
-      }
-      else {
-        // create shadow locale
-        locales[locale] = {
-          locale,
-          value: '',
-          shadow: true,
-          keyname: node.keyname,
-          keypath: node.keypath,
-          filepath: this.getShadowFilePath(node.keypath, locale),
-          type: 'record',
+          locales[locale] = node.locales[locale]
         }
-      }
-    })
+        else {
+        // create shadow locale
+          locales[locale] = {
+            locale,
+            value: '',
+            shadow: true,
+            keyname: node.keyname,
+            keypath: node.keypath,
+            filepath: this.getShadowFilePath(node.keypath, locale),
+            type: 'record',
+          }
+        }
+      })
     return locales
   }
 
@@ -258,7 +268,7 @@ export class LocaleLoader extends Disposable {
       if (!parser)
         return new AllyError(ErrorType.unsupported_file_type, ext)
       const value = await parser.parse(raw)
-      this.files[filepath] = {
+      this._files[filepath] = {
         filepath,
         locale,
         value,
@@ -274,7 +284,7 @@ export class LocaleLoader extends Disposable {
   }
 
   private unsetFile (filepath: string) {
-    delete this.files[filepath]
+    delete this._files[filepath]
   }
 
   private async loadDirectory (rootPath: string) {
@@ -313,7 +323,7 @@ export class LocaleLoader extends Disposable {
 
       switch (type) {
         case 'del':
-          delete this.files[filepath]
+          delete this._files[filepath]
           this.update()
           break
 
@@ -331,7 +341,7 @@ export class LocaleLoader extends Disposable {
 
   private updateFlattenLocalesTree () {
     const tree: FlattenLocaleTree = {}
-    for (const file of Object.values(this.files)) {
+    for (const file of Object.values(this._files)) {
       for (const keypath of Object.keys(file.flatten)) {
         if (!tree[keypath])
           tree[keypath] = new LocaleNode(keypath)
@@ -346,7 +356,7 @@ export class LocaleLoader extends Disposable {
         }
       }
     }
-    this.flattenLocaleTree = tree
+    this._flattenLocaleTree = tree
   }
 
   private updateLocalesTree () {
@@ -382,9 +392,9 @@ export class LocaleLoader extends Disposable {
     }
 
     const tree = newTree()
-    for (const file of Object.values(this.files))
+    for (const file of Object.values(this._files))
       subTree(file.value, '', file, tree)
-    this.localeTree = tree
+    this._localeTree = tree
   }
 
   private update () {

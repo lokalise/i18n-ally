@@ -1,3 +1,4 @@
+
 export enum Commands {
   config_locales_auto = 'extension.vue-i18n-ally.config-locales-auto',
   config_display_language = 'extension.vue-i18n-ally.config-display-language',
@@ -10,4 +11,7 @@ export enum Commands {
   translate_key = 'extension.vue-i18n-ally.translate-key',
   edit_key = 'extension.vue-i18n-ally.edit-key',
   open_key = 'extension.vue-i18n-ally.open-key',
+  locale_visibility_toggle = 'extension.vue-i18n-ally.locale-visibility-toggle',
+  locale_visibility_show = 'extension.vue-i18n-ally.locale-visibility-show',
+  locale_visibility_hide = 'extension.vue-i18n-ally.locale-visibility-hide',
 }

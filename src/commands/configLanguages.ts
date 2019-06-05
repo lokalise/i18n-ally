@@ -2,6 +2,7 @@ import { commands, window } from 'vscode'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { Commands } from '.'
+import { ProgressItem } from '../views/ProgressView'
 
 async function pickLocale (locale?: any) {
   // from context menu
@@ -10,7 +11,7 @@ async function pickLocale (locale?: any) {
   if (locale && typeof locale === 'string')
     return locale
 
-  const locales = Global.loader.locales
+  const locales = Global.visibleLocales
   return await window.showQuickPick(locales, {
     placeHolder: Global.displayLanguage,
   })
@@ -24,12 +25,21 @@ function handler (type: 'displayLanguage' | 'sourceLanguage') {
   }
 }
 
+function visibilityHandler (value?: boolean) {
+  return (item: ProgressItem) => {
+    Global.toggleLocaleVisibility(item.node.locale, value)
+  }
+}
+
 const m: ExtensionModule = () => {
   return [
     commands.registerCommand(Commands.config_display_language, handler('displayLanguage')),
     commands.registerCommand(Commands.set_display_language, handler('displayLanguage')),
     commands.registerCommand(Commands.config_source_language, handler('sourceLanguage')),
     commands.registerCommand(Commands.set_source_language, handler('sourceLanguage')),
+    commands.registerCommand(Commands.locale_visibility_toggle, visibilityHandler()),
+    commands.registerCommand(Commands.locale_visibility_show, visibilityHandler(true)),
+    commands.registerCommand(Commands.locale_visibility_hide, visibilityHandler(false)),
   ]
 }
 

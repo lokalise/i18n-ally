@@ -1,9 +1,10 @@
-import * as vscode from 'vscode'
 import { LocaleLoader, Coverage, Global } from '../core'
 import { ExtensionModule } from '../modules'
+import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
-export class Item extends vscode.TreeItem {
+export class ProgressItem extends TreeItem {
   constructor (
+    private ctx: ExtensionContext,
     public readonly node: Coverage
   ) {
     super(node.locale)
@@ -12,6 +13,15 @@ export class Item extends vscode.TreeItem {
   get description (): string {
     const percent = (this.node.translated / this.node.total * 100).toFixed(2)
     return `${percent}% - ${this.node.translated}/${this.node.total}`
+  }
+
+  get visible () {
+    return !Global.ignoredLocales.includes(this.node.locale)
+  }
+
+  get iconPath () {
+    if (!this.visible)
+      return this.ctx.asAbsolutePath('static/icon-eye-off.svg')
   }
 
   get contextValue () {
@@ -23,16 +33,23 @@ export class Item extends vscode.TreeItem {
     if (this.node.locale !== Global.displayLanguage)
       context.push('notdisply')
 
+    if (!this.visible)
+      context.push('show')
+    else if (this.node.locale !== Global.displayLanguage)
+      context.push('hide')
+
     return context.join('-')
   }
 }
 
-export class ProgressProvider implements vscode.TreeDataProvider<Item> {
-  private _onDidChangeTreeData: vscode.EventEmitter<Item | undefined> = new vscode.EventEmitter<Item | undefined>();
-  readonly onDidChangeTreeData: vscode.Event<Item | undefined> = this._onDidChangeTreeData.event;
+export class ProgressProvider implements TreeDataProvider<ProgressItem> {
+  private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>();
+  readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event;
   private loader: LocaleLoader
 
-  constructor () {
+  constructor (
+    private ctx: ExtensionContext,
+  ) {
     this.loader = Global.loader
     Global.onDidChangeLoader((loader) => {
       this.loader = loader
@@ -44,22 +61,22 @@ export class ProgressProvider implements vscode.TreeDataProvider<Item> {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: Item): vscode.TreeItem {
+  getTreeItem (element: ProgressItem): TreeItem {
     return element
   }
 
-  async getChildren (element?: Item) {
+  async getChildren (element?: ProgressItem) {
     if (element)
-      return []
+      return [] // no child
 
-    else
-      return Object.values(this.loader.locales).map(node => new Item(this.loader.getCoverage(node)))
+    return Object.values(Global.allLocales)
+      .map(node => new ProgressItem(this.ctx, this.loader.getCoverage(node)))
   }
 }
 
-const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
-  const provider = new ProgressProvider()
-  return vscode.window.registerTreeDataProvider('locales-progress', provider)
+const m: ExtensionModule = (ctx: ExtensionContext) => {
+  const provider = new ProgressProvider(ctx)
+  return window.registerTreeDataProvider('locales-progress', provider)
 }
 
 export default m
