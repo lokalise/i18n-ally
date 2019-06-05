@@ -41,7 +41,7 @@ export class LocaleTreeItem extends TreeItem {
 
   get description (): string {
     if (this.node.type === 'node' || this.node.type === 'record')
-      return this.node.value || '(empty)'
+      return this.node.value
     return ''
   }
 
