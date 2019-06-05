@@ -252,7 +252,6 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "@types/flat": "0.0.28",
     "@types/js-yaml": "3.12.1",
     "@types/lodash": "4.14.133",
     "@types/mocha": "5.2.7",
@@ -275,7 +274,6 @@
   },
   "dependencies": {
     "fast-glob": "^2.2.7",
-    "flat": "^4.1.0",
     "js-yaml": "^3.13.1",
     "limax": "^1.7.0",
     "lodash": "^4.17.11",

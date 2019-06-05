@@ -3,7 +3,6 @@ import { promises as fs, existsSync } from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
 // @ts-ignore
-import * as flat from 'flat'
 import { Global } from './Global'
 import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
@@ -280,7 +279,6 @@ export class LocaleLoader extends Disposable {
         locale,
         value,
         nested,
-        flatten: flat(value),
       }
     }
     catch (e) {
@@ -346,32 +344,14 @@ export class LocaleLoader extends Disposable {
     watcher.onDidDelete(updateFile.bind(this, 'del'))
   }
 
-  private updateFlattenLocalesTree () {
-    const tree: FlattenLocaleTree = {}
-    for (const file of Object.values(this._files)) {
-      for (const keypath of Object.keys(file.flatten)) {
-        if (!tree[keypath])
-          tree[keypath] = new LocaleNode(keypath)
-
-        tree[keypath].locales[file.locale] = {
-          keypath,
-          keyname: getKeyname(keypath),
-          value: file.flatten[keypath],
-          locale: file.locale,
-          filepath: file.filepath,
-          type: 'record',
-        }
-      }
-    }
-    this._flattenLocaleTree = tree
-  }
-
   private updateLocalesTree () {
+    this._flattenLocaleTree = {}
     const subTree = (object: object, keypath: string, file: ParsedFile, tree?: LocaleTree) => {
       tree = tree || newTree(keypath)
       for (const [key, value] of Object.entries(object)) {
         const newKeyPath = keypath ? `${keypath}.${key}` : key
 
+        // should go nested
         if (_.isObject(value)) {
           let originalTree: LocaleTree|undefined
           if (tree.children[key] && tree.children[key].type === 'tree')
@@ -381,8 +361,14 @@ export class LocaleLoader extends Disposable {
           continue
         }
 
-        if (!tree.children[key])
-          tree.children[key] = new LocaleNode(newKeyPath)
+        // init node
+        if (!tree.children[key]) {
+          const node = new LocaleNode(newKeyPath)
+          tree.children[key] = node
+          this._flattenLocaleTree[node.keypath] = node
+        }
+
+        // add locales to exitsing node
         const node = tree.children[key]
         if (node.type === 'node') {
           node.locales[file.locale] = {
@@ -406,7 +392,6 @@ export class LocaleLoader extends Disposable {
 
   private update () {
     this.updateLocalesTree()
-    this.updateFlattenLocalesTree()
     this._onDidChange.fire()
   }
 

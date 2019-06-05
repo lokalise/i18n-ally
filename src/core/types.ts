@@ -7,7 +7,6 @@ export interface ParsedFile {
   locale: string
   value: object
   nested: boolean
-  flatten: Record<string, string>
 }
 
 export interface LocaleRecord {
