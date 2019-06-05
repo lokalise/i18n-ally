@@ -1,6 +1,6 @@
 import { workspace, window, EventEmitter, Event, Disposable } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
-import { uniq, isObject, set } from 'lodash'
+import * as _ from 'lodash'
 import * as path from 'path'
 // @ts-ignore
 import * as flat from 'flat'
@@ -41,7 +41,17 @@ export class LocaleLoader extends Disposable {
   }
 
   get locales () {
-    return uniq(Object.values(this._files).map(f => f.locale))
+    const source = Global.sourceLanguage
+    return _(this._files)
+      .values()
+      .map(f => f.locale)
+      .uniq()
+      .sort((x, y) => x === source
+        ? -1
+        : y === source
+          ? 1
+          : 0)
+      .value()
   }
 
   get flattenLocaleTree () {
@@ -244,7 +254,7 @@ export class LocaleLoader extends Disposable {
       const originalRaw = await fs.readFile(filepath, 'utf-8')
       original = await parser.parse(originalRaw)
     }
-    set(original, pending.keypath, pending.value)
+    _.set(original, pending.keypath, pending.value)
 
     const writting = await parser.dump(original)
     await fs.writeFile(filepath, writting, 'utf-8')
@@ -365,7 +375,7 @@ export class LocaleLoader extends Disposable {
       for (const [key, value] of Object.entries(object)) {
         const newKeyPath = keypath ? `${keypath}.${key}` : key
 
-        if (isObject(value)) {
+        if (_.isObject(value)) {
           let originalTree: LocaleTree|undefined
           if (tree.children[key] && tree.children[key].type === 'tree')
             originalTree = tree.children[key] as LocaleTree
