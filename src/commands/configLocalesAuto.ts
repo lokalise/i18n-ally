@@ -5,7 +5,7 @@ import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { Commands } from '.'
 
-class AutoDetectLocales {
+export class AutoDetectLocales {
   ctx: ExtensionContext
 
   constructor (ctx: ExtensionContext) {
@@ -42,13 +42,9 @@ class AutoDetectLocales {
 }
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
-  const detector = new AutoDetectLocales(ctx)
-
-  if (Global.enabled)
-    detector.init()
-
   return commands.registerCommand(Commands.config_locales_auto,
     () => {
+      const detector = new AutoDetectLocales(ctx)
       detector.autoSet()
     })
 }

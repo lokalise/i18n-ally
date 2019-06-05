@@ -416,6 +416,7 @@ export class LocaleLoader extends Disposable {
   private async loadAll () {
     for (const pathname of this.localesPaths) {
       const fullpath = path.resolve(this.rootpath, pathname)
+      Global.outputChannel.appendLine(`Loading locales under ${fullpath}`)
       await this.loadDirectory(fullpath)
       this.watchOn(fullpath)
     }

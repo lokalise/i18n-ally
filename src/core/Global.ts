@@ -4,6 +4,7 @@ import { uniq } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from './utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
+import { AutoDetectLocales } from '../commands/configLocalesAuto'
 
 const configPrefix = 'vue-i18n-ally'
 
@@ -30,6 +31,7 @@ export class Global {
     context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
+    new AutoDetectLocales(context).init()
     await this.updateRootPath()
     await this.initLoader(this._rootpath)
   }
