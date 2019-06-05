@@ -1,4 +1,12 @@
 {
   "project": "Demo",
-  "hello": "Hello!"
+  "hello": "Hello!",
+  "good_morning": "Good morning",
+  "some": {
+    "deep": {
+      "nested": {
+        "key": "Nested!"
+      }
+    }
+  }
 }

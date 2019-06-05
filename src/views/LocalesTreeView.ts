@@ -50,7 +50,8 @@ export class LocaleTreeItem extends TreeItem {
       return this.ctx.asAbsolutePath('static/icon-module.svg')
     else if (this.node.type === 'node')
       return this.ctx.asAbsolutePath('static/icon-string.svg')
-    return undefined
+    else if (this.node.type === 'record')
+      return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
   }
 
   get contextValue () {

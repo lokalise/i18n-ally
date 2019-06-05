@@ -1,3 +1,10 @@
 {
-  "project": "Démo"
+  "project": "Démo",
+  "some": {
+    "deep": {
+      "nested": {
+        "key": "Imbriqué!"
+      }
+    }
+  }
 }

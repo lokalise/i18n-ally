@@ -1,3 +1,10 @@
 {
-  "project": "デモ"
+  "project": "デモ",
+  "some": {
+    "deep": {
+      "nested": {
+        "key": "入れ子になった！"
+      }
+    }
+  }
 }

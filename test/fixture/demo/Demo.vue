@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <p>{{ $t('hello') }}</p>
+    <p>This is a demo app.</p>
 
-    <p v-t="'nested.hello'"></p>
+    <p v-t="'some.deep.nested.key'"></p>
+
+    <p>{{ $t('intro') }}</p>
   </div>
 </template>
 
@@ -11,7 +14,7 @@
 export default {
   computed: {
     foobar() {
-      return this.$t('nested.foo.bar')
+      return this.$t('good_morning')
     },
   },
 }
