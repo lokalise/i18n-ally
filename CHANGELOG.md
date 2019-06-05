@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/antfu/vue-i18n-ally/compare/v0.11.1...v0.12.0) (2019-06-05)
+
+
+### ⚡ Features
+
+* locale flag! ([cdb3f9a](https://github.com/antfu/vue-i18n-ally/commit/cdb3f9a))
+* progress bar ([2424f4a](https://github.com/antfu/vue-i18n-ally/commit/2424f4a))
+
+
+### 📚 Documentations
+
+* screenshot ([d444c2a](https://github.com/antfu/vue-i18n-ally/commit/d444c2a))
+
+
+
 ### [0.11.1](https://github.com/antfu/vue-i18n-ally/compare/v0.11.0...v0.11.1) (2019-06-05)
 
 
