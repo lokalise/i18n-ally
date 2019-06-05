@@ -73,15 +73,15 @@ If you would like use different file formats or directory structures, it welcome
 - [x] Underscore for i18n keys?
 - [x] YAML support
 - [x] `$tc`, `$d`, `$n`, `v-t` support
+- [x] Hide/Show specific locales
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Source language indicator
-- [ ] Hide/Show specific locales
 - [ ] Analysis report
 - [ ] Screenshots
 - [ ] JSON/YAML file annonation & hint
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Force enabled on non-vue-i18n project
-- [ ] i18n for this plugin
+- [ ] i18n for the plugin itself
 
 ## 👨‍💻 Credits
 
