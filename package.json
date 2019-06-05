@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "Vue i18n Ally",
   "description": "Better Vue i18n experiences with VS Code",
-  "version": "0.10.11",
+  "version": "0.11.0",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"

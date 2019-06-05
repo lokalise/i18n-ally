@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/antfu/vue-i18n-ally/compare/v0.10.11...v0.11.0) (2019-06-05)
+
+
+### ⚡ Features
+
+* "set as display language" contextmenu ([608fc93](https://github.com/antfu/vue-i18n-ally/commit/608fc93))
+* hide/show locales ([71d7777](https://github.com/antfu/vue-i18n-ally/commit/71d7777))
+
+
+### 📚 Documentations
+
+* update readme ([fb361ab](https://github.com/antfu/vue-i18n-ally/commit/fb361ab))
+
+
+
 ### [0.10.11](https://github.com/antfu/vue-i18n-ally/compare/v0.10.0...v0.10.11) (2019-06-04)
 
 
