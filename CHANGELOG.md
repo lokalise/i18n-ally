@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.14.0](https://github.com/antfu/vue-i18n-ally/compare/v0.13.0...v0.14.0) (2019-06-05)
+
+
+### ⚡ Features
+
+* add support for `vuex-i18n` and `vue-i18next` ([769cce0](https://github.com/antfu/vue-i18n-ally/commit/769cce0))
+
+
+### 🐞 Bug Fixes
+
+* add `i18n` as detectable locale path  ([5c9726a](https://github.com/antfu/vue-i18n-ally/commit/5c9726a))
+* auto locales detect timing ([7376259](https://github.com/antfu/vue-i18n-ally/commit/7376259))
+
+
+### 📚 Documentations
+
+* add vuex-i18n fixture ([43d5c5d](https://github.com/antfu/vue-i18n-ally/commit/43d5c5d))
+* update readme ([46f0f14](https://github.com/antfu/vue-i18n-ally/commit/46f0f14))
+
+
+
 ## [0.13.0](https://github.com/antfu/vue-i18n-ally/compare/v0.12.0...v0.13.0) (2019-06-05)
 
 
