@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.1](https://github.com/antfu/vue-i18n-ally/compare/v0.11.0...v0.11.1) (2019-06-05)
+
+
+### ⚡ Features
+
+* file locales tree displays on both view containers ([a6c07a7](https://github.com/antfu/vue-i18n-ally/commit/a6c07a7))
+
+
+
 ## [0.11.0](https://github.com/antfu/vue-i18n-ally/compare/v0.10.11...v0.11.0) (2019-06-05)
 
 
