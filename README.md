@@ -4,9 +4,9 @@
 
 🌍 Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 
-![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/antfu.vue-i18n-ally.svg?style=flat-square)
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/antfu.vue-i18n-ally.svg?style=flat-square)
-![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/antfu.vue-i18n-ally.svg?style=flat-square)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/antfu.vue-i18n-ally.svg?color=blue&style=flat-square&label=VSCode%20Marketplace&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjM0IDIzNS4xIiB3aWR0aD0iMjQ4OCIgaGVpZ2h0PSIyNTAwIj48c3R5bGU%2BLnN0MHtmaWxsOiMwMTc5Y2J9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNODMuMyAxNDMuOWwtNTggNDUuMkwwIDE3Ni41VjU4LjdMMjUuMiA0Nmw1Ny42IDQ1LjNMMTc0IDBsNjAgMjMuOXYxODYuOWwtNTkuNyAyNC4zLTkxLTkxLjJ6bTg4LjkgMTUuOVY3NS4zbC01NC42IDQyLjMgNTQuNiA0Mi4yek0yNy4zIDE0NC42TDU2IDExOC41IDI3LjMgODkuOXY1NC43eiIvPjwvc3ZnPg%3D%3D)](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally)
+[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/antfu.vue-i18n-ally.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/antfu.vue-i18n-ally.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally)
 
 
 ## ⚡ Features
