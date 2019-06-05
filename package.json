@@ -35,27 +35,33 @@
     "commands": [
       {
         "command": "extension.vue-i18n-ally.config-locales",
-        "title": "Vue i18n Ally: Manual configure locales path"
+        "title": "Manual configure locales path",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.config-locales-auto",
-        "title": "Vue i18n Ally: Auto detect locales path"
+        "title": "Auto detect locales path",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.config-display-language",
-        "title": "Vue i18n Ally: Change display language"
+        "title": "Change display language",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.config-source-language",
-        "title": "Vue i18n Ally: Change source language"
+        "title": "Change source language",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.set-display-language",
-        "title": "Set as display language"
+        "title": "Set as display language",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.set-source-language",
-        "title": "Set as source language"
+        "title": "Set as source language",
+        "category": "Vue i18n Ally"
       },
       {
         "command": "extension.vue-i18n-ally.copy-key",
@@ -94,6 +100,16 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "extension.vue-i18n-ally.set-display-language",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.vue-i18n-ally.set-source-language",
+          "when": "config.no_exits"
+        }
+      ],
       "view/item/context": [
         {
           "command": "extension.vue-i18n-ally.open-key",
