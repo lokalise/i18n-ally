@@ -274,6 +274,7 @@
     "webpack-cli": "3.3.2"
   },
   "dependencies": {
+    "esm": "^3.2.25",
     "fast-glob": "^2.2.7",
     "flat": "^4.1.0",
     "js-yaml": "^3.13.1",
