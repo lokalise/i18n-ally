@@ -137,7 +137,7 @@
         },
         {
           "command": "extension.vue-i18n-ally.set-source-language",
-          "when": "false && view =~ /locales-progress/ && viewItem =~ /notsource/"
+          "when": "view =~ /locales-progress/ && viewItem =~ /notsource/"
         },
         {
           "command": "extension.vue-i18n-ally.locale-visibility-show",

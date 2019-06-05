@@ -1,4 +1,4 @@
-import { LocaleLoader, Coverage, Global, unicodeProgress } from '../core'
+import { LocaleLoader, Coverage, Global, unicodeProgress, decorateLocale } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
@@ -7,7 +7,7 @@ export class ProgressItem extends TreeItem {
     private ctx: ExtensionContext,
     public readonly node: Coverage
   ) {
-    super(node.locale)
+    super(decorateLocale(node.locale))
   }
 
   get description (): string {

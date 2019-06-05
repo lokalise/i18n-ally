@@ -1,4 +1,4 @@
-import { Global, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree } from '../core'
+import { Global, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree, decorateLocale } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
@@ -14,12 +14,12 @@ export class LocaleTreeItem extends TreeItem {
   }
 
   get tooltip (): string {
-    return `${this.node.keypath}`
+    return this.node.keypath
   }
 
   get label (): string {
     if (this.node.type === 'record') {
-      return this.node.locale
+      return decorateLocale(this.node.locale)
     }
     else {
       return this.flatten
