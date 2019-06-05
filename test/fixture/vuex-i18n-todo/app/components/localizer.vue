@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.localizer">
     <span v-for="locale in $i18n.locales()" :key="'i81n-' + locale"
-      @click="$i18n.set(locale)" v-if="$i18n.locale() !== locale">
+      @click="$i18n.set(locale)">
       {{locale}}
     </span>
   </div>
