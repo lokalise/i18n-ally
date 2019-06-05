@@ -1,4 +1,4 @@
-import { LocaleLoader, Coverage, Global } from '../core'
+import { LocaleLoader, Coverage, Global, unicodeProgress } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
@@ -11,8 +11,10 @@ export class ProgressItem extends TreeItem {
   }
 
   get description (): string {
-    const percent = (this.node.translated / this.node.total * 100).toFixed(2)
-    return `${percent}% - ${this.node.translated}/${this.node.total}`
+    const rate = this.node.translated / this.node.total
+    const progress = unicodeProgress(rate, 8)
+    const percent = (rate * 100).toFixed(2)
+    return `${progress} ${percent}%  (${this.node.translated}/${this.node.total})`
   }
 
   get visible () {
