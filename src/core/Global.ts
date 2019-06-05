@@ -113,11 +113,17 @@ export class Global {
   }
 
   static set displayLanguage (value) {
-    Global.setConfig('displayLanguage', normalizeLocale(value))
+    Global.setConfig('displayLanguage', normalizeLocale(value), true)
+    this._onDidChangeLoader.fire(this.loader)
   }
 
   static get sourceLanguage (): string {
     return normalizeLocale(Global.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
+  }
+
+  static set sourceLanguage (value) {
+    Global.setConfig('sourceLanguage', normalizeLocale(value))
+    this._onDidChangeLoader.fire(this.loader)
   }
 
   // locales

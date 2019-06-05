@@ -46,6 +46,18 @@
         "title": "Vue i18n Ally: Change display language"
       },
       {
+        "command": "extension.vue-i18n-ally.config-source-language",
+        "title": "Vue i18n Ally: Change source language"
+      },
+      {
+        "command": "extension.vue-i18n-ally.set-display-language",
+        "title": "Set as display language"
+      },
+      {
+        "command": "extension.vue-i18n-ally.set-source-language",
+        "title": "Set as source language"
+      },
+      {
         "command": "extension.vue-i18n-ally.copy-key",
         "title": "Copy i18n key",
         "icon": "./static/icon-copy.svg"
@@ -87,6 +99,14 @@
           "command": "extension.vue-i18n-ally.edit-key",
           "when": "view =~ /locales-tree/ && viewItem =~ /record/",
           "group": "inline@4"
+        },
+        {
+          "command": "extension.vue-i18n-ally.set-display-language",
+          "when": "view =~ /locales-progress/ && viewItem =~ /notdisply/"
+        },
+        {
+          "command": "extension.vue-i18n-ally.set-source-language",
+          "when": "false && view =~ /locales-progress/ && viewItem =~ /notsource/"
         }
       ]
     },
@@ -137,7 +157,7 @@
         "vue-i18n-ally.displayLanguage": {
           "type": "string",
           "default": "en",
-          "description": "Default display language"
+          "description": "Displaying language"
         }
       }
     }

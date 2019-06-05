@@ -14,7 +14,17 @@ export class Item extends vscode.TreeItem {
     return `${percent}% - ${this.node.translated}/${this.node.total}`
   }
 
-  contextValue = 'progressItem'
+  get contextValue () {
+    const context = ['progress']
+
+    if (this.node.locale !== Global.sourceLanguage)
+      context.push('notsource')
+
+    if (this.node.locale !== Global.displayLanguage)
+      context.push('notdisply')
+
+    return context.join('-')
+  }
 }
 
 export class ProgressProvider implements vscode.TreeDataProvider<Item> {

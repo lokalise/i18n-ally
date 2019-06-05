@@ -1,11 +1,11 @@
 export enum Commands {
   config_locales_auto = 'extension.vue-i18n-ally.config-locales-auto',
   config_display_language = 'extension.vue-i18n-ally.config-display-language',
+  config_source_language = 'extension.vue-i18n-ally.config-source-language',
   config_locales = 'extension.vue-i18n-ally.config-locales',
-  extract_text = 'extension.vue-i18n-ally.extract_text',
-
-  debug = 'extension.vue-i18n-ally.debug',
-
+  set_display_language = 'extension.vue-i18n-ally.set-display-language',
+  set_source_language = 'extension.vue-i18n-ally.set-source-language',
+  extract_text = 'extension.vue-i18n-ally.extract-text',
   copy_key = 'extension.vue-i18n-ally.copy-key',
   translate_key = 'extension.vue-i18n-ally.translate-key',
   edit_key = 'extension.vue-i18n-ally.edit-key',
