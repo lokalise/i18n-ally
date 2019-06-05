@@ -66,7 +66,7 @@ export class LocaleTreeItem extends TreeItem {
     const hasFilepath = this.node.type === 'record' && !!this.node.filepath
 
     const translatable = !isSource && !isTree && (!isShadow || hasFilepath)
-    const openable = hasFilepath
+    const openable = !isTree && (!isShadow || hasFilepath)
 
     if (translatable)
       values.push('translatable')

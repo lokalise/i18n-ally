@@ -80,7 +80,7 @@
       },
       {
         "command": "extension.vue-i18n-ally.open-key",
-        "title": "Open locale file",
+        "title": "Go to definaition",
         "icon": "./static/icon-open-file.svg"
       },
       {
@@ -117,18 +117,18 @@
           "group": "inline@1"
         },
         {
-          "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /translatable/",
+          "command": "extension.vue-i18n-ally.copy-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /node/",
           "group": "inline@2"
         },
         {
-          "command": "extension.vue-i18n-ally.copy-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /node/",
+          "command": "extension.vue-i18n-ally.translate-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /translatable/",
           "group": "inline@3"
         },
         {
           "command": "extension.vue-i18n-ally.edit-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /record/",
+          "when": "view =~ /locales-tree/ && viewItem =~ /record|node/",
           "group": "inline@4"
         },
         {
