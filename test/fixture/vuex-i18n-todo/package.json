@@ -1,0 +1,16 @@
+{
+  "name": "todo-vuex-i18n",
+  "version": "1.1.0",
+  "description": "Example of todo application with vuex-i18n",
+  "author": "Department of Clinical Research, University Hospital Basel",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server --inline --hot"
+  },
+  "dependencies": {
+    "vue": "2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "vuex-i18n": "^1.8.0",
+    "vuex-router-sync": "^5.0.0"
+  }
+}
