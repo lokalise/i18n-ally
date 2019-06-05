@@ -2,6 +2,7 @@ import { workspace } from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
 import LanguageCodes from '../meta/LanguageCodes'
+import { Global } from './Global'
 
 export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -63,6 +64,12 @@ export function replaceLocalePath (filepath: string, targetLocale: string): stri
   return ''
 }
 
+const SupportedFrameworks = [
+  'vue-i18n',
+  'vuex-i18n',
+  '@panter/vue-i18next',
+]
+
 export function isVueI18nProject (projectUrl: string): boolean {
   if (!projectUrl || !workspace.workspaceFolders)
     return false
@@ -70,14 +77,19 @@ export function isVueI18nProject (projectUrl: string): boolean {
   try {
     const rawPackageJSON = fs.readFileSync(`${projectUrl}/package.json`, 'utf-8')
     const {
-      dependencies,
-      devDependencies,
+      dependencies = {},
+      devDependencies = {},
     } = JSON.parse(rawPackageJSON)
-    return !!dependencies['vue-i18n'] || !!devDependencies['vue-i18n']
+
+    for (const framework of SupportedFrameworks) {
+      if (framework in dependencies || framework in devDependencies)
+        return true
+    }
   }
   catch (err) {
-    return false
+    Global.outputChannel.appendLine('Error on parsing package.json')
   }
+  return false
 }
 
 export function unicodeProgress (progress: number, width: number) {
