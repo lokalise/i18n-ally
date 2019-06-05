@@ -147,12 +147,17 @@
     "views": {
       "explorer": [
         {
-          "id": "locales-tree-file",
+          "id": "locales-tree-file-explorer",
           "name": "Vue i18n Keys",
           "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
         }
       ],
       "vue-i18n-ally": [
+        {
+          "id": "locales-tree-file",
+          "name": "Current file",
+          "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
+        },
         {
           "id": "locales-progress",
           "name": "Progress",
@@ -222,6 +227,7 @@
   "scripts": {
     "release": "standard-version",
     "publish": "standard-version && vsce publish",
+    "publish:patch": "standard-version --release-as patch && vsce publish",
     "vscode:prepublish": "webpack --mode development",
     "compile": "webpack --mode development",
     "watch": "webpack --mode development --watch",

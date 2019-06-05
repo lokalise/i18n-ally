@@ -50,7 +50,10 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
 const m: ExtensionModule = (ctx) => {
   const provider = new FileLocalesTreeProvider(ctx)
 
-  return window.registerTreeDataProvider('locales-tree-file', provider)
+  return [
+    window.registerTreeDataProvider('locales-tree-file', provider),
+    window.registerTreeDataProvider('locales-tree-file-explorer', provider),
+  ]
 }
 
 export default m
