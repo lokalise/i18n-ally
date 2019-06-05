@@ -74,7 +74,7 @@ If you would like use different file formats or directory structures, it welcome
 - [x] Machine translating
 - [x] Locales Tree
 - [x] Translating progress
-- [x] [Workspace support](https://github.com/microsoft/vscode-extension-samples/blob/master/basic-multi-root-sample/src/extension.ts)
+- [x] Workspace support
 - [x] Underscore for i18n keys?
 - [x] YAML support
 - [x] `$tc`, `$d`, `$n`, `v-t` support
@@ -88,6 +88,8 @@ If you would like use different file formats or directory structures, it welcome
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Force enabled on non-vue-i18n project
 - [ ] i18n for the plugin itself
+- [ ] `.js` locales
+- [ ] tests
 
 ## 👨‍💻 Credits
 

@@ -250,14 +250,12 @@ export class LocaleLoader extends Disposable {
       throw new AllyError(ErrorType.unsupported_file_type, ext)
 
     let original: object = {}
-    if (existsSync(filepath)) {
-      const originalRaw = await fs.readFile(filepath, 'utf-8')
-      original = await parser.parse(originalRaw)
-    }
+    if (existsSync(filepath))
+      original = await parser.load(filepath)
+
     _.set(original, pending.keypath, pending.value)
 
-    const writting = await parser.dump(original)
-    await fs.writeFile(filepath, writting, 'utf-8')
+    await parser.save(filepath, original)
   }
 
   async writeToFile (pendings: PendingWrite|PendingWrite[]) {
@@ -272,12 +270,11 @@ export class LocaleLoader extends Disposable {
     try {
       Global.outputChannel.appendLine(`Loading file ${filepath}`)
       const { locale, nested } = getFileInfo(filepath)
-      const raw = await fs.readFile(filepath, 'utf-8')
       const ext = path.extname(filepath)
       const parser = Global.getMatchedParser(ext)
       if (!parser)
         return new AllyError(ErrorType.unsupported_file_type, ext)
-      const value = await parser.parse(raw)
+      const value = await parser.load(filepath)
       this._files[filepath] = {
         filepath,
         locale,

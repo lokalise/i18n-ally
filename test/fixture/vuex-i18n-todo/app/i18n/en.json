@@ -3,7 +3,7 @@
     "text": "Welcome to the <span class=\"highlight\">awesome</span> TooDoo App"
   },
   "todos": {
-    "placeholder": "Add a new todo item",
+    "placeholder": "Add a new todo items",
     "all": "all",
     "active": "active",
     "completed": "completed",
