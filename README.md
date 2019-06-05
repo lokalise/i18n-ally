@@ -19,6 +19,7 @@
 - JSON and YAML supported
 - Multi-root workspace
 - Translating progress
+- Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n) and [`vue-i18next`](https://github.com/panter/vue-i18next)
 
 ![](https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/screenshots/overview.png)
 
