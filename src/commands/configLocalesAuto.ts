@@ -25,7 +25,7 @@ class AutoDetectLocales {
     if (!rootPath)
       return
 
-    const pattern = [`${rootPath}/**/(locales|locale)`]
+    const pattern = [`${rootPath}/**/(locales|locale|i18n)`]
     let result: string[] = await fg(pattern, {
       ignore: ['**/node_modules'],
       onlyDirectories: true,
