@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <p>{{ $t('hello') }}</p>
+    <p v-t="'some.deep.nested.key'"></p>
+    <p>{{ $t('intro') }}</p>
     <p>This is a demo app.</p>
 
-    <p v-t="'some.deep.nested.key'"></p>
-
-    <p>{{ $t('intro') }}</p>
   </div>
 </template>
 

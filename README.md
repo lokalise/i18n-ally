@@ -2,13 +2,12 @@
 
 # Vue i18n Ally
 
-Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
+🌍 Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 
 ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/antfu.vue-i18n-ally.svg?style=flat-square)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/antfu.vue-i18n-ally.svg?style=flat-square)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/antfu.vue-i18n-ally.svg?style=flat-square)
 
-🚧 This project is under construction, please use wisely...
 
 ## ⚡ Features
 
@@ -18,6 +17,11 @@ Better [Vue i18n](https://github.com/kazupon/vue-i18n) experiences with VSCode
 - One-click machine translation
 - Extract text from code
 - JSON and YAML supported
+- Multi-root workspace
+- Translating progress
+
+![](https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/screenshots/overview.png)
+
 
 ## ⚙ Installation
 
@@ -74,10 +78,11 @@ If you would like use different file formats or directory structures, it welcome
 - [x] YAML support
 - [x] `$tc`, `$d`, `$n`, `v-t` support
 - [x] Hide/Show specific locales
+- [x] Screenshots
+- [x] Language flags
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Source language indicator
 - [ ] Analysis report
-- [ ] Screenshots
 - [ ] JSON/YAML file annonation & hint
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Force enabled on non-vue-i18n project
