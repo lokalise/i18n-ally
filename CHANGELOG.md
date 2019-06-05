@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://github.com/antfu/vue-i18n-ally/compare/v0.12.0...v0.13.0) (2019-06-05)
+
+
+### ⚡ Features
+
+* edit and goto for node ([9e6dbdc](https://github.com/antfu/vue-i18n-ally/commit/9e6dbdc))
+* keep source locales on top ([53531d6](https://github.com/antfu/vue-i18n-ally/commit/53531d6))
+* remove the placeholder for empty value ([d094484](https://github.com/antfu/vue-i18n-ally/commit/d094484))
+* special "unicode font" for displaying locales ([05da0ef](https://github.com/antfu/vue-i18n-ally/commit/05da0ef))
+
+
+### 🐞 Bug Fixes
+
+* commandPalette commands ([219599d](https://github.com/antfu/vue-i18n-ally/commit/219599d))
+
+
+### 📚 Documentations
+
+* update badges ([464b5a9](https://github.com/antfu/vue-i18n-ally/commit/464b5a9))
+
+
+
 ## [0.12.0](https://github.com/antfu/vue-i18n-ally/compare/v0.11.1...v0.12.0) (2019-06-05)
 
 
