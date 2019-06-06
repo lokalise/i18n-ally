@@ -23,7 +23,7 @@ export class ProgressItem extends TreeItem {
 
   get iconPath () {
     if (!this.visible)
-      return this.ctx.asAbsolutePath('static/icon-eye-off.svg')
+      return this.ctx.asAbsolutePath('static/icon-eye-off-fade.svg')
     return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
   }
 
