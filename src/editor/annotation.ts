@@ -30,9 +30,8 @@ const annotation: ExtensionModule = (ctx) => {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const trans = Global.loader.getNodeByKey(key)
 
-      const text = (trans && trans.value) || ''
+      const text = Global.loader.getValueByKey(key)
 
       const end = index + match[0].length - 1
       const start = end - match[1].length

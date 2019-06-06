@@ -9,11 +9,12 @@ import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
-function newTree (keypath = ''): LocaleTree {
+function newTree (keypath = '', values = {}): LocaleTree {
   return {
     keypath,
     keyname: getKeyname(keypath),
     children: {},
+    values,
     type: 'tree',
   }
 }
@@ -100,6 +101,36 @@ export class LocaleLoader extends Disposable {
     if (node && node.type === 'tree')
       return this.getTreeNodeByKey(remaining, node)
     return undefined
+  }
+
+  getValueByKey (keypath: string, locale?: string, clamp: boolean = true) {
+    locale = locale || Global.displayLanguage
+
+    const maxlength = 50 // TODO: a configure for this
+    const node = this.getTreeNodeByKey(keypath)
+
+    if (!node)
+      return undefined
+
+    if (node.type === 'tree') {
+      const value = node.values[locale]
+      if (!value)
+        return undefined
+      let text = JSON
+        .stringify(value, null, clamp ? undefined : 2)
+        .replace(/"(\w+?)":/g, ' $1:')
+        .replace(/}/g, ' }')
+
+      if (clamp && maxlength && text.length > maxlength)
+        text = '{...}'
+      return text
+    }
+    else {
+      let value = node.getValue(locale)
+      if (clamp && maxlength && value.length > maxlength)
+        value = `${value.substring(0, maxlength)}...`
+      return value
+    }
   }
 
   getClosestNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
@@ -348,6 +379,7 @@ export class LocaleLoader extends Disposable {
     this._flattenLocaleTree = {}
     const subTree = (object: object, keypath: string, file: ParsedFile, tree?: LocaleTree) => {
       tree = tree || newTree(keypath)
+      tree.values[file.locale] = object
       for (const [key, value] of Object.entries(object)) {
         const newKeyPath = keypath ? `${keypath}.${key}` : key
 

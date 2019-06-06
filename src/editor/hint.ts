@@ -18,10 +18,8 @@ class HintProvider implements HoverProvider {
     if (!key)
       return
 
-    const locales = Global.loader.getTranslationsByKey(key, true)
-
-    const transText = Object
-      .values(locales)
+    const transText = Global.visibleLocales
+      .map(locale => ({ locale, value: Global.loader.getValueByKey(key, locale, false) }))
       .map(item => `**${item.locale}:** ${item.value || '-'}`)
       .join('\n\n')
 

@@ -47,6 +47,7 @@ export interface LocaleTree {
   keyname: string
   children: Record<string, LocaleTree|LocaleNode>
   shadow?: boolean
+  values: Record<string, object>
   type: 'tree'
 }
 
