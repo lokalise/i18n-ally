@@ -1,4 +1,4 @@
-import { LocaleLoader, Coverage, Global, unicodeProgress, decorateLocale } from '../core'
+import { LocaleLoader, Coverage, Global, unicodeProgress, decorateLocale, unicodeDecorate } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
@@ -13,12 +13,25 @@ export class ProgressItem extends TreeItem {
   get description (): string {
     const rate = this.node.translated / this.node.total
     const progress = unicodeProgress(rate, 8)
-    const percent = (rate * 100).toFixed(2)
-    return `${progress} ${percent}%  (${this.node.translated}/${this.node.total})`
+    const percent = (rate * 100).toFixed(1)
+    let description = `${progress} ${percent}%  (${this.node.translated}/${this.node.total})`
+    if (this.isSource)
+      description += unicodeDecorate('  source', 'regional_indicator')
+    else if (this.isDisplay)
+      description += unicodeDecorate('  display', 'regional_indicator')
+    return description
   }
 
   get visible () {
     return !Global.ignoredLocales.includes(this.node.locale)
+  }
+
+  get isSource () {
+    return this.node.locale === Global.sourceLanguage
+  }
+
+  get isDisplay () {
+    return this.node.locale === Global.displayLanguage
   }
 
   get iconPath () {
@@ -30,15 +43,15 @@ export class ProgressItem extends TreeItem {
   get contextValue () {
     const context = ['progress']
 
-    if (this.node.locale !== Global.sourceLanguage)
+    if (!this.isSource)
       context.push('notsource')
 
-    if (this.node.locale !== Global.displayLanguage)
+    if (!this.isDisplay)
       context.push('notdisply')
 
     if (!this.visible)
       context.push('show')
-    else if (this.node.locale !== Global.displayLanguage)
+    else if (!this.isDisplay) // should not hide if it's displaying
       context.push('hide')
 
     return context.join('-')

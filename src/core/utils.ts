@@ -101,6 +101,6 @@ export function unicodeProgress (progress: number, width: number) {
   if (width - whole_width - 1 < 0)
     part_char = ''
   const space_width = Math.max(width - whole_width - 1, 0)
-  const line = `${'█'.repeat(whole_width)}${part_char}${'   '.repeat(space_width)}`
+  const line = `${'█'.repeat(whole_width)}${part_char}${'  '.repeat(space_width)}`
   return line
 }
