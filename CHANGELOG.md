@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.15.0](https://github.com/antfu/vue-i18n-ally/compare/v0.14.0...v0.15.0) (2019-06-07)
+
+
+### ⚡ Features
+
+* "collapse all" button ([8153666](https://github.com/antfu/vue-i18n-ally/commit/8153666))
+* displaying object keypaths ([ffea7ed](https://github.com/antfu/vue-i18n-ally/commit/ffea7ed))
+* goto definition ([01d953c](https://github.com/antfu/vue-i18n-ally/commit/01d953c))
+* source and displaying locales indicator ([6e93964](https://github.com/antfu/vue-i18n-ally/commit/6e93964))
+* use table to display hint ([0534a20](https://github.com/antfu/vue-i18n-ally/commit/0534a20))
+
+
+### 🐞 Bug Fixes
+
+* eye buttons color ([b65d205](https://github.com/antfu/vue-i18n-ally/commit/b65d205))
+* remove buttons in hint ([2621975](https://github.com/antfu/vue-i18n-ally/commit/2621975))
+* vuex-i18n fixture ([6687a72](https://github.com/antfu/vue-i18n-ally/commit/6687a72))
+
+
+### 🔮 Refactor
+
+* extract file reading and writing logic to parser ([185464a](https://github.com/antfu/vue-i18n-ally/commit/185464a))
+
+
+
 ## [0.14.0](https://github.com/antfu/vue-i18n-ally/compare/v0.13.0...v0.14.0) (2019-06-05)
 
 
