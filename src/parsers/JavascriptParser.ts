@@ -1,4 +1,5 @@
 import { Parser } from './Parser'
+import { window } from 'vscode'
 
 export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any
@@ -29,8 +30,8 @@ export class JavascriptParser extends Parser {
     return JSON.parse(JSON.stringify(module))
   }
 
-  async save (filepath: string, object: object) {
-    // TODO: raise a warning
+  async save () {
+    window.showErrorMessage('Writing to js file is not supported')
   }
 
   navigateToKey (text: string, keypath: string) {
