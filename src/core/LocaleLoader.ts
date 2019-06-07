@@ -133,6 +133,16 @@ export class LocaleLoader extends Disposable {
     }
   }
 
+  getFilepathByKey (key: string, locale?: string) {
+    locale = locale || Global.displayLanguage
+    const files = Object.values(this._files).filter(f => f.locale === locale)
+    for (const file of files) {
+      if (_.get(file.value, key))
+        return file.filepath
+    }
+    return undefined
+  }
+
   getClosestNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     tree = tree || this._localeTree
     const keys = keypath.split('.')

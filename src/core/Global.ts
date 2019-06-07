@@ -5,6 +5,7 @@ import { normalizeLocale, isVueI18nProject } from './utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
 import { AutoDetectLocales } from '../commands/configLocalesAuto'
+import { extname } from 'path'
 
 const configPrefix = 'vue-i18n-ally'
 
@@ -89,6 +90,8 @@ export class Global {
   }
 
   static getMatchedParser (ext: string) {
+    if (!ext.startsWith('.'))
+      ext = extname(ext)
     return this.parsers.find(parser => parser.supports(ext))
   }
 

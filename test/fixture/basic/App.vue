@@ -12,7 +12,6 @@
     <p>{{ $d(new Date(), 'date.short') }}</p>
     <p>{{ $d(new Date(), 'date.long', 'ja-JP') }}</p>
 
-
     <!-- Number localization -->
     <p>{{ $n(100, 'currency') }}</p>
     <p>{{ $n(100, 'currency', 'ja-JP') }}</p>

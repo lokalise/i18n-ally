@@ -16,16 +16,17 @@ export class JsonParser extends Parser {
   navigateToKey (text: string, keypath: string) {
     const keys = keypath.split('.')
 
+    // build regex to search key
     let regexString = keys
       .map((key, i) => `^[ \\t]{${(i + 1) * this.options.indent}}"${key}": ?`)
       .join('[\\s\\S]*')
-    regexString += '"(.*)"'
+    regexString += '(?:"(.*)"|({))'
     const regex = new RegExp(regexString, 'gm')
 
     const match = regex.exec(text)
     if (match && match.length >= 2) {
       const end = match.index + match[0].length - 1
-      const value = match[1]
+      const value = match[1] || match[2]
       const start = end - value.length
       return { start, end }
     }
