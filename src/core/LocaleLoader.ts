@@ -103,7 +103,7 @@ export class LocaleLoader extends Disposable {
     return undefined
   }
 
-  getValueByKey (keypath: string, locale?: string, clamp: boolean = true) {
+  getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
     locale = locale || Global.displayLanguage
 
     const maxlength = 50 // TODO: a configure for this
@@ -117,9 +117,9 @@ export class LocaleLoader extends Disposable {
       if (!value)
         return undefined
       let text = JSON
-        .stringify(value, null, clamp ? undefined : 2)
+        .stringify(value, null, stringifySpace)
         .replace(/"(\w+?)":/g, ' $1:')
-        .replace(/}/g, ' }')
+        .replace(/}/, ' }')
 
       if (clamp && maxlength && text.length > maxlength)
         text = '{...}'

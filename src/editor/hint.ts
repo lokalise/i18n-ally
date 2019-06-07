@@ -1,4 +1,4 @@
-import { Global, KeyDetector, LanguageSelectors } from '../core'
+import { Global, KeyDetector, LanguageSelectors, decorateLocale } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import { Commands } from '../commands'
@@ -18,13 +18,15 @@ class HintProvider implements HoverProvider {
     if (!key)
       return
 
-    const transText = Global.visibleLocales
+    let transTable = Global.visibleLocales
       .map(locale => ({ locale, value: Global.loader.getValueByKey(key, locale, false) }))
-      .map(item => `**${item.locale}:** ${item.value || '-'}`)
-      .join('\n\n')
+      .map(item => `| **${decorateLocale(item.locale)}** | ${item.value || '-'} |`)
+      .join('\n')
 
-    if (!transText)
+    if (!transTable)
       return
+
+    transTable = `|   |   |\n|---:|---|\n${transTable}`
 
     const buttons: {name: string; command: string}[] = []
 
@@ -35,7 +37,7 @@ class HintProvider implements HoverProvider {
 
     const buttonsMarkdown = buttons.map(btn => `[${btn.name}](command:${btn.command})`).join(' | ')
     const markdownText = new MarkdownString(
-      `${transText || key}\n\n---\n\n${buttonsMarkdown}`
+      `${transTable || key}\n\n---\n\n${buttonsMarkdown}`
     )
     markdownText.isTrusted = true
 
