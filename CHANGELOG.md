@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://github.com/antfu/vue-i18n-ally/compare/v0.15.0...v0.16.0) (2019-06-07)
+
+
+### ⚡ Features
+
+* `.js` parser ([b538d45](https://github.com/antfu/vue-i18n-ally/commit/b538d45))
+
+
+### 📚 Documentations
+
+* add js-parser fixture ([db33e1c](https://github.com/antfu/vue-i18n-ally/commit/db33e1c))
+* update readme for js supporting ([aeedb81](https://github.com/antfu/vue-i18n-ally/commit/aeedb81))
+
+
+
 ## [0.15.0](https://github.com/antfu/vue-i18n-ally/compare/v0.14.0...v0.15.0) (2019-06-07)
 
 
