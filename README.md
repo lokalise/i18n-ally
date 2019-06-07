@@ -69,6 +69,35 @@ Currently we support `json` or `yaml` as your locales file type.
 
 If you would like use different file formats or directory structures, it welcome to open an issue or pull request.
 
+### ⚗ Experimental `.js` support
+
+From v0.16.x, we shipped the support for loading javascript locale files.
+
+Something like this:
+
+```js
+// locales/en.js
+export default {
+  intro: {
+    text: 'Welcome to the <span class="highlight">awesome</span> TooDoo App'
+  },
+
+  about: {
+    name: 'About',
+    text: 'This is a small sample app to illustration internationalization with the vuex-i18n plugin.',
+    link: 'Back to my list'.toUpperCase()
+  }
+}
+```
+
+Although there are some limitations:
+
+### No editting / translating
+Sine javascript can be very complex and there is not a proper way the let machine decide where to write the changes. We disabled any writing features on ".js" locales and will never support it.
+
+### No reload on file changes 🐞
+This is a bug cause by `esm`'s cache. It will be fixed in the future release.
+
 ## 📅 TODO
 
 - [x] Machine translating
@@ -81,6 +110,7 @@ If you would like use different file formats or directory structures, it welcome
 - [x] Hide/Show specific locales
 - [x] Screenshots
 - [x] Language flags
+- [x] `.js` locales
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Source language indicator
 - [ ] Analysis report
@@ -88,7 +118,6 @@ If you would like use different file formats or directory structures, it welcome
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Force enabled on non-vue-i18n project
 - [ ] i18n for the plugin itself
-- [ ] `.js` locales
 - [ ] tests
 
 ## 👨‍💻 Credits

@@ -19,6 +19,7 @@ const config = {
   externals: {
     vscode: 'commonjs vscode',
     nodejieba: 'nodejieba',
+    esm: 'esm',
   },
   resolve: {
     extensions: ['.ts', '.js'],

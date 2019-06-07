@@ -4,6 +4,7 @@ import { uniq } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from './utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
+import { JavascriptParser } from '../parsers/JavascriptParser'
 import { AutoDetectLocales } from '../commands/configLocalesAuto'
 import { extname } from 'path'
 
@@ -15,7 +16,11 @@ export class Global {
   private static _channel: OutputChannel;
   private static _enabled: boolean = false
   static context: ExtensionContext
-  static parsers = [new JsonParser(), new YamlParser()]
+  static parsers = [
+    new JsonParser(),
+    new YamlParser(),
+    new JavascriptParser(),
+  ]
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
