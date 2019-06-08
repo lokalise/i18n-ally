@@ -1,8 +1,9 @@
 import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
-import { Global, Commands } from '../core'
+import { Global, Commands, LocaleRecord } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem, Node } from '../views/LocalesTreeView'
 import * as path from 'path'
+import { flatten } from 'lodash'
 
 async function getRecordFromNode (node: Node, defaultLocale?: string) {
   if (node.type === 'tree')
@@ -120,6 +121,72 @@ const m: ExtensionModule = (ctx) => {
               locale: node.locale,
             })
           }
+        }
+        catch (err) {
+          window.showErrorMessage(err.toString())
+        }
+      }),
+
+    commands.registerCommand(Commands.rename_key,
+      async ({ node }: LocaleTreeItem) => {
+        let records: LocaleRecord[] = []
+
+        if (node.type === 'tree')
+          return
+
+        else if (node.type === 'record')
+          records = [node]
+
+        else
+          records = Object.values(node.locales)
+
+        try {
+          const newkeypath = await window.showInputBox({
+            value: node.keypath,
+            prompt: 'Enter the new keypath',
+          })
+
+          if (newkeypath !== undefined && newkeypath !== node.keypath) {
+            const writes = flatten(records
+              .map(record => [{
+                value: undefined,
+                keypath: record.keypath,
+                filepath: record.filepath,
+                locale: record.locale,
+              }, {
+                value: record.value,
+                keypath: newkeypath,
+                filepath: record.filepath,
+                locale: record.locale,
+              }]))
+            await Global.loader.writeToFile(writes)
+          }
+        }
+        catch (err) {
+          window.showErrorMessage(err.toString())
+        }
+      }),
+
+    commands.registerCommand(Commands.delete_key,
+      async ({ node }: LocaleTreeItem) => {
+        let records: LocaleRecord[] = []
+
+        if (node.type === 'tree')
+          return
+
+        else if (node.type === 'record')
+          records = [node]
+
+        else
+          records = Object.values(node.locales)
+
+        try {
+          await Global.loader.writeToFile(records.map(record => ({
+            value: undefined,
+            keypath: record.keypath,
+            filepath: record.filepath,
+            locale: record.locale,
+          })))
         }
         catch (err) {
           window.showErrorMessage(err.toString())

@@ -8,6 +8,7 @@ import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
+import { load } from 'js-yaml'
 
 function newTree (keypath = '', values = {}): LocaleTree {
   return {
@@ -298,12 +299,25 @@ export class LocaleLoader extends Disposable {
     await parser.save(filepath, original)
   }
 
+  private _ignoreChanges = false
   async writeToFile (pendings: PendingWrite|PendingWrite[]) {
+    this._ignoreChanges = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
     pendings = pendings.filter(i => i)
-    for (const pending of pendings)
-      await this.writeToSingleFile(pending)
+    try {
+      for (const pending of pendings)
+        await this.writeToSingleFile(pending)
+    }
+    catch (e) {
+      this._ignoreChanges = false
+      throw e
+    }
+    this._ignoreChanges = false
+    for (const pending of pendings) {
+      if (pending.filepath)
+        await this.loadFile(pending.filepath)
+    }
   }
 
   private async loadFile (filepath: string) {
@@ -362,6 +376,8 @@ export class LocaleLoader extends Disposable {
     const watcher = workspace.createFileSystemWatcher(`${rootPath}/**`)
 
     const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
+      if (this._ignoreChanges)
+        return
       filepath = path.resolve(filepath)
       const { ext } = path.parse(filepath)
       if (!Global.getMatchedParser(ext))

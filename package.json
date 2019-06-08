@@ -84,6 +84,14 @@
         "icon": "./static/icon-open-file.svg"
       },
       {
+        "command": "extension.vue-i18n-ally.delete-key",
+        "title": "Delete key"
+      },
+      {
+        "command": "extension.vue-i18n-ally.rename-key",
+        "title": "Rename key path"
+      },
+      {
         "command": "extension.vue-i18n-ally.locale-visibility-toggle",
         "title": "Toggle locale visibility",
         "icon": "./static/icon-eye.svg"
@@ -107,6 +115,14 @@
         },
         {
           "command": "extension.vue-i18n-ally.set-source-language",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.vue-i18n-ally.delete-key",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.vue-i18n-ally.rename-key",
           "when": "config.no_exits"
         }
       ],
@@ -138,6 +154,14 @@
         {
           "command": "extension.vue-i18n-ally.set-source-language",
           "when": "view =~ /locales-progress/ && viewItem =~ /notsource/"
+        },
+        {
+          "command": "extension.vue-i18n-ally.delete-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /node/"
+        },
+        {
+          "command": "extension.vue-i18n-ally.rename-key",
+          "when": "view =~ /locales-tree/ && viewItem =~ /node/"
         },
         {
           "command": "extension.vue-i18n-ally.locale-visibility-show",

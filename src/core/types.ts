@@ -62,7 +62,7 @@ export interface PendingWrite {
   locale: string
   keypath: string
   filepath?: string
-  value: string
+  value?: string
 }
 
 export interface ExtractTextOptions {
