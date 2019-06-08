@@ -44,9 +44,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
       roots.push(this.newItem(node))
     }
 
-    sortBy(roots, 'keypath')
-
-    return roots
+    return sortBy(roots, 'node.keypath')
   }
 }
 

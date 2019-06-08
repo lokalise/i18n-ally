@@ -1,6 +1,7 @@
 import { Global, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree, decorateLocale } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
+import { sortBy } from 'lodash'
 
 export type Node = LocaleNode | LocaleRecord | LocaleTree
 
@@ -136,9 +137,11 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
       ? Object.values(this.loader.flattenLocaleTree)
       : Object.values(this.loader.localeTree.children)
 
-    return nodes
+    const items = nodes
       .filter(node => this.filter(node))
       .map(node => this.newItem(node))
+
+    return sortBy(items, 'node.keypath')
   }
 
   async getChildren (element?: LocaleTreeItem) {
@@ -153,9 +156,11 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     else if (element.node.type === 'node')
       nodes = Object.values(this.loader.getShadowLocales(element.node))
 
-    return nodes
+    const items = nodes
       .filter(node => this.filter(node))
       .map(r => this.newItem(r))
+
+    return sortBy(items, 'node.keypath')
   }
 }
 

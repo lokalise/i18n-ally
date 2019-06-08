@@ -8,7 +8,6 @@ import { MachinTranslate } from './MachineTranslate'
 import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
-import { load } from 'js-yaml'
 
 function newTree (keypath = '', values = {}): LocaleTree {
   return {
