@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.17.0](https://github.com/antfu/vue-i18n-ally/compare/v0.16.0...v0.17.0) (2019-06-08)
+
+
+### ⚡ Features
+
+* able rename keys and remove keys ([2f99d63](https://github.com/antfu/vue-i18n-ally/commit/2f99d63))
+* annotation fallback ([d3201bc](https://github.com/antfu/vue-i18n-ally/commit/d3201bc))
+* sort keys ([a5de710](https://github.com/antfu/vue-i18n-ally/commit/a5de710))
+
+
+### 🐞 Bug Fixes
+
+* icon for non-existent keys ([85699c2](https://github.com/antfu/vue-i18n-ally/commit/85699c2))
+* object display in file locales tree ([d747d20](https://github.com/antfu/vue-i18n-ally/commit/d747d20))
+
+
+
 ## [0.16.0](https://github.com/antfu/vue-i18n-ally/compare/v0.15.0...v0.16.0) (2019-06-07)
 
 
