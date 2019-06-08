@@ -30,11 +30,25 @@ const annotation: ExtensionModule = (ctx) => {
       const index = match.index
       const matchKey = match[0]
       const key = matchKey.replace(new RegExp(KEY_REG), '$1')
+      let missing = false
 
-      const text = Global.loader.getValueByKey(key)
+      let text = Global.loader.getValueByKey(key)
+      // fallback to source
+      if (!text && Global.displayLanguage !== Global.sourceLanguage) {
+        text = Global.loader.getValueByKey(key, Global.sourceLanguage)
+        missing = true
+      }
+      // no value on both displaying and source
+      if (!text) {
+        text = '⚠'
+        missing = true
+      }
 
       const end = index + match[0].length - 1
       const start = end - match[1].length
+      const color = missing
+        ? 'rgba(153, 153, 153, .3)'
+        : 'rgba(153, 153, 153, .7)'
 
       annotations.push({
         range: new Range(
@@ -43,7 +57,7 @@ const annotation: ExtensionModule = (ctx) => {
         ),
         renderOptions: {
           after: {
-            color: 'rgba(153, 153, 153, .7)',
+            color,
             contentText: `◽️${text || '""'}`,
             fontWeight: 'normal',
             fontStyle: 'normal',
