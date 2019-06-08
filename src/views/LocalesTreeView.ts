@@ -106,8 +106,9 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     return element
   }
 
-  newItem (node: Node) {
-    return new LocaleTreeItem(this.ctx, node, this.flatten)
+  newItem (node: Node, flatten?: boolean) {
+    flatten = flatten === undefined ? this.flatten : flatten
+    return new LocaleTreeItem(this.ctx, node, flatten)
   }
 
   get flatten () {
@@ -121,12 +122,14 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     }
   }
 
-  private filter (node: Node): boolean {
+  private filter (node: Node, root = false): boolean {
     if (!this.includePaths)
       return true
 
     for (const includePath of this.includePaths) {
       if (includePath.startsWith(node.keypath))
+        return true
+      if (!root && node.keypath.startsWith(includePath))
         return true
     }
     return false
@@ -138,7 +141,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
       : Object.values(this.loader.localeTree.children)
 
     const items = nodes
-      .filter(node => this.filter(node))
+      .filter(node => this.filter(node, true))
       .map(node => this.newItem(node))
 
     return sortBy(items, 'node.keypath')
@@ -158,7 +161,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
 
     const items = nodes
       .filter(node => this.filter(node))
-      .map(r => this.newItem(r))
+      .map(r => this.newItem(r, false))
 
     return sortBy(items, 'node.keypath')
   }

@@ -1,6 +1,6 @@
 import { ExtensionContext, window, commands } from 'vscode'
 import { LocalesTreeProvider } from './LocalesTreeView'
-import { KeyDetector, LocaleNode } from '../core'
+import { KeyDetector, LocaleNode, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { isSupported } from '../core/SupportedLanguageIds'
 import { sortBy } from 'lodash'
@@ -39,9 +39,16 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     // create shadow nodes
     const shadowPaths = this.includePaths
       .filter(path => !realPaths.includes(path))
+
     for (const keypath of shadowPaths) {
-      const node = new LocaleNode(keypath, {}, true)
-      roots.push(this.newItem(node))
+      let node = Global.loader.getTreeNodeByKey(keypath)
+      if (node && node.type === 'tree') {
+        roots.push(this.newItem(node))
+      }
+      else {
+        node = new LocaleNode(keypath, {}, true)
+        roots.push(this.newItem(node))
+      }
     }
 
     return sortBy(roots, 'node.keypath')
