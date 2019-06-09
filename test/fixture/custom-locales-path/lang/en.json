@@ -1,0 +1,34 @@
+{
+  "project": "Basic",
+  "car": "car | cars",
+  "apple": "no apples | one apple | {count} apples",
+  "tos": "Term of Service",
+  "term": "I accept {0}",
+  "nested": {
+    "hello": "Hello again",
+    "greeting": "good morning",
+    "foo": {
+      "bar": "foobar"
+    }
+  },
+  "currency": {
+    "style": "currency",
+    "currency": "USD"
+  },
+  "date": {
+    "short": {
+      "year": "numeric",
+      "month": "short",
+      "day": "numeric"
+    },
+    "long": {
+      "year": "numeric",
+      "month": "short",
+      "day": "numeric",
+      "weekday": "short",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    }
+  }
+}
