@@ -3,7 +3,6 @@ import { LocalesTreeProvider } from './LocalesTreeView'
 import { KeyDetector, LocaleNode, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { isSupported } from '../core/SupportedLanguageIds'
-import { sortBy } from 'lodash'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
   constructor (
@@ -51,7 +50,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
       }
     }
 
-    return sortBy(roots, 'node.keypath')
+    return this.sort(roots)
   }
 }
 

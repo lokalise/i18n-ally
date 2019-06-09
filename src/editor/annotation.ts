@@ -40,7 +40,7 @@ const annotation: ExtensionModule = (ctx) => {
       }
       // no value on both displaying and source
       if (!text) {
-        text = '⚠'
+        text = '🔴Not exist'
         missing = true
       }
 

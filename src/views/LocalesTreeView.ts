@@ -147,7 +147,11 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
       .filter(node => this.filter(node, true))
       .map(node => this.newItem(node))
 
-    return sortBy(items, 'node.keypath')
+    return this.sort(items)
+  }
+
+  sort (elements: LocaleTreeItem[]) {
+    return sortBy(elements, 'node.type', 'node.keypath')
   }
 
   async getChildren (element?: LocaleTreeItem) {
@@ -166,7 +170,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
       .filter(node => this.filter(node))
       .map(r => this.newItem(r, false))
 
-    return sortBy(items, 'node.keypath')
+    return this.sort(items)
   }
 }
 
