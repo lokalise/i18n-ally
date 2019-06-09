@@ -68,6 +68,7 @@ const SupportedFrameworks = [
   'vue-i18n',
   'vuex-i18n',
   '@panter/vue-i18next',
+  'nuxt-i18n',
 ]
 
 export function isVueI18nProject (projectUrl: string): boolean {
