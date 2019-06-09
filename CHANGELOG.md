@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.17.4](https://github.com/antfu/vue-i18n-ally/compare/v0.17.3...v0.17.4) (2019-06-09)
+
+
+### 🐞 Bug Fixes
+
+* rename keys will now also update current file ([15fd6d4](https://github.com/antfu/vue-i18n-ally/commit/15fd6d4))
+
+
+
 ### [0.17.3](https://github.com/antfu/vue-i18n-ally/compare/v0.17.2...v0.17.3) (2019-06-09)
 
 
