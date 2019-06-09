@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 🐞 Bug Fixes
 
-* detecting `nuxt-i18n` ([3f09ec8](https://github.com/antfu/vue-i18n-ally/commit/3f09ec8))
+* detecting `nuxt-i18n`, thanks [@cannap](https://github.com/cannap) ([#16](https://github.com/antfu/vue-i18n-ally/issues/16), [3f09ec8](https://github.com/antfu/vue-i18n-ally/commit/3f09ec8))
 
 
 
