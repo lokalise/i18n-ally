@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.17.3](https://github.com/antfu/vue-i18n-ally/compare/v0.17.2...v0.17.3) (2019-06-09)
+
+
+### ⚡ Features
+
+* indicators of translation missing ([51fcb2a](https://github.com/antfu/vue-i18n-ally/commit/51fcb2a))
+
+
+### 🐞 Bug Fixes
+
+* items sorting order ([880883c](https://github.com/antfu/vue-i18n-ally/commit/880883c))
+
+
+
 ### [0.17.2](https://github.com/antfu/vue-i18n-ally/compare/v0.17.1...v0.17.2) (2019-06-09)
 
 
