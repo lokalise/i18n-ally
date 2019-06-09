@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.17.1](https://github.com/antfu/vue-i18n-ally/compare/v0.17.0...v0.17.1) (2019-06-09)
+
+
+### 🐞 Bug Fixes
+
+* detecting `nuxt-i18n` ([3f09ec8](https://github.com/antfu/vue-i18n-ally/commit/3f09ec8))
+
+
+
 ## [0.17.0](https://github.com/antfu/vue-i18n-ally/compare/v0.16.0...v0.17.0) (2019-06-08)
 
 
