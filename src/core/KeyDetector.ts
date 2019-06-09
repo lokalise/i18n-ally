@@ -28,4 +28,24 @@ export class KeyDetector {
       ? document.getText(keyRange).replace(KEY_REG, '$1')
       : undefined
   }
+
+  static getKeys (text: vscode.TextDocument | string) {
+    const keys = []
+    if (typeof text !== 'string')
+      text = text.getText()
+    let match = null
+    while (match = KEY_REG.exec(text)) {
+      const index = match.index
+      const matchKey = match[0]
+      const key = matchKey.replace(new RegExp(KEY_REG), '$1')
+      const end = index + match[0].length - 1
+      const start = end - match[1].length
+      keys.push({
+        key,
+        start,
+        end,
+      })
+    }
+    return keys
+  }
 }

@@ -1,6 +1,6 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
-import { KEY_REG } from '../core/KeyDetector'
+import { KeyDetector } from '../core/KeyDetector'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 
@@ -20,16 +20,12 @@ const annotation: ExtensionModule = (ctx) => {
       return
 
     const document = activeTextEditor.document
-    const text = document.getText()
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []
 
+    const keys = KeyDetector.getKeys(document)
     // get all keys of current file
-    let match = null
-    while (match = KEY_REG.exec(text)) {
-      const index = match.index
-      const matchKey = match[0]
-      const key = matchKey.replace(new RegExp(KEY_REG), '$1')
+    keys.forEach(({ key, start, end }) => {
       let missing = false
 
       let text = Global.loader.getValueByKey(key)
@@ -44,8 +40,6 @@ const annotation: ExtensionModule = (ctx) => {
         missing = true
       }
 
-      const end = index + match[0].length - 1
-      const start = end - match[1].length
       const color = missing
         ? 'rgba(153, 153, 153, .3)'
         : 'rgba(153, 153, 153, .7)'
@@ -58,7 +52,7 @@ const annotation: ExtensionModule = (ctx) => {
         renderOptions: {
           after: {
             color,
-            contentText: `◽️${text || '""'}`,
+            contentText: `◽️${text}`,
             fontWeight: 'normal',
             fontStyle: 'normal',
           },
@@ -70,7 +64,7 @@ const annotation: ExtensionModule = (ctx) => {
           document.positionAt(end)
         ),
       })
-    }
+    })
 
     activeTextEditor.setDecorations(noneDecorationType, annotations)
     activeTextEditor.setDecorations(underlineDecorationType, underlines)

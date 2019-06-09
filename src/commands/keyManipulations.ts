@@ -1,5 +1,5 @@
-import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
-import { Global, Commands, LocaleRecord } from '../core'
+import { window, commands, workspace, Selection, TextEditorRevealType, env, Range } from 'vscode'
+import { Global, Commands, LocaleRecord, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem, Node } from '../views/LocalesTreeView'
 import * as path from 'path'
@@ -141,27 +141,54 @@ const m: ExtensionModule = (ctx) => {
           records = Object.values(node.locales)
 
         try {
+          const oldkeypath = node.keypath
           const newkeypath = await window.showInputBox({
-            value: node.keypath,
+            value: oldkeypath,
             prompt: 'Enter the new keypath',
           })
 
-          if (newkeypath !== undefined && newkeypath !== node.keypath) {
-            const writes = flatten(records
-              .filter(record => !record.shadow)
-              .map(record => [{
-                value: undefined,
-                keypath: record.keypath,
-                filepath: record.filepath,
-                locale: record.locale,
-              }, {
-                value: record.value,
-                keypath: newkeypath,
-                filepath: record.filepath,
-                locale: record.locale,
-              }]))
-            await Global.loader.writeToFile(writes)
-          }
+          if (!newkeypath || newkeypath === node.keypath)
+            return
+
+          // save to locale files
+          const writes = flatten(records
+            .filter(record => !record.shadow)
+            .map(record => [{
+              value: undefined,
+              keypath: oldkeypath,
+              filepath: record.filepath,
+              locale: record.locale,
+            }, {
+              value: record.value,
+              keypath: newkeypath,
+              filepath: record.filepath,
+              locale: record.locale,
+            }]))
+
+          if (!writes.length)
+            return
+
+          await Global.loader.writeToFile(writes)
+
+          // update current file
+          const editor = window.activeTextEditor
+          if (!editor)
+            return
+          const document = editor.document
+          if (!document)
+            return
+
+          const keys = KeyDetector.getKeys(document)
+            .filter(({ key }) => key === oldkeypath)
+
+          editor.edit((builder) => {
+            keys.forEach(({ start, end }) => {
+              builder.replace(new Range(
+                document.positionAt(start),
+                document.positionAt(end),
+              ), newkeypath)
+            })
+          })
         }
         catch (err) {
           window.showErrorMessage(err.toString())
