@@ -4,6 +4,7 @@ import { ExtensionContext, workspace, window, commands } from 'vscode'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { Commands } from '.'
+import { ConfigLocalesGuide } from './configLocalesGuide'
 
 export class AutoDetectLocales {
   ctx: ExtensionContext
@@ -33,11 +34,17 @@ export class AutoDetectLocales {
 
     result = result.map(r => path.relative(rootPath, r))
 
-    Global.updateLocalesPaths(result)
+    if (result.length) {
+      Global.updateLocalesPaths(result)
 
-    await window.showInformationMessage(
-      `Vue i18n Ally: Locales path auto set to "${result.join(';').toString()}"`,
-    )
+      await window.showInformationMessage(
+        `Locales path auto set to "${result.join(';').toString()}"`,
+      )
+    }
+    else {
+      const guide = new ConfigLocalesGuide(this.ctx)
+      guide.prompt()
+    }
   }
 }
 

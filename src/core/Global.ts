@@ -37,9 +37,12 @@ export class Global {
     context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
+    // TODO: if not locales set, disabled this plugin
+    // TODO: watch on config change
     new AutoDetectLocales(context).init()
     await this.updateRootPath()
-    await this.initLoader(this._rootpath)
+    if (this.enabled)
+      await this.initLoader(this._rootpath)
   }
 
   private static async initLoader (rootpath: string) {

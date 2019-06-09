@@ -2,20 +2,25 @@ import { window, workspace, Uri, ExtensionContext, commands } from 'vscode'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { Commands } from '.'
+import * as path from 'path'
 
-class Guide {
+export class ConfigLocalesGuide {
   constructor (public ctx: ExtensionContext) {}
 
-  async init () {
+  async prompt () {
     const okText = 'Config Now'
     const result = await window.showInformationMessage(
-      'Locate the `locales` directory in your project',
+      'Config the locales directory for your project',
       okText
     )
 
     if (result !== okText)
       return
 
+    this.config()
+  }
+
+  async config () {
     const dirs = await this.pickDir()
     Global.updateLocalesPaths(dirs)
 
@@ -35,7 +40,13 @@ class Guide {
     if (!dirs)
       return []
 
-    return dirs.map(dirItem => dirItem.path)
+    return dirs
+      .map(item => {
+        if (process.platform === 'win32') // path on windows will starts with '/'
+          return item.path.slice(1)
+        return item.path
+      })
+      .map(pa => path.relative(rootPath, pa))
   }
 
   async success () {
@@ -48,8 +59,8 @@ class Guide {
 const m: ExtensionModule = (ctx) => {
   return commands.registerCommand(Commands.config_locales,
     () => {
-      const guide = new Guide(ctx)
-      guide.init()
+      const guide = new ConfigLocalesGuide(ctx)
+      guide.config()
     })
 }
 
