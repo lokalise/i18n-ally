@@ -71,7 +71,7 @@ If you would like use different file formats or directory structures, it welcome
 
 ### ⚗ Experimental `.js` support
 
-From v0.16.x, we shipped the support for loading javascript locale files.
+From v0.16.x, we shipped the support for loading '*.js' locale files.
 
 Something like this:
 
@@ -85,7 +85,7 @@ export default {
   about: {
     name: 'About',
     text: 'This is a small sample app to illustration internationalization with the vuex-i18n plugin.',
-    link: 'Back to my list'.toUpperCase()
+    link: 'Back to my list'.toUpperCase() // you can run some code if you want
   }
 }
 ```
@@ -98,27 +98,36 @@ Sine javascript can be very complex and there is not a proper way the let machin
 ### No reload on file changes 🐞
 This is a bug cause by `esm`'s cache. It will be fixed in the future release.
 
-## 📅 TODO
+## 📅 TODOs
+
+We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases.
+
+PR to implement any of the following features is also welcome. ☺
 
 - [x] Machine translating
 - [x] Locales Tree
 - [x] Translating progress
 - [x] Workspace support
-- [x] Underscore for i18n keys?
+- [x] Underscore for i18n keys
 - [x] YAML support
 - [x] `$tc`, `$d`, `$n`, `v-t` support
 - [x] Hide/Show specific locales
 - [x] Screenshots
 - [x] Language flags
-- [x] `.js` locales
+- [x] Loading `.js` locales
+- [x] Goto definition
+- [x] Source language indicator
+- [ ] Find all usage
+- [ ] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
-- [ ] Source language indicator
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
+- [ ] Loading `.ts` locales
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Force enabled on non-vue-i18n project
 - [ ] i18n for the plugin itself
 - [ ] tests
+- [ ] RED for missing keys
 
 ## 👨‍💻 Credits
 
