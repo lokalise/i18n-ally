@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.17.2](https://github.com/antfu/vue-i18n-ally/compare/v0.17.1...v0.17.2) (2019-06-09)
+
+
+### 🐞 Bug Fixes
+
+* error on rename/delete non-existent keys ([e8793ee](https://github.com/antfu/vue-i18n-ally/commit/e8793ee))
+
+
+
 ### [0.17.1](https://github.com/antfu/vue-i18n-ally/compare/v0.17.0...v0.17.1) (2019-06-09)
 
 
