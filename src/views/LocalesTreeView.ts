@@ -47,15 +47,20 @@ export class LocaleTreeItem extends TreeItem {
   }
 
   get iconPath () {
-    if (this.node.type === 'record')
-      return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+    if (this.node.type === 'record') { return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`) }
 
-    else if (this.node.shadow)
+    else if (this.node.shadow) {
       return this.ctx.asAbsolutePath('static/icon-unknown.svg')
-    else if (this.node.type === 'tree')
+    }
+    else if (this.node.type === 'tree') {
       return this.ctx.asAbsolutePath('static/icon-module.svg')
-    else if (this.node.type === 'node')
-      return this.ctx.asAbsolutePath('static/icon-string.svg')
+    }
+    else if (this.node.type === 'node') {
+      if (this.description)
+        return this.ctx.asAbsolutePath('static/icon-string.svg')
+      else
+        return this.ctx.asAbsolutePath('static/icon-string-missing.svg')
+    }
   }
 
   get contextValue () {
