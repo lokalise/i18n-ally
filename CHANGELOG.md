@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.17.5](https://github.com/antfu/vue-i18n-ally/compare/v0.17.4...v0.17.5) (2019-06-09)
+
+
+### 🐞 Bug Fixes
+
+* better locales config guide ([9860d63](https://github.com/antfu/vue-i18n-ally/commit/9860d63))
+* logic of disabling and re-enabling the extension ([a6f4b7d](https://github.com/antfu/vue-i18n-ally/commit/a6f4b7d))
+
+
+### 📚 Documentations
+
+* add custom-locales-path fixture ([f24d80f](https://github.com/antfu/vue-i18n-ally/commit/f24d80f))
+* update readme ([47d4613](https://github.com/antfu/vue-i18n-ally/commit/47d4613))
+
+
+
 ### [0.17.4](https://github.com/antfu/vue-i18n-ally/compare/v0.17.3...v0.17.4) (2019-06-09)
 
 
