@@ -11,6 +11,7 @@ export class YamlParser extends Parser {
   }
 
   async dump (object: object) {
+    object = JSON.parse(JSON.stringify(object))
     return yaml.safeDump(object, {
       indent: this.options.indent,
     })

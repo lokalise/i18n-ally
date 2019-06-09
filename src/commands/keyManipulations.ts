@@ -148,6 +148,7 @@ const m: ExtensionModule = (ctx) => {
 
           if (newkeypath !== undefined && newkeypath !== node.keypath) {
             const writes = flatten(records
+              .filter(record => !record.shadow)
               .map(record => [{
                 value: undefined,
                 keypath: record.keypath,
@@ -181,12 +182,14 @@ const m: ExtensionModule = (ctx) => {
           records = Object.values(node.locales)
 
         try {
-          await Global.loader.writeToFile(records.map(record => ({
-            value: undefined,
-            keypath: record.keypath,
-            filepath: record.filepath,
-            locale: record.locale,
-          })))
+          await Global.loader.writeToFile(records
+            .filter(record => !record.shadow)
+            .map(record => ({
+              value: undefined,
+              keypath: record.keypath,
+              filepath: record.filepath,
+              locale: record.locale,
+            })))
         }
         catch (err) {
           window.showErrorMessage(err.toString())
