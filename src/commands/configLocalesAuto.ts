@@ -42,6 +42,7 @@ export class AutoDetectLocales {
       )
     }
     else {
+      window.showWarningMessage('Locales directory not found. Vue i18n Ally is disabled.')
       const guide = new ConfigLocalesGuide(this.ctx)
       guide.prompt()
     }

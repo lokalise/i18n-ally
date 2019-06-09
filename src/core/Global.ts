@@ -37,12 +37,9 @@ export class Global {
     context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
-    // TODO: if not locales set, disabled this plugin
-    // TODO: watch on config change
+    context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update()))
     new AutoDetectLocales(context).init()
     await this.updateRootPath()
-    if (this.enabled)
-      await this.initLoader(this._rootpath)
   }
 
   private static async initLoader (rootpath: string) {
@@ -52,7 +49,6 @@ export class Global {
     if (this._loaders[rootpath])
       return this._loaders[rootpath]
 
-    this.outputChannel.appendLine(`Init loader "${rootpath}"`)
     const loader = new LocaleLoader(rootpath)
     await loader.init()
     this.context.subscriptions.push(loader.onDidChange(() => this._onDidChangeLoader.fire(loader)))
@@ -81,16 +77,34 @@ export class Global {
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
-      const shouldEnabled = isVueI18nProject(rootpath)
       this.outputChannel.appendLine(`\n----\nWorkspace root changed to "${rootpath}"`)
-      this.setEnabled(shouldEnabled)
-      if (shouldEnabled)
-        await this.initLoader(rootpath)
-      else
-        this.outputChannel.appendLine('Workspace is not a vue-i18n project, extension disabled')
+      await this.update()
       this._onDidChangeRootPath.fire(rootpath)
-      this._onDidChangeLoader.fire(this.loader)
     }
+  }
+
+  private static async update () {
+    const i18nProject = isVueI18nProject(this._rootpath)
+    const hasLocalesSet = !!this.localesPaths.length
+    const shouldEnabled = i18nProject && hasLocalesSet
+    this.setEnabled(shouldEnabled)
+    if (this.enabled) {
+      await this.initLoader(this._rootpath)
+    }
+    else {
+      if (!i18nProject)
+        this.outputChannel.appendLine('Current workspace is not a vue-i18n project, extension disabled')
+      else if (!hasLocalesSet)
+        this.outputChannel.appendLine('No locales path found, extension disabled')
+      this.unloadAll()
+    }
+
+    this._onDidChangeLoader.fire(this.loader)
+  }
+
+  private static unloadAll () {
+    Object.values(this._loaders).forEach(loader => loader.dispose())
+    this._loaders = {}
   }
 
   static get loader () {
@@ -116,6 +130,7 @@ export class Global {
 
   private static setEnabled (value: boolean) {
     if (this._enabled !== value) {
+      this.outputChannel.appendLine(value ? 'Enabled' : 'Disabled')
       this._enabled = value
       commands.executeCommand('setContext', 'vue-i18n-ally-enabled', value)
       this._onDidChangeEnabled.fire()

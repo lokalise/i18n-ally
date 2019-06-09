@@ -26,12 +26,14 @@ export class LocaleLoader extends Disposable {
   private _files: Record<string, ParsedFile> = {}
   private _flattenLocaleTree: FlattenLocaleTree = {}
   private _localeTree: LocaleTree = newTree()
+  private _disposables: Disposable[]=[]
 
   constructor (public readonly rootpath: string) {
     super(() => this.onDispose())
   }
 
   async init () {
+    Global.outputChannel.appendLine(`Initializing loader "${this.rootpath}"`)
     await this.loadAll()
     this.update()
   }
@@ -398,6 +400,8 @@ export class LocaleLoader extends Disposable {
     watcher.onDidChange(updateFile.bind(this, 'change'))
     watcher.onDidCreate(updateFile.bind(this, 'create'))
     watcher.onDidDelete(updateFile.bind(this, 'del'))
+
+    this._disposables.push(watcher)
   }
 
   private updateLocalesTree () {
@@ -462,6 +466,8 @@ export class LocaleLoader extends Disposable {
   }
 
   private onDispose () {
-
+    Global.outputChannel.appendLine(`Disposing loader "${this.rootpath}"`)
+    this._disposables.forEach(d => d.dispose())
+    this._disposables = []
   }
 }
