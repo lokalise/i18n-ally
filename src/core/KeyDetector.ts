@@ -29,6 +29,25 @@ export class KeyDetector {
       : undefined
   }
 
+  static getKeyAndRange (document: vscode.TextDocument, position: vscode.Position) {
+    const range = KeyDetector.getKeyRange(document, position)
+    if (!range)
+      return
+    const key = document.getText(range).replace(KEY_REG, '$1')
+    if (!key)
+      return
+    const end = range.end.character - 1
+    const start = end - key.length
+    const keyRange = new vscode.Range(
+      new vscode.Position(range.end.line, start),
+      new vscode.Position(range.end.line, end),
+    )
+    return {
+      range: keyRange,
+      key,
+    }
+  }
+
   static getKeys (text: vscode.TextDocument | string) {
     const keys = []
     if (typeof text !== 'string')

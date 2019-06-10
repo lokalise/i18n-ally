@@ -5,6 +5,7 @@ import completion from './completion'
 import extract from './extract'
 import hint from './hint'
 import definition from './definition'
+import refactor from './refactor'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -12,6 +13,7 @@ const m: ExtensionModule = (ctx) => {
     completion(ctx),
     extract(ctx),
     hint(ctx),
+    refactor(ctx),
     definition(ctx),
   ])
 }

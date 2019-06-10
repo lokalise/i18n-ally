@@ -128,7 +128,20 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.rename_key,
-      async ({ node }: LocaleTreeItem) => {
+      async (item?: LocaleTreeItem | string) => {
+        if (!item)
+          return
+
+        let node: Node | undefined
+
+        if (typeof item === 'string')
+          node = Global.loader.getTreeNodeByKey(item)
+        else
+          node = item.node
+
+        if (!node)
+          return
+
         let records: LocaleRecord[] = []
 
         if (node.type === 'tree')
