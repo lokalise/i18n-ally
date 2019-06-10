@@ -5,7 +5,7 @@ import { normalizeLocale, isVueI18nProject } from './utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
 import { JavascriptParser } from '../parsers/JavascriptParser'
-import { AutoDetectLocales } from '../commands/configLocalesAuto'
+import { AutoDetectLocales } from '../commands/configLocales'
 import { extname } from 'path'
 
 const configPrefix = 'vue-i18n-ally'
@@ -38,7 +38,7 @@ export class Global {
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update()))
-    new AutoDetectLocales(context).init()
+    AutoDetectLocales.init()
     await this.updateRootPath()
   }
 
