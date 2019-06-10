@@ -92,16 +92,3 @@ export function isVueI18nProject (projectUrl: string): boolean {
   }
   return false
 }
-
-export function unicodeProgress (progress: number, width: number) {
-  progress = Math.min(1, Math.max(0, progress))
-  const whole_width = Math.floor(progress * width)
-  const remainder_width = progress * width - whole_width || 0
-  const part_width = Math.floor(remainder_width * 8) || 0
-  let part_char = [' ', '▏', '▎', '▍', '▌', '▋', '▊', '▉'][part_width]
-  if (width - whole_width - 1 < 0)
-    part_char = ''
-  const space_width = Math.max(width - whole_width - 1, 0)
-  const line = `${'█'.repeat(whole_width)}${part_char}${'  '.repeat(space_width)}`
-  return line
-}
