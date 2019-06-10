@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.18.0](https://github.com/antfu/vue-i18n-ally/compare/v0.17.5...v0.18.0) (2019-06-10)
+
+
+### ⚡ Features
+
+* new progress bar ([f1f77e3](https://github.com/antfu/vue-i18n-ally/commit/f1f77e3))
+* refactor to rename ([1c556fb](https://github.com/antfu/vue-i18n-ally/commit/1c556fb))
+
+
+### 🔮 Refactor
+
+* simplified code ([5c94de1](https://github.com/antfu/vue-i18n-ally/commit/5c94de1))
+
+
+
 ### [0.17.5](https://github.com/antfu/vue-i18n-ally/compare/v0.17.4...v0.17.5) (2019-06-09)
 
 
