@@ -1,6 +1,7 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
 import { LanguageSelectors, KeyDetector, Commands } from '../core'
 import { ExtensionModule } from '../modules'
+import i18n from '../i18n'
 
 export class Refactor implements CodeActionProvider {
   public static readonly providedCodeActionKinds = [
@@ -20,9 +21,10 @@ export class Refactor implements CodeActionProvider {
   }
 
   private createRenameAction (document: TextDocument, key: string, range: Range): CodeAction {
-    const action = new CodeAction('Rename key', CodeActionKind.Refactor)
+    const title = i18n.t('command.rename_key')
+    const action = new CodeAction(title, CodeActionKind.Refactor)
     action.command = {
-      title: 'Rename',
+      title,
       command: Commands.rename_key,
       arguments: [
         key,

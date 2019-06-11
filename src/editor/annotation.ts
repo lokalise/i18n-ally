@@ -3,6 +3,7 @@ import { debounce } from 'lodash'
 import { KeyDetector } from '../core/KeyDetector'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
+import i18n from '../i18n'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
 
@@ -36,7 +37,7 @@ const annotation: ExtensionModule = (ctx) => {
       }
       // no value on both displaying and source
       if (!text) {
-        text = '🔴Not exist'
+        text = i18n.t('misc.not_exists')
         missing = true
       }
 

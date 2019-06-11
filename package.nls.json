@@ -22,6 +22,8 @@
   "config.source_language": "Source language for machine translation",
   "config.display_language": "Displaying language",
   "config.ignored_locales": "Locale codes to be ingored",
+  "misc.not_exists": "🔴Not exist",
+  "refactor.extract_text": "Extract text to vue-i18n locales",
   "prompt.config_locales_auto_success": "Locales path auto set to \"{0}\".",
   "prompt.config_locales_success": "Locales path successfully configured.",
   "prompt.config_locales_info": "Config the locales directory for your project",

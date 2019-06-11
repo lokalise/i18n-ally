@@ -1,6 +1,7 @@
 import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
 import { Global, Commands, ExtractTextOptions, LanguageSelectors } from '../core'
 import { ExtensionModule } from '../modules'
+import i18n from '../i18n'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions (): Promise<Command[]> {
@@ -24,7 +25,7 @@ class ExtractProvider implements CodeActionProvider {
 
     return [{
       command: Commands.extract_text,
-      title: 'Extract text to vue-i18n locales',
+      title: i18n.t('refactor.extract_text'),
       arguments: [options],
     }]
   }
