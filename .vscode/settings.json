@@ -9,5 +9,4 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "vue-i18n-ally.localesPaths": "test\\fixture\\basic\\locales,test\\fixture\\demo\\locales,test\\fixture\\dir-locales\\locales,test\\fixture\\non-i18n-project\\locales,test\\fixture\\yaml\\locales,test\\fixture\\vuex-i18n-todo\\app\\i18n",
 }

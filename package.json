@@ -1,6 +1,6 @@
 {
   "name": "vue-i18n-ally",
-  "displayName": "Vue i18n Ally",
+  "displayName": "%extname%",
   "description": "🌍 Better Vue i18n experiences with VS Code",
   "version": "0.18.1",
   "publisher": "antfu",
@@ -35,75 +35,70 @@
     "commands": [
       {
         "command": "extension.vue-i18n-ally.config-locales",
-        "title": "Manual configure locales path",
-        "category": "Vue i18n Ally"
+        "title": "%command.config_locales%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.config-locales-auto",
-        "title": "Auto detect locales path",
-        "category": "Vue i18n Ally"
+        "title": "%command.config_locales_auto%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.config-display-language",
-        "title": "Change display language",
-        "category": "Vue i18n Ally"
+        "title": "%command.config_display_language%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.config-source-language",
-        "title": "Change source language",
-        "category": "Vue i18n Ally"
+        "title": "%command.config_source_language%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.set-display-language",
-        "title": "Set as display language",
-        "category": "Vue i18n Ally"
+        "title": "%command.set_display_language%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.set-source-language",
-        "title": "Set as source language",
-        "category": "Vue i18n Ally"
+        "title": "%command.set_source_language%",
+        "category": "%extname%"
       },
       {
         "command": "extension.vue-i18n-ally.copy-key",
-        "title": "Copy i18n key",
+        "title": "%command.copy_key%",
         "icon": "./static/icon-copy.svg"
       },
       {
         "command": "extension.vue-i18n-ally.translate-key",
-        "title": "Translate",
+        "title": "%command.translate_key%",
         "icon": "./static/icon-translate.svg"
       },
       {
         "command": "extension.vue-i18n-ally.edit-key",
-        "title": "Edit",
+        "title": "%command.edit_key%",
         "icon": "./static/icon-edit.svg"
       },
       {
         "command": "extension.vue-i18n-ally.open-key",
-        "title": "Go to definaition",
+        "title": "%command.open_key%",
         "icon": "./static/icon-open-file.svg"
       },
       {
         "command": "extension.vue-i18n-ally.delete-key",
-        "title": "Delete key"
+        "title": "%command.delete_key%"
       },
       {
         "command": "extension.vue-i18n-ally.rename-key",
-        "title": "Rename key path"
-      },
-      {
-        "command": "extension.vue-i18n-ally.locale-visibility-toggle",
-        "title": "Toggle locale visibility",
-        "icon": "./static/icon-eye.svg"
+        "title": "%command.rename_key%"
       },
       {
         "command": "extension.vue-i18n-ally.locale-visibility-show",
-        "title": "Show locale",
+        "title": "%command.locale_visibility_show%",
         "icon": "./static/icon-eye.svg"
       },
       {
         "command": "extension.vue-i18n-ally.locale-visibility-hide",
-        "title": "Hide locale",
+        "title": "%command.locale_visibility_hide%",
         "icon": "./static/icon-eye-off.svg"
       }
     ],
@@ -179,7 +174,7 @@
       "activitybar": [
         {
           "id": "vue-i18n-ally",
-          "title": "Vue i18n Ally",
+          "title": "%extname%",
           "icon": "./static/logo-view-container.svg"
         }
       ]
@@ -188,50 +183,50 @@
       "explorer": [
         {
           "id": "locales-tree-file-explorer",
-          "name": "Vue i18n Keys",
+          "name": "%view.i18n_keys%",
           "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
         }
       ],
       "vue-i18n-ally": [
         {
           "id": "locales-tree-file",
-          "name": "Current file",
+          "name": "%view.current_file%",
           "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
         },
         {
           "id": "locales-progress",
-          "name": "Progress",
+          "name": "%view.progress%",
           "when": "vue-i18n-ally-enabled"
         },
         {
           "id": "locales-tree",
-          "name": "Tree",
+          "name": "%view.tree%",
           "when": "vue-i18n-ally-enabled"
         }
       ]
     },
     "configuration": {
       "type": "object",
-      "title": "Vue i18n Ally",
+      "title": "%extname%",
       "properties": {
         "vue-i18n-ally.localesPaths": {
           "type": "string",
           "default": "",
-          "description": "Path to locales directory (relative to project root)"
+          "description": "%config.locales_paths%"
         },
         "vue-i18n-ally.sourceLanguage": {
           "type": "string",
           "default": "en",
-          "description": "Source language for machine translation"
+          "description": "%config.source_language%"
         },
         "vue-i18n-ally.displayLanguage": {
           "type": "string",
           "default": "en",
-          "description": "Displaying language"
+          "description": "%config.display_language%"
         },
         "vue-i18n-ally.ignoredLocales": {
           "type": "array",
-          "description": "Locale codes to be ingored"
+          "description": "%config.ignored_locales%"
         }
       }
     }
