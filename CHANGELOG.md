@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.18.1](https://github.com/antfu/vue-i18n-ally/compare/v0.18.0...v0.18.1) (2019-06-11)
+
+
+### 🐞 Bug Fixes
+
+* auto detect only on i18n-enabled project ([a637544](https://github.com/antfu/vue-i18n-ally/commit/a637544))
+
+
+
 ## [0.18.0](https://github.com/antfu/vue-i18n-ally/compare/v0.17.5...v0.18.0) (2019-06-10)
 
 
