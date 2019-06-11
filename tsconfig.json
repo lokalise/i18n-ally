@@ -9,13 +9,14 @@
     "sourceMap": true,
     "strict": true,
     "resolveJsonModule": true,
-    "rootDir": "src",
     "moduleResolution": "node",
     "typeRoots": [ "node_modules/@types" ],
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
   },
   "include": [
     "src/**/*.ts",
+    "package.nls.*.json",
     "./node_modules/vscode/vscode.d.ts",
     "./node_modules/vscode/lib/*",
   ]

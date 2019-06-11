@@ -5,6 +5,7 @@ import { ExtensionModule } from '../modules'
 import { Commands } from '.'
 import { ExtractTextOptions, Global } from '../core'
 import { trim } from 'lodash'
+import i18n from '../i18n'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
@@ -14,12 +15,12 @@ const m: ExtensionModule = () => {
 
       // prompt for keypath
       const keypath = await window.showInputBox({
-        prompt: 'Enter the i18n key path (for example: home.document.title)',
+        prompt: i18n.t('prompt.enter_i18n_key'),
         value: default_keypath,
       })
 
       if (!keypath) {
-        window.showWarningMessage('Extraction canceled')
+        window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
         return
       }
 
@@ -27,11 +28,11 @@ const m: ExtensionModule = () => {
       const node = Global.loader.getNodeByKey(keypath)
       let willSkip = false
       if (node) {
-        const Override = 'Override'
-        const Skip = 'Continue with out override'
-        const Reenter = 'Re-enter'
+        const Override = i18n.t('prompt.button_override')
+        const Skip = i18n.t('prompt.button_skip')
+        const Reenter = i18n.t('prompt.button_reenter')
         const result = await window.showInformationMessage(
-          'Key path already exists. Do you want to override the existing value or re-enter the path?',
+          i18n.t('prompt.key_already_exists'),
           { modal: true },
           Override,
           Skip,
@@ -63,11 +64,11 @@ const m: ExtensionModule = () => {
 
       // prompt for template
       const replacer = await window.showQuickPick(templates, {
-        placeHolder: 'Replace text as:',
+        placeHolder: i18n.t('prompt.replace_text_as'),
       })
 
       if (!replacer) {
-        window.showWarningMessage('Extraction canceled')
+        window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
         return
       }
 

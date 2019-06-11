@@ -4,6 +4,7 @@ import { ExtensionModule } from '../modules'
 import { LocaleTreeItem, Node } from '../views/LocalesTreeView'
 import * as path from 'path'
 import { flatten } from 'lodash'
+import i18n from '../i18n'
 
 async function getRecordFromNode (node: Node, defaultLocale?: string) {
   if (node.type === 'tree')
@@ -16,7 +17,7 @@ async function getRecordFromNode (node: Node, defaultLocale?: string) {
     const locales = Global.loader.getShadowLocales(node)
     const locale = defaultLocale || await window.showQuickPick(
       Global.visibleLocales,
-      { placeHolder: 'Choice a locale' }
+      { placeHolder: i18n.t('prompt.choice_locale') }
     )
     if (!locale)
       return
@@ -30,7 +31,7 @@ const m: ExtensionModule = (ctx) => {
       async ({ node }: LocaleTreeItem) => {
         // @ts-ignore
         await env.clipboard.writeText(`$t('${node.keypath}')`)
-        window.showInformationMessage('I18n key copied')
+        window.showInformationMessage(i18n.t('prompt.key_copied'))
       }),
 
     commands.registerCommand(Commands.translate_key,
@@ -45,7 +46,7 @@ const m: ExtensionModule = (ctx) => {
           const pendings = await Global.loader.MachineTranslate(item.node)
           if (pendings.length) {
             await Global.loader.writeToFile(pendings)
-            window.showInformationMessage('Translation saved!')
+            window.showInformationMessage(i18n.t('prompt.translation_saved'))
           }
         }
         catch (err) {
@@ -86,7 +87,7 @@ const m: ExtensionModule = (ctx) => {
           commands.executeCommand('workbench.action.focusActiveEditorGroup')
         }
         else {
-          window.showWarningMessage(`Failed to locale key "${keypath}"`)
+          window.showWarningMessage(i18n.t('prompt.failed_to_locale_key', keypath))
         }
       }),
 
@@ -110,7 +111,7 @@ const m: ExtensionModule = (ctx) => {
         try {
           const newvalue = await window.showInputBox({
             value: node.value,
-            prompt: `Edit key "${node.keypath}" in ${node.locale}`,
+            prompt: i18n.t('prompt.edit_key_in_locale', node.keypath, node.locale),
           })
 
           if (newvalue !== undefined && newvalue !== node.value) {
@@ -157,7 +158,7 @@ const m: ExtensionModule = (ctx) => {
           const oldkeypath = node.keypath
           const newkeypath = await window.showInputBox({
             value: oldkeypath,
-            prompt: 'Enter the new keypath',
+            prompt: i18n.t('prompt.enter_new_keypath'),
           })
 
           if (!newkeypath || newkeypath === node.keypath)
@@ -191,7 +192,8 @@ const m: ExtensionModule = (ctx) => {
           if (!document)
             return
 
-          const keys = KeyDetector.getKeys(document)
+          const keys = KeyDetector
+            .getKeys(document)
             .filter(({ key }) => key === oldkeypath)
 
           editor.edit((builder) => {
