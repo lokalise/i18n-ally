@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.19.0](https://github.com/antfu/vue-i18n-ally/compare/v0.18.1...v0.19.0) (2019-06-11)
+
+
+### ⚡ Features
+
+* **i18n:** vscode menu i18n (zh-cn) ([95447cf](https://github.com/antfu/vue-i18n-ally/commit/95447cf))
+
+
+### 🌍 Internationalization
+
+* add more translations for zh-CN ([4a4b0ad](https://github.com/antfu/vue-i18n-ally/commit/4a4b0ad))
+* add zh-tw ([6fe183d](https://github.com/antfu/vue-i18n-ally/commit/6fe183d))
+
+
+### 🐞 Bug Fixes
+
+* **deps:** @typescript-eslint/parser ([4303e13](https://github.com/antfu/vue-i18n-ally/commit/4303e13))
+
+
+### 📚 Documentations
+
+* update readme ([8be2e94](https://github.com/antfu/vue-i18n-ally/commit/8be2e94))
+* update vscode logo ([396f670](https://github.com/antfu/vue-i18n-ally/commit/396f670))
+
+
+### 🔮 Refactor
+
+* **i18n:** extract texts ([ee1be49](https://github.com/antfu/vue-i18n-ally/commit/ee1be49))
+
+
+
 ### [0.18.1](https://github.com/antfu/vue-i18n-ally/compare/v0.18.0...v0.18.1) (2019-06-11)
 
 
