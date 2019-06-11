@@ -254,6 +254,10 @@
         "section": "📚 Documentations"
       },
       {
+        "type": "i18n",
+        "section": "🌍 Internationalization"
+      },
+      {
         "type": "ci",
         "hidden": true
       }
