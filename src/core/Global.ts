@@ -5,7 +5,7 @@ import { normalizeLocale, isVueI18nProject } from './utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
 import { JavascriptParser } from '../parsers/JavascriptParser'
-import { AutoDetectLocales } from '../commands/configLocales'
+import { ConfigLocalesGuide } from '../commands/configLocales'
 import { extname } from 'path'
 
 const configPrefix = 'vue-i18n-ally'
@@ -38,7 +38,6 @@ export class Global {
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update()))
-    AutoDetectLocales.init()
     await this.updateRootPath()
   }
 
@@ -96,6 +95,10 @@ export class Global {
         this.outputChannel.appendLine('Current workspace is not a vue-i18n project, extension disabled')
       else if (!hasLocalesSet)
         this.outputChannel.appendLine('No locales path found, extension disabled')
+
+      if (i18nProject && !hasLocalesSet)
+        ConfigLocalesGuide.autoSet()
+
       this.unloadAll()
     }
 

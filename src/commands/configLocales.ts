@@ -53,16 +53,6 @@ export class ConfigLocalesGuide {
       'Locales path successfully configured.',
     )
   }
-}
-
-export class AutoDetectLocales {
-  static async init () {
-    const localesPaths = Global.localesPaths
-    if (localesPaths.length)
-      return
-
-    this.autoSet()
-  }
 
   static async autoSet () {
     const rootPath = workspace.rootPath
@@ -86,7 +76,7 @@ export class AutoDetectLocales {
     }
     else {
       window.showWarningMessage('Locales directory not found. Vue i18n Ally is disabled.')
-      ConfigLocalesGuide.prompt()
+      this.prompt()
     }
   }
 }
@@ -94,7 +84,7 @@ export class AutoDetectLocales {
 const m: ExtensionModule = () => {
   return [
     commands.registerCommand(Commands.config_locales_auto,
-      () => AutoDetectLocales.autoSet()),
+      () => ConfigLocalesGuide.autoSet()),
     commands.registerCommand(Commands.config_locales,
       () => ConfigLocalesGuide.config()),
   ]
