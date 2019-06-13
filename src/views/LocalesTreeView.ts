@@ -144,6 +144,9 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   }
 
   protected getRoots () {
+    if (!this.loader)
+      return []
+
     const nodes = this.flatten
       ? Object.values(this.loader.flattenLocaleTree)
       : Object.values(this.loader.localeTree.children)
