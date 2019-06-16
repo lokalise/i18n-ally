@@ -19,7 +19,7 @@
 - Extract text from code
 - JSON and YAML supported
 - Multi-root workspace
-- Translating progress
+- Translating progress report
 - Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 - i18n for the extension itself, of course. (English, 简体中文, 繁體中文)
 
@@ -28,11 +28,27 @@
 
 ## ⚙ Installation
 
-1. Install [`vue-i18n`](https://github.com/kazupon/vue-i18n) package if you haven't yet. `npm i vue-i18n` or `yarn add vue-i18n`
-2. Install this extension
-3. `locales` path will be detected automatically. You can also configure it manually. There are two ways to do that:
+Install [the extension from VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally) and you are good to go!
+
+
+## 🎯 Troubleshooting
+
+### Extension doesn't work/show up
+
+Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
+  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
+  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
+  - [`vue-i18next`](https://github.com/panter/vue-i18next)
+  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
+
+### I can see the icon, but nothing show up
+
+1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Modify the `settings.json` file of your VSCode, adding `vue-i18n-ally.localesPath` manually.
+   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPath` manually.
+2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
+3. **Directory structure** please read the next section
+
 
 ## 📂 Directory structure
 
