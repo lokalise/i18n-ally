@@ -58,7 +58,7 @@ export class ConfigLocalesGuide {
     if (!rootPath)
       return
 
-    const pattern = [`${rootPath}/**/(locales|locale|i18n)`]
+    const pattern = [`${rootPath}/**/(locales|locale|i18n|lang|langs)`]
     let result: string[] = await fg(pattern, {
       ignore: ['**/node_modules'],
       onlyDirectories: true,
