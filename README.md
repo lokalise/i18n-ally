@@ -21,7 +21,7 @@
 - Multi-root workspace
 - Translating progress report
 - Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
-- i18n for the extension itself, of course. (English, 简体中文, 繁體中文)
+- i18n for the extension itself, of course. **(English, 简体中文, 繁體中文)**
 
 ![](https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/screenshots/overview.png)
 
@@ -89,7 +89,7 @@ If you would like use different file formats or directory structures, it welcome
 
 ### ⚗ Experimental `.js` support
 
-From v0.16.x, we shipped the support for loading '*.js' locale files.
+From v0.16.x, we shipped the support for loading `*.js` locale files.
 
 Something like this:
 
@@ -111,7 +111,7 @@ export default {
 Although there are some limitations:
 
 ### No editting / translating
-Sine javascript can be very complex and there is not a proper way the let machine decide where to write the changes. We disabled any writing features on ".js" locales and will never support it.
+Since javascript can be very complex and there is not a proper way the let machine decide where to update the changes. We disabled all the writing features on `.js` locales and there is no plan to support them in the future.
 
 ### No reload on file changes 🐞
 This is a bug cause by `esm`'s cache. It will be fixed in the future release.
@@ -136,16 +136,17 @@ PR to implement any of the following features is also welcome. ☺
 - [x] Goto definition
 - [x] Source language indicator
 - [x] i18n for the plugin itself
-- [ ] Find all usage
+- [ ] Find all references
 - [ ] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
 - [ ] Loading `.ts` locales
 - [ ] Annoation config (on/off, maxlength)
-- [ ] Force enabled on non-vue-i18n project
-- [ ] tests
+- [ ] Option to force enabling on non-vue-i18n project
+- [ ] Tests
 - [ ] RED for missing keys
+- [ ] Live share support
 
 ## 👨‍💻 Credits
 

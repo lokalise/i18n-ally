@@ -10,7 +10,6 @@
   "categories": [
     "Other"
   ],
-  "preview": true,
   "activationEvents": [
     "workspaceContains:package.json",
     "onLanguage:vue",
@@ -21,7 +20,8 @@
     "vue",
     "vue-i18n",
     "vue i18n",
-    "i18n"
+    "i18n",
+    "i18next"
   ],
   "icon": "static/logo.png",
   "repository": {
