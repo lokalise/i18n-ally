@@ -10,5 +10,6 @@
   "currency": {
     "style": "currency",
     "currency": "JPY"
-  }
+  },
+  "apple": "Good"
 }

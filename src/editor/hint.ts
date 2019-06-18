@@ -1,4 +1,4 @@
-import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands } from '../core'
+import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import i18n from '../i18n'
@@ -27,7 +27,7 @@ class HintProvider implements HoverProvider {
         const commands = []
         const row = {
           locale: decorateLocale(locale),
-          value: Global.loader.getValueByKey(keypath, locale, false) || '-',
+          value: escapeMarkdown(Global.loader.getValueByKey(keypath, locale, false) || '-'),
           commands: '',
         }
         if (node.type === 'node') {

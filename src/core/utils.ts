@@ -64,6 +64,15 @@ export function replaceLocalePath (filepath: string, targetLocale: string): stri
   return ''
 }
 
+export function escapeMarkdown (text: string) {
+  return text
+    .replace(/\|/g, '\\|')
+    .replace(/\[/g, '\\[')
+    .replace(/\]/g, '\\]')
+    .replace(/\(/g, '\\(')
+    .replace(/\)/g, '\\)')
+}
+
 const SupportedFrameworks = [
   'vue-i18n',
   'vuex-i18n',
