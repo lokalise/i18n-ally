@@ -22,6 +22,7 @@
   "config.source_language": "翻譯源語言",
   "config.display_language": "顯示語言",
   "config.ignored_locales": "隱藏的語言",
+  "config.keystyle": "翻譯路徑格式",
   "misc.not_exists": "🔴無翻譯",
   "refactor.extract_text": "提取文案到 vue-i18n",
   "prompt.config_locales_auto_success": "自動檢測到翻譯資料夾 \"{0}\"",
@@ -41,5 +42,10 @@
   "prompt.translation_saved": "翻譯已保存",
   "prompt.failed_to_locale_key": "找不到路徑 \"{0}\"",
   "prompt.edit_key_in_locale": "{1} | 編輯 \"{0}\" 的文案",
-  "prompt.enter_new_keypath": "輸入新的路徑"
+  "prompt.enter_new_keypath": "輸入新的路徑",
+  "prompt.keystyle_flat": "扁平式(Flat)",
+  "prompt.keystyle_flat_example": "例如: { \"a.b.c\": \"...\" }",
+  "prompt.keystyle_nested": "嵌套式(Nested)",
+  "prompt.keystyle_nested_example": "例如: { \"a\": { \"b\": { \"c\": \"...\" } } }",
+  "prompt.keystyle_select": "選擇項目所使用的翻譯路徑格式"
 }
