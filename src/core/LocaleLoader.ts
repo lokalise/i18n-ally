@@ -303,11 +303,15 @@ export class LocaleLoader extends Disposable {
     if (!parser)
       throw new AllyError(ErrorType.unsupported_file_type, ext)
 
-    let original: object = {}
+    let original: any = {}
     if (existsSync(filepath))
       original = await parser.load(filepath)
 
-    _.set(original, pending.keypath, pending.value)
+    const keyStyle = await Global.requestKeyStyle()
+    if (keyStyle === 'flat')
+      original[pending.keypath] = pending.value
+    else
+      _.set(original, pending.keypath, pending.value)
 
     await parser.save(filepath, original)
   }

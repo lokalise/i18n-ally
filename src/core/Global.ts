@@ -7,8 +7,10 @@ import { YamlParser } from '../parsers/YamlParser'
 import { JavascriptParser } from '../parsers/JavascriptParser'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { extname } from 'path'
+import i18n from '../i18n'
 
 const configPrefix = 'vue-i18n-ally'
+export type KeyStyle = 'auto' | 'nested' | 'flat'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -188,6 +190,38 @@ export class Global {
   static set ignoredLocales (value) {
     Global.setConfig('ignoredLocales', value, true)
     this._onDidChangeLoader.fire(this.loader)
+  }
+
+  static get keyStyle (): KeyStyle {
+    return (Global.getConfig('keystyle') || 'auto') as KeyStyle
+  }
+
+  static set keyStyle (value: KeyStyle) {
+    Global.setConfig('keystyle', value, false)
+  }
+
+  static async requestKeyStyle (): Promise<KeyStyle | undefined> {
+    if (this.keyStyle !== 'auto')
+      return this.keyStyle
+
+    const result = await window.showQuickPick([{
+      value: 'nested',
+      label: i18n.t('prompt.keystyle_nested'),
+      description: i18n.t('prompt.keystyle_nested_example'),
+    }, {
+      value: 'flat',
+      label: i18n.t('prompt.keystyle_flat'),
+      description: i18n.t('prompt.keystyle_flat_example'),
+    }], {
+      placeHolder: i18n.t('prompt.keystyle_select'),
+    })
+
+    if (!result) {
+      this.keyStyle = 'nested'
+      return 'nested'
+    }
+    this.keyStyle = result.value as KeyStyle
+    return result.value as KeyStyle
   }
 
   static toggleLocaleVisibility (locale: string, visible?: boolean) {

@@ -22,6 +22,7 @@
   "config.source_language": "Source language for machine translation",
   "config.display_language": "Displaying language",
   "config.ignored_locales": "Locale codes to be ingored",
+  "config.keystyle": "Locale key style",
   "misc.not_exists": "🔴Not exist",
   "refactor.extract_text": "Extract text to vue-i18n locales",
   "prompt.config_locales_auto_success": "Locales path auto set to \"{0}\".",
@@ -41,5 +42,10 @@
   "prompt.translation_saved": "Translation saved.",
   "prompt.failed_to_locale_key": "Failed to locale key \"{0}\".",
   "prompt.edit_key_in_locale": "{1} | Editing key \"{0}\"",
-  "prompt.enter_new_keypath": "Enter the new keypath"
+  "prompt.enter_new_keypath": "Enter the new keypath",
+  "prompt.keystyle_flat": "Flat style",
+  "prompt.keystyle_flat_example": "for example: { \"a.b.c\": \"...\" }",
+  "prompt.keystyle_nested": "Nested style",
+  "prompt.keystyle_nested_example": "for example: { \"a\": { \"b\": { \"c\": \"...\" } } }",
+  "prompt.keystyle_select": "Which kind of key style do you use to organize your locales?"
 }

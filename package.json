@@ -233,6 +233,16 @@
         "vue-i18n-ally.ignoredLocales": {
           "type": "array",
           "description": "%config.ignored_locales%"
+        },
+        "vue-i18n-ally.keystyle": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "nested",
+            "flat"
+          ],
+          "default": "auto",
+          "description": "%config.keystyle%"
         }
       }
     }

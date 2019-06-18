@@ -3,7 +3,8 @@ export enum ErrorType {
   translating_unknown_error,
   translating_empty_source_value,
   filepath_not_specified,
-  unsupported_file_type
+  unsupported_file_type,
+  keystyle_not_set
 }
 
 export class AllyError extends Error {
