@@ -1,4 +1,4 @@
-import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown } from '../core'
+import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown, GlyphChars } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import i18n from '../i18n'
@@ -32,11 +32,17 @@ class HintProvider implements HoverProvider {
         }
         if (node && node.type === 'node') {
           commands.push({
+            text: i18n.t('command.translate_key'),
+            icon: GlyphChars.Translate,
+            command: HintProvider.getMarkdownCommand(Commands.translate_key, { keypath, locale }),
+          })
+          commands.push({
             text: i18n.t('command.edit_key'),
+            icon: GlyphChars.Pencil,
             command: HintProvider.getMarkdownCommand(Commands.edit_key, { keypath, locale }),
           })
         }
-        row.commands = commands.map(c => `[\`${c.text}\`](${c.command})`).join(' ')
+        row.commands = commands.map(c => `[${c.icon}](${c.command} "${c.text}")`).join(' ')
         return row
       })
       .map(item => `| | **${item.locale}** | | ${item.value} | ${item.commands} |`)

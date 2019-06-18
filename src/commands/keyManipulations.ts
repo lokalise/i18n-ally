@@ -6,6 +6,20 @@ import * as path from 'path'
 import { flatten } from 'lodash'
 import i18n from '../i18n'
 
+interface CommandOptions {
+  keypath: string
+  locale: string
+}
+
+function getNode (item?: LocaleTreeItem | CommandOptions) {
+  if (!item)
+    return
+
+  if (item instanceof LocaleTreeItem)
+    return item.node
+  return Global.loader.getRecordByKey(item.keypath, item.locale, true)
+}
+
 async function getRecordFromNode (node: Node, defaultLocale?: string) {
   if (node.type === 'tree')
     return
@@ -35,15 +49,16 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.translate_key,
-      async (item?: LocaleTreeItem) => {
-        if (!item || !item.node)
+      async (item?: LocaleTreeItem | CommandOptions) => {
+        const node = getNode(item)
+        if (!node)
           return
 
-        if (item.node.type === 'tree')
+        if (node.type === 'tree')
           return
 
         try {
-          const pendings = await Global.loader.MachineTranslate(item.node)
+          const pendings = await Global.loader.MachineTranslate(node)
           if (pendings.length) {
             await Global.loader.writeToFile(pendings)
             window.showInformationMessage(i18n.t('prompt.translation_saved'))
@@ -55,17 +70,18 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.open_key,
-      async (item?: LocaleTreeItem) => {
-        if (!item || !item.node)
+      async (item?: LocaleTreeItem | CommandOptions) => {
+        const node = getNode(item)
+        if (!node)
           return
 
-        const node = await getRecordFromNode(item.node, Global.displayLanguage)
+        const record = await getRecordFromNode(node, Global.displayLanguage)
 
-        if (!node || !node.filepath)
+        if (!record || !record.filepath)
           return
 
-        const filepath = node.filepath
-        const keypath = item.node.keypath
+        const filepath = record.filepath
+        const keypath = node.keypath
 
         const document = await workspace.openTextDocument(filepath)
         const editor = await window.showTextDocument(document)
@@ -92,11 +108,8 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.edit_key,
-      async (item?: LocaleTreeItem | { keypath: string; locale: string }) => {
-        if (!item)
-          return
-
-        let node = item instanceof LocaleTreeItem ? item.node : Global.loader.getRecordByKey(item.keypath, item.locale, true)
+      async (item?: LocaleTreeItem | CommandOptions) => {
+        let node = getNode(item)
 
         if (!node)
           return
