@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0](https://github.com/antfu/vue-i18n-ally/compare/v0.19.3...v0.20.0) (2019-06-18)
+
+
+### ⚡ Features
+
+* new config "keystyle" ([216b52b](https://github.com/antfu/vue-i18n-ally/commit/216b52b))
+* support for flatten style, [#25](https://github.com/antfu/vue-i18n-ally/issues/25), thanks @JJBocanegra ([93f5432](https://github.com/antfu/vue-i18n-ally/commit/93f5432))
+
+
+### 🌍 Internationalization
+
+* `zh-cn` for new texts ([a2d38af](https://github.com/antfu/vue-i18n-ally/commit/a2d38af))
+* `zh-tw` for new texts ([0789485](https://github.com/antfu/vue-i18n-ally/commit/0789485))
+
+
+### 🐞 Bug Fixes
+
+* flatten style sideview tree display ([e8a551e](https://github.com/antfu/vue-i18n-ally/commit/e8a551e))
+* support array for "localesPaths" ([4c403e2](https://github.com/antfu/vue-i18n-ally/commit/4c403e2))
+
+
+### 📚 Documentations
+
+* add flatten-mode fixture ([49e86f5](https://github.com/antfu/vue-i18n-ally/commit/49e86f5))
+
+
+
 ### [0.19.3](https://github.com/antfu/vue-i18n-ally/compare/v0.19.2...v0.19.3) (2019-06-18)
 
 
