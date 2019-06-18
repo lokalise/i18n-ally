@@ -1,0 +1,10 @@
+{
+  "project": "Basic",
+  "car": "car | cars",
+  "apple": "no apples | one apple | {count} apples",
+  "tos": "Term of Service",
+  "term": "I accept {0}",
+  "nested.hello": "Hello again",
+  "nested.greeting": "good morning",
+  "nested.foo.bar": "foobar"
+}
