@@ -1,7 +1,7 @@
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel } from 'vscode'
 import { LocaleLoader } from '.'
 import { uniq } from 'lodash'
-import { normalizeLocale, isVueI18nProject } from './utils'
+import { normalizeLocale, isVueI18nProject } from '../utils/utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
 import { JavascriptParser } from '../parsers/JavascriptParser'

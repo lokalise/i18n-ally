@@ -1,7 +1,7 @@
 import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 
-export async function MachinTranslate (text: string, from: string, to: string) {
+export async function MachineTranslate (text: string, from: string, to: string) {
   const plans = [google, baidu, youdao]
   let trans_result: TranslateResult | undefined
 

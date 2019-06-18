@@ -1,7 +1,6 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
-import { KeyDetector } from '../core/KeyDetector'
-import { Global } from '../core'
+import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 
 const noneDecorationType = window.createTextEditorDecorationType({})

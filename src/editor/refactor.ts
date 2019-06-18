@@ -1,6 +1,7 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
-import { LanguageSelectors, KeyDetector, Commands } from '../core'
+import { KeyDetector, Commands } from '../core'
 import { ExtensionModule } from '../modules'
+import { LanguageSelectors } from '../meta'
 import i18n from '../i18n'
 
 export class Refactor implements CodeActionProvider {

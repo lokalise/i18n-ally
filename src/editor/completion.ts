@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
-import { Global, KeyDetector, LanguageSelectors } from '../core'
+import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
+import { LanguageSelectors } from '../meta'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
   public provideCompletionItems (

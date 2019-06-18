@@ -2,7 +2,8 @@ import { workspace } from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
 import intl from 'intl'
-import { Global } from './Global'
+import { Global } from '../core'
+import { SupportedFrameworks } from '../meta'
 
 export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -71,13 +72,6 @@ export function escapeMarkdown (text: string) {
     .replace(/\(/g, '\\(')
     .replace(/\)/g, '\\)')
 }
-
-const SupportedFrameworks = [
-  'vue-i18n',
-  'vuex-i18n',
-  '@panter/vue-i18next',
-  'nuxt-i18n',
-]
 
 export function isVueI18nProject (projectUrl: string): boolean {
   if (!projectUrl || !workspace.workspaceFolders)

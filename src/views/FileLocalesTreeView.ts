@@ -2,7 +2,7 @@ import { ExtensionContext, window, commands } from 'vscode'
 import { LocalesTreeProvider } from './LocalesTreeView'
 import { KeyDetector, LocaleNode, Global } from '../core'
 import { ExtensionModule } from '../modules'
-import { isSupportedLanguageId } from '../core/SupportedLanguageIds'
+import { isLanguageIdSupported } from '../meta'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
   constructor (
@@ -17,7 +17,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
   loadCurrentDocument () {
     const editor = window.activeTextEditor
 
-    if (!editor || !isSupportedLanguageId(editor.document.languageId)) {
+    if (!editor || !isLanguageIdSupported(editor.document.languageId)) {
       commands.executeCommand('setContext', 'vue-i18n-ally-supported-file', false)
       this.includePaths = []
     }

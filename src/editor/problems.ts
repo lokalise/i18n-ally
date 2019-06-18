@@ -1,6 +1,7 @@
 import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace } from 'vscode'
-import { Global, KeyDetector, isSupportedLanguageId } from '../core'
+import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
+import { isLanguageIdSupported } from '../meta'
 import i18n from '../i18n'
 
 export class ProblemProvider {
@@ -14,7 +15,7 @@ export class ProblemProvider {
     if (!Global.enabled)
       return this.collection.clear()
 
-    if (!isSupportedLanguageId(document.languageId))
+    if (!isLanguageIdSupported(document.languageId))
       return
 
     const locale = Global.displayLanguage

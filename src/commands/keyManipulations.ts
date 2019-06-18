@@ -1,6 +1,7 @@
 import { window, commands, workspace, Selection, TextEditorRevealType, env, Range } from 'vscode'
-import { Global, Commands, LocaleRecord, KeyDetector, decorateLocale, Node } from '../core'
+import { Global, Commands, LocaleRecord, KeyDetector, Node } from '../core'
 import { ExtensionModule } from '../modules'
+import { decorateLocale } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import * as path from 'path'
 import { flatten } from 'lodash'

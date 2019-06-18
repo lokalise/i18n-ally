@@ -1,7 +1,8 @@
-import { Global, LocaleLoader, decorateLocale, Node, NodeHelper } from '../core'
+import { Global, LocaleLoader, Node } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { sortBy } from 'lodash'
+import { decorateLocale, NodeHelper } from '../utils'
 
 export class LocaleTreeItem extends TreeItem {
   constructor (

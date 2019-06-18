@@ -1,5 +1,5 @@
 import { Range } from 'vscode'
-import { getKeyname } from './utils'
+import { getKeyname } from '../utils/utils'
 import { Global } from '.'
 
 export interface ParsedFile {

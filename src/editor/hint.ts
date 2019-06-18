@@ -1,4 +1,6 @@
-import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown, GlyphChars, NodeHelper } from '../core'
+import { Global, KeyDetector, Commands } from '../core'
+import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
+import { LanguageSelectors } from '../meta'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import i18n from '../i18n'

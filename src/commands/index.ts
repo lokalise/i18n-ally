@@ -5,8 +5,6 @@ import configLanguages from './configLanguages'
 import keyManipulations from './keyManipulations'
 import extractText from './extractText'
 
-export * from '../core/Commands'
-
 const m: ExtensionModule = (ctx) => {
   return flatten([
     configLocales(ctx),

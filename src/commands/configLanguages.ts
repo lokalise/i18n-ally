@@ -1,7 +1,6 @@
 import { commands, window } from 'vscode'
-import { Global } from '../core'
+import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
-import { Commands } from '.'
 import { ProgressItem } from '../views/ProgressView'
 
 async function pickLocale (locale?: any) {

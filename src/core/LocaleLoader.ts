@@ -2,10 +2,8 @@ import { workspace, window, EventEmitter, Event, Disposable } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
-// @ts-ignore
-import { Global } from './Global'
-import { MachinTranslate } from './MachineTranslate'
-import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
+import { Global } from '.'
+import { MachineTranslate, getKeyname, getFileInfo, replaceLocalePath, notEmpty } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
@@ -220,7 +218,7 @@ export class LocaleLoader extends Disposable {
     if (!sourceRecord || !sourceRecord.value)
       throw new AllyError(ErrorType.translating_empty_source_value)
     try {
-      const result = await MachinTranslate(sourceRecord.value, sourceLanguage, record.locale)
+      const result = await MachineTranslate(sourceRecord.value, sourceLanguage, record.locale)
 
       return {
         locale: record.locale,

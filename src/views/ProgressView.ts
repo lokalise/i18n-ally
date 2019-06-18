@@ -1,5 +1,6 @@
-import { LocaleLoader, Coverage, Global, unicodeProgressBar, decorateLocale, unicodeDecorate } from '../core'
+import { LocaleLoader, Coverage, Global } from '../core'
 import { ExtensionModule } from '../modules'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate } from '../utils'
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 
 export class ProgressItem extends TreeItem {

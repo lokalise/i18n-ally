@@ -1,5 +1,6 @@
 import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
-import { Global, Commands, ExtractTextOptions, LanguageSelectors } from '../core'
+import { Global, Commands, ExtractTextOptions } from '../core'
+import { LanguageSelectors } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 

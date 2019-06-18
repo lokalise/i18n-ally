@@ -2,8 +2,7 @@
 import * as limax from 'limax'
 import { commands, window, workspace } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { Commands } from '.'
-import { ExtractTextOptions, Global } from '../core'
+import { ExtractTextOptions, Global, Commands } from '../core'
 import { trim } from 'lodash'
 import i18n from '../i18n'
 
