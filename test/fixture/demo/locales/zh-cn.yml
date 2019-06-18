@@ -1,6 +1,3 @@
 project: 演示
-some:
-  deep:
-    nested:
-      key: 嵌套！
-intro: 更好的翻译经验
+intro: 带来更好的翻译体验
+good_morning: 早上好
