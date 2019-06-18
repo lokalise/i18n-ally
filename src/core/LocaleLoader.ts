@@ -78,12 +78,16 @@ export class LocaleLoader extends Disposable {
     }
   }
 
-  getNodeByKey (keypath: string): LocaleNode | undefined {
-    return this._flattenLocaleTree[keypath]
+  getNodeByKey (keypath: string, shadow = false): LocaleNode | undefined {
+    const node = this.getTreeNodeByKey(keypath)
+    if (!node && shadow)
+      return this.getShadowNodeByKey(keypath)
+    if (node && node.type !== 'tree')
+      return node
   }
 
   getTranslationsByKey (keypath: string, shadow = true) {
-    const node = this.getNodeByKey(keypath)
+    const node = this.getNodeByKey(keypath, shadow)
     if (!node)
       return {}
     if (shadow)
@@ -92,8 +96,8 @@ export class LocaleLoader extends Disposable {
       return node.locales
   }
 
-  getRecordByKey (keypath: string, locale: string): LocaleRecord | undefined {
-    const trans = this.getTranslationsByKey(keypath)
+  getRecordByKey (keypath: string, locale: string, shadow = false): LocaleRecord | undefined {
+    const trans = this.getTranslationsByKey(keypath, shadow)
     return trans[locale]
   }
 
@@ -248,6 +252,10 @@ export class LocaleLoader extends Disposable {
     const pending = await this.MachineTranslateRecord(node, sourceLanguage)
 
     return [pending].filter(notEmpty)
+  }
+
+  getShadowNodeByKey (keypath: string) {
+    return new LocaleNode(keypath, '', {}, true)
   }
 
   getShadowFilePath (keypath: string, locale: string) {

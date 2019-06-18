@@ -96,7 +96,7 @@ const m: ExtensionModule = (ctx) => {
         if (!item)
           return
 
-        let node = item instanceof LocaleTreeItem ? item.node : Global.loader.getRecordByKey(item.keypath, item.locale)
+        let node = item instanceof LocaleTreeItem ? item.node : Global.loader.getRecordByKey(item.keypath, item.locale, true)
 
         if (!node)
           return

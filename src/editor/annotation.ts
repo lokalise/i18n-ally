@@ -3,7 +3,6 @@ import { debounce } from 'lodash'
 import { KeyDetector } from '../core/KeyDetector'
 import { Global } from '../core'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
 
@@ -35,11 +34,9 @@ const annotation: ExtensionModule = (ctx) => {
         text = Global.loader.getValueByKey(key, Global.sourceLanguage)
         missing = true
       }
-      // no value on both displaying and source
-      if (!text) {
-        text = i18n.t('misc.not_exists')
-        missing = true
-      }
+
+      if (text)
+        text = `◽️${text}`
 
       const color = missing
         ? 'rgba(153, 153, 153, .3)'
@@ -53,7 +50,7 @@ const annotation: ExtensionModule = (ctx) => {
         renderOptions: {
           after: {
             color,
-            contentText: `◽️${text}`,
+            contentText: text,
             fontWeight: 'normal',
             fontStyle: 'normal',
           },

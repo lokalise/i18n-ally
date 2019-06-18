@@ -18,11 +18,11 @@ class HintProvider implements HoverProvider {
     if (!keypath)
       return
 
-    const node = Global.loader.getTreeNodeByKey(keypath)
+    let node = Global.loader.getTreeNodeByKey(keypath)
     if (!node)
-      return
+      node = Global.loader.getShadowNodeByKey(keypath)
 
-    let transTable = Global.visibleLocales
+    const transTable = Global.visibleLocales
       .map(locale => {
         const commands = []
         const row = {
@@ -30,7 +30,7 @@ class HintProvider implements HoverProvider {
           value: escapeMarkdown(Global.loader.getValueByKey(keypath, locale, false) || '-'),
           commands: '',
         }
-        if (node.type === 'node') {
+        if (node && node.type === 'node') {
           commands.push({
             text: i18n.t('command.edit_key'),
             command: HintProvider.getMarkdownCommand(Commands.edit_key, { keypath, locale }),
@@ -45,9 +45,12 @@ class HintProvider implements HoverProvider {
     if (!transTable)
       return
 
-    transTable = `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
+    let markdown = `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 
-    const markdownText = new MarkdownString(transTable)
+    if (node.shadow)
+      markdown += `\n\n-----\n\n${i18n.t('misc.not_exists')}`
+
+    const markdownText = new MarkdownString(markdown)
     markdownText.isTrusted = true
 
     return new Hover(markdownText)
