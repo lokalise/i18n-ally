@@ -32,6 +32,11 @@ class HintProvider implements HoverProvider {
         }
         if (node && node.type === 'node') {
           commands.push({
+            text: i18n.t('command.open_key'),
+            icon: GlyphChars.ArrowUpRight,
+            command: HintProvider.getMarkdownCommand(Commands.open_key, { keypath, locale }),
+          })
+          commands.push({
             text: i18n.t('command.translate_key'),
             icon: GlyphChars.Translate,
             command: HintProvider.getMarkdownCommand(Commands.translate_key, { keypath, locale }),
