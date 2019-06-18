@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.5](https://github.com/antfu/vue-i18n-ally/compare/v0.21.4...v0.21.5) (2019-06-18)
+
+
+### 🐞 Bug Fixes
+
+* disable unicodeDecorate for os other than Windows ([b85e83c](https://github.com/antfu/vue-i18n-ally/commit/b85e83c))
+
+
+
 ### [0.21.4](https://github.com/antfu/vue-i18n-ally/compare/v0.21.3...v0.21.4) (2019-06-18)
 
 
