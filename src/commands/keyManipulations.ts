@@ -1,5 +1,5 @@
 import { window, commands, workspace, Selection, TextEditorRevealType, env, Range } from 'vscode'
-import { Global, Commands, LocaleRecord, KeyDetector } from '../core'
+import { Global, Commands, LocaleRecord, KeyDetector, decorateLocale } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem, Node } from '../views/LocalesTreeView'
 import * as path from 'path'
@@ -92,11 +92,15 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.edit_key,
-      async (item?: LocaleTreeItem) => {
-        if (!item || !item.node)
+      async (item?: LocaleTreeItem | { keypath: string; locale: string }) => {
+        console.log('ITEM', item)
+        if (!item)
           return
 
-        let node = item.node
+        let node = item instanceof LocaleTreeItem ? item.node : Global.loader.getRecordByKey(item.keypath, item.locale)
+
+        if (!node)
+          return
 
         if (node.type === 'tree')
           return
@@ -111,7 +115,7 @@ const m: ExtensionModule = (ctx) => {
         try {
           const newvalue = await window.showInputBox({
             value: node.value,
-            prompt: i18n.t('prompt.edit_key_in_locale', node.keypath, node.locale),
+            prompt: i18n.t('prompt.edit_key_in_locale', node.keypath, decorateLocale(node.locale)),
           })
 
           if (newvalue !== undefined && newvalue !== node.value) {

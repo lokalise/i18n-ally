@@ -92,6 +92,11 @@ export class LocaleLoader extends Disposable {
       return node.locales
   }
 
+  getRecordByKey (keypath: string, locale: string): LocaleRecord | undefined {
+    const trans = this.getTranslationsByKey(keypath)
+    return trans[locale]
+  }
+
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     tree = tree || this._localeTree
     const keys = keypath.split('.')

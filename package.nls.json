@@ -40,6 +40,6 @@
   "prompt.locales_dir_not_found": "Locales directory not found. Vue i18n Ally is disabled.",
   "prompt.translation_saved": "Translation saved.",
   "prompt.failed_to_locale_key": "Failed to locale key \"{0}\".",
-  "prompt.edit_key_in_locale": "Editing key \"{0}\" in {1}",
+  "prompt.edit_key_in_locale": "{1} | Editing key \"{0}\"",
   "prompt.enter_new_keypath": "Enter the new keypath"
 }
