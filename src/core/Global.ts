@@ -206,11 +206,16 @@ export class Global {
   // locales
   static get localesPaths (): string[] {
     const paths = Global.getConfig('localesPaths')
-    return paths ? paths.split(',') : []
+    if (typeof paths === 'string')
+      return paths.split(',')
+    return paths || []
   }
 
   static set localesPaths (paths: string[]) {
-    Global.setConfig('localesPaths', paths.join(','))
+    if (paths.length === 1)
+      Global.setConfig('localesPaths', paths[0])
+    else
+      Global.setConfig('localesPaths', paths)
   }
 
   static updateLocalesPaths (paths: string[]) {

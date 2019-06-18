@@ -210,8 +210,14 @@
       "title": "%extname%",
       "properties": {
         "vue-i18n-ally.localesPaths": {
-          "type": "string",
+          "type": [
+            "string",
+            "array"
+          ],
           "default": "",
+          "items": {
+            "type": "string"
+          },
           "description": "%config.locales_paths%"
         },
         "vue-i18n-ally.sourceLanguage": {
