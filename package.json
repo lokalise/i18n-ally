@@ -292,7 +292,7 @@
     "eslint-plugin-standard": "4.0.0",
     "rimraf": "2.6.3",
     "standard-version": "6.0.1",
-    "ts-loader": "6.0.2",
+    "ts-loader": "6.0.3",
     "typescript": "3.5.2",
     "vscode": "1.1.34",
     "webpack": "4.34.0",
@@ -300,7 +300,7 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
-    "fast-glob": "^2.2.7",
+    "fast-glob": "^3.0.0",
     "js-yaml": "^3.13.1",
     "limax": "^1.7.0",
     "lodash": "^4.17.11",
