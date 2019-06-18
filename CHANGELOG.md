@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1](https://github.com/antfu/vue-i18n-ally/compare/v0.21.0...v0.21.1) (2019-06-18)
+
+
+### 🐞 Bug Fixes
+
+* support for backticks, [#27](https://github.com/antfu/vue-i18n-ally/issues/27), thanks @JJBocanegra ([ad7878f](https://github.com/antfu/vue-i18n-ally/commit/ad7878f))
+
+
+
 ## [0.21.0](https://github.com/antfu/vue-i18n-ally/compare/v0.20.0...v0.21.0) (2019-06-18)
 
 
