@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.21.0](https://github.com/antfu/vue-i18n-ally/compare/v0.20.0...v0.21.0) (2019-06-18)
+
+
+### ⚡ Features
+
+* show missing keys in "problems" section ([f1bc61e](https://github.com/antfu/vue-i18n-ally/commit/f1bc61e))
+
+
+### 🌍 Internationalization
+
+* extract texts and add translations for `zh-cn` and `zh-tw` ([7808912](https://github.com/antfu/vue-i18n-ally/commit/7808912))
+
+
+### 🐞 Bug Fixes
+
+* change problem severity to infomation ([8b25e4f](https://github.com/antfu/vue-i18n-ally/commit/8b25e4f))
+* hover will now display for non-existent keys ([72ce923](https://github.com/antfu/vue-i18n-ally/commit/72ce923))
+* problems update listener ([b086fa1](https://github.com/antfu/vue-i18n-ally/commit/b086fa1))
+
+
+### 🔮 Refactor
+
+* now use Intl to normalize locale codes ([06ec923](https://github.com/antfu/vue-i18n-ally/commit/06ec923))
+
+
+
 ## [0.20.0](https://github.com/antfu/vue-i18n-ally/compare/v0.19.3...v0.20.0) (2019-06-18)
 
 
