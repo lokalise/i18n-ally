@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
-import LanguageCodes from '../meta/LanguageCodes'
+import intl from 'intl'
 import { Global } from './Global'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -12,15 +12,14 @@ export function normalizeLocale (locale: string, fallback = 'en'): string {
   if (!locale)
     return fallback
 
-  const result = LanguageCodes.find(codes => {
-    return Array.isArray(codes)
-      ? !!codes.find(c => caseInsensitiveMatch(c, locale))
-      : caseInsensitiveMatch(locale, codes)
-  }) || fallback
-
-  return Array.isArray(result)
-    ? result[0].toString()
-    : result
+  try {
+    // @ts-ignore
+    return intl.getCanonicalLocales(locale)[0]
+  }
+  catch (e) {
+    Global.outputChannel.appendLine(e.toString())
+    return fallback
+  }
 }
 
 export function getKeyname (keypath: string) {

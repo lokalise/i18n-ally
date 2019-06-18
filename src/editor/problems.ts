@@ -32,6 +32,7 @@ export class ProblemProvider {
           message: `${locale}: Translation of "${key}" is missing`,
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Warning,
+          source: 'vue-i18n-ally',
         })
       })
 
