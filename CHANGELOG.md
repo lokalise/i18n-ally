@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.19.3](https://github.com/antfu/vue-i18n-ally/compare/v0.19.2...v0.19.3) (2019-06-18)
+
+
+### ⚡ Features
+
+* edit in hover ([2ba3292](https://github.com/antfu/vue-i18n-ally/commit/2ba3292))
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency fast-glob to v3 ([#24](https://github.com/antfu/vue-i18n-ally/issues/24)) ([9546aca](https://github.com/antfu/vue-i18n-ally/commit/9546aca))
+* escape markdown ([6904efa](https://github.com/antfu/vue-i18n-ally/commit/6904efa))
+
+
+
 ### [0.19.2](https://github.com/antfu/vue-i18n-ally/compare/v0.19.1...v0.19.2) (2019-06-16)
 
 
