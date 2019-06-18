@@ -99,10 +99,17 @@ export class LocaleLoader extends Disposable {
 
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     tree = tree || this._localeTree
+
+    // flatten style
+    let node = tree.children[keypath]
+    if (node)
+      return node
+
+    // tree style
     const keys = keypath.split('.')
     const root = keys[0]
     const remaining = keys.slice(1).join('.')
-    const node = tree.children[root]
+    node = tree.children[root]
     if (!remaining)
       return node
     if (node && node.type === 'tree')
