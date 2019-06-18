@@ -70,3 +70,5 @@ export interface ExtractTextOptions {
   text: string
   range: Range
 }
+
+export type Node = LocaleNode | LocaleRecord | LocaleTree

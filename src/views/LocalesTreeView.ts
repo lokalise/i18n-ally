@@ -1,9 +1,7 @@
-import { Global, LocaleLoader, LocaleNode, LocaleRecord, LocaleTree, decorateLocale } from '../core'
+import { Global, LocaleLoader, decorateLocale, Node, NodeHelper } from '../core'
 import { ExtensionModule } from '../modules'
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { sortBy } from 'lodash'
-
-export type Node = LocaleNode | LocaleRecord | LocaleTree
 
 export class LocaleTreeItem extends TreeItem {
   constructor (
@@ -66,21 +64,10 @@ export class LocaleTreeItem extends TreeItem {
   get contextValue () {
     const values: string[] = [this.node.type]
 
-    let isSource = false
-    const isShadow = this.node.shadow
-    if (this.node.type === 'record')
-      isSource = this.node.locale === Global.sourceLanguage
-
-    const isTree = this.node.type === 'tree'
-    const hasFilepath = this.node.type === 'record' && !!this.node.filepath
-
-    const translatable = !isSource && !isTree && (!isShadow || hasFilepath)
-    const openable = !isTree && (!isShadow || hasFilepath)
-
-    if (translatable)
+    if (NodeHelper.isTranslatable(this.node))
       values.push('translatable')
 
-    if (openable)
+    if (NodeHelper.isOpenable(this.node))
       values.push('openable')
 
     return values.join('-')

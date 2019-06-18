@@ -33,7 +33,6 @@ export class ProblemProvider {
           message: i18n.t('misc.missing_translation', locale, key),
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Information,
-          source: 'vue-i18n-ally',
         })
       })
 

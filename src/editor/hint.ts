@@ -1,4 +1,4 @@
-import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown, GlyphChars } from '../core'
+import { Global, KeyDetector, LanguageSelectors, decorateLocale, Commands, escapeMarkdown, GlyphChars, NodeHelper } from '../core'
 import { ExtensionModule } from '../modules'
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import i18n from '../i18n'
@@ -22,6 +22,8 @@ class HintProvider implements HoverProvider {
     if (!node)
       node = Global.loader.getShadowNodeByKey(keypath)
 
+    const locales = Global.loader.getTranslationsByKey(keypath)
+
     const transTable = Global.visibleLocales
       .map(locale => {
         const commands = []
@@ -30,22 +32,29 @@ class HintProvider implements HoverProvider {
           value: escapeMarkdown(Global.loader.getValueByKey(keypath, locale, false) || '-'),
           commands: '',
         }
-        if (node && node.type === 'node') {
-          commands.push({
-            text: i18n.t('command.open_key'),
-            icon: GlyphChars.ArrowUpRight,
-            command: HintProvider.getMarkdownCommand(Commands.open_key, { keypath, locale }),
-          })
-          commands.push({
-            text: i18n.t('command.translate_key'),
-            icon: GlyphChars.Translate,
-            command: HintProvider.getMarkdownCommand(Commands.translate_key, { keypath, locale }),
-          })
-          commands.push({
-            text: i18n.t('command.edit_key'),
-            icon: GlyphChars.Pencil,
-            command: HintProvider.getMarkdownCommand(Commands.edit_key, { keypath, locale }),
-          })
+        const record = locales[locale]
+        if (record) {
+          if (NodeHelper.isTranslatable(record)) {
+            commands.push({
+              text: i18n.t('command.translate_key'),
+              icon: GlyphChars.Translate,
+              command: HintProvider.getMarkdownCommand(Commands.translate_key, { keypath, locale }),
+            })
+          }
+          if (NodeHelper.isEditable(record)) {
+            commands.push({
+              text: i18n.t('command.edit_key'),
+              icon: GlyphChars.Pencil,
+              command: HintProvider.getMarkdownCommand(Commands.edit_key, { keypath, locale }),
+            })
+          }
+          if (NodeHelper.isOpenable(record)) {
+            commands.push({
+              text: i18n.t('command.open_key'),
+              icon: GlyphChars.ArrowUpRight,
+              command: HintProvider.getMarkdownCommand(Commands.open_key, { keypath, locale }),
+            })
+          }
         }
         row.commands = commands.map(c => `[${c.icon}](${c.command} "${c.text}")`).join(' ')
         return row
