@@ -45,7 +45,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
         roots.push(this.newItem(node))
       }
       else {
-        node = new LocaleNode(keypath, {}, true)
+        node = new LocaleNode(keypath, '', {}, true)
         roots.push(this.newItem(node))
       }
     }

@@ -9,10 +9,10 @@ import { getKeyname, getFileInfo, replaceLocalePath, notEmpty } from './utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
-function newTree (keypath = '', values = {}): LocaleTree {
+function newTree (keypath = '', keyname?: string, values = {}): LocaleTree {
   return {
     keypath,
-    keyname: getKeyname(keypath),
+    keyname: keyname || getKeyname(keypath),
     children: {},
     values,
     type: 'tree',
@@ -418,7 +418,7 @@ export class LocaleLoader extends Disposable {
 
   private updateLocalesTree () {
     this._flattenLocaleTree = {}
-    const subTree = (object: object, keypath: string, file: ParsedFile, tree?: LocaleTree) => {
+    const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree) => {
       tree = tree || newTree(keypath)
       tree.values[file.locale] = object
       for (const [key, value] of Object.entries(object)) {
@@ -430,13 +430,13 @@ export class LocaleLoader extends Disposable {
           if (tree.children[key] && tree.children[key].type === 'tree')
             originalTree = tree.children[key] as LocaleTree
 
-          tree.children[key] = subTree(value, newKeyPath, file, originalTree)
+          tree.children[key] = subTree(value, newKeyPath, key, file, originalTree)
           continue
         }
 
         // init node
         if (!tree.children[key]) {
-          const node = new LocaleNode(newKeyPath)
+          const node = new LocaleNode(newKeyPath, key)
           tree.children[key] = node
           this._flattenLocaleTree[node.keypath] = node
         }
@@ -459,7 +459,7 @@ export class LocaleLoader extends Disposable {
 
     const tree = newTree()
     for (const file of Object.values(this._files))
-      subTree(file.value, '', file, tree)
+      subTree(file.value, '', '', file, tree)
     this._localeTree = tree
   }
 

@@ -20,15 +20,15 @@ export interface LocaleRecord {
 }
 
 export class LocaleNode {
-  keyname: string
   type: 'node' = 'node'
 
   constructor (
     public readonly keypath: string,
+    public readonly keyname: string = '',
     public readonly locales: Record<string, LocaleRecord> = {},
     public readonly shadow = false
   ) {
-    this.keyname = getKeyname(keypath)
+    this.keyname = keyname || getKeyname(keypath)
   }
 
   getValue (locale: string, fallback = '') {
