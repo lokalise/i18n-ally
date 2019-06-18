@@ -15,7 +15,14 @@ const fonts = {
 
 export type FontNames = keyof typeof fonts
 
+const enabledPlatforms = [
+  'win32',
+]
+
 export function unicodeTransform (text: string, from: FontNames, to: FontNames) {
+  if (!enabledPlatforms.includes(process.platform))
+    return text
+
   const FromFont = Array.from(fonts[from])
   const ToFont = Array.from(fonts[to])
   return Array.from(text)
