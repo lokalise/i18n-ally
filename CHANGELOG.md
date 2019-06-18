@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.4](https://github.com/antfu/vue-i18n-ally/compare/v0.21.3...v0.21.4) (2019-06-18)
+
+
+### 📚 Documentations
+
+* add `zh-cn` readme ([40a0668](https://github.com/antfu/vue-i18n-ally/commit/40a0668))
+
+
+
 ### [0.21.3](https://github.com/antfu/vue-i18n-ally/compare/v0.21.2...v0.21.3) (2019-06-18)
 
 
