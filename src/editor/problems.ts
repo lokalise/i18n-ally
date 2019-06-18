@@ -1,4 +1,4 @@
-import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range } from 'vscode'
+import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace } from 'vscode'
 import { Global, KeyDetector, isSupportedLanguageId } from '../core'
 import { ExtensionModule } from '../modules'
 
@@ -42,6 +42,10 @@ export class ProblemProvider {
       this.collection.clear()
     }
   }
+
+  clear () {
+    this.collection.clear()
+  }
 }
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
@@ -50,10 +54,18 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
   if (window.activeTextEditor)
     provider.update(window.activeTextEditor.document)
 
-  return window.onDidChangeActiveTextEditor(editor => {
-    if (editor)
-      provider.update(editor.document)
-  })
+  return [
+    window.onDidChangeActiveTextEditor(editor => {
+      if (editor)
+        provider.update(editor.document)
+      else
+        provider.clear()
+    }),
+    workspace.onDidChangeConfiguration(() => {
+      if (window.activeTextEditor)
+        provider.update(window.activeTextEditor.document)
+    }),
+  ]
 }
 
 export default m
