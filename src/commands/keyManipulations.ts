@@ -93,7 +93,6 @@ const m: ExtensionModule = (ctx) => {
 
     commands.registerCommand(Commands.edit_key,
       async (item?: LocaleTreeItem | { keypath: string; locale: string }) => {
-        console.log('ITEM', item)
         if (!item)
           return
 
