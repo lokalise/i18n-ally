@@ -292,7 +292,7 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "@types/intl": "^1.2.0",
+    "@types/intl": "1.2.0",
     "@types/js-yaml": "3.12.1",
     "@types/lodash": "4.14.134",
     "@types/mocha": "5.2.7",
