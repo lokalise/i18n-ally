@@ -24,6 +24,7 @@
   "config.ignored_locales": "隐藏的语言",
   "config.keystyle": "翻译路径格式",
   "misc.not_exists": "无翻译",
+  "misc.missing_translation": "{0}: 缺少 \"{1}\" 的翻译",
   "refactor.extract_text": "提取文案到 vue-i18n",
   "prompt.config_locales_auto_success": "自动检测到翻译文件夹 \"{0}\"",
   "prompt.config_locales_success": "翻译文件夹配置成功",

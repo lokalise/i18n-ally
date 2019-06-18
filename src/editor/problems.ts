@@ -1,6 +1,7 @@
 import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace } from 'vscode'
 import { Global, KeyDetector, isSupportedLanguageId } from '../core'
 import { ExtensionModule } from '../modules'
+import i18n from '../i18n'
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -29,7 +30,7 @@ export class ProblemProvider {
           return
 
         problems.push({
-          message: `(${locale}) Translation of "${key}" is missing`,
+          message: i18n.t('misc.missing_translation', locale, key),
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Information,
           source: 'vue-i18n-ally',

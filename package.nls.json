@@ -24,6 +24,7 @@
   "config.ignored_locales": "Locale codes to be ingored",
   "config.keystyle": "Locale key style",
   "misc.not_exists": "No translation",
+  "misc.missing_translation": "{0}: Translation of \"{1}\" is missing",
   "refactor.extract_text": "Extract text to vue-i18n locales",
   "prompt.config_locales_auto_success": "Locales path auto set to \"{0}\".",
   "prompt.config_locales_success": "Locales path successfully configured.",
