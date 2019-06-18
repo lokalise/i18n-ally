@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.3](https://github.com/antfu/vue-i18n-ally/compare/v0.21.2...v0.21.3) (2019-06-18)
+
+
+### ⚡ Features
+
+* add "goto" button for hover ([079fe1b](https://github.com/antfu/vue-i18n-ally/commit/079fe1b))
+* make hover button icon ([e0d3957](https://github.com/antfu/vue-i18n-ally/commit/e0d3957))
+
+
+### 🐞 Bug Fixes
+
+* hover buttons shows with conditions ([1cc91eb](https://github.com/antfu/vue-i18n-ally/commit/1cc91eb))
+
+
+### 🔮 Refactor
+
+* reorganize code ([2aa98d5](https://github.com/antfu/vue-i18n-ally/commit/2aa98d5))
+
+
+
 ### [0.21.2](https://github.com/antfu/vue-i18n-ally/compare/v0.21.1...v0.21.2) (2019-06-18)
 
 
