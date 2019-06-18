@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import { uniq } from 'lodash'
 
 // for visualize the regex, you can use https://regexper.com/
-export const KEY_REG = /(?:i18n[ (]path=|v-t=['"]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"]([^]+?)['"]/g
+export const KEY_REG = /(?:i18n[ (]path=|v-t=['"`]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([^]+?)['"`]/g
 
 export class KeyDetector {
   static getKeyByContent (text: string) {
