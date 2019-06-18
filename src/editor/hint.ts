@@ -45,10 +45,7 @@ class HintProvider implements HoverProvider {
     if (!transTable)
       return
 
-    let markdown = `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
-
-    if (node.shadow)
-      markdown += `\n\n-----\n\n${i18n.t('misc.not_exists')}`
+    const markdown = `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 
     const markdownText = new MarkdownString(markdown)
     markdownText.isTrusted = true

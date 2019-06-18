@@ -9,4 +9,4 @@ export const LanguageIds = [
 export const LanguageSelectors = LanguageIds
   .map(language => ({ language, schema: 'file' }))
 
-export const isSupported = (id: string) => LanguageIds.includes(id)
+export const isSupportedLanguageId = (id: string) => LanguageIds.includes(id)

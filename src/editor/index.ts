@@ -6,6 +6,7 @@ import extract from './extract'
 import hint from './hint'
 import definition from './definition'
 import refactor from './refactor'
+import problems from './problems'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -15,6 +16,7 @@ const m: ExtensionModule = (ctx) => {
     hint(ctx),
     refactor(ctx),
     definition(ctx),
+    problems(ctx),
   ])
 }
 
