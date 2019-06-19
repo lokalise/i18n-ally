@@ -243,6 +243,11 @@
           ],
           "default": "auto",
           "description": "%config.keystyle%"
+        },
+        "vue-i18n-ally.annotationMaxLength": {
+          "type": "number",
+          "default": 40,
+          "description": "%config.annotation_max_length%"
         }
       }
     }

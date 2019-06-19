@@ -200,6 +200,14 @@ export class Global {
     Global.setConfig('keystyle', value, false)
   }
 
+  static get annotationMaxLength (): number {
+    return (Global.getConfig('annotationMaxLength')) as number
+  }
+
+  static set annotationMaxLength (value: number) {
+    Global.setConfig('annotationMaxLength', value, true)
+  }
+
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {
     if (this.keyStyle !== 'auto')
       return this.keyStyle

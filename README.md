@@ -145,7 +145,6 @@ PR to implement any of the following features is also welcome. ☺
 - [ ] Annoation config (on/off, maxlength)
 - [ ] Option to force enabling on non-vue-i18n project
 - [ ] Tests
-- [ ] RED for missing keys
 - [ ] Live share support
 
 ## 👨‍💻 Credits

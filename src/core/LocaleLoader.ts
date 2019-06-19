@@ -122,7 +122,7 @@ export class LocaleLoader extends Disposable {
   getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
     locale = locale || Global.displayLanguage
 
-    const maxlength = 50 // TODO: a configure for this
+    const maxlength = Global.annotationMaxLength
     const node = this.getTreeNodeByKey(keypath)
 
     if (!node)
@@ -362,7 +362,6 @@ export class LocaleLoader extends Disposable {
     catch (e) {
       this.unsetFile(filepath)
       Global.outputChannel.appendLine(`Failed to load file ${e}`)
-      console.error(e)
     }
   }
 
