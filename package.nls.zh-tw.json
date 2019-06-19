@@ -49,5 +49,11 @@
   "prompt.keystyle_flat_example": "例如: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "嵌套式(Nested)",
   "prompt.keystyle_nested_example": "例如: { \"a\": { \"b\": { \"c\": \"...\" } } }",
-  "prompt.keystyle_select": "選擇項目所使用的翻譯路徑格式"
+  "prompt.keystyle_select": "選擇項目所使用的翻譯路徑格式",
+  "config.annotation_max_length": "內聯註釋顯示的最大字符數。超出的部分將顯示為省略號（...）",
+  "config.annotations": "啟用內聯註釋",
+  "config.force_enabled": "無論如何都啟用此擴展",
+  "config.match_regex": "匹配語言環境文件名的正規運算式字串（返回結果的第一個群組應是語言代碼）",
+  "prompt.enter_file_path_to_store_key": "輸入存儲文案 \"{0}\" 的文件路徑",
+  "prompt.select_file_to_store_key": "選擇要存儲文案 \"{0}\" 的文件"
 }

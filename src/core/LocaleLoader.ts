@@ -6,6 +6,7 @@ import { Global } from '.'
 import { MachineTranslate, getKeyname, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
+import i18n from '../i18n'
 
 function newTree (keypath = '', keyname?: string, values = {}): LocaleTree {
   return {
@@ -198,12 +199,12 @@ export class LocaleLoader extends Disposable {
       return paths[0]
     if (paths.length === 0) {
       return await window.showInputBox({
-        prompt: `Enter the file path to store key "${keypath}"`, // TODO:i18n
+        prompt: i18n.t('prompt.enter_file_path_to_store_key'),
         placeHolder: `path/to/${locale}.json`,
       })
     }
     return await window.showQuickPick(paths, {
-      placeHolder: `Select which file to store key "${keypath}"`,
+      placeHolder: i18n.t('prompt.select_file_to_store_key'),
       ignoreFocusOut: true,
     })
   }
@@ -355,7 +356,7 @@ export class LocaleLoader extends Disposable {
     const info = path.parse(filepath)
 
     let locale = ''
-    if (match[1] === '') // filename with no locales code, should be treat as source locale
+    if (!match[1]) // filename with no locales code, should be treat as source locale
       locale = Global.sourceLanguage
     else
       locale = normalizeLocale(match[1], '')

@@ -53,5 +53,7 @@
   "prompt.keystyle_flat_example": "for example: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "Nested style",
   "prompt.keystyle_nested_example": "for example: { \"a\": { \"b\": { \"c\": \"...\" } } }",
-  "prompt.keystyle_select": "Which kind of key style do you use to organize your locales?"
+  "prompt.keystyle_select": "Which kind of key style do you use to organize your locales?",
+  "prompt.enter_file_path_to_store_key": "Enter the file path to store key \"{0}\"",
+  "prompt.select_file_to_store_key": "Select file to store key \"{0}\""
 }
