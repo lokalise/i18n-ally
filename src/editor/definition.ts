@@ -21,7 +21,7 @@ class DefinitionProvider {
     if (!parser)
       return []
 
-    const range = parser.navigateToKey(localeDocument.getText(), key)
+    const range = parser.navigateToKey(localeDocument.getText(), key, Global.keyStyle)
 
     const { start = 0, end = 0 } = range || {}
 

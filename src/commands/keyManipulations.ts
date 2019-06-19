@@ -96,7 +96,7 @@ const m: ExtensionModule = (ctx) => {
           return
 
         const text = editor.document.getText()
-        const range = parser.navigateToKey(text, keypath)
+        const range = parser.navigateToKey(text, keypath, Global.keyStyle)
 
         if (range) {
           editor.selection = new Selection(

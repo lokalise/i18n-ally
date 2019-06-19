@@ -1,4 +1,5 @@
 import { Parser } from './Parser'
+import { KeyStyle } from '../core'
 
 export class JsonParser extends Parser {
   constructor () {
@@ -13,8 +14,10 @@ export class JsonParser extends Parser {
     return JSON.stringify(object, null, this.options.indent)
   }
 
-  navigateToKey (text: string, keypath: string) {
-    const keys = keypath.split('.')
+  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
+    const keys = keystyle === 'flat'
+      ? [keypath]
+      : keypath.split('.')
 
     // build regex to search key
     let regexString = keys

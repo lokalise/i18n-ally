@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs'
+import { KeyStyle } from '../core'
 
 export interface PositionRange {
   start: number
@@ -42,5 +43,5 @@ export abstract class Parser {
 
   abstract parse(text: string): Promise<object>
   abstract dump(object: object): Promise<string>
-  abstract navigateToKey(text: string, keypath: string): PositionRange | undefined
+  abstract navigateToKey(text: string, keypath: string, keystyle: KeyStyle): PositionRange | undefined
 }

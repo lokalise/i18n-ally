@@ -1,5 +1,6 @@
 import { Parser } from './Parser'
 import * as yaml from 'js-yaml'
+import { KeyStyle } from '../core'
 
 export class YamlParser extends Parser {
   constructor () {
@@ -17,8 +18,10 @@ export class YamlParser extends Parser {
     })
   }
 
-  navigateToKey (text: string, keypath: string) {
-    const keys = keypath.split('.')
+  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
+    const keys = keystyle === 'flat'
+      ? [keypath]
+      : keypath.split('.')
 
     let regexString = keys
       .map((key, i) => `^[ \\t]{${i * this.options.indent}}${key}: ?`)
