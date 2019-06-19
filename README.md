@@ -18,61 +18,65 @@
 
 <h2 align="center"> ⚡ Features </h2>
 
-<p align="center">
-<img src='./screenshots/annotation.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='700px'/>
-</p>
-
 <h3 align="center"> Inline annotation </h3>
 
 <p align="center">
-<img src='./screenshots/hover.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/annotation.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='700px'/>
 </p>
 
 <h3 align="center"> Hover & Direct actions </h3>
 
 <p align="center">
-<img src='./screenshots/progress_report.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/hover.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
 </p>
 
-
-<p align="center">
-<img src='./screenshots/manage.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
-</p>
 
 <h3 align="center"> Manage all translations in one place </h3>
 
 <p align="center">
-<img src='./screenshots/problems.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/progress_report.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
 </p>
+
+<p align="center">
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/manage.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='600px'/>
+</p>
+
 
 <h3 align="center"> Translations missing report </h3>
 
 <p align="center">
-<img src='./screenshots/yaml_support.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/problems.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
 </p>
+
 
 <h3 align="center"> YAML and JSON are supported </h3>
 
-
 <p align="center">
-<img src='./screenshots/refactor_translate.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
 </p>
+
 
 <h3 align="center"> Refactors & Auto translate </h3>
 
-
 <p align="center">
-<img src='./screenshots/extract.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/refactor_translate.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
 </p>
 
+
 <h3 align="center"> Extract translations from code </h3>
+
+<p align="center">
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/extract.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='500px'/>
+</p>
+
+<h3 align="center"> Overview </h3>
 
 - Multi-root workspace
 - Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 - i18n for the extension itself, of course. **(English, 简体中文, 繁體中文)**
 
 <p align="center">
-<img src='./screenshots/overview.png' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='700px'/>
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/overview.png?raw=true' style='box-shadow: 2px 4px 21px 0px rgba(0,0,0, 0.2); border-radius:5px' width='700px'/>
 </p>
 
 ## ⚙ Installation

@@ -5,6 +5,7 @@ out/**
 dist/test/**
 dist/**/*.map
 src/**
+screenshots/**
 .gitignore
 .editorconfig
 .eslintrc.js
