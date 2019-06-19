@@ -1,7 +1,6 @@
 import { workspace } from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
-import intl from 'intl'
 import { Global } from '../core'
 import { SupportedFrameworks } from '../meta'
 
@@ -15,7 +14,7 @@ export function normalizeLocale (locale: string, fallback = 'en'): string {
 
   try {
     // @ts-ignore
-    return intl.getCanonicalLocales(locale)[0]
+    return Intl.Collator.supportedLocalesOf(Intl.getCanonicalLocales(locale), { localeMatcher: 'lookup' })[0]
   }
   catch (e) {
     Global.outputChannel.appendLine(e.toString())
