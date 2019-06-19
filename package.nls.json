@@ -26,6 +26,7 @@
   "config.keystyle": "Locale key style",
   "config.annotations": "Enable the inline annotations.",
   "config.annotation_max_length": "Max count of characters shown of the inline annotations. Exceeding parts will displayed as ellipses (...)",
+  "config.match_regex": "Regex string to match locale filename. (The first group should be the locale code)",
   "misc.not_exists": "No translation",
   "misc.missing_translation": "{0}: Translation of \"{1}\" is missing",
   "refactor.extract_text": "Extract text to vue-i18n locales",

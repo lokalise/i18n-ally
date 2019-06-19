@@ -30,24 +30,6 @@ export function getKeyname (keypath: string) {
   return keys[keys.length - 1]
 }
 
-export function getFileInfo (filepath: string) {
-  const info = path.parse(filepath)
-
-  let locale = normalizeLocale(info.name, '')
-  let nested = false
-  if (!locale) {
-    nested = true
-    locale = normalizeLocale(path.basename(info.dir), '')
-  }
-  if (!locale)
-    console.error(`Failed to get locale on file ${filepath}`)
-
-  return {
-    locale,
-    nested,
-  }
-}
-
 export function notEmpty<T> (value: T | null | undefined): value is T {
   return value !== null && value !== undefined
 }

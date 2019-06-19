@@ -3,7 +3,7 @@ import { promises as fs, existsSync } from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
 import { Global } from '.'
-import { MachineTranslate, getKeyname, getFileInfo, replaceLocalePath, notEmpty } from '../utils'
+import { MachineTranslate, getKeyname, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 
@@ -343,14 +343,48 @@ export class LocaleLoader extends Disposable {
     }
   }
 
+  private getFileInfo (filepath: string) {
+    const regexp = new RegExp(Global.matchRegex, 'ig')
+    const filename = path.basename(filepath)
+    const ext = path.extname(filepath)
+    const match = regexp.exec(filename)
+    Global.outputChannel.appendLine(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
+    if (!match || match.length < 2)
+      return
+
+    const info = path.parse(filepath)
+
+    let locale = normalizeLocale(match[1], '')
+    let nested = false
+    if (!locale) {
+      nested = true
+      locale = normalizeLocale(path.basename(info.dir), '')
+    }
+    if (!locale) {
+      Global.outputChannel.appendLine(`Failed to get locale on file ${filepath}`)
+      return
+    }
+
+    const parser = Global.getMatchedParser(ext)
+
+    return {
+      locale,
+      nested,
+      parser,
+      ext,
+    }
+  }
+
   private async loadFile (filepath: string) {
     try {
-      Global.outputChannel.appendLine(`Loading file ${filepath}`)
-      const { locale, nested } = getFileInfo(filepath)
-      const ext = path.extname(filepath)
-      const parser = Global.getMatchedParser(ext)
+      const result = this.getFileInfo(filepath)
+      if (!result)
+        return
+      const { locale, nested, parser } = result
+      Global.outputChannel.appendLine(`Loading file ${filepath} [${locale}]`)
       if (!parser)
-        return new AllyError(ErrorType.unsupported_file_type, ext)
+        throw new AllyError(ErrorType.unsupported_file_type)
+
       const value = await parser.load(filepath)
       this._files[filepath] = {
         filepath,
@@ -371,25 +405,17 @@ export class LocaleLoader extends Disposable {
 
   private async loadDirectory (rootPath: string) {
     const paths = await fs.readdir(rootPath)
+
     for (const filename of paths) {
-      // filename starts with underscore will be ignored
-      if (filename.startsWith('_'))
-        continue
-
-      const filePath = path.resolve(rootPath, filename)
-      const isDirectory = (await fs.lstat(filePath)).isDirectory()
-
-      const ext = path.extname(filePath)
-
-      if (!isDirectory && !Global.getMatchedParser(ext))
-        continue
+      const filepath = path.resolve(rootPath, filename)
+      const isDirectory = (await fs.lstat(filepath)).isDirectory()
 
       if (!isDirectory) {
-        await this.loadFile(filePath)
+        await this.loadFile(filepath)
       }
       else {
-        for (const p of await fs.readdir(filePath))
-          await this.loadFile(path.resolve(filePath, p))
+        for (const p of await fs.readdir(filepath))
+          await this.loadFile(path.resolve(filepath, p))
       }
     }
   }

@@ -253,6 +253,11 @@
           "type": "number",
           "default": 40,
           "description": "%config.annotation_max_length%"
+        },
+        "vue-i18n-ally.matchRegex": {
+          "type": "string",
+          "default": "^([\\w-]*)\\.(json|ya?ml|js)",
+          "description": "%config.match_regex%"
         }
       }
     }

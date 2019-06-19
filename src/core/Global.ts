@@ -216,6 +216,14 @@ export class Global {
     Global.setConfig('annotationMaxLength', value, true)
   }
 
+  static get matchRegex (): string {
+    return (Global.getConfig('matchRegex')) as string
+  }
+
+  static set matchRegex (value: string) {
+    Global.setConfig('matchRegex', value, true)
+  }
+
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {
     if (this.keyStyle !== 'auto')
       return this.keyStyle
