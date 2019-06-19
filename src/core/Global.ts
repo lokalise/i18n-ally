@@ -200,6 +200,14 @@ export class Global {
     Global.setConfig('keystyle', value, false)
   }
 
+  static get annotations (): boolean {
+    return (Global.getConfig('annotations')) as boolean
+  }
+
+  static set annotations (value: boolean) {
+    Global.setConfig('annotations', value, true)
+  }
+
   static get annotationMaxLength (): number {
     return (Global.getConfig('annotationMaxLength')) as number
   }

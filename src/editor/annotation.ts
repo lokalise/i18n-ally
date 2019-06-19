@@ -25,42 +25,45 @@ const annotation: ExtensionModule = (ctx) => {
     const keys = KeyDetector.getKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
-      let missing = false
-
-      let text = Global.loader.getValueByKey(key)
-      // fallback to source
-      if (!text && Global.displayLanguage !== Global.sourceLanguage) {
-        text = Global.loader.getValueByKey(key, Global.sourceLanguage)
-        missing = true
-      }
-
-      if (text)
-        text = `◽️${text}`
-
-      const color = missing
-        ? 'rgba(153, 153, 153, .3)'
-        : 'rgba(153, 153, 153, .7)'
-
-      annotations.push({
-        range: new Range(
-          document.positionAt(start - 1),
-          document.positionAt(end + 1)
-        ),
-        renderOptions: {
-          after: {
-            color,
-            contentText: text,
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-          },
-        },
-      })
       underlines.push({
         range: new Range(
           document.positionAt(start),
           document.positionAt(end)
         ),
       })
+
+      if (Global.annotations) {
+        let missing = false
+
+        let text = Global.loader.getValueByKey(key)
+        // fallback to source
+        if (!text && Global.displayLanguage !== Global.sourceLanguage) {
+          text = Global.loader.getValueByKey(key, Global.sourceLanguage)
+          missing = true
+        }
+
+        if (text)
+          text = `◽️${text}`
+
+        const color = missing
+          ? 'rgba(153, 153, 153, .3)'
+          : 'rgba(153, 153, 153, .7)'
+
+        annotations.push({
+          range: new Range(
+            document.positionAt(start - 1),
+            document.positionAt(end + 1)
+          ),
+          renderOptions: {
+            after: {
+              color,
+              contentText: text,
+              fontWeight: 'normal',
+              fontStyle: 'normal',
+            },
+          },
+        })
+      }
     })
 
     activeTextEditor.setDecorations(noneDecorationType, annotations)

@@ -244,6 +244,11 @@
           "default": "auto",
           "description": "%config.keystyle%"
         },
+        "vue-i18n-ally.annotations": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.annotations%"
+        },
         "vue-i18n-ally.annotationMaxLength": {
           "type": "number",
           "default": 40,
