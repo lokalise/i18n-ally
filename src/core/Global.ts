@@ -1,4 +1,4 @@
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel, ConfigurationChangeEvent } from 'vscode'
 import { LocaleLoader } from '.'
 import { uniq } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from '../utils/utils'
@@ -9,8 +9,14 @@ import { ConfigLocalesGuide } from '../commands/configLocales'
 import { extname } from 'path'
 import i18n from '../i18n'
 
-const configPrefix = 'vue-i18n-ally'
 export type KeyStyle = 'auto' | 'nested' | 'flat'
+
+const configPrefix = 'vue-i18n-ally'
+
+const reloadConfigs = [
+  'locales',
+  'matchRegex',
+]
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -39,15 +45,15 @@ export class Global {
     context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
-    context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update()))
+    context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update(e)))
     await this.updateRootPath()
   }
 
-  private static async initLoader (rootpath: string) {
+  private static async initLoader (rootpath: string, reload = false) {
     if (!rootpath)
       return
 
-    if (this._loaders[rootpath])
+    if (this._loaders[rootpath] && !reload)
       return this._loaders[rootpath]
 
     const loader = new LocaleLoader(rootpath)
@@ -84,13 +90,21 @@ export class Global {
     }
   }
 
-  private static async update () {
+  private static async update (e?: ConfigurationChangeEvent) {
+    let reload = false
+    if (e) {
+      for (const config of reloadConfigs)
+        reload = reload || e.affectsConfiguration(`${configPrefix}.${config}`)
+      if (reload)
+        this.outputChannel.appendLine('Reloading loader')
+    }
+
     const i18nProject = isVueI18nProject(this._rootpath)
     const hasLocalesSet = !!this.localesPaths.length
     const shouldEnabled = i18nProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
     if (this.enabled) {
-      await this.initLoader(this._rootpath)
+      await this.initLoader(this._rootpath, reload)
     }
     else {
       if (!i18nProject)
