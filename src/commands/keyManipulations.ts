@@ -10,6 +10,7 @@ import i18n from '../i18n'
 interface CommandOptions {
   keypath: string
   locale: string
+  from?: string
 }
 
 function getNode (item?: LocaleTreeItem | CommandOptions) {
@@ -58,8 +59,10 @@ const m: ExtensionModule = (ctx) => {
         if (node.type === 'tree')
           return
 
+        const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Global.sourceLanguage
+
         try {
-          const pendings = await Global.loader.MachineTranslate(node)
+          const pendings = await Global.loader.MachineTranslate(node, from)
           if (pendings.length) {
             await Global.loader.writeToFile(pendings)
             window.showInformationMessage(i18n.t('prompt.translation_saved'))
