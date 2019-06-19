@@ -101,7 +101,7 @@ export class Global {
 
     const i18nProject = isVueI18nProject(this._rootpath)
     const hasLocalesSet = !!this.localesPaths.length
-    const shouldEnabled = i18nProject && hasLocalesSet
+    const shouldEnabled = this.forceEnabled || (i18nProject && hasLocalesSet)
     this.setEnabled(shouldEnabled)
     if (this.enabled) {
       await this.initLoader(this._rootpath, reload)
@@ -234,8 +234,8 @@ export class Global {
     return (Global.getConfig('matchRegex')) as string
   }
 
-  static set matchRegex (value: string) {
-    Global.setConfig('matchRegex', value, true)
+  static get forceEnabled (): boolean {
+    return (Global.getConfig('forceEnabled')) as boolean
   }
 
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {

@@ -126,24 +126,22 @@ PR to implement any of the following features is also welcome. ☺
 - [x] Locales Tree
 - [x] Translating progress
 - [x] Workspace support
-- [x] Underscore for i18n keys
 - [x] YAML support
 - [x] `$tc`, `$d`, `$n`, `v-t` support
 - [x] Hide/Show specific locales
-- [x] Screenshots
 - [x] Language flags
 - [x] Loading `.js` locales
 - [x] Goto definition
 - [x] Source language indicator
 - [x] i18n for the plugin itself
+- [x] Annoation config (on/off, maxlength)
+- [x] Option to force enabling on non-vue-i18n project
 - [ ] Find all references
 - [ ] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
 - [ ] Loading `.ts` locales
-- [ ] Annoation config (on/off, maxlength)
-- [ ] Option to force enabling on non-vue-i18n project
 - [ ] Tests
 - [ ] Live share support
 
