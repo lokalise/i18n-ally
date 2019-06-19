@@ -198,7 +198,7 @@ export class LocaleLoader extends Disposable {
       return paths[0]
     if (paths.length === 0) {
       return await window.showInputBox({
-        prompt: `Enter the file path to store key "${keypath}"`,
+        prompt: `Enter the file path to store key "${keypath}"`, // TODO:i18n
         placeHolder: `path/to/${locale}.json`,
       })
     }
@@ -354,7 +354,12 @@ export class LocaleLoader extends Disposable {
 
     const info = path.parse(filepath)
 
-    let locale = normalizeLocale(match[1], '')
+    let locale = ''
+    if (match[1] === '') // filename with no locales code, should be treat as source locale
+      locale = Global.sourceLanguage
+    else
+      locale = normalizeLocale(match[1], '')
+
     let nested = false
     if (!locale) {
       nested = true
