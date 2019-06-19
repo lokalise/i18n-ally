@@ -2,6 +2,7 @@
   // See http://go.microsoft.com/fwlink/?LinkId=827846
   // for the documentation about the extensions.json format
   "recommendations": [
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "antfu.vue-i18n-ally",
   ]
 }

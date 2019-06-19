@@ -9,4 +9,8 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+
+  "vue-i18n-ally.forceEnabled": true,
+  "vue-i18n-ally.matchRegex": "^package.nls.([\\w-]*)\\.json",
+  "vue-i18n-ally.sourceLanguage": "en"
 }
