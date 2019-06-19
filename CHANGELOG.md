@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0](https://github.com/antfu/vue-i18n-ally/compare/v0.21.6...v0.22.0) (2019-06-19)
+
+
+### ⚡ Features
+
+* add an config to turn off annotations ([22ffdf8](https://github.com/antfu/vue-i18n-ally/commit/22ffdf8))
+* add config to force enable this extension (advanced) ([26bd36a](https://github.com/antfu/vue-i18n-ally/commit/26bd36a))
+* config for "annotation_max_length" ([5a0153c](https://github.com/antfu/vue-i18n-ally/commit/5a0153c))
+* support for custom match regex ([dd1d65b](https://github.com/antfu/vue-i18n-ally/commit/dd1d65b))
+
+
+### 🐞 Bug Fixes
+
+* reload on config changed ([979d02e](https://github.com/antfu/vue-i18n-ally/commit/979d02e))
+
+
+### 📚 Documentations
+
+* add match-regex fixture ([4dcd052](https://github.com/antfu/vue-i18n-ally/commit/4dcd052))
+
+
+
 ### [0.21.6](https://github.com/antfu/vue-i18n-ally/compare/v0.21.5...v0.21.6) (2019-06-19)
 
 
