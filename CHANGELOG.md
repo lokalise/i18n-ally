@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.22.5](https://github.com/antfu/vue-i18n-ally/compare/v0.22.4...v0.22.5) (2019-06-24)
+
+
+### 🐞 Bug Fixes
+
+* locale normalization ([a32a4c8](https://github.com/antfu/vue-i18n-ally/commit/a32a4c8))
+
+
+### 📚 Documentations
+
+* rounded and compress screenshoots ([ba0cb63](https://github.com/antfu/vue-i18n-ally/commit/ba0cb63))
+
+
+
 ### [0.22.4](https://github.com/antfu/vue-i18n-ally/compare/v0.22.3...v0.22.4) (2019-06-20)
 
 
