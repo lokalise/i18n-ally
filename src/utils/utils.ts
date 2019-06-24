@@ -14,10 +14,10 @@ export function normalizeLocale (locale: string, fallback = 'en'): string {
 
   try {
     // @ts-ignore
-    return Intl.Collator.supportedLocalesOf(Intl.getCanonicalLocales(locale), { localeMatcher: 'lookup' })[0]
+    return Intl.getCanonicalLocales(locale)[0]
   }
   catch (e) {
-    Global.outputChannel.appendLine(e.toString())
+    Global.outputChannel.appendLine(`Invalid locale code "${locale}"\n${e.toString()}`)
     return fallback
   }
 }
