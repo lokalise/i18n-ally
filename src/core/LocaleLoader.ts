@@ -344,28 +344,45 @@ export class LocaleLoader extends Disposable {
     }
   }
 
+  guessDirStructure (filepath: string): 'dir' | 'file' {
+    if (Global.dirStructure !== 'auto')
+      return Global.dirStructure
+    const dirname = path.basename(path.dirname(filepath))
+
+    if (normalizeLocale(dirname, '', true))
+      return 'dir'
+    else
+      return 'file'
+  }
+
   private getFileInfo (filepath: string) {
-    const regexp = new RegExp(Global.matchRegex, 'ig')
+    const dirStructure = this.guessDirStructure(filepath)
+    const regexp = new RegExp(Global.getMatchRegex(dirStructure), 'ig')
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const match = regexp.exec(filename)
     Global.outputChannel.appendLine(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
-    if (!match || match.length < 2)
+    if (!match || match.length < 1)
       return
 
     const info = path.parse(filepath)
 
     let locale = ''
-    if (!match[1]) // filename with no locales code, should be treat as source locale
-      locale = Global.sourceLanguage
-    else
-      locale = normalizeLocale(match[1], '')
-
     let nested = false
-    if (!locale) {
+
+    if (dirStructure === 'file') {
+      if (!match || match.length < 2)
+        return
+      if (!match[1]) // filename with no locales code, should be treat as source locale
+        locale = Global.sourceLanguage
+      else
+        locale = normalizeLocale(match[1], '')
+    }
+    else {
       nested = true
       locale = normalizeLocale(path.basename(info.dir), '')
     }
+
     if (!locale) {
       Global.outputChannel.appendLine(`Failed to get locale on file ${filepath}`)
       return

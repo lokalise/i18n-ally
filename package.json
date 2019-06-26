@@ -244,6 +244,16 @@
           "default": "auto",
           "description": "%config.keystyle%"
         },
+        "vue-i18n-ally.dirStructure": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "file",
+            "dir"
+          ],
+          "default": "auto",
+          "description": "%config.dir_structure%"
+        },
         "vue-i18n-ally.annotations": {
           "type": "boolean",
           "default": true,
@@ -256,7 +266,7 @@
         },
         "vue-i18n-ally.matchRegex": {
           "type": "string",
-          "default": "^([\\w-]*)\\.(json|ya?ml|js)",
+          "default": "",
           "description": "%config.match_regex%"
         },
         "vue-i18n-ally.forceEnabled": {

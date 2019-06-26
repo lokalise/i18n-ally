@@ -8,13 +8,16 @@ export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
 }
 
-export function normalizeLocale (locale: string, fallback = 'en'): string {
+export function normalizeLocale (locale: string, fallback = 'en', strict = false): string {
   if (!locale)
     return fallback
 
   try {
     // @ts-ignore
-    return Intl.getCanonicalLocales(locale)[0]
+    const canonical = Intl.getCanonicalLocales(locale)[0]
+    if (strict)
+      return Intl.Collator.supportedLocalesOf(canonical, { localeMatcher: 'lookup' })[0]
+    return canonical
   }
   catch (e) {
     Global.outputChannel.appendLine(`Invalid locale code "${locale}"\n${e.toString()}`)

@@ -230,12 +230,27 @@ export class Global {
     Global.setConfig('annotationMaxLength', value, true)
   }
 
-  static get matchRegex (): string {
-    return (Global.getConfig('matchRegex')) as string
-  }
-
   static get forceEnabled (): boolean {
     return (Global.getConfig('forceEnabled')) as boolean
+  }
+
+  static get dirStructure (): 'auto' | 'file' | 'dir' {
+    return (Global.getConfig('dirStructure')) as ('auto' | 'file' | 'dir')
+  }
+
+  static set dirStructure (value: 'auto' | 'file' | 'dir') {
+    Global.setConfig('dirStructure', value, true)
+  }
+
+  static getMatchRegex (dirStructure = this.dirStructure): string {
+    let regex = (Global.getConfig('matchRegex')) as string
+    if (!regex) {
+      if (dirStructure)
+        regex = '^([\\w-]*)\\.(json|ya?ml|js)'
+      else
+        regex = '^(.*)\\.(json|ya?ml|js)'
+    }
+    return regex
   }
 
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {
