@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.2](https://github.com/antfu/vue-i18n-ally/compare/v0.23.1...v0.23.2) (2019-07-09)
+
+
+### 🐞 Bug Fixes
+
+* **icons:** update new iconset and add dark icons ([6edae9f](https://github.com/antfu/vue-i18n-ally/commit/6edae9f))
+
+
+
 ### [0.23.1](https://github.com/antfu/vue-i18n-ally/compare/v0.23.0...v0.23.1) (2019-07-09)
 
 
