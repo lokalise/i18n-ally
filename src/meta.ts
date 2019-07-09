@@ -13,6 +13,8 @@ export const SupportedLanguageIds = [
   'typescript',
 ]
 
+export const SupportedLanguageGlobs = '**/*.{js,jsx,ts,tsx,vue}'
+
 export const LanguageSelectors = SupportedLanguageIds
   .map(language => ({ language, schema: 'file' }))
 

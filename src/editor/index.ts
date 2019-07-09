@@ -7,6 +7,7 @@ import hint from './hint'
 import definition from './definition'
 import refactor from './refactor'
 import problems from './problems'
+import reference from './reference'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -17,6 +18,7 @@ const m: ExtensionModule = (ctx) => {
     refactor(ctx),
     definition(ctx),
     problems(ctx),
+    reference(ctx),
   ])
 }
 
