@@ -2,6 +2,7 @@ import { workspace, window, EventEmitter, Event, Disposable } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
+import * as fg from 'fast-glob'
 import { Global } from '.'
 import { MachineTranslate, getKeyname, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
@@ -554,7 +555,12 @@ export class LocaleLoader extends Disposable {
   }
 
   private async loadAll () {
-    for (const pathname of this.localesPaths) {
+    const paths = await fg(this.localesPaths, {
+      cwd: this.rootpath,
+      onlyDirectories: true,
+    })
+    Global.outputChannel.appendLine(`Loading locales under ${JSON.stringify(paths)}`)
+    for (const pathname of paths) {
       const fullpath = path.resolve(this.rootpath, pathname)
       Global.outputChannel.appendLine(`Loading locales under ${fullpath}`)
       await this.loadDirectory(fullpath)

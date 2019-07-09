@@ -19,7 +19,7 @@
   "view.current_file": "Current file",
   "view.progress": "Progress",
   "view.tree": "tree",
-  "config.locales_paths": "Path to locales directory (relative to project root)",
+  "config.locales_paths": "Path to locales directory (relative to project root), glob pattern is also acceptable.",
   "config.source_language": "Source language for machine translation",
   "config.display_language": "Displaying language",
   "config.ignored_locales": "Locale codes to be ingored",

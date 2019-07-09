@@ -3,8 +3,6 @@
   "vue-i18n-ally.sourceLanguage": "en",
   "vue-i18n-ally.keystyle": "nested",
   "vue-i18n-ally.localesPaths": [
-    "modules\\moduleA\\locales",
-    "modules\\moduleB\\locales",
-    "modules\\moduleC\\nested\\locales",
+    "modules/**/**/locales",
   ],
 }

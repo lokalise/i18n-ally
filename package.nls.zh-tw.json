@@ -19,7 +19,7 @@
   "view.current_file": "當前檔案",
   "view.progress": "翻譯進度",
   "view.tree": "翻譯樹",
-  "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)",
+  "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)，你也可以使用Glob匹配模式。",
   "config.source_language": "翻譯源語言",
   "config.display_language": "顯示語言",
   "config.ignored_locales": "隱藏的語言",
