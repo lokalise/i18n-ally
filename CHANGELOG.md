@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0](https://github.com/antfu/vue-i18n-ally/compare/v0.22.6...v0.23.0) (2019-07-09)
+
+
+### ⚡ Features
+
+* find all references ([c5248d4](https://github.com/antfu/vue-i18n-ally/commit/c5248d4))
+* rename keys ([6c24567](https://github.com/antfu/vue-i18n-ally/commit/6c24567))
+
+
+
 ### [0.22.6](https://github.com/antfu/vue-i18n-ally/compare/v0.22.5...v0.22.6) (2019-06-26)
 
 
