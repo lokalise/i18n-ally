@@ -344,6 +344,29 @@ export class LocaleLoader extends Disposable {
     }
   }
 
+  async renameKey (oldkey: string, newkey: string) {
+    const writes = _(this._files)
+      .entries()
+      .flatMap(([filepath, file]) =>
+        [{
+          value: undefined,
+          keypath: oldkey,
+          filepath,
+          locale: file.locale,
+        }, {
+          value: _.get(file.value, oldkey),
+          keypath: newkey,
+          filepath,
+          locale: file.locale,
+        }])
+      .value()
+
+    if (!writes.length)
+      return
+
+    await Global.loader.writeToFile(writes)
+  }
+
   guessDirStructure (filepath: string): 'dir' | 'file' {
     if (Global.dirStructure !== 'auto')
       return Global.dirStructure
