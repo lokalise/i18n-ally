@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.23.1](https://github.com/antfu/vue-i18n-ally/compare/v0.23.0...v0.23.1) (2019-07-09)
+
+
+### ⚡ Features
+
+* `localesPaths` config now also accept glob pattern ([f4dfcdd](https://github.com/antfu/vue-i18n-ally/commit/f4dfcdd))
+
+
+### 🌍 Internationalization
+
+* add missing translations ([1da6cb6](https://github.com/antfu/vue-i18n-ally/commit/1da6cb6))
+
+
+### 📚 Documentations
+
+* add module-style fixture ([44e8c57](https://github.com/antfu/vue-i18n-ally/commit/44e8c57))
+
+
+
 ## [0.23.0](https://github.com/antfu/vue-i18n-ally/compare/v0.22.6...v0.23.0) (2019-07-09)
 
 
