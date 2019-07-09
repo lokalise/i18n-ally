@@ -52,13 +52,22 @@ export class LocaleTreeItem extends TreeItem {
       return this.ctx.asAbsolutePath('static/icon-unknown.svg')
     }
     else if (this.node.type === 'tree') {
-      return this.ctx.asAbsolutePath('static/icon-module.svg')
+      return {
+        light: this.ctx.asAbsolutePath('static/light/namespace.svg'),
+        dark: this.ctx.asAbsolutePath('static/dark/namespace.svg'),
+      }
     }
     else if (this.node.type === 'node') {
       if (this.description)
-        return this.ctx.asAbsolutePath('static/icon-string.svg')
+        return {
+          light: this.ctx.asAbsolutePath('static/light/string.svg'),
+          dark: this.ctx.asAbsolutePath('static/dark/string.svg'),
+        }
       else
-        return this.ctx.asAbsolutePath('static/icon-string-missing.svg')
+        return  {
+          light: this.ctx.asAbsolutePath('static/light/missing.svg'),
+          dark: this.ctx.asAbsolutePath('static/dark/missing.svg'),
+        }
     }
   }
 

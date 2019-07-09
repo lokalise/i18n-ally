@@ -66,22 +66,34 @@
       {
         "command": "extension.vue-i18n-ally.copy-key",
         "title": "%command.copy_key%",
-        "icon": "./static/icon-copy.svg"
+        "icon": {
+          "light": "./static/light/file.svg",
+          "dark": "./static/dark/file.svg"
+        }
       },
       {
         "command": "extension.vue-i18n-ally.translate-key",
         "title": "%command.translate_key%",
-        "icon": "./static/icon-translate.svg"
+        "icon": {
+          "light": "./static/light/translate.svg",
+          "dark": "./static/dark/translate.svg"
+        }
       },
       {
         "command": "extension.vue-i18n-ally.edit-key",
         "title": "%command.edit_key%",
-        "icon": "./static/icon-edit.svg"
+        "icon": {
+          "light": "./static/light/edit.svg",
+          "dark": "./static/dark/edit.svg"
+        }
       },
       {
         "command": "extension.vue-i18n-ally.open-key",
         "title": "%command.open_key%",
-        "icon": "./static/icon-open-file.svg"
+        "icon": {
+          "light": "./static/light/open-file.svg",
+          "dark": "./static/dark/open-file.svg"
+        }
       },
       {
         "command": "extension.vue-i18n-ally.delete-key",
@@ -94,12 +106,18 @@
       {
         "command": "extension.vue-i18n-ally.locale-visibility-show",
         "title": "%command.locale_visibility_show%",
-        "icon": "./static/icon-eye.svg"
+        "icon": {
+          "light": "./static/light/eye.svg",
+          "dark": "./static/dark/eye.svg"
+        }
       },
       {
         "command": "extension.vue-i18n-ally.locale-visibility-hide",
         "title": "%command.locale_visibility_hide%",
-        "icon": "./static/icon-eye-off.svg"
+        "icon": {
+          "light": "./static/light/eye-off.svg",
+          "dark": "./static/dark/eye-off.svg"
+        }
       }
     ],
     "menus": {
