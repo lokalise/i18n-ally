@@ -347,8 +347,11 @@ export class LocaleLoader extends Disposable {
   async renameKey (oldkey: string, newkey: string) {
     const writes = _(this._files)
       .entries()
-      .flatMap(([filepath, file]) =>
-        [{
+      .flatMap(([filepath, file]) => {
+        const value = _.get(file.value, oldkey)
+        if (value === undefined)
+          return []
+        return [{
           value: undefined,
           keypath: oldkey,
           filepath,
@@ -358,7 +361,8 @@ export class LocaleLoader extends Disposable {
           keypath: newkey,
           filepath,
           locale: file.locale,
-        }])
+        }]
+      })
       .value()
 
     if (!writes.length)

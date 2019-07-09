@@ -1,10 +1,9 @@
-import { window, commands, workspace, Selection, TextEditorRevealType, env, Range } from 'vscode'
-import { Global, Commands, LocaleRecord, KeyDetector, Node } from '../core'
+import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
+import { Global, Commands, LocaleRecord, Node } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import * as path from 'path'
-import { flatten } from 'lodash'
 import i18n from '../i18n'
 
 interface CommandOptions {
@@ -142,88 +141,6 @@ const m: ExtensionModule = (ctx) => {
               locale: node.locale,
             })
           }
-        }
-        catch (err) {
-          window.showErrorMessage(err.toString())
-        }
-      }),
-
-    commands.registerCommand(Commands.rename_key,
-      async (item?: LocaleTreeItem | string) => {
-        if (!item)
-          return
-
-        let node: Node | undefined
-
-        if (typeof item === 'string')
-          node = Global.loader.getTreeNodeByKey(item)
-        else
-          node = item.node
-
-        if (!node)
-          return
-
-        let records: LocaleRecord[] = []
-
-        if (node.type === 'tree')
-          return
-
-        else if (node.type === 'record')
-          records = [node]
-
-        else
-          records = Object.values(node.locales)
-
-        try {
-          const oldkeypath = node.keypath
-          const newkeypath = await window.showInputBox({
-            value: oldkeypath,
-            prompt: i18n.t('prompt.enter_new_keypath'),
-          })
-
-          if (!newkeypath || newkeypath === node.keypath)
-            return
-
-          // save to locale files
-          const writes = flatten(records
-            .filter(record => !record.shadow)
-            .map(record => [{
-              value: undefined,
-              keypath: oldkeypath,
-              filepath: record.filepath,
-              locale: record.locale,
-            }, {
-              value: record.value,
-              keypath: newkeypath,
-              filepath: record.filepath,
-              locale: record.locale,
-            }]))
-
-          if (!writes.length)
-            return
-
-          await Global.loader.writeToFile(writes)
-
-          // update current file
-          const editor = window.activeTextEditor
-          if (!editor)
-            return
-          const document = editor.document
-          if (!document)
-            return
-
-          const keys = KeyDetector
-            .getKeys(document)
-            .filter(({ key }) => key === oldkeypath)
-
-          editor.edit((builder) => {
-            keys.forEach(({ start, end }) => {
-              builder.replace(new Range(
-                document.positionAt(start),
-                document.positionAt(end),
-              ), newkeypath)
-            })
-          })
         }
         catch (err) {
           window.showErrorMessage(err.toString())

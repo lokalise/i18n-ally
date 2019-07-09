@@ -17,9 +17,7 @@ export class Refactor implements CodeActionProvider {
 
     const { key } = keyInfo
 
-    const actions = [
-      this.createRenameAction(key),
-    ]
+    const actions = []
 
     const records = Global.loader.getTranslationsByKey(key)
     if (!records[Global.displayLanguage] || !records[Global.displayLanguage].value) {
@@ -32,19 +30,6 @@ export class Refactor implements CodeActionProvider {
     }
 
     return actions
-  }
-
-  private createRenameAction (key: string): CodeAction {
-    const title = i18n.t('command.rename_key')
-    const action = new CodeAction(title, CodeActionKind.Refactor)
-    action.command = {
-      title,
-      command: Commands.rename_key,
-      arguments: [
-        key,
-      ],
-    }
-    return action
   }
 
   private createEditQuickFix (key: string) {

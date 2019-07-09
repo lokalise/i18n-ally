@@ -12,7 +12,6 @@ export enum Commands {
   edit_key = 'extension.vue-i18n-ally.edit-key',
   open_key = 'extension.vue-i18n-ally.open-key',
   delete_key = 'extension.vue-i18n-ally.delete-key',
-  rename_key = 'extension.vue-i18n-ally.rename-key',
   locale_visibility_toggle = 'extension.vue-i18n-ally.locale-visibility-toggle',
   locale_visibility_show = 'extension.vue-i18n-ally.locale-visibility-show',
   locale_visibility_hide = 'extension.vue-i18n-ally.locale-visibility-hide',
