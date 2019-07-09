@@ -98,7 +98,7 @@ Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have o
 
 1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPath` manually.
+   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
 2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
 3. **Directory structure** please read the next section
 
