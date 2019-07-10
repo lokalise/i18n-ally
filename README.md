@@ -165,8 +165,9 @@ You could change your config like this:
 
 ```json
 {
-  // ...
-  "vue-i18n-ally.localesPaths": "packages/**/**/i18n", // array is also acceptable
+  "vue-i18n-ally.localesPaths": [
+    "packages/**/**/i18n"
+  ],
   "vue-i18n-ally.matchRegex": "^([\\w-]*)\\.messages\\.json",
 }
 ```
