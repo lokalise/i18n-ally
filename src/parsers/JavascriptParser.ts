@@ -5,7 +5,7 @@ export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any
 
   constructor () {
-    super(['javascript'], /\.?js$/g)
+    super(['javascript', 'typescript'], /\.?(t|j)s$/g)
     this.esm = require('esm')(module, { cache: false })
     this._writable = false
   }
@@ -19,7 +19,8 @@ export class JavascriptParser extends Parser {
   }
 
   async load (filepath: string) {
-    let module = this.esm(filepath)
+    // set mtime to disable cache
+    let module = this.esm(`${filepath}?mtime=${+new Date()}`)
     if ('default' in module)
       module = module.default
     if (typeof module === 'function')

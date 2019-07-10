@@ -246,9 +246,9 @@ export class Global {
     let regex = (Global.getConfig('matchRegex')) as string
     if (!regex) {
       if (dirStructure)
-        regex = '^([\\w-_]*)\\.(json|ya?ml|js)'
+        regex = '^([\\w-_]*)\\.(json|ya?ml|js|ts)'
       else
-        regex = '^(.*)\\.(json|ya?ml|js)'
+        regex = '^(.*)\\.(json|ya?ml|js|ts)'
     }
     return regex
   }
