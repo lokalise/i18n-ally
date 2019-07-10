@@ -18,17 +18,32 @@ webpack.config.js
 renovate.json
 
 # Externals
-!node_modules/nodejieba/**
-!node_modules/esm/**
+# jieba
+!node_modules/nodejieba/build/Release/nodejieba.*
+!node_modules/nodejieba/dict/**
+!node_modules/nodejieba/*.js
+!node_modules/nodejieba/*.json
 
-!node_modules/ts-node/**
-!node_modules/arg/**
-!node_modules/buffer-from/**
-!node_modules/source-map/**
-!node_modules/source-map-support/**
-!node_modules/yn/**
-!node_modules/make-error/**
-!node_modules/typescript/**
+# esm
+!node_modules/esm/**/*.js
+!node_modules/esm/**/*.json
 
-node_modules/**/**/*.md
-node_modules/**/lib/**
+# ts-node
+!node_modules/ts-node/**/*.js
+!node_modules/ts-node/**/*.json
+!node_modules/arg/*.js
+!node_modules/arg/*.json
+!node_modules/buffer-from/*.js
+!node_modules/buffer-from/*.json
+!node_modules/source-map/**/*.js
+!node_modules/source-map/**/*.json
+!node_modules/source-map-support/*.js
+!node_modules/source-map-support/*.json
+!node_modules/yn/*.js
+!node_modules/yn/*.json
+!node_modules/make-error/*.js
+!node_modules/make-error/*.json
+!node_modules/typescript/bin/**
+!node_modules/typescript/lib/**
+!node_modules/typescript/*.js
+!node_modules/typescript/*.json
