@@ -1,0 +1,7 @@
+{
+  "vue-i18n-ally.localesPaths": "locales",
+  "eslint.enable": false,
+  "vue-i18n-ally.sourceLanguage": "en",
+  "vue-i18n-ally.keystyle": "nested",
+  "vue-i18n-ally.annotations": true
+}
