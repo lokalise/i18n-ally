@@ -56,5 +56,6 @@
   "config.match_regex": "匹配语言环境文件名的正则表达式字符串（返回结果的第一个组应是语言代码）",
   "prompt.enter_file_path_to_store_key": "输入存储文案 \"{0}\" 的文件路径",
   "prompt.select_file_to_store_key": "选择要存储文案 \"{0}\" 的文件",
-  "config.dir_structure": "用于组织本地文件的首选目录结构"
+  "config.dir_structure": "用于组织本地文件的首选目录结构",
+  "prompt.writing_js": "不支持写入文案至 js/ts 文件"
 }

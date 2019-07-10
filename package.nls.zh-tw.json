@@ -56,5 +56,6 @@
   "config.match_regex": "匹配語言環境文件名的正規運算式字串（返回結果的第一個群組應是語言代碼）",
   "prompt.enter_file_path_to_store_key": "輸入存儲文案 \"{0}\" 的文件路徑",
   "prompt.select_file_to_store_key": "選擇要存儲文案 \"{0}\" 的文件",
-  "config.dir_structure": "用於組織本地文件的首選目錄結構"
+  "config.dir_structure": "用於組織本地文件的首選目錄結構",
+  "prompt.writing_js": "不支援寫入文案至 js/ts 文件"
 }
