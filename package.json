@@ -157,7 +157,7 @@
         },
         {
           "command": "extension.vue-i18n-ally.edit-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /record|node/",
+          "when": "view =~ /locales-tree/ && viewItem =~ /editable/",
           "group": "inline@4"
         },
         {

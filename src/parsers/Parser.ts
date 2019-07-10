@@ -13,7 +13,7 @@ export interface ParserOptions {
 
 export abstract class Parser {
   private supportedExtsRegex: RegExp
-  protected _writable = true
+  readonly readonly: boolean = false
 
   constructor (
     public readonly languageIds: string[],
@@ -21,10 +21,6 @@ export abstract class Parser {
     public options: ParserOptions = { indent: 2, tab: ' ' }
   ) {
     this.supportedExtsRegex = new RegExp(supportedExts)
-  }
-
-  get writable () {
-    return this._writable
   }
 
   supports (ext: string) {

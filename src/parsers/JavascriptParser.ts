@@ -4,12 +4,12 @@ import { register as registerTsNode } from 'ts-node'
 
 export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any
+  readonly readonly = true
 
   constructor () {
     super(['javascript', 'typescript'], /\.?(t|j)s$/g)
     registerTsNode()
     this.esm = require('esm')(module, { cache: false })
-    this._writable = false
   }
 
   async parse (text: string) {
@@ -38,6 +38,6 @@ export class JavascriptParser extends Parser {
   }
 
   navigateToKey (text: string, keypath: string) {
-    return undefined
+    return { start: 0, end: 0 }
   }
 }

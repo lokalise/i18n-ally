@@ -291,6 +291,7 @@ export class LocaleLoader extends Disposable {
             keypath: node.keypath,
             filepath: this.getShadowFilePath(node.keypath, locale),
             type: 'record',
+            readonly: node.readonly,
           }
         }
       })
@@ -442,6 +443,7 @@ export class LocaleLoader extends Disposable {
         locale,
         value,
         nested,
+        readonly: parser.readonly,
       }
     }
     catch (e) {
@@ -523,6 +525,7 @@ export class LocaleLoader extends Disposable {
         // init node
         if (!tree.children[key]) {
           const node = new LocaleNode(newKeyPath, key)
+          node.readonly = file.readonly
           tree.children[key] = node
           this._flattenLocaleTree[node.keypath] = node
         }
@@ -537,6 +540,7 @@ export class LocaleLoader extends Disposable {
             locale: file.locale,
             filepath: file.filepath,
             type: 'record',
+            readonly: file.readonly,
           }
         }
       }

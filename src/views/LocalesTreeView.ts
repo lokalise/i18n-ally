@@ -58,16 +58,18 @@ export class LocaleTreeItem extends TreeItem {
       }
     }
     else if (this.node.type === 'node') {
-      if (this.description)
+      if (this.description) {
         return {
           light: this.ctx.asAbsolutePath('static/light/string.svg'),
           dark: this.ctx.asAbsolutePath('static/dark/string.svg'),
         }
-      else
-        return  {
+      }
+      else {
+        return {
           light: this.ctx.asAbsolutePath('static/light/missing.svg'),
           dark: this.ctx.asAbsolutePath('static/dark/missing.svg'),
         }
+      }
     }
   }
 
@@ -79,6 +81,9 @@ export class LocaleTreeItem extends TreeItem {
 
     if (NodeHelper.isOpenable(this.node))
       values.push('openable')
+
+    if (NodeHelper.isEditable(this.node))
+      values.push('editable')
 
     return values.join('-')
   }

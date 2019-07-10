@@ -7,6 +7,7 @@ export interface ParsedFile {
   locale: string
   value: object
   nested: boolean
+  readonly?: boolean
 }
 
 export interface LocaleRecord {
@@ -16,11 +17,13 @@ export interface LocaleRecord {
   locale: string
   filepath?: string
   shadow?: boolean
+  readonly?: boolean
   type: 'record'
 }
 
 export class LocaleNode {
   type: 'node' = 'node'
+  readonly?: boolean
 
   constructor (
     public readonly keypath: string,
@@ -47,6 +50,7 @@ export interface LocaleTree {
   keyname: string
   children: Record<string, LocaleTree|LocaleNode>
   shadow?: boolean
+  readonly?: boolean
   values: Record<string, object>
   type: 'tree'
 }
