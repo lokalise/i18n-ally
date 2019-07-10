@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0](https://github.com/antfu/vue-i18n-ally/compare/v0.23.2...v0.24.0) (2019-07-10)
+
+
+### ⚡ Features
+
+* add ts locales support ([d7e152b](https://github.com/antfu/vue-i18n-ally/commit/d7e152b))
+
+
+### 🌍 Internationalization
+
+* add missing translations ([d6fac95](https://github.com/antfu/vue-i18n-ally/commit/d6fac95))
+
+
+### 🐞 Bug Fixes
+
+* **docs:** update readme ([11ca965](https://github.com/antfu/vue-i18n-ally/commit/11ca965))
+* actions behavior for readonly locales ([caa2d22](https://github.com/antfu/vue-i18n-ally/commit/caa2d22))
+* support underscore in canonical locales ([09e6dcb](https://github.com/antfu/vue-i18n-ally/commit/09e6dcb))
+* ts hot reload, close [#46](https://github.com/antfu/vue-i18n-ally/issues/46) ([f247f85](https://github.com/antfu/vue-i18n-ally/commit/f247f85))
+
+
+### 📚 Documentations
+
+* update readme ([90f086f](https://github.com/antfu/vue-i18n-ally/commit/90f086f))
+* update readme about advanced folder directory configurations ([ba98b96](https://github.com/antfu/vue-i18n-ally/commit/ba98b96))
+
+
+### 🔮 Refactor
+
+* unified internal types ([3f31317](https://github.com/antfu/vue-i18n-ally/commit/3f31317))
+
+
+
 ### [0.23.2](https://github.com/antfu/vue-i18n-ally/compare/v0.23.1...v0.23.2) (2019-07-09)
 
 
