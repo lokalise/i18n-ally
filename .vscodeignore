@@ -18,4 +18,10 @@ webpack.config.js
 # Externals
 !node_modules/nodejieba/**
 !node_modules/esm/**
+
 !node_modules/ts-node/**
+!node_modules/arg/**
+!node_modules/buffer-from/**
+!node_modules/source-map/**
+!node_modules/source-map-support/**
+!node_modules/yn/**

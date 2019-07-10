@@ -365,7 +365,6 @@
   "dependencies": {
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
-    "intl": "^1.2.5",
     "js-yaml": "^3.13.1",
     "limax": "^1.7.0",
     "lodash": "^4.17.11",
