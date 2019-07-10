@@ -14,7 +14,7 @@ export type KeyStyle = 'auto' | 'nested' | 'flat'
 const configPrefix = 'vue-i18n-ally'
 
 const reloadConfigs = [
-  'locales',
+  'localePaths',
   'matchRegex',
 ]
 
@@ -246,7 +246,7 @@ export class Global {
     let regex = (Global.getConfig('matchRegex')) as string
     if (!regex) {
       if (dirStructure)
-        regex = '^([\\w-]*)\\.(json|ya?ml|js)'
+        regex = '^([\\w-_]*)\\.(json|ya?ml|js)'
       else
         regex = '^(.*)\\.(json|ya?ml|js)'
     }

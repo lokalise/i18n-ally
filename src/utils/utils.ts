@@ -13,6 +13,7 @@ export function normalizeLocale (locale: string, fallback = 'en', strict = false
     return fallback
 
   try {
+    locale = locale.replace(/_/g, '-')
     // @ts-ignore
     const canonical = Intl.getCanonicalLocales(locale)[0]
     if (strict)
