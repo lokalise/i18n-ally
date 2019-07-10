@@ -1,11 +1,13 @@
 import { Parser } from './Parser'
 import { window } from 'vscode'
+import { register as registerTsNode } from 'ts-node'
 
 export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any
 
   constructor () {
     super(['javascript', 'typescript'], /\.?(t|j)s$/g)
+    registerTsNode()
     this.esm = require('esm')(module, { cache: false })
     this._writable = false
   }
@@ -32,7 +34,7 @@ export class JavascriptParser extends Parser {
   }
 
   async save () {
-    window.showErrorMessage('Writing to js file is not supported')
+    window.showErrorMessage('Writing to js/ts file is not supported.')
   }
 
   navigateToKey (text: string, keypath: string) {

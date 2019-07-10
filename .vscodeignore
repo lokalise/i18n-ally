@@ -18,3 +18,4 @@ webpack.config.js
 # Externals
 !node_modules/nodejieba/**
 !node_modules/esm/**
+!node_modules/ts-node/**

@@ -20,6 +20,7 @@ const config = {
     vscode: 'commonjs vscode',
     nodejieba: 'nodejieba',
     esm: 'esm',
+    'ts-node': 'ts-node',
   },
   resolve: {
     extensions: ['.ts', '.js'],

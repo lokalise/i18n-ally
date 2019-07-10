@@ -1,4 +1,4 @@
 // export as function
-export default () => ({
+export default (): object => ({
   hello: 'Bonjour!'.toUpperCase()
 })
