@@ -172,9 +172,9 @@ You could change your config like this:
 }
 ```
 
-### ⚗ Experimental `.js` support
+### ⚗ Experimental `.js`/`.ts` support
 
-From v0.16.x, we shipped the support for loading `*.js` locale files.
+From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files.
 
 Something like this:
 
@@ -196,10 +196,7 @@ export default {
 Although there are some limitations:
 
 ### No editting / translating
-Since javascript can be very complex and there is not a proper way the let machine decide where to update the changes. We disabled all the writing features on `.js` locales and there is no plan to support them in the future.
-
-### No reload on file changes 🐞
-This is a bug cause by `esm`'s cache. It will be fixed in the future release.
+Since javascript/typescript can be very complex and there is not a proper way the let machine decide where to update the changes. We disabled all the writing features on `.js`/`.ts` locales and there is no plan to support them in the future.
 
 ## 📅 TODOs
 
@@ -223,10 +220,10 @@ PR to implement any of the following features is also welcome. ☺
 - [x] Option to force enabling on non-vue-i18n project
 - [x] Find all references
 - [x] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
-- [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
+- [x] Loading `.ts` locales
+- [ ] [Vue SFC locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
-- [ ] Loading `.ts` locales
 - [ ] Tests
 - [ ] Live share support
 

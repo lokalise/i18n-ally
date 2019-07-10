@@ -33,6 +33,9 @@
 ![](https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/screenshots/overview-zh-cn.png)
 
 
+> 🚧 注意: 中文文档可能不会及时对应到最新版本的功能，请以英文版本为主。
+
+
 ## ⚙ 安装
 
 从 VSCode插件市场 [安装插件](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally) 即可!
@@ -92,9 +95,7 @@ or
       └── ...
 ```
 
-目前我们支持`json`和`yaml`两种翻译文件格式。
-
-如果您想使用不同的文件格式或目录结构，欢迎提 Issue 或 PR。
+目前我们支持 `json`/`yaml`/`js`/`ts` 翻译文件格式。
 
 ## 👨‍💻 感谢
 
