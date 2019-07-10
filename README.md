@@ -105,10 +105,10 @@ Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have o
 
 ## 📂 Directory structure
 
-You can have locales directory structured like this
+You can have locales directory structured like this with zero-configuration
 
 ```
-  locales         # you can specify the folder path in the settings
+  locales         # i18n, langs, locale are also acceptable
   ├── en.json
   ├── de-DE.json
   ├── zh-CN.yaml  # YAML is also supported
@@ -136,7 +136,40 @@ or
       └── ...
 ```
 
-If you would like use different file formats or directory structures, it welcome to open an issue or pull request.
+### 🗂 Advanced folder directory configurations
+
+In some cases, you may use modules, monorepo or other philosophies to organize your locale files. The follow configs might be helpful.
+
+`vue-i18n-ally.localesPaths` accept an array of glob patterns which allows you to specify the folders containing your locale files.
+
+`vue-i18n-ally.matchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored in this plugin.
+
+**For example**, you have following directory structure need to be config.
+
+```
+  packages
+  ├── pkgA
+  |   └── i18n
+  |       ├── en.messages.json
+  |       ├── zh-CN.messages.json
+  |       └── ...
+  ├── pkgB
+  |   └── i18n
+  |       ├── en.messages.json
+  |       ├── zh-CN.messages.json
+  |       └── ...
+  └── ...
+```
+
+You could change your config like this:
+
+```json
+{
+  // ...
+  "vue-i18n-ally.localesPaths": "packages/**/**/i18n", // array is also acceptable
+  "vue-i18n-ally.matchRegex": "^([\\w-]*)\\.messages\\.json",
+}
+```
 
 ### ⚗ Experimental `.js` support
 
@@ -187,8 +220,8 @@ PR to implement any of the following features is also welcome. ☺
 - [x] i18n for the plugin itself
 - [x] Annoation config (on/off, maxlength)
 - [x] Option to force enabling on non-vue-i18n project
-- [ ] Find all references
-- [ ] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
+- [x] Find all references
+- [x] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
 - [ ] [Vue inlined locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
