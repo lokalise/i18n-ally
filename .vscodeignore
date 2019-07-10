@@ -13,7 +13,9 @@ screenshots/**
 tsconfig.json
 tslint.json
 test/**
+samples/**
 webpack.config.js
+renovate.json
 
 # Externals
 !node_modules/nodejieba/**
@@ -25,3 +27,8 @@ webpack.config.js
 !node_modules/source-map/**
 !node_modules/source-map-support/**
 !node_modules/yn/**
+!node_modules/make-error/**
+!node_modules/typescript/**
+
+node_modules/**/**/*.md
+node_modules/**/lib/**
