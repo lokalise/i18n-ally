@@ -10,28 +10,64 @@ export interface ParsedFile {
   readonly?: boolean
 }
 
-export interface LocaleRecord {
+export interface INode {
   keypath: string
-  keyname: string
-  value: string
-  locale: string
+  keyname?: string
   filepath?: string
   shadow?: boolean
   readonly?: boolean
-  type: 'record'
 }
 
-export class LocaleNode {
-  type: 'node' = 'node'
-  readonly?: boolean
+export interface ILocaleRecord extends INode {
+  value: string
+  locale: string
+}
 
-  constructor (
-    public readonly keypath: string,
-    public readonly keyname: string = '',
-    public readonly locales: Record<string, LocaleRecord> = {},
-    public readonly shadow = false
-  ) {
-    this.keyname = keyname || getKeyname(keypath)
+export interface ILocaleNode extends INode {
+  locales?: Record<string, LocaleRecord>
+}
+
+export interface ILocaleTree extends INode {
+  children?: Record<string, LocaleTree | LocaleNode>
+  values?: Record<string, object>
+}
+
+abstract class BaseNode implements INode {
+  readonly keypath: string
+  readonly keyname: string
+  readonly filepath?: string
+  readonly shadow?: boolean
+  readonly readonly?: boolean
+
+  constructor (data: INode) {
+    this.keypath = data.keypath
+    this.keyname = data.keyname || getKeyname(data.keypath)
+    this.filepath = data.filepath
+    this.shadow = data.shadow
+    this.readonly = data.readonly
+  }
+}
+
+export class LocaleRecord extends BaseNode implements ILocaleRecord {
+  readonly type: 'record' = 'record'
+
+  readonly locale: string
+  readonly value: string
+
+  constructor (data: ILocaleRecord) {
+    super(data)
+    this.value = data.value
+    this.locale = data.locale
+  }
+}
+
+export class LocaleNode extends BaseNode implements ILocaleNode {
+  readonly type: 'node' = 'node'
+  readonly locales: Record<string, LocaleRecord>
+
+  constructor (data: ILocaleNode) {
+    super(data)
+    this.locales = data.locales || {}
   }
 
   getValue (locale: string, fallback = '') {
@@ -43,17 +79,20 @@ export class LocaleNode {
   }
 }
 
-export interface FlattenLocaleTree extends Record<string, LocaleNode> {}
+export class LocaleTree extends BaseNode implements ILocaleTree {
+  readonly type: 'tree' = 'tree'
 
-export interface LocaleTree {
-  keypath: string
-  keyname: string
-  children: Record<string, LocaleTree|LocaleNode>
-  shadow?: boolean
-  readonly?: boolean
-  values: Record<string, object>
-  type: 'tree'
+  readonly children: Record<string, LocaleTree|LocaleNode>
+  readonly values: Record<string, object>
+
+  constructor (data: ILocaleTree) {
+    super(data)
+    this.children = data.children || {}
+    this.values = data.values || {}
+  }
 }
+
+export interface FlattenLocaleTree extends Record<string, LocaleNode> {}
 
 export interface Coverage {
   locale: string

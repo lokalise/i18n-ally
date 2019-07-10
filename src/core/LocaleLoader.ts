@@ -4,20 +4,10 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fg from 'fast-glob'
 import { Global } from '.'
-import { MachineTranslate, getKeyname, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
+import { MachineTranslate, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType } from './Errors'
 import i18n from '../i18n'
-
-function newTree (keypath = '', keyname?: string, values = {}): LocaleTree {
-  return {
-    keypath,
-    keyname: keyname || getKeyname(keypath),
-    children: {},
-    values,
-    type: 'tree',
-  }
-}
 
 export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
@@ -25,7 +15,7 @@ export class LocaleLoader extends Disposable {
 
   private _files: Record<string, ParsedFile> = {}
   private _flattenLocaleTree: FlattenLocaleTree = {}
-  private _localeTree: LocaleTree = newTree()
+  private _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
   private _disposables: Disposable[]=[]
 
   constructor (public readonly rootpath: string) {
@@ -255,7 +245,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getShadowNodeByKey (keypath: string) {
-    return new LocaleNode(keypath, '', {}, true)
+    return new LocaleNode({ keypath, shadow: true })
   }
 
   getShadowFilePath (keypath: string, locale: string) {
@@ -283,16 +273,15 @@ export class LocaleLoader extends Disposable {
         }
         else {
         // create shadow locale
-          locales[locale] = {
+          locales[locale] = new LocaleRecord({
             locale,
             value: '',
             shadow: true,
             keyname: node.keyname,
             keypath: node.keypath,
             filepath: this.getShadowFilePath(node.keypath, locale),
-            type: 'record',
             readonly: node.readonly,
-          }
+          })
         }
       })
     return locales
@@ -507,7 +496,7 @@ export class LocaleLoader extends Disposable {
   private updateLocalesTree () {
     this._flattenLocaleTree = {}
     const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree) => {
-      tree = tree || newTree(keypath)
+      tree = tree || new LocaleTree({ keypath })
       tree.values[file.locale] = object
       for (const [key, value] of Object.entries(object)) {
         const newKeyPath = keypath ? `${keypath}.${key}` : key
@@ -524,8 +513,11 @@ export class LocaleLoader extends Disposable {
 
         // init node
         if (!tree.children[key]) {
-          const node = new LocaleNode(newKeyPath, key)
-          node.readonly = file.readonly
+          const node = new LocaleNode({
+            keypath: newKeyPath,
+            keyname: key,
+            readonly: file.readonly,
+          })
           tree.children[key] = node
           this._flattenLocaleTree[node.keypath] = node
         }
@@ -533,21 +525,20 @@ export class LocaleLoader extends Disposable {
         // add locales to exitsing node
         const node = tree.children[key]
         if (node.type === 'node') {
-          node.locales[file.locale] = {
+          node.locales[file.locale] = new LocaleRecord({
             keypath: newKeyPath,
             keyname: key,
             value,
             locale: file.locale,
             filepath: file.filepath,
-            type: 'record',
             readonly: file.readonly,
-          }
+          })
         }
       }
       return tree
     }
 
-    const tree = newTree()
+    const tree = new LocaleTree({ keypath: '' })
     for (const file of Object.values(this._files))
       subTree(file.value, '', '', file, tree)
     this._localeTree = tree

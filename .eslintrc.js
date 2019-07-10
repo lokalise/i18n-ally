@@ -95,6 +95,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
 
     // vue-i18n
     'no-cond-assign': 'off',
