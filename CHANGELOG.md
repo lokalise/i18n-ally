@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1](https://github.com/antfu/vue-i18n-ally/compare/v0.24.0...v0.24.1) (2019-07-10)
+
+
+### 🐞 Bug Fixes
+
+* deps of ts-node ([b0ffd23](https://github.com/antfu/vue-i18n-ally/commit/b0ffd23))
+
+
+
 ## [0.24.0](https://github.com/antfu/vue-i18n-ally/compare/v0.23.2...v0.24.0) (2019-07-10)
 
 
