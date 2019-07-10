@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.2](https://github.com/antfu/vue-i18n-ally/compare/v0.24.1...v0.24.2) (2019-07-10)
+
+
+### 🐞 Bug Fixes
+
+* vscodeignore ([cfa90e4](https://github.com/antfu/vue-i18n-ally/commit/cfa90e4))
+
+
+
 ### [0.24.1](https://github.com/antfu/vue-i18n-ally/compare/v0.24.0...v0.24.1) (2019-07-10)
 
 
