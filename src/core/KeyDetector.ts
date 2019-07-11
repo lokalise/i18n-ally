@@ -4,7 +4,7 @@ import { uniq } from 'lodash'
 
 // for visualize the regex, you can use https://regexper.com/
 // eslint-disable-next-line no-useless-escape
-export const KEY_REG = /(?:i18n[ (]path=|v-t=['"`]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\.]+?)['"`]/g
+export const KEY_REG = /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\.]+?)['"`]/g
 
 export class KeyDetector {
   static getKeyByContent (text: string) {
