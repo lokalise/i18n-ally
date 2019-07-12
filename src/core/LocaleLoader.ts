@@ -456,8 +456,11 @@ export class LocaleLoader extends Disposable {
         await this.loadFile(filepath)
       }
       else {
-        for (const p of await fs.readdir(filepath))
-          await this.loadFile(path.resolve(filepath, p))
+        for (const p of await fs.readdir(filepath)) {
+          const subfilepath = path.resolve(filepath, p)
+          if (!(await fs.lstat(subfilepath)).isDirectory())
+            await this.loadFile(subfilepath)
+        }
       }
     }
   }
