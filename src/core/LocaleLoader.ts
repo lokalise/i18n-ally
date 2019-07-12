@@ -362,24 +362,12 @@ export class LocaleLoader extends Disposable {
     await Global.loader.writeToFile(writes)
   }
 
-  guessDirStructure (filepath: string): 'dir' | 'file' {
-    if (Global.dirStructure !== 'auto')
-      return Global.dirStructure
-    const dirname = path.basename(path.dirname(filepath))
-
-    if (normalizeLocale(dirname, '', true))
-      return 'dir'
-    else
-      return 'file'
-  }
-
-  private getFileInfo (filepath: string) {
-    const dirStructure = this.guessDirStructure(filepath)
+  private getFileInfo (filepath: string, dirStructure: 'dir'|'file') {
     const regexp = new RegExp(Global.getMatchRegex(dirStructure), 'ig')
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const match = regexp.exec(filename)
-    Global.outputChannel.appendLine(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
+    // Global.outputChannel.appendLine(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
     if (!match || match.length < 1)
       return
 
@@ -396,7 +384,8 @@ export class LocaleLoader extends Disposable {
       else
         locale = normalizeLocale(match[1], '')
     }
-    else {
+
+    if (dirStructure === 'dir') {
       nested = true
       locale = normalizeLocale(path.basename(info.dir), '')
     }
@@ -416,13 +405,13 @@ export class LocaleLoader extends Disposable {
     }
   }
 
-  private async loadFile (filepath: string) {
+  private async loadFile (filepath: string, dirStructure: 'dir'|'file' = 'file', parentPath?: string) {
     try {
-      const result = this.getFileInfo(filepath)
+      const result = this.getFileInfo(filepath, dirStructure)
       if (!result)
         return
       const { locale, nested, parser } = result
-      Global.outputChannel.appendLine(`Loading file ${filepath} [${locale}]`)
+      Global.outputChannel.appendLine(`  Loading [${locale}] ${path.relative(parentPath || this.rootpath, filepath)}`)
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
@@ -437,7 +426,7 @@ export class LocaleLoader extends Disposable {
     }
     catch (e) {
       this.unsetFile(filepath)
-      Global.outputChannel.appendLine(`Failed to load file ${e}`)
+      Global.outputChannel.appendLine(`    Failed to load ${e}`)
     }
   }
 
@@ -445,21 +434,27 @@ export class LocaleLoader extends Disposable {
     delete this._files[filepath]
   }
 
+  private async isDirectory (filepath: string) {
+    const stat = await fs.lstat(filepath)
+    return stat.isDirectory()
+  }
+
   private async loadDirectory (rootPath: string) {
     const paths = await fs.readdir(rootPath)
+    const dirStructure = Global.dirStructure
 
     for (const filename of paths) {
       const filepath = path.resolve(rootPath, filename)
-      const isDirectory = (await fs.lstat(filepath)).isDirectory()
+      const isDirectory = await this.isDirectory(filepath)
 
-      if (!isDirectory) {
-        await this.loadFile(filepath)
-      }
-      else {
+      if (['auto', 'file'].includes(dirStructure) && !isDirectory)
+        await this.loadFile(filepath, 'file', rootPath)
+
+      if (['auto', 'dir'].includes(dirStructure) && isDirectory) {
         for (const p of await fs.readdir(filepath)) {
           const subfilepath = path.resolve(filepath, p)
-          if (!(await fs.lstat(subfilepath)).isDirectory())
-            await this.loadFile(subfilepath)
+          if (!await this.isDirectory(subfilepath))
+            await this.loadFile(subfilepath, 'dir', rootPath)
         }
       }
     }
@@ -557,13 +552,13 @@ export class LocaleLoader extends Disposable {
       cwd: this.rootpath,
       onlyDirectories: true,
     })
-    Global.outputChannel.appendLine(`Loading locales under ${JSON.stringify(paths)}`)
     for (const pathname of paths) {
       const fullpath = path.resolve(this.rootpath, pathname)
-      Global.outputChannel.appendLine(`Loading locales under ${fullpath}`)
+      Global.outputChannel.appendLine(`\nLoading locales under ${fullpath}`)
       await this.loadDirectory(fullpath)
       this.watchOn(fullpath)
     }
+    Global.outputChannel.appendLine('\nLoad finished\n-----\n')
   }
 
   private onDispose () {
