@@ -14,7 +14,7 @@ export type KeyStyle = 'auto' | 'nested' | 'flat'
 const configPrefix = 'vue-i18n-ally'
 
 const reloadConfigs = [
-  'localePaths',
+  'localesPaths',
   'matchRegex',
 ]
 
@@ -93,8 +93,14 @@ export class Global {
   private static async update (e?: ConfigurationChangeEvent) {
     let reload = false
     if (e) {
-      for (const config of reloadConfigs)
-        reload = reload || e.affectsConfiguration(`${configPrefix}.${config}`)
+      for (const config of reloadConfigs) {
+        const key = `${configPrefix}.${config}`
+        const affected = e.affectsConfiguration(key)
+        if (affected) {
+          reload = true
+          break
+        }
+      }
       if (reload)
         this.outputChannel.appendLine('Reloading loader')
     }
