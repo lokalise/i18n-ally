@@ -302,7 +302,8 @@ export class Global {
     let localesPaths: string[]
     if (typeof paths === 'string')
       localesPaths = paths.split(',')
-    localesPaths = paths || []
+    else
+      localesPaths = paths || []
     return localesPaths.map(i => trimEnd(i, '/\\'))
   }
 
