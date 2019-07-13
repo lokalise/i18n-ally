@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.8](https://github.com/antfu/vue-i18n-ally/compare/v0.24.7...v0.24.8) (2019-07-13)
+
+
+### 🐞 Bug Fixes
+
+* path autoset ([6d74ac7](https://github.com/antfu/vue-i18n-ally/commit/6d74ac7))
+
+
+
 ### [0.24.7](https://github.com/antfu/vue-i18n-ally/compare/v0.24.6...v0.24.7) (2019-07-13)
 
 
