@@ -16,7 +16,7 @@ export class LocaleLoader extends Disposable {
   private _files: Record<string, ParsedFile> = {}
   private _flattenLocaleTree: FlattenLocaleTree = {}
   private _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
-  private _disposables: Disposable[]=[]
+  private _disposables: Disposable[] = []
 
   constructor (public readonly rootpath: string) {
     super(() => this.onDispose())

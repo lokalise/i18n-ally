@@ -1,6 +1,6 @@
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel, ConfigurationChangeEvent } from 'vscode'
 import { LocaleLoader } from '.'
-import { uniq } from 'lodash'
+import { uniq, trimEnd } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from '../utils/utils'
 import { JsonParser } from '../parsers/JsonParser'
 import { YamlParser } from '../parsers/YamlParser'
@@ -293,9 +293,11 @@ export class Global {
   // locales
   static get localesPaths (): string[] {
     const paths = Global.getConfig('localesPaths')
+    let localesPaths: string[]
     if (typeof paths === 'string')
-      return paths.split(',')
-    return paths || []
+      localesPaths = paths.split(',')
+    localesPaths = paths || []
+    return localesPaths.map(i => trimEnd(i, '/\\'))
   }
 
   static set localesPaths (paths: string[]) {
