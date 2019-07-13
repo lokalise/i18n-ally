@@ -300,7 +300,9 @@ export class Global {
   static get localesPaths (): string[] {
     const paths = Global.getConfig('localesPaths')
     let localesPaths: string[]
-    if (typeof paths === 'string')
+    if (!paths)
+      localesPaths = []
+    else if (typeof paths === 'string')
       localesPaths = paths.split(',')
     else
       localesPaths = paths || []

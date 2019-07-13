@@ -549,15 +549,20 @@ export class LocaleLoader extends Disposable {
 
   private async loadAll () {
     let paths: string[] = []
-    try {
-      paths = await fg(this.localesPaths, {
-        cwd: this.rootpath,
-        onlyDirectories: true,
-      })
+    if (this.localesPaths.length > 0) {
+      try {
+        paths = await fg(this.localesPaths, {
+          cwd: this.rootpath,
+          onlyDirectories: true,
+        })
+      }
+      catch (e) {
+        LogError(e)
+      }
     }
-    catch (e) {
-      LogError(e)
-    }
+    if (paths.length === 0)
+      Global.outputChannel.appendLine('\nNo locales paths.')
+
     for (const pathname of paths) {
       try {
         const fullpath = path.resolve(this.rootpath, pathname)

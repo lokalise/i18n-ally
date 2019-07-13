@@ -58,13 +58,11 @@ export class ConfigLocalesGuide {
       return
 
     const pattern = ['**/**/(locales|locale|i18n|lang|langs)']
-    let result: string[] = await fg(pattern, {
+    const result: string[] = await fg(pattern, {
       cwd: rootPath,
       ignore: ['**/node_modules'],
       onlyDirectories: true,
     })
-
-    result = result.map(r => path.relative(rootPath, r))
 
     if (result.length) {
       Global.updateLocalesPaths(result)
