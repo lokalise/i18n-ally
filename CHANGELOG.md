@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.6](https://github.com/antfu/vue-i18n-ally/compare/v0.24.5...v0.24.6) (2019-07-13)
+
+
+### 🐞 Bug Fixes
+
+* config watch of localesPaths ([ada02ac](https://github.com/antfu/vue-i18n-ally/commit/ada02ac))
+* optimize file loading ([2418570](https://github.com/antfu/vue-i18n-ally/commit/2418570))
+* tailing dash in localePaths ([e68e17d](https://github.com/antfu/vue-i18n-ally/commit/e68e17d))
+
+
+### 🔮 Refactor
+
+* improved log ([b2672af](https://github.com/antfu/vue-i18n-ally/commit/b2672af))
+
+
+
 ### [0.24.5](https://github.com/antfu/vue-i18n-ally/compare/v0.24.4...v0.24.5) (2019-07-11)
 
 
