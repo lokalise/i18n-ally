@@ -6,7 +6,7 @@ import * as fg from 'fast-glob'
 import { Global } from '.'
 import { MachineTranslate, replaceLocalePath, notEmpty, normalizeLocale } from '../utils'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
-import { AllyError, ErrorType } from './Errors'
+import { AllyError, ErrorType, LogError } from './Errors'
 import i18n from '../i18n'
 
 export class LocaleLoader extends Disposable {
@@ -548,15 +548,26 @@ export class LocaleLoader extends Disposable {
   }
 
   private async loadAll () {
-    const paths = await fg(this.localesPaths, {
-      cwd: this.rootpath,
-      onlyDirectories: true,
-    })
+    let paths: string[] = []
+    try {
+      paths = await fg(this.localesPaths, {
+        cwd: this.rootpath,
+        onlyDirectories: true,
+      })
+    }
+    catch (e) {
+      LogError(e)
+    }
     for (const pathname of paths) {
-      const fullpath = path.resolve(this.rootpath, pathname)
-      Global.outputChannel.appendLine(`\nLoading locales under ${fullpath}`)
-      await this.loadDirectory(fullpath)
-      this.watchOn(fullpath)
+      try {
+        const fullpath = path.resolve(this.rootpath, pathname)
+        Global.outputChannel.appendLine(`\nLoading locales under ${fullpath}`)
+        await this.loadDirectory(fullpath)
+        this.watchOn(fullpath)
+      }
+      catch (e) {
+        LogError(e)
+      }
     }
     Global.outputChannel.appendLine('\nLoad finished\n-----\n')
   }

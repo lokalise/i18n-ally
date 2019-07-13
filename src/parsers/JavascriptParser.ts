@@ -1,7 +1,7 @@
 import { Parser } from './Parser'
-import { window } from 'vscode'
 import { register as registerTsNode } from 'ts-node'
 import i18n from '../i18n'
+import { LogError } from '../core/Errors'
 
 export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any
@@ -35,7 +35,7 @@ export class JavascriptParser extends Parser {
   }
 
   async save () {
-    window.showErrorMessage(i18n.t('prompt.writing_js'))
+    LogError(i18n.t('prompt.writing_js'))
   }
 
   navigateToKey (text: string, keypath: string) {

@@ -1,3 +1,6 @@
+import { Global } from './Global'
+import { window } from 'vscode'
+
 export enum ErrorType {
   translating_same_locale,
   translating_unknown_error,
@@ -18,4 +21,12 @@ export class AllyError extends Error {
   toString () {
     return ErrorType[this.type].toString()
   }
+}
+
+export function LogError (err: Error | string) {
+  window.showErrorMessage(err.toString())
+  if (typeof err === 'string')
+    Global.outputChannel.appendLine(`ERROR: ${err}`)
+  else
+    Global.outputChannel.appendLine(`ERROR: ${err.name}: ${err.message}\n${err.stack}`)
 }

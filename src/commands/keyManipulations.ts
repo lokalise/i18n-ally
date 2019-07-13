@@ -5,6 +5,7 @@ import { decorateLocale } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import * as path from 'path'
 import i18n from '../i18n'
+import { LogError } from '../core/Errors'
 
 interface CommandOptions {
   keypath: string
@@ -68,7 +69,7 @@ const m: ExtensionModule = (ctx) => {
           }
         }
         catch (err) {
-          window.showErrorMessage(err.toString())
+          LogError(err.toString())
         }
       }),
 
@@ -143,7 +144,7 @@ const m: ExtensionModule = (ctx) => {
           }
         }
         catch (err) {
-          window.showErrorMessage(err.toString())
+          LogError(err.toString())
         }
       }),
 
@@ -171,7 +172,7 @@ const m: ExtensionModule = (ctx) => {
             })))
         }
         catch (err) {
-          window.showErrorMessage(err.toString())
+          LogError(err.toString())
         }
       }),
   ]
