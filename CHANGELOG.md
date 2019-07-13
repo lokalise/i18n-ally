@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.7](https://github.com/antfu/vue-i18n-ally/compare/v0.24.6...v0.24.7) (2019-07-13)
+
+
+### 🐞 Bug Fixes
+
+* string value of localesPaths ([ef001ac](https://github.com/antfu/vue-i18n-ally/commit/ef001ac))
+
+
+
 ### [0.24.6](https://github.com/antfu/vue-i18n-ally/compare/v0.24.5...v0.24.6) (2019-07-13)
 
 
