@@ -142,7 +142,7 @@ In some cases, you may use modules, monorepo or other philosophies to organize y
 
 `vue-i18n-ally.localesPaths` accept an array of glob patterns which allows you to specify the folders containing your locale files.
 
-`vue-i18n-ally.matchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored in this plugin.
+`vue-i18n-ally.matchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored.
 
 **For example**, you have following directory structure need to be config.
 
@@ -204,6 +204,14 @@ We have not determined schedule to implement the TODOs. If you would like to see
 
 PR to implement any of the following features is also welcome. ☺
 
+Todo:
+- [ ] Analysis report
+- [ ] JSON/YAML file annonation & hint
+- [ ] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html) ([Vote Here #56](https://github.com/antfu/vue-i18n-ally/issues/56))
+- [ ] Tests
+- [ ] Live share support
+
+Done:
 - [x] Machine translating
 - [x] Locales Tree
 - [x] Translating progress
@@ -212,20 +220,14 @@ PR to implement any of the following features is also welcome. ☺
 - [x] `$tc`, `$d`, `$n`, `v-t` support
 - [x] Hide/Show specific locales
 - [x] Language flags
-- [x] Loading `.js` locales
 - [x] Goto definition
 - [x] Source language indicator
 - [x] i18n for the plugin itself
 - [x] Annoation config (on/off, maxlength)
 - [x] Option to force enabling on non-vue-i18n project
 - [x] Find all references
-- [x] [Refactor](https://code.visualstudio.com/api/references/vscode-api#CodeAction)
+- [x] Loading `.js` locales
 - [x] Loading `.ts` locales
-- [ ] [Vue SFC locales support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
-- [ ] Analysis report
-- [ ] JSON/YAML file annonation & hint
-- [ ] Tests
-- [ ] Live share support
 
 ## 👨‍💻 Credits
 
