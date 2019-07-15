@@ -2,7 +2,7 @@ import { env } from 'vscode'
 import en from '../package.nls.json'
 import zhcn from '../package.nls.zh-cn.json'
 
-type Message = typeof en
+export type i18nMessage = typeof en
 
 // eslint-disable-next-line @typescript-eslint/class-name-casing
 export default class i18n {
@@ -31,7 +31,7 @@ export default class i18n {
     })
   }
 
-  static t (key: keyof Message, ...args: any[]) {
+  static t (key: keyof i18nMessage, ...args: any[]) {
     let text = this.currentMessages[key] || this.fallbackMessages[key]
 
     if (args && args.length)

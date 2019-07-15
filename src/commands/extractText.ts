@@ -58,6 +58,7 @@ const m: ExtensionModule = () => {
         '{{$t(\'___\')}}',
         'this.$t(\'___\')',
         '$t("___")',
+        'i18n.t(\'___\')',
         `${keypath}`,
       ]
 

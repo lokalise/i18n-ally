@@ -104,6 +104,14 @@
         "title": "%command.rename_key%"
       },
       {
+        "command": "extension.vue-i18n-ally.open-url",
+        "title": "%command.open-url%"
+      },
+      {
+        "command": "extension.vue-i18n-ally.support",
+        "title": "%feedback.support%"
+      },
+      {
         "command": "extension.vue-i18n-ally.locale-visibility-show",
         "title": "%command.locale_visibility_show%",
         "icon": {
@@ -136,6 +144,10 @@
         },
         {
           "command": "extension.vue-i18n-ally.rename-key",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.vue-i18n-ally.open-url",
           "when": "config.no_exits"
         }
       ],
@@ -219,6 +231,11 @@
         {
           "id": "locales-tree",
           "name": "%view.tree%",
+          "when": "vue-i18n-ally-enabled"
+        },
+        {
+          "id": "help-feedback",
+          "name": "%view.help_feedback%",
           "when": "vue-i18n-ally-enabled"
         }
       ]

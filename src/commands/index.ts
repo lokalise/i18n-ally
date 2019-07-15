@@ -4,6 +4,7 @@ import configLocales from './configLocales'
 import configLanguages from './configLanguages'
 import keyManipulations from './keyManipulations'
 import extractText from './extractText'
+import help from './help'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -11,6 +12,7 @@ const m: ExtensionModule = (ctx) => {
     configLanguages(ctx),
     keyManipulations(ctx),
     extractText(ctx),
+    help(ctx),
   ])
 }
 
