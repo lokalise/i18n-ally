@@ -45,31 +45,33 @@ export class LocaleTreeItem extends TreeItem {
     return ''
   }
 
+  getIcon (name: string) {
+    return {
+      light: this.ctx.asAbsolutePath(`static/light/${name}.svg`),
+      dark: this.ctx.asAbsolutePath(`static/dark/${name}.svg`),
+    }
+  }
+
   get iconPath () {
-    if (this.node.type === 'record') { return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`) }
+    if (Global.loader.translator.isTranslating(this.node))
+      return this.getIcon('loading')
+
+    if (this.node.type === 'record') {
+      return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+    }
 
     else if (this.node.shadow) {
       return this.ctx.asAbsolutePath('static/icon-unknown.svg')
     }
     else if (this.node.type === 'tree') {
-      return {
-        light: this.ctx.asAbsolutePath('static/light/namespace.svg'),
-        dark: this.ctx.asAbsolutePath('static/dark/namespace.svg'),
-      }
+      return this.getIcon('namespace')
     }
     else if (this.node.type === 'node') {
-      if (this.description) {
-        return {
-          light: this.ctx.asAbsolutePath('static/light/string.svg'),
-          dark: this.ctx.asAbsolutePath('static/dark/string.svg'),
-        }
-      }
-      else {
-        return {
-          light: this.ctx.asAbsolutePath('static/light/missing.svg'),
-          dark: this.ctx.asAbsolutePath('static/dark/missing.svg'),
-        }
-      }
+      if (this.description)
+        return this.getIcon('string')
+
+      else
+        return this.getIcon('missing')
     }
   }
 
