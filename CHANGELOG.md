@@ -22,72 +22,24 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-### [0.24.8](https://github.com/antfu/vue-i18n-ally/compare/v0.24.7...v0.24.8) (2019-07-13)
+### [0.24.8](https://github.com/antfu/vue-i18n-ally/compare/v0.24.0...v0.24.8) (2019-07-13)
 
 
 ### 🐞 Bug Fixes
 
 * path autoset ([6d74ac7](https://github.com/antfu/vue-i18n-ally/commit/6d74ac7))
-
-
-
-### [0.24.7](https://github.com/antfu/vue-i18n-ally/compare/v0.24.6...v0.24.7) (2019-07-13)
-
-
-### 🐞 Bug Fixes
-
 * string value of localesPaths ([ef001ac](https://github.com/antfu/vue-i18n-ally/commit/ef001ac))
-
-
-
-### [0.24.6](https://github.com/antfu/vue-i18n-ally/compare/v0.24.5...v0.24.6) (2019-07-13)
-
-
-### 🐞 Bug Fixes
-
 * config watch of localesPaths ([ada02ac](https://github.com/antfu/vue-i18n-ally/commit/ada02ac))
 * optimize file loading ([2418570](https://github.com/antfu/vue-i18n-ally/commit/2418570))
 * tailing dash in localePaths ([e68e17d](https://github.com/antfu/vue-i18n-ally/commit/e68e17d))
+* support for v-t={'...'} ([29b75b1](https://github.com/antfu/vue-i18n-ally/commit/29b75b1))
+* vscodeignore ([cfa90e4](https://github.com/antfu/vue-i18n-ally/commit/cfa90e4))
+* deps of ts-node ([b0ffd23](https://github.com/antfu/vue-i18n-ally/commit/b0ffd23))
 
 
 ### 🔮 Refactor
 
 * improved log ([b2672af](https://github.com/antfu/vue-i18n-ally/commit/b2672af))
-
-
-
-### [0.24.5](https://github.com/antfu/vue-i18n-ally/compare/v0.24.4...v0.24.5) (2019-07-11)
-
-
-
-### [0.24.4](https://github.com/antfu/vue-i18n-ally/compare/v0.24.3...v0.24.4) (2019-07-11)
-
-
-### 🐞 Bug Fixes
-
-* support for v-t={'...'} ([29b75b1](https://github.com/antfu/vue-i18n-ally/commit/29b75b1))
-
-
-
-### [0.24.3](https://github.com/antfu/vue-i18n-ally/compare/v0.24.2...v0.24.3) (2019-07-10)
-
-
-
-### [0.24.2](https://github.com/antfu/vue-i18n-ally/compare/v0.24.1...v0.24.2) (2019-07-10)
-
-
-### 🐞 Bug Fixes
-
-* vscodeignore ([cfa90e4](https://github.com/antfu/vue-i18n-ally/commit/cfa90e4))
-
-
-
-### [0.24.1](https://github.com/antfu/vue-i18n-ally/compare/v0.24.0...v0.24.1) (2019-07-10)
-
-
-### 🐞 Bug Fixes
-
-* deps of ts-node ([b0ffd23](https://github.com/antfu/vue-i18n-ally/commit/b0ffd23))
 
 
 
@@ -110,7 +62,7 @@ All notable changes to this project will be documented in this file. See [standa
 * actions behavior for readonly locales ([caa2d22](https://github.com/antfu/vue-i18n-ally/commit/caa2d22))
 * support underscore in canonical locales ([09e6dcb](https://github.com/antfu/vue-i18n-ally/commit/09e6dcb))
 * ts hot reload, close [#46](https://github.com/antfu/vue-i18n-ally/issues/46) ([f247f85](https://github.com/antfu/vue-i18n-ally/commit/f247f85))
-
+* **icons:** update new iconset and add dark icons ([6edae9f](https://github.com/antfu/vue-i18n-ally/commit/6edae9f))
 
 ### 📚 Documentations
 
@@ -121,16 +73,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### 🔮 Refactor
 
 * unified internal types ([3f31317](https://github.com/antfu/vue-i18n-ally/commit/3f31317))
-
-
-
-### [0.23.2](https://github.com/antfu/vue-i18n-ally/compare/v0.23.1...v0.23.2) (2019-07-09)
-
-
-### 🐞 Bug Fixes
-
-* **icons:** update new iconset and add dark icons ([6edae9f](https://github.com/antfu/vue-i18n-ally/commit/6edae9f))
-
 
 
 ### [0.23.1](https://github.com/antfu/vue-i18n-ally/compare/v0.23.0...v0.23.1) (2019-07-09)
@@ -149,7 +91,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### 📚 Documentations
 
 * add module-style fixture ([44e8c57](https://github.com/antfu/vue-i18n-ally/commit/44e8c57))
-
 
 
 ## [0.23.0](https://github.com/antfu/vue-i18n-ally/compare/v0.22.6...v0.23.0) (2019-07-09)
