@@ -25,8 +25,13 @@ export class LocaleLoader extends Disposable {
   constructor (public readonly rootpath: string) {
     super(() => this.onDispose())
     this.translator = new Translator(this)
-    this.translator.onDidChange(() => this._onDidChange.fire())
     this.analyst = new Analyst(this)
+    this._disposables.push(
+      this.translator.onDidChange(() => this._onDidChange.fire())
+    )
+    this._disposables.push(
+      this.analyst.watch()
+    )
   }
 
   async init () {

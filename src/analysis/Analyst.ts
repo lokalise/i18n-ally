@@ -1,5 +1,5 @@
-import { workspace, Range, Location } from 'vscode'
-import { SupportedLanguageGlobs } from '../meta'
+import { workspace, Range, Location, TextDocument } from 'vscode'
+import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
 import { KeyDetector, Global, LocaleLoader } from '../core'
 import * as fg from 'fast-glob'
 import { resolve } from 'path'
@@ -28,6 +28,23 @@ export class Analyst {
       this._cache = this._cache.filter(o => o.filepath !== filepath)
   }
 
+  watch () {
+    return workspace.onDidSaveTextDocument((doc) => this.updateCache(doc))
+  }
+
+  private async updateCache (doc: TextDocument) {
+    if (!this._cache)
+      return
+    if (!SupportedLanguageIds.includes(doc.languageId))
+      return
+
+    const filepath = doc.uri.fsPath
+    Global.outputChannel.appendLine(`Update cache of ${filepath}`)
+    this.invalidateCacheOf(filepath)
+    const occurrences = await this.getOccurrencesOfText(doc.getText(), filepath)
+    this._cache.push(...occurrences)
+  }
+
   private async getDocumentPaths () {
     const root = workspace.rootPath
     if (!root)
@@ -51,6 +68,10 @@ export class Analyst {
 
   private async getOccurrencesOfFile (filepath: string) {
     const text = await fs.readFile(filepath, 'utf-8')
+    return await this.getOccurrencesOfText(text, filepath)
+  }
+
+  private async getOccurrencesOfText (text: string, filepath: string) {
     const keys = KeyDetector.getKeys(text)
     const occurrences: Occurrence[] = []
 
