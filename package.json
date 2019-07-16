@@ -105,7 +105,7 @@
       },
       {
         "command": "extension.vue-i18n-ally.open-url",
-        "title": "%command.open-url%"
+        "title": "%command.open_url%"
       },
       {
         "command": "extension.vue-i18n-ally.support",
