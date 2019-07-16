@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.25.1](https://github.com/antfu/vue-i18n-ally/compare/v0.25.0...v0.25.1) (2019-07-16)
+
+
+### 🐞 Bug Fixes
+
+* find reference slow on large project ([5fabb35](https://github.com/antfu/vue-i18n-ally/commit/5fabb35))
+* rename key in context menu ([61597bc](https://github.com/antfu/vue-i18n-ally/commit/61597bc))
+* strict locale code parse ([392a279](https://github.com/antfu/vue-i18n-ally/commit/392a279))
+* update analyst cache on file changed ([7114b0d](https://github.com/antfu/vue-i18n-ally/commit/7114b0d))
+
+
+### 🔮 Refactor
+
+* extract logic in reference provider ([54666e8](https://github.com/antfu/vue-i18n-ally/commit/54666e8))
+* make analyst non-static ([43965f0](https://github.com/antfu/vue-i18n-ally/commit/43965f0))
+
+
+
 ## [0.25.0](https://github.com/antfu/vue-i18n-ally/compare/v0.24.8...v0.25.0) (2019-07-16)
 
 
