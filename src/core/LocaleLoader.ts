@@ -9,11 +9,13 @@ import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, Locale
 import { AllyError, ErrorType, LogError } from './Errors'
 import i18n from '../i18n'
 import { Translator } from './Translator'
+import { Analyst } from '../analysis/Analyst'
 
 export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
   readonly onDidChange: Event<undefined> = this._onDidChange.event
   readonly translator: Translator
+  readonly analyst: Analyst
 
   private _files: Record<string, ParsedFile> = {}
   private _flattenLocaleTree: FlattenLocaleTree = {}
@@ -24,6 +26,7 @@ export class LocaleLoader extends Disposable {
     super(() => this.onDispose())
     this.translator = new Translator(this)
     this.translator.onDidChange(() => this._onDidChange.fire())
+    this.analyst = new Analyst(this)
   }
 
   async init () {

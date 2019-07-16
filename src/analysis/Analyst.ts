@@ -1,6 +1,6 @@
 import { workspace, Range, Location } from 'vscode'
 import { SupportedLanguageGlobs } from '../meta'
-import { KeyDetector, Global } from '../core'
+import { KeyDetector, Global, LocaleLoader } from '../core'
 import * as fg from 'fast-glob'
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
@@ -13,18 +13,22 @@ export interface Occurrence {
 }
 
 export class Analyst {
-  private static _cache: Occurrence[] | null = null
+  private _cache: Occurrence[] | null = null
 
-  static invalidateCache () {
+  constructor (
+    readonly loader: LocaleLoader
+  ) {}
+
+  invalidateCache () {
     this._cache = null
   }
 
-  static invalidateCacheOf (filepath: string) {
+  invalidateCacheOf (filepath: string) {
     if (this._cache)
       this._cache = this._cache.filter(o => o.filepath !== filepath)
   }
 
-  static async getDocumentPaths () {
+  private async getDocumentPaths () {
     const root = workspace.rootPath
     if (!root)
       return []
@@ -45,7 +49,7 @@ export class Analyst {
     return files.map(f => resolve(root, f))
   }
 
-  private static async getOccurrencesOfFile (filepath: string) {
+  private async getOccurrencesOfFile (filepath: string) {
     const text = await fs.readFile(filepath, 'utf-8')
     const keys = KeyDetector.getKeys(text)
     const occurrences: Occurrence[] = []
@@ -62,7 +66,7 @@ export class Analyst {
     return occurrences
   }
 
-  static async getAllOccurrences (targetKey?: string) {
+  async getAllOccurrences (targetKey?: string) {
     if (!this._cache) {
       const occurrences: Occurrence[] = []
       const filepaths = await this.getDocumentPaths()
@@ -78,12 +82,12 @@ export class Analyst {
     return this._cache
   }
 
-  static async getAllOccurrenceLocations (targetKey: string) {
-    const occurrences = await Analyst.getAllOccurrences(targetKey)
-    return await Promise.all(occurrences.map(o => Analyst.getLocationOf(o)))
+  async getAllOccurrenceLocations (targetKey: string) {
+    const occurrences = await this.getAllOccurrences(targetKey)
+    return await Promise.all(occurrences.map(o => this.getLocationOf(o)))
   }
 
-  static async getLocationOf (occurrence: Occurrence) {
+  async getLocationOf (occurrence: Occurrence) {
     const document = await workspace.openTextDocument(occurrence.filepath)
     const range = new Range(
       document.positionAt(occurrence.start),

@@ -2,7 +2,6 @@ import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position,
 import { ExtensionModule } from '../modules'
 import { LanguageSelectors } from '../meta'
 import { KeyDetector, Global } from '../core'
-import { Analyst } from '../analysis/Analyst'
 
 class Provider implements ReferenceProvider, RenameProvider {
   async provideReferences (document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
@@ -14,7 +13,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return []
 
-    return await Analyst.getAllOccurrenceLocations(key)
+    return await Global.loader.analyst.getAllOccurrenceLocations(key)
   }
 
   prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
@@ -36,7 +35,7 @@ class Provider implements ReferenceProvider, RenameProvider {
 
     const edit = new WorkspaceEdit()
 
-    const locations = await Analyst.getAllOccurrenceLocations(key)
+    const locations = await Global.loader.analyst.getAllOccurrenceLocations(key)
 
     for (const location of locations)
       edit.replace(location.uri, location.range, newName)
