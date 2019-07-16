@@ -1,40 +1,18 @@
-import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, workspace, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
+import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { LanguageSelectors, SupportedLanguageGlobs } from '../meta'
+import { LanguageSelectors } from '../meta'
 import { KeyDetector, Global } from '../core'
+import { Analyst } from '../analysis/Analyst'
 
 class Provider implements ReferenceProvider, RenameProvider {
-  async getDocuments () {
-    const uris = await workspace.findFiles(SupportedLanguageGlobs, workspace.getConfiguration().get('files.exclude'))
-
-    const documents: TextDocument[] = []
-    for (const uri of uris)
-      documents.push(await workspace.openTextDocument(uri))
-
-    return documents
-  }
-
   async provideReferences (document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
     if (!Global.enabled)
       return []
 
-    const target = KeyDetector.getKey(document, position)
-    const files = await this.getDocuments()
-    const locations: Location[] = []
+    const key = KeyDetector.getKey(document, position)
 
-    for (const file of files) {
-      const keys = KeyDetector.getKeys(file).filter(({ key }) => key === target)
-
-      keys.forEach(({ start, end }) => {
-        const range = new Range(
-          document.positionAt(start),
-          document.positionAt(end)
-        )
-        locations.push(new Location(file.uri, range))
-      })
-    }
-
-    return locations
+    const occurrences = await Analyst.getAllOccurrences(key)
+    return occurrences.map(o => o.location)
   }
 
   prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
@@ -49,26 +27,19 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!Global.enabled)
       return
 
-    const target = KeyDetector.getKey(document, position)
+    const key = KeyDetector.getKey(document, position)
 
-    if (!target)
+    if (!key)
       return
-
-    const files = await this.getDocuments()
 
     const edit = new WorkspaceEdit()
 
-    for (const file of files) {
-      const keys = KeyDetector.getKeys(file).filter(({ key }) => key === target)
-      keys.forEach(({ start, end }) => {
-        edit.replace(file.uri, new Range(
-          document.positionAt(start),
-          document.positionAt(end),
-        ), newName)
-      })
-    }
+    const occurrences = await Analyst.getAllOccurrences(key)
 
-    Global.loader.renameKey(target, newName)
+    for (const occurrence of occurrences)
+      edit.replace(occurrence.location.uri, occurrence.location.range, newName)
+
+    Global.loader.renameKey(key, newName)
 
     return edit
   }
