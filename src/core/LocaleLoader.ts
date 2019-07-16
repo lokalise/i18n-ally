@@ -1,4 +1,4 @@
-import { workspace, window, EventEmitter, Event, Disposable } from 'vscode'
+import { workspace, window, EventEmitter, Event, Disposable, WorkspaceEdit } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
@@ -304,6 +304,19 @@ export class LocaleLoader extends Disposable {
   }
 
   async renameKey (oldkey: string, newkey: string) {
+    const edit = new WorkspaceEdit()
+
+    const locations = await Global.loader.analyst.getAllOccurrenceLocations(oldkey)
+
+    for (const location of locations)
+      edit.replace(location.uri, location.range, newkey)
+
+    Global.loader.renameKeyInLocales(oldkey, newkey)
+
+    return edit
+  }
+
+  async renameKeyInLocales (oldkey: string, newkey: string) {
     const writes = _(this._files)
       .entries()
       .flatMap(([filepath, file]) => {

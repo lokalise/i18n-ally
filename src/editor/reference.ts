@@ -33,16 +33,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return
 
-    const edit = new WorkspaceEdit()
-
-    const locations = await Global.loader.analyst.getAllOccurrenceLocations(key)
-
-    for (const location of locations)
-      edit.replace(location.uri, location.range, newName)
-
-    Global.loader.renameKey(key, newName)
-
-    return edit
+    return await Global.loader.renameKey(key, newName)
   }
 
   constructor (public readonly ctx: ExtensionContext) {}
