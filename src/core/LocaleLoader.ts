@@ -350,10 +350,8 @@ export class LocaleLoader extends Disposable {
       locale = normalizeLocale(path.basename(info.dir), '')
     }
 
-    if (!locale) {
-      Global.outputChannel.appendLine(`Failed to get locale on file ${filepath}`)
+    if (!locale)
       return
-    }
 
     const parser = Global.getMatchedParser(ext)
 
