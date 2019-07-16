@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0](https://github.com/antfu/vue-i18n-ally/compare/v0.24.8...v0.25.0) (2019-07-16)
+
+
+### ⚡ Features
+
+* translation indicator ([4fcd3cf](https://github.com/antfu/vue-i18n-ally/commit/4fcd3cf))
+
+
+### 🌍 Internationalization
+
+* **zh-cn:** add missing messages ([9d4d539](https://github.com/antfu/vue-i18n-ally/commit/9d4d539))
+
+
+### 📚 Documentations
+
+* add feedback links in the extension ([51c58b3](https://github.com/antfu/vue-i18n-ally/commit/51c58b3))
+* **readme:** update readme ([b292d69](https://github.com/antfu/vue-i18n-ally/commit/b292d69))
+
+
+
 ### [0.24.8](https://github.com/antfu/vue-i18n-ally/compare/v0.24.7...v0.24.8) (2019-07-13)
 
 
