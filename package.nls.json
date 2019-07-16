@@ -64,7 +64,7 @@
   "prompt.enter_file_path_to_store_key": "Enter the file path to store key \"{0}\"",
   "prompt.select_file_to_store_key": "Select file to store key \"{0}\"",
   "prompt.writing_js": "Writing to js/ts file is not supported.",
-  "prompt.support": "While Vue i18n Ally is offered to everyone for free, if you find it useful, please consider supporting it. Thank you! ❤",
+  "prompt.support": "Vue i18n Ally is offered to everyone for free, if you find it useful, please consider supporting it. Thank you! ❤",
   "prompt.star_on_github": "Star on Github",
   "prompt.donate_via_paypal": "Donate via Paypal"
 }

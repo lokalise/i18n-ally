@@ -57,5 +57,14 @@
   "prompt.select_file_to_store_key": "选择要存储文案 \"{0}\" 的文件",
   "config.dir_structure": "用于组织本地文件的首选目录结构",
   "prompt.writing_js": "不支持写入文案至 js/ts 文件",
-  "command.open_url": "打开网址"
+  "command.open_url": "打开网址",
+  "feedback.github": "Star on Github",
+  "feedback.document": "查看文档",
+  "feedback.report_issues": "报告问题",
+  "feedback.support": "支持我们",
+  "feedback.twitter_feedback": "提供意见反馈",
+  "prompt.star_on_github": "Star on Github",
+  "prompt.support": "如果您觉得 Vue i18n Ally 对您有所帮助，请考虑支持我们。\n谢谢！❤",
+  "view.help_feedback": "帮助和反馈",
+  "prompt.donate_via_paypal": "通过Paypal捐款"
 }
