@@ -11,8 +11,10 @@ class Provider implements ReferenceProvider, RenameProvider {
 
     const key = KeyDetector.getKey(document, position)
 
-    const occurrences = await Analyst.getAllOccurrences(key)
-    return occurrences.map(o => o.location)
+    if (!key)
+      return []
+
+    return await Analyst.getAllOccurrenceLocations(key)
   }
 
   prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
@@ -34,10 +36,10 @@ class Provider implements ReferenceProvider, RenameProvider {
 
     const edit = new WorkspaceEdit()
 
-    const occurrences = await Analyst.getAllOccurrences(key)
+    const locations = await Analyst.getAllOccurrenceLocations(key)
 
-    for (const occurrence of occurrences)
-      edit.replace(occurrence.location.uri, occurrence.location.range, newName)
+    for (const location of locations)
+      edit.replace(location.uri, location.range, newName)
 
     Global.loader.renameKey(key, newName)
 
