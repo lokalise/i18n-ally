@@ -175,29 +175,13 @@ You could change your config like this:
 
 ### ⚗ Experimental `.js`/`.ts` support
 
-From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files.
+From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files. You can use them already with no config required.
 
-Something like this:
+**⚠ You will have limited features in this extension**
 
-```js
-// locales/en.js
-export default {
-  intro: {
-    text: 'Welcome to the <span class="highlight">awesome</span> TooDoo App'
-  },
-
-  about: {
-    name: 'About',
-    text: 'This is a small sample app to illustration internationalization with the vuex-i18n plugin.',
-    link: 'Back to my list'.toUpperCase() // you can run some code if you want
-  }
-}
-```
-
-Although there are some limitations:
-
-### No editting / translating
-Since javascript/typescript can be very complex and there is not a proper way the let machine decide where to update the changes. We disabled all the writing features on `.js`/`.ts` locales and there is no plan to support them in the future.
+> Features like editting and translating are not avaliable in javascript/typescript locales. Because they can be very complex and there is not a proper way the let machine decide how to update the changes.
+>
+> We would recommend you to use static files like JSON or YAML storing locale messages to work best with this extension.
 
 
 ## 🌍 Help translate this extension
@@ -206,17 +190,15 @@ This extension itself supports i18n as well, it will be auto matched to the disp
 
 1. Fork this repo and clone it to you local machine
 2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
-3. Translate every single messages in new json file you created.
-4. Commit the changes and make a PR to this original repo
+3. Translate every single message in the new json file you created.
+4. Commit changes and make a PR to this repo
 
-We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself. 😁
+We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself 😁, all the configs were already set in the workspace settings.
 
 
 ## 📅 TODOs
 
-We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases.
-
-PR to implement any of the following features is also welcome. ☺
+We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases. PR is also welcome.
 
 Todo:
 - [ ] Analysis report
