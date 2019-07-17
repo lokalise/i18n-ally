@@ -62,9 +62,7 @@ const m: ExtensionModule = (ctx) => {
         const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Global.sourceLanguage
 
         try {
-          const pendings = await Global.loader.translator.MachineTranslate(node, from)
-          if (pendings.length)
-            await Global.loader.writeToFile(pendings)
+          await Global.loader.translator.MachineTranslate(node, from)
         }
         catch (err) {
           LogError(err.toString())

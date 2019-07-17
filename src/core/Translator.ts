@@ -2,9 +2,8 @@ import { EventEmitter } from 'vscode'
 import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { LocaleLoader } from './LocaleLoader'
-import { LocaleNode, PendingWrite, LocaleRecord } from '.'
+import { LocaleNode, LocaleRecord } from '.'
 import { AllyError, ErrorType } from './Errors'
-import { notEmpty } from '../utils'
 import { Global } from './Global'
 import { LocaleTree } from './types'
 
@@ -28,9 +27,7 @@ export class Translator {
     if (node.type === 'node')
       return await this.MachineTranslateNode(node, sourceLanguage)
 
-    const pending = await this.MachineTranslateRecord(node, sourceLanguage)
-
-    return [pending].filter(notEmpty)
+    await this.MachineTranslateRecord(node, sourceLanguage)
   }
 
   isTranslating (node: LocaleNode| LocaleRecord | LocaleTree) {
@@ -56,7 +53,7 @@ export class Translator {
       this._onDidChange.fire({ keypath, locale, action: 'end' })
   }
 
-  private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string): Promise<PendingWrite|undefined> {
+  private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string) {
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
     const sourceNode = this.loader.getNodeByKey(record.keypath)
@@ -71,12 +68,13 @@ export class Translator {
       const result = await this.translateText(sourceRecord.value, sourceLanguage, record.locale)
       this.end(record.keypath, record.locale)
 
-      return {
+      const pending = {
         locale: record.locale,
         value: result,
         filepath: record.filepath,
         keypath: record.keypath,
       }
+      await Global.loader.writeToFile(pending)
     }
     catch (e) {
       this.end(record.keypath, record.locale)
@@ -84,14 +82,12 @@ export class Translator {
     }
   }
 
-  private async MachineTranslateNode (node: LocaleNode, sourceLanguage: string): Promise<PendingWrite[]> {
+  private async MachineTranslateNode (node: LocaleNode, sourceLanguage: string) {
     const tasks = Object.values(this.loader.getShadowLocales(node))
       .filter(record => record.locale !== sourceLanguage)
       .map(record => this.MachineTranslateRecord(record, sourceLanguage))
 
-    const pendings = await Promise.all(tasks)
-
-    return pendings.filter(notEmpty)
+    await Promise.all(tasks)
   }
 
   private async translateText (text: string, from: string, to: string) {
