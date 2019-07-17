@@ -31,6 +31,7 @@
   "config.match_regex": "Regex string to match locale filename. (The first group should be the locale code)",
   "config.force_enabled": "Enable this extension anyway. (Take your own RISK!)",
   "config.dir_structure": "Prefered directory structure to orangnize locale files",
+  "config.sort_keys": "Save with sorted json/yaml",
   "misc.not_exists": "No translation",
   "misc.missing_translation": "{0}: Translation of \"{1}\" is missing",
   "refactor.extract_text": "Extract text to vue-i18n locales",

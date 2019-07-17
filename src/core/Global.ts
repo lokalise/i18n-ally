@@ -20,10 +20,15 @@ const reloadConfigs = [
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
+
   private static _rootpath: string
+
   private static _channel: OutputChannel;
+
   private static _enabled: boolean = false
+
   static context: ExtensionContext
+
   static parsers = [
     new JsonParser(),
     new YamlParser(),
@@ -32,10 +37,15 @@ export class Global {
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
+
   static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
+
   private static _onDidChangeEnabled: EventEmitter<boolean> = new EventEmitter()
+
   static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
+
   private static _onDidChangeLoader: EventEmitter<LocaleLoader> = new EventEmitter()
+
   static readonly onDidChangeLoader: Event<LocaleLoader> = Global._onDidChangeLoader.event
 
   static async init (context: ExtensionContext) {
@@ -179,7 +189,7 @@ export class Global {
 
   // languages
   static get displayLanguage (): string {
-    return normalizeLocale(Global.getConfig('displayLanguage'))
+    return normalizeLocale(Global.getConfig<string>('displayLanguage') || '')
   }
 
   static set displayLanguage (value) {
@@ -188,7 +198,7 @@ export class Global {
   }
 
   static get sourceLanguage (): string {
-    return normalizeLocale(Global.getConfig('sourceLanguage'), '') || this.displayLanguage || 'en'
+    return normalizeLocale(Global.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
   }
 
   static set sourceLanguage (value) {
@@ -246,6 +256,10 @@ export class Global {
 
   static set dirStructure (value: 'auto' | 'file' | 'dir') {
     Global.setConfig('dirStructure', value, true)
+  }
+
+  static get sortKeys (): boolean {
+    return Global.getConfig<boolean>('sortKeys') || false
   }
 
   static getMatchRegex (dirStructure = this.dirStructure): string {
@@ -325,10 +339,10 @@ export class Global {
   }
 
   // config
-  private static getConfig (key: string): any {
+  private static getConfig<T = any> (key: string): T | undefined {
     return workspace
-      .getConfiguration()
-      .get(`${configPrefix}.${key}`)
+      .getConfiguration(configPrefix)
+      .get<T>(key)
   }
 
   private static setConfig (key: string, value: any, isGlobal = false) {

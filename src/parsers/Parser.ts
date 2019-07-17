@@ -13,6 +13,7 @@ export interface ParserOptions {
 
 export abstract class Parser {
   private supportedExtsRegex: RegExp
+
   readonly readonly: boolean = false
 
   constructor (
@@ -32,12 +33,14 @@ export abstract class Parser {
     return await this.parse(raw)
   }
 
-  async save (filepath: string, object: object) {
-    const text = await this.dump(object)
+  async save (filepath: string, object: object, sort: boolean) {
+    const text = await this.dump(object, sort)
     await fs.writeFile(filepath, text, 'utf-8')
   }
 
   abstract parse(text: string): Promise<object>
-  abstract dump(object: object): Promise<string>
+
+  abstract dump(object: object, sort: boolean): Promise<string>
+
   abstract navigateToKey(text: string, keypath: string, keystyle: KeyStyle): PositionRange | undefined
 }

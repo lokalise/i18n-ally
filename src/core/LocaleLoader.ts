@@ -13,13 +13,19 @@ import { Analyst } from '../analysis/Analyst'
 
 export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
+
   readonly onDidChange: Event<undefined> = this._onDidChange.event
+
   readonly translator: Translator
+
   readonly analyst: Analyst
 
   private _files: Record<string, ParsedFile> = {}
+
   private _flattenLocaleTree: FlattenLocaleTree = {}
+
   private _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
+
   private _disposables: Disposable[] = []
 
   constructor (public readonly rootpath: string) {
@@ -279,10 +285,11 @@ export class LocaleLoader extends Disposable {
     else
       _.set(original, pending.keypath, pending.value)
 
-    await parser.save(filepath, original)
+    await parser.save(filepath, original, Global.sortKeys)
   }
 
   private _ignoreChanges = false
+
   async writeToFile (pendings: PendingWrite|PendingWrite[]) {
     this._ignoreChanges = true
     if (!Array.isArray(pendings))

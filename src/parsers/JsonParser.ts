@@ -1,5 +1,7 @@
 import { Parser } from './Parser'
 import { KeyStyle } from '../core'
+// @ts-ignore
+import * as SortedStringify from 'json-stable-stringify'
 
 export class JsonParser extends Parser {
   constructor () {
@@ -10,8 +12,11 @@ export class JsonParser extends Parser {
     return JSON.parse(text)
   }
 
-  async dump (object: object) {
-    return JSON.stringify(object, null, this.options.indent)
+  async dump (object: object, sort: boolean) {
+    if (sort)
+      return SortedStringify(object, { space: 2 })
+    else
+      return JSON.stringify(object, null, this.options.indent)
   }
 
   navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {

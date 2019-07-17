@@ -11,10 +11,11 @@ export class YamlParser extends Parser {
     return yaml.safeLoad(text)
   }
 
-  async dump (object: object) {
+  async dump (object: object, sort: boolean) {
     object = JSON.parse(JSON.stringify(object))
     return yaml.safeDump(object, {
       indent: this.options.indent,
+      sortKeys: sort,
     })
   }
 

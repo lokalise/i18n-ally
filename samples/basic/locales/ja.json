@@ -1,15 +1,15 @@
 {
-  "nested": {
-    "hello": "また会いましたね",
-    "greeting": "おはようございます"
-  },
-  "yeah": "Good",
-  "project": "基本",
-  "tos": "利用規約",
-  "term": "{0}を受け入れます",
+  "apple": "Good",
   "currency": {
-    "style": "currency",
-    "currency": "JPY"
+    "currency": "JPY",
+    "style": "currency"
   },
-  "apple": "Good"
+  "nested": {
+    "greeting": "おはようございます",
+    "hello": "また会いましたね"
+  },
+  "project": "基本",
+  "term": "{0}を受け入れます",
+  "tos": "利用規約",
+  "yeah": "ええ"
 }
