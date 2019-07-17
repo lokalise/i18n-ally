@@ -6,7 +6,7 @@ import editorModules from './editor'
 import viewsModules from './views'
 
 export async function activate (ctx: ExtensionContext) {
-  Global.outputChannel.appendLine('Activated')
+  Global.outputChannel.appendLine('🈶 Activated')
 
   // activate the extension
   await Global.init(ctx)
@@ -21,5 +21,5 @@ export async function activate (ctx: ExtensionContext) {
 }
 
 export function deactivate () {
-  Global.outputChannel.appendLine('Deactivated')
+  Global.outputChannel.appendLine('🈚 Deactivated')
 }

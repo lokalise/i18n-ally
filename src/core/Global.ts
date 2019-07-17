@@ -94,7 +94,7 @@ export class Global {
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
-      this.outputChannel.appendLine(`\n----\nWorkspace root changed to "${rootpath}"`)
+      this.outputChannel.appendLine(`\n----\n💼 Workspace root changed to "${rootpath}"`)
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
     }
@@ -112,7 +112,7 @@ export class Global {
         }
       }
       if (reload)
-        this.outputChannel.appendLine('Reloading loader')
+        this.outputChannel.appendLine('🔁 Reloading loader')
     }
 
     const i18nProject = isVueI18nProject(this._rootpath)
@@ -124,9 +124,9 @@ export class Global {
     }
     else {
       if (!i18nProject)
-        this.outputChannel.appendLine('Current workspace is not a vue-i18n project, extension disabled')
+        this.outputChannel.appendLine('⚠ Current workspace is not a vue-i18n project, extension disabled')
       else if (!hasLocalesSet)
-        this.outputChannel.appendLine('No locales path found, extension disabled')
+        this.outputChannel.appendLine('⚠ No locales path found, extension disabled')
 
       if (i18nProject && !hasLocalesSet)
         ConfigLocalesGuide.autoSet()
@@ -165,7 +165,7 @@ export class Global {
 
   private static setEnabled (value: boolean) {
     if (this._enabled !== value) {
-      this.outputChannel.appendLine(value ? 'Enabled' : 'Disabled')
+      this.outputChannel.appendLine(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
       commands.executeCommand('setContext', 'vue-i18n-ally-enabled', value)
       this._onDidChangeEnabled.fire()

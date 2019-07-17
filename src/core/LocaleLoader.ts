@@ -41,7 +41,7 @@ export class LocaleLoader extends Disposable {
   }
 
   async init () {
-    Global.outputChannel.appendLine(`Initializing loader "${this.rootpath}"`)
+    Global.outputChannel.appendLine(`🚀 Initializing loader "${this.rootpath}"`)
     await this.loadAll()
     this.update()
   }
@@ -269,7 +269,7 @@ export class LocaleLoader extends Disposable {
     if (!filepath)
       throw new AllyError(ErrorType.filepath_not_specified)
 
-    Global.outputChannel.appendLine(`Saving file ${filepath}`)
+    Global.outputChannel.appendLine(`💾 Writing ${filepath}`)
     const ext = path.extname(filepath)
     const parser = Global.getMatchedParser(ext)
     if (!parser)
@@ -393,7 +393,7 @@ export class LocaleLoader extends Disposable {
       if (!result)
         return
       const { locale, nested, parser } = result
-      Global.outputChannel.appendLine(`  Loading [${locale}] ${path.relative(parentPath || this.rootpath, filepath)}`)
+      Global.outputChannel.appendLine(`${parentPath ? '\t' : ''}📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`)
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
@@ -408,7 +408,7 @@ export class LocaleLoader extends Disposable {
     }
     catch (e) {
       this.unsetFile(filepath)
-      Global.outputChannel.appendLine(`    Failed to load ${e}`)
+      Global.outputChannel.appendLine(`${parentPath ? '\t' : ''}\t🐛 Failed to load ${e}`)
     }
   }
 
@@ -543,12 +543,12 @@ export class LocaleLoader extends Disposable {
       }
     }
     if (paths.length === 0)
-      Global.outputChannel.appendLine('\nNo locales paths.')
+      Global.outputChannel.appendLine('\n⚠ No locales paths.')
 
     for (const pathname of paths) {
       try {
         const fullpath = path.resolve(this.rootpath, pathname)
-        Global.outputChannel.appendLine(`\nLoading locales under ${fullpath}`)
+        Global.outputChannel.appendLine(`\n📂 Loading locales under ${fullpath}`)
         await this.loadDirectory(fullpath)
         this.watchOn(fullpath)
       }
@@ -556,11 +556,11 @@ export class LocaleLoader extends Disposable {
         LogError(e)
       }
     }
-    Global.outputChannel.appendLine('\nLoad finished\n-----\n')
+    Global.outputChannel.appendLine('\n✅ Loading finished\n-----\n')
   }
 
   private onDispose () {
-    Global.outputChannel.appendLine(`Disposing loader "${this.rootpath}"`)
+    Global.outputChannel.appendLine(`🗑 Disposing loader "${this.rootpath}"`)
     this._disposables.forEach(d => d.dispose())
     this._disposables = []
   }
