@@ -66,5 +66,6 @@
   "prompt.star_on_github": "Star on Github",
   "prompt.support": "如果您觉得 Vue i18n Ally 对您有所帮助，请考虑支持我们。\n谢谢！❤",
   "view.help_feedback": "帮助和反馈",
-  "prompt.donate_via_paypal": "通过Paypal捐款"
+  "prompt.donate_via_paypal": "通过Paypal捐款",
+  "config.sort_keys": "保存排序后的JSON/YAML"
 }
