@@ -83,6 +83,7 @@ module.exports = {
     'require-await': 'off',
     'no-return-assign': 'off',
     'no-useless-constructor': 'off',
+    'lines-between-class-members': 'off',
 
     // TS
     '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
@@ -96,8 +97,5 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
-
-    // vue-i18n
-    'no-cond-assign': 'off',
   }
 }

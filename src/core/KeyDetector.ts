@@ -54,6 +54,7 @@ export class KeyDetector {
     if (typeof text !== 'string')
       text = text.getText()
     let match = null
+    // eslint-disable-next-line no-cond-assign
     while (match = KEY_REG.exec(text)) {
       const index = match.index
       const matchKey = match[0]

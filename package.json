@@ -356,6 +356,8 @@
     "gh-release": "conventional-github-releaser -p angular",
     "vscode:prepublish": "webpack --mode development",
     "compile": "webpack --mode development",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore src",
+    "lint:fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore src",
     "watch": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
