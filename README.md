@@ -71,9 +71,10 @@
 
 <h3 align="center"> Overview </h3>
 
-- Multi-root workspace
+- Multi-root workspace supported
+- Remote development supported
 - Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
-- i18n for the extension itself, of course. **(English, 简体中文, 繁體中文)**
+- i18n for the extension itself, of course. **(supporting: English, 简体中文, 繁體中文 or [help us translate](https://github.com/antfu/vue-i18n-ally#-help-translate-this-extension))**
 
 <p align="center">
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
@@ -198,6 +199,19 @@ Although there are some limitations:
 ### No editting / translating
 Since javascript/typescript can be very complex and there is not a proper way the let machine decide where to update the changes. We disabled all the writing features on `.js`/`.ts` locales and there is no plan to support them in the future.
 
+
+## 🌍 Help translate this extension
+
+This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. If you would like to help translate this extension, you can do it by following steps.
+
+1. Fork this repo and clone it to you local machine
+2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
+3. Translate every single messages in new json file you created.
+4. Commit the changes and make a PR to this original repo
+
+We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself. 😁
+
+
 ## 📅 TODOs
 
 We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases.
@@ -229,9 +243,11 @@ Done:
 - [x] Loading `.js` locales
 - [x] Loading `.ts` locales
 
-## 👨‍💻 Credits
+## 👨‍💻 Thanks
 
 This extension is original forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it can't be existed without [@think2011](https://github.com/think2011)'s great work.
+
+And thanks for all [the awesome contributors](https://github.com/antfu/vue-i18n-ally/graphs/contributors).
 
 ## License
 
