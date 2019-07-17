@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0](https://github.com/antfu/vue-i18n-ally/compare/v0.25.1...v0.26.0) (2019-07-17)
+
+
+### ⚡ Features
+
+* new config "vue-i18n-ally.sortKeys" to sort keys in JSON/YAML ([3b4dfb1](https://github.com/antfu/vue-i18n-ally/commit/3b4dfb1))
+
+
+### 🌍 Internationalization
+
+* **zh-cn:** add new messages ([d26ede6](https://github.com/antfu/vue-i18n-ally/commit/d26ede6))
+
+
+### 🐞 Bug Fixes
+
+* loading twice on write ([f6a76ae](https://github.com/antfu/vue-i18n-ally/commit/f6a76ae))
+* translations saving behavior ([35d0da6](https://github.com/antfu/vue-i18n-ally/commit/35d0da6))
+
+
+### 📚 Documentations
+
+* update readme ([b58c9c0](https://github.com/antfu/vue-i18n-ally/commit/b58c9c0))
+
+
+### 🔮 Refactor
+
+* improved logs ([67c2e03](https://github.com/antfu/vue-i18n-ally/commit/67c2e03))
+
+
+
 ### [0.25.1](https://github.com/antfu/vue-i18n-ally/compare/v0.25.0...v0.25.1) (2019-07-16)
 
 
