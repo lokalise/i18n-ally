@@ -304,10 +304,6 @@ export class LocaleLoader extends Disposable {
       throw e
     }
     this._ignoreChanges = false
-    for (const pending of pendings) {
-      if (pending.filepath)
-        await this.loadFile(pending.filepath)
-    }
   }
 
   async renameKey (oldkey: string, newkey: string) {
