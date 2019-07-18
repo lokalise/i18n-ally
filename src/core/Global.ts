@@ -1,5 +1,6 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { EXT_NAMESPACE } from '../meta'
 import { isVueI18nProject } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
@@ -90,7 +91,7 @@ export class Global {
     if (e) {
       let affected = false
       for (const config of Config.reloadConfigs) {
-        const key = `${Config.extensionNamespace}.${config}`
+        const key = `${EXT_NAMESPACE}.${config}`
         if (e.affectsConfiguration(key)) {
           affected = true
           reload = true
@@ -99,7 +100,7 @@ export class Global {
         }
       }
       for (const config of Config.refreshConfigs) {
-        const key = `${Config.extensionNamespace}.${config}`
+        const key = `${EXT_NAMESPACE}.${config}`
         if (e.affectsConfiguration(key)) {
           affected = true
           Log.info(`🧰 Config "${key}" changed`)

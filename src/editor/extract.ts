@@ -1,6 +1,6 @@
 import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
 import { Global, Commands, ExtractTextOptions } from '../core'
-import { LanguageSelectors } from '../meta'
+import { LANG_SELECTORS } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -35,7 +35,7 @@ class ExtractProvider implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      LanguageSelectors,
+      LANG_SELECTORS,
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],

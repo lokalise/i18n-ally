@@ -1,7 +1,7 @@
 import { languages, TextDocument, Position, CancellationToken, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
 import { ExtensionModule } from '../modules'
 import { Global, KeyDetector, Config } from '../core'
-import { LanguageSelectors } from '../meta'
+import { LANG_SELECTORS } from '../meta'
 
 class DefinitionProvider {
   async provideDefinition (document: TextDocument, position: Position, token: CancellationToken): Promise<Definition | DefinitionLink[]> {
@@ -38,7 +38,7 @@ class DefinitionProvider {
 const definition: ExtensionModule = () => {
   return [
     languages.registerDefinitionProvider(
-      LanguageSelectors,
+      LANG_SELECTORS,
       new DefinitionProvider()
     ),
   ]

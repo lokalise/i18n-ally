@@ -2,11 +2,10 @@ import { window, workspace } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
+import { MATCH_REG_DIR, MATCH_REG_FILE, EXT_NAMESPACE } from '../meta'
 import { KeyStyle } from '.'
 
 export class Config {
-  static readonly extensionNamespace = 'vue-i18n-ally'
-
   static readonly reloadConfigs = [
     'localesPaths',
     'matchRegex',
@@ -100,10 +99,10 @@ export class Config {
   static getMatchRegex (dirStructure = this.dirStructure): string {
     let regex = (this.getConfig('matchRegex')) as string
     if (!regex) {
-      if (dirStructure)
-        regex = '^([\\w-_]*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
+      if (dirStructure === 'file')
+        regex = MATCH_REG_FILE
       else
-        regex = '^(.*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
+        regex = MATCH_REG_DIR
     }
     return regex
   }
@@ -176,13 +175,13 @@ export class Config {
   // config
   private static getConfig<T = any> (key: string): T | undefined {
     return workspace
-      .getConfiguration(this.extensionNamespace)
+      .getConfiguration(EXT_NAMESPACE)
       .get<T>(key)
   }
 
   private static setConfig (key: string, value: any, isGlobal = false) {
     return workspace
-      .getConfiguration(this.extensionNamespace)
+      .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
   }
 

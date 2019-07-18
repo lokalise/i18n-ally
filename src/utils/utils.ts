@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import { workspace } from 'vscode'
-import { SupportedFrameworks } from '../meta'
+import { SUPPORTED_FRAMEWORKS } from '../meta'
 import { Log } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -71,7 +71,7 @@ export function isVueI18nProject (projectUrl: string): boolean {
       devDependencies = {},
     } = JSON.parse(rawPackageJSON)
 
-    for (const framework of SupportedFrameworks) {
+    for (const framework of SUPPORTED_FRAMEWORKS) {
       if (framework in dependencies || framework in devDependencies)
         return true
     }

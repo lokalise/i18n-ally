@@ -5,6 +5,7 @@ import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
 import { ExtractTextOptions, Global, Commands, Config } from '../core'
 import i18n from '../i18n'
+import { REFACTOR_TEMPLATES } from '../meta'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
@@ -54,16 +55,8 @@ const m: ExtensionModule = () => {
 
       const value = trim(text, '\'"')
 
-      const templates = [
-        '{{$t(\'___\')}}',
-        'this.$t(\'___\')',
-        '$t("___")',
-        'i18n.t(\'___\')',
-        `${keypath}`,
-      ]
-
       // prompt for template
-      const replacer = await window.showQuickPick(templates, {
+      const replacer = await window.showQuickPick(REFACTOR_TEMPLATES(keypath), {
         placeHolder: i18n.t('prompt.replace_text_as'),
       })
 
@@ -79,7 +72,7 @@ const m: ExtensionModule = () => {
         editor = await window.showTextDocument(document)
       }
       editor.edit((editBuilder) => {
-        editBuilder.replace(range, replacer.replace('___', keypath))
+        editBuilder.replace(range, replacer)
       })
 
       if (willSkip)

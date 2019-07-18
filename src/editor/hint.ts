@@ -1,7 +1,7 @@
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import { Global, KeyDetector, Commands } from '../core'
 import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
-import { LanguageSelectors } from '../meta'
+import { LANG_SELECTORS } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -78,7 +78,7 @@ class HintProvider implements HoverProvider {
 
 const m: ExtensionModule = (ctx) => {
   return languages.registerHoverProvider(
-    LanguageSelectors,
+    LANG_SELECTORS,
     new HintProvider(ctx)
   )
 }

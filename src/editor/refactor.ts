@@ -1,7 +1,7 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
 import { KeyDetector, Commands, Global, Config } from '../core'
 import { ExtensionModule } from '../modules'
-import { LanguageSelectors } from '../meta'
+import { LANG_SELECTORS } from '../meta'
 import i18n from '../i18n'
 
 export class Refactor implements CodeActionProvider {
@@ -66,7 +66,7 @@ export class Refactor implements CodeActionProvider {
 
 const m: ExtensionModule = () => {
   return [
-    languages.registerCodeActionsProvider(LanguageSelectors, new Refactor(), {
+    languages.registerCodeActionsProvider(LANG_SELECTORS, new Refactor(), {
       providedCodeActionKinds: Refactor.providedCodeActionKinds,
     }),
   ]

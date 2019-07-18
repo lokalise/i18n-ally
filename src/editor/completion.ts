@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import { Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
-import { LanguageSelectors } from '../meta'
+import { LANG_SELECTORS } from '../meta'
 
 class CompletionProvider implements vscode.CompletionItemProvider {
   public provideCompletionItems (
@@ -34,7 +34,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
 
 const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   return vscode.languages.registerCompletionItemProvider(
-    LanguageSelectors,
+    LANG_SELECTORS,
     new CompletionProvider(),
     '.'
   )

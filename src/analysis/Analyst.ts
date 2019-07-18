@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
-import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
+import { SUPPORTED_LANG_GLOBS, SUPPORTED_LANG_IDS } from '../meta'
 import { KeyDetector, LocaleLoader, Config } from '../core'
 import { Log } from '../utils'
 
@@ -36,7 +36,7 @@ export class Analyst {
   private async updateCache (doc: TextDocument) {
     if (!this._cache)
       return
-    if (!SupportedLanguageIds.includes(doc.languageId))
+    if (!SUPPORTED_LANG_IDS.includes(doc.languageId))
       return
 
     const filepath = doc.uri.fsPath
@@ -59,7 +59,7 @@ export class Analyst {
       '**/**/coverage',
       ...Config.localesPaths,
     ]
-    const files = await fg(SupportedLanguageGlobs, {
+    const files = await fg(SUPPORTED_LANG_GLOBS, {
       cwd: root,
       ignore,
     })

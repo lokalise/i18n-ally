@@ -1,11 +1,12 @@
 import { OutputChannel, window } from 'vscode'
+import { EXT_NAME } from '../meta'
 
 export class Log {
   private static _channel: OutputChannel
 
   static get outputChannel (): OutputChannel {
     if (!this._channel)
-      this._channel = window.createOutputChannel('Vue i18n Ally')
+      this._channel = window.createOutputChannel(EXT_NAME)
     return this._channel
   }
 
