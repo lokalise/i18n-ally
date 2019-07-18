@@ -7,19 +7,6 @@ import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
 
-const configPrefix = 'vue-i18n-ally'
-
-const reloadConfigs = [
-  'localesPaths',
-  'matchRegex',
-]
-
-const refreshConfigs = [
-  'sourceLanguage',
-  'ignoredLocales',
-  'displayLanguage',
-]
-
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
 
@@ -102,8 +89,8 @@ export class Global {
     let reload = false
     if (e) {
       let affected = false
-      for (const config of reloadConfigs) {
-        const key = `${configPrefix}.${config}`
+      for (const config of Config.reloadConfigs) {
+        const key = `${Config.extensionNamespace}.${config}`
         if (e.affectsConfiguration(key)) {
           affected = true
           reload = true
@@ -111,8 +98,8 @@ export class Global {
           break
         }
       }
-      for (const config of refreshConfigs) {
-        const key = `${configPrefix}.${config}`
+      for (const config of Config.refreshConfigs) {
+        const key = `${Config.extensionNamespace}.${config}`
         if (e.affectsConfiguration(key)) {
           affected = true
           this.outputChannel.appendLine(`🧰 Config "${key}" changed`)

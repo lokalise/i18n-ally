@@ -7,6 +7,18 @@ import { KeyStyle } from '.'
 export class Config {
   static readonly extensionNamespace = 'vue-i18n-ally'
 
+  static readonly reloadConfigs = [
+    'localesPaths',
+    'matchRegex',
+  ]
+
+  static readonly refreshConfigs = [
+    'sourceLanguage',
+    'ignoredLocales',
+    'displayLanguage',
+    'readonly',
+  ]
+
   // #region ====== Configurations ======
 
   // languages
@@ -79,6 +91,10 @@ export class Config {
 
   static get sortKeys (): boolean {
     return this.getConfig<boolean>('sortKeys') || false
+  }
+
+  static get readonly (): boolean {
+    return this.getConfig<boolean>('readonly') || false
   }
 
   static getMatchRegex (dirStructure = this.dirStructure): string {

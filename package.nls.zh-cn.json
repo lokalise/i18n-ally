@@ -41,7 +41,7 @@
   "prompt.choice_locale": "选择语言",
   "prompt.key_copied": "路径已复制",
   "prompt.locales_dir_not_found": "没有找到翻译文件夹，插件已停用",
-  "prompt.failed_to_locale_key": "找不到路径 \"{0}\"",
+  "prompt.failed_to_locate_key": "找不到路径 \"{0}\"",
   "prompt.edit_key_in_locale": "{1} | 编辑 \"{0}\" 的文案",
   "prompt.enter_new_keypath": "输入新的路径",
   "prompt.keystyle_flat": "扁平式(Flat)",

@@ -103,7 +103,7 @@ const m: ExtensionModule = (ctx) => {
           commands.executeCommand('workbench.action.focusActiveEditorGroup')
         }
         else {
-          window.showWarningMessage(i18n.t('prompt.failed_to_locale_key', keypath))
+          window.showWarningMessage(i18n.t('prompt.failed_to_locate_key', keypath))
         }
       }),
 
