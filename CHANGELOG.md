@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0](https://github.com/antfu/vue-i18n-ally/compare/v0.26.0...v0.27.0) (2019-07-18)
+
+
+### ⚡ Features
+
+* **parser:** supporting JSON5 ([46af841](https://github.com/antfu/vue-i18n-ally/commit/46af841))
+* introduce new config "vue-i18n-ally.readonly" ([465abb7](https://github.com/antfu/vue-i18n-ally/commit/465abb7))
+
+
+### 🌍 Internationalization
+
+* sort message keys ([c1de912](https://github.com/antfu/vue-i18n-ally/commit/c1de912))
+
+
+### 📚 Documentations
+
+* **readme:** update readme ([b65f740](https://github.com/antfu/vue-i18n-ally/commit/b65f740))
+* **readme:** update readme ([3420e9e](https://github.com/antfu/vue-i18n-ally/commit/3420e9e))
+
+
+### 🔮 Refactor
+
+* extract configs from Global ([3ce92d9](https://github.com/antfu/vue-i18n-ally/commit/3ce92d9))
+
+
+
 ## [0.26.0](https://github.com/antfu/vue-i18n-ally/compare/v0.25.1...v0.26.0) (2019-07-17)
 
 
