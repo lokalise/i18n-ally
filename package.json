@@ -356,8 +356,8 @@
   },
   "scripts": {
     "release": "standard-version",
-    "publish": "standard-version && vsce publish",
-    "publish:patch": "standard-version --release-as patch && vsce publish",
+    "publish": "standard-version && git push --follow-tags && vsce publish",
+    "publish:patch": "standard-version --release-as patch && git push --follow-tags && vsce publish",
     "gh-release": "conventional-github-releaser -p angular",
     "vscode:prepublish": "webpack --mode development",
     "compile": "webpack --mode development",
