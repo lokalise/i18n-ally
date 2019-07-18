@@ -1,12 +1,13 @@
 import { ExtensionContext } from 'vscode'
 import { flatten } from 'lodash'
+import { version } from '../package.json'
 import { Global } from './core'
 import commandsModules from './commands'
 import editorModules from './editor'
 import viewsModules from './views'
 
 export async function activate (ctx: ExtensionContext) {
-  Global.outputChannel.appendLine('🈶 Activated')
+  Global.outputChannel.appendLine(`🈶 Activated, v${version}`)
 
   // activate the extension
   await Global.init(ctx)
