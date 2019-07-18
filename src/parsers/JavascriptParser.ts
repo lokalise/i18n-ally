@@ -8,7 +8,7 @@ export class JavascriptParser extends Parser {
   readonly readonly = true
 
   constructor () {
-    super(['javascript', 'typescript'], /\.?(t|j)s$/g)
+    super(['javascript', 'typescript'], /\.?(jsx?|tsx?)$/g)
     registerTsNode()
     this.esm = require('esm')(module, { cache: false })
   }

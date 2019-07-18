@@ -101,9 +101,9 @@ export class Config {
     let regex = (this.getConfig('matchRegex')) as string
     if (!regex) {
       if (dirStructure)
-        regex = '^([\\w-_]*)\\.(json|ya?ml|js|ts)'
+        regex = '^([\\w-_]*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
       else
-        regex = '^(.*)\\.(json|ya?ml|js|ts)'
+        regex = '^(.*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
     }
     return regex
   }
