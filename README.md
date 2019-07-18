@@ -72,9 +72,9 @@
 <h3 align="center"> Overview </h3>
 
 - Multi-root workspace supported
-- Support `.json`, `.yaml`, `.json5`, `.js` and `.ts` locale message formats
+- Supports `.json`, `.yaml`, `.json5`, `.js` and `.ts` locale message formats
 - Remote development supported
-- Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
+- Supports both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 - i18n for the extension itself, of course. **(supporting: English, 简体中文, 繁體中文 or [help us translate](https://github.com/antfu/vue-i18n-ally#-help-translate-this-extension))**
 
 <p align="center">
