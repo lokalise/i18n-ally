@@ -49,7 +49,7 @@
 </p>
 
 
-<h3 align="center"> YAML and JSON are supported </h3>
+<h3 align="center"> JSON, YAML and JSON5 are supported </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' width='500px'/>
@@ -72,6 +72,7 @@
 <h3 align="center"> Overview </h3>
 
 - Multi-root workspace supported
+- Support `.json`, `.yaml`, `.json5`, `.js` and `.ts` locale message formats
 - Remote development supported
 - Supporting both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 - i18n for the extension itself, of course. **(supporting: English, 简体中文, 繁體中文 or [help us translate](https://github.com/antfu/vue-i18n-ally#-help-translate-this-extension))**
@@ -173,13 +174,36 @@ You could change your config like this:
 }
 ```
 
+### ⚙ More configurations
+
+### Comments in YAML/JSON5
+
+Since there is no easy way to perserve comments in `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) or `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any writings by this extension (editing, translating, etc).
+
+Although you can make this extension works in `readonly` mode, preventing losing the comments.
+
+```json
+"vue-i18n-ally.readonly": true
+```
+
+### Keys sorting
+
+You can turn on keys sorting by
+
+```json5
+"vue-i18n-ally.sortedKeys": true // default disabled
+```
+
+The keys sorting is only avaliable in JSON and YAML, but not JSON5.
+
+
 ### ⚗ Experimental `.js`/`.ts` support
 
 From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files. You can use them already with no config required.
 
 **⚠ You will have limited features in this extension**
 
-> Features like editting and translating are not avaliable in javascript/typescript locales. Because they can be very complex and there is not a proper way the let machine decide how to update the changes.
+> Features like editting and translating are not avaliable in javascript/typescript locales (a.k.a forced to work on readonly mode). They can be very complex and there is not a proper way to update the changes.
 >
 > We would recommend you to use static files like JSON or YAML storing locale messages to work best with this extension.
 
