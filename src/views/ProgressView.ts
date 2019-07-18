@@ -1,5 +1,5 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
-import { LocaleLoader, Coverage, Global } from '../core'
+import { LocaleLoader, Coverage, Global, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { unicodeProgressBar, decorateLocale, unicodeDecorate } from '../utils'
 
@@ -24,15 +24,15 @@ export class ProgressItem extends TreeItem {
   }
 
   get visible () {
-    return !Global.ignoredLocales.includes(this.node.locale)
+    return !Config.ignoredLocales.includes(this.node.locale)
   }
 
   get isSource () {
-    return this.node.locale === Global.sourceLanguage
+    return this.node.locale === Config.sourceLanguage
   }
 
   get isDisplay () {
-    return this.node.locale === Global.displayLanguage
+    return this.node.locale === Config.displayLanguage
   }
 
   get iconPath () {

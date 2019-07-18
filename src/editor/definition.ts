@@ -1,6 +1,6 @@
 import { languages, TextDocument, Position, CancellationToken, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, Config } from '../core'
 import { LanguageSelectors } from '../meta'
 
 class DefinitionProvider {
@@ -21,7 +21,7 @@ class DefinitionProvider {
     if (!parser)
       return []
 
-    const range = parser.navigateToKey(localeDocument.getText(), key, Global.keyStyle)
+    const range = parser.navigateToKey(localeDocument.getText(), key, Config.keyStyle)
 
     const { start = 0, end = 0 } = range || {}
 

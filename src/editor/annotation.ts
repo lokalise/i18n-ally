@@ -1,6 +1,6 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, Config } from '../core'
 import { ExtensionModule } from '../modules'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
@@ -32,13 +32,13 @@ const annotation: ExtensionModule = (ctx) => {
         ),
       })
 
-      if (Global.annotations) {
+      if (Config.annotations) {
         let missing = false
 
         let text = Global.loader.getValueByKey(key)
         // fallback to source
-        if (!text && Global.displayLanguage !== Global.sourceLanguage) {
-          text = Global.loader.getValueByKey(key, Global.sourceLanguage)
+        if (!text && Config.displayLanguage !== Config.sourceLanguage) {
+          text = Global.loader.getValueByKey(key, Config.sourceLanguage)
           missing = true
         }
 

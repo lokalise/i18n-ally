@@ -1,5 +1,5 @@
 import { commands, window } from 'vscode'
-import { Global, Commands } from '../core'
+import { Global, Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { ProgressItem } from '../views/ProgressView'
 
@@ -12,7 +12,7 @@ async function pickLocale (locale?: any) {
 
   const locales = Global.visibleLocales
   return await window.showQuickPick(locales, {
-    placeHolder: Global.displayLanguage,
+    placeHolder: Config.displayLanguage,
   })
 }
 
@@ -20,13 +20,13 @@ function handler (type: 'displayLanguage' | 'sourceLanguage') {
   return async (options?: any) => {
     const locale = await pickLocale(options)
     if (locale)
-      Global[type] = locale
+      Config[type] = locale
   }
 }
 
 function visibilityHandler (value?: boolean) {
   return (item: ProgressItem) => {
-    Global.toggleLocaleVisibility(item.node.locale, value)
+    Config.toggleLocaleVisibility(item.node.locale, value)
   }
 }
 

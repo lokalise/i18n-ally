@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as fg from 'fast-glob'
 import { Uri, workspace, window, commands } from 'vscode'
-import { Global, Commands } from '../core'
+import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -21,7 +21,7 @@ export class ConfigLocalesGuide {
 
   static async config () {
     const dirs = await this.pickDir()
-    Global.updateLocalesPaths(dirs)
+    Config.updateLocalesPaths(dirs)
 
     this.success()
   }
@@ -65,7 +65,7 @@ export class ConfigLocalesGuide {
     })
 
     if (result.length) {
-      Global.updateLocalesPaths(result)
+      Config.updateLocalesPaths(result)
 
       await window.showInformationMessage(
         i18n.t('prompt.config_locales_auto_success', result.join(';').toString())

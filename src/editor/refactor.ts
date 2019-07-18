@@ -1,5 +1,5 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
-import { KeyDetector, Commands, Global } from '../core'
+import { KeyDetector, Commands, Global, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { LanguageSelectors } from '../meta'
 import i18n from '../i18n'
@@ -20,11 +20,11 @@ export class Refactor implements CodeActionProvider {
     const actions = []
 
     const records = Global.loader.getTranslationsByKey(key)
-    if (!records[Global.displayLanguage] || !records[Global.displayLanguage].value) {
+    if (!records[Config.displayLanguage] || !records[Config.displayLanguage].value) {
       actions.push(this.createEditQuickFix(key))
 
       for (const record of Object.values(records)) {
-        if (!record.shadow && record.value && record.locale !== Global.displayLanguage)
+        if (!record.shadow && record.value && record.locale !== Config.displayLanguage)
           actions.push(this.createTranslateQuickFix(key, record.locale))
       }
     }
@@ -40,15 +40,15 @@ export class Refactor implements CodeActionProvider {
       command: Commands.edit_key,
       arguments: [{
         keypath: key,
-        locale: Global.displayLanguage,
+        locale: Config.displayLanguage,
       }],
     }
     return action
   }
 
   private createTranslateQuickFix (key: string, from?: string, to?: string) {
-    from = from || Global.sourceLanguage
-    to = to || Global.displayLanguage
+    from = from || Config.sourceLanguage
+    to = to || Config.displayLanguage
     const title = i18n.t('command.translate_key_from', from)
     const action = new CodeAction(title, CodeActionKind.QuickFix)
     action.command = {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Range } from 'vscode'
 import { getKeyname } from '../utils/utils'
-import { Global } from '.'
+import { Config } from './Config'
 
 export interface ParsedFile {
   filepath: string
@@ -76,7 +76,7 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
   }
 
   get value () {
-    return this.getValue(Global.displayLanguage)
+    return this.getValue(Config.displayLanguage)
   }
 }
 

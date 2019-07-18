@@ -1,11 +1,9 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel, ConfigurationChangeEvent } from 'vscode'
-import { uniq, trimEnd } from 'lodash'
-import { normalizeLocale, isVueI18nProject } from '../utils/utils'
+import { isVueI18nProject } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
-import i18n from '../i18n'
 import { PARSERS } from '../parsers'
-import { LocaleLoader } from '.'
+import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
 
@@ -14,6 +12,12 @@ const configPrefix = 'vue-i18n-ally'
 const reloadConfigs = [
   'localesPaths',
   'matchRegex',
+]
+
+const refreshConfigs = [
+  'sourceLanguage',
+  'ignoredLocales',
+  'displayLanguage',
 ]
 
 export class Global {
@@ -97,21 +101,33 @@ export class Global {
   private static async update (e?: ConfigurationChangeEvent) {
     let reload = false
     if (e) {
+      let affected = false
       for (const config of reloadConfigs) {
         const key = `${configPrefix}.${config}`
-        const affected = e.affectsConfiguration(key)
-        if (affected) {
+        if (e.affectsConfiguration(key)) {
+          affected = true
           reload = true
+          this.outputChannel.appendLine(`🧰 Config "${key}" changed, reloading`)
           break
         }
       }
+      for (const config of refreshConfigs) {
+        const key = `${configPrefix}.${config}`
+        if (e.affectsConfiguration(key)) {
+          affected = true
+          this.outputChannel.appendLine(`🧰 Config "${key}" changed`)
+          break
+        }
+      }
+      if (!affected)
+        return
       if (reload)
         this.outputChannel.appendLine('🔁 Reloading loader')
     }
 
     const i18nProject = isVueI18nProject(this._rootpath)
-    const hasLocalesSet = !!this.localesPaths.length
-    const shouldEnabled = this.forceEnabled || (i18nProject && hasLocalesSet)
+    const hasLocalesSet = !!Config.localesPaths.length
+    const shouldEnabled = Config.forceEnabled || (i18nProject && hasLocalesSet)
     this.setEnabled(shouldEnabled)
     if (this.enabled) {
       await this.initLoader(this._rootpath, reload)
@@ -166,8 +182,6 @@ export class Global {
     }
   }
 
-  // #region ====== Configurations ======
-
   static get allLocales () {
     return this.loader.locales
   }
@@ -177,173 +191,7 @@ export class Global {
   }
 
   static getVisibleLocales (locales: string[]) {
-    const ignored = this.ignoredLocales
+    const ignored = Config.ignoredLocales
     return locales.filter(locale => !ignored.includes(locale))
   }
-
-  // languages
-  static get displayLanguage (): string {
-    return normalizeLocale(Global.getConfig<string>('displayLanguage') || '')
-  }
-
-  static set displayLanguage (value) {
-    Global.setConfig('displayLanguage', normalizeLocale(value), true)
-    this._onDidChangeLoader.fire(this.loader)
-  }
-
-  static get sourceLanguage (): string {
-    return normalizeLocale(Global.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
-  }
-
-  static set sourceLanguage (value) {
-    Global.setConfig('sourceLanguage', normalizeLocale(value))
-    this._onDidChangeLoader.fire(this.loader)
-  }
-
-  static get ignoredLocales (): string[] {
-    const ignored = Global.getConfig('ignoredLocales')
-    if (!ignored)
-      return []
-    if (ignored && typeof ignored === 'string')
-      return [ignored]
-    if (Array.isArray(ignored))
-      return ignored
-    return []
-  }
-
-  static set ignoredLocales (value) {
-    Global.setConfig('ignoredLocales', value, true)
-    this._onDidChangeLoader.fire(this.loader)
-  }
-
-  static get keyStyle (): KeyStyle {
-    return (Global.getConfig('keystyle') || 'auto') as KeyStyle
-  }
-
-  static set keyStyle (value: KeyStyle) {
-    Global.setConfig('keystyle', value, false)
-  }
-
-  static get annotations (): boolean {
-    return (Global.getConfig('annotations')) as boolean
-  }
-
-  static set annotations (value: boolean) {
-    Global.setConfig('annotations', value, true)
-  }
-
-  static get annotationMaxLength (): number {
-    return (Global.getConfig('annotationMaxLength')) as number
-  }
-
-  static set annotationMaxLength (value: number) {
-    Global.setConfig('annotationMaxLength', value, true)
-  }
-
-  static get forceEnabled (): boolean {
-    return (Global.getConfig('forceEnabled')) as boolean
-  }
-
-  static get dirStructure (): 'auto' | 'file' | 'dir' {
-    return (Global.getConfig('dirStructure')) as ('auto' | 'file' | 'dir')
-  }
-
-  static set dirStructure (value: 'auto' | 'file' | 'dir') {
-    Global.setConfig('dirStructure', value, true)
-  }
-
-  static get sortKeys (): boolean {
-    return Global.getConfig<boolean>('sortKeys') || false
-  }
-
-  static getMatchRegex (dirStructure = this.dirStructure): string {
-    let regex = (Global.getConfig('matchRegex')) as string
-    if (!regex) {
-      if (dirStructure)
-        regex = '^([\\w-_]*)\\.(json|ya?ml|js|ts)'
-      else
-        regex = '^(.*)\\.(json|ya?ml|js|ts)'
-    }
-    return regex
-  }
-
-  static async requestKeyStyle (): Promise<KeyStyle | undefined> {
-    if (this.keyStyle !== 'auto')
-      return this.keyStyle
-
-    const result = await window.showQuickPick([{
-      value: 'nested',
-      label: i18n.t('prompt.keystyle_nested'),
-      description: i18n.t('prompt.keystyle_nested_example'),
-    }, {
-      value: 'flat',
-      label: i18n.t('prompt.keystyle_flat'),
-      description: i18n.t('prompt.keystyle_flat_example'),
-    }], {
-      placeHolder: i18n.t('prompt.keystyle_select'),
-    })
-
-    if (!result) {
-      this.keyStyle = 'nested'
-      return 'nested'
-    }
-    this.keyStyle = result.value as KeyStyle
-    return result.value as KeyStyle
-  }
-
-  static toggleLocaleVisibility (locale: string, visible?: boolean) {
-    const ignored = this.ignoredLocales
-    if (visible == null)
-      visible = !ignored.includes(locale)
-    if (!visible) {
-      ignored.push(locale)
-      this.ignoredLocales = ignored
-    }
-    else {
-      this.ignoredLocales = ignored.filter(i => i !== locale)
-    }
-  }
-
-  // locales
-  static get localesPaths (): string[] {
-    const paths = Global.getConfig('localesPaths')
-    let localesPaths: string[]
-    if (!paths)
-      localesPaths = []
-    else if (typeof paths === 'string')
-      localesPaths = paths.split(',')
-    else
-      localesPaths = paths || []
-    return localesPaths.map(i => trimEnd(i, '/\\'))
-  }
-
-  static set localesPaths (paths: string[]) {
-    if (paths.length === 1)
-      Global.setConfig('localesPaths', paths[0])
-    else
-      Global.setConfig('localesPaths', paths)
-  }
-
-  static updateLocalesPaths (paths: string[]) {
-    this.localesPaths = uniq(Global.localesPaths.concat(paths))
-  }
-
-  static get hasLocalesConfigured () {
-    return !!this.localesPaths.length
-  }
-
-  // config
-  private static getConfig<T = any> (key: string): T | undefined {
-    return workspace
-      .getConfiguration(configPrefix)
-      .get<T>(key)
-  }
-
-  private static setConfig (key: string, value: any, isGlobal = false) {
-    return workspace
-      .getConfiguration()
-      .update(`${configPrefix}.${key}`, value, isGlobal)
-  }
-
-  // #endregion
 }

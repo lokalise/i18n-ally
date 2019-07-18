@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
-import { Global, Commands, LocaleRecord, Node } from '../core'
+import { Global, Commands, LocaleRecord, Node, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
@@ -59,7 +59,7 @@ const m: ExtensionModule = (ctx) => {
         if (node.type === 'tree')
           return
 
-        const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Global.sourceLanguage
+        const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
 
         try {
           await Global.loader.translator.MachineTranslate(node, from)
@@ -75,7 +75,7 @@ const m: ExtensionModule = (ctx) => {
         if (!node)
           return
 
-        const record = await getRecordFromNode(node, Global.displayLanguage)
+        const record = await getRecordFromNode(node, Config.displayLanguage)
 
         if (!record || !record.filepath)
           return
@@ -92,7 +92,7 @@ const m: ExtensionModule = (ctx) => {
           return
 
         const text = editor.document.getText()
-        const range = parser.navigateToKey(text, keypath, Global.keyStyle)
+        const range = parser.navigateToKey(text, keypath, Config.keyStyle)
 
         if (range) {
           editor.selection = new Selection(
@@ -151,7 +151,7 @@ const m: ExtensionModule = (ctx) => {
           return
 
         if (node.type === 'node') {
-          const record = await getRecordFromNode(node, Global.displayLanguage)
+          const record = await getRecordFromNode(node, Config.displayLanguage)
           if (!record)
             return
           node = record

@@ -1,9 +1,9 @@
-import { Global, Node } from '../core'
+import { Node, Config } from '../core'
 
 export class NodeHelper {
   static isSource (node: Node) {
     if (node.type === 'record')
-      return node.locale === Global.sourceLanguage
+      return node.locale === Config.sourceLanguage
     return false
   }
 

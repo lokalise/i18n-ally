@@ -1,5 +1,5 @@
 import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace } from 'vscode'
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
 import i18n from '../i18n'
@@ -18,7 +18,7 @@ export class ProblemProvider {
     if (!isLanguageIdSupported(document.languageId))
       return
 
-    const locale = Global.displayLanguage
+    const locale = Config.displayLanguage
 
     if (document) {
       const problems: Diagnostic[] = []

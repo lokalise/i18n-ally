@@ -3,7 +3,7 @@ import { promises as fs } from 'fs'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
 import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
-import { KeyDetector, Global, LocaleLoader } from '../core'
+import { KeyDetector, Global, LocaleLoader, Config } from '../core'
 
 export interface Occurrence {
   keypath: string
@@ -56,7 +56,7 @@ export class Analyst {
       'dist',
       '**/**/dist',
       '**/**/coverage',
-      ...Global.localesPaths,
+      ...Config.localesPaths,
     ]
     const files = await fg(SupportedLanguageGlobs, {
       cwd: root,

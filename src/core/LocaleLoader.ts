@@ -9,7 +9,7 @@ import { Analyst } from '../analysis/Analyst'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType, LogError } from './Errors'
 import { Translator } from './Translator'
-import { Global } from '.'
+import { Global, Config } from '.'
 
 export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
@@ -47,11 +47,11 @@ export class LocaleLoader extends Disposable {
   }
 
   get localesPaths () {
-    return Global.localesPaths
+    return Config.localesPaths
   }
 
   get locales () {
-    const source = Global.sourceLanguage
+    const source = Config.sourceLanguage
     return _(this._files)
       .values()
       .map(f => f.locale)
@@ -130,9 +130,9 @@ export class LocaleLoader extends Disposable {
   }
 
   getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
-    locale = locale || Global.displayLanguage
+    locale = locale || Config.displayLanguage
 
-    const maxlength = Global.annotationMaxLength
+    const maxlength = Config.annotationMaxLength
     const node = this.getTreeNodeByKey(keypath)
 
     if (!node)
@@ -160,7 +160,7 @@ export class LocaleLoader extends Disposable {
   }
 
   getFilepathByKey (key: string, locale?: string) {
-    locale = locale || Global.displayLanguage
+    locale = locale || Config.displayLanguage
     const files = Object.values(this._files).filter(f => f.locale === locale)
     for (const file of files) {
       if (_.get(file.value, key))
@@ -193,7 +193,7 @@ export class LocaleLoader extends Disposable {
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
     const node = this.getNodeByKey(key)
-    return node && node.locales[Global.displayLanguage]
+    return node && node.locales[Config.displayLanguage]
   }
 
   getFilepathsOfLocale (locale: string) {
@@ -229,7 +229,7 @@ export class LocaleLoader extends Disposable {
 
     const node = this.getNodeByKey(keypath)
     if (node) {
-      const sourceRecord = node.locales[Global.sourceLanguage] || Object.values(node.locales)[0]
+      const sourceRecord = node.locales[Config.sourceLanguage] || Object.values(node.locales)[0]
       if (sourceRecord && sourceRecord.filepath)
         return replaceLocalePath(sourceRecord.filepath, locale)
     }
@@ -279,13 +279,13 @@ export class LocaleLoader extends Disposable {
     if (existsSync(filepath))
       original = await parser.load(filepath)
 
-    const keyStyle = await Global.requestKeyStyle()
+    const keyStyle = await Config.requestKeyStyle()
     if (keyStyle === 'flat')
       original[pending.keypath] = pending.value
     else
       _.set(original, pending.keypath, pending.value)
 
-    await parser.save(filepath, original, Global.sortKeys)
+    await parser.save(filepath, original, Config.sortKeys)
   }
 
   private _ignoreChanges = false
@@ -347,7 +347,7 @@ export class LocaleLoader extends Disposable {
   }
 
   private getFileInfo (filepath: string, dirStructure: 'dir'|'file') {
-    const regexp = new RegExp(Global.getMatchRegex(dirStructure), 'ig')
+    const regexp = new RegExp(Config.getMatchRegex(dirStructure), 'ig')
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const match = regexp.exec(filename)
@@ -364,7 +364,7 @@ export class LocaleLoader extends Disposable {
       if (!match || match.length < 2)
         return
       if (!match[1]) // filename with no locales code, should be treat as source locale
-        locale = Global.sourceLanguage
+        locale = Config.sourceLanguage
       else
         locale = normalizeLocale(match[1], '')
     }
@@ -423,7 +423,7 @@ export class LocaleLoader extends Disposable {
 
   private async loadDirectory (rootPath: string) {
     const paths = await fs.readdir(rootPath)
-    const dirStructure = Global.dirStructure
+    const dirStructure = Config.dirStructure
 
     for (const filename of paths) {
       const filepath = path.resolve(rootPath, filename)

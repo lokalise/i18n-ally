@@ -5,7 +5,7 @@ import { LocaleLoader } from './LocaleLoader'
 import { AllyError, ErrorType } from './Errors'
 import { Global } from './Global'
 import { LocaleTree } from './types'
-import { LocaleNode, LocaleRecord } from '.'
+import { LocaleNode, LocaleRecord, Config } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -23,7 +23,7 @@ export class Translator {
   ) {}
 
   async MachineTranslate (node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
-    sourceLanguage = sourceLanguage || Global.sourceLanguage
+    sourceLanguage = sourceLanguage || Config.sourceLanguage
     if (node.type === 'node')
       return await this.MachineTranslateNode(node, sourceLanguage)
 
