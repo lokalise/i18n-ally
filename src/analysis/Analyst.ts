@@ -3,7 +3,8 @@ import { promises as fs } from 'fs'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
 import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
-import { KeyDetector, Global, LocaleLoader, Config } from '../core'
+import { KeyDetector, LocaleLoader, Config } from '../core'
+import { Log } from '../utils'
 
 export interface Occurrence {
   keypath: string
@@ -39,7 +40,7 @@ export class Analyst {
       return
 
     const filepath = doc.uri.fsPath
-    Global.outputChannel.appendLine(`Update cache of ${filepath}`)
+    Log.info(`Update cache of ${filepath}`)
     this.invalidateCacheOf(filepath)
     const occurrences = await this.getOccurrencesOfText(doc.getText(), filepath)
     this._cache.push(...occurrences)

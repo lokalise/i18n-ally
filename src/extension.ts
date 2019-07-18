@@ -5,9 +5,10 @@ import { Global } from './core'
 import commandsModules from './commands'
 import editorModules from './editor'
 import viewsModules from './views'
+import { Log } from './utils'
 
 export async function activate (ctx: ExtensionContext) {
-  Global.outputChannel.appendLine(`🈶 Activated, v${version}`)
+  Log.info(`🈶 Activated, v${version}`)
 
   // activate the extension
   await Global.init(ctx)
@@ -22,5 +23,5 @@ export async function activate (ctx: ExtensionContext) {
 }
 
 export function deactivate () {
-  Global.outputChannel.appendLine('🈚 Deactivated')
+  Log.info('🈚 Deactivated')
 }

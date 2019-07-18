@@ -3,11 +3,11 @@ import * as path from 'path'
 import * as _ from 'lodash'
 import { workspace, window, EventEmitter, Event, Disposable, WorkspaceEdit } from 'vscode'
 import * as fg from 'fast-glob'
-import { replaceLocalePath, normalizeLocale } from '../utils'
+import { replaceLocalePath, normalizeLocale, Log } from '../utils'
 import i18n from '../i18n'
 import { Analyst } from '../analysis/Analyst'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
-import { AllyError, ErrorType, LogError } from './Errors'
+import { AllyError, ErrorType } from './Errors'
 import { Translator } from './Translator'
 import { Global, Config } from '.'
 
@@ -41,7 +41,7 @@ export class LocaleLoader extends Disposable {
   }
 
   async init () {
-    Global.outputChannel.appendLine(`🚀 Initializing loader "${this.rootpath}"`)
+    Log.info(`🚀 Initializing loader "${this.rootpath}"`)
     await this.loadAll()
     this.update()
   }
@@ -269,7 +269,7 @@ export class LocaleLoader extends Disposable {
     if (!filepath)
       throw new AllyError(ErrorType.filepath_not_specified)
 
-    Global.outputChannel.appendLine(`💾 Writing ${filepath}`)
+    Log.info(`💾 Writing ${filepath}`)
     const ext = path.extname(filepath)
     const parser = Global.getMatchedParser(ext)
     if (!parser)
@@ -351,7 +351,7 @@ export class LocaleLoader extends Disposable {
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const match = regexp.exec(filename)
-    // Global.outputChannel.appendLine(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
+    // Log.info(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
     if (!match || match.length < 1)
       return
 
@@ -393,7 +393,7 @@ export class LocaleLoader extends Disposable {
       if (!result)
         return
       const { locale, nested, parser } = result
-      Global.outputChannel.appendLine(`${parentPath ? '\t' : ''}📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`)
+      Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
@@ -408,7 +408,7 @@ export class LocaleLoader extends Disposable {
     }
     catch (e) {
       this.unsetFile(filepath)
-      Global.outputChannel.appendLine(`${parentPath ? '\t' : ''}\t🐛 Failed to load ${e}`)
+      Log.info(`🐛 Failed to load ${e}`, parentPath ? 2 : 1)
     }
   }
 
@@ -539,28 +539,29 @@ export class LocaleLoader extends Disposable {
         })
       }
       catch (e) {
-        LogError(e)
+        Log.error(e)
       }
     }
     if (paths.length === 0)
-      Global.outputChannel.appendLine('\n⚠ No locales paths.')
+      Log.info('\n⚠ No locales paths.')
 
     for (const pathname of paths) {
       try {
         const fullpath = path.resolve(this.rootpath, pathname)
-        Global.outputChannel.appendLine(`\n📂 Loading locales under ${fullpath}`)
+        Log.info(`\n📂 Loading locales under ${fullpath}`)
         await this.loadDirectory(fullpath)
         this.watchOn(fullpath)
       }
       catch (e) {
-        LogError(e)
+        Log.error(e)
       }
     }
-    Global.outputChannel.appendLine('\n✅ Loading finished\n-----\n')
+    Log.info('\n✅ Loading finished')
+    Log.divider()
   }
 
   private onDispose () {
-    Global.outputChannel.appendLine(`🗑 Disposing loader "${this.rootpath}"`)
+    Log.info(`🗑 Disposing loader "${this.rootpath}"`)
     this._disposables.forEach(d => d.dispose())
     this._disposables = []
   }

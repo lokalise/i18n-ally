@@ -1,6 +1,7 @@
 import { EventEmitter } from 'vscode'
 import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
+import { Log } from '../utils'
 import { LocaleLoader } from './LocaleLoader'
 import { AllyError, ErrorType } from './Errors'
 import { Global } from './Global'
@@ -63,7 +64,7 @@ export class Translator {
     if (!sourceRecord || !sourceRecord.value)
       throw new AllyError(ErrorType.translating_empty_source_value)
     try {
-      Global.outputChannel.appendLine(`🌍 Translating "${record.keypath}" (${sourceLanguage}->${record.locale})`)
+      Log.info(`🌍 Translating "${record.keypath}" (${sourceLanguage}->${record.locale})`)
       this.start(record.keypath, record.locale)
       const result = await this.translateText(sourceRecord.value, sourceLanguage, record.locale)
       this.end(record.keypath, record.locale)

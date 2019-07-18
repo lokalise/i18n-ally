@@ -1,8 +1,9 @@
 import { extname } from 'path'
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel, ConfigurationChangeEvent } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { isVueI18nProject } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
+import { Log } from '../utils'
 import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
@@ -11,8 +12,6 @@ export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
 
   private static _rootpath: string
-
-  private static _channel: OutputChannel;
 
   private static _enabled: boolean = false
 
@@ -79,7 +78,8 @@ export class Global {
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
-      this.outputChannel.appendLine(`\n----\n💼 Workspace root changed to "${rootpath}"`)
+      Log.divider()
+      Log.info(`💼 Workspace root changed to "${rootpath}"`)
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
     }
@@ -94,7 +94,7 @@ export class Global {
         if (e.affectsConfiguration(key)) {
           affected = true
           reload = true
-          this.outputChannel.appendLine(`🧰 Config "${key}" changed, reloading`)
+          Log.info(`🧰 Config "${key}" changed, reloading`)
           break
         }
       }
@@ -102,14 +102,14 @@ export class Global {
         const key = `${Config.extensionNamespace}.${config}`
         if (e.affectsConfiguration(key)) {
           affected = true
-          this.outputChannel.appendLine(`🧰 Config "${key}" changed`)
+          Log.info(`🧰 Config "${key}" changed`)
           break
         }
       }
       if (!affected)
         return
       if (reload)
-        this.outputChannel.appendLine('🔁 Reloading loader')
+        Log.info('🔁 Reloading loader')
     }
 
     const i18nProject = isVueI18nProject(this._rootpath)
@@ -121,9 +121,9 @@ export class Global {
     }
     else {
       if (!i18nProject)
-        this.outputChannel.appendLine('⚠ Current workspace is not a vue-i18n project, extension disabled')
+        Log.info('⚠ Current workspace is not a vue-i18n project, extension disabled')
       else if (!hasLocalesSet)
-        this.outputChannel.appendLine('⚠ No locales path found, extension disabled')
+        Log.info('⚠ No locales path found, extension disabled')
 
       if (i18nProject && !hasLocalesSet)
         ConfigLocalesGuide.autoSet()
@@ -149,12 +149,6 @@ export class Global {
     return this.parsers.find(parser => parser.supports(ext))
   }
 
-  static get outputChannel (): OutputChannel {
-    if (!this._channel)
-      this._channel = window.createOutputChannel('Vue i18n Ally')
-    return this._channel
-  }
-
   // enables
   static get enabled () {
     return this._enabled
@@ -162,7 +156,7 @@ export class Global {
 
   private static setEnabled (value: boolean) {
     if (this._enabled !== value) {
-      this.outputChannel.appendLine(value ? '🌞 Enabled' : '🌚 Disabled')
+      Log.info(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
       commands.executeCommand('setContext', 'vue-i18n-ally-enabled', value)
       this._onDidChangeEnabled.fire()

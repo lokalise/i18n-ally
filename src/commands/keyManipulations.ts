@@ -2,10 +2,9 @@ import * as path from 'path'
 import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
 import { Global, Commands, LocaleRecord, Node, Config } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale } from '../utils'
+import { decorateLocale, Log } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import i18n from '../i18n'
-import { LogError } from '../core/Errors'
 
 interface CommandOptions {
   keypath: string
@@ -65,7 +64,7 @@ const m: ExtensionModule = (ctx) => {
           await Global.loader.translator.MachineTranslate(node, from)
         }
         catch (err) {
-          LogError(err.toString())
+          Log.error(err.toString())
         }
       }),
 
@@ -136,7 +135,7 @@ const m: ExtensionModule = (ctx) => {
           await workspace.applyEdit(edit)
         }
         catch (err) {
-          LogError(err)
+          Log.error(err)
         }
       }),
 
@@ -173,7 +172,7 @@ const m: ExtensionModule = (ctx) => {
           }
         }
         catch (err) {
-          LogError(err.toString())
+          Log.error(err.toString())
         }
       }),
 
@@ -201,7 +200,7 @@ const m: ExtensionModule = (ctx) => {
             })))
         }
         catch (err) {
-          LogError(err.toString())
+          Log.error(err.toString())
         }
       }),
   ]

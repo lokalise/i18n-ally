@@ -1,8 +1,8 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import { workspace } from 'vscode'
-import { Global } from '../core'
 import { SupportedFrameworks } from '../meta'
+import { Log } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -23,7 +23,7 @@ export function normalizeLocale (locale: string, fallback = 'en', strict = false
     return canonical
   }
   catch (e) {
-    Global.outputChannel.appendLine(`Invalid locale code "${locale}"\n${e.toString()}`)
+    Log.info(`Invalid locale code "${locale}"\n${e.toString()}`)
     return fallback
   }
 }
@@ -77,7 +77,7 @@ export function isVueI18nProject (projectUrl: string): boolean {
     }
   }
   catch (err) {
-    Global.outputChannel.appendLine('Error on parsing package.json')
+    Log.info('Error on parsing package.json')
   }
   return false
 }
