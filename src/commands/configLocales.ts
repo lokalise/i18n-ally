@@ -1,5 +1,5 @@
-import * as fg from 'fast-glob'
 import * as path from 'path'
+import * as fg from 'fast-glob'
 import { Uri, workspace, window, commands } from 'vscode'
 import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
@@ -40,7 +40,7 @@ export class ConfigLocalesGuide {
       return []
 
     return dirs
-      .map(item => {
+      .map((item) => {
         if (process.platform === 'win32') // path on windows will starts with '/'
           return item.path.slice(1)
         return item.path

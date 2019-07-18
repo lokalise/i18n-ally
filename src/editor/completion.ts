@@ -21,7 +21,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
     if (!trans || trans.type !== 'tree')
       return
 
-    return Object.values(trans.children).map(node => {
+    return Object.values(trans.children).map((node) => {
       return new vscode.CompletionItem(
         node.keyname,
         node.type === 'tree'

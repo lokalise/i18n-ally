@@ -1,8 +1,8 @@
+import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import { Global, KeyDetector, Commands } from '../core'
 import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
 import { LanguageSelectors } from '../meta'
 import { ExtensionModule } from '../modules'
-import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import i18n from '../i18n'
 
 class HintProvider implements HoverProvider {
@@ -27,7 +27,7 @@ class HintProvider implements HoverProvider {
     const locales = Global.loader.getTranslationsByKey(keypath)
 
     const transTable = Global.visibleLocales
-      .map(locale => {
+      .map((locale) => {
         const commands = []
         const row = {
           locale: decorateLocale(locale),

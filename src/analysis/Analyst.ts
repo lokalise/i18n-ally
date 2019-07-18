@@ -1,9 +1,9 @@
-import { workspace, Range, Location, TextDocument } from 'vscode'
-import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
-import { KeyDetector, Global, LocaleLoader } from '../core'
-import * as fg from 'fast-glob'
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
+import { workspace, Range, Location, TextDocument } from 'vscode'
+import * as fg from 'fast-glob'
+import { SupportedLanguageGlobs, SupportedLanguageIds } from '../meta'
+import { KeyDetector, Global, LocaleLoader } from '../core'
 
 export interface Occurrence {
   keypath: string
@@ -29,7 +29,7 @@ export class Analyst {
   }
 
   watch () {
-    return workspace.onDidSaveTextDocument((doc) => this.updateCache(doc))
+    return workspace.onDidSaveTextDocument(doc => this.updateCache(doc))
   }
 
   private async updateCache (doc: TextDocument) {

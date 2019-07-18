@@ -1,9 +1,9 @@
+import * as path from 'path'
 import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
 import { Global, Commands, LocaleRecord, Node } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
-import * as path from 'path'
 import i18n from '../i18n'
 import { LogError } from '../core/Errors'
 

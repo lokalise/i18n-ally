@@ -56,7 +56,7 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
     provider.update(window.activeTextEditor.document)
 
   return [
-    window.onDidChangeActiveTextEditor(editor => {
+    window.onDidChangeActiveTextEditor((editor) => {
       if (editor)
         provider.update(editor.document)
       else

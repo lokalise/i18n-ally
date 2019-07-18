@@ -1,21 +1,19 @@
-import * as yaml from 'js-yaml'
+import JSON5 from 'json5'
 import { KeyStyle } from '../core'
 import { Parser } from './Parser'
 
-export class YamlParser extends Parser {
+export class Json5Parser extends Parser {
   constructor () {
-    super(['yaml'], /\.?ya?ml$/g)
+    super(['json5'], /\.?json5$/g)
   }
 
   async parse (text: string) {
-    return yaml.safeLoad(text)
+    return JSON5.parse(text)
   }
 
   async dump (object: object, sort: boolean) {
-    object = JSON.parse(JSON.stringify(object))
-    return yaml.safeDump(object, {
-      indent: this.options.indent,
-      sortKeys: sort,
+    return JSON5.stringify(object, {
+      space: this.options.indent,
     })
   }
 
@@ -24,16 +22,17 @@ export class YamlParser extends Parser {
       ? [keypath]
       : keypath.split('.')
 
+    // build regex to search key
     let regexString = keys
-      .map((key, i) => `^[ \\t]{${i * this.options.indent}}${key}: ?`)
+      .map((key, i) => `^[ \\t]{${(i + 1) * this.options.indent}}"?${key}"?: ?`)
       .join('[\\s\\S]*')
-    regexString += ' (.*)$'
+    regexString += '(?:"?(.*)"?|({))'
     const regex = new RegExp(regexString, 'gm')
 
     const match = regex.exec(text)
     if (match && match.length >= 2) {
-      const end = match.index + match[0].length
-      const value = match[1]
+      const end = match.index + match[0].length - 1
+      const value = match[1] || match[2]
       const start = end - value.length
       return { start, end }
     }

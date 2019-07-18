@@ -1,5 +1,5 @@
-import { Global } from './Global'
 import { window } from 'vscode'
+import { Global } from './Global'
 
 export enum ErrorType {
   translating_same_locale,

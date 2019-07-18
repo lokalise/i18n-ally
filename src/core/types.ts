@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Range } from 'vscode'
 import { getKeyname } from '../utils/utils'
 import { Global } from '.'

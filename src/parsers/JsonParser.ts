@@ -1,7 +1,6 @@
-import { Parser } from './Parser'
-import { KeyStyle } from '../core'
-// @ts-ignore
 import * as SortedStringify from 'json-stable-stringify'
+import { KeyStyle } from '../core'
+import { Parser } from './Parser'
 
 export class JsonParser extends Parser {
   constructor () {
@@ -14,7 +13,7 @@ export class JsonParser extends Parser {
 
   async dump (object: object, sort: boolean) {
     if (sort)
-      return SortedStringify(object, { space: 2 })
+      return SortedStringify(object, { space: this.options.indent })
     else
       return JSON.stringify(object, null, this.options.indent)
   }

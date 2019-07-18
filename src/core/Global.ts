@@ -1,13 +1,11 @@
+import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, OutputChannel, ConfigurationChangeEvent } from 'vscode'
-import { LocaleLoader } from '.'
 import { uniq, trimEnd } from 'lodash'
 import { normalizeLocale, isVueI18nProject } from '../utils/utils'
-import { JsonParser } from '../parsers/JsonParser'
-import { YamlParser } from '../parsers/YamlParser'
-import { JavascriptParser } from '../parsers/JavascriptParser'
 import { ConfigLocalesGuide } from '../commands/configLocales'
-import { extname } from 'path'
 import i18n from '../i18n'
+import { PARSERS } from '../parsers'
+import { LocaleLoader } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
 
@@ -29,11 +27,7 @@ export class Global {
 
   static context: ExtensionContext
 
-  static parsers = [
-    new JsonParser(),
-    new YamlParser(),
-    new JavascriptParser(),
-  ]
+  static parsers = PARSERS
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()

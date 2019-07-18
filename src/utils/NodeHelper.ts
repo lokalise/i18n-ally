@@ -18,15 +18,15 @@ export class NodeHelper {
   }
 
   static isTranslatable (node: Node) {
-    return !node.readonly &&
-      !this.isSource(node) &&
-      node.type !== 'tree' &&
-      this.notShadowOrHasFilepath(node)
+    return !node.readonly
+      && !this.isSource(node)
+      && node.type !== 'tree'
+      && this.notShadowOrHasFilepath(node)
   }
 
   static isOpenable (node: Node) {
-    return node.type !== 'tree' &&
-      this.notShadowOrHasFilepath(node)
+    return node.type !== 'tree'
+      && this.notShadowOrHasFilepath(node)
   }
 
   static isEditable (node: Node) {

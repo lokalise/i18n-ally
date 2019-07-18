@@ -1,0 +1,10 @@
+{
+  nested: {
+    greeting: '早上好',
+    hello: '再次问好',
+  },
+  project: '基本',
+  term: '我接受{0}',
+  tos: '服务期限',
+  yeah: '是啊',
+}

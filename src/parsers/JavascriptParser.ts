@@ -1,7 +1,7 @@
-import { Parser } from './Parser'
 import { register as registerTsNode } from 'ts-node'
 import i18n from '../i18n'
 import { LogError } from '../core/Errors'
+import { Parser } from './Parser'
 
 export class JavascriptParser extends Parser {
   private esm: (filepath: string) => any

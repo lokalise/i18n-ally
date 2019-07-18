@@ -1,9 +1,9 @@
 // @ts-ignore
 import * as limax from 'limax'
 import { commands, window, workspace } from 'vscode'
+import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
 import { ExtractTextOptions, Global, Commands } from '../core'
-import { trim } from 'lodash'
 import i18n from '../i18n'
 
 const m: ExtensionModule = () => {
@@ -78,7 +78,7 @@ const m: ExtensionModule = () => {
         const document = await workspace.openTextDocument(filepath)
         editor = await window.showTextDocument(document)
       }
-      editor.edit(editBuilder => {
+      editor.edit((editBuilder) => {
         editBuilder.replace(range, replacer.replace('___', keypath))
       })
 

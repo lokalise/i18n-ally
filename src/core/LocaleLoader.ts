@@ -1,15 +1,15 @@
-import { workspace, window, EventEmitter, Event, Disposable, WorkspaceEdit } from 'vscode'
 import { promises as fs, existsSync } from 'fs'
-import * as _ from 'lodash'
 import * as path from 'path'
+import * as _ from 'lodash'
+import { workspace, window, EventEmitter, Event, Disposable, WorkspaceEdit } from 'vscode'
 import * as fg from 'fast-glob'
-import { Global } from '.'
 import { replaceLocalePath, normalizeLocale } from '../utils'
+import i18n from '../i18n'
+import { Analyst } from '../analysis/Analyst'
 import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
 import { AllyError, ErrorType, LogError } from './Errors'
-import i18n from '../i18n'
 import { Translator } from './Translator'
-import { Analyst } from '../analysis/Analyst'
+import { Global } from '.'
 
 export class LocaleLoader extends Disposable {
   private _onDidChange: EventEmitter<undefined> = new EventEmitter<undefined>()
@@ -75,7 +75,7 @@ export class LocaleLoader extends Disposable {
   getCoverage (locale: string, keys?: string[]): Coverage {
     keys = keys || Object.keys(this._flattenLocaleTree)
     const total = keys.length
-    const translated = keys.filter(key => {
+    const translated = keys.filter((key) => {
       return this._flattenLocaleTree[key] && this._flattenLocaleTree[key].getValue(locale)
     })
     return {
@@ -240,7 +240,7 @@ export class LocaleLoader extends Disposable {
     const locales: Record<string, LocaleRecord> = {}
 
     Global.getVisibleLocales(this.locales)
-      .forEach(locale => {
+      .forEach((locale) => {
         if (node.locales[locale]) {
         // locales already exists
           locales[locale] = node.locales[locale]

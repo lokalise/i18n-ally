@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import * as fs from 'fs'
+import * as vscode from 'vscode'
 import { uniq } from 'lodash'
 
 // for visualize the regex, you can use https://regexper.com/

@@ -26,7 +26,7 @@ export function unicodeTransform (text: string, from: FontNames, to: FontNames) 
   const FromFont = Array.from(fonts[from])
   const ToFont = Array.from(fonts[to])
   return Array.from(text)
-    .map(c => {
+    .map((c) => {
       if (FromFont.includes(c))
         return ToFont[FromFont.indexOf(c)]
       return c

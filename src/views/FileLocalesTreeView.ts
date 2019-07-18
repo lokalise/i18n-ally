@@ -1,8 +1,8 @@
 import { ExtensionContext, window, commands } from 'vscode'
-import { LocalesTreeProvider } from './LocalesTreeView'
 import { KeyDetector, LocaleNode, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
+import { LocalesTreeProvider } from './LocalesTreeView'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
   constructor (

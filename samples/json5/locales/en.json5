@@ -1,0 +1,35 @@
+{
+  apple: 'no apples | one apple | {count} apples',
+  car: 'car | cars',
+  currency: {
+    currency: 'USD',
+    style: 'currency',
+  },
+  date: {
+    long: {
+      day: 'numeric',
+      hour: 'numeric',
+      hour12: true,
+      minute: 'numeric',
+      month: 'short',
+      weekday: 'short',
+      year: 'numeric',
+    },
+    short: {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    },
+  },
+  nested: {
+    foo: {
+      bar: 'foobar',
+    },
+    greeting: 'good morning',
+    hello: 'Hello again',
+  },
+  project: 'Basic',
+  term: 'I accept {0}',
+  tos: 'Term of Service',
+  yeah: 'Yeah',
+}
