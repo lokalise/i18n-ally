@@ -1,3 +1,4 @@
+.github/**
 .vscode/**
 .vscode-test/**
 node_modules
@@ -6,14 +7,16 @@ dist/test/**
 dist/**/*.map
 src/**
 screenshots/**
+samples/**
+test/**
+
 .gitignore
 .editorconfig
 .eslintrc.js
 .eslintignore
+package-lock.json
 tsconfig.json
 tslint.json
-test/**
-samples/**
 webpack.config.js
 renovate.json
 
