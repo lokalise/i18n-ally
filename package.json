@@ -23,7 +23,7 @@
     "i18n",
     "i18next"
   ],
-  "icon": "static/logo.png",
+  "icon": "res/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/antfu/vue-i18n-ally"
@@ -67,32 +67,32 @@
         "command": "extension.vue-i18n-ally.copy-key",
         "title": "%command.copy_key%",
         "icon": {
-          "light": "./static/light/file.svg",
-          "dark": "./static/dark/file.svg"
+          "light": "./res/light/file.svg",
+          "dark": "./res/dark/file.svg"
         }
       },
       {
         "command": "extension.vue-i18n-ally.translate-key",
         "title": "%command.translate_key%",
         "icon": {
-          "light": "./static/light/translate.svg",
-          "dark": "./static/dark/translate.svg"
+          "light": "./res/light/translate.svg",
+          "dark": "./res/dark/translate.svg"
         }
       },
       {
         "command": "extension.vue-i18n-ally.edit-key",
         "title": "%command.edit_key%",
         "icon": {
-          "light": "./static/light/edit.svg",
-          "dark": "./static/dark/edit.svg"
+          "light": "./res/light/edit.svg",
+          "dark": "./res/dark/edit.svg"
         }
       },
       {
         "command": "extension.vue-i18n-ally.open-key",
         "title": "%command.open_key%",
         "icon": {
-          "light": "./static/light/open-file.svg",
-          "dark": "./static/dark/open-file.svg"
+          "light": "./res/light/open-file.svg",
+          "dark": "./res/dark/open-file.svg"
         }
       },
       {
@@ -115,16 +115,16 @@
         "command": "extension.vue-i18n-ally.locale-visibility-show",
         "title": "%command.locale_visibility_show%",
         "icon": {
-          "light": "./static/light/eye.svg",
-          "dark": "./static/dark/eye.svg"
+          "light": "./res/light/eye.svg",
+          "dark": "./res/dark/eye.svg"
         }
       },
       {
         "command": "extension.vue-i18n-ally.locale-visibility-hide",
         "title": "%command.locale_visibility_hide%",
         "icon": {
-          "light": "./static/light/eye-off.svg",
-          "dark": "./static/dark/eye-off.svg"
+          "light": "./res/light/eye-off.svg",
+          "dark": "./res/dark/eye-off.svg"
         }
       }
     ],
@@ -205,7 +205,7 @@
         {
           "id": "vue-i18n-ally",
           "title": "%extname%",
-          "icon": "./static/logo-view-container.svg"
+          "icon": "./res/logo-view-container.svg"
         }
       ]
     },

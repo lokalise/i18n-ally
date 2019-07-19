@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/static/logo.png" alt="logo" width="100"/>
+<img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/res/logo.png" alt="logo" width="100"/>
 </p>
 <h1 align="center">Vue i18n Ally</h1>
 

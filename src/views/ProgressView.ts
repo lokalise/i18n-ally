@@ -38,11 +38,11 @@ export class ProgressItem extends TreeItem {
   get iconPath () {
     if (!this.visible) {
       return {
-        light: this.ctx.asAbsolutePath('static/light/eye-off-fade.svg'),
-        dark: this.ctx.asAbsolutePath('static/dark/eye-off-fade.svg'),
+        light: this.ctx.asAbsolutePath('res/light/eye-off-fade.svg'),
+        dark: this.ctx.asAbsolutePath('res/dark/eye-off-fade.svg'),
       }
     }
-    return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+    return this.ctx.asAbsolutePath(`res/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
   }
 
   get contextValue () {

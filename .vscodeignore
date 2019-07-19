@@ -7,7 +7,7 @@ dist/test/**
 dist/**/*.map
 src/**
 screenshots/**
-samples/**
+examples/**
 test/**
 
 .gitignore

@@ -47,8 +47,8 @@ export class LocaleTreeItem extends TreeItem {
 
   getIcon (name: string) {
     return {
-      light: this.ctx.asAbsolutePath(`static/light/${name}.svg`),
-      dark: this.ctx.asAbsolutePath(`static/dark/${name}.svg`),
+      light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
+      dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
     }
   }
 
@@ -57,11 +57,11 @@ export class LocaleTreeItem extends TreeItem {
       return this.getIcon('loading')
 
     if (this.node.type === 'record') {
-      return this.ctx.asAbsolutePath(`static/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+      return this.ctx.asAbsolutePath(`res/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
     }
 
     else if (this.node.shadow) {
-      return this.ctx.asAbsolutePath('static/icon-unknown.svg')
+      return this.ctx.asAbsolutePath('res/icon-unknown.svg')
     }
     else if (this.node.type === 'tree') {
       return this.getIcon('namespace')

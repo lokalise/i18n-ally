@@ -1,6 +1,0 @@
-{
-  "vue-i18n-ally.localesPaths": "lang",
-  "vue-i18n-ally.keystyle": "flat",
-  "vue-i18n-ally.matchRegex": "^package\\.([\\w-]*)\\.(json|ya?ml|js)",
-  "vue-i18n-ally.forceEnabled": true
-}

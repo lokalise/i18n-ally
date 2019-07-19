@@ -44,8 +44,8 @@ export class FeedbackItem extends TreeItem {
   ) {
     super(define.text)
     this.iconPath = {
-      light: ctx.asAbsolutePath(`static/light/${define.icon}.svg`),
-      dark: ctx.asAbsolutePath(`static/dark/${define.icon}.svg`),
+      light: ctx.asAbsolutePath(`res/light/${define.icon}.svg`),
+      dark: ctx.asAbsolutePath(`res/dark/${define.icon}.svg`),
     }
     if (define.desc)
       this.tooltip = define.desc

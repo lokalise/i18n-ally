@@ -5,5 +5,5 @@ node_modules
 *.vsix
 .DS_Store
 
-samples/**/.vscode
-samples/**/package-lock.json
+examples/**/.vscode
+examples/**/package-lock.json
