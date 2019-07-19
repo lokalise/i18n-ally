@@ -1,16 +1,18 @@
 <template>
   <div :class="$style.about">
-    <p>{{ $t('about.text')}}</p>
+    <p>{{ $t('about.text') }}</p>
     <p :class="$style.back">
-      <router-link :to="{name:'todos'}">{{ $t('about.link') }}</router-link>
+      <router-link :to="{name:'todos'}">
+        {{ $t('about.link') }}
+      </router-link>
     </p>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'About'
-  };
+export default {
+  name: 'About',
+}
 </script>
 
 <style lang="stylus" module>

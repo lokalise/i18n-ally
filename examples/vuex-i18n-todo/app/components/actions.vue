@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.actions">
-
     <div v-if="anyTodos" :class="$style.indicator">
       {{ $t('todos.indicator', {count: activeTodos.length}, activeTodos.length) }}
     </div>
@@ -28,22 +27,22 @@
 
 <script>
 
-  import Localizer from './localizer.vue';
+import Localizer from './localizer.vue'
 
-  export default {
-    name: 'Actions',
-    components: { Localizer },
-    computed: {
-      anyTodos() {
-        return this.$store.state.todos.length > 0;
-      },
-      activeTodos() {
-        return this.$store.state.todos.filter((todo) => {
-          return todo.status === 'active';
-        });
-      }
-    }
-  };
+export default {
+  name: 'Actions',
+  components: { Localizer },
+  computed: {
+    anyTodos () {
+      return this.$store.state.todos.length > 0
+    },
+    activeTodos () {
+      return this.$store.state.todos.filter((todo) => {
+        return todo.status === 'active'
+      })
+    },
+  },
+}
 </script>
 
 <style lang="stylus" module>

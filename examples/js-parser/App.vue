@@ -8,13 +8,12 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: 'app',
+  name: 'App',
 
   computed: {
-    foobar() {
+    foobar () {
       return this.$t('nested.foo.bar')
     },
   },
