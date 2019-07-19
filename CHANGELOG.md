@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.27.1](https://github.com/antfu/vue-i18n-ally/compare/v0.27.0...v0.27.1) (2019-07-19)
+
+
+### 🐞 Bug Fixes
+
+* hyphen and space inside keypath, fix [#60](https://github.com/antfu/vue-i18n-ally/issues/60) ([6f8d99b](https://github.com/antfu/vue-i18n-ally/commit/6f8d99b))
+* support jsx tsx json5 mjs ([9601737](https://github.com/antfu/vue-i18n-ally/commit/9601737))
+
+
+### 📚 Documentations
+
+* **readme:** update readme ([ba51b89](https://github.com/antfu/vue-i18n-ally/commit/ba51b89))
+
+
+### 🔮 Refactor
+
+* extract default vars to meta ([088cf7a](https://github.com/antfu/vue-i18n-ally/commit/088cf7a))
+* extract log from Global ([2bbe1c4](https://github.com/antfu/vue-i18n-ally/commit/2bbe1c4))
+
+
+
 ## [0.27.0](https://github.com/antfu/vue-i18n-ally/compare/v0.26.0...v0.27.0) (2019-07-18)
 
 
