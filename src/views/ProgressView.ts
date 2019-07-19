@@ -64,8 +64,8 @@ export class ProgressItem extends TreeItem {
 }
 
 export class ProgressProvider implements TreeDataProvider<ProgressItem> {
-  private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>();
-  readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event;
+  private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>()
+  readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event
   private loader: LocaleLoader
 
   constructor (

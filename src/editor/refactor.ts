@@ -8,7 +8,7 @@ export class Refactor implements CodeActionProvider {
   public static readonly providedCodeActionKinds = [
     CodeActionKind.Refactor,
     CodeActionKind.QuickFix,
-  ];
+  ]
 
   public provideCodeActions (document: TextDocument, { start }: Range): CodeAction[] | undefined {
     const keyInfo = KeyDetector.getKeyAndRange(document, start)

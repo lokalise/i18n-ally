@@ -369,7 +369,8 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "0.2.0",
+    "@antfu/eslint-config-ts": "0.2.2",
+    "@antfu/eslint-config-vue": "0.2.1",
     "@types/js-yaml": "3.12.1",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/json5": "0.0.30",

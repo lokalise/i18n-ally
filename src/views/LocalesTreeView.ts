@@ -94,8 +94,8 @@ export class LocaleTreeItem extends TreeItem {
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   private loader: LocaleLoader
   private _flatten: boolean
-  private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>();
-  readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event;
+  private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>()
+  readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event
 
   constructor (
     private ctx: ExtensionContext,
