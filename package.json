@@ -318,6 +318,11 @@
           "type": "boolean",
           "default": false,
           "description": "%config.readonly%"
+        },
+        "vue-i18n-ally.experimental.sfc": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.sfc%"
         }
       }
     }

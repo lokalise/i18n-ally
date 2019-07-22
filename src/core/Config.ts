@@ -96,6 +96,10 @@ export class Config {
     return this.getConfig<boolean>('readonly') || false
   }
 
+  static get sfc (): boolean {
+    return this.getConfig<boolean>('experimental.sfc') || false
+  }
+
   static getMatchRegex (dirStructure = this.dirStructure): string {
     let regex = (this.getConfig('matchRegex')) as string
     if (!regex) {
