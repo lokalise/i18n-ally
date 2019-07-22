@@ -64,7 +64,10 @@ export class LocaleTreeItem extends TreeItem {
       return this.ctx.asAbsolutePath('res/icon-unknown.svg')
     }
     else if (this.node.type === 'tree') {
-      return this.getIcon('namespace')
+      if (this.node.isCollection)
+        return this.getIcon('collection')
+      else
+        return this.getIcon('namespace')
     }
     else if (this.node.type === 'node') {
       if (this.description)
