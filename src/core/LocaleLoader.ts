@@ -104,25 +104,32 @@ export class LocaleLoader extends Disposable {
       return node.locales
   }
 
+  splitKeypath (keypath: string): string[] {
+    return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
+  }
+
   getRecordByKey (keypath: string, locale: string, shadow = false): LocaleRecord | undefined {
     const trans = this.getTranslationsByKey(keypath, shadow)
     return trans[locale]
   }
 
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
+    const root = !tree
     tree = tree || this._localeTree
 
     // flatten style
-    let node = tree.children[keypath]
-    if (node)
-      return node
+    if (root) {
+      const node = tree.getChild(keypath)
+      if (node)
+        return node
+    }
 
     // tree style
-    const keys = keypath.split('.')
-    const root = keys[0]
+    const keys = this.splitKeypath(keypath)
+    const head = keys[0]
     const remaining = keys.slice(1).join('.')
-    node = tree.children[root]
-    if (!remaining)
+    const node = tree.getChild(head)
+    if (remaining === '')
       return node
     if (node && node.type === 'tree')
       return this.getTreeNodeByKey(remaining, node)
@@ -147,14 +154,18 @@ export class LocaleLoader extends Disposable {
         .replace(/"(\w+?)":/g, ' $1:')
         .replace(/}/, ' }')
 
-      if (clamp && maxlength && text.length > maxlength)
-        text = '{...}'
+      if (clamp && maxlength && text.length > maxlength) {
+        if (node.isCollection)
+          text = '[…]'
+        else
+          text = '{…}'
+      }
       return text
     }
     else {
       let value = node.getValue(locale)
       if (clamp && maxlength && value.length > maxlength)
-        value = `${value.substring(0, maxlength)}...`
+        value = `${value.substring(0, maxlength)}…`
       return value
     }
   }
@@ -171,10 +182,10 @@ export class LocaleLoader extends Disposable {
 
   getClosestNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     tree = tree || this._localeTree
-    const keys = keypath.split('.')
+    const keys = this.splitKeypath(keypath)
     const root = keys[0]
     const remaining = keys.slice(1).join('.')
-    const node = tree.children[root]
+    const node = tree.getChild(root)
 
     if (node) {
       // end of the search
@@ -475,35 +486,50 @@ export class LocaleLoader extends Disposable {
 
   private updateLocalesTree () {
     this._flattenLocaleTree = {}
-    const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree) => {
-      tree = tree || new LocaleTree({ keypath })
+    const subTree = (object: object, keypath: string, keyname: string, file: ParsedFile, tree?: LocaleTree, isCollection = false) => {
+      tree = tree || new LocaleTree({ keypath, keyname, isCollection })
       tree.values[file.locale] = object
       for (const [key, value] of Object.entries(object)) {
-        const newKeyPath = keypath ? `${keypath}.${key}` : key
+        const newKeyPath = keypath
+          ? (isCollection
+            ? `${keypath}[${key}]`
+            : `${keypath}.${key}`)
+          : (isCollection
+            ? `[${key}]`
+            : key)
 
         // should go nested
+        if (_.isArray(value)) {
+          let originalTree: LocaleTree|undefined
+          if (tree.getChild(key) && tree.getChild(key).type === 'tree')
+            originalTree = tree.getChild(key) as LocaleTree
+
+          tree.setChild(key, subTree(value, newKeyPath, key, file, originalTree, true))
+          continue
+        }
+
         if (_.isObject(value)) {
           let originalTree: LocaleTree|undefined
-          if (tree.children[key] && tree.children[key].type === 'tree')
-            originalTree = tree.children[key] as LocaleTree
+          if (tree.getChild(key) && tree.getChild(key).type === 'tree')
+            originalTree = tree.getChild(key) as LocaleTree
 
-          tree.children[key] = subTree(value, newKeyPath, key, file, originalTree)
+          tree.setChild(key, subTree(value, newKeyPath, key, file, originalTree))
           continue
         }
 
         // init node
-        if (!tree.children[key]) {
+        if (!tree.getChild(key)) {
           const node = new LocaleNode({
             keypath: newKeyPath,
             keyname: key,
             readonly: file.readonly,
           })
-          tree.children[key] = node
+          tree.setChild(key, node)
           this._flattenLocaleTree[node.keypath] = node
         }
 
         // add locales to exitsing node
-        const node = tree.children[key]
+        const node = tree.getChild(key)
         if (node.type === 'node') {
           node.locales[file.locale] = new LocaleRecord({
             keypath: newKeyPath,

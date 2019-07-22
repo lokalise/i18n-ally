@@ -17,9 +17,9 @@
     <p>{{ $n(100, 'currency', 'ja-JP') }}</p>
 
     <!-- Directive localization -->
-    <p v-t="'nested.hello'"></p>
-    <p v-t='"nested.greeting"'></p>
-    <p v-t='invalid'></p>
+    <p v-t="'nested.hello'" />
+    <p v-t="&quot;nested.greeting&quot;" />
+    <p v-t="invalid" />
 
     <!-- Component interpolation -->
     <i18n path="term" tag="label" for="tos">
@@ -28,26 +28,24 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: 'app',
+  name: 'App',
+
+  data: () => ({
+    invalid: 'invalid',
+  }),
 
   computed: {
-    foobar() {
+    foobar () {
       return this.$t('nested.foo.bar')
     },
-    exists() {
+    exists () {
       return this.$te('nested.foo.bar')
     },
   },
-
-  data: () => ({
-    invalid: 'invalid'
-  })
 }
 </script>
-
 
 <i18n>
 {

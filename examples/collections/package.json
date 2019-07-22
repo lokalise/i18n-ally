@@ -1,0 +1,9 @@
+{
+  "name": "collections",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.11.2"
+  }
+}

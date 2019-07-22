@@ -1,5 +1,5 @@
 <template>
-  <div @click="$emit('click', $event)" :class="$style.icon">
+  <div :class="$style.icon" @click="$emit('click', $event)">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
       <circle cy="12.5" cx="12.5" r="8" stroke-width="2" :class="$style.outline" />
       <circle v-if="done" cy="12.5" cx="12.5" r="5" :class="$style.fill" />
@@ -8,15 +8,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'Icon',
-    props: {
-      done: {
-        type: Boolean,
-        default: false
-      }
-    }
-  };
+export default {
+  name: 'Icon',
+  props: {
+    done: {
+      type: Boolean,
+      default: false,
+    },
+  },
+}
 </script>
 
 <style lang="stylus" module>

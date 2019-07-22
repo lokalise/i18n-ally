@@ -1,12 +1,12 @@
 <template>
-  <div :class="$style.intro" v-html="$t('intro.text')">
-  </div>
+  <!-- eslint-disable-next-line vue/no-v-html -->
+  <div :class="$style.intro" v-html="$t('intro.text')" />
 </template>
 
 <script>
-  export default {
-    name: 'Intro'
-  };
+export default {
+  name: 'Intro',
+}
 </script>
 
 <style lang="stylus" module>

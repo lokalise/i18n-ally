@@ -1,28 +1,20 @@
 import Vue from 'vue'
 
-// use vuex for state management
 import Vuex from 'vuex'
 
-// initilialize a new vuex store
-import state from './store/state'
-import mutations from './store/mutations'
-import actions from './store/actions'
-
-// initialize the vuex-i18 module
 import vuexI18n from 'vuex-i18n'
 
-// import predefined localizations
 import translationsEn from 'i18n/en.json'
 import translationsDe from 'i18n/de.json'
 
-// use vue-router for navigation
 import Router from 'vue-router'
+import { sync } from 'vuex-router-sync'
 import routes from './routes.js'
 
-// synchronize the router with vuex
-import { sync } from 'vuex-router-sync'
+import actions from './store/actions'
+import mutations from './store/mutations'
+import state from './store/state'
 
-// import the main app component
 import App from './app.vue'
 Vue.use(Vuex)
 

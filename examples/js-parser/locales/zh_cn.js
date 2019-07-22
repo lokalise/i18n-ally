@@ -1,4 +1,4 @@
 // export as async function
 export default async () => ({
-  hello: '你好'
+  hello: '你好',
 })

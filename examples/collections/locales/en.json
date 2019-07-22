@@ -1,0 +1,15 @@
+{
+  "key1": "this is message1",
+  "nested": {
+    "message1": "this is nested message1"
+  },
+  "errors": [
+    "this is 0 error code message",
+    {
+      "internal1": "this is internal 1 error message"
+    },
+    [
+      "this is nested array error 1"
+    ]
+  ]
+}
