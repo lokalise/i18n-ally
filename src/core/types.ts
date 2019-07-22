@@ -29,8 +29,9 @@ export interface ILocaleNode extends INode {
 }
 
 export interface ILocaleTree extends INode {
-  children?: Record<string, LocaleTree | LocaleNode>
+  children?: Record<string | number, LocaleTree | LocaleNode>
   values?: Record<string, object>
+  isCollection?: boolean
 }
 
 abstract class BaseNode implements INode {
@@ -83,13 +84,33 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
 export class LocaleTree extends BaseNode implements ILocaleTree {
   readonly type: 'tree' = 'tree'
 
-  readonly children: Record<string, LocaleTree|LocaleNode>
+  readonly children: Record<string | number, LocaleTree|LocaleNode>
   readonly values: Record<string, object>
+  readonly isCollection: boolean
 
   constructor (data: ILocaleTree) {
     super(data)
     this.children = data.children || {}
     this.values = data.values || {}
+    this.isCollection = data.isCollection || false
+  }
+
+  getChild (key: string) {
+    let child = this.children[key]
+    if (!child && this.isCollection) {
+      const index = parseInt(key)
+      if (!isNaN(index))
+        child = this.children[index]
+    }
+    return child
+  }
+
+  setChild (key: string, value: LocaleTree|LocaleNode) {
+    const index = parseInt(key)
+    if (!isNaN(index))
+      this.children[index] = value
+    else
+      this.children[key] = value
   }
 }
 
