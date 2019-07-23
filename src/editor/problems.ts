@@ -3,7 +3,7 @@ import { Global, KeyDetector, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
 import i18n from '../i18n'
-import { BaseLoader } from '../core/BaseLoader'
+import { Loader } from '../core/loaders/Loader'
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -20,7 +20,7 @@ export class ProblemProvider {
       return
 
     const locale = Config.displayLanguage
-    const loader: BaseLoader = Global.loader // TODO:sfc
+    const loader: Loader = Global.loader // TODO:sfc
 
     if (document) {
       const problems: Diagnostic[] = []

@@ -3,16 +3,16 @@ import * as path from 'path'
 import * as _ from 'lodash'
 import { workspace, window, EventEmitter, WorkspaceEdit } from 'vscode'
 import * as fg from 'fast-glob'
-import { replaceLocalePath, normalizeLocale, Log } from '../utils'
-import i18n from '../i18n'
-import { Analyst } from '../analysis/Analyst'
-import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from './types'
-import { AllyError, ErrorType } from './Errors'
-import { Translator } from './Translator'
-import { BaseLoader } from './BaseLoader'
-import { Global, Config } from '.'
+import { replaceLocalePath, normalizeLocale, Log } from '../../utils'
+import i18n from '../../i18n'
+import { Analyst } from '../../analysis/Analyst'
+import { LocaleTree, ParsedFile, FlattenLocaleTree, Coverage, LocaleNode, LocaleRecord, PendingWrite } from '../types'
+import { AllyError, ErrorType } from '../Errors'
+import { Translator } from '../Translator'
+import { Loader } from './Loader'
+import { Global, Config } from '..'
 
-export class LocaleLoader extends BaseLoader {
+export class LocaleLoader extends Loader {
   private _onDidChange = new EventEmitter<undefined>()
 
   readonly onDidChange = this._onDidChange.event

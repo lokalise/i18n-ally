@@ -1,9 +1,9 @@
 import { Disposable } from 'vscode'
-import { Log } from '../utils'
-import { LocaleTree, LocaleNode, LocaleRecord } from './types'
-import { Config, Global } from '.'
+import { Log } from '../../utils'
+import { LocaleTree, LocaleNode, LocaleRecord } from '../types'
+import { Config, Global } from '..'
 
-export abstract class BaseLoader extends Disposable {
+export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
 
   constructor (

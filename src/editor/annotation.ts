@@ -1,6 +1,6 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
-import { Global, KeyDetector, Config, BaseLoader } from '../core'
+import { Global, KeyDetector, Config, Loader } from '../core'
 import { ExtensionModule } from '../modules'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
@@ -18,7 +18,7 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
-    const loader: BaseLoader = Global.loader // TODO:sfc
+    const loader: Loader = Global.loader // TODO:sfc
     const document = activeTextEditor.document
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []

@@ -1,9 +1,10 @@
 import { extname } from 'path'
 import { workspace, Uri } from 'vscode'
 import { parse, HTMLElement } from 'node-html-parser'
-import { BaseLoader } from './BaseLoader'
-import { LocaleTree } from './types'
-import { Global } from './Global'
+import { Log } from '../../utils'
+import { LocaleTree } from '../types'
+import { Global } from '../Global'
+import { Loader } from './Loader'
 
 interface Section {
   lang: string
@@ -17,13 +18,15 @@ interface ParseredSection extends Section{
   data: any
 }
 
-export class SFCLoader extends BaseLoader {
+export class SFCLoader extends Loader {
   _root: LocaleTree = new LocaleTree({ keypath: '' })
 
   constructor (
-    public readonly filepath: string
+    public readonly uri: Uri
   ) {
-    super(`[SFC]${filepath}`)
+    super(`[SFC]${uri.fsPath}`)
+
+    this.load()
   }
 
   private getSections (text: string): Section[] {
@@ -65,7 +68,9 @@ export class SFCLoader extends BaseLoader {
   _parsedSections: ParseredSection[] = []
 
   async load () {
-    const doc = await workspace.openTextDocument(Uri.file(this.filepath))
+    Log.info(`📑 Loading sfc ${this.uri.fsPath}`)
+    this._parsedSections = []
+    const doc = await workspace.openTextDocument(this.uri)
     const sections = this.getSections(doc.getText())
     for (const section of sections) {
       const data = await this.loadSection(section)
@@ -85,6 +90,6 @@ export class SFCLoader extends BaseLoader {
   }
 
   getShadowFilePath (keypath: string, locale: string) {
-    return this.filepath
+    return this.uri.fsPath
   }
 }

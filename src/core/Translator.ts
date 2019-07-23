@@ -2,11 +2,10 @@ import { EventEmitter } from 'vscode'
 import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { Log } from '../utils'
-import { LocaleLoader } from './LocaleLoader'
 import { AllyError, ErrorType } from './Errors'
 import { Global } from './Global'
 import { LocaleTree } from './types'
-import { LocaleNode, LocaleRecord, Config } from '.'
+import { LocaleLoader, LocaleNode, LocaleRecord, Config } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string

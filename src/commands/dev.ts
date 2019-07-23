@@ -1,7 +1,7 @@
 import { commands, window } from 'vscode'
 import { Commands } from '../core'
 import { ExtensionModule } from '../modules'
-import { SFCLoader } from '../core/SfcLoader'
+import { SFCLoader } from '../core/loaders/SfcLoader'
 
 const m: ExtensionModule = (ctx) => {
   return [
@@ -12,7 +12,7 @@ const m: ExtensionModule = (ctx) => {
           return
         if (editor.document.languageId !== 'vue')
           return
-        const loader = new SFCLoader(editor.document.uri.fsPath)
+        const loader = new SFCLoader(editor.document.uri)
         loader.load()
       }),
   ]
