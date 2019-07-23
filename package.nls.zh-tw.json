@@ -24,6 +24,7 @@
   "config.keystyle": "翻譯路徑格式",
   "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)，你也可以使用Glob匹配模式。",
   "config.match_regex": "匹配語言環境文件名的正規運算式字串（返回結果的第一個群組應是語言代碼）",
+  "config.preferred_delimiter": "組合鍵路徑的首選分隔符，默認為“ - ”（短劃線）",
   "config.readonly": "唯讀模式",
   "config.sort_keys": "儲存已排序的JSON/YAML",
   "config.source_language": "翻譯源語言",

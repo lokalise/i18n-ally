@@ -314,6 +314,11 @@
           "default": false,
           "description": "%config.sort_keys%"
         },
+        "vue-i18n-ally.preferredDelimiter": {
+          "type": "string",
+          "default": "-",
+          "description": "%config.preferred_delimiter%"
+        },
         "vue-i18n-ally.readonly": {
           "type": "boolean",
           "default": false,

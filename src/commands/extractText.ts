@@ -11,7 +11,7 @@ const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
     async (options: ExtractTextOptions) => {
       const { filepath, text, range } = options
-      const default_keypath = limax(text) as string
+      const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
 
       // prompt for keypath
       const keypath = await window.showInputBox({

@@ -27,6 +27,7 @@
   "config.readonly": "Readonly mode",
   "config.sort_keys": "Save with sorted json/yaml",
   "config.source_language": "Source language for machine translation",
+  "config.preferred_delimiter": "Preferred delimiter of composed keypath, default to \"-\"(dash)",
   "extname": "Vue i18n Ally",
   "feedback.document": "Read Documentation",
   "feedback.github": "Star on Github",
