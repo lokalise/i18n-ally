@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<i18n>
+<i18n locale='en'>
 {
   "en": {
     "hello": "hello world!"

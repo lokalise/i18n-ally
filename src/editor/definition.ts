@@ -9,7 +9,7 @@ class DefinitionProvider {
     if (!key)
       return []
 
-    const filepath = Global.loader.getFilepathByKey(key)
+    const filepath = Global.loader.getFilepathByKey(key) // TODO:sfc
     if (!filepath)
       return []
 

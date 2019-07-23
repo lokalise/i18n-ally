@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { Global, KeyDetector } from '../core'
+import { Global, KeyDetector, BaseLoader } from '../core'
 import { ExtensionModule } from '../modules'
 import { LANG_SELECTORS } from '../meta'
 
@@ -11,12 +11,13 @@ class CompletionProvider implements vscode.CompletionItemProvider {
     if (!Global.enabled)
       return
 
+    const loader: BaseLoader = Global.loader // TODO:sfc
     let key = KeyDetector.getKey(document, position)
     if (!key || !/\.$/.test(key))
       return
 
     key = key.slice(0, -1)
-    const trans = Global.loader.getTreeNodeByKey(key)
+    const trans = loader.getTreeNodeByKey(key)
 
     if (!trans || trans.type !== 'tree')
       return

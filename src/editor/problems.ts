@@ -3,6 +3,7 @@ import { Global, KeyDetector, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
 import i18n from '../i18n'
+import { BaseLoader } from '../core/BaseLoader'
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -19,6 +20,7 @@ export class ProblemProvider {
       return
 
     const locale = Config.displayLanguage
+    const loader: BaseLoader = Global.loader // TODO:sfc
 
     if (document) {
       const problems: Diagnostic[] = []
@@ -26,7 +28,7 @@ export class ProblemProvider {
       const keys = KeyDetector.getKeys(document)
       // get all keys of current file
       keys.forEach(({ key, start, end }) => {
-        const text = Global.loader.getValueByKey(key, locale)
+        const text = loader.getValueByKey(key, locale)
         if (text)
           return
 

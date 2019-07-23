@@ -145,7 +145,7 @@ export class Global {
   }
 
   static getMatchedParser (ext: string) {
-    if (!ext.startsWith('.'))
+    if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
     return this.parsers.find(parser => parser.supports(ext))
   }

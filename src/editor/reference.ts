@@ -13,7 +13,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return []
 
-    return await Global.loader.analyst.getAllOccurrenceLocations(key)
+    return await Global.loader.analyst.getAllOccurrenceLocations(key) // TODO:sfc
   }
 
   prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
@@ -33,7 +33,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return
 
-    return await Global.loader.renameKey(key, newName)
+    return await Global.loader.renameKey(key, newName) // TODO:sfc
   }
 
   constructor (public readonly ctx: ExtensionContext) {}

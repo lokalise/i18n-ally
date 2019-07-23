@@ -156,7 +156,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
 
     const nodes = this.flatten
       ? Object.values(this.loader.flattenLocaleTree)
-      : Object.values(this.loader.localeTree.children)
+      : Object.values(this.loader.root.children)
 
     const items = nodes
       .filter(node => this.filter(node, true))

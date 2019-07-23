@@ -1,6 +1,6 @@
 import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
 import { debounce } from 'lodash'
-import { Global, KeyDetector, Config } from '../core'
+import { Global, KeyDetector, Config, BaseLoader } from '../core'
 import { ExtensionModule } from '../modules'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
@@ -18,6 +18,7 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
+    const loader: BaseLoader = Global.loader // TODO:sfc
     const document = activeTextEditor.document
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []
@@ -35,10 +36,10 @@ const annotation: ExtensionModule = (ctx) => {
       if (Config.annotations) {
         let missing = false
 
-        let text = Global.loader.getValueByKey(key)
+        let text = loader.getValueByKey(key)
         // fallback to source
         if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-          text = Global.loader.getValueByKey(key, Config.sourceLanguage)
+          text = loader.getValueByKey(key, Config.sourceLanguage)
           missing = true
         }
 
