@@ -1,5 +1,5 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
-import { KeyDetector, Commands, Global, Config, Loader } from '../core'
+import { KeyDetector, Commands, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { LANG_SELECTORS } from '../meta'
 import i18n from '../i18n'
@@ -19,7 +19,7 @@ export class Refactor implements CodeActionProvider {
 
     const actions = []
 
-    const loader: Loader = Global.loader // TODO:sfc
+    const loader: Loader = CurrentFile.loader
 
     const records = loader.getTranslationsByKey(key)
     if (!records[Config.displayLanguage] || !records[Config.displayLanguage].value) {

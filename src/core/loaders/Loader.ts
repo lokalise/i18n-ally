@@ -1,10 +1,23 @@
-import { Disposable } from 'vscode'
+import { Disposable, EventEmitter } from 'vscode'
+import _ from 'lodash'
 import { Log } from '../../utils'
-import { LocaleTree, LocaleNode, LocaleRecord } from '../types'
+import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage } from '../types'
 import { Config, Global } from '..'
+
+export interface NodeOptions{
+  locale: string
+  readonly?: boolean
+  filepath: string
+  sfc?: boolean
+}
 
 export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
+  protected _onDidChange = new EventEmitter<undefined>()
+  readonly onDidChange = this._onDidChange.event
+
+  protected _flattenLocaleTree: FlattenLocaleTree = {}
+  protected _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
 
   constructor (
     public readonly name: string
@@ -12,19 +25,99 @@ export abstract class Loader extends Disposable {
     super(() => this.onDispose())
   }
 
-  protected onDispose () {
-    Log.info(`🗑 Disposing loader "${this.name}"`)
-    this._disposables.forEach(d => d.dispose())
-    this._disposables = []
-  }
-
-  abstract get root(): LocaleTree
   abstract get locales(): string[]
 
   abstract getShadowFilePath(keypath: string, locale: string): string | undefined
 
+  get root () {
+    return this._localeTree
+  }
+
+  get flattenLocaleTree () {
+    return this._flattenLocaleTree
+  }
+
   splitKeypath (keypath: string): string[] {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
+  }
+
+  getCoverage (locale: string, keys?: string[]): Coverage | undefined {
+    keys = keys || Object.keys(this._flattenLocaleTree)
+    const total = keys.length
+    const translated = keys.filter((key) => {
+      return this._flattenLocaleTree[key] && this._flattenLocaleTree[key].getValue(locale)
+    })
+    return {
+      locale,
+      total,
+      translated: translated.length,
+      keys,
+    }
+  }
+
+  protected updateTree (tree: LocaleTree | undefined, data: any, keypath: string, keyname: string, options: NodeOptions, isCollection = false) {
+    tree = tree || new LocaleTree({
+      keypath,
+      keyname,
+      isCollection,
+      sfc: options.sfc,
+    })
+    tree.values[options.locale] = data
+    for (const [key, value] of Object.entries(data)) {
+      const newKeyPath = keypath
+        ? (isCollection
+          ? `${keypath}[${key}]`
+          : `${keypath}.${key}`)
+        : (isCollection
+          ? `[${key}]`
+          : key)
+
+      // should go nested
+      if (_.isArray(value)) {
+        let subtree: LocaleTree|undefined
+        if (tree.getChild(key) && tree.getChild(key).type === 'tree')
+          subtree = tree.getChild(key) as LocaleTree
+
+        tree.setChild(key, this.updateTree(subtree, value, newKeyPath, key, options, true))
+        continue
+      }
+
+      if (_.isObject(value)) {
+        let subtree: LocaleTree|undefined
+        if (tree.getChild(key) && tree.getChild(key).type === 'tree')
+          subtree = tree.getChild(key) as LocaleTree
+
+        tree.setChild(key, this.updateTree(subtree, value, newKeyPath, key, options))
+        continue
+      }
+
+      // init node
+      if (!tree.getChild(key)) {
+        const node = new LocaleNode({
+          keypath: newKeyPath,
+          keyname: key,
+          readonly: options.readonly,
+          sfc: options.sfc,
+        })
+        tree.setChild(key, node)
+        this._flattenLocaleTree[node.keypath] = node
+      }
+
+      // add locales to exitsing node
+      const node = tree.getChild(key)
+      if (node.type === 'node') {
+        node.locales[options.locale] = new LocaleRecord({
+          keypath: newKeyPath,
+          keyname: key,
+          value: `${value}`,
+          locale: options.locale,
+          filepath: options.filepath,
+          sfc: options.sfc,
+          readonly: options.readonly,
+        })
+      }
+    }
+    return tree
   }
 
   getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
@@ -47,6 +140,14 @@ export abstract class Loader extends Disposable {
       return node
     if (node && node.type === 'tree')
       return this.getTreeNodeByKey(remaining, node)
+    return undefined
+  }
+
+  getFilepathByKey (key: string, locale?: string) {
+    locale = locale || Config.displayLanguage
+    const record = this.getRecordByKey(key, locale)
+    if (record && record.filepath)
+      return record.filepath
     return undefined
   }
 
@@ -134,5 +235,11 @@ export abstract class Loader extends Disposable {
         }
       })
     return locales
+  }
+
+  protected onDispose () {
+    Log.info(`🗑 Disposing loader "${this.name}"`)
+    this._disposables.forEach(d => d.dispose())
+    this._disposables = []
   }
 }

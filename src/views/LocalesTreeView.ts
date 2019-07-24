@@ -1,8 +1,9 @@
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { sortBy } from 'lodash'
-import { Global, LocaleLoader, Node } from '../core'
+import { Global, Node, Loader } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale, NodeHelper } from '../utils'
+import { CurrentFile } from '../core/CurrentFile'
 
 export class LocaleTreeItem extends TreeItem {
   constructor (
@@ -95,7 +96,7 @@ export class LocaleTreeItem extends TreeItem {
 }
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
-  private loader: LocaleLoader
+  protected loader: Loader
   private _flatten: boolean
   private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>()
   readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event
@@ -106,11 +107,8 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     flatten = false,
   ) {
     this._flatten = flatten
-    this.loader = Global.loader
-    Global.onDidChangeLoader((loader) => {
-      this.loader = loader
-      this.refresh()
-    })
+    this.loader = CurrentFile.loader
+    this.loader.onDidChange(() => this.refresh())
   }
 
   protected refresh (): void {

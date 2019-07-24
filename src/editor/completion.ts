@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { Global, KeyDetector, Loader } from '../core'
+import { Global, KeyDetector, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { LANG_SELECTORS } from '../meta'
 
@@ -11,7 +11,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
     if (!Global.enabled)
       return
 
-    const loader: Loader = Global.loader // TODO:sfc
+    const loader: Loader = CurrentFile.loader
     let key = KeyDetector.getKey(document, position)
     if (!key || !/\.$/.test(key))
       return

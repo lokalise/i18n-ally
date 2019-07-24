@@ -1,9 +1,8 @@
-import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace } from 'vscode'
-import { Global, KeyDetector, Config } from '../core'
+import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace, Uri } from 'vscode'
+import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
 import i18n from '../i18n'
-import { Loader } from '../core/loaders/Loader'
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -20,10 +19,11 @@ export class ProblemProvider {
       return
 
     const locale = Config.displayLanguage
-    const loader: Loader = Global.loader // TODO:sfc
+    const loader: Loader = CurrentFile.loader
 
     if (document) {
       const problems: Diagnostic[] = []
+      this.collection.delete(document.uri)
 
       const keys = KeyDetector.getKeys(document)
       // get all keys of current file
@@ -49,6 +49,10 @@ export class ProblemProvider {
   clear () {
     this.collection.clear()
   }
+
+  clearUri (uri: Uri) {
+    this.collection.delete(uri)
+  }
 }
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
@@ -58,16 +62,11 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
     provider.update(window.activeTextEditor.document)
 
   return [
-    window.onDidChangeActiveTextEditor((editor) => {
-      if (editor)
-        provider.update(editor.document)
-      else
-        provider.clear()
-    }),
-    workspace.onDidChangeConfiguration(() => {
+    CurrentFile.loader.onDidChange(() => {
       if (window.activeTextEditor)
         provider.update(window.activeTextEditor.document)
     }),
+    workspace.onDidCloseTextDocument(e => provider.clearUri(e.uri)),
   ]
 }
 

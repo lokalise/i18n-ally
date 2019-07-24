@@ -1,5 +1,5 @@
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
-import { Global, KeyDetector, Commands, Loader } from '../core'
+import { Global, KeyDetector, Commands, Loader, CurrentFile } from '../core'
 import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
 import { LANG_SELECTORS } from '../meta'
 import { ExtensionModule } from '../modules'
@@ -20,7 +20,7 @@ class HintProvider implements HoverProvider {
     if (!keypath)
       return
 
-    const loader: Loader = Global.loader // TODO: sfc
+    const loader: Loader = CurrentFile.loader
 
     let node = loader.getTreeNodeByKey(keypath)
     if (!node)

@@ -4,7 +4,7 @@ import { parse, HTMLElement } from 'node-html-parser'
 import { Log } from '../../utils'
 import { LocaleTree } from '../types'
 import { Global } from '../Global'
-import { Loader } from './Loader'
+import { Loader, NodeOptions } from './Loader'
 
 interface Section {
   lang: string
@@ -19,8 +19,6 @@ interface ParseredSection extends Section{
 }
 
 export class SFCLoader extends Loader {
-  _root: LocaleTree = new LocaleTree({ keypath: '' })
-
   constructor (
     public readonly uri: Uri
   ) {
@@ -74,19 +72,47 @@ export class SFCLoader extends Loader {
     const sections = this.getSections(doc.getText())
     for (const section of sections) {
       const data = await this.loadSection(section)
-      if (data)
-        this._parsedSections.push({ ...section, data })
+      this._parsedSections.push({ ...section, data })
     }
-    // TODO: parser to tree
-    console.log(this._parsedSections)
+    this.updateLocalesTree()
+    this._onDidChange.fire()
   }
 
-  get root () {
-    return this._root
+  private getOptions (section: ParseredSection, locale: string): NodeOptions {
+    return {
+      filepath: section.src || this.uri.fsPath,
+      locale,
+      readonly: true, // TODO:sfc write
+      sfc: true,
+    }
+  }
+
+  _locales = new Set<string>()
+
+  private updateLocalesTree () {
+    this._flattenLocaleTree = {}
+    this._locales = new Set()
+
+    const tree = new LocaleTree({ keypath: '', sfc: true })
+    for (const section of this._parsedSections) {
+      if (!section.data)
+        continue
+      if (section.locale) {
+        this._locales.add(section.locale)
+        this.updateTree(tree, section.data, '', '', this.getOptions(section, section.locale))
+      }
+      else {
+        for (const [locale, value] of Object.entries(section.data)) {
+          this._locales.add(locale)
+          this.updateTree(tree, value, '', '', this.getOptions(section, locale))
+        }
+      }
+    }
+    this._localeTree = tree
   }
 
   get locales () {
-    return [] // TODO:
+    return Array.from(this._locales)
   }
 
   getShadowFilePath (keypath: string, locale: string) {
