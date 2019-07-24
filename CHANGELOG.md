@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0](https://github.com/antfu/vue-i18n-ally/compare/v0.27.1...v0.28.0) (2019-07-23)
+
+
+### ⚡ Features
+
+* collection support, close [#62](https://github.com/antfu/vue-i18n-ally/issues/62) ([deff789](https://github.com/antfu/vue-i18n-ally/commit/deff789))
+* new setting field "vue-i18n-ally.preferredDelimiter" ([96030d4](https://github.com/antfu/vue-i18n-ally/commit/96030d4))
+
+
+### 📚 Documentations
+
+* **exmples:** add collection example ([6058def](https://github.com/antfu/vue-i18n-ally/commit/6058def))
+
+
+
 ### [0.27.1](https://github.com/antfu/vue-i18n-ally/compare/v0.27.0...v0.27.1) (2019-07-19)
 
 

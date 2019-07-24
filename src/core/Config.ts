@@ -100,6 +100,10 @@ export class Config {
     return this.getConfig<boolean>('experimental.sfc') || false
   }
 
+  static get preferredDelimiter (): string {
+    return this.getConfig<string>('preferredDelimiter') || '-'
+  }
+
   static getMatchRegex (dirStructure = this.dirStructure): string {
     let regex = (this.getConfig('matchRegex')) as string
     if (!regex) {

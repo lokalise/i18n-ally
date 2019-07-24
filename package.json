@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 Better Vue i18n experiences with VS Code",
-  "version": "0.27.1",
+  "version": "0.28.0",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
@@ -317,6 +317,11 @@
           "type": "boolean",
           "default": false,
           "description": "%config.sort_keys%"
+        },
+        "vue-i18n-ally.preferredDelimiter": {
+          "type": "string",
+          "default": "-",
+          "description": "%config.preferred_delimiter%"
         },
         "vue-i18n-ally.readonly": {
           "type": "boolean",
