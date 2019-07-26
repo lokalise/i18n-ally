@@ -8,24 +8,17 @@ import i18n from '../../i18n'
 import { Analyst } from '../../analysis/Analyst'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite } from '../types'
 import { AllyError, ErrorType } from '../Errors'
-import { Translator } from '../Translator'
 import { Loader } from './Loader'
 import { Global, Config } from '..'
 
 export class LocaleLoader extends Loader {
-  readonly translator: Translator
-
   readonly analyst: Analyst
 
   private _files: Record<string, ParsedFile> = {}
 
   constructor (public readonly rootpath: string) {
     super(`[LOCALE]${rootpath}`)
-    this.translator = new Translator(this)
     this.analyst = new Analyst(this)
-    this._disposables.push(
-      this.translator.onDidChange(() => this._onDidChange.fire())
-    )
     this._disposables.push(
       this.analyst.watch()
     )

@@ -1,11 +1,15 @@
 import _ from 'lodash'
 import { Disposable } from 'vscode'
 import { LocaleNode, LocaleTree, FlattenLocaleTree } from '../types'
+import { Translator } from '../Translator'
 import { Loader } from './Loader'
 
 export class ComposedLoader extends Loader {
   constructor () {
     super('[Composed]')
+    this._disposables.push(
+      Translator.onDidChange(() => this._onDidChange.fire())
+    )
   }
 
   _loaders: Loader[] = []

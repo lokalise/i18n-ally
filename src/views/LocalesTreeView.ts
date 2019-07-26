@@ -1,9 +1,8 @@
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { sortBy } from 'lodash'
-import { Global, Node, Loader } from '../core'
+import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale, NodeHelper, Log } from '../utils'
-import { CurrentFile } from '../core/CurrentFile'
 
 export class LocaleTreeItem extends TreeItem {
   constructor (
@@ -54,7 +53,7 @@ export class LocaleTreeItem extends TreeItem {
   }
 
   get iconPath () {
-    if (Global.loader.translator.isTranslating(this.node))
+    if (Translator.isTranslating(this.node))
       return this.getIcon('loading')
 
     if (this.node.type === 'record') {

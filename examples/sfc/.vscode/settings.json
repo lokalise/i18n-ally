@@ -2,5 +2,5 @@
   "vue-i18n-ally.localesPaths": "locales",
   "vue-i18n-ally.keystyle": "nested",
   "vue-i18n-ally.experimental.sfc": true,
-  "vue-i18n-ally.sourceLanguage": "ja",
+  "vue-i18n-ally.sourceLanguage": "en",
 }

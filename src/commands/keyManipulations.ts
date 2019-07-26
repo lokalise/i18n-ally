@@ -5,6 +5,7 @@ import { ExtensionModule } from '../modules'
 import { decorateLocale, Log } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import i18n from '../i18n'
+import { Translator } from '../core/Translator'
 
 interface CommandOptions {
   keypath: string
@@ -61,7 +62,7 @@ const m: ExtensionModule = (ctx) => {
         const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
 
         try {
-          await Global.loader.translator.MachineTranslate(node, from) // TODO:sfc
+          await Translator.MachineTranslate(CurrentFile.loader, node, from) // TODO:sfc
         }
         catch (err) {
           Log.error(err.toString())
