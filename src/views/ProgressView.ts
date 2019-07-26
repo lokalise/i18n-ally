@@ -1,7 +1,7 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { unicodeProgressBar, decorateLocale, unicodeDecorate } from '../utils'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log } from '../utils'
 import { notEmpty } from '../utils/utils'
 
 export class ProgressItem extends TreeItem {
@@ -65,6 +65,7 @@ export class ProgressItem extends TreeItem {
 }
 
 export class ProgressProvider implements TreeDataProvider<ProgressItem> {
+  protected name = 'ProgressProvider'
   private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>()
   readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event
   private loader: Loader
@@ -73,8 +74,10 @@ export class ProgressProvider implements TreeDataProvider<ProgressItem> {
     private ctx: ExtensionContext,
   ) {
     this.loader = CurrentFile.loader
-    Global.onDidChangeLoader((loader) => {
-      this.loader = loader
+
+    let count = 0
+    this.loader.onDidChange((src) => {
+      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
       this.refresh()
     })
   }

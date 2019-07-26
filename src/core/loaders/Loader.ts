@@ -42,10 +42,10 @@ export abstract class Loader extends Disposable {
   }
 
   getCoverage (locale: string, keys?: string[]): Coverage | undefined {
-    keys = keys || Object.keys(this._flattenLocaleTree)
+    keys = keys || Object.keys(this.flattenLocaleTree)
     const total = keys.length
     const translated = keys.filter((key) => {
-      return this._flattenLocaleTree[key] && this._flattenLocaleTree[key].getValue(locale)
+      return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
     })
     return {
       locale,

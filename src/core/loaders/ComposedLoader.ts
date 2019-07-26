@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { Disposable } from 'vscode'
-import { LocaleNode, LocaleTree } from '../types'
+import { LocaleNode, LocaleTree, FlattenLocaleTree } from '../types'
 import { Loader } from './Loader'
 
 export class ComposedLoader extends Loader {
@@ -34,6 +34,16 @@ export class ComposedLoader extends Loader {
     return new LocaleTree({ keypath: '', children })
   }
 
+  get flattenLocaleTree (): FlattenLocaleTree {
+    const children: Record<string | number, LocaleNode> = {}
+    for (const loader of this._loaders) {
+      const loaderChildren = loader.flattenLocaleTree
+      for (const key of Object.keys(loaderChildren))
+        children[key] = loaderChildren[key]
+    }
+    return children
+  }
+
   get locales (): string[] {
     return _(this._loaders)
       .flatMap(l => l.locales)
@@ -60,14 +70,6 @@ export class ComposedLoader extends Loader {
   getFilepathByKey (keypath: string, locale?: string) {
     for (const loader of this._loaders.reverse()) {
       const value = loader.getFilepathByKey(keypath, locale)
-      if (value)
-        return value
-    }
-  }
-
-  getCoverage (locale: string, keys?: string[]) {
-    for (const loader of this._loaders.reverse()) {
-      const value = loader.getCoverage(locale, keys)
       if (value)
         return value
     }
