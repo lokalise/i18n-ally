@@ -20,7 +20,7 @@ export class LocaleLoader extends Loader {
   private _files: Record<string, ParsedFile> = {}
 
   constructor (public readonly rootpath: string) {
-    super(rootpath)
+    super(`[LOCALE]${rootpath}`)
     this.translator = new Translator(this)
     this.analyst = new Analyst(this)
     this._disposables.push(
@@ -331,7 +331,7 @@ export class LocaleLoader extends Loader {
 
   private update () {
     this.updateLocalesTree()
-    this._onDidChange.fire()
+    this._onDidChange.fire(this.name)
   }
 
   private async loadAll () {

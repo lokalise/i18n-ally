@@ -75,7 +75,7 @@ export class SFCLoader extends Loader {
       this._parsedSections.push({ ...section, data })
     }
     this.updateLocalesTree()
-    this._onDidChange.fire()
+    this._onDidChange.fire(this.name)
   }
 
   private getOptions (section: ParseredSection, locale: string): NodeOptions {

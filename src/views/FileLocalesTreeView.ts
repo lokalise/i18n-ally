@@ -5,6 +5,8 @@ import { isLanguageIdSupported } from '../meta'
 import { LocalesTreeProvider } from './LocalesTreeView'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
+  protected name = 'FileLocalesTreeProvider'
+
   constructor (
     ctx: ExtensionContext,
   ) {

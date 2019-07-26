@@ -19,9 +19,9 @@ export class ComposedLoader extends Loader {
     this._watchers.forEach(d => d.dispose())
     this._loaders = value
     this._watchers = this.loaders.map(loader =>
-      loader.onDidChange(() => this._onDidChange.fire())
+      loader.onDidChange(e => this._onDidChange.fire(`${e}+${this.name}`))
     )
-    this._onDidChange.fire()
+    // this._onDidChange.fire(this.name)
   }
 
   get root (): LocaleTree {

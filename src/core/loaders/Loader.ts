@@ -13,7 +13,7 @@ export interface NodeOptions{
 
 export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
-  protected _onDidChange = new EventEmitter<undefined>()
+  protected _onDidChange = new EventEmitter<string>()
   readonly onDidChange = this._onDidChange.event
 
   protected _flattenLocaleTree: FlattenLocaleTree = {}

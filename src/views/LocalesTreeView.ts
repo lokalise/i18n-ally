@@ -2,7 +2,7 @@ import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider,
 import { sortBy } from 'lodash'
 import { Global, Node, Loader } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale, NodeHelper } from '../utils'
+import { decorateLocale, NodeHelper, Log } from '../utils'
 import { CurrentFile } from '../core/CurrentFile'
 
 export class LocaleTreeItem extends TreeItem {
@@ -97,6 +97,7 @@ export class LocaleTreeItem extends TreeItem {
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   protected loader: Loader
+  protected name = 'LocalesTreeProvider'
   private _flatten: boolean
   private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>()
   readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event
@@ -108,7 +109,12 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   ) {
     this._flatten = flatten
     this.loader = CurrentFile.loader
-    this.loader.onDidChange(() => this.refresh())
+
+    let count = 0
+    this.loader.onDidChange((src) => {
+      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
+      this.refresh()
+    })
   }
 
   protected refresh (): void {
