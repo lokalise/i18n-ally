@@ -5,23 +5,16 @@ import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit } from 'vscode'
 import { replaceLocalePath, normalizeLocale, Log } from '../../utils'
 import i18n from '../../i18n'
-import { Analyst } from '../../analysis/Analyst'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite } from '../types'
 import { AllyError, ErrorType } from '../Errors'
 import { Loader } from './Loader'
-import { Global, Config } from '..'
+import { Analyst, Global, Config } from '..'
 
 export class LocaleLoader extends Loader {
-  readonly analyst: Analyst
-
   private _files: Record<string, ParsedFile> = {}
 
   constructor (public readonly rootpath: string) {
     super(`[LOCALE]${rootpath}`)
-    this.analyst = new Analyst(this)
-    this._disposables.push(
-      this.analyst.watch()
-    )
   }
 
   async init () {
@@ -149,7 +142,7 @@ export class LocaleLoader extends Loader {
   async renameKey (oldkey: string, newkey: string) {
     const edit = new WorkspaceEdit()
 
-    const locations = await this.analyst.getAllOccurrenceLocations(oldkey)
+    const locations = await Analyst.getAllOccurrenceLocations(oldkey)
 
     for (const location of locations)
       edit.replace(location.uri, location.range, newkey)

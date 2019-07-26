@@ -62,7 +62,7 @@ const m: ExtensionModule = (ctx) => {
         const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
 
         try {
-          await Translator.MachineTranslate(CurrentFile.loader, node, from) // TODO:sfc
+          await Translator.MachineTranslate(CurrentFile.loader, node, from)
         }
         catch (err) {
           Log.error(err.toString())

@@ -70,7 +70,7 @@ export class Translator {
         filepath: record.filepath,
         keypath: record.keypath,
       }
-      await Global.loader.writeToFile(pending)
+      await Global.loader.writeToFile(pending) // TODO:sfc
     }
     catch (e) {
       this.end(record.keypath, record.locale)

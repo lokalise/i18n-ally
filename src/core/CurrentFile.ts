@@ -3,7 +3,7 @@ import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
 import { SFCLoader } from './loaders/SfcLoader'
 import { Config } from './Config'
-import { Loader } from '.'
+import { Loader, Analyst } from '.'
 
 export class CurrentFile {
   static _sfc_loader: SFCLoader | null = null
@@ -16,6 +16,7 @@ export class CurrentFile {
       this.updateLoaders()
       this._composed_loader.fire('{Config}')
     }))
+    ctx.subscriptions.push(Analyst.watch())
     this.update(window.activeTextEditor && window.activeTextEditor.document.uri)
     if (!Config.sfc)
       this.updateLoaders()
