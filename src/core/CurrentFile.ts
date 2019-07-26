@@ -12,7 +12,10 @@ export class CurrentFile {
   static watch (ctx: ExtensionContext) {
     ctx.subscriptions.push(workspace.onDidSaveTextDocument(e => this.update(e.uri)))
     ctx.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.update(e && e.document.uri)))
-    ctx.subscriptions.push(Global.onDidChangeLoader(() => this.updateLoaders()))
+    ctx.subscriptions.push(Global.onDidChangeLoader(() => {
+      this.updateLoaders()
+      this._composed_loader.fire('{Config}')
+    }))
     this.update(window.activeTextEditor && window.activeTextEditor.document.uri)
     if (!Config.sfc)
       this.updateLoaders()

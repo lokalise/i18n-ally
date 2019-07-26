@@ -1,5 +1,4 @@
-import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
-import { debounce } from 'lodash'
+import { window, DecorationOptions, Range, Disposable } from 'vscode'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 
@@ -71,12 +70,8 @@ const annotation: ExtensionModule = (ctx) => {
     activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
-  const debounceUpdate = debounce(update, 500)
-
   const disposables: Disposable[] = []
-  disposables.push(window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions))
-  disposables.push(workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions))
-  disposables.push(Global.onDidChangeLoader(update))
+  disposables.push(CurrentFile.loader.onDidChange(() => update()))
 
   update()
 

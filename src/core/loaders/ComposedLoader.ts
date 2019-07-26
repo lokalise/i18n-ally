@@ -75,5 +75,9 @@ export class ComposedLoader extends Loader {
     }
   }
 
+  fire (src?: string) {
+    this._onDidChange.fire(src || this.name)
+  }
+
   // TODO:sfc merge tree nodes
 }
