@@ -5,16 +5,22 @@ All notable changes to this project will be documented in this file. See [standa
 ## [0.29.0](https://github.com/antfu/vue-i18n-ally/compare/v0.28.0...v0.29.0) (2019-07-29)
 
 
+## ⚠ ! BREAKING CHANGE
+
+- I have reworked the internal engine and there might be some breaking bugs that tests can not cover. If you encounter any problems, feel free to raise an issue. If it's broken in your case, you can rollback to the previous version before the next fix came out.
+- VSCode Markplace does not support alpha/beta channels. So again, sorry for any inconvenience. Thanks for understanding.
+
 ### ⚡ Features
 
-* **sfc:** sfc works in readonly mode ([b5d7c0c](https://github.com/antfu/vue-i18n-ally/commit/b5d7c0c))
+* **SFC:** Expiremental Single File Components (SFC) i18n Support, #56 ([b5d7c0c](https://github.com/antfu/vue-i18n-ally/commit/b5d7c0c))
+  - You can opt-in the SFC support on by setting `"vue-i18n-ally.experimental.sfc": true`
+  - SFC currently only works in READONLY mode, the other features might be landed in future release.
 
 
 ### 🐞 Bug Fixes
 
 * config reactive ([859cc60](https://github.com/antfu/vue-i18n-ally/commit/859cc60))
 * redundant event fires ([af42533](https://github.com/antfu/vue-i18n-ally/commit/af42533))
-* side bar locale display ([b7da092](https://github.com/antfu/vue-i18n-ally/commit/b7da092))
 
 
 ### 📚 Documentations
@@ -26,8 +32,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * prepare for sfc support ([a08a5b6](https://github.com/antfu/vue-i18n-ally/commit/a08a5b6))
 * **sfc:** composed loadder ([d26bce4](https://github.com/antfu/vue-i18n-ally/commit/d26bce4))
-* staticlize analyst ([02e0f0c](https://github.com/antfu/vue-i18n-ally/commit/02e0f0c))
-* staticlize Translator ([e703df8](https://github.com/antfu/vue-i18n-ally/commit/e703df8))
 
 
 
