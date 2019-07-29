@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0](https://github.com/antfu/vue-i18n-ally/compare/v0.28.0...v0.29.0) (2019-07-29)
+
+
+## ⚠ ! BREAKING CHANGE
+
+- I have reworked the internal engine and there might be some breaking bugs that tests can not cover. If you encounter any problems, feel free to raise an issue. If it's broken in your case, you can rollback to the previous version before the next fix came out.
+- VSCode Markplace does not support alpha/beta channels. So again, sorry for any inconvenience. Thanks for understanding.
+
+### ⚡ Features
+
+* **SFC:** Expiremental Single File Components (SFC) i18n Support, #56 ([b5d7c0c](https://github.com/antfu/vue-i18n-ally/commit/b5d7c0c))
+  - You can opt-in the SFC support on by setting `"vue-i18n-ally.experimental.sfc": true`
+  - SFC currently only works in READONLY mode, the other features might be landed in future release.
+
+
+### 🐞 Bug Fixes
+
+* config reactive ([859cc60](https://github.com/antfu/vue-i18n-ally/commit/859cc60))
+* redundant event fires ([af42533](https://github.com/antfu/vue-i18n-ally/commit/af42533))
+
+
+### 📚 Documentations
+
+* **examples:** add sfc example ([da8af1f](https://github.com/antfu/vue-i18n-ally/commit/da8af1f))
+
+
+### 🔮 Refactor
+
+* prepare for sfc support ([a08a5b6](https://github.com/antfu/vue-i18n-ally/commit/a08a5b6))
+* **sfc:** composed loadder ([d26bce4](https://github.com/antfu/vue-i18n-ally/commit/d26bce4))
+
+
+
 ## [0.28.0](https://github.com/antfu/vue-i18n-ally/compare/v0.27.1...v0.28.0) (2019-07-23)
 
 
