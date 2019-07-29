@@ -72,6 +72,7 @@ const annotation: ExtensionModule = (ctx) => {
 
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(() => update()))
+  disposables.push(window.onDidChangeActiveTextEditor(() => update()))
 
   update()
 

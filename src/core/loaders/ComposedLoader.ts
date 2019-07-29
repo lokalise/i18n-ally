@@ -79,6 +79,14 @@ export class ComposedLoader extends Loader {
     }
   }
 
+  getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
+    for (const loader of this._loaders.reverse()) {
+      const value = loader.getValueByKey(keypath, locale, clamp, stringifySpace)
+      if (value)
+        return value
+    }
+  }
+
   fire (src?: string) {
     this._onDidChange.fire(src || this.name)
   }
