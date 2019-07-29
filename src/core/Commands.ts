@@ -18,4 +18,7 @@ export enum Commands {
   locale_visibility_hide = 'extension.vue-i18n-ally.locale-visibility-hide',
   open_url = 'extension.vue-i18n-ally.open-url',
   support = 'extension.vue-i18n-ally.support',
+
+  // DEV
+  dev_load_sfc = 'extension.vue-i18n-ally.dev.load-sfc',
 }

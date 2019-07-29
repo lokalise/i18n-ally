@@ -126,6 +126,10 @@
           "light": "./res/light/eye-off.svg",
           "dark": "./res/dark/eye-off.svg"
         }
+      },
+      {
+        "command": "extension.vue-i18n-ally.dev.load-sfc",
+        "title": "DEV: Load SFC"
       }
     ],
     "menus": {
@@ -323,6 +327,11 @@
           "type": "boolean",
           "default": false,
           "description": "%config.readonly%"
+        },
+        "vue-i18n-ally.experimental.sfc": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.sfc%"
         }
       }
     }
@@ -401,6 +410,7 @@
     "json5": "^2.1.0",
     "limax": "^1.7.0",
     "lodash": "^4.17.11",
+    "node-html-parser": "^1.1.16",
     "translation.js": "^0.7.8",
     "ts-node": "^8.3.0",
     "typescript": "3.5.3"

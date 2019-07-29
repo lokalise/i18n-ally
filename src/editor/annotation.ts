@@ -1,6 +1,5 @@
-import { window, DecorationOptions, Range, workspace, Disposable } from 'vscode'
-import { debounce } from 'lodash'
-import { Global, KeyDetector, Config } from '../core'
+import { window, DecorationOptions, Range, Disposable } from 'vscode'
+import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
@@ -18,6 +17,7 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
+    const loader: Loader = CurrentFile.loader
     const document = activeTextEditor.document
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []
@@ -35,10 +35,10 @@ const annotation: ExtensionModule = (ctx) => {
       if (Config.annotations) {
         let missing = false
 
-        let text = Global.loader.getValueByKey(key)
+        let text = loader.getValueByKey(key)
         // fallback to source
         if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-          text = Global.loader.getValueByKey(key, Config.sourceLanguage)
+          text = loader.getValueByKey(key, Config.sourceLanguage)
           missing = true
         }
 
@@ -70,12 +70,8 @@ const annotation: ExtensionModule = (ctx) => {
     activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
-  const debounceUpdate = debounce(update, 500)
-
   const disposables: Disposable[] = []
-  disposables.push(window.onDidChangeActiveTextEditor(debounceUpdate, null, ctx.subscriptions))
-  disposables.push(workspace.onDidChangeTextDocument(debounceUpdate, null, ctx.subscriptions))
-  disposables.push(Global.onDidChangeLoader(update))
+  disposables.push(CurrentFile.loader.onDidChange(() => update()))
 
   update()
 

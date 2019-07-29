@@ -1,7 +1,8 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
-import { LocaleLoader, Coverage, Global, Config } from '../core'
+import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { unicodeProgressBar, decorateLocale, unicodeDecorate } from '../utils'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log } from '../utils'
+import { notEmpty } from '../utils/utils'
 
 export class ProgressItem extends TreeItem {
   constructor (
@@ -64,16 +65,19 @@ export class ProgressItem extends TreeItem {
 }
 
 export class ProgressProvider implements TreeDataProvider<ProgressItem> {
+  protected name = 'ProgressProvider'
   private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>()
   readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event
-  private loader: LocaleLoader
+  private loader: Loader
 
   constructor (
     private ctx: ExtensionContext,
   ) {
-    this.loader = Global.loader
-    Global.onDidChangeLoader((loader) => {
-      this.loader = loader
+    this.loader = CurrentFile.loader
+
+    let count = 0
+    this.loader.onDidChange((src) => {
+      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
       this.refresh()
     })
   }
@@ -91,7 +95,9 @@ export class ProgressProvider implements TreeDataProvider<ProgressItem> {
       return [] // no child
 
     return Object.values(Global.allLocales)
-      .map(node => new ProgressItem(this.ctx, this.loader.getCoverage(node)))
+      .map(node => this.loader.getCoverage(node))
+      .filter(notEmpty)
+      .map(cov => new ProgressItem(this.ctx, cov))
   }
 }
 

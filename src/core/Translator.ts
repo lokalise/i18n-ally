@@ -2,11 +2,10 @@ import { EventEmitter } from 'vscode'
 import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { Log } from '../utils'
-import { LocaleLoader } from './LocaleLoader'
 import { AllyError, ErrorType } from './Errors'
 import { Global } from './Global'
 import { LocaleTree } from './types'
-import { LocaleNode, LocaleRecord, Config } from '.'
+import { LocaleNode, LocaleRecord, Config, Loader } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -15,23 +14,19 @@ interface TranslatorChangeEvent {
 }
 
 export class Translator {
-  private translatingKeys: {keypath: string; locale: string}[] = []
-  private _onDidChange = new EventEmitter<TranslatorChangeEvent>()
-  readonly onDidChange = this._onDidChange.event
+  private static translatingKeys: {keypath: string; locale: string}[] = []
+  private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
+  static readonly onDidChange = Translator._onDidChange.event
 
-  constructor (
-    readonly loader: LocaleLoader
-  ) {}
-
-  async MachineTranslate (node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
+  static async MachineTranslate (loader: Loader, node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
     sourceLanguage = sourceLanguage || Config.sourceLanguage
     if (node.type === 'node')
-      return await this.MachineTranslateNode(node, sourceLanguage)
+      return await this.MachineTranslateNode(loader, node, sourceLanguage)
 
-    await this.MachineTranslateRecord(node, sourceLanguage)
+    await this.MachineTranslateRecord(loader, node, sourceLanguage)
   }
 
-  isTranslating (node: LocaleNode| LocaleRecord | LocaleTree) {
+  static isTranslating (node: LocaleNode| LocaleRecord | LocaleTree) {
     if (node.type === 'record')
       return !!this.translatingKeys.find(i => i.keypath === node.keypath && i.locale === node.locale)
     if (node.type === 'node')
@@ -41,23 +36,23 @@ export class Translator {
     return false
   }
 
-  private start (keypath: string, locale: string, update = true) {
+  private static start (keypath: string, locale: string, update = true) {
     this.end(keypath, locale, false)
     this.translatingKeys.push({ keypath, locale })
     if (update)
       this._onDidChange.fire({ keypath, locale, action: 'start' })
   }
 
-  private end (keypath: string, locale: string, update = true) {
+  private static end (keypath: string, locale: string, update = true) {
     this.translatingKeys = this.translatingKeys.filter(i => !(i.keypath === keypath && i.locale === locale))
     if (update)
       this._onDidChange.fire({ keypath, locale, action: 'end' })
   }
 
-  private async MachineTranslateRecord (record: LocaleRecord, sourceLanguage: string) {
+  private static async MachineTranslateRecord (loader: Loader, record: LocaleRecord, sourceLanguage: string) {
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
-    const sourceNode = this.loader.getNodeByKey(record.keypath)
+    const sourceNode = loader.getNodeByKey(record.keypath)
     if (!sourceNode)
       throw new AllyError(ErrorType.translating_empty_source_value)
     const sourceRecord = sourceNode.locales[sourceLanguage]
@@ -75,7 +70,7 @@ export class Translator {
         filepath: record.filepath,
         keypath: record.keypath,
       }
-      await Global.loader.writeToFile(pending)
+      await Global.loader.writeToFile(pending) // TODO:sfc
     }
     catch (e) {
       this.end(record.keypath, record.locale)
@@ -83,15 +78,15 @@ export class Translator {
     }
   }
 
-  private async MachineTranslateNode (node: LocaleNode, sourceLanguage: string) {
-    const tasks = Object.values(this.loader.getShadowLocales(node))
+  private static async MachineTranslateNode (loader: Loader, node: LocaleNode, sourceLanguage: string) {
+    const tasks = Object.values(loader.getShadowLocales(node))
       .filter(record => record.locale !== sourceLanguage)
-      .map(record => this.MachineTranslateRecord(record, sourceLanguage))
+      .map(record => this.MachineTranslateRecord(loader, record, sourceLanguage))
 
     await Promise.all(tasks)
   }
 
-  private async translateText (text: string, from: string, to: string) {
+  private static async translateText (text: string, from: string, to: string) {
     const plans = [google, baidu, youdao]
     let trans_result: TranslateResult | undefined
 

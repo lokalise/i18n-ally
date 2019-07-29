@@ -6,12 +6,14 @@ import commandsModules from './commands'
 import editorModules from './editor'
 import viewsModules from './views'
 import { Log } from './utils'
+import { CurrentFile } from './core/CurrentFile'
 
 export async function activate (ctx: ExtensionContext) {
   Log.info(`🈶 Activated, v${version}`)
 
   // activate the extension
   await Global.init(ctx)
+  CurrentFile.watch(ctx)
 
   const modules = [
     commandsModules,

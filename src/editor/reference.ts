@@ -1,7 +1,7 @@
 import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
 import { ExtensionModule } from '../modules'
 import { LANG_SELECTORS } from '../meta'
-import { KeyDetector, Global } from '../core'
+import { KeyDetector, Global, Analyst } from '../core'
 
 class Provider implements ReferenceProvider, RenameProvider {
   async provideReferences (document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
@@ -13,7 +13,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return []
 
-    return await Global.loader.analyst.getAllOccurrenceLocations(key)
+    return await Analyst.getAllOccurrenceLocations(key)
   }
 
   prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
@@ -33,7 +33,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     if (!key)
       return
 
-    return await Global.loader.renameKey(key, newName)
+    return await Global.loader.renameKey(key, newName) // TODO:sfc
   }
 
   constructor (public readonly ctx: ExtensionContext) {}

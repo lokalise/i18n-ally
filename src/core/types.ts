@@ -17,6 +17,7 @@ export interface INode {
   filepath?: string
   shadow?: boolean
   readonly?: boolean
+  sfc?: boolean
 }
 
 export interface ILocaleRecord extends INode {
@@ -40,6 +41,7 @@ abstract class BaseNode implements INode {
   readonly filepath?: string
   readonly shadow?: boolean
   readonly readonly?: boolean
+  readonly sfc?: boolean
 
   constructor (data: INode) {
     this.keypath = data.keypath
@@ -47,6 +49,7 @@ abstract class BaseNode implements INode {
     this.filepath = data.filepath
     this.shadow = data.shadow
     this.readonly = data.readonly
+    this.sfc = data.sfc
   }
 }
 

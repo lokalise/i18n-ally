@@ -3,8 +3,8 @@ import { promises as fs } from 'fs'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
 import { SUPPORTED_LANG_GLOBS, SUPPORTED_LANG_IDS } from '../meta'
-import { KeyDetector, LocaleLoader, Config } from '../core'
 import { Log } from '../utils'
+import { KeyDetector, Config } from '.'
 
 export interface Occurrence {
   keypath: string
@@ -14,26 +14,22 @@ export interface Occurrence {
 }
 
 export class Analyst {
-  private _cache: Occurrence[] | null = null
+  private static _cache: Occurrence[] | null = null
 
-  constructor (
-    readonly loader: LocaleLoader
-  ) {}
-
-  invalidateCache () {
+  static invalidateCache () {
     this._cache = null
   }
 
-  invalidateCacheOf (filepath: string) {
+  static invalidateCacheOf (filepath: string) {
     if (this._cache)
       this._cache = this._cache.filter(o => o.filepath !== filepath)
   }
 
-  watch () {
+  static watch () {
     return workspace.onDidSaveTextDocument(doc => this.updateCache(doc))
   }
 
-  private async updateCache (doc: TextDocument) {
+  private static async updateCache (doc: TextDocument) {
     if (!this._cache)
       return
     if (!SUPPORTED_LANG_IDS.includes(doc.languageId))
@@ -46,7 +42,7 @@ export class Analyst {
     this._cache.push(...occurrences)
   }
 
-  private async getDocumentPaths () {
+  private static async getDocumentPaths () {
     const root = workspace.rootPath
     if (!root)
       return []
@@ -67,12 +63,12 @@ export class Analyst {
     return files.map(f => resolve(root, f))
   }
 
-  private async getOccurrencesOfFile (filepath: string) {
+  private static async getOccurrencesOfFile (filepath: string) {
     const text = await fs.readFile(filepath, 'utf-8')
     return await this.getOccurrencesOfText(text, filepath)
   }
 
-  private async getOccurrencesOfText (text: string, filepath: string) {
+  private static async getOccurrencesOfText (text: string, filepath: string) {
     const keys = KeyDetector.getKeys(text)
     const occurrences: Occurrence[] = []
 
@@ -88,7 +84,7 @@ export class Analyst {
     return occurrences
   }
 
-  async getAllOccurrences (targetKey?: string) {
+  static async getAllOccurrences (targetKey?: string) {
     if (!this._cache) {
       const occurrences: Occurrence[] = []
       const filepaths = await this.getDocumentPaths()
@@ -104,12 +100,12 @@ export class Analyst {
     return this._cache
   }
 
-  async getAllOccurrenceLocations (targetKey: string) {
+  static async getAllOccurrenceLocations (targetKey: string) {
     const occurrences = await this.getAllOccurrences(targetKey)
     return await Promise.all(occurrences.map(o => this.getLocationOf(o)))
   }
 
-  async getLocationOf (occurrence: Occurrence) {
+  static async getLocationOf (occurrence: Occurrence) {
     const document = await workspace.openTextDocument(occurrence.filepath)
     const range = new Range(
       document.positionAt(occurrence.start),

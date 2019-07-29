@@ -1,6 +1,6 @@
 import { languages, TextDocument, Position, CancellationToken, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { Global, KeyDetector, Config } from '../core'
+import { Global, KeyDetector, Config, CurrentFile } from '../core'
 import { LANG_SELECTORS } from '../meta'
 
 class DefinitionProvider {
@@ -9,7 +9,7 @@ class DefinitionProvider {
     if (!key)
       return []
 
-    const filepath = Global.loader.getFilepathByKey(key)
+    const filepath = CurrentFile.loader.getFilepathByKey(key)
     if (!filepath)
       return []
 

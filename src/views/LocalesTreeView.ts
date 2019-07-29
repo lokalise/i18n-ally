@@ -1,8 +1,8 @@
 import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { sortBy } from 'lodash'
-import { Global, LocaleLoader, Node } from '../core'
+import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale, NodeHelper } from '../utils'
+import { decorateLocale, NodeHelper, Log } from '../utils'
 
 export class LocaleTreeItem extends TreeItem {
   constructor (
@@ -53,7 +53,7 @@ export class LocaleTreeItem extends TreeItem {
   }
 
   get iconPath () {
-    if (Global.loader.translator.isTranslating(this.node))
+    if (Translator.isTranslating(this.node))
       return this.getIcon('loading')
 
     if (this.node.type === 'record') {
@@ -95,7 +95,8 @@ export class LocaleTreeItem extends TreeItem {
 }
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
-  private loader: LocaleLoader
+  protected loader: Loader
+  protected name = 'LocalesTreeProvider'
   private _flatten: boolean
   private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>()
   readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event
@@ -106,9 +107,11 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     flatten = false,
   ) {
     this._flatten = flatten
-    this.loader = Global.loader
-    Global.onDidChangeLoader((loader) => {
-      this.loader = loader
+    this.loader = CurrentFile.loader
+
+    let count = 0
+    this.loader.onDidChange((src) => {
+      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
       this.refresh()
     })
   }
@@ -156,7 +159,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
 
     const nodes = this.flatten
       ? Object.values(this.loader.flattenLocaleTree)
-      : Object.values(this.loader.localeTree.children)
+      : Object.values(this.loader.root.children)
 
     const items = nodes
       .filter(node => this.filter(node, true))

@@ -96,6 +96,10 @@ export class Config {
     return this.getConfig<boolean>('readonly') || false
   }
 
+  static get sfc (): boolean {
+    return this.getConfig<boolean>('experimental.sfc') || false
+  }
+
   static get preferredDelimiter (): string {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }

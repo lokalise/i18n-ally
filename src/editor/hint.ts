@@ -1,5 +1,5 @@
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
-import { Global, KeyDetector, Commands } from '../core'
+import { Global, KeyDetector, Commands, Loader, CurrentFile } from '../core'
 import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
 import { LANG_SELECTORS } from '../meta'
 import { ExtensionModule } from '../modules'
@@ -20,18 +20,20 @@ class HintProvider implements HoverProvider {
     if (!keypath)
       return
 
-    let node = Global.loader.getTreeNodeByKey(keypath)
-    if (!node)
-      node = Global.loader.getShadowNodeByKey(keypath)
+    const loader: Loader = CurrentFile.loader
 
-    const locales = Global.loader.getTranslationsByKey(keypath)
+    let node = loader.getTreeNodeByKey(keypath)
+    if (!node)
+      node = loader.getShadowNodeByKey(keypath)
+
+    const locales = loader.getTranslationsByKey(keypath)
 
     const transTable = Global.visibleLocales
       .map((locale) => {
         const commands = []
         const row = {
           locale: decorateLocale(locale),
-          value: escapeMarkdown(Global.loader.getValueByKey(keypath, locale, false) || '-'),
+          value: escapeMarkdown(loader.getValueByKey(keypath, locale, false) || '-'),
           commands: '',
         }
         const record = locales[locale]

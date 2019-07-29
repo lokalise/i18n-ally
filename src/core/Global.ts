@@ -5,6 +5,7 @@ import { isVueI18nProject } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log } from '../utils'
+import { CurrentFile } from './CurrentFile'
 import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
@@ -145,7 +146,7 @@ export class Global {
   }
 
   static getMatchedParser (ext: string) {
-    if (!ext.startsWith('.'))
+    if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
     return this.parsers.find(parser => parser.supports(ext))
   }
@@ -165,7 +166,7 @@ export class Global {
   }
 
   static get allLocales () {
-    return this.loader.locales
+    return CurrentFile.loader.locales
   }
 
   static get visibleLocales () {

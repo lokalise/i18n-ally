@@ -1,10 +1,11 @@
 import * as path from 'path'
 import { window, commands, workspace, Selection, TextEditorRevealType, env } from 'vscode'
-import { Global, Commands, LocaleRecord, Node, Config } from '../core'
+import { Global, Commands, LocaleRecord, Node, Config, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale, Log } from '../utils'
 import { LocaleTreeItem } from '../views/LocalesTreeView'
 import i18n from '../i18n'
+import { Translator } from '../core/Translator'
 
 interface CommandOptions {
   keypath: string
@@ -18,7 +19,7 @@ function getNode (item?: LocaleTreeItem | CommandOptions) {
 
   if (item instanceof LocaleTreeItem)
     return item.node
-  return Global.loader.getRecordByKey(item.keypath, item.locale, true)
+  return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
 }
 
 async function getRecordFromNode (node: Node, defaultLocale?: string) {
@@ -29,7 +30,7 @@ async function getRecordFromNode (node: Node, defaultLocale?: string) {
     return node
 
   if (node.type === 'node') {
-    const locales = Global.loader.getShadowLocales(node)
+    const locales = CurrentFile.loader.getShadowLocales(node)
     const locale = defaultLocale || await window.showQuickPick(
       Global.visibleLocales,
       { placeHolder: i18n.t('prompt.choice_locale') }
@@ -61,7 +62,7 @@ const m: ExtensionModule = (ctx) => {
         const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
 
         try {
-          await Global.loader.translator.MachineTranslate(node, from)
+          await Translator.MachineTranslate(CurrentFile.loader, node, from)
         }
         catch (err) {
           Log.error(err.toString())
@@ -114,7 +115,7 @@ const m: ExtensionModule = (ctx) => {
         let node: Node | undefined
 
         if (typeof item === 'string')
-          node = Global.loader.getTreeNodeByKey(item)
+          node = CurrentFile.loader.getTreeNodeByKey(item)
         else
           node = item.node
 
@@ -131,7 +132,7 @@ const m: ExtensionModule = (ctx) => {
           if (!newkeypath)
             return
 
-          const edit = await Global.loader.renameKey(oldkeypath, newkeypath)
+          const edit = await Global.loader.renameKey(oldkeypath, newkeypath) // TODO:sfc
           await workspace.applyEdit(edit)
         }
         catch (err) {
@@ -163,7 +164,7 @@ const m: ExtensionModule = (ctx) => {
           })
 
           if (newvalue !== undefined && newvalue !== node.value) {
-            await Global.loader.writeToFile({
+            await Global.loader.writeToFile({ // TODO:sfc
               value: newvalue,
               keypath: node.keypath,
               filepath: node.filepath,
@@ -190,7 +191,7 @@ const m: ExtensionModule = (ctx) => {
           records = Object.values(node.locales)
 
         try {
-          await Global.loader.writeToFile(records
+          await Global.loader.writeToFile(records // TODO:sfc
             .filter(record => !record.shadow)
             .map(record => ({
               value: undefined,
