@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0](https://github.com/antfu/vue-i18n-ally/compare/v0.28.0...v0.29.0) (2019-07-29)
+
+
+### ⚡ Features
+
+* **sfc:** sfc works in readonly mode ([b5d7c0c](https://github.com/antfu/vue-i18n-ally/commit/b5d7c0c))
+
+
+### 🐞 Bug Fixes
+
+* config reactive ([859cc60](https://github.com/antfu/vue-i18n-ally/commit/859cc60))
+* redundant event fires ([af42533](https://github.com/antfu/vue-i18n-ally/commit/af42533))
+* side bar locale display ([b7da092](https://github.com/antfu/vue-i18n-ally/commit/b7da092))
+
+
+### 📚 Documentations
+
+* **examples:** add sfc example ([da8af1f](https://github.com/antfu/vue-i18n-ally/commit/da8af1f))
+
+
+### 🔮 Refactor
+
+* prepare for sfc support ([a08a5b6](https://github.com/antfu/vue-i18n-ally/commit/a08a5b6))
+* **sfc:** composed loadder ([d26bce4](https://github.com/antfu/vue-i18n-ally/commit/d26bce4))
+* staticlize analyst ([02e0f0c](https://github.com/antfu/vue-i18n-ally/commit/02e0f0c))
+* staticlize Translator ([e703df8](https://github.com/antfu/vue-i18n-ally/commit/e703df8))
+
+
+
 ## [0.28.0](https://github.com/antfu/vue-i18n-ally/compare/v0.27.1...v0.28.0) (2019-07-23)
 
 
