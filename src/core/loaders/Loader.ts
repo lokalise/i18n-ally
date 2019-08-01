@@ -72,11 +72,13 @@ export abstract class Loader extends Disposable {
           ? `[${key}]`
           : key)
 
+      let node = tree.getChild(key)
+
       // should go nested
       if (_.isArray(value)) {
         let subtree: LocaleTree|undefined
-        if (tree.getChild(key) && tree.getChild(key).type === 'tree')
-          subtree = tree.getChild(key) as LocaleTree
+        if (node && node.type === 'tree')
+          subtree = node as LocaleTree
 
         tree.setChild(key, this.updateTree(subtree, value, newKeyPath, key, options, true))
         continue
@@ -84,16 +86,16 @@ export abstract class Loader extends Disposable {
 
       if (_.isObject(value)) {
         let subtree: LocaleTree|undefined
-        if (tree.getChild(key) && tree.getChild(key).type === 'tree')
-          subtree = tree.getChild(key) as LocaleTree
+        if (node && node.type === 'tree')
+          subtree = node as LocaleTree
 
         tree.setChild(key, this.updateTree(subtree, value, newKeyPath, key, options))
         continue
       }
 
       // init node
-      if (!tree.getChild(key)) {
-        const node = new LocaleNode({
+      if (!node) {
+        node = new LocaleNode({
           keypath: newKeyPath,
           keyname: key,
           readonly: options.readonly,
@@ -104,8 +106,7 @@ export abstract class Loader extends Disposable {
       }
 
       // add locales to exitsing node
-      const node = tree.getChild(key)
-      if (node.type === 'node') {
+      if (node && node.type === 'node') {
         node.locales[options.locale] = new LocaleRecord({
           keypath: newKeyPath,
           keyname: key,

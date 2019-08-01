@@ -100,7 +100,7 @@ export class LocaleTree extends BaseNode implements ILocaleTree {
 
   getChild (key: string) {
     let child = this.children[key]
-    if (!child && this.isCollection) {
+    if (this.isCollection && !child) {
       const index = parseInt(key)
       if (!isNaN(index))
         child = this.children[index]
@@ -108,9 +108,9 @@ export class LocaleTree extends BaseNode implements ILocaleTree {
     return child
   }
 
-  setChild (key: string, value: LocaleTree|LocaleNode) {
+  setChild (key: string, value: LocaleTree | LocaleNode) {
     const index = parseInt(key)
-    if (!isNaN(index))
+    if (this.isCollection && !isNaN(index))
       this.children[index] = value
     else
       this.children[key] = value

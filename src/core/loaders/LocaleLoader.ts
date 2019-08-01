@@ -316,8 +316,13 @@ export class LocaleLoader extends Loader {
   }
 
   private update () {
-    this.updateLocalesTree()
-    this._onDidChange.fire(this.name)
+    try {
+      this.updateLocalesTree()
+      this._onDidChange.fire(this.name)
+    }
+    catch (e) {
+      Log.error(e)
+    }
   }
 
   private async loadAll () {
