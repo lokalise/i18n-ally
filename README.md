@@ -16,6 +16,10 @@
 <a href="https://github.com/antfu/vue-i18n-ally/issues"><img src="https://img.shields.io/github/issues/antfu/vue-i18n-ally.svg" alt="GitHub issues" /></a>
 </p>
 
+<p align='center'>
+Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-support">Single File Component</a> support! 🎉
+</p>
+
 <h2 align="center"> ⚡ Features </h2>
 
 <h3 align="center"> Inline annotation </h3>
@@ -207,6 +211,16 @@ From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files. You
 >
 > We would recommend you to use static files like JSON or YAML storing locale messages to work best with this extension.
 
+### ⚗ Experimental SFC support
+
+From v0.29.x, we shipped the support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. The feature is disabled by default. You can opt-in by changing setting:
+
+```json
+"vue-i18n-ally.experimental.sfc": true
+```
+
+Note currently SFC only works in **READONLY** mode, the other features will be landed in future release.
+
 
 ## 🌍 Help translate this extension
 
@@ -227,7 +241,7 @@ We have not determined schedule to implement the TODOs. If you would like to see
 Todo:
 - [ ] Analysis report
 - [ ] JSON/YAML file annonation & hint
-- [ ] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html) ([Vote Here #56](https://github.com/antfu/vue-i18n-ally/issues/56))
+- [x] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Tests
 - [ ] Live share support
 
