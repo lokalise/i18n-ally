@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2](https://github.com/antfu/vue-i18n-ally/compare/v0.29.1...v0.29.2) (2019-08-01)
+
+
+### 🐞 Bug Fixes
+
+* safe object parsing ([3a02f50](https://github.com/antfu/vue-i18n-ally/commit/3a02f50))
+
+
+
 ### [0.29.1](https://github.com/antfu/vue-i18n-ally/compare/v0.28.0...v0.29.1) (2019-07-29)
 
 
