@@ -66,6 +66,7 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
       if (window.activeTextEditor)
         provider.update(window.activeTextEditor.document)
     }),
+    workspace.onDidChangeTextDocument(doc => provider.update(doc.document)),
     workspace.onDidCloseTextDocument(e => provider.clearUri(e.uri)),
   ]
 }

@@ -1,4 +1,4 @@
-import { window, DecorationOptions, Range, Disposable } from 'vscode'
+import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 
@@ -73,6 +73,7 @@ const annotation: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(() => update()))
   disposables.push(window.onDidChangeActiveTextEditor(() => update()))
+  disposables.push(workspace.onDidChangeTextDocument(() => update()))
 
   update()
 
