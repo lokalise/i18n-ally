@@ -390,7 +390,7 @@
     "@types/json5": "0.0.30",
     "@types/lodash": "4.14.136",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.6.8",
+    "@types/node": "12.6.9",
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "conventional-github-releaser": "3.1.3",
@@ -398,8 +398,8 @@
     "rimraf": "2.6.3",
     "standard-version": "6.0.1",
     "ts-loader": "6.0.4",
-    "vscode": "1.1.35",
-    "webpack": "4.38.0",
+    "vscode": "1.1.36",
+    "webpack": "4.39.1",
     "webpack-cli": "3.3.6"
   },
   "dependencies": {
