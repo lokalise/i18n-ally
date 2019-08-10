@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.4](https://github.com/antfu/vue-i18n-ally/compare/v0.29.3...v0.29.4) (2019-08-10)
+
+
+### 🐞 Bug Fixes
+
+* **icons:** sidebar icon size in insider build ([c9a8b95](https://github.com/antfu/vue-i18n-ally/commit/c9a8b95))
+
+
+
 ### [0.29.3](https://github.com/antfu/vue-i18n-ally/compare/v0.29.2...v0.29.3) (2019-08-03)
 
 
