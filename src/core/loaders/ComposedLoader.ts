@@ -14,6 +14,7 @@ export class ComposedLoader extends Loader {
 
   _loaders: Loader[] = []
   _watchers: Disposable[] = []
+  _isFlattenLocaleTreeDirty = true
 
   get loaders () {
     return this._loaders
@@ -23,7 +24,10 @@ export class ComposedLoader extends Loader {
     this._watchers.forEach(d => d.dispose())
     this._loaders = value
     this._watchers = this.loaders.filter(i => i).map(loader =>
-      loader.onDidChange(e => this._onDidChange.fire(`${e}+${this.name}`))
+      loader.onDidChange((e) => {
+        this._isFlattenLocaleTreeDirty = true
+        this._onDidChange.fire(`${e}+${this.name}`)
+      })
     )
     // this._onDidChange.fire(this.name)
   }
@@ -39,13 +43,16 @@ export class ComposedLoader extends Loader {
   }
 
   get flattenLocaleTree (): FlattenLocaleTree {
-    const children: Record<string | number, LocaleNode> = {}
+    if (!this._isFlattenLocaleTreeDirty)
+      return this._flattenLocaleTree
+
+    this._flattenLocaleTree = {}
     for (const loader of this._loaders) {
       const loaderChildren = loader.flattenLocaleTree
-      for (const key of Object.keys(loaderChildren))
-        children[key] = loaderChildren[key]
+      Object.assign(this._flattenLocaleTree, loaderChildren)
     }
-    return children
+    this._isFlattenLocaleTreeDirty = false
+    return this._flattenLocaleTree
   }
 
   get locales (): string[] {
