@@ -1,25 +1,23 @@
-import { Command, CodeActionProvider, window, CodeActionKind, languages } from 'vscode'
+import { Command, CodeActionProvider, CodeActionKind, languages, TextDocument, Range, Selection } from 'vscode'
 import { Global, Commands, ExtractTextOptions } from '../core'
 import { LANG_SELECTORS } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
 class ExtractProvider implements CodeActionProvider {
-  public async provideCodeActions (): Promise<Command[]> {
+  public async provideCodeActions (document: TextDocument, selection: Range | Selection): Promise<Command[]> {
     if (!Global.enabled)
       return []
 
-    const editor = window.activeTextEditor
-    if (!editor)
+    if (!(selection instanceof Selection))
       return []
 
-    const { selection } = editor
-    const text = editor.document.getText(selection)
+    const text = document.getText(selection)
     if (!text || selection.start.line !== selection.end.line)
       return []
 
     const options: ExtractTextOptions = {
-      filepath: editor.document.fileName,
+      filepath: document.fileName,
       text,
       range: selection,
     }
