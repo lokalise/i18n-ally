@@ -205,7 +205,7 @@ The keys sorting is only avaliable in JSON and YAML, but not JSON5.
 
 From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files. You can use them already with no config required.
 
-**⚠ You will have limited features in this extension**
+**⚠ You will only be able to use limited features of the extension**
 
 > Features like editting and translating are not avaliable in javascript/typescript locales (a.k.a forced to work on readonly mode). They can be very complex and there is not a proper way to update the changes.
 >
