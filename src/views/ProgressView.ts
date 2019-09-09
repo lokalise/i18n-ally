@@ -1,7 +1,7 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
 import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log } from '../utils'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log, getFlagFilename } from '../utils'
 import { notEmpty } from '../utils/utils'
 
 export class ProgressItem extends TreeItem {
@@ -43,7 +43,7 @@ export class ProgressItem extends TreeItem {
         dark: this.ctx.asAbsolutePath('res/dark/eye-off-fade.svg'),
       }
     }
-    return this.ctx.asAbsolutePath(`res/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+    return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(this.node.locale)}`)
   }
 
   get contextValue () {

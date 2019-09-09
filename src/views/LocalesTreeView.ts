@@ -2,7 +2,7 @@ import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider,
 import { sortBy } from 'lodash'
 import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale, NodeHelper, Log } from '../utils'
+import { decorateLocale, NodeHelper, Log, getFlagFilename } from '../utils'
 
 export class LocaleTreeItem extends TreeItem {
   constructor (
@@ -57,7 +57,7 @@ export class LocaleTreeItem extends TreeItem {
       return this.getIcon('loading')
 
     if (this.node.type === 'record') {
-      return this.ctx.asAbsolutePath(`res/flags/${this.node.locale.toLocaleLowerCase()}.svg`)
+      return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(this.node.locale)}`)
     }
 
     else if (this.node.shadow) {

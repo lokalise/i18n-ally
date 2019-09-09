@@ -39,6 +39,12 @@ export function notEmpty<T> (value: T | null | undefined): value is T {
   return value !== null && value !== undefined
 }
 
+export function getFlagFilename (locale: string) {
+  const parts = locale.toLocaleLowerCase().split('-', 2)
+  const flag = parts[parts.length - 1]
+  return `${flag}.svg`
+}
+
 export function replaceLocalePath (filepath: string, targetLocale: string): string {
   const info = path.parse(filepath)
 
