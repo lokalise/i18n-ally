@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.6](https://github.com/antfu/vue-i18n-ally/compare/v0.29.5...v0.29.6) (2019-09-09)
+
+
+### 🌍 Internationalization
+
+* Added Norwegian Bokmål (nb-no) + corrected some typos in the English localisation ([#83](https://github.com/antfu/vue-i18n-ally/issues/83)), thanks [@rubjo](https://github.com/rubjo)  ([e2b2638](https://github.com/antfu/vue-i18n-ally/commit/e2b2638))
+
+
+### 🐞 Bug Fixes
+
+* flag icons ([e2608b4](https://github.com/antfu/vue-i18n-ally/commit/e2608b4))
+
+
+### 🔮 Refactor
+
+* Obey selection passed by vscode ([#85](https://github.com/antfu/vue-i18n-ally/issues/85)), thanks [@ypresto](https://github.com/ypresto) ([2ab77f8](https://github.com/antfu/vue-i18n-ally/commit/2ab77f8))
+
 ### [0.29.5](https://github.com/antfu/vue-i18n-ally/compare/v0.29.4...v0.29.5) (2019-08-12)
 
 
