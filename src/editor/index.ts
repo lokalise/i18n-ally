@@ -8,6 +8,7 @@ import definition from './definition'
 import refactor from './refactor'
 import problems from './problems'
 import reference from './reference'
+import statusbar from './statusbar'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -19,6 +20,7 @@ const m: ExtensionModule = (ctx) => {
     definition(ctx),
     problems(ctx),
     reference(ctx),
+    statusbar(ctx),
   ])
 }
 
