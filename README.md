@@ -92,7 +92,7 @@ Install [the extension from VSCode Marketplace](https://marketplace.visualstudio
 
 ## 🎯 Troubleshooting
 
-### Extension doesn't work/show up
+### Extension doesn't work/show up. There is no icon in activity bar
 
 Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
   - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
@@ -100,7 +100,9 @@ Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have o
   - [`vue-i18next`](https://github.com/panter/vue-i18next)
   - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 
-### I can see the icon, but nothing show up
+You can also enable extension manually with `"vue-i18n-ally.forceEnabled": true` in the settings of VSCode
+
+### I can see the icon in activity bar, but nothing show up
 
 1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
    - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
