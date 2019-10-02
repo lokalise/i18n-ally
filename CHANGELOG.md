@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.7](https://github.com/antfu/vue-i18n-ally/compare/v0.29.6...v0.29.7) (2019-10-02)
+
+
+### ⚡ Features
+
+* status bar language switch, close [#91](https://github.com/antfu/vue-i18n-ally/issues/91) ([a83d677](https://github.com/antfu/vue-i18n-ally/commit/a83d677))
+
+
+### 🐞 Bug Fixes
+
+* flag for 'uk' encoding ([#93](https://github.com/antfu/vue-i18n-ally/issues/93)) ([511f7aa](https://github.com/antfu/vue-i18n-ally/commit/511f7aa))
+* **deps:** update dependency limax to v2 ([#95](https://github.com/antfu/vue-i18n-ally/issues/95)) ([f20b964](https://github.com/antfu/vue-i18n-ally/commit/f20b964))
+
 ### [0.29.6](https://github.com/antfu/vue-i18n-ally/compare/v0.29.5...v0.29.6) (2019-09-09)
 
 
