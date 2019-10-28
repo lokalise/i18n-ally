@@ -2,7 +2,7 @@ import { promises as fs, existsSync } from 'fs'
 import * as path from 'path'
 import * as _ from 'lodash'
 import * as fg from 'fast-glob'
-import { workspace, window, WorkspaceEdit } from 'vscode'
+import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import { replaceLocalePath, normalizeLocale, Log } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite } from '../types'
@@ -276,15 +276,26 @@ export class LocaleLoader extends Loader {
   }
 
   private async watchOn (rootPath: string) {
-    const watcher = workspace.createFileSystemWatcher(`${rootPath}/**`)
+    Log.info(`\n👀 Watching change on ${rootPath}`)
+    const watcher = workspace.createFileSystemWatcher(
+      new RelativePattern(
+        rootPath,
+        '**/*'
+      ),
+    )
 
     const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
       if (this._ignoreChanges)
         return
       filepath = path.resolve(filepath)
-      const { ext } = path.parse(filepath)
+      const { ext, base } = path.parse(filepath)
+      const related = path.relative(rootPath, filepath)
+
       if (!Global.getMatchedParser(ext))
         return
+
+      Log.info(`🐱‍🚀 Update detected <${type}> ${filepath} [${related}]`)
+
 
       switch (type) {
         case 'del':
@@ -294,7 +305,10 @@ export class LocaleLoader extends Loader {
 
         case 'change':
         case 'create':
-          await this.loadFile(filepath)
+          if (related !== base)
+            await this.loadFile(filepath,'dir', rootPath)
+          else
+            await this.loadFile(filepath)
           this.update()
           break
       }
