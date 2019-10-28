@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.8](https://github.com/antfu/vue-i18n-ally/compare/v0.29.7...v0.29.8) (2019-10-28)
+
+
+### 🐞 Bug Fixes
+
+* watcher on dir locales mode, resolve [#97](https://github.com/antfu/vue-i18n-ally/issues/97) ([7b26c52](https://github.com/antfu/vue-i18n-ally/commit/7b26c52))
+
 ### [0.29.7](https://github.com/antfu/vue-i18n-ally/compare/v0.29.6...v0.29.7) (2019-10-02)
 
 
