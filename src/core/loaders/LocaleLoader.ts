@@ -299,7 +299,7 @@ export class LocaleLoader extends Loader {
 
       if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
         Log.info('🐱‍🚀 Perfroming a full reload')
-        await this.loadAll()
+        await this.loadAll(false)
         this.update()
         return
       }
@@ -346,7 +346,7 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private async loadAll () {
+  private async loadAll (watch = true) {
     this._files = {}
     let paths: string[] = []
     if (this.localesPaths.length > 0) {
@@ -368,7 +368,8 @@ export class LocaleLoader extends Loader {
         const fullpath = path.resolve(this.rootpath, pathname)
         Log.info(`\n📂 Loading locales under ${fullpath}`)
         await this.loadDirectory(fullpath, Config.dirStructure)
-        this.watchOn(fullpath)
+        if (watch)
+          this.watchOn(fullpath)
       }
       catch (e) {
         Log.error(e)

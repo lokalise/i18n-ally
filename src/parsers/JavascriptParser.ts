@@ -3,15 +3,18 @@ import i18n from '../i18n'
 import { Log } from '../utils'
 import { Parser } from './Parser'
 
+process.env.ESM_DISABLE_CACHE = '1'
+
 export class JavascriptParser extends Parser {
-  private esm: (filepath: string) => any
+  private esm: (filepath: string, options?: any) => any
   readonly readonly = true
 
   constructor () {
     super(['javascript', 'typescript'], /\.?(jsx?|tsx?)$/g)
     registerTsNode()
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    this.esm = require('esm')(module, { cache: false })
+    const esm = require('esm')
+    this.esm = esm(module, { cache: false, force: true })
   }
 
   async parse (text: string) {
@@ -24,15 +27,15 @@ export class JavascriptParser extends Parser {
 
   async load (filepath: string) {
     // set mtime to disable cache
-    let module = this.esm(`${filepath}?mtime=${+new Date()}`)
-    if ('default' in module)
-      module = module.default
-    if (typeof module === 'function')
-      module = module()
+    let m = this.esm(`${filepath}?mtime=${+new Date()}`, { cache: false })
+    if ('default' in m)
+      m = m.default
+    if (typeof m === 'function')
+      m = m()
 
-    module = await Promise.resolve(module)
+    m = await Promise.resolve(m)
 
-    return JSON.parse(JSON.stringify(module))
+    return JSON.parse(JSON.stringify(m))
   }
 
   async save () {
