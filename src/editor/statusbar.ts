@@ -20,7 +20,8 @@ const statusbar: ExtensionModule = (ctx) => {
   }
 
   disposables.push(Global.onDidChangeEnabled(() => update()))
-  disposables.push(Global.loader.onDidChange(() => update()))
+  if (Global.loader)
+    disposables.push(Global.loader.onDidChange(() => update()))
 
   update()
 

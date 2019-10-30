@@ -12,7 +12,7 @@
 
   "vue-i18n-ally.forceEnabled": true,
   "vue-i18n-ally.localesPaths": ".",
-  "vue-i18n-ally.matchRegex": "^package.nls.?([\\w-]*)\\.json",
+  "vue-i18n-ally.filenameMatchRegex": "^package.nls.?([\\w-]*)\\.json",
   "vue-i18n-ally.sourceLanguage": "en",
   "vue-i18n-ally.keystyle": "flat",
   "vue-i18n-ally.preferredDelimiter": "_",
