@@ -8,7 +8,8 @@ import { KeyStyle } from '.'
 export class Config {
   static readonly reloadConfigs = [
     'localesPaths',
-    'matchRegex',
+    'filenameMatchRegex',
+    'includeSubfolders',
   ]
 
   static readonly refreshConfigs = [
@@ -100,12 +101,20 @@ export class Config {
     return this.getConfig<boolean>('experimental.sfc') || false
   }
 
+  static get includeSubfolders (): boolean {
+    return this.getConfig<boolean>('includeSubfolders') || false
+  }
+
+  static get fullReloadOnChanged (): boolean {
+    return this.getConfig<boolean>('fullReloadOnChanged') || false
+  }
+
   static get preferredDelimiter (): string {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
   static getMatchRegex (dirStructure = this.dirStructure): string {
-    let regex = (this.getConfig('matchRegex')) as string
+    let regex = (this.getConfig('filenameMatchRegex')) as string
     if (!regex) {
       if (dirStructure === 'file')
         regex = MATCH_REG_FILE

@@ -29,6 +29,8 @@
   "config.sfc": "Support for locales in Vue Single file components (SFC)",
   "config.sort_keys": "Save with sorted json/yaml",
   "config.source_language": "Source language for machine translation",
+  "config.include_subfolders": "Search recursively inside locale directories",
+  "config.full_reload_on_changed": "Perform a full reload on locale file changed. (for .js/.ts dynamic import)",
   "extname": "Vue i18n Ally",
   "feedback.document": "Read Documentation",
   "feedback.github": "Star on Github",

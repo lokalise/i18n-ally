@@ -10,6 +10,7 @@ export class JavascriptParser extends Parser {
   constructor () {
     super(['javascript', 'typescript'], /\.?(jsx?|tsx?)$/g)
     registerTsNode()
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     this.esm = require('esm')(module, { cache: false })
   }
 

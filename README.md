@@ -150,7 +150,7 @@ In some cases, you may use modules, monorepo or other philosophies to organize y
 
 `vue-i18n-ally.localesPaths` accept an array of glob patterns which allows you to specify the folders containing your locale files.
 
-`vue-i18n-ally.matchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored.
+`vue-i18n-ally.filenameMatchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored.
 
 **For example**, you have following directory structure need to be config.
 
@@ -176,7 +176,7 @@ You could change your config like this:
   "vue-i18n-ally.localesPaths": [
     "packages/**/**/i18n"
   ],
-  "vue-i18n-ally.matchRegex": "^([\\w-]*)\\.messages\\.json",
+  "vue-i18n-ally.filenameMatchRegex": "^([\\w-]*)\\.messages\\.json",
 }
 ```
 

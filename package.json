@@ -308,6 +308,16 @@
           "default": "",
           "description": "%config.match_regex%"
         },
+        "vue-i18n-ally.includeSubfolders": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.include_subfolders%"
+        },
+        "vue-i18n-ally.fullReloadOnChanged": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.full_reload_on_changed%"
+        },
         "vue-i18n-ally.forceEnabled": {
           "type": "boolean",
           "default": false,

@@ -254,9 +254,8 @@ export class LocaleLoader extends Loader {
     return stat.isDirectory()
   }
 
-  private async loadDirectory (rootPath: string) {
+  private async loadDirectory (rootPath: string, dirStructure: 'auto' | 'file'| 'dir') {
     const paths = await fs.readdir(rootPath)
-    const dirStructure = Config.dirStructure
 
     for (const filename of paths) {
       const filepath = path.resolve(rootPath, filename)
@@ -270,6 +269,8 @@ export class LocaleLoader extends Loader {
           const subfilepath = path.resolve(filepath, p)
           if (!await this.isDirectory(subfilepath))
             await this.loadFile(subfilepath, 'dir', rootPath)
+          else if (Config.includeSubfolders)
+            await this.loadDirectory(subfilepath, 'dir')
         }
       }
     }
@@ -296,6 +297,12 @@ export class LocaleLoader extends Loader {
 
       Log.info(`🐱‍🚀 Update detected <${type}> ${filepath} [${related}]`)
 
+      if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
+        Log.info('🐱‍🚀 Perfroming a full reload')
+        await this.loadAll()
+        this.update()
+        return
+      }
 
       switch (type) {
         case 'del':
@@ -306,7 +313,7 @@ export class LocaleLoader extends Loader {
         case 'change':
         case 'create':
           if (related !== base)
-            await this.loadFile(filepath,'dir', rootPath)
+            await this.loadFile(filepath, 'dir', rootPath)
           else
             await this.loadFile(filepath)
           this.update()
@@ -340,6 +347,7 @@ export class LocaleLoader extends Loader {
   }
 
   private async loadAll () {
+    this._files = {}
     let paths: string[] = []
     if (this.localesPaths.length > 0) {
       try {
@@ -359,7 +367,7 @@ export class LocaleLoader extends Loader {
       try {
         const fullpath = path.resolve(this.rootpath, pathname)
         Log.info(`\n📂 Loading locales under ${fullpath}`)
-        await this.loadDirectory(fullpath)
+        await this.loadDirectory(fullpath, Config.dirStructure)
         this.watchOn(fullpath)
       }
       catch (e) {
