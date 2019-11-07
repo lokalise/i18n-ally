@@ -63,6 +63,14 @@ export class ProgressMissingListView extends ProgressSubmenuView {
     super(root, 'view.progress_submenu.missing_keys', 'icon-unknown')
   }
 
+  get contextValue () {
+    const values: string[] = []
+
+    values.push('translatable')
+
+    return values.join('-')
+  }
+
   getItems () {
     return this.root.node.missingKeys
   }
