@@ -29,6 +29,7 @@ export abstract class ProgressSubmenuView extends ProgressView {
     public readonly icon?: string,
   ) {
     super(root.ctx, root.node)
+    this.id = `progress-${this.node.locale}-${labelKey}`
   }
 
   get iconPath () {
