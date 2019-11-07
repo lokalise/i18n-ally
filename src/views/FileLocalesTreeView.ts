@@ -2,7 +2,7 @@ import { ExtensionContext, window, commands } from 'vscode'
 import { KeyDetector, LocaleNode } from '../core'
 import { ExtensionModule } from '../modules'
 import { isLanguageIdSupported } from '../meta'
-import { LocalesTreeProvider } from './LocalesTreeView'
+import { LocalesTreeProvider, LocaleTreeView } from './LocalesTreeView'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
   protected name = 'FileLocalesTreeProvider'
@@ -44,11 +44,11 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     for (const keypath of shadowPaths) {
       let node = this.loader.getTreeNodeByKey(keypath)
       if (node && node.type === 'tree') {
-        roots.push(this.newItem(node))
+        roots.push(new LocaleTreeView(this.ctx, node))
       }
       else {
         node = new LocaleNode({ keypath, shadow: true })
-        roots.push(this.newItem(node))
+        roots.push(new LocaleTreeView(this.ctx, node))
       }
     }
 

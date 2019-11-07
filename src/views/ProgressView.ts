@@ -4,17 +4,19 @@ import { ExtensionModule } from '../modules'
 import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log, getFlagFilename } from '../utils'
 import { notEmpty } from '../utils/utils'
 import i18n, { i18nKeys } from '../i18n'
+import { BasicTreeView } from './Basic'
+import { LocaleTreeView } from './LocalesTreeView'
 
-export abstract class ProgressView extends TreeItem {
+export abstract class ProgressView extends BasicTreeView {
   constructor (
     public readonly ctx: ExtensionContext,
     public readonly node: Coverage
   ) {
-    super(decorateLocale(node.locale))
+    super(ctx)
   }
 
-  async getChildren (): Promise<ProgressView[]> {
-    return []
+  getLabel () {
+    return decorateLocale(this.node.locale)
   }
 
   collapsibleState = TreeItemCollapsibleState.Collapsed
@@ -59,7 +61,25 @@ export class ProgressMissingListView extends ProgressSubmenuView {
   }
 
   async getChildren () {
-    return this.root.node.missingKeys.map(key => new ProgressMissingKeyView(this.root, key))
+    return this.root.node.missingKeys
+      .map(key => CurrentFile.loader.getNodeByKey(key))
+      .map(node => node && new LocaleTreeView(this.ctx, node, true))
+      .filter(item => item) as LocaleTreeView[]
+  }
+}
+
+export class ProgressTranslatedListView extends ProgressSubmenuView {
+  constructor (
+    protected root: ProgressRootView,
+  ) {
+    super(root, 'view.progress_submenu.missing_keys', ` (${root.node.translated})`)
+  }
+
+  async getChildren () {
+    return this.root.node.translatedKeys
+      .map(key => CurrentFile.loader.getNodeByKey(key))
+      .map(node => node && new LocaleTreeView(this.ctx, node))
+      .filter(item => item) as LocaleTreeView[]
   }
 }
 
@@ -116,14 +136,17 @@ export class ProgressRootView extends ProgressView {
   }
 
   async getChildren () {
-    return [new ProgressMissingListView(this)]
+    return [
+      new ProgressTranslatedListView(this),
+      new ProgressMissingListView(this),
+    ]
   }
 }
 
-export class ProgressProvider implements TreeDataProvider<ProgressView> {
+export class ProgressProvider implements TreeDataProvider<BasicTreeView> {
   protected name = 'ProgressProvider'
-  private _onDidChangeTreeData: EventEmitter<ProgressView | undefined> = new EventEmitter<ProgressView | undefined>()
-  readonly onDidChangeTreeData: Event<ProgressView | undefined> = this._onDidChangeTreeData.event
+  private _onDidChangeTreeData: EventEmitter<BasicTreeView | undefined> = new EventEmitter<BasicTreeView | undefined>()
+  readonly onDidChangeTreeData: Event<BasicTreeView | undefined> = this._onDidChangeTreeData.event
   private loader: Loader
 
   constructor (
@@ -142,13 +165,13 @@ export class ProgressProvider implements TreeDataProvider<ProgressView> {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: ProgressView): TreeItem {
+  getTreeItem (element: BasicTreeView): TreeItem {
     return element
   }
 
-  async getChildren (element?: ProgressView) {
+  async getChildren (element?: BasicTreeView) {
     if (element)
-      return element.getChildren()
+      return await element.getChildren()
 
     return Object.values(Global.allLocales)
       .map(node => this.loader.getCoverage(node))

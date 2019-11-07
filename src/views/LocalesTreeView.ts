@@ -3,21 +3,22 @@ import { sortBy } from 'lodash'
 import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale, NodeHelper, Log, getFlagFilename } from '../utils'
+import { BasicTreeView } from './Basic'
 
-export class LocaleTreeItem extends TreeItem {
+export class LocaleTreeView extends BasicTreeView {
   constructor (
-    private ctx: ExtensionContext,
+    ctx: ExtensionContext,
     public readonly node: Node,
     public flatten = false
   ) {
-    super('')
+    super(ctx)
   }
 
   get tooltip (): string {
     return this.node.keypath
   }
 
-  get label (): string {
+  getLabel (): string {
     if (this.node.type === 'record') {
       return decorateLocale(this.node.locale)
     }
@@ -27,8 +28,6 @@ export class LocaleTreeItem extends TreeItem {
         : this.node.keyname
     }
   }
-
-  set label (_) {}
 
   get collapsibleState () {
     if (this.node.type === 'record')
@@ -92,17 +91,33 @@ export class LocaleTreeItem extends TreeItem {
 
     return values.join('-')
   }
+
+  async getChildren () {
+    let nodes: Node[] = []
+
+    if (this.node.type === 'tree')
+      nodes = Object.values(this.node.children)
+
+    else if (this.node.type === 'node')
+      nodes = Object.values(CurrentFile.loader.getShadowLocales(this.node))
+
+    const items = nodes
+      // .filter(node => this.filter(node))
+      .map(node => new LocaleTreeView(this.ctx, node, false))
+
+    return items
+  }
 }
 
-export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
+export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeView> {
   protected loader: Loader
   protected name = 'LocalesTreeProvider'
   private _flatten: boolean
-  private _onDidChangeTreeData: EventEmitter<LocaleTreeItem | undefined> = new EventEmitter<LocaleTreeItem | undefined>()
-  readonly onDidChangeTreeData: Event<LocaleTreeItem | undefined> = this._onDidChangeTreeData.event
+  private _onDidChangeTreeData: EventEmitter<LocaleTreeView | undefined> = new EventEmitter<LocaleTreeView | undefined>()
+  readonly onDidChangeTreeData: Event<LocaleTreeView | undefined> = this._onDidChangeTreeData.event
 
   constructor (
-    private ctx: ExtensionContext,
+    public readonly ctx: ExtensionContext,
     public includePaths?: string[],
     flatten = false,
   ) {
@@ -120,13 +135,8 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: LocaleTreeItem): TreeItem {
+  getTreeItem (element: LocaleTreeView): TreeItem {
     return element
-  }
-
-  newItem (node: Node, flatten?: boolean) {
-    flatten = flatten === undefined ? this.flatten : flatten
-    return new LocaleTreeItem(this.ctx, node, flatten)
   }
 
   get flatten () {
@@ -163,32 +173,24 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
 
     const items = nodes
       .filter(node => this.filter(node, true))
-      .map(node => this.newItem(node))
+      .map(node => new LocaleTreeView(this.ctx, node, this.flatten))
 
     return this.sort(items)
   }
 
-  sort (elements: LocaleTreeItem[]) {
+  sort (elements: LocaleTreeView[]) {
     return sortBy(elements, 'node.type', 'node.keypath')
   }
 
-  async getChildren (element?: LocaleTreeItem) {
-    if (!element)
-      return this.getRoots()
+  async getChildren (element?: LocaleTreeView) {
+    let elements: LocaleTreeView[] = []
 
-    let nodes: Node[] = []
+    if (element)
+      elements = await element.getChildren()
+    else
+      elements = this.getRoots()
 
-    if (element.node.type === 'tree')
-      nodes = Object.values(element.node.children)
-
-    else if (element.node.type === 'node')
-      nodes = Object.values(this.loader.getShadowLocales(element.node))
-
-    const items = nodes
-      .filter(node => this.filter(node))
-      .map(r => this.newItem(r, false))
-
-    return this.sort(items)
+    return this.sort(elements)
   }
 }
 

@@ -158,22 +158,22 @@
       "view/item/context": [
         {
           "command": "extension.vue-i18n-ally.open-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /openable/",
+          "when": "view =~ /locales/ && viewItem =~ /openable/",
           "group": "inline@1"
         },
         {
           "command": "extension.vue-i18n-ally.copy-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /node/",
+          "when": "view =~ /locales/ && viewItem =~ /node/",
           "group": "inline@2"
         },
         {
           "command": "extension.vue-i18n-ally.translate-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /translatable/",
+          "when": "view =~ /locales/ && viewItem =~ /translatable/",
           "group": "inline@3"
         },
         {
           "command": "extension.vue-i18n-ally.edit-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /editable/",
+          "when": "view =~ /locales/ && viewItem =~ /editable/",
           "group": "inline@4"
         },
         {
@@ -186,11 +186,11 @@
         },
         {
           "command": "extension.vue-i18n-ally.delete-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /node/"
+          "when": "view =~ /locales/ && viewItem =~ /node/"
         },
         {
           "command": "extension.vue-i18n-ally.rename-key",
-          "when": "view =~ /locales-tree/ && viewItem =~ /node/"
+          "when": "view =~ /locales/ && viewItem =~ /node/"
         },
         {
           "command": "extension.vue-i18n-ally.locale-visibility-show",

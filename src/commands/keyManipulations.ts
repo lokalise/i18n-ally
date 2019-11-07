@@ -3,7 +3,7 @@ import { window, commands, workspace, Selection, TextEditorRevealType, env } fro
 import { Global, Commands, LocaleRecord, Node, Config, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { decorateLocale, Log } from '../utils'
-import { LocaleTreeItem } from '../views/LocalesTreeView'
+import { LocaleTreeView } from '../views/LocalesTreeView'
 import i18n from '../i18n'
 import { Translator } from '../core/Translator'
 
@@ -13,11 +13,11 @@ interface CommandOptions {
   from?: string
 }
 
-function getNode (item?: LocaleTreeItem | CommandOptions) {
+function getNode (item?: LocaleTreeView | CommandOptions) {
   if (!item)
     return
 
-  if (item instanceof LocaleTreeItem)
+  if (item instanceof LocaleTreeView)
     return item.node
   return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
 }
@@ -44,14 +44,14 @@ async function getRecordFromNode (node: Node, defaultLocale?: string) {
 const m: ExtensionModule = (ctx) => {
   return [
     commands.registerCommand(Commands.copy_key,
-      async ({ node }: LocaleTreeItem) => {
+      async ({ node }: LocaleTreeView) => {
         // @ts-ignore
         await env.clipboard.writeText(`$t('${node.keypath}')`)
         window.showInformationMessage(i18n.t('prompt.key_copied'))
       }),
 
     commands.registerCommand(Commands.translate_key,
-      async (item?: LocaleTreeItem | CommandOptions) => {
+      async (item?: LocaleTreeView | CommandOptions) => {
         const node = getNode(item)
         if (!node)
           return
@@ -59,7 +59,7 @@ const m: ExtensionModule = (ctx) => {
         if (node.type === 'tree')
           return
 
-        const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
+        const from = (item && !(item instanceof LocaleTreeView) && item.from) || Config.sourceLanguage
 
         try {
           await Translator.MachineTranslate(CurrentFile.loader, node, from)
@@ -70,7 +70,7 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.open_key,
-      async (item?: LocaleTreeItem | CommandOptions) => {
+      async (item?: LocaleTreeView | CommandOptions) => {
         const node = getNode(item)
         if (!node)
           return
@@ -108,7 +108,7 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.rename_key,
-      async (item?: LocaleTreeItem | string) => {
+      async (item?: LocaleTreeView | string) => {
         if (!item)
           return
 
@@ -141,7 +141,7 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.edit_key,
-      async (item?: LocaleTreeItem | CommandOptions) => {
+      async (item?: LocaleTreeView | CommandOptions) => {
         let node = getNode(item)
 
         if (!node)
@@ -178,7 +178,7 @@ const m: ExtensionModule = (ctx) => {
       }),
 
     commands.registerCommand(Commands.delete_key,
-      async ({ node }: LocaleTreeItem) => {
+      async ({ node }: LocaleTreeView) => {
         let records: LocaleRecord[] = []
 
         if (node.type === 'tree')
