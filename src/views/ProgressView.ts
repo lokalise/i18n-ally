@@ -46,6 +46,15 @@ export abstract class ProgressSubmenuView extends ProgressView {
 
   abstract getKeys (): string[]
 
+  get collapsibleState () {
+    if (this.getKeys().length)
+      return TreeItemCollapsibleState.Collapsed
+    else
+      return TreeItemCollapsibleState.None
+  }
+
+  set collapsibleState (_) {}
+
   async getChildren () {
     const locales = Array.from(new Set([this.node.locale, Config.sourceLanguage]))
 
