@@ -47,7 +47,7 @@ export abstract class ProgressSubmenuView extends ProgressView {
   abstract getKeys (): string[]
 
   async getChildren () {
-    const locales = Array.from(new Set([this.node.locale, Config.displayLanguage]))
+    const locales = Array.from(new Set([this.node.locale, Config.sourceLanguage]))
 
     return this.getKeys()
       .map(key => CurrentFile.loader.getNodeByKey(key))

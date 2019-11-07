@@ -40,7 +40,7 @@ export async function TranslateMultipleKeys (item: ProgressMissingListView) {
     window.showInformationMessage(i18n.t('prompt.translate_missing_in_progress'))
     for (const key of keys)
       await TranslateSingleKey({ locale: to, keypath: key })
-    window.showInformationMessage(i18n.t('prompt.translate_missing_done'))
+    window.showInformationMessage(i18n.t('prompt.translate_missing_done', keys.length))
   }
 }
 

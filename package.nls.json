@@ -59,7 +59,7 @@
   "prompt.key_already_exists": "Key already exists. Do you want to override the existing value or re-enter the path?",
   "prompt.translate_missing_confirm": "Are you sure to translate {0} missing keys for language \"{1}\" from \"{2}\"?\n\nThis operation cannot be undone.",
   "prompt.translate_missing_in_progress": "Translating...",
-  "prompt.translate_missing_done": "Translating finished.",
+  "prompt.translate_missing_done": "{0} keys translated.",
   "prompt.key_copied": "Key copied.",
   "prompt.keystyle_flat": "Flat style",
   "prompt.keystyle_flat_example": "for example: { \"a.b.c\": \"...\" }",
