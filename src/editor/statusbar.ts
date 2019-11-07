@@ -1,27 +1,37 @@
 import { window, Disposable, StatusBarAlignment } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { Config, Global } from '../core'
+import { Config, Global, CurrentFile } from '../core'
 import { Commands } from '../core/Commands'
+import i18n from '../i18n'
 
 const statusbar: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []
-  const bar = window.createStatusBarItem(StatusBarAlignment.Left)
+  const priority = -1000
+  const bar1 = window.createStatusBarItem(StatusBarAlignment.Left, priority + 1)
+  const bar2 = window.createStatusBarItem(StatusBarAlignment.Left, priority)
   function update () {
-    if (!Global.enabled)
-      return bar.hide()
+    if (!Global.enabled) {
+      bar1.hide()
+      bar2.hide()
+      return
+    }
     try {
-      bar.text = `$(globe) ${Config.sourceLanguage.toUpperCase()} → ${Config.displayLanguage.toUpperCase()}`
-      bar.command = Commands.config_display_language
-      bar.show()
+      bar1.text = `$(globe) ${Config.sourceLanguage.toUpperCase()}`
+      bar1.command = Commands.config_source_language
+      bar1.tooltip = i18n.t('command.config_source_language')
+      bar1.show()
+      bar2.text = `$(eye) ${Config.displayLanguage.toUpperCase()}`
+      bar2.command = Commands.config_display_language
+      bar2.tooltip = i18n.t('command.config_display_language')
+      bar2.show()
     }
     catch (e) {
-      bar.hide()
+      bar1.hide()
+      bar2.hide()
     }
   }
 
-  disposables.push(Global.onDidChangeEnabled(() => update()))
-  if (Global.loader)
-    disposables.push(Global.loader.onDidChange(() => update()))
+  disposables.push(CurrentFile.loader.onDidChange(() => update()))
 
   update()
 
