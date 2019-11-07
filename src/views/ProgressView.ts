@@ -1,7 +1,7 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window, TreeItemCollapsibleState } from 'vscode'
 import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log, getFlagFilename } from '../utils'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log } from '../utils'
 import { notEmpty } from '../utils/utils'
 import i18n, { i18nKeys } from '../i18n'
 import { BasicTreeView } from './Basic'
@@ -101,13 +101,9 @@ export class ProgressRootView extends ProgressView {
   }
 
   get iconPath () {
-    if (!this.visible) {
-      return {
-        light: this.ctx.asAbsolutePath('res/light/eye-off-fade.svg'),
-        dark: this.ctx.asAbsolutePath('res/dark/eye-off-fade.svg'),
-      }
-    }
-    return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(this.node.locale)}`)
+    if (!this.visible)
+      return this.getIcon('eye-off-fade')
+    return this.getFlagIcon(this.node.locale)
   }
 
   get contextValue () {

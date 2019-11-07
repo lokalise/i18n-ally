@@ -1,4 +1,5 @@
 import { ExtensionContext, TreeItem } from 'vscode'
+import { getFlagFilename } from '../utils/utils'
 
 export abstract class BasicTreeView extends TreeItem {
   constructor (
@@ -23,5 +24,16 @@ export abstract class BasicTreeView extends TreeItem {
 
   set label (v) {
     this.setLabel(v)
+  }
+
+  getIcon (name: string) {
+    return {
+      light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
+      dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
+    }
+  }
+
+  getFlagIcon (locale: string) {
+    return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(locale)}`)
   }
 }

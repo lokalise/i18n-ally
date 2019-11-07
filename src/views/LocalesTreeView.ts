@@ -2,7 +2,7 @@ import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider,
 import { sortBy } from 'lodash'
 import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale, NodeHelper, Log, getFlagFilename } from '../utils'
+import { decorateLocale, NodeHelper, Log } from '../utils'
 import { BasicTreeView } from './Basic'
 
 export class LocaleTreeView extends BasicTreeView {
@@ -48,23 +48,16 @@ export class LocaleTreeView extends BasicTreeView {
     return ''
   }
 
-  getIcon (name: string) {
-    return {
-      light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
-      dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
-    }
-  }
-
   get iconPath () {
     if (Translator.isTranslating(this.node))
       return this.getIcon('loading')
 
     if (this.node.type === 'record') {
-      return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(this.node.locale)}`)
+      return this.getFlagIcon(this.node.locale)
     }
 
     else if (this.node.shadow) {
-      return this.ctx.asAbsolutePath('res/icon-unknown.svg')
+      return this.getIcon('icon-unknown')
     }
     else if (this.node.type === 'tree') {
       if (this.node.isCollection)
@@ -77,7 +70,7 @@ export class LocaleTreeView extends BasicTreeView {
         return this.getIcon('string')
 
       else
-        return this.getIcon('missing')
+        return this.getIcon('string-missing')
     }
   }
 
