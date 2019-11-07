@@ -1,8 +1,8 @@
-import { window, workspace } from 'vscode'
+import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
-import { MATCH_REG_DIR, MATCH_REG_FILE, EXT_NAMESPACE } from '../meta'
+import { MATCH_REG_DIR, MATCH_REG_FILE, EXT_NAMESPACE, EXT_ID } from '../meta'
 import { KeyStyle } from '.'
 
 export class Config {
@@ -187,6 +187,16 @@ export class Config {
 
   static get hasLocalesConfigured () {
     return !!this.localesPaths.length
+  }
+
+  static get extension () {
+    return extensions.getExtension(EXT_ID)
+  }
+
+  static get extensionPath () {
+    if (this.extension)
+      return this.extension.extensionPath
+    return undefined
   }
 
   // config
