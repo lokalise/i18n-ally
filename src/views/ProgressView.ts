@@ -193,8 +193,14 @@ export class ProgressProvider implements TreeDataProvider<BasicTreeView> {
 }
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
-  const provider = new ProgressProvider(ctx)
-  return window.registerTreeDataProvider('locales-progress', provider)
+  const treeDataProvider = new ProgressProvider(ctx)
+  window.createTreeView('locales-progress', {
+    treeDataProvider,
+    // @ts-ignore
+    showCollapseAll: true,
+  })
+
+  return []
 }
 
 export default m
