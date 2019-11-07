@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.31.0](https://github.com/antfu/vue-i18n-ally/compare/v0.30.0...v0.31.0) (2019-11-07)
+
+
+### ⚡ Features
+
+* translate all missing keys ([940fe20](https://github.com/antfu/vue-i18n-ally/commit/940fe20))
+
+
+### 🌍 Internationalization
+
+* update zh-cn messages ([a696cbe](https://github.com/antfu/vue-i18n-ally/commit/a696cbe))
+
+
+### 🐞 Bug Fixes
+
+* disable expanding for tree with zero child ([35e9019](https://github.com/antfu/vue-i18n-ally/commit/35e9019))
+* improved status bar ([06f8ea6](https://github.com/antfu/vue-i18n-ally/commit/06f8ea6))
+
+
+### 🔮 Refactor
+
+* extract manipulations into files ([8a8b2df](https://github.com/antfu/vue-i18n-ally/commit/8a8b2df))
+
 ## [0.30.0](https://github.com/antfu/vue-i18n-ally/compare/v0.29.8...v0.30.0) (2019-11-07)
 
 
