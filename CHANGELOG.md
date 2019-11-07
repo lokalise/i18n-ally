@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.31.2](https://github.com/antfu/vue-i18n-ally/compare/v0.31.1...v0.31.2) (2019-11-07)
+
+
+### 🐞 Bug Fixes
+
+* preserve expendable state for progress view ([ac3ad6b](https://github.com/antfu/vue-i18n-ally/commit/ac3ad6be3fe7ff45e5935bfccf7f16ca216dfc54))
+* sort keys in progress view ([99fedf9](https://github.com/antfu/vue-i18n-ally/commit/99fedf9f1338ec0d0777b4958ee79b7047c9f51a))
+
 ### [0.31.1](https://github.com/antfu/vue-i18n-ally/compare/v0.31.0...v0.31.1) (2019-11-07)
 
 
