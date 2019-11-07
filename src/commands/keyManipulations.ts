@@ -53,6 +53,8 @@ const m: ExtensionModule = (ctx) => {
     commands.registerCommand(Commands.translate_key,
       async (item?: LocaleTreeView | CommandOptions) => {
         const node = getNode(item)
+        const targetLocales = item instanceof LocaleTreeView ? item.listedLocales : undefined
+
         if (!node)
           return
 
@@ -62,7 +64,7 @@ const m: ExtensionModule = (ctx) => {
         const from = (item && !(item instanceof LocaleTreeView) && item.from) || Config.sourceLanguage
 
         try {
-          await Translator.MachineTranslate(CurrentFile.loader, node, from)
+          await Translator.MachineTranslate(CurrentFile.loader, node, from, targetLocales)
         }
         catch (err) {
           Log.error(err.toString())

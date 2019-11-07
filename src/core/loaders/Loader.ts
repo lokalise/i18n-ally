@@ -219,28 +219,30 @@ export abstract class Loader extends Disposable {
     return trans[locale]
   }
 
-  getShadowLocales (node: LocaleNode) {
+  getShadowLocales (node: LocaleNode, listedLocales?: string[]) {
     const locales: Record<string, LocaleRecord> = {}
 
-    Global.getVisibleLocales(this.locales)
-      .forEach((locale) => {
-        if (node.locales[locale]) {
+    listedLocales = listedLocales || Global.getVisibleLocales(this.locales)
+
+    listedLocales.forEach((locale) => {
+      if (node.locales[locale]) {
         // locales already exists
-          locales[locale] = node.locales[locale]
-        }
-        else {
+        locales[locale] = node.locales[locale]
+      }
+      else {
         // create shadow locale
-          locales[locale] = new LocaleRecord({
-            locale,
-            value: '',
-            shadow: true,
-            keyname: node.keyname,
-            keypath: node.keypath,
-            filepath: this.getShadowFilePath(node.keypath, locale),
-            readonly: node.readonly,
-          })
-        }
-      })
+        locales[locale] = new LocaleRecord({
+          locale,
+          value: '',
+          shadow: true,
+          keyname: node.keyname,
+          keypath: node.keypath,
+          filepath: this.getShadowFilePath(node.keypath, locale),
+          readonly: node.readonly,
+        })
+      }
+    })
+
     return locales
   }
 

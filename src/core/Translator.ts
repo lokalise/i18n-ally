@@ -18,10 +18,10 @@ export class Translator {
   private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
   static readonly onDidChange = Translator._onDidChange.event
 
-  static async MachineTranslate (loader: Loader, node: LocaleNode| LocaleRecord, sourceLanguage?: string) {
+  static async MachineTranslate (loader: Loader, node: LocaleNode| LocaleRecord, sourceLanguage?: string, targetLocales?: string[]) {
     sourceLanguage = sourceLanguage || Config.sourceLanguage
     if (node.type === 'node')
-      return await this.MachineTranslateNode(loader, node, sourceLanguage)
+      return await this.MachineTranslateNode(loader, node, sourceLanguage, targetLocales)
 
     await this.MachineTranslateRecord(loader, node, sourceLanguage)
   }
@@ -78,8 +78,8 @@ export class Translator {
     }
   }
 
-  private static async MachineTranslateNode (loader: Loader, node: LocaleNode, sourceLanguage: string) {
-    const tasks = Object.values(loader.getShadowLocales(node))
+  private static async MachineTranslateNode (loader: Loader, node: LocaleNode, sourceLanguage: string, targetLocales?: string[]) {
+    const tasks = Object.values(loader.getShadowLocales(node, targetLocales))
       .filter(record => record.locale !== sourceLanguage)
       .map(record => this.MachineTranslateRecord(loader, record, sourceLanguage))
 

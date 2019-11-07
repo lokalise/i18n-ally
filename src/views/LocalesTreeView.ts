@@ -9,7 +9,9 @@ export class LocaleTreeView extends BasicTreeView {
   constructor (
     ctx: ExtensionContext,
     public readonly node: Node,
-    public flatten = false
+    public flatten = false,
+    public readonly displayLocale?: string,
+    public readonly listedLocales?: string[]
   ) {
     super(ctx)
   }
@@ -39,7 +41,9 @@ export class LocaleTreeView extends BasicTreeView {
   set collapsibleState (_) {}
 
   get description (): string {
-    if (this.node.type === 'node' || this.node.type === 'record')
+    if (this.node.type === 'node')
+      return this.node.getValue(this.displayLocale) || this.node.value
+    if (this.node.type === 'record')
       return this.node.value
     return ''
   }
@@ -99,10 +103,9 @@ export class LocaleTreeView extends BasicTreeView {
       nodes = Object.values(this.node.children)
 
     else if (this.node.type === 'node')
-      nodes = Object.values(CurrentFile.loader.getShadowLocales(this.node))
+      nodes = Object.values(CurrentFile.loader.getShadowLocales(this.node, this.listedLocales))
 
     const items = nodes
-      // .filter(node => this.filter(node))
       .map(node => new LocaleTreeView(this.ctx, node, false))
 
     return items
@@ -171,11 +174,8 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeView> {
       ? Object.values(this.loader.flattenLocaleTree)
       : Object.values(this.loader.root.children)
 
-    const items = nodes
-      .filter(node => this.filter(node, true))
+    return nodes
       .map(node => new LocaleTreeView(this.ctx, node, this.flatten))
-
-    return this.sort(items)
   }
 
   sort (elements: LocaleTreeView[]) {
@@ -189,6 +189,8 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeView> {
       elements = await element.getChildren()
     else
       elements = this.getRoots()
+
+    elements = elements.filter(el => this.filter(el.node, true))
 
     return this.sort(elements)
   }

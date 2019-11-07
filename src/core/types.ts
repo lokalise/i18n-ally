@@ -75,12 +75,13 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
     this.locales = data.locales || {}
   }
 
-  getValue (locale: string, fallback = '') {
+  getValue (locale?: string, fallback = '') {
+    locale = locale || Config.displayLanguage
     return (this.locales[locale] && this.locales[locale].value) || fallback
   }
 
   get value () {
-    return this.getValue(Config.displayLanguage)
+    return this.getValue()
   }
 }
 

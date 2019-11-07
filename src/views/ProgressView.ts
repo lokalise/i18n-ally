@@ -22,49 +22,43 @@ export abstract class ProgressView extends BasicTreeView {
   collapsibleState = TreeItemCollapsibleState.Collapsed
 }
 
-export class ProgressSubmenuView extends ProgressView {
+export abstract class ProgressSubmenuView extends ProgressView {
   constructor (
     protected root: ProgressRootView,
     public readonly labelKey: i18nKeys,
-    public suffix: string = ''
   ) {
     super(root.ctx, root.node)
   }
 
-  get label () {
-    return i18n.t(this.labelKey) + this.suffix
+  getLabel () {
+    return i18n.t(this.labelKey) + this.getSuffix()
   }
 
-  set label (_) {}
-}
-
-export class ProgressMissingKeyView extends ProgressView {
-  constructor (
-    protected root: ProgressRootView,
-    public readonly key: string,
-  ) {
-    super(root.ctx, root.node)
+  getSuffix () {
+    return ` (${this.getItems().length})`
   }
 
-  get label () {
-    return this.key
-  }
+  abstract getItems (): string[]
 
-  set label (_) {}
+  async getChildren () {
+    const locales = Array.from(new Set([this.node.locale, Config.displayLanguage]))
+
+    return this.getItems()
+      .map(key => CurrentFile.loader.getNodeByKey(key))
+      .map(node => node && new LocaleTreeView(this.ctx, node, true, this.node.locale, locales))
+      .filter(item => item) as LocaleTreeView[]
+  }
 }
 
 export class ProgressMissingListView extends ProgressSubmenuView {
   constructor (
     protected root: ProgressRootView,
   ) {
-    super(root, 'view.progress_submenu.missing_keys', ` (${root.node.missing})`)
+    super(root, 'view.progress_submenu.missing_keys')
   }
 
-  async getChildren () {
+  getItems () {
     return this.root.node.missingKeys
-      .map(key => CurrentFile.loader.getNodeByKey(key))
-      .map(node => node && new LocaleTreeView(this.ctx, node, true))
-      .filter(item => item) as LocaleTreeView[]
   }
 }
 
@@ -72,14 +66,12 @@ export class ProgressTranslatedListView extends ProgressSubmenuView {
   constructor (
     protected root: ProgressRootView,
   ) {
-    super(root, 'view.progress_submenu.missing_keys', ` (${root.node.translated})`)
+    // @ts-ignore
+    super(root, 'view.progress_submenu.translated_keys')
   }
 
-  async getChildren () {
+  getItems () {
     return this.root.node.translatedKeys
-      .map(key => CurrentFile.loader.getNodeByKey(key))
-      .map(node => node && new LocaleTreeView(this.ctx, node))
-      .filter(item => item) as LocaleTreeView[]
   }
 }
 
