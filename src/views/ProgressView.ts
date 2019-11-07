@@ -26,8 +26,14 @@ export abstract class ProgressSubmenuView extends ProgressView {
   constructor (
     protected root: ProgressRootView,
     public readonly labelKey: i18nKeys,
+    public readonly icon?: string
   ) {
     super(root.ctx, root.node)
+  }
+
+  get iconPath () {
+    if (this.icon)
+      return this.getIcon(this.icon)
   }
 
   getLabel () {
@@ -54,7 +60,7 @@ export class ProgressMissingListView extends ProgressSubmenuView {
   constructor (
     protected root: ProgressRootView,
   ) {
-    super(root, 'view.progress_submenu.missing_keys')
+    super(root, 'view.progress_submenu.missing_keys', 'icon-unknown')
   }
 
   getItems () {
@@ -67,7 +73,7 @@ export class ProgressTranslatedListView extends ProgressSubmenuView {
     protected root: ProgressRootView,
   ) {
     // @ts-ignore
-    super(root, 'view.progress_submenu.translated_keys')
+    super(root, 'view.progress_submenu.translated_keys', 'checkmark')
   }
 
   getItems () {
