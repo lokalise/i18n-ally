@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.30.0](https://github.com/antfu/vue-i18n-ally/compare/v0.29.8...v0.30.0) (2019-11-07)
+
+
+### ⚡ Features
+
+* new config "fullReloadOnChanged" ([4a931e7](https://github.com/antfu/vue-i18n-ally/commit/4a931e7))
+* translating for records listed under progress view ([29413dd](https://github.com/antfu/vue-i18n-ally/commit/29413dd))
+
+
+### 🐞 Bug Fixes
+
+* duplicate watch ([21354c3](https://github.com/antfu/vue-i18n-ally/commit/21354c3))
+
+
+### 🔮 Refactor
+
+* expandable progress item ([81a346d](https://github.com/antfu/vue-i18n-ally/commit/81a346d))
+* extract tree view logic ([6e23fda](https://github.com/antfu/vue-i18n-ally/commit/6e23fda))
+* reuse tree view code ([b8f5c18](https://github.com/antfu/vue-i18n-ally/commit/b8f5c18))
+
 ### [0.29.8](https://github.com/antfu/vue-i18n-ally/compare/v0.29.7...v0.29.8) (2019-10-28)
 
 
