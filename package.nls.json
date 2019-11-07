@@ -72,5 +72,6 @@
   "view.help_feedback": "Help & Feedback",
   "view.i18n_keys": "Vue i18n Keys",
   "view.progress": "Progress",
-  "view.tree": "Tree"
+  "view.tree": "Tree",
+  "view.progress_submenu.missing_keys": "Missing keys"
 }

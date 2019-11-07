@@ -121,9 +121,12 @@ export interface FlattenLocaleTree extends Record<string, LocaleNode> {}
 
 export interface Coverage {
   locale: string
-  keys: string[]
   translated: number
   total: number
+  missing: number
+  totalKeys: string[]
+  translatedKeys: string[]
+  missingKeys: string[]
 }
 
 export interface PendingWrite {

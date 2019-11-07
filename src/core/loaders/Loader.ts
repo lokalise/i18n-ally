@@ -42,16 +42,22 @@ export abstract class Loader extends Disposable {
   }
 
   getCoverage (locale: string, keys?: string[]): Coverage | undefined {
-    keys = keys || Object.keys(this.flattenLocaleTree)
-    const total = keys.length
-    const translated = keys.filter((key) => {
+    const totalKeys = keys || Object.keys(this.flattenLocaleTree)
+    const translatedKeys = totalKeys.filter((key) => {
       return this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale)
     })
+    const missingKeys = totalKeys.filter(key => !translatedKeys.includes(key))
+    const total = totalKeys.length
+    const translated = translatedKeys.length
+    const missing = missingKeys.length
     return {
       locale,
       total,
-      translated: translated.length,
-      keys,
+      missing,
+      translated,
+      missingKeys,
+      totalKeys,
+      translatedKeys,
     }
   }
 
@@ -152,7 +158,7 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
-  getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
+  getValueByKey (keypath: string, locale?: string, clamp = true, stringifySpace?: number) {
     locale = locale || Config.displayLanguage
 
     const maxlength = Config.annotationMaxLength

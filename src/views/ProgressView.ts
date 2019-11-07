@@ -1,17 +1,69 @@
-import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window } from 'vscode'
+import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window, TreeItemCollapsibleState } from 'vscode'
 import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log, getFlagFilename } from '../utils'
 import { notEmpty } from '../utils/utils'
+import i18n, { i18nKeys } from '../i18n'
 
-export class ProgressItem extends TreeItem {
+export abstract class ProgressView extends TreeItem {
   constructor (
-    private ctx: ExtensionContext,
+    public readonly ctx: ExtensionContext,
     public readonly node: Coverage
   ) {
     super(decorateLocale(node.locale))
   }
 
+  async getChildren (): Promise<ProgressView[]> {
+    return []
+  }
+
+  collapsibleState = TreeItemCollapsibleState.Collapsed
+}
+
+export class ProgressSubmenuView extends ProgressView {
+  constructor (
+    protected root: ProgressRootView,
+    public readonly labelKey: i18nKeys,
+    public suffix: string = ''
+  ) {
+    super(root.ctx, root.node)
+  }
+
+  get label () {
+    return i18n.t(this.labelKey) + this.suffix
+  }
+
+  set label (_) {}
+}
+
+export class ProgressMissingKeyView extends ProgressView {
+  constructor (
+    protected root: ProgressRootView,
+    public readonly key: string,
+  ) {
+    super(root.ctx, root.node)
+  }
+
+  get label () {
+    return this.key
+  }
+
+  set label (_) {}
+}
+
+export class ProgressMissingListView extends ProgressSubmenuView {
+  constructor (
+    protected root: ProgressRootView,
+  ) {
+    super(root, 'view.progress_submenu.missing_keys', ` (${root.node.missing})`)
+  }
+
+  async getChildren () {
+    return this.root.node.missingKeys.map(key => new ProgressMissingKeyView(this.root, key))
+  }
+}
+
+export class ProgressRootView extends ProgressView {
   get description (): string {
     const rate = this.node.translated / this.node.total
     const percent = +(rate * 100).toFixed(1)
@@ -62,12 +114,16 @@ export class ProgressItem extends TreeItem {
 
     return context.join('-')
   }
+
+  async getChildren () {
+    return [new ProgressMissingListView(this)]
+  }
 }
 
-export class ProgressProvider implements TreeDataProvider<ProgressItem> {
+export class ProgressProvider implements TreeDataProvider<ProgressView> {
   protected name = 'ProgressProvider'
-  private _onDidChangeTreeData: EventEmitter<ProgressItem | undefined> = new EventEmitter<ProgressItem | undefined>()
-  readonly onDidChangeTreeData: Event<ProgressItem | undefined> = this._onDidChangeTreeData.event
+  private _onDidChangeTreeData: EventEmitter<ProgressView | undefined> = new EventEmitter<ProgressView | undefined>()
+  readonly onDidChangeTreeData: Event<ProgressView | undefined> = this._onDidChangeTreeData.event
   private loader: Loader
 
   constructor (
@@ -86,18 +142,18 @@ export class ProgressProvider implements TreeDataProvider<ProgressItem> {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: ProgressItem): TreeItem {
+  getTreeItem (element: ProgressView): TreeItem {
     return element
   }
 
-  async getChildren (element?: ProgressItem) {
+  async getChildren (element?: ProgressView) {
     if (element)
-      return [] // no child
+      return element.getChildren()
 
     return Object.values(Global.allLocales)
       .map(node => this.loader.getCoverage(node))
       .filter(notEmpty)
-      .map(cov => new ProgressItem(this.ctx, cov))
+      .map(cov => new ProgressRootView(this.ctx, cov))
   }
 }
 
