@@ -8,7 +8,7 @@ export class ComposedLoader extends Loader {
   constructor () {
     super('[Composed]')
     this._disposables.push(
-      Translator.onDidChange(() => this._onDidChange.fire())
+      Translator.onDidChange(() => this._onDidChange.fire()),
     )
   }
 
@@ -27,7 +27,7 @@ export class ComposedLoader extends Loader {
       loader.onDidChange((e) => {
         this._isFlattenLocaleTreeDirty = true
         this._onDidChange.fire(`${e}+${this.name}`)
-      })
+      }),
     )
     // this._onDidChange.fire(this.name)
   }
@@ -86,7 +86,7 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  getValueByKey (keypath: string, locale?: string, clamp: boolean = true, stringifySpace?: number) {
+  getValueByKey (keypath: string, locale?: string, clamp = true, stringifySpace?: number) {
     for (const loader of this._loaders.reverse()) {
       const value = loader.getValueByKey(keypath, locale, clamp, stringifySpace)
       if (value)

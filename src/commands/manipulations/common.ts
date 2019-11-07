@@ -30,7 +30,7 @@ export async function getRecordFromNode (node: Node, defaultLocale?: string) {
     const locales = CurrentFile.loader.getShadowLocales(node)
     const locale = defaultLocale || await window.showQuickPick(
       Global.visibleLocales,
-      { placeHolder: i18n.t('prompt.choice_locale') }
+      { placeHolder: i18n.t('prompt.choice_locale') },
     )
     if (!locale)
       return

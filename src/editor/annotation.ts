@@ -28,7 +28,7 @@ const annotation: ExtensionModule = (ctx) => {
       underlines.push({
         range: new Range(
           document.positionAt(start),
-          document.positionAt(end)
+          document.positionAt(end),
         ),
       })
 
@@ -52,7 +52,7 @@ const annotation: ExtensionModule = (ctx) => {
         annotations.push({
           range: new Range(
             document.positionAt(start - 1),
-            document.positionAt(end + 1)
+            document.positionAt(end + 1),
           ),
           renderOptions: {
             after: {

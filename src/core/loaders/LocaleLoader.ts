@@ -281,7 +281,7 @@ export class LocaleLoader extends Loader {
     const watcher = workspace.createFileSystemWatcher(
       new RelativePattern(
         rootPath,
-        '**/*'
+        '**/*',
       ),
     )
 

@@ -10,7 +10,7 @@ import { LocaleTreeView } from './LocalesTreeView'
 export abstract class ProgressView extends BasicTreeView {
   constructor (
     public readonly ctx: ExtensionContext,
-    public readonly node: Coverage
+    public readonly node: Coverage,
   ) {
     super(ctx)
   }
@@ -26,7 +26,7 @@ export abstract class ProgressSubmenuView extends ProgressView {
   constructor (
     protected root: ProgressRootView,
     public readonly labelKey: i18nKeys,
-    public readonly icon?: string
+    public readonly icon?: string,
   ) {
     super(root.ctx, root.node)
   }
@@ -41,15 +41,15 @@ export abstract class ProgressSubmenuView extends ProgressView {
   }
 
   getSuffix () {
-    return ` (${this.getItems().length})`
+    return ` (${this.getKeys().length})`
   }
 
-  abstract getItems (): string[]
+  abstract getKeys (): string[]
 
   async getChildren () {
     const locales = Array.from(new Set([this.node.locale, Config.displayLanguage]))
 
-    return this.getItems()
+    return this.getKeys()
       .map(key => CurrentFile.loader.getNodeByKey(key))
       .map(node => node && new LocaleTreeView(this.ctx, node, true, this.node.locale, locales))
       .filter(item => item) as LocaleTreeView[]
@@ -66,12 +66,13 @@ export class ProgressMissingListView extends ProgressSubmenuView {
   get contextValue () {
     const values: string[] = []
 
-    values.push('translatable')
+    if (this.node.locale !== Config.sourceLanguage)
+      values.push('translatable')
 
     return values.join('-')
   }
 
-  getItems () {
+  getKeys () {
     return this.root.node.missingKeys
   }
 }
@@ -84,7 +85,7 @@ export class ProgressTranslatedListView extends ProgressSubmenuView {
     super(root, 'view.progress_submenu.translated_keys', 'checkmark')
   }
 
-  getItems () {
+  getKeys () {
     return this.root.node.translatedKeys
   }
 }

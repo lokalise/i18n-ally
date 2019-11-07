@@ -19,7 +19,7 @@ export abstract class Parser {
   constructor (
     public readonly languageIds: string[],
     public readonly supportedExts: string|RegExp,
-    public options: ParserOptions = { indent: 2, tab: ' ' }
+    public options: ParserOptions = { indent: 2, tab: ' ' },
   ) {
     this.supportedExtsRegex = new RegExp(supportedExts)
   }

@@ -81,7 +81,7 @@ class HintProvider implements HoverProvider {
 const m: ExtensionModule = (ctx) => {
   return languages.registerHoverProvider(
     LANG_SELECTORS,
-    new HintProvider(ctx)
+    new HintProvider(ctx),
   )
 }
 

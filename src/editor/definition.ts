@@ -30,7 +30,7 @@ class DefinitionProvider {
       new Range(
         localeDocument.positionAt(start),
         localeDocument.positionAt(end),
-      )
+      ),
     )
   }
 }
@@ -39,7 +39,7 @@ const definition: ExtensionModule = () => {
   return [
     languages.registerDefinitionProvider(
       LANG_SELECTORS,
-      new DefinitionProvider()
+      new DefinitionProvider(),
     ),
   ]
 }

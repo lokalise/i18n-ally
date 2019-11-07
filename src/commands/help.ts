@@ -23,7 +23,7 @@ const m: ExtensionModule = (ctx) => {
         }]
         const result = await window.showInformationMessage(
           i18n.t('prompt.support'),
-          ...options.map(i => i.text)
+          ...options.map(i => i.text),
         )
         const selected = options.find(i => i.text === result)
         if (selected)

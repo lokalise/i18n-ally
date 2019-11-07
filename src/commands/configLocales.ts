@@ -10,7 +10,7 @@ export class ConfigLocalesGuide {
     const okText = i18n.t('prompt.config_locales_button')
     const result = await window.showInformationMessage(
       i18n.t('prompt.config_locales_info'),
-      okText
+      okText,
     )
 
     if (result !== okText)
@@ -68,7 +68,7 @@ export class ConfigLocalesGuide {
       Config.updateLocalesPaths(result)
 
       await window.showInformationMessage(
-        i18n.t('prompt.config_locales_auto_success', result.join(';').toString())
+        i18n.t('prompt.config_locales_auto_success', result.join(';').toString()),
       )
     }
     else {

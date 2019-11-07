@@ -36,7 +36,7 @@ const m: ExtensionModule = () => {
           { modal: true },
           Override,
           Skip,
-          Reenter
+          Reenter,
         )
 
         // canceled

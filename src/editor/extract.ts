@@ -37,7 +37,7 @@ const m: ExtensionModule = () => {
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],
-      }
+      },
     ),
   ]
 }

@@ -40,7 +40,7 @@ const items: FeedbackItemDefintion[] = [{
 export class FeedbackItem extends TreeItem {
   constructor (
     ctx: ExtensionContext,
-    define: FeedbackItemDefintion
+    define: FeedbackItemDefintion,
   ) {
     super(define.text)
     this.iconPath = {

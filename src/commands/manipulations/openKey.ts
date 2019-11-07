@@ -32,7 +32,7 @@ export async function OpenKey (item?: LocaleTreeView | CommandOptions) {
   if (range) {
     editor.selection = new Selection(
       document.positionAt(range.end),
-      document.positionAt(range.start)
+      document.positionAt(range.start),
     )
     editor.revealRange(editor.selection, TextEditorRevealType.InCenter)
     commands.executeCommand('workbench.action.focusActiveEditorGroup')

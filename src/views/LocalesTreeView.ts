@@ -11,7 +11,7 @@ export class LocaleTreeView extends BasicTreeView {
     public readonly node: Node,
     public flatten = false,
     public readonly displayLocale?: string,
-    public readonly listedLocales?: string[]
+    public readonly listedLocales?: string[],
   ) {
     super(ctx)
   }

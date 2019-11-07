@@ -15,7 +15,7 @@ export class Global {
 
   private static _rootpath: string
 
-  private static _enabled: boolean = false
+  private static _enabled = false
 
   static context: ExtensionContext
 

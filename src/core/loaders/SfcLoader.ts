@@ -20,7 +20,7 @@ interface ParseredSection extends Section{
 
 export class SFCLoader extends Loader {
   constructor (
-    public readonly uri: Uri
+    public readonly uri: Uri,
   ) {
     super(`[SFC]${uri.fsPath}`)
 

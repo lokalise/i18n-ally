@@ -6,7 +6,7 @@ import { LANG_SELECTORS } from '../meta'
 class CompletionProvider implements vscode.CompletionItemProvider {
   public provideCompletionItems (
     document: vscode.TextDocument,
-    position: vscode.Position
+    position: vscode.Position,
   ) {
     if (!Global.enabled)
       return
@@ -27,7 +27,7 @@ class CompletionProvider implements vscode.CompletionItemProvider {
         node.keyname,
         node.type === 'tree'
           ? vscode.CompletionItemKind.Field
-          : vscode.CompletionItemKind.Text
+          : vscode.CompletionItemKind.Text,
       )
     })
   }
@@ -37,7 +37,7 @@ const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
   return vscode.languages.registerCompletionItemProvider(
     LANG_SELECTORS,
     new CompletionProvider(),
-    '.'
+    '.',
   )
 }
 

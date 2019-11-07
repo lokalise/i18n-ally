@@ -20,7 +20,7 @@ export abstract class Loader extends Disposable {
   protected _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
 
   constructor (
-    public readonly name: string
+    public readonly name: string,
   ) {
     super(() => this.onDispose())
   }
