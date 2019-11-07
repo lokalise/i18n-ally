@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.31.1](https://github.com/antfu/vue-i18n-ally/compare/v0.31.0...v0.31.1) (2019-11-07)
+
+
+### 🌍 Internationalization
+
+* update messages for zh-cn and zh-tw ([5259ee8](https://github.com/antfu/vue-i18n-ally/commit/5259ee83fad6e9de8495ff9f9ef39a95207b1195))
+
 ## [0.31.0](https://github.com/antfu/vue-i18n-ally/compare/v0.30.0...v0.31.0) (2019-11-07)
 
 
