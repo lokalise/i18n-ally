@@ -10,7 +10,11 @@ export async function OpenKey (item?: LocaleTreeView | CommandOptions) {
   if (!node)
     return
 
-  const record = await getRecordFromNode(node, Config.displayLanguage)
+  let locale = Config.displayLanguage
+  if (item instanceof LocaleTreeView && item.displayLocale)
+    locale = item.displayLocale
+
+  const record = await getRecordFromNode(node, locale)
 
   if (!record || !record.filepath)
     return
