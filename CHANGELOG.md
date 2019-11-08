@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.32.0](https://github.com/antfu/vue-i18n-ally/compare/v0.31.2...v0.32.0) (2019-11-08)
+
+
+### 🐞 Bug Fixes
+
+* goto key in progress view ([6a9092c](https://github.com/antfu/vue-i18n-ally/commit/6a9092cf11ceb3d0b81b64b8d598cb8ff071d1f4))
+
+
+### ⚡ Features
+
+* command to fulfill missing keys with empty string ([f78eb9f](https://github.com/antfu/vue-i18n-ally/commit/f78eb9fae353c4bceae7e644a1efa0a5171ed3fe))
+
 ### [0.31.2](https://github.com/antfu/vue-i18n-ally/compare/v0.31.1...v0.31.2) (2019-11-07)
 
 
