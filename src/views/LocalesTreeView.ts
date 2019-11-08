@@ -42,7 +42,7 @@ export class LocaleTreeView extends BasicTreeView {
 
   get description (): string {
     if (this.node.type === 'node')
-      return this.node.getValue(this.displayLocale) || this.node.value
+      return this.node.getValue(this.displayLocale)
     if (this.node.type === 'record')
       return this.node.value
     return ''

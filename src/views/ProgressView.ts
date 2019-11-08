@@ -79,6 +79,8 @@ export class ProgressMissingListView extends ProgressSubmenuView {
     if (this.node.locale !== Config.sourceLanguage)
       values.push('translatable')
 
+    values.push('fulfillable')
+
     return values.join('-')
   }
 
@@ -87,11 +89,31 @@ export class ProgressMissingListView extends ProgressSubmenuView {
   }
 }
 
+export class ProgressEmptyListView extends ProgressSubmenuView {
+  constructor (
+    protected root: ProgressRootView,
+  ) {
+    super(root, 'view.progress_submenu.empty_keys', 'warning')
+  }
+
+  get contextValue () {
+    const values: string[] = []
+
+    if (this.node.locale !== Config.sourceLanguage)
+      values.push('translatable')
+
+    return values.join('-')
+  }
+
+  getKeys () {
+    return this.root.node.emptyKeys
+  }
+}
+
 export class ProgressTranslatedListView extends ProgressSubmenuView {
   constructor (
     protected root: ProgressRootView,
   ) {
-    // @ts-ignore
     super(root, 'view.progress_submenu.translated_keys', 'checkmark')
   }
 
@@ -151,6 +173,7 @@ export class ProgressRootView extends ProgressView {
   async getChildren () {
     return [
       new ProgressTranslatedListView(this),
+      new ProgressEmptyListView(this),
       new ProgressMissingListView(this),
     ]
   }

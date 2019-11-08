@@ -108,6 +108,14 @@
         "title": "%command.open_url%"
       },
       {
+        "command": "extension.vue-i18n-ally.fulfill-keys",
+        "title": "%command.fulfill_keys%",
+        "icon": {
+          "light": "./res/light/fulfill.svg",
+          "dark": "./res/dark/fulfill.svg"
+        }
+      },
+      {
         "command": "extension.vue-i18n-ally.support",
         "title": "%feedback.support%"
       },
@@ -175,6 +183,11 @@
           "command": "extension.vue-i18n-ally.edit-key",
           "when": "view =~ /locales/ && viewItem =~ /editable/",
           "group": "inline@4"
+        },
+        {
+          "command": "extension.vue-i18n-ally.fulfill-keys",
+          "when": "view =~ /locales/ && viewItem =~ /fulfillable/",
+          "group": "inline@3"
         },
         {
           "command": "extension.vue-i18n-ally.set-display-language",

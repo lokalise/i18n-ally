@@ -2,7 +2,7 @@ import { window } from 'vscode'
 import { LocaleTreeView } from '../../views/LocalesTreeView'
 import { Translator, CurrentFile, Config } from '../../core'
 import { Log } from '../../utils'
-import { ProgressMissingListView } from '../../views/ProgressView'
+import { ProgressSubmenuView } from '../../views/ProgressView'
 import i18n from '../../i18n'
 import { getNode, CommandOptions } from './common'
 
@@ -26,7 +26,7 @@ export async function TranslateSingleKey (item?: LocaleTreeView | CommandOptions
   }
 }
 
-export async function TranslateMultipleKeys (item: ProgressMissingListView) {
+export async function TranslateMultipleKeys (item: ProgressSubmenuView) {
   const Yes = i18n.t('prompt.button_yes')
   const to = item.node.locale
   const from = Config.sourceLanguage
@@ -44,8 +44,8 @@ export async function TranslateMultipleKeys (item: ProgressMissingListView) {
   }
 }
 
-export async function TranslateKeys (item?: LocaleTreeView | ProgressMissingListView | CommandOptions) {
-  if (item instanceof ProgressMissingListView)
+export async function TranslateKeys (item?: LocaleTreeView | ProgressSubmenuView | CommandOptions) {
+  if (item instanceof ProgressSubmenuView)
     return TranslateMultipleKeys(item)
   else
     return TranslateSingleKey(item)

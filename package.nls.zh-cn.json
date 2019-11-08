@@ -6,6 +6,7 @@
   "command.copy_key": "复制路径",
   "command.delete_key": "删除路径",
   "command.edit_key": "编辑文案",
+  "command.fulfill_keys": "使用空字符串填充文案路径",
   "command.locale_visibility_hide": "隐藏此语言",
   "command.locale_visibility_show": "显示此语言",
   "command.open_key": "转到定义",
@@ -56,6 +57,7 @@
   "prompt.enter_new_keypath": "输入新的路径",
   "prompt.extraction_canceled": "文案提取已取消",
   "prompt.failed_to_locate_key": "找不到路径 \"{0}\"",
+  "prompt.fullfill_missing_confirm": "您确定要用空字符串来填充 {1} 中的 {0} 个缺失文案吗？\n\n此操作将无法撤消。",
   "prompt.key_already_exists": "路径已存在。覆盖当前路径或是重新输入路径?",
   "prompt.key_copied": "路径已复制",
   "prompt.keystyle_flat": "扁平式(Flat)",
@@ -79,6 +81,7 @@
   "view.help_feedback": "帮助和反馈",
   "view.i18n_keys": "翻译字段",
   "view.progress": "翻译进度",
+  "view.progress_submenu.empty_keys": "空值",
   "view.progress_submenu.missing_keys": "缺失的文案",
   "view.progress_submenu.translated_keys": "已翻译",
   "view.tree": "翻译树"

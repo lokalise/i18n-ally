@@ -6,6 +6,7 @@
   "command.copy_key": "復制路徑",
   "command.delete_key": "刪除路徑",
   "command.edit_key": "編輯文案",
+  "command.fulfill_keys": "使用空字串填充文案路徑",
   "command.locale_visibility_hide": "隱藏此語言",
   "command.locale_visibility_show": "顯示此語言",
   "command.open_key": "轉到定義",
@@ -56,6 +57,7 @@
   "prompt.enter_new_keypath": "輸入新的路徑",
   "prompt.extraction_canceled": "文案提取已取消",
   "prompt.failed_to_locate_key": "找不到路徑 \"{0}\"",
+  "prompt.fullfill_missing_confirm": "您確定要用空字串來填充 {1} 中的 {0} 個缺失文案嗎？\n此操作將無法撤消。",
   "prompt.key_already_exists": "路徑已存在。覆蓋當前路徑或是重新輸入路徑?",
   "prompt.key_copied": "路徑已復制",
   "prompt.keystyle_flat": "扁平式(Flat)",
@@ -79,6 +81,7 @@
   "view.help_feedback": "幫助和反饋",
   "view.i18n_keys": "翻譯字段",
   "view.progress": "翻譯進度",
+  "view.progress_submenu.empty_keys": "空值",
   "view.progress_submenu.missing_keys": "缺失的文案",
   "view.progress_submenu.translated_keys": "已翻譯",
   "view.tree": "翻譯樹"

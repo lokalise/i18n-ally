@@ -13,12 +13,12 @@ export enum Commands {
   open_key = 'extension.vue-i18n-ally.open-key',
   delete_key = 'extension.vue-i18n-ally.delete-key',
   rename_key = 'extension.vue-i18n-ally.rename-key',
+  fulfill_keys = 'extension.vue-i18n-ally.fulfill-keys',
   locale_visibility_toggle = 'extension.vue-i18n-ally.locale-visibility-toggle',
   locale_visibility_show = 'extension.vue-i18n-ally.locale-visibility-show',
   locale_visibility_hide = 'extension.vue-i18n-ally.locale-visibility-hide',
   open_url = 'extension.vue-i18n-ally.open-url',
   support = 'extension.vue-i18n-ally.support',
-
   // DEV
   dev_load_sfc = 'extension.vue-i18n-ally.dev.load-sfc',
 }

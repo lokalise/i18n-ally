@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 import { Range } from 'vscode'
 import { getKeyname } from '../utils/utils'
@@ -75,13 +76,13 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
     this.locales = data.locales || {}
   }
 
-  getValue (locale?: string, fallback = '') {
+  public getValue (locale?: string) {
     locale = locale || Config.displayLanguage
-    return (this.locales[locale] && this.locales[locale].value) || fallback
+    return (this.locales[locale] && this.locales[locale].value)
   }
 
   get value () {
-    return this.getValue()
+    return this.getValue() || ''
   }
 }
 
@@ -128,6 +129,7 @@ export interface Coverage {
   totalKeys: string[]
   translatedKeys: string[]
   missingKeys: string[]
+  emptyKeys: string[]
 }
 
 export interface PendingWrite {
