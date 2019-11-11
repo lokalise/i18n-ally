@@ -29,8 +29,14 @@ export abstract class Parser {
   }
 
   async load (filepath: string): Promise<object> {
-    const raw = await fs.readFile(filepath, 'utf-8')
-    return await this.parse(raw)
+    const raw = await fs.readFile(filepath)
+    let str = ''
+    if (raw[0] === 0xEF && raw[1] === 0xBB && raw[2] === 0xBF) {
+      str = raw.slice(3).toString('utf-8')
+    } else {
+      str = raw.toString('utf-8')
+    }
+    return await this.parse(str)
   }
 
   async save (filepath: string, object: object, sort: boolean) {
