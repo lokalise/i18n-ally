@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs'
 import { KeyStyle } from '../core'
+import { File } from '../utils'
 
 export interface PositionRange {
   start: number
@@ -29,13 +29,13 @@ export abstract class Parser {
   }
 
   async load (filepath: string): Promise<object> {
-    const raw = await fs.readFile(filepath, 'utf-8')
+    const raw = await File.read(filepath)
     return await this.parse(raw)
   }
 
   async save (filepath: string, object: object, sort: boolean) {
     const text = await this.dump(object, sort)
-    await fs.writeFile(filepath, text, 'utf-8')
+    await File.write(filepath, text)
   }
 
   abstract parse(text: string): Promise<object>

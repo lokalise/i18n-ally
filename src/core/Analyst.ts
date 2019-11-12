@@ -1,9 +1,8 @@
 import { resolve } from 'path'
-import { promises as fs } from 'fs'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
 import { SUPPORTED_LANG_GLOBS, SUPPORTED_LANG_IDS } from '../meta'
-import { Log } from '../utils'
+import { Log, File } from '../utils'
 import { KeyDetector, Config } from '.'
 
 export interface Occurrence {
@@ -64,7 +63,7 @@ export class Analyst {
   }
 
   private static async getOccurrencesOfFile (filepath: string) {
-    const text = await fs.readFile(filepath, 'utf-8')
+    const text = await File.read(filepath)
     return await this.getOccurrencesOfText(text, filepath)
   }
 

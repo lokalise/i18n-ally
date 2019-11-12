@@ -1,8 +1,7 @@
 import * as path from 'path'
-import * as fs from 'fs'
 import { workspace } from 'vscode'
 import { SUPPORTED_FRAMEWORKS } from '../meta'
-import { Log } from '.'
+import { Log, File } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -71,7 +70,7 @@ export function isVueI18nProject (projectUrl: string): boolean {
     return false
 
   try {
-    const rawPackageJSON = fs.readFileSync(`${projectUrl}/package.json`, 'utf-8')
+    const rawPackageJSON = File.readSync(`${projectUrl}/package.json`)
     const {
       dependencies = {},
       devDependencies = {},

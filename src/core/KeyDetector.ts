@@ -1,7 +1,7 @@
-import * as fs from 'fs'
 import * as vscode from 'vscode'
 import { uniq } from 'lodash'
 import { KEY_REG } from '../meta'
+import { File } from '../utils'
 
 export class KeyDetector {
   static getKeyByContent (text: string) {
@@ -12,7 +12,7 @@ export class KeyDetector {
   }
 
   static getKeyByFile (filePath: string) {
-    const file: string = fs.readFileSync(filePath, 'utf-8')
+    const file: string = File.readSync(filePath)
     return KeyDetector.getKeyByContent(file)
   }
 

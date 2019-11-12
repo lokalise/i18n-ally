@@ -1,0 +1,12 @@
+{
+  "project": "演示",
+  "hello": "你好！",
+  "good_morning": "早上好",
+  "some": {
+    "deep": {
+      "nested": {
+        "encoding": "GBK"
+      }
+    }
+  }
+}

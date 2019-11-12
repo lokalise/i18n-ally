@@ -32,6 +32,7 @@
   "config.sfc": "啟用 SFC 支持",
   "config.sort_keys": "儲存已排序的JSON/YAML",
   "config.source_language": "翻譯源語言",
+  "config.encoding": "語言文件編碼，默認為“auto”（自動識別）",
   "extname": "Vue i18n 小助手",
   "feedback.document": "查看文檔",
   "feedback.github": "Star on Github",
