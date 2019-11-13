@@ -135,22 +135,26 @@ export class ProgressRootView extends ProgressView {
     return description
   }
 
+  get locale () {
+    return this.node.locale
+  }
+
   get visible () {
-    return !Config.ignoredLocales.includes(this.node.locale)
+    return !Config.ignoredLocales.includes(this.locale)
   }
 
   get isSource () {
-    return this.node.locale === Config.sourceLanguage
+    return this.locale === Config.sourceLanguage
   }
 
   get isDisplay () {
-    return this.node.locale === Config.displayLanguage
+    return this.locale === Config.displayLanguage
   }
 
   get iconPath () {
     if (!this.visible)
       return this.getIcon('eye-off-fade')
-    return this.getFlagIcon(this.node.locale)
+    return this.getFlagIcon(this.locale)
   }
 
   get contextValue () {
@@ -166,6 +170,8 @@ export class ProgressRootView extends ProgressView {
       context.push('show')
     else if (!this.isDisplay) // should not hide if it's displaying
       context.push('hide')
+
+    context.push('openable')
 
     return context.join('-')
   }

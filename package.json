@@ -208,12 +208,12 @@
         {
           "command": "extension.vue-i18n-ally.locale-visibility-show",
           "when": "view =~ /locales-progress/ && viewItem =~ /show/",
-          "group": "inline"
+          "group": "inline@4"
         },
         {
           "command": "extension.vue-i18n-ally.locale-visibility-hide",
           "when": "view =~ /locales-progress/ && viewItem =~ /hide/",
-          "group": "inline"
+          "group": "inline@4"
         }
       ]
     },

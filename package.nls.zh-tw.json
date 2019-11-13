@@ -1,4 +1,4 @@
-{
+﻿{
   "command.config_display_language": "修改顯示語言",
   "command.config_locales": "手動設定語言目錄",
   "command.config_locales_auto": "自動設定語言目錄",
@@ -21,6 +21,7 @@
   "config.annotations": "啟用內聯註釋",
   "config.dir_structure": "用於組織本地文件的首選目錄結構",
   "config.display_language": "顯示語言",
+  "config.encoding": "語言文件編碼，默認為 \"auto\"（自動識別）",
   "config.force_enabled": "無論如何都啟用此擴展",
   "config.full_reload_on_changed": "當語言文件被修改時執行完整的重載。\n（用於.js/.ts動態導入）",
   "config.ignored_locales": "隱藏的語言",
@@ -33,7 +34,6 @@
   "config.sfc": "啟用 SFC 支持",
   "config.sort_keys": "儲存已排序的JSON/YAML",
   "config.source_language": "翻譯源語言",
-  "config.encoding": "語言文件編碼，默認為 \"auto\"（自動識別）",
   "extname": "Vue i18n 小助手",
   "feedback.document": "查看文檔",
   "feedback.github": "Star on Github",
@@ -70,6 +70,7 @@
   "prompt.locales_dir_not_found": "沒有找到翻譯資料夾，插件已停用",
   "prompt.replace_text_as": "將文案替換為:",
   "prompt.select_display_locale": "選擇顯示語言（{0}）",
+  "prompt.select_file_to_open": "選擇要打開的文件",
   "prompt.select_file_to_store_key": "選擇要存儲文案 \"{0}\" 的文件",
   "prompt.select_source_locale": "選擇源語言（{0}）",
   "prompt.star_on_github": "Star on Github",

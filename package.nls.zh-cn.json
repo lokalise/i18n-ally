@@ -1,4 +1,4 @@
-{
+﻿{
   "command.config_display_language": "修改显示语言",
   "command.config_locales": "手动设置语言目录",
   "command.config_locales_auto": "自动设置语言目录",
@@ -70,6 +70,7 @@
   "prompt.locales_dir_not_found": "没有找到翻译文件夹，插件已停用",
   "prompt.replace_text_as": "将文案替换为:",
   "prompt.select_display_locale": "选择显示语言（{0}）",
+  "prompt.select_file_to_open": "选择要打开的文件",
   "prompt.select_file_to_store_key": "选择要存储文案 \"{0}\" 的文件",
   "prompt.select_source_locale": "选择源语言（{0}）",
   "prompt.star_on_github": "Star on Github",
