@@ -2,6 +2,7 @@ import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
 import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { Parser } from '../parsers/Parser'
+import { createHover } from './hover'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
 
@@ -65,6 +66,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
               fontStyle: 'normal',
             },
           },
+          hoverMessage: createHover(key),
         })
       }
     })
