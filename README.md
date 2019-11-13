@@ -241,11 +241,10 @@ We would recommend you to use vscode with `vue-i18n-ally` installed. It can help
 We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases. PR is also welcome.
 
 Todo:
-- [ ] Analysis report
-- [ ] JSON/YAML file annonation & hint
-- [x] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 - [ ] Tests
 - [ ] Live share support
+- [ ] `esm` hot reloading, #97
+- [ ] Enhance SFC support
 
 Done:
 - [x] Machine translating
@@ -264,6 +263,9 @@ Done:
 - [x] Find all references
 - [x] Loading `.js` locales
 - [x] Loading `.ts` locales
+- [x] Analysis report
+- [x] JSON/YAML file annonation & hint
+- [x] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
 
 ## 👨‍💻 Thanks
 

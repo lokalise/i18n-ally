@@ -12,6 +12,12 @@ export interface ParserOptions {
   tab: string
 }
 
+export interface KeyInDocument {
+  start: number
+  end: number
+  key: string
+}
+
 export abstract class Parser {
   private supportedExtsRegex: RegExp
 
@@ -47,7 +53,7 @@ export abstract class Parser {
 
   annotationSupported = false
   annotationLanguageIds: string[] = []
-  annotationGetKeys (document: TextDocument): {start: number; end: number; key: string}[] {
+  annotationGetKeys (document: TextDocument): KeyInDocument[] {
     return []
   }
 }
