@@ -7,8 +7,8 @@ import i18n from '../i18n'
 const statusbar: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []
   const priority = -1000
-  const bar1 = window.createStatusBarItem(StatusBarAlignment.Left, priority + 1)
-  const bar2 = window.createStatusBarItem(StatusBarAlignment.Left, priority)
+  const bar1 = window.createStatusBarItem(StatusBarAlignment.Right, priority + 1)
+  const bar2 = window.createStatusBarItem(StatusBarAlignment.Right, priority)
   function update () {
     if (!Global.enabled) {
       bar1.hide()
