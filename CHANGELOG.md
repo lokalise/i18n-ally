@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.34.0](https://github.com/antfu/vue-i18n-ally/compare/v0.33.1...v0.34.0) (2019-11-13)
+
+
+### 🐞 Bug Fixes
+
+* imporve logical for annonation display ([2cb5cb4](https://github.com/antfu/vue-i18n-ally/commit/2cb5cb4167f29b2ce5dcea15981d057a04129cdb))
+
+
+### ⚡ Features
+
+* hover for annotation in locale ([e4e9d6d](https://github.com/antfu/vue-i18n-ally/commit/e4e9d6d2a8cb46b66a21c559d01afa2d8d64f146))
+* support for annonation in json locale files! ([43dbe52](https://github.com/antfu/vue-i18n-ally/commit/43dbe52133b48f6fec047ff9139c812c684d5d60))
+* yaml annotation support ([d351079](https://github.com/antfu/vue-i18n-ally/commit/d351079844acd1109b51920aa0ddd7bfacd3b98d))
+
 ### [0.33.1](https://github.com/antfu/vue-i18n-ally/compare/v0.33.0...v0.33.1) (2019-11-13)
 
 
