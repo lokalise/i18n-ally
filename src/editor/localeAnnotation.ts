@@ -1,15 +1,13 @@
 import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
-import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
+import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { isLanguageIdSupported } from '../meta'
+import { Parser } from '../parsers/Parser'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
 
-const underlineDecorationType = window.createTextEditorDecorationType({
-  textDecoration: 'underline',
-})
+const localeAnnotation: ExtensionModule = (ctx) => {
+  const supportedParsers = Global.parsers.filter(p => p.annotationSupported)
 
-const annotation: ExtensionModule = (ctx) => {
   function update () {
     if (!Global.enabled)
       return
@@ -18,47 +16,46 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
+    const loader: Loader = CurrentFile.loader
+
     const document = activeTextEditor.document
-    if (!isLanguageIdSupported(document.languageId))
+
+    // Enable only for locale files
+    if (!loader.files.includes(document.uri.fsPath))
+      return
+
+    // find matched parser
+    let parser: Parser | undefined
+    for (const p of supportedParsers) {
+      if (p.annotationLanguageIds.includes(document.languageId)) {
+        parser = p
+        break
+      }
+    }
+    if (!parser)
       return
 
     const annotationDelimiter = Config.annotationDelimiter
-
-    const loader: Loader = CurrentFile.loader
     const annotations: DecorationOptions[] = []
-    const underlines: DecorationOptions[] = []
 
-    const keys = KeyDetector.getKeys(document)
+    const keys = parser.annotationGetKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
-      underlines.push({
-        range: new Range(
-          document.positionAt(start),
-          document.positionAt(end),
-        ),
-      })
-
       if (Config.annotations) {
-        let missing = false
-
-        let text = loader.getValueByKey(key)
-        // fallback to source
-        if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-          text = loader.getValueByKey(key, Config.sourceLanguage)
-          missing = true
-        }
+        const node = loader.getTreeNodeByKey(key)
+        if (!node || node.type === 'tree')
+          return
+        let text = node.getValue()
 
         if (text)
           text = `${annotationDelimiter}${text}`
 
-        const color = missing
-          ? 'rgba(153, 153, 153, .3)'
-          : 'rgba(153, 153, 153, .7)'
+        const color = 'rgba(153, 153, 153, .7)'
 
         annotations.push({
           range: new Range(
-            document.positionAt(start - 1),
-            document.positionAt(end + 1),
+            document.positionAt(start),
+            document.positionAt(end),
           ),
           renderOptions: {
             after: {
@@ -73,7 +70,6 @@ const annotation: ExtensionModule = (ctx) => {
     })
 
     activeTextEditor.setDecorations(noneDecorationType, annotations)
-    activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
   const disposables: Disposable[] = []
@@ -86,4 +82,4 @@ const annotation: ExtensionModule = (ctx) => {
   return disposables
 }
 
-export default annotation
+export default localeAnnotation

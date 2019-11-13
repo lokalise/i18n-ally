@@ -16,6 +16,10 @@ export class ComposedLoader extends Loader {
   _watchers: Disposable[] = []
   _isFlattenLocaleTreeDirty = true
 
+  get files () {
+    return _.flatten(this._loaders.map(l => l.files))
+  }
+
   get loaders () {
     return this._loaders
   }

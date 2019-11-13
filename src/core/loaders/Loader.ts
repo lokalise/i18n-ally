@@ -37,6 +37,10 @@ export abstract class Loader extends Disposable {
     return this._flattenLocaleTree
   }
 
+  get files (): string[] {
+    return []
+  }
+
   splitKeypath (keypath: string): string[] {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }

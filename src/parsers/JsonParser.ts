@@ -1,4 +1,7 @@
 import * as SortedStringify from 'json-stable-stringify'
+// @ts-ignore
+import JsonMap from 'json-source-map'
+import { TextDocument } from 'vscode'
 import { KeyStyle } from '../core'
 import { Parser } from './Parser'
 
@@ -40,5 +43,18 @@ export class JsonParser extends Parser {
     else {
       return undefined
     }
+  }
+
+  annotationSupported = true
+  annotationLanguageIds = ['json']
+  annotationGetKeys (document: TextDocument) {
+    const text = document.getText()
+
+    const map = JsonMap.parse(text).pointers
+    const pairs = Object.entries<any>(map)
+      .filter(([k, v]) => k)
+      .map(([k, v]) => ({ start: v.value.pos, end: v.valueEnd.pos, key: k.replace(/\//g, '.').slice(1) }))
+
+    return pairs
   }
 }

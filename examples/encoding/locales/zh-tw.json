@@ -1,12 +1,13 @@
 {
-  "project": "ÑÝÊ¾",
-  "hello": "ÄãºÃ£¡",
-  "good_morning": "ÔçÉÏºÃ",
+  "project": "ï¿½ï¿½Ê¾",
+  "hello": "ï¿½ï¿½Ã£ï¿½",
+  "good_morning": "ï¿½ï¿½ï¿½Ïºï¿½",
   "some": {
     "deep": {
       "nested": {
         "encoding": "GBK"
       }
     }
-  }
+  },
+  "intro": ""
 }

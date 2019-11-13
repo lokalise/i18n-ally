@@ -1,7 +1,7 @@
 import { HoverProvider, Position, TextDocument, MarkdownString, languages, Hover, ExtensionContext } from 'vscode'
 import { Global, KeyDetector, Commands, Loader, CurrentFile } from '../core'
 import { decorateLocale, escapeMarkdown, GlyphChars, NodeHelper } from '../utils'
-import { LANG_SELECTORS } from '../meta'
+import { LANG_SELECTORS, isLanguageIdSupported } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -14,6 +14,9 @@ class HintProvider implements HoverProvider {
 
   public provideHover (document: TextDocument, position: Position) {
     if (!Global.enabled)
+      return
+
+    if (!isLanguageIdSupported(document.languageId))
       return
 
     const keypath = KeyDetector.getKey(document, position)

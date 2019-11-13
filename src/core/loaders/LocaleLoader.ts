@@ -29,6 +29,10 @@ export class LocaleLoader extends Loader {
     return Config.localesPaths
   }
 
+  get files () {
+    return Object.keys(this._files)
+  }
+
   get locales () {
     const source = Config.sourceLanguage
     return _(this._files)

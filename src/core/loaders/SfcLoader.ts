@@ -27,6 +27,10 @@ export class SFCLoader extends Loader {
     this.load()
   }
 
+  get files () {
+    return [this.uri.fsPath]
+  }
+
   private getSections (text: string): Section[] {
     const root = parse(text)
     const elements = root.childNodes.filter(node => node instanceof HTMLElement && node.tagName === 'i18n') as HTMLElement[]

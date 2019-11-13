@@ -1,3 +1,4 @@
+import { TextDocument } from 'vscode'
 import { KeyStyle } from '../core'
 import { File } from '../utils'
 
@@ -43,4 +44,10 @@ export abstract class Parser {
   abstract dump(object: object, sort: boolean): Promise<string>
 
   abstract navigateToKey(text: string, keypath: string, keystyle: KeyStyle): PositionRange | undefined
+
+  annotationSupported = false
+  annotationLanguageIds: string[] = []
+  annotationGetKeys (document: TextDocument): {start: number; end: number; key: string}[] {
+    return []
+  }
 }
