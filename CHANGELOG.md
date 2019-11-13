@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.33.0](https://github.com/antfu/vue-i18n-ally/compare/v0.32.0...v0.33.0) (2019-11-13)
+
+
+### ⚡ Features
+
+* new config for customize the delimiter of annotations ([4dd8eeb](https://github.com/antfu/vue-i18n-ally/commit/4dd8eeb47b342a5cc281f59f8d156cd1f632f91d))
+* support multiple encodings, thanks [@mudoo](https://github.com/mudoo) ([#105](https://github.com/antfu/vue-i18n-ally/issues/105)) ([a23cc7a](https://github.com/antfu/vue-i18n-ally/commit/a23cc7a6b506b7473417ccc9f41bfa39d76edc7e))
+
 ## [0.32.0](https://github.com/antfu/vue-i18n-ally/compare/v0.31.2...v0.32.0) (2019-11-08)
 
 
