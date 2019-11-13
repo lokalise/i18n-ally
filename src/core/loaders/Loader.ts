@@ -1,7 +1,7 @@
 import { Disposable, EventEmitter } from 'vscode'
 import _ from 'lodash'
 import { Log } from '../../utils'
-import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage } from '../types'
+import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo } from '../types'
 import { Config, Global } from '..'
 
 export interface NodeOptions{
@@ -37,7 +37,7 @@ export abstract class Loader extends Disposable {
     return this._flattenLocaleTree
   }
 
-  get files (): string[] {
+  get files (): FileInfo[] {
     return []
   }
 

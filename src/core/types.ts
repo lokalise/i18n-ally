@@ -4,12 +4,15 @@ import { Range } from 'vscode'
 import { getKeyname } from '../utils/utils'
 import { Config } from './Config'
 
-export interface ParsedFile {
+export interface FileInfo {
   filepath: string
   locale: string
-  value: object
   nested: boolean
   readonly?: boolean
+}
+
+export interface ParsedFile extends FileInfo {
+  value: object
 }
 
 export interface INode {

@@ -30,7 +30,7 @@ export class LocaleLoader extends Loader {
   }
 
   get files () {
-    return Object.keys(this._files)
+    return Object.values(this._files)
   }
 
   get locales () {

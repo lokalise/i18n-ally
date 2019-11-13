@@ -1,7 +1,6 @@
 import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
 import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { Parser } from '../parsers/Parser'
 import { createHover } from './hover'
 
 const noneDecorationType = window.createTextEditorDecorationType({})
@@ -22,36 +21,41 @@ const localeAnnotation: ExtensionModule = (ctx) => {
     const document = activeTextEditor.document
 
     // Enable only for locale files
-    if (!loader.files.includes(document.uri.fsPath))
+    const filepath = document.uri.fsPath
+    const file = loader.files.find(f => f.filepath === filepath)
+    if (!file)
       return
 
     // find matched parser
-    let parser: Parser | undefined
-    for (const p of supportedParsers) {
-      if (p.annotationLanguageIds.includes(document.languageId)) {
-        parser = p
-        break
-      }
-    }
+    const parser = supportedParsers.find(p => p.annotationLanguageIds.includes(document.languageId))
     if (!parser)
       return
 
     const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptions[] = []
+    const color = 'rgba(153, 153, 153, .7)'
+    let displayLanguage = Config.displayLanguage
+    if (displayLanguage === file.locale) {
+      displayLanguage = Config.sourceLanguage
+      if (Config.sourceLanguage === Config.displayLanguage)
+        displayLanguage = ''
+    }
 
     const keys = parser.annotationGetKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
       if (Config.annotations) {
-        const node = loader.getTreeNodeByKey(key)
-        if (!node || node.type === 'tree')
-          return
-        let text = node.getValue()
+        let text = ''
 
-        if (text)
-          text = `${annotationDelimiter}${text}`
+        if (displayLanguage) {
+          const node = loader.getTreeNodeByKey(key)
+          if (!node || node.type === 'tree')
+            return
+          text = node.getValue(displayLanguage)
 
-        const color = 'rgba(153, 153, 153, .7)'
+          if (text)
+            text = `${annotationDelimiter}${text}`
+        }
 
         annotations.push({
           range: new Range(

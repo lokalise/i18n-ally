@@ -28,7 +28,7 @@ export class SFCLoader extends Loader {
   }
 
   get files () {
-    return [this.uri.fsPath]
+    return [{ filepath: this.uri.fsPath, locale: '', nested: false }]
   }
 
   private getSections (text: string): Section[] {
