@@ -15,7 +15,11 @@ export async function EditKey (item?: LocaleTreeView | CommandOptions) {
     return
 
   if (node.type === 'node') {
-    const record = await getRecordFromNode(node, Config.displayLanguage)
+    let locale = Config.displayLanguage
+    if (item instanceof LocaleTreeView && item.displayLocale)
+      locale = item.displayLocale
+
+    const record = await getRecordFromNode(node, locale)
     if (!record)
       return
     node = record
