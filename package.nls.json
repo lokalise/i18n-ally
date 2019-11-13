@@ -32,6 +32,7 @@
   "config.sfc": "Support for locales in Vue Single file components (SFC)",
   "config.sort_keys": "Save with sorted json/yaml",
   "config.source_language": "Source language for machine translation",
+  "config.encoding": "Locale files encoding, default to \"auto\" (auto detect)",
   "extname": "Vue i18n Ally",
   "feedback.document": "Read Documentation",
   "feedback.github": "Star on Github",

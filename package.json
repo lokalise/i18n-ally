@@ -272,6 +272,11 @@
           },
           "description": "%config.locales_paths%"
         },
+        "vue-i18n-ally.encoding": {
+          "type": "string",
+          "default": "auto",
+          "description": "%config.encoding%"
+        },
         "vue-i18n-ally.sourceLanguage": {
           "type": "string",
           "default": "en",
@@ -428,7 +433,9 @@
   "dependencies": {
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
+    "iconv-lite": "^0.5.0",
     "js-yaml": "^3.13.1",
+    "jschardet": "^2.1.1",
     "json-stable-stringify": "^1.0.1",
     "json5": "^2.1.0",
     "limax": "^2.0.0",

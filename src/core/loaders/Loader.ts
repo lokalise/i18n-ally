@@ -187,6 +187,8 @@ export abstract class Loader extends Disposable {
     }
     else {
       let value = node.getValue(locale)
+      if (!value)
+        return
       if (clamp && maxlength && value.length > maxlength)
         value = `${value.substring(0, maxlength)}…`
       return value

@@ -1,0 +1,10 @@
+﻿{
+  "project": "Demo",
+  "some": {
+    "deep": {
+      "nested": {
+        "encoding": "UTF-8 BOM"
+      }
+    }
+  }
+}

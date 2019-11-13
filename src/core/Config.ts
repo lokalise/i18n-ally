@@ -10,6 +10,7 @@ export class Config {
     'localesPaths',
     'filenameMatchRegex',
     'includeSubfolders',
+    'encoding',
   ]
 
   static readonly refreshConfigs = [
@@ -197,6 +198,10 @@ export class Config {
     if (this.extension)
       return this.extension.extensionPath
     return undefined
+  }
+
+  static get encoding () {
+    return this.getConfig<string>('encoding') || 'auto'
   }
 
   // config

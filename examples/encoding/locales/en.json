@@ -1,0 +1,13 @@
+{
+  "project": "Demo",
+  "hello": "Hello!",
+  "good_morning": "Good morning",
+  "some": {
+    "deep": {
+      "nested": {
+        "encoding": "UTF-8"
+      }
+    }
+  },
+  "intro": "Brings a better translating experience."
+}
