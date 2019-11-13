@@ -16,6 +16,7 @@
   "command.translate_key": "Translate",
   "command.translate_key_from": "Translate from \"{0}\"",
   "command.fulfill_keys": "Fulfill keys with empty string",
+  "config.annotation_delimiter": "The delimiter of annotations",
   "config.annotation_max_length": "Max count of characters shown in the inline annotations. Exceeding parts will displayed as ellipses (...)",
   "config.annotations": "Enable the inline annotations.",
   "config.dir_structure": "Preferred directory structure to organize locale files",

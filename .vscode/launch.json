@@ -18,7 +18,7 @@
       ],
       "stopOnEntry": false,
       "sourceMaps": true,
-      "preLaunchTask": "npm: watch"
+      // "preLaunchTask": "npm: watch"
     },
     {
       "name": "Extension Tests",
@@ -32,7 +32,7 @@
       "outFiles": [
         "${workspaceFolder}/dist/test/**/*.js"
       ],
-      "preLaunchTask": "npm: watch"
+      // "preLaunchTask": "npm: watch"
     }
   ]
 }

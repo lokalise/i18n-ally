@@ -78,6 +78,10 @@ export class Config {
     this.setConfig('annotationMaxLength', value, true)
   }
 
+  static get annotationDelimiter (): string {
+    return this.getConfig<string>('annotationDelimiter') || ''
+  }
+
   static get forceEnabled (): boolean {
     return this.getConfig<boolean>('forceEnabled') || false
   }

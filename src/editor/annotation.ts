@@ -17,6 +17,8 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
+    const annotationDelimiter = Config.annotationDelimiter
+
     const loader: Loader = CurrentFile.loader
     const document = activeTextEditor.document
     const annotations: DecorationOptions[] = []
@@ -43,7 +45,7 @@ const annotation: ExtensionModule = (ctx) => {
         }
 
         if (text)
-          text = `◽️${text}`
+          text = `${annotationDelimiter}${text}`
 
         const color = missing
           ? 'rgba(153, 153, 153, .3)'

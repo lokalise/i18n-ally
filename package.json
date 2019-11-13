@@ -321,6 +321,11 @@
           "default": 40,
           "description": "%config.annotation_max_length%"
         },
+        "vue-i18n-ally.annotationDelimiter": {
+          "type": "string",
+          "default": "·",
+          "description": "%config.annotation_delimiter%"
+        },
         "vue-i18n-ally.filenameMatchRegex": {
           "type": "string",
           "default": "",
