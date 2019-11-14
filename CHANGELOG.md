@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.34.3](https://github.com/antfu/vue-i18n-ally/compare/v0.34.2...v0.34.3) (2019-11-14)
+
+
+### 🐞 Bug Fixes
+
+* improve key navigation for json and yaml ([200a5ad](https://github.com/antfu/vue-i18n-ally/commit/200a5adabaa49520507b8edda8177b902236e407))
+
 ### [0.34.2](https://github.com/antfu/vue-i18n-ally/compare/v0.34.1...v0.34.2) (2019-11-14)
 
 
