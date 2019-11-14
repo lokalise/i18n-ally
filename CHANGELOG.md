@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.34.5](https://github.com/antfu/vue-i18n-ally/compare/v0.34.4...v0.34.5) (2019-11-14)
+
+
+### ⚡ Features
+
+* fullfill keys cross all locales ([8c1734c](https://github.com/antfu/vue-i18n-ally/commit/8c1734c0f1c98793953f98b9e65a8ba3b7127f77))
+
 ### [0.34.4](https://github.com/antfu/vue-i18n-ally/compare/v0.34.3...v0.34.4) (2019-11-14)
 
 
