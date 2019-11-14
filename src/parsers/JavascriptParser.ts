@@ -41,8 +41,4 @@ export class JavascriptParser extends Parser {
   async save () {
     Log.error(i18n.t('prompt.writing_js'))
   }
-
-  navigateToKey (text: string, keypath: string) {
-    return { start: 0, end: 0 }
-  }
 }

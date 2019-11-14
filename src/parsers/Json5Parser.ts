@@ -34,7 +34,7 @@ export class Json5Parser extends Parser {
       const end = match.index + match[0].length - 1
       const value = match[1] || match[2]
       const start = end - value.length
-      return { start, end }
+      return { start, end, key: keypath }
     }
     else {
       return undefined
