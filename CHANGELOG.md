@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.34.2](https://github.com/antfu/vue-i18n-ally/compare/v0.34.1...v0.34.2) (2019-11-14)
+
+
+### 🐞 Bug Fixes
+
+* bom encoding detection ([2cf71c4](https://github.com/antfu/vue-i18n-ally/commit/2cf71c4e96a3fb5332603f5d4c928e07fb9a7218))
+
 ### [0.34.1](https://github.com/antfu/vue-i18n-ally/compare/v0.34.0...v0.34.1) (2019-11-13)
 
 
