@@ -1,8 +1,6 @@
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
-import { TextDocument } from 'vscode'
-import { KeyStyle } from '../core'
 import { Parser } from './Parser'
 
 export class JsonParser extends Parser {
@@ -21,35 +19,10 @@ export class JsonParser extends Parser {
       return JSON.stringify(object, null, this.options.indent)
   }
 
-  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
-    const keys = keystyle === 'flat'
-      ? [keypath]
-      : keypath.split('.')
-
-    // build regex to search key
-    let regexString = keys
-      .map((key, i) => `^[ \\t]{${(i + 1) * this.options.indent}}"${key}": ?`)
-      .join('[\\s\\S]*')
-    regexString += '(?:"(.*)"|({))'
-    const regex = new RegExp(regexString, 'gm')
-
-    const match = regex.exec(text)
-    if (match && match.length >= 2) {
-      const end = match.index + match[0].length - 1
-      const value = match[1] || match[2]
-      const start = end - value.length
-      return { start, end }
-    }
-    else {
-      return undefined
-    }
-  }
-
   annotationSupported = true
   annotationLanguageIds = ['json']
-  annotationGetKeys (document: TextDocument) {
-    const text = document.getText()
 
+  parseAST (text: string) {
     const map = JsonMap.parse(text).pointers
     const pairs = Object.entries<any>(map)
       .filter(([k, v]) => k)

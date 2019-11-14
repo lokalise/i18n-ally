@@ -1,8 +1,6 @@
 import * as yaml from 'js-yaml'
 import YAML from 'yaml'
-import { TextDocument } from 'vscode'
 import _ from 'lodash'
-import { KeyStyle } from '../core'
 import { Parser, KeyInDocument } from './Parser'
 
 export class YamlParser extends Parser {
@@ -22,34 +20,10 @@ export class YamlParser extends Parser {
     })
   }
 
-  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
-    const keys = keystyle === 'flat'
-      ? [keypath]
-      : keypath.split('.')
-
-    let regexString = keys
-      .map((key, i) => `^[ \\t]{${i * this.options.indent}}${key}: ?`)
-      .join('[\\s\\S]*')
-    regexString += ' (.*)$'
-    const regex = new RegExp(regexString, 'gm')
-
-    const match = regex.exec(text)
-    if (match && match.length >= 2) {
-      const end = match.index + match[0].length
-      const value = match[1]
-      const start = end - value.length
-      return { start, end }
-    }
-    else {
-      return undefined
-    }
-  }
-
   annotationSupported = true
   annotationLanguageIds = ['yaml']
-  annotationGetKeys (document: TextDocument) {
-    const text = document.getText()
 
+  parseAST (text: string) {
     const cst = YAML.parseCST(text)
     cst.setOrigRanges() // Workaround for CRLF eol, https://github.com/eemeli/yaml/issues/127
     const doc = new YAML.Document({ keepCstNodes: true }).parse(cst[0])
@@ -58,7 +32,7 @@ export class YamlParser extends Parser {
       if (!node)
         return []
       if (node.type === 'MAP' || node.type === 'SEQ')
-        // @ts-ignore
+      // @ts-ignore
         return _.flatMap(node.items, m => findPairs(m, path))
       if (node.type === 'PAIR' && node.value != null && node.key != null) {
         console.log('----', path)
@@ -85,8 +59,6 @@ export class YamlParser extends Parser {
       return []
     }
 
-    const keys = findPairs(doc.contents)
-    console.log(keys)
-    return keys
+    return findPairs(doc.contents)
   }
 }

@@ -49,11 +49,17 @@ export abstract class Parser {
 
   abstract dump(object: object, sort: boolean): Promise<string>
 
-  abstract navigateToKey(text: string, keypath: string, keystyle: KeyStyle): PositionRange | undefined
+  parseAST (text: string): KeyInDocument[] {
+    return []
+  }
+
+  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
+    return this.parseAST(text).find(k => k.key === keypath)
+  }
 
   annotationSupported = false
   annotationLanguageIds: string[] = []
-  annotationGetKeys (document: TextDocument): KeyInDocument[] {
-    return []
+  annotationGetKeys (document: TextDocument) {
+    return this.parseAST(document.getText())
   }
 }
