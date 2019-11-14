@@ -7,7 +7,11 @@ function makeMarkdownCommand (command: Commands, args: object): string {
   return `command:${command}?${encodeURIComponent(JSON.stringify(args))}`
 }
 
-export function createHover (keypath: string) {
+function formatValue (text: string) {
+  return escapeMarkdown(text.replace('\n', ' '))
+}
+
+export function createHover (keypath: string, maxLength = 0) {
   const loader = CurrentFile.loader
   const locales = loader.getTranslationsByKey(keypath)
 
@@ -16,7 +20,7 @@ export function createHover (keypath: string) {
       const commands = []
       const row = {
         locale: decorateLocale(locale),
-        value: escapeMarkdown(loader.getValueByKey(keypath, locale, false) || '-'),
+        value: formatValue(loader.getValueByKey(keypath, locale, maxLength) || '-'),
         commands: '',
       }
       const record = locales[locale]

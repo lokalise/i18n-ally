@@ -28,6 +28,7 @@ const annotation: ExtensionModule = (ctx) => {
     const loader: Loader = CurrentFile.loader
     const annotations: DecorationOptions[] = []
     const underlines: DecorationOptions[] = []
+    const maxLength = Config.annotationMaxLength
 
     const keys = KeyDetector.getKeys(document)
     // get all keys of current file
@@ -42,10 +43,10 @@ const annotation: ExtensionModule = (ctx) => {
       if (Config.annotations) {
         let missing = false
 
-        let text = loader.getValueByKey(key)
+        let text = loader.getValueByKey(key, undefined, maxLength)
         // fallback to source
         if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-          text = loader.getValueByKey(key, Config.sourceLanguage)
+          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
           missing = true
         }
 
@@ -69,7 +70,7 @@ const annotation: ExtensionModule = (ctx) => {
               fontStyle: 'normal',
             },
           },
-          hoverMessage: createHover(key),
+          hoverMessage: createHover(key, maxLength),
         })
       }
     })

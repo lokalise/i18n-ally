@@ -90,9 +90,9 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  getValueByKey (keypath: string, locale?: string, clamp = true, stringifySpace?: number) {
+  getValueByKey (keypath: string, locale?: string, maxLength = 0, stringifySpace?: number) {
     for (const loader of this._loaders.reverse()) {
-      const value = loader.getValueByKey(keypath, locale, clamp, stringifySpace)
+      const value = loader.getValueByKey(keypath, locale, maxLength, stringifySpace)
       if (value)
         return value
     }

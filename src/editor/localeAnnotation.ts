@@ -41,20 +41,24 @@ const localeAnnotation: ExtensionModule = (ctx) => {
         displayLanguage = ''
     }
 
+    const maxLength = Config.annotationMaxLength
     const keys = parser.annotationGetKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
       if (Config.annotations) {
         let text = ''
 
-        if (displayLanguage) {
+        if (Config.annotations && displayLanguage) {
           const node = loader.getTreeNodeByKey(key)
           if (!node || node.type === 'tree')
             return
           text = node.getValue(displayLanguage)
 
-          if (text)
+          if (text) {
+            if (maxLength && text.length > maxLength)
+              text = `${text.substring(0, maxLength)}…`
             text = `${annotationDelimiter}${text}`
+          }
         }
 
         annotations.push({
@@ -70,7 +74,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
               fontStyle: 'normal',
             },
           },
-          hoverMessage: createHover(key),
+          hoverMessage: createHover(key, maxLength),
         })
       }
     })

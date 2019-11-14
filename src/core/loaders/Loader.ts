@@ -163,10 +163,9 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
-  getValueByKey (keypath: string, locale?: string, clamp = true, stringifySpace?: number) {
+  getValueByKey (keypath: string, locale?: string, maxlength = 0, stringifySpace?: number) {
     locale = locale || Config.displayLanguage
 
-    const maxlength = Config.annotationMaxLength
     const node = this.getTreeNodeByKey(keypath)
 
     if (!node)
@@ -181,7 +180,7 @@ export abstract class Loader extends Disposable {
         .replace(/"(\w+?)":/g, ' $1:')
         .replace(/}/, ' }')
 
-      if (clamp && maxlength && text.length > maxlength) {
+      if (maxlength && text.length > maxlength) {
         if (node.isCollection)
           text = '[…]'
         else
@@ -193,7 +192,7 @@ export abstract class Loader extends Disposable {
       let value = node.getValue(locale)
       if (!value)
         return
-      if (clamp && maxlength && value.length > maxlength)
+      if (maxlength && value.length > maxlength)
         value = `${value.substring(0, maxlength)}…`
       return value
     }

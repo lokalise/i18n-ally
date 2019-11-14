@@ -2,88 +2,105 @@ import { normalize } from 'path'
 import { readFileSync, writeFileSync, promises as fsPromises } from 'fs'
 import * as iconv from 'iconv-lite'
 import * as jschardet from 'jschardet'
-// import { Log } from './Log'
 import { Config } from '../core'
 
-interface IFileEncoding extends Record<string, string> {}
-interface IDecodeData {
-  encoding: string,
+interface FileEncoding {
+  encoding: string
+  bom: boolean
+}
+
+interface DecodeData {
+  encoding: string
+  bom: boolean
   content: string
 }
 
-export class File {
-  private static _fileEncoding: IFileEncoding = {}
+const defaultEncoding = 'utf-8'
+const encodingMapping: Record<string, string> = {
+  ascii: defaultEncoding,
+  'windows-1252': defaultEncoding,
+}
 
-  private static __setFileEncoding(filepath: string, encoding: string) {
+export class File {
+  private static _fileEncoding: Record<string, FileEncoding> = {}
+
+  private static __setFileEncoding (filepath: string, encoding: FileEncoding) {
     filepath = normalize(filepath)
     this._fileEncoding[filepath] = encoding
   }
 
-  private static __getFileEncoding(filepath: string, opts?: any): string {
-    let encoding
-
-    switch (typeof opts) {
-      case 'object':
-        encoding = opts.encoding
-        break
-      case 'string':
-        encoding = opts
-        break
+  private static __getFileEncoding (filepath: string): FileEncoding {
+    filepath = normalize(filepath)
+    const info: FileEncoding = this._fileEncoding[filepath] || {
+      encoding: '',
+      bom: false,
     }
 
-    if (!encoding) {
-      filepath = normalize(filepath)
-      encoding = this._fileEncoding[filepath]
-    }
+    if (!info.encoding && Config.encoding !== 'auto')
+      info.encoding = Config.encoding
 
-    if (!encoding && Config.encoding !== 'auto')
-      encoding = Config.encoding
+    if (!info.encoding)
+      info.encoding = defaultEncoding
 
-    return encoding
+    return info
   }
 
-  static async read(filepath: string, encoding: string = Config.encoding): Promise<string> {
+  static async read (filepath: string, encodingConfig: string = Config.encoding): Promise<string> {
     const raw = await fsPromises.readFile(filepath)
-    const res = File.decode(raw, encoding)
-    this.__setFileEncoding(filepath, res.encoding)
-    return res.content
+    const { encoding, bom, content } = File.decode(raw, encodingConfig)
+    console.log(filepath, encoding, bom)
+    this.__setFileEncoding(filepath, { encoding, bom })
+    return content
   }
 
-  static readSync(filepath: string, encoding: string = Config.encoding): string {
+  static readSync (filepath: string, encodingConfig: string = Config.encoding): string {
     const raw = readFileSync(filepath)
-    const res = File.decode(raw, encoding)
-    this.__setFileEncoding(filepath, res.encoding)
-    return res.content
+    const { encoding, bom, content } = File.decode(raw, encodingConfig)
+    this.__setFileEncoding(filepath, { encoding, bom })
+    return content
   }
 
-  static async write(filepath: string, data: any, opts?: any) {
-    const encoding = this.__getFileEncoding(filepath, opts)
-    const buffer = new Buffer(File.encode(data, encoding))
+  static async write (filepath: string, data: any, opts?: FileEncoding) {
+    const { encoding, bom } = opts || this.__getFileEncoding(filepath)
+    console.log('WRITE', encoding, bom)
+    const buffer = Buffer.from(File.encode(data, encoding, bom))
     await fsPromises.writeFile(filepath, buffer)
   }
 
-  static writeSync(filepath: string, data: any, opts?: any) {
-    const encoding = this.__getFileEncoding(filepath, opts)
-    const content = File.encode(data, encoding)
-    writeFileSync(filepath, content)
+  static writeSync (filepath: string, data: any, opts?: FileEncoding) {
+    const { encoding, bom } = opts || this.__getFileEncoding(filepath)
+    const buffer = Buffer.from(File.encode(data, encoding, bom))
+    writeFileSync(filepath, buffer)
   }
 
-  static decode(buffer: Buffer, encoding?: string): IDecodeData {
+  static decode (buffer: Buffer, encoding?: string): DecodeData {
     if (!encoding || encoding === 'auto') {
-      const res = jschardet.detect(buffer)
-      // Log.info(JSON.stringify(res))
+      const res = jschardet.detect(buffer, { minimumThreshold: 0 })
       encoding = res.encoding
     }
 
+    if (!encoding)
+      encoding = defaultEncoding
+
+    if (encodingMapping[encoding])
+      encoding = encodingMapping[encoding]
+
+    const content = iconv.decode(buffer, encoding)
+    let bom = false
+
+    // Catches EFBBBF (UTF-8 BOM) because the buffer-to-string
+    // conversion translates it to FEFF (UTF-16 BOM)
+    if (buffer[0] === 0xEF && buffer[1] === 0xBB && buffer[2] === 0xBF)
+      bom = true
+
     return {
-      encoding: encoding,
-      content: iconv.decode(buffer, encoding)
+      encoding,
+      content,
+      bom,
     }
   }
 
-  static encode(string: string, encoding: string, addBom: boolean = true): Buffer {
-    return iconv.encode(string, encoding, {
-      addBOM: addBom
-    })
+  static encode (string: string, encoding: string, addBOM = true): Buffer {
+    return iconv.encode(string, encoding, { addBOM })
   }
 }
