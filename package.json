@@ -109,6 +109,7 @@
       },
       {
         "command": "extension.vue-i18n-ally.fulfill-keys",
+        "category": "%extname%",
         "title": "%command.fulfill_keys%",
         "icon": {
           "light": "./res/light/fulfill.svg",
@@ -161,6 +162,10 @@
         {
           "command": "extension.vue-i18n-ally.open-url",
           "when": "config.no_exits"
+        },
+        {
+          "command": "extension.vue-i18n-ally.fulfill-keys",
+          "when": "vue-i18n-ally-enabled"
         }
       ],
       "view/item/context": [

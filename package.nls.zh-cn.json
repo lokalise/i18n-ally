@@ -59,6 +59,7 @@
   "prompt.enter_new_keypath": "输入新的路径",
   "prompt.extraction_canceled": "文案提取已取消",
   "prompt.failed_to_locate_key": "找不到路径 \"{0}\"",
+  "prompt.fullfill_missing_all_confirm": "您确定要使用空字符串来填充所有丢失的文案吗？\n\n此操作无法撤消。",
   "prompt.fullfill_missing_confirm": "您确定要用空字符串来填充 {1} 中的 {0} 个缺失文案吗？\n\n此操作将无法撤消。",
   "prompt.key_already_exists": "路径已存在。覆盖当前路径或是重新输入路径?",
   "prompt.key_copied": "路径已复制",
