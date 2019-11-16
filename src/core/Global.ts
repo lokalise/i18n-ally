@@ -145,6 +145,7 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
+      Log.info(`🐱‍🏍 "${this.enabledFrameworks.map(i => i.display).join(', ')}" framework(s) detected, extension enabled.`)
       await this.initLoader(this._rootpath, reload)
     }
     else {
