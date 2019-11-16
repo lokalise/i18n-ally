@@ -80,7 +80,7 @@
   "prompt.translate_missing_done": "{0} keys translated.",
   "prompt.translate_missing_in_progress": "Translating...",
   "prompt.writing_js": "Writing to js/ts file is not supported.",
-  "refactor.extract_text": "Extract text to vue-i18n locales",
+  "refactor.extract_text": "Extract text into i18n messages",
   "view.current_file": "Current file",
   "view.help_feedback": "Help & Feedback",
   "view.i18n_keys": "Vue i18n Keys",

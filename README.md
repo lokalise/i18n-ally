@@ -53,7 +53,7 @@ Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-suppo
 </p>
 
 
-<h3 align="center"> JSON, YAML and JSON5 are supported </h3>
+<h3 align="center"> Multiple formats supported </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' width='500px'/>
@@ -85,31 +85,17 @@ Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-suppo
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
 
-## ⚙ Installation
+## 📜 Supported Formats
 
-Install [the extension from VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally) and you are good to go!
+| Format | Read | Write | Annonations | Note |
+| --- | --- | --- | --- | --- |
+| JSON | ✅ | ✅ | ✅ | |
+| YAML | ✅ | ✅ | ✅ | *Comments will NOT preserved\** |
+| JSON5 | ✅ | ✅ | ❌ | *Comments will NOT preserved\** |
+| JavaScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
+| TypeScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 
-
-## 🎯 Troubleshooting
-
-### Extension doesn't work/show up. There is no icon in activity bar
-
-Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
-  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
-  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
-  - [`vue-i18next`](https://github.com/panter/vue-i18next)
-  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
-
-You can also enable extension manually with `"vue-i18n-ally.forceEnabled": true` in the settings of VSCode
-
-### I can see the icon in activity bar, but nothing show up
-
-1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
-2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
-3. **Directory structure** please read the next section
-
+*\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on readonly mode by `vue-i18n-ally.readonly` to prevent lossing comments.*
 
 ## 📂 Directory structure
 
@@ -182,16 +168,6 @@ You could change your config like this:
 
 ### ⚙ More configurations
 
-### Comments in YAML/JSON5
-
-Since there is no easy way to perserve comments in `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) or `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any writings by this extension (editing, translating, etc).
-
-Although you can make this extension works in `readonly` mode, preventing losing the comments.
-
-```json
-"vue-i18n-ally.readonly": true
-```
-
 ### Keys sorting
 
 You can turn on keys sorting by
@@ -201,17 +177,6 @@ You can turn on keys sorting by
 ```
 
 The keys sorting is only avaliable in JSON and YAML, but not JSON5.
-
-
-### ⚗ Experimental `.js`/`.ts` support
-
-From v0.24.x, we shipped the support for loading `*.js`/`*.ts` locale files. You can use them already with no config required.
-
-**⚠ You will only be able to use limited features of the extension**
-
-> Features like editting and translating are not avaliable in javascript/typescript locales (a.k.a forced to work on readonly mode). They can be very complex and there is not a proper way to update the changes.
->
-> We would recommend you to use static files like JSON or YAML storing locale messages to work best with this extension.
 
 ### ⚗ Experimental SFC support
 
@@ -234,6 +199,28 @@ This extension itself supports i18n as well, it will be auto matched to the disp
 4. Commit changes and make a PR to this repo
 
 We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself 😁, all the configs were already set in the workspace settings.
+
+
+## 🎯 Troubleshooting
+
+### Extension doesn't work/show up. There is no icon in activity bar
+
+Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
+  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
+  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
+  - [`vue-i18next`](https://github.com/panter/vue-i18next)
+  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
+
+You can also enable extension manually with `"vue-i18n-ally.forceEnabled": true` in the settings of VSCode
+
+### I can see the icon in activity bar, but nothing show up
+
+1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
+   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
+   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
+2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
+3. **Directory structure** please read the next section
+
 
 
 ## 📅 TODOs
