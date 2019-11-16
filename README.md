@@ -133,23 +133,25 @@ or
 
 ## ⚙ Common Configurations
 
-| Key | Default Value | Description | Note |
-| --- | --- | --- | --- |
-| `vue-i18n-ally.sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
-| `vue-i18n-ally.displayLanguage` | `en` | Displaying language in annotations and tree views. |
-| `vue-i18n-ally.localesPaths` | Auto detect | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
-| `vue-i18n-ally.sortedKeys` | `false` | Sorting keys alphabetically on saving |
-| `vue-i18n-ally.readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
-| `vue-i18n-ally.annotations` | `true` | Enabling inline annotations |
+All fields should add prefix "`vue-i18n-ally.`" in the setting.
+
+| Field | Default | Description |
+| --- | --- | --- |
+| `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
+| `displayLanguage` | `en` | Displaying language in annotations and tree views. |
+| `localesPaths` | Auto detect | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
+| `sortedKeys` | `false` | Sorting keys alphabetically on saving |
+| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
+| `annotations` | `true` | Enabling inline annotations |
 
 
 ## 🔩 Advanced Configurations
 
-| Key | Default Value | Description | Note |
-| --- | --- | --- | --- |
-| `vue-i18n-ally.filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
-| `vue-i18n-ally.forceEnabled` | `false` | Extension will on enabled when `vue-i18n`-ish dependencies is installed in the project. Turning on this option will force the extension enabled anyway. |
-| `vue-i18n-ally.experimental.sfc` | `false` | Support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. Currently SFC only works in **READONLY** mode, the other features will be landed in future release. |
+| Field | Default | Description |
+| --- | --- | --- |
+| `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
+| `forceEnabled` | `false` | Extension will on enabled when `vue-i18n`-ish dependencies is installed in the project. Turning on this option will force the extension enabled anyway. |
+| `experimental.sfc` | `false` | Support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. Currently SFC only works in **READONLY** mode, the other features will be landed in future release. |
 
 
 ## 🌍 Help translate this extension
