@@ -1,8 +1,9 @@
 import { FrameworkDefinition } from '../type'
 
 const VueFrameworkDefinition: FrameworkDefinition = {
-  id: 'vue',
-  display: 'Vue',
+  id: 'vue-i18n',
+  display: 'Vue i18n',
+
   detection: {
     packageJSON: [
       'vue-i18n',
@@ -11,12 +12,14 @@ const VueFrameworkDefinition: FrameworkDefinition = {
       'nuxt-i18n',
     ],
   },
+
   languageIds: [
     'vue',
     'vue-html',
     'javascript',
     'typescript',
   ],
+
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg: {
     '*': [
@@ -24,6 +27,7 @@ const VueFrameworkDefinition: FrameworkDefinition = {
       /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. -\[\]]+?)['"`]/g,
     ],
   },
+
   refactorTemplates: (keypath, languageId) => [
     `{{$t('${keypath}')}}`,
     `this.$t('${keypath}')`,

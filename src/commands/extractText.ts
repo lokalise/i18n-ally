@@ -5,12 +5,11 @@ import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
 import { ExtractTextOptions, Global, Commands, Config } from '../core'
 import i18n from '../i18n'
-import { REFACTOR_TEMPLATES } from '../meta'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
     async (options: ExtractTextOptions) => {
-      const { filepath, text, range } = options
+      const { filepath, text, range, languageId } = options
       const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
 
       // prompt for keypath
@@ -56,9 +55,11 @@ const m: ExtensionModule = () => {
       const value = trim(text, '\'"')
 
       // prompt for template
-      const replacer = await window.showQuickPick(REFACTOR_TEMPLATES(keypath), {
-        placeHolder: i18n.t('prompt.replace_text_as'),
-      })
+      const replacer = await window.showQuickPick(
+        Global.refactorTemplates(keypath, languageId),
+        {
+          placeHolder: i18n.t('prompt.replace_text_as'),
+        })
 
       if (!replacer) {
         window.showWarningMessage(i18n.t('prompt.extraction_canceled'))

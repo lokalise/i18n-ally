@@ -1,5 +1,6 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { uniq } from 'lodash'
 import { EXT_NAMESPACE } from '../meta'
 import { getPackageDependencies } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
@@ -50,22 +51,30 @@ export class Global {
   }
 
   static getKeyMatchReg (languageId?: string) {
-    const regex: RegExp[] = []
+    let regex: RegExp[] = []
     if (languageId) {
-      this.enabledFrameworks
-        .forEach(f => (f.keyMatchReg[languageId] || [])
-          .forEach((reg) => {
-            regex.push(reg)
-          }),
-        )
-    }
-    this.enabledFrameworks
-      .forEach(f => (f.keyMatchReg['*'] || [])
-        .forEach((reg) => {
-          regex.push(reg)
-        }),
+      regex = regex.concat(
+        this.enabledFrameworks
+          .flatMap(f => f.keyMatchReg[languageId] || []),
       )
+    }
+    regex = regex.concat(
+      this.enabledFrameworks
+        .flatMap(f => f.keyMatchReg['*'] || []),
+    )
     return regex
+  }
+
+  static refactorTemplates (keypath: string, languageId?: string) {
+    return uniq(this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)))
+  }
+
+  static isLanguageIdSupported (languageId: string) {
+    return this.enabledFrameworks.flatMap(f => f.languageIds).includes(languageId)
+  }
+
+  static getDocumentSelectors () {
+    return this.enabledFrameworks.flatMap(f => f.languageIds).map(id => ({ scheme: 'file', language: id }))
   }
 
   private static async initLoader (rootpath: string, reload = false) {

@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": { "*": ["types/*"] },
-    "target": "es2018",
-    "lib": ["es2018"],
+    "target": "es2019",
+    "lib": ["es2019"],
     "module": "esnext",
     "outDir": "dist",
     "sourceMap": true,

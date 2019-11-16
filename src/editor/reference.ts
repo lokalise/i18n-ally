@@ -1,7 +1,7 @@
 import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { LANG_SELECTORS } from '../meta'
-import { KeyDetector, Global, Analyst } from '../core'
+import { KeyDetector, Analyst } from '../core'
+import { Global } from '../core/Global'
 
 class Provider implements ReferenceProvider, RenameProvider {
   async provideReferences (document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
@@ -42,8 +42,8 @@ class Provider implements ReferenceProvider, RenameProvider {
 const m: ExtensionModule = (ctx) => {
   const provider = new Provider(ctx)
   return [
-    languages.registerReferenceProvider(LANG_SELECTORS, provider),
-    languages.registerRenameProvider(LANG_SELECTORS, provider),
+    languages.registerReferenceProvider(Global.getDocumentSelectors(), provider),
+    languages.registerRenameProvider(Global.getDocumentSelectors(), provider),
   ]
 }
 

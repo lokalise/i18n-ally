@@ -1,8 +1,9 @@
 import { resolve } from 'path'
 import { workspace, Range, Location, TextDocument } from 'vscode'
 import * as fg from 'fast-glob'
-import { SUPPORTED_LANG_GLOBS, SUPPORTED_LANG_IDS } from '../meta'
+import { SUPPORTED_LANG_GLOBS } from '../meta'
 import { Log, File } from '../utils'
+import { Global } from './Global'
 import { KeyDetector, Config } from '.'
 
 export interface Occurrence {
@@ -31,7 +32,7 @@ export class Analyst {
   private static async updateCache (doc: TextDocument) {
     if (!this._cache)
       return
-    if (!SUPPORTED_LANG_IDS.includes(doc.languageId))
+    if (!Global.isLanguageIdSupported(doc.languageId))
       return
 
     const filepath = doc.uri.fsPath
