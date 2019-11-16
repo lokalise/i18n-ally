@@ -1,10 +1,12 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { EXT_NAMESPACE } from '../meta'
-import { isVueI18nProject } from '../utils/utils'
+import { getPackageDependencies } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log } from '../utils'
+import { FrameworkDefinition } from '../frameworks/type'
+import { getEnabledFrameworks } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
 import { LocaleLoader, Config } from '.'
 
@@ -20,6 +22,8 @@ export class Global {
   static context: ExtensionContext
 
   static parsers = PARSERS
+
+  static enabledFrameworks: FrameworkDefinition[] = []
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
@@ -43,6 +47,25 @@ export class Global {
     context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update(e)))
     await this.updateRootPath()
+  }
+
+  static getKeyMatchReg (languageId?: string) {
+    const regex: RegExp[] = []
+    if (languageId) {
+      this.enabledFrameworks
+        .forEach(f => (f.keyMatchReg[languageId] || [])
+          .forEach((reg) => {
+            regex.push(reg)
+          }),
+        )
+    }
+    this.enabledFrameworks
+      .forEach(f => (f.keyMatchReg['*'] || [])
+        .forEach((reg) => {
+          regex.push(reg)
+        }),
+      )
+    return regex
   }
 
   private static async initLoader (rootpath: string, reload = false) {
@@ -114,20 +137,23 @@ export class Global {
         Log.info('🔁 Reloading loader')
     }
 
-    const i18nProject = isVueI18nProject(this._rootpath)
+    const dependencies = getPackageDependencies(this._rootpath)
+    this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
+    const isValidProject = this.enabledFrameworks.length > 0
     const hasLocalesSet = !!Config.localesPaths.length
-    const shouldEnabled = Config.forceEnabled || (i18nProject && hasLocalesSet)
+    const shouldEnabled = Config.forceEnabled || (isValidProject && hasLocalesSet)
     this.setEnabled(shouldEnabled)
+
     if (this.enabled) {
       await this.initLoader(this._rootpath, reload)
     }
     else {
-      if (!i18nProject)
-        Log.info('⚠ Current workspace is not a vue-i18n project, extension disabled')
+      if (!isValidProject)
+        Log.info('⚠ Current workspace is not a valid project, extension disabled')
       else if (!hasLocalesSet)
         Log.info('⚠ No locales path found, extension disabled')
 
-      if (i18nProject && !hasLocalesSet)
+      if (isValidProject && !hasLocalesSet)
         ConfigLocalesGuide.autoSet()
 
       this.unloadAll()

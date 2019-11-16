@@ -1,14 +1,23 @@
 import * as vscode from 'vscode'
-import { uniq } from 'lodash'
-import { KEY_REG } from '../meta'
-import { File } from '../utils'
+import { File } from '../utils/File'
+import { Global } from './Global'
 
 export class KeyDetector {
-  static getKeyByContent (text: string) {
-    const keys = (text.match(KEY_REG) || [])
-      .map(key => key.replace(KEY_REG, '$1'))
+  static get KeyMatchReg () {
+    return Global.getKeyMatchReg()
+  }
 
-    return uniq(keys)
+  static getKeyByContent (text: string) {
+    const keys = new Set<string>()
+
+    for (const reg of this.KeyMatchReg) {
+      (text.match(reg) || [])
+        .forEach(key =>
+          keys.add(key.replace(reg, '$1')),
+        )
+    }
+
+    return Array.from(keys)
   }
 
   static getKeyByFile (filePath: string) {
@@ -17,22 +26,25 @@ export class KeyDetector {
   }
 
   static getKeyRange (document: vscode.TextDocument, position: vscode.Position) {
-    return document.getWordRangeAtPosition(position, KEY_REG)
+    for (const regex of this.KeyMatchReg) {
+      const range = document.getWordRangeAtPosition(position, regex)
+      if (range) {
+        const key = document.getText(range).replace(regex, '$1')
+        return { range, key }
+      }
+    }
   }
 
   static getKey (document: vscode.TextDocument, position: vscode.Position) {
     const keyRange = KeyDetector.getKeyRange(document, position)
-    return keyRange
-      ? document.getText(keyRange).replace(KEY_REG, '$1')
-      : undefined
+    if (!keyRange)
+      return
+    return keyRange.key
   }
 
   static getKeyAndRange (document: vscode.TextDocument, position: vscode.Position) {
-    const range = KeyDetector.getKeyRange(document, position)
-    if (!range)
-      return
-    const key = document.getText(range).replace(KEY_REG, '$1')
-    if (!key)
+    const { range, key } = KeyDetector.getKeyRange(document, position) || {}
+    if (!range || !key)
       return
     const end = range.end.character - 1
     const start = end - key.length
@@ -50,19 +62,21 @@ export class KeyDetector {
     const keys = []
     if (typeof text !== 'string')
       text = text.getText()
-    let match = null
-    // eslint-disable-next-line no-cond-assign
-    while (match = KEY_REG.exec(text)) {
-      const index = match.index
-      const matchKey = match[0]
-      const key = matchKey.replace(new RegExp(KEY_REG), '$1')
-      const end = index + match[0].length - 1
-      const start = end - match[1].length
-      keys.push({
-        key,
-        start,
-        end,
-      })
+    for (const reg of this.KeyMatchReg) {
+      let match = null
+      // eslint-disable-next-line no-cond-assign
+      while (match = reg.exec(text)) {
+        const index = match.index
+        const matchKey = match[0]
+        const key = matchKey.replace(new RegExp(reg), '$1')
+        const end = index + match[0].length - 1
+        const start = end - match[1].length
+        keys.push({
+          key,
+          start,
+          end,
+        })
+      }
     }
     return keys
   }

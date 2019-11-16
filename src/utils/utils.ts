@@ -1,6 +1,5 @@
 import * as path from 'path'
 import { workspace } from 'vscode'
-import { SUPPORTED_FRAMEWORKS } from '../meta'
 import { Log, File } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -65,24 +64,22 @@ export function escapeMarkdown (text: string) {
     .replace(/\)/g, '\\)')
 }
 
-export function isVueI18nProject (projectUrl: string): boolean {
+export function getPackageDependencies (projectUrl: string): string[] {
   if (!projectUrl || !workspace.workspaceFolders)
-    return false
+    return []
 
   try {
     const rawPackageJSON = File.readSync(`${projectUrl}/package.json`)
     const {
       dependencies = {},
       devDependencies = {},
+      peerDependencies = {},
     } = JSON.parse(rawPackageJSON)
 
-    for (const framework of SUPPORTED_FRAMEWORKS) {
-      if (framework in dependencies || framework in devDependencies)
-        return true
-    }
+    return [...Object.keys(dependencies), ...Object.keys(devDependencies), ...Object.keys(peerDependencies)]
   }
   catch (err) {
     Log.info('Error on parsing package.json')
   }
-  return false
+  return []
 }
