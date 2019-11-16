@@ -105,8 +105,8 @@ You can have locales directory structured like this with zero-configuration
   locales         # i18n, langs, locale are also acceptable
   ├── en.json
   ├── de-DE.json
-  ├── zh-CN.yaml  # YAML is also supported
-  ├── zh-TW.yaml
+  ├── zh-CN.yml   # YAML
+  ├── zh-TW.ts    # You can mix different formats
   ├── ...
   └── <contry-code>.json
 ```
@@ -130,13 +130,62 @@ or
       └── ...
 ```
 
+
+## ⚙ Common Configurations
+
+| Key | Default Value | Description | Note |
+| --- | --- | --- | --- |
+| `vue-i18n-ally.sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
+| `vue-i18n-ally.displayLanguage` | `en` | Displaying language in annotations and tree views. |
+| `vue-i18n-ally.localesPaths` | Auto detect | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
+| `vue-i18n-ally.sortedKeys` | `false` | Sorting keys alphabetically on saving |
+| `vue-i18n-ally.readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
+| `vue-i18n-ally.annotations` | `true` | Enabling inline annotations |
+
+
+## 🔩 Advanced Configurations
+
+| Key | Default Value | Description | Note |
+| --- | --- | --- | --- |
+| `vue-i18n-ally.filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
+| `vue-i18n-ally.forceEnabled` | `false` | Extension will on enabled when `vue-i18n`-ish dependencies is installed in the project. Turning on this option will force the extension enabled anyway. |
+| `vue-i18n-ally.experimental.sfc` | `false` | Support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. Currently SFC only works in **READONLY** mode, the other features will be landed in future release. |
+
+
+## 🌍 Help translate this extension
+
+This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. If you would like to help translate this extension, you can do it by following steps.
+
+1. Fork this repo and clone it to you local machine
+2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
+3. Translate every single message in the new json file you created.
+4. Commit changes and make a PR to this repo
+
+We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself 😁, all the configs were already set in the workspace settings.
+
+
+## 🎯 Troubleshooting
+
+### Extension doesn't work/show up. There is no icon in activity bar
+
+Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
+  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
+  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
+  - [`vue-i18next`](https://github.com/panter/vue-i18next)
+  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
+
+### I can see the icon in activity bar, but nothing show up
+
+1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
+   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
+   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
+2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
+3. Check your **Directory structure**
+
+
 ### 🗂 Advanced folder directory configurations
 
-In some cases, you may use modules, monorepo or other philosophies to organize your locale files. The follow configs might be helpful.
-
-`vue-i18n-ally.localesPaths` accept an array of glob patterns which allows you to specify the folders containing your locale files.
-
-`vue-i18n-ally.filenameMatchRegex` accept a regex allows you to map the filenames. The first group in regex should be the locale code. Filenames with not match will be ignored.
+In some cases, you may use modules, monorepo or other philosophies to organize your locale files.
 
 **For example**, you have following directory structure need to be config.
 
@@ -165,62 +214,6 @@ You could change your config like this:
   "vue-i18n-ally.filenameMatchRegex": "^([\\w-]*)\\.messages\\.json",
 }
 ```
-
-### ⚙ More configurations
-
-### Keys sorting
-
-You can turn on keys sorting by
-
-```json5
-"vue-i18n-ally.sortedKeys": true // default disabled
-```
-
-The keys sorting is only avaliable in JSON and YAML, but not JSON5.
-
-### ⚗ Experimental SFC support
-
-From v0.29.x, we shipped the support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. The feature is disabled by default. You can opt-in by changing setting:
-
-```json
-"vue-i18n-ally.experimental.sfc": true
-```
-
-Note currently SFC only works in **READONLY** mode, the other features will be landed in future release.
-
-
-## 🌍 Help translate this extension
-
-This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. If you would like to help translate this extension, you can do it by following steps.
-
-1. Fork this repo and clone it to you local machine
-2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
-3. Translate every single message in the new json file you created.
-4. Commit changes and make a PR to this repo
-
-We would recommend you to use vscode with `vue-i18n-ally` installed. It can helps you translate itself 😁, all the configs were already set in the workspace settings.
-
-
-## 🎯 Troubleshooting
-
-### Extension doesn't work/show up. There is no icon in activity bar
-
-Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
-  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
-  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
-  - [`vue-i18next`](https://github.com/panter/vue-i18next)
-  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
-
-You can also enable extension manually with `"vue-i18n-ally.forceEnabled": true` in the settings of VSCode
-
-### I can see the icon in activity bar, but nothing show up
-
-1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
-2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
-3. **Directory structure** please read the next section
-
 
 
 ## 📅 TODOs
