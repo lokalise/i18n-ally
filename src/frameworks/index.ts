@@ -1,8 +1,10 @@
-import VueI18nFrameworkDefinition from './vue-i18n'
 import { FrameworkDefinition } from './type'
+import VueI18nFrameworkDefinition from './vue-i18n'
+import ReactI18nFrameworkDefinition from './react-i18n'
 
 export const frameworks = [
   VueI18nFrameworkDefinition,
+  ReactI18nFrameworkDefinition,
 ]
 
 export function getFramework (id: string): FrameworkDefinition | undefined {
@@ -10,11 +12,7 @@ export function getFramework (id: string): FrameworkDefinition | undefined {
 }
 
 export function getEnabledFrameworks ({ dependenciesNames }: {dependenciesNames: string[]}) {
-  return frameworks.filter((f) => {
-    for (const key of f.detection.packageJSON) {
-      if (dependenciesNames.includes(key))
-        return true
-    }
-    return false
-  })
+  return frameworks.filter(f =>
+    f.detection.packageJSON.some(key => dependenciesNames.includes(key)),
+  )
 }
