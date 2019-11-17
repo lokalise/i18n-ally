@@ -95,6 +95,15 @@ Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-suppo
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
 
+## 🧱 Supported Frameworks
+
+Frameworks will be auto detected when one of the dependencies can be found in the project.
+
+| Format | Manage | Annonations | Triggers | Note |
+| --- | --- | --- | --- | --- |
+| Vue | ✅ | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) | |
+| React | ✅ | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |  |
+
 ## 📜 Supported Formats
 
 | Format | Read | Write | Annonations | Note |
