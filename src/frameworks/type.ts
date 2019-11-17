@@ -2,7 +2,7 @@ export interface FrameworkDefinition {
   id: string
   display: string
   detection: {
-    packageJSON: string[]
+    packageJSON: string[] | ((packages: string[]) => boolean)
   }
   languageIds: string[]
   keyMatchReg: Record<string, RegExp[]>

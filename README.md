@@ -103,6 +103,7 @@ Frameworks will be auto detected when one of the dependencies can be found in th
 | --- | --- | --- | --- | --- |
 | Vue | ✅ | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) | |
 | React | ✅ | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |  |
+| General i18next | ✅ | ❌ | [`i18next`](https://github.com/i18next/i18next) and none of above |  |
 
 ## 📜 Supported Formats
 

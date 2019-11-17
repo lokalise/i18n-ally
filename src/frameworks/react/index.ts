@@ -8,6 +8,7 @@ const ReactFrameworkDefinition: FrameworkDefinition = {
     packageJSON: [
       'react-i18next',
       'react-intl',
+      'next-i18next',
     ],
   },
 

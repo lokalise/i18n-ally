@@ -146,8 +146,8 @@ export class Global {
         Log.info('🔁 Reloading loader')
     }
 
-    const dependencies = getPackageDependencies(this._rootpath)
-    this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
+    const packages = getPackageDependencies(this._rootpath)
+    this.enabledFrameworks = getEnabledFrameworks({ packages })
     const isValidProject = this.enabledFrameworks.length > 0
     const hasLocalesSet = !!Config.localesPaths.length
     const shouldEnabled = Config.forceEnabled || (isValidProject && hasLocalesSet)
