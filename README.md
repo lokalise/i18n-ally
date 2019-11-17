@@ -45,6 +45,10 @@ Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-suppo
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/manage.png?raw=true' width='600px'/>
 </p>
 
+<p align="center">
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/missing_keys.png?raw=true' width='600px'/>
+</p>
+
 
 <h3 align="center"> Translations missing report </h3>
 
@@ -73,10 +77,16 @@ Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-suppo
 <img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/extract.png?raw=true' width='500px'/>
 </p>
 
+<h3 align="center"> Annonation for JSON and YAML </h3>
+
+<p align="center">
+<img src='https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/locale-annotation.png?raw=true' width='600px'/>
+</p>
+
+
 <h3 align="center"> Overview </h3>
 
 - Multi-root workspace supported
-- Supports `.json`, `.yaml`, `.json5`, `.js` and `.ts` locale message formats
 - Remote development supported
 - Supports both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
 - i18n for the extension itself, of course. **(supporting: English, 简体中文, 繁體中文 or [help us translate](https://github.com/antfu/vue-i18n-ally#-help-translate-this-extension))**
