@@ -1,8 +1,8 @@
 import { FrameworkDefinition } from '../type'
 
-const VueI18nFrameworkDefinition: FrameworkDefinition = {
-  id: 'vue-i18n',
-  display: 'Vue i18n',
+const VueFrameworkDefinition: FrameworkDefinition = {
+  id: 'vue',
+  display: 'Vue',
 
   detection: {
     packageJSON: [
@@ -37,4 +37,4 @@ const VueI18nFrameworkDefinition: FrameworkDefinition = {
   ],
 }
 
-export default VueI18nFrameworkDefinition
+export default VueFrameworkDefinition

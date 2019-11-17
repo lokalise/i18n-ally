@@ -1,10 +1,10 @@
 import { FrameworkDefinition } from './type'
-import VueI18nFrameworkDefinition from './vue-i18n'
-import ReactI18nFrameworkDefinition from './react-i18n'
+import VueFrameworkDefinition from './vue-i18n'
+import ReactFrameworkDefinition from './react-i18n'
 
 export const frameworks = [
-  VueI18nFrameworkDefinition,
-  ReactI18nFrameworkDefinition,
+  VueFrameworkDefinition,
+  ReactFrameworkDefinition,
 ]
 
 export function getFramework (id: string): FrameworkDefinition | undefined {

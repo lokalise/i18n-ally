@@ -1,12 +1,13 @@
 import { FrameworkDefinition } from '../type'
 
-const ReactI18nFrameworkDefinition: FrameworkDefinition = {
-  id: 'react-i18n',
-  display: 'React i18n',
+const ReactFrameworkDefinition: FrameworkDefinition = {
+  id: 'react',
+  display: 'React',
 
   detection: {
     packageJSON: [
       'react-i18next',
+      'react-intl',
     ],
   },
 
@@ -21,7 +22,7 @@ const ReactI18nFrameworkDefinition: FrameworkDefinition = {
   keyMatchReg: {
     '*': [
       // eslint-disable-next-line no-useless-escape
-      /(?:Trans[ (]i18nKey=|(?:t)\()['"`]([\w\d\. -\[\]]+?)['"`]/g,
+      /(?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\()['"`]([\w\d\. -\[\]]+?)['"`]/g,
     ],
   },
 
@@ -32,4 +33,4 @@ const ReactI18nFrameworkDefinition: FrameworkDefinition = {
   ],
 }
 
-export default ReactI18nFrameworkDefinition
+export default ReactFrameworkDefinition
