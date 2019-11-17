@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.34.6](https://github.com/antfu/vue-i18n-ally/compare/v0.34.5...v0.34.6) (2019-11-17)
+
+
+### 📚 Documentations
+
+* add screenshots ([d575f66](https://github.com/antfu/vue-i18n-ally/commit/d575f668bb000a0695a43ce51d3ec5887caabbaa))
+* polish README ([84f79ed](https://github.com/antfu/vue-i18n-ally/commit/84f79ed76d92c65e4f432fc1f51e7012795bcb74))
+* update README ([0fba9db](https://github.com/antfu/vue-i18n-ally/commit/0fba9db8a0b58a25aeb080b163f06262ef06463e))
+* update README ([e1f4cd7](https://github.com/antfu/vue-i18n-ally/commit/e1f4cd77ff688ee0333402b087e0f4e3cea95550))
+
+
+### 🔮 Refactor
+
+* extract key reg to frameworks ([41e3239](https://github.com/antfu/vue-i18n-ally/commit/41e323910b669cf0c58f40954014aa67946e1bdb))
+* extract language selectors and refactor templates ([012222c](https://github.com/antfu/vue-i18n-ally/commit/012222c7b429d3c2b783ad7ef344e35db2ea287e))
+
 ### [0.34.5](https://github.com/antfu/vue-i18n-ally/compare/v0.34.4...v0.34.5) (2019-11-14)
 
 
