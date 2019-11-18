@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.35.0](https://github.com/antfu/vue-i18n-ally/compare/v0.34.6...v0.35.0) (2019-11-18)
+
+
+### 🐞 Bug Fixes
+
+* forceEnable accept an array of framework ids ([3b0c807](https://github.com/antfu/vue-i18n-ally/commit/3b0c807ab6104fe643ae286e376846c314a7b863))
+
+
+### 🌍 Internationalization
+
+* add Spanish translation, thanks @Baltimer ([#111](https://github.com/antfu/vue-i18n-ally/issues/111)) ([c303a73](https://github.com/antfu/vue-i18n-ally/commit/c303a733f075057ecaacd64ff75a1b4e2b8edc79))
+
 ### [0.34.6](https://github.com/antfu/vue-i18n-ally/compare/v0.34.5...v0.34.6) (2019-11-17)
 
 
