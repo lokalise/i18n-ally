@@ -2,11 +2,10 @@ import { window } from 'vscode'
 import { ProgressSubmenuView } from '../../views/ProgressView'
 import i18n from '../../i18n'
 import { LocaleTreeView } from '../../views/LocalesTreeView'
-import { Global } from '../../core/Global';
+import { Global } from '../../core/Global'
+import { CurrentFile } from '../../core/CurrentFile'
+import { PendingWrite } from '../../core/types'
 import { CommandOptions } from './common'
-import { CurrentFile } from '../../core/CurrentFile';
-import { PendingWrite } from '../../core/types';
-
 
 const FULFILL_VALUE = ''
 
@@ -25,12 +24,12 @@ export async function FulfillMissingKeysForProgress (item: ProgressSubmenuView) 
 
   const pendings = keys.map(key => ({
     locale,
-    value:FULFILL_VALUE,
+    value: FULFILL_VALUE,
     filepath: Global.loader.getFilepathByKey(key, locale),
     keypath: key,
   }))
 
-  await Global.loader.writeToFile(pendings) // TODO:sfc
+  await CurrentFile.loader.write(pendings)
 }
 
 export async function FulfillAllMissingKeys () {
@@ -44,19 +43,20 @@ export async function FulfillAllMissingKeys () {
     return
 
   let pendings: PendingWrite[] = []
-  for (const locale of Global.visibleLocales){
-    const cov = CurrentFile.loader.getCoverage(locale)
+  const loader = CurrentFile.loader
+  for (const locale of Global.visibleLocales) {
+    const cov = loader.getCoverage(locale)
     if (!cov)
       continue
 
     pendings = pendings.concat(cov.missingKeys.map(key => ({
       locale,
       value: FULFILL_VALUE,
-      filepath: Global.loader.getFilepathByKey(key, locale),
+      filepath: loader.getFilepathByKey(key, locale),
       keypath: key,
     })))
   }
-  await Global.loader.writeToFile(pendings) // TODO:sfc
+  await CurrentFile.loader.write(pendings)
 }
 
 export async function FulfillKeys (item?: LocaleTreeView | ProgressSubmenuView | CommandOptions) {

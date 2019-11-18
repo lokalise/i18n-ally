@@ -77,6 +77,10 @@ export class Global {
     return this.enabledFrameworks.flatMap(f => f.languageIds).map(id => ({ scheme: 'file', language: id }))
   }
 
+  static get rootpath () {
+    return this._rootpath
+  }
+
   private static async initLoader (rootpath: string, reload = false) {
     if (!rootpath)
       return

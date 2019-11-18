@@ -16,5 +16,6 @@
   "vue-i18n-ally.sourceLanguage": "en",
   "vue-i18n-ally.keystyle": "flat",
   "vue-i18n-ally.preferredDelimiter": "_",
-  "vue-i18n-ally.sortKeys": true
+  "vue-i18n-ally.sortKeys": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

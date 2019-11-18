@@ -1,5 +1,7 @@
 import * as path from 'path'
 import { workspace } from 'vscode'
+import _ from 'lodash'
+import { PendingWrite, Config } from '../core'
 import { Log, File } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -82,4 +84,13 @@ export function getPackageDependencies (projectUrl: string): string[] {
     Log.info('Error on parsing package.json')
   }
   return []
+}
+
+export async function applyPendingToObject (obj: any, pending: PendingWrite) {
+  const keyStyle = await Config.requestKeyStyle()
+  if (keyStyle === 'flat')
+    obj[pending.keypath] = pending.value
+  else
+    _.set(obj, pending.keypath, pending.value)
+  return obj
 }

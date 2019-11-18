@@ -21,6 +21,8 @@ const config = {
     nodejieba: 'nodejieba',
     esm: 'esm',
     'ts-node': 'ts-node',
+    'vue-template-compiler': 'vue-template-compiler',
+    '@vue/component-compiler-utils': '@vue/component-compiler-utils',
   },
   resolve: {
     extensions: ['.ts', '.js'],

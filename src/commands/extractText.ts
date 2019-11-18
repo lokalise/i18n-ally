@@ -3,7 +3,7 @@ import * as limax from 'limax'
 import { commands, window, workspace } from 'vscode'
 import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
-import { ExtractTextOptions, Global, Commands, Config } from '../core'
+import { ExtractTextOptions, Global, Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
 
 const m: ExtensionModule = () => {
@@ -80,7 +80,7 @@ const m: ExtensionModule = () => {
         return
 
       // save key
-      await Global.loader.writeToFile({
+      await CurrentFile.loader.write({
         filepath: undefined,
         keypath,
         value,
