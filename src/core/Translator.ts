@@ -3,9 +3,8 @@ import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
-import { Global } from './Global'
 import { LocaleTree } from './types'
-import { LocaleNode, LocaleRecord, Config, Loader } from '.'
+import { LocaleNode, LocaleRecord, Config, Loader, CurrentFile } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -70,7 +69,7 @@ export class Translator {
         filepath: record.filepath,
         keypath: record.keypath,
       }
-      await Global.loader.writeToFile(pending) // TODO:sfc
+      await CurrentFile.loader.write(pending)
     }
     catch (e) {
       this.end(record.keypath, record.locale)

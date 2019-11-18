@@ -15,6 +15,18 @@ export interface ParsedFile extends FileInfo {
   value: object
 }
 
+export interface NodeOptions{
+  locale: string
+  readonly?: boolean
+  filepath: string
+  sfc?: boolean
+  meta?: NodeMeta
+}
+
+export interface NodeMeta {
+  sfcSectionIndex?: number
+}
+
 export interface INode {
   keypath: string
   keyname?: string
@@ -22,6 +34,7 @@ export interface INode {
   shadow?: boolean
   readonly?: boolean
   sfc?: boolean
+  meta?: NodeMeta
 }
 
 export interface ILocaleRecord extends INode {
@@ -46,6 +59,7 @@ abstract class BaseNode implements INode {
   readonly shadow?: boolean
   readonly readonly?: boolean
   readonly sfc?: boolean
+  readonly meta?: NodeMeta
 
   constructor (data: INode) {
     this.keypath = data.keypath
@@ -54,6 +68,7 @@ abstract class BaseNode implements INode {
     this.shadow = data.shadow
     this.readonly = data.readonly
     this.sfc = data.sfc
+    this.meta = data.meta
   }
 }
 
@@ -140,6 +155,7 @@ export interface PendingWrite {
   keypath: string
   filepath?: string
   value?: string
+  sfc?: boolean
 }
 
 export interface ExtractTextOptions {

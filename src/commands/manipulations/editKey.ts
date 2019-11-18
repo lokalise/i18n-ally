@@ -1,6 +1,6 @@
 import { window } from 'vscode'
 import { LocaleTreeView } from '../../views/LocalesTreeView'
-import { Config, Global } from '../../core'
+import { Config, CurrentFile } from '../../core'
 import i18n from '../../i18n'
 import { decorateLocale, Log } from '../../utils'
 import { CommandOptions, getNode, getRecordFromNode } from './common'
@@ -32,11 +32,12 @@ export async function EditKey (item?: LocaleTreeView | CommandOptions) {
     })
 
     if (newvalue !== undefined && newvalue !== node.value) {
-      await Global.loader.writeToFile({ // TODO:sfc
+      await CurrentFile.loader.write({
         value: newvalue,
         keypath: node.keypath,
         filepath: node.filepath,
         locale: node.locale,
+        sfc: node.sfc,
       })
     }
   }

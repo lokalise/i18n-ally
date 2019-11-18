@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as _ from 'lodash'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import { replaceLocalePath, normalizeLocale, Log } from '../../utils'
+import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite } from '../types'
 import { AllyError, ErrorType } from '../Errors'
@@ -47,16 +47,6 @@ export class LocaleLoader extends Loader {
       .value()
   }
 
-  getFilepathByKey (key: string, locale?: string) {
-    locale = locale || Config.displayLanguage
-    const files = Object.values(this._files).filter(f => f.locale === locale)
-    for (const file of files) {
-      if (_.get(file.value, key))
-        return file.filepath
-    }
-    return undefined
-  }
-
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
     const node = this.getNodeByKey(key)
     return node && node.locales[Config.displayLanguage]
@@ -98,7 +88,7 @@ export class LocaleLoader extends Loader {
     return undefined
   }
 
-  async writeToSingleFile (pending: PendingWrite) {
+  private async writeToSingleFile (pending: PendingWrite) {
     let filepath = pending.filepath
     if (!filepath)
       filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
@@ -116,18 +106,14 @@ export class LocaleLoader extends Loader {
     if (existsSync(filepath))
       original = await parser.load(filepath)
 
-    const keyStyle = await Config.requestKeyStyle()
-    if (keyStyle === 'flat')
-      original[pending.keypath] = pending.value
-    else
-      _.set(original, pending.keypath, pending.value)
+    original = await applyPendingToObject(original, pending)
 
     await parser.save(filepath, original, Config.sortKeys)
   }
 
   private _ignoreChanges = false
 
-  async writeToFile (pendings: PendingWrite|PendingWrite[]) {
+  async write (pendings: PendingWrite|PendingWrite[]) {
     this._ignoreChanges = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
@@ -141,6 +127,10 @@ export class LocaleLoader extends Loader {
       throw e
     }
     this._ignoreChanges = false
+  }
+
+  canHandleWrites (pending: PendingWrite) {
+    return !pending.sfc
   }
 
   async renameKey (oldkey: string, newkey: string) {
@@ -180,7 +170,7 @@ export class LocaleLoader extends Loader {
     if (!writes.length)
       return
 
-    await this.writeToFile(writes)
+    await this.write(writes)
   }
 
   private getFileInfo (filepath: string, dirStructure: 'dir'|'file') {
