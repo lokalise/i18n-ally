@@ -50,3 +50,10 @@ renovate.json
 !node_modules/typescript/lib/**
 !node_modules/typescript/*.js
 !node_modules/typescript/*.json
+
+# vue-i18n-locale-messages
+!node_modules/consolidate/**/*.js
+!node_modules/consolidate/*.json
+!node_modules/bluebird/**/*.js
+!node_modules/bluebird/*.json
+

@@ -155,11 +155,11 @@ export class Global {
       this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
     }
     else {
-      const frameworks = Config.forceEnabled === true ? ['vue'] : Config.forceEnabled
+      const frameworks = Config.forceEnabled === true ? ['vue-i18n'] : Config.forceEnabled
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks)
     }
     const isValidProject = this.enabledFrameworks.length > 0
-    const hasLocalesSet = !!Config.localesPaths.length
+    const hasLocalesSet = Config.localesPaths.length > 0
     const shouldEnabled = isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
