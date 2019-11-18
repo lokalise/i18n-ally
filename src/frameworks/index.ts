@@ -18,3 +18,7 @@ export function getEnabledFrameworks ({ dependenciesNames }: {dependenciesNames:
     return false
   })
 }
+
+export function getEnabledFrameworksByIds (ids: string[]) {
+  return frameworks.filter(f => ids.includes(f.id))
+}

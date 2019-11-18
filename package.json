@@ -347,7 +347,10 @@
           "description": "%config.full_reload_on_changed%"
         },
         "vue-i18n-ally.forceEnabled": {
-          "type": "boolean",
+          "type": [
+            "boolean",
+            "array"
+          ],
           "default": false,
           "description": "%config.force_enabled%"
         },

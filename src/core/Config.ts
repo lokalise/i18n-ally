@@ -82,8 +82,8 @@ export class Config {
     return this.getConfig<string>('annotationDelimiter') || ''
   }
 
-  static get forceEnabled (): boolean {
-    return this.getConfig<boolean>('forceEnabled') || false
+  static get forceEnabled (): boolean | string[] {
+    return this.getConfig<boolean|string[]>('forceEnabled') || false
   }
 
   static get dirStructure (): 'auto' | 'file' | 'dir' {

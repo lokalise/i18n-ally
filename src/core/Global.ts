@@ -7,7 +7,7 @@ import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log } from '../utils'
 import { FrameworkDefinition } from '../frameworks/type'
-import { getEnabledFrameworks } from '../frameworks/index'
+import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
 import { LocaleLoader, Config } from '.'
 
@@ -146,11 +146,17 @@ export class Global {
         Log.info('🔁 Reloading loader')
     }
 
-    const dependencies = getPackageDependencies(this._rootpath)
-    this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
+    if (!Config.forceEnabled) {
+      const dependencies = getPackageDependencies(this._rootpath)
+      this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
+    }
+    else {
+      const frameworks = Config.forceEnabled === true ? ['vue'] : Config.forceEnabled
+      this.enabledFrameworks = getEnabledFrameworksByIds(frameworks)
+    }
     const isValidProject = this.enabledFrameworks.length > 0
     const hasLocalesSet = !!Config.localesPaths.length
-    const shouldEnabled = Config.forceEnabled || (isValidProject && hasLocalesSet)
+    const shouldEnabled = isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
