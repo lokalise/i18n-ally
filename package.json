@@ -1,8 +1,9 @@
 {
-  "name": "vue-i18n-ally",
+  "name": "i18n-ally",
+  "preview": true,
   "displayName": "%extname%",
-  "description": "🌍 Better Vue i18n experiences with VS Code",
-  "version": "0.36.0",
+  "description": "🌍 Better i18n DX for Vue, React, Angular and more!",
+  "version": "1.0.1",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
@@ -14,12 +15,15 @@
     "workspaceContains:package.json",
     "onLanguage:vue",
     "onLanguage:javascript",
-    "onLanguage:typescript"
+    "onLanguage:typescript",
+    "onLanguage:json",
+    "onLanguage:yaml",
+    "onLanguage:json5"
   ],
   "keywords": [
     "vue",
     "vue-i18n",
-    "vue i18n",
+    "translate",
     "i18n",
     "i18next"
   ],
