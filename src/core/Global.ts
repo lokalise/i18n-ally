@@ -83,6 +83,8 @@ export class Global {
   }
 
   static getFilenameMatchRegex (dirStructure: DirStructure) {
+    if (Config.filenameMatchRegex)
+      return [new RegExp(Config.filenameMatchRegex, 'ig')]
     return this.enabledFrameworks
       .flatMap(f => f.filenameMatchReg(dirStructure))
       .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
