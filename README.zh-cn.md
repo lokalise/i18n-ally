@@ -1,7 +1,7 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/res/logo.png" alt="logo" width="100"/>
 </p>
-<h1 align="center">Vue i18n Ally</h1>
+<h1 align="center">i18n Ally</h1>
 
 <p align="center">
 🌍 更好的 <a href="https://github.com/kazupon/vue-i18n">Vue i18n</a> 翻译体验 -

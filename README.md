@@ -1,7 +1,7 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/res/logo.png" alt="logo" width="100"/>
 </p>
-<h1 align="center">Vue i18n Ally</h1>
+<h1 align="center">i18n Ally</h1>
 
 <p align="center">
 🌍 Better <a href="https://github.com/kazupon/vue-i18n">Vue i18n</a> experiences with VSCode -
@@ -199,9 +199,9 @@ Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have o
 ### I can see the icon in activity bar, but nothing show up
 
 1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `Vue i18n Ally: Manual configure locales path` then press enter and follow the guide.
+   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `i18n Ally: Manual configure locales path` then press enter and follow the guide.
    - Goto to the settings of VSCode and set `vue-i18n-ally.localesPaths` manually.
-2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `Vue i18n Ally: Change source language`
+2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `i18n Ally: Change source language`
 3. Check your **Directory structure**
 
 
