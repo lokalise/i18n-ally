@@ -66,11 +66,10 @@ export class KeyDetector {
       let match = null
       // eslint-disable-next-line no-cond-assign
       while (match = reg.exec(text)) {
-        const index = match.index
-        const matchKey = match[0]
-        const key = matchKey.replace(new RegExp(reg), '$1')
-        const end = index + match[0].length - 1
-        const start = end - match[1].length
+        const matchString = match[0]
+        const key = match[1]
+        const start = match.index + matchString.indexOf(key)
+        const end = start + key.length
         keys.push({
           key,
           start,
