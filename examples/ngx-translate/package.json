@@ -1,0 +1,45 @@
+{
+  "name": "ngx-translate",
+  "description": "The internationalization (i18n) library for Angular",
+  "private": true,
+  "scripts": {
+    "build": "ng build",
+    "lint": "ng lint",
+    "start": "ng serve",
+    "test": "ng test"
+  },
+  "dependencies": {
+    "@angular/common": "^7.0.4",
+    "@angular/compiler": "^7.0.4",
+    "@angular/core": "^7.0.4",
+    "@angular/platform-browser": "^7.0.4",
+    "@angular/platform-browser-dynamic": "^7.0.4",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "core-js": "^2.5.4",
+    "rxjs": "^6.3.3",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.10.6",
+    "@angular/cli": "7.0.6",
+    "@angular/compiler-cli": "^7.0.4",
+    "@angular/language-service": "^7.0.4",
+    "@types/jasmine": "~2.8.7",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.5.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~1.7.1",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~1.4.2",
+    "karma-jasmine": "~1.1.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-mocha-reporter": "^2.2.5",
+    "ts-node": "~7.0.1",
+    "tslib": "^1.7.1",
+    "tslint": "~5.11.0",
+    "typescript": "3.1.6"
+  }
+}
