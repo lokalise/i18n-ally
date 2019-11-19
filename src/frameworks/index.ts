@@ -21,3 +21,7 @@ export function getEnabledFrameworks ({ packages }: { packages: string[] }) {
       return f.detection.packageJSON.some(key => packages.includes(key))
   })
 }
+
+export function getEnabledFrameworksByIds (ids: string[]) {
+  return frameworks.filter(f => ids.includes(f.id))
+}

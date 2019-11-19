@@ -1,15 +1,8 @@
 import { Disposable, EventEmitter } from 'vscode'
 import _ from 'lodash'
 import { Log } from '../../utils'
-import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo } from '../types'
+import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
 import { Config, Global } from '..'
-
-export interface NodeOptions{
-  locale: string
-  readonly?: boolean
-  filepath: string
-  sfc?: boolean
-}
 
 export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
@@ -72,6 +65,7 @@ export abstract class Loader extends Disposable {
       keyname,
       isCollection,
       sfc: options.sfc,
+      meta: options.meta,
     })
     tree.values[options.locale] = data
     for (const [key, value] of Object.entries(data)) {
@@ -111,6 +105,7 @@ export abstract class Loader extends Disposable {
           keyname: key,
           readonly: options.readonly,
           sfc: options.sfc,
+          meta: options.meta,
         })
         tree.setChild(key, node)
         this._flattenLocaleTree[node.keypath] = node
@@ -125,6 +120,7 @@ export abstract class Loader extends Disposable {
           locale: options.locale,
           filepath: options.filepath,
           sfc: options.sfc,
+          meta: options.meta,
           readonly: options.readonly,
         })
       }
@@ -243,6 +239,7 @@ export abstract class Loader extends Disposable {
           shadow: true,
           keyname: node.keyname,
           keypath: node.keypath,
+          meta: node.meta,
           filepath: this.getShadowFilePath(node.keypath, locale),
           readonly: node.readonly,
         })
@@ -250,6 +247,12 @@ export abstract class Loader extends Disposable {
     })
 
     return locales
+  }
+
+  abstract async write (pendings: PendingWrite | PendingWrite[]): Promise<void>
+
+  canHandleWrites (pending: PendingWrite) {
+    return false
   }
 
   protected onDispose () {

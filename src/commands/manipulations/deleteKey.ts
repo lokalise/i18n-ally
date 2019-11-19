@@ -1,5 +1,5 @@
 import { LocaleTreeView } from '../../views/LocalesTreeView'
-import { LocaleRecord, Global } from '../../core'
+import { LocaleRecord, CurrentFile } from '../../core'
 import { Log } from '../../utils'
 
 export async function DeleteKey ({ node }: LocaleTreeView) {
@@ -15,13 +15,14 @@ export async function DeleteKey ({ node }: LocaleTreeView) {
     records = Object.values(node.locales)
 
   try {
-    await Global.loader.writeToFile(records // TODO:sfc
+    await CurrentFile.loader.write(records
       .filter(record => !record.shadow)
       .map(record => ({
         value: undefined,
         keypath: record.keypath,
         filepath: record.filepath,
         locale: record.locale,
+        sfc: record.sfc,
       })))
   }
   catch (err) {

@@ -7,7 +7,7 @@ import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log } from '../utils'
 import { FrameworkDefinition } from '../frameworks/type'
-import { getEnabledFrameworks } from '../frameworks/index'
+import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
 import { LocaleLoader, Config } from '.'
 
@@ -75,6 +75,10 @@ export class Global {
 
   static getDocumentSelectors () {
     return this.enabledFrameworks.flatMap(f => f.languageIds).map(id => ({ scheme: 'file', language: id }))
+  }
+
+  static get rootpath () {
+    return this._rootpath
   }
 
   private static async initLoader (rootpath: string, reload = false) {
@@ -146,11 +150,19 @@ export class Global {
         Log.info('🔁 Reloading loader')
     }
 
+    if (!Config.forceEnabled) {
+      const dependencies = getPackageDependencies(this._rootpath)
+      this.enabledFrameworks = getEnabledFrameworks({ dependenciesNames: dependencies })
+    }
+    else {
+      const frameworks = Config.forceEnabled === true ? ['vue-i18n'] : Config.forceEnabled
+      this.enabledFrameworks = getEnabledFrameworksByIds(frameworks)
+    }
     const packages = getPackageDependencies(this._rootpath)
     this.enabledFrameworks = getEnabledFrameworks({ packages })
     const isValidProject = this.enabledFrameworks.length > 0
-    const hasLocalesSet = !!Config.localesPaths.length
-    const shouldEnabled = Config.forceEnabled || (isValidProject && hasLocalesSet)
+    const hasLocalesSet = Config.localesPaths.length > 0
+    const shouldEnabled = isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {

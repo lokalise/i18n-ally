@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-check
 'use strict'
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 
 /** @type {import('webpack').Configuration} */
 const config = {
@@ -21,6 +22,11 @@ const config = {
     nodejieba: 'nodejieba',
     esm: 'esm',
     'ts-node': 'ts-node',
+    consolidate: 'consolidate',
+    less: '_',
+    sass: '_',
+    stylus: '_',
+    '@microsoft/typescript-etw': '_',
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -38,5 +44,11 @@ const config = {
       },
     ],
   },
+  plugins: [
+    // @ts-ignore
+    new FilterWarningsPlugin({
+      exclude: /Critical dependency: the request of a dependency is an expression/,
+    }),
+  ],
 }
 module.exports = config
