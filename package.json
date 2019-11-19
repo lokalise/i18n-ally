@@ -169,7 +169,7 @@
         },
         {
           "command": "extension.i18n-ally.fulfill-keys",
-          "when": "vue-i18n-ally-enabled"
+          "when": "i18n-ally-enabled"
         }
       ],
       "view/item/context": [
@@ -229,7 +229,7 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "vue-i18n-ally",
+          "id": "i18n-ally",
           "title": "%extname%",
           "icon": "./res/logo-view-container.svg"
         }
@@ -240,29 +240,29 @@
         {
           "id": "locales-tree-file-explorer",
           "name": "%view.i18n_keys%",
-          "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
+          "when": "i18n-ally-enabled && i18n-ally-supported-file"
         }
       ],
-      "vue-i18n-ally": [
+      "i18n-ally": [
         {
           "id": "locales-tree-file",
           "name": "%view.current_file%",
-          "when": "vue-i18n-ally-enabled && vue-i18n-ally-supported-file"
+          "when": "i18n-ally-enabled && i18n-ally-supported-file"
         },
         {
           "id": "locales-progress",
           "name": "%view.progress%",
-          "when": "vue-i18n-ally-enabled"
+          "when": "i18n-ally-enabled"
         },
         {
           "id": "locales-tree",
           "name": "%view.tree%",
-          "when": "vue-i18n-ally-enabled"
+          "when": "i18n-ally-enabled"
         },
         {
           "id": "help-feedback",
           "name": "%view.help_feedback%",
-          "when": "vue-i18n-ally-enabled"
+          "when": "i18n-ally-enabled"
         }
       ]
     },

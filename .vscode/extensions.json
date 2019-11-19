@@ -3,6 +3,6 @@
   // for the documentation about the extensions.json format
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "antfu.vue-i18n-ally",
+    "antfu.i18n-ally",
   ]
 }

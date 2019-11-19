@@ -219,7 +219,7 @@ export class Global {
     if (this._enabled !== value) {
       Log.info(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
-      commands.executeCommand('setContext', 'vue-i18n-ally-enabled', value)
+      commands.executeCommand('setContext', `${EXT_NAMESPACE}-enabled`, value)
       this._onDidChangeEnabled.fire()
     }
   }
