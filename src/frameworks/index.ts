@@ -3,10 +3,12 @@ import VueFramework from './vue'
 import ReactFramework from './react'
 import I18nextFramework from './i18next'
 import VSCodeFramework from './vscode'
+import NgxTranslateFramework from './ngx-translate'
 
 export const frameworks = [
   new VueFramework(),
   new ReactFramework(),
+  new NgxTranslateFramework(),
   new VSCodeFramework(),
   new I18nextFramework(),
 ]

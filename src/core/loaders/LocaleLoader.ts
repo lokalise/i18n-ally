@@ -178,13 +178,13 @@ export class LocaleLoader extends Loader {
     const ext = path.extname(filepath)
     const regs = Global.getFilenameMatchRegex(dirStructure)
 
-    let match: RegExpExecArray | undefined
+    let match: RegExpExecArray | null = null
     for (const reg of regs) {
-      const match = reg.exec(filename)
+      match = reg.exec(filename)
       if (match && match.length > 0)
         break
     }
-    // Log.info(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
+    Log.info(`\nMatching filename: ${filename} ${dirStructure} ${JSON.stringify(match)}`)
     if (!match || match.length < 1)
       return
 
