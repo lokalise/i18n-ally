@@ -38,37 +38,37 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.vue-i18n-ally.config-locales",
+        "command": "extension.i18n-ally.config-locales",
         "title": "%command.config_locales%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.config-locales-auto",
+        "command": "extension.i18n-ally.config-locales-auto",
         "title": "%command.config_locales_auto%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.config-display-language",
+        "command": "extension.i18n-ally.config-display-language",
         "title": "%command.config_display_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.config-source-language",
+        "command": "extension.i18n-ally.config-source-language",
         "title": "%command.config_source_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.set-display-language",
+        "command": "extension.i18n-ally.set-display-language",
         "title": "%command.set_display_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.set-source-language",
+        "command": "extension.i18n-ally.set-source-language",
         "title": "%command.set_source_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.vue-i18n-ally.copy-key",
+        "command": "extension.i18n-ally.copy-key",
         "title": "%command.copy_key%",
         "icon": {
           "light": "./res/light/file.svg",
@@ -76,7 +76,7 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.translate-key",
+        "command": "extension.i18n-ally.translate-key",
         "title": "%command.translate_key%",
         "icon": {
           "light": "./res/light/translate.svg",
@@ -84,7 +84,7 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.edit-key",
+        "command": "extension.i18n-ally.edit-key",
         "title": "%command.edit_key%",
         "icon": {
           "light": "./res/light/edit.svg",
@@ -92,7 +92,7 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.open-key",
+        "command": "extension.i18n-ally.open-key",
         "title": "%command.open_key%",
         "icon": {
           "light": "./res/light/open-file.svg",
@@ -100,19 +100,19 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.delete-key",
+        "command": "extension.i18n-ally.delete-key",
         "title": "%command.delete_key%"
       },
       {
-        "command": "extension.vue-i18n-ally.rename-key",
+        "command": "extension.i18n-ally.rename-key",
         "title": "%command.rename_key%"
       },
       {
-        "command": "extension.vue-i18n-ally.open-url",
+        "command": "extension.i18n-ally.open-url",
         "title": "%command.open_url%"
       },
       {
-        "command": "extension.vue-i18n-ally.fulfill-keys",
+        "command": "extension.i18n-ally.fulfill-keys",
         "category": "%extname%",
         "title": "%command.fulfill_keys%",
         "icon": {
@@ -121,11 +121,11 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.support",
+        "command": "extension.i18n-ally.support",
         "title": "%feedback.support%"
       },
       {
-        "command": "extension.vue-i18n-ally.locale-visibility-show",
+        "command": "extension.i18n-ally.locale-visibility-show",
         "title": "%command.locale_visibility_show%",
         "icon": {
           "light": "./res/light/eye.svg",
@@ -133,7 +133,7 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.locale-visibility-hide",
+        "command": "extension.i18n-ally.locale-visibility-hide",
         "title": "%command.locale_visibility_hide%",
         "icon": {
           "light": "./res/light/eye-off.svg",
@@ -141,86 +141,86 @@
         }
       },
       {
-        "command": "extension.vue-i18n-ally.dev.load-sfc",
+        "command": "extension.i18n-ally.dev.load-sfc",
         "title": "DEV: Load SFC"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "extension.vue-i18n-ally.set-display-language",
+          "command": "extension.i18n-ally.set-display-language",
           "when": "config.no_exits"
         },
         {
-          "command": "extension.vue-i18n-ally.set-source-language",
+          "command": "extension.i18n-ally.set-source-language",
           "when": "config.no_exits"
         },
         {
-          "command": "extension.vue-i18n-ally.delete-key",
+          "command": "extension.i18n-ally.delete-key",
           "when": "config.no_exits"
         },
         {
-          "command": "extension.vue-i18n-ally.rename-key",
+          "command": "extension.i18n-ally.rename-key",
           "when": "config.no_exits"
         },
         {
-          "command": "extension.vue-i18n-ally.open-url",
+          "command": "extension.i18n-ally.open-url",
           "when": "config.no_exits"
         },
         {
-          "command": "extension.vue-i18n-ally.fulfill-keys",
+          "command": "extension.i18n-ally.fulfill-keys",
           "when": "vue-i18n-ally-enabled"
         }
       ],
       "view/item/context": [
         {
-          "command": "extension.vue-i18n-ally.open-key",
+          "command": "extension.i18n-ally.open-key",
           "when": "view =~ /locales/ && viewItem =~ /openable/",
           "group": "inline@1"
         },
         {
-          "command": "extension.vue-i18n-ally.copy-key",
+          "command": "extension.i18n-ally.copy-key",
           "when": "view =~ /locales/ && viewItem =~ /node/",
           "group": "inline@2"
         },
         {
-          "command": "extension.vue-i18n-ally.translate-key",
+          "command": "extension.i18n-ally.translate-key",
           "when": "view =~ /locales/ && viewItem =~ /translatable/",
           "group": "inline@3"
         },
         {
-          "command": "extension.vue-i18n-ally.edit-key",
+          "command": "extension.i18n-ally.edit-key",
           "when": "view =~ /locales/ && viewItem =~ /editable/",
           "group": "inline@4"
         },
         {
-          "command": "extension.vue-i18n-ally.fulfill-keys",
+          "command": "extension.i18n-ally.fulfill-keys",
           "when": "view =~ /locales/ && viewItem =~ /fulfillable/",
           "group": "inline@3"
         },
         {
-          "command": "extension.vue-i18n-ally.set-display-language",
+          "command": "extension.i18n-ally.set-display-language",
           "when": "view =~ /locales-progress/ && viewItem =~ /notdisply/"
         },
         {
-          "command": "extension.vue-i18n-ally.set-source-language",
+          "command": "extension.i18n-ally.set-source-language",
           "when": "view =~ /locales-progress/ && viewItem =~ /notsource/"
         },
         {
-          "command": "extension.vue-i18n-ally.delete-key",
+          "command": "extension.i18n-ally.delete-key",
           "when": "view =~ /locales/ && viewItem =~ /node/"
         },
         {
-          "command": "extension.vue-i18n-ally.rename-key",
+          "command": "extension.i18n-ally.rename-key",
           "when": "view =~ /locales/ && viewItem =~ /node/"
         },
         {
-          "command": "extension.vue-i18n-ally.locale-visibility-show",
+          "command": "extension.i18n-ally.locale-visibility-show",
           "when": "view =~ /locales-progress/ && viewItem =~ /show/",
           "group": "inline@4"
         },
         {
-          "command": "extension.vue-i18n-ally.locale-visibility-hide",
+          "command": "extension.i18n-ally.locale-visibility-hide",
           "when": "view =~ /locales-progress/ && viewItem =~ /hide/",
           "group": "inline@4"
         }
