@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "preview": true,
   "displayName": "%extname%",
-  "description": "🌍 Better i18n DX for Vue, React, Angular and more!",
+  "description": "🌍 i18n helpers for Vue, React, Angular and more!",
   "version": "1.0.1",
   "publisher": "antfu",
   "engines": {

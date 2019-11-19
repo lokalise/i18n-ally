@@ -4,8 +4,7 @@
 <h1 align="center">i18n Ally</h1>
 
 <p align="center">
-🌍 Better <a href="https://github.com/kazupon/vue-i18n">Vue i18n</a> experiences with VSCode -
-<a href="https://github.com/antfu/vue-i18n-ally/blob/master/README.zh-cn.md"><strong>中文文档</strong></a>
+🌍 i18n helpers for Vue, React, Angular and more in VSCode
 </p>
 
 <p align="center">
@@ -17,7 +16,7 @@
 </p>
 
 <p align='center'>
-Now with <a href="https://github.com/antfu/vue-i18n-ally#-experimental-sfc-support">Single File Component</a> support! 🎉
+<code>Vue i18n Ally</code> is now <code>i18n Ally</code>!
 </p>
 
 <h2 align="center"> ⚡ Features </h2>
