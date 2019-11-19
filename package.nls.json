@@ -21,6 +21,7 @@
   "config.annotations": "Enable the inline annotations.",
   "config.dir_structure": "Preferred directory structure to organize locale files",
   "config.display_language": "Displaying language",
+  "config.deprecated": "Deprecated. Use \"i18n-ally.\" prefix instead.",
   "config.encoding": "Locale files encoding, default to \"auto\" (auto detect)",
   "config.force_enabled": "Enable this extension anyway. (At your own RISK!)",
   "config.full_reload_on_changed": "Perform a full reload on locale file changed. (for .js/.ts dynamic import)",

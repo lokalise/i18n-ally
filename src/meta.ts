@@ -1,4 +1,5 @@
-export const EXT_NAMESPACE = 'vue-i18n-ally'
+export const EXT_NAMESPACE = 'i18n-ally'
+export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 export const EXT_ID = 'antfu.vue-i18n-ally'
 export const EXT_NAME = 'i18n Ally'
 

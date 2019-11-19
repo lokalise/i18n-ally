@@ -2,7 +2,7 @@ import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
-import { EXT_NAMESPACE, EXT_ID } from '../meta'
+import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
 
 export class Config {
@@ -204,13 +204,32 @@ export class Config {
 
   // config
   private static getConfig<T = any> (key: string): T | undefined {
-    return workspace
+    let config = workspace
       .getConfiguration(EXT_NAMESPACE)
       .get<T>(key)
+
+    // compatible to vue-i18n-ally
+    if (config === undefined) {
+      config = workspace
+        .getConfiguration(EXT_LEGACY_NAMESPACE)
+        .get<T>(key)
+    }
+
+    return config
   }
 
-  private static setConfig (key: string, value: any, isGlobal = false) {
-    return workspace
+  private static async setConfig (key: string, value: any, isGlobal = false) {
+    // transfer legacy config
+    if (workspace
+      .getConfiguration(EXT_LEGACY_NAMESPACE)
+      .get<any>(key)
+    ) {
+      await workspace.getConfiguration(EXT_LEGACY_NAMESPACE)
+        .update(key, undefined, isGlobal)
+    }
+
+    // update value
+    return await workspace
       .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
   }

@@ -270,7 +270,7 @@
       "type": "object",
       "title": "%extname%",
       "properties": {
-        "vue-i18n-ally.localesPaths": {
+        "i18n-ally.localesPaths": {
           "type": [
             "string",
             "array"
@@ -281,26 +281,26 @@
           },
           "description": "%config.locales_paths%"
         },
-        "vue-i18n-ally.encoding": {
+        "i18n-ally.encoding": {
           "type": "string",
           "default": "auto",
           "description": "%config.encoding%"
         },
-        "vue-i18n-ally.sourceLanguage": {
+        "i18n-ally.sourceLanguage": {
           "type": "string",
           "default": "en",
           "description": "%config.source_language%"
         },
-        "vue-i18n-ally.displayLanguage": {
+        "i18n-ally.displayLanguage": {
           "type": "string",
           "default": "en",
           "description": "%config.display_language%"
         },
-        "vue-i18n-ally.ignoredLocales": {
+        "i18n-ally.ignoredLocales": {
           "type": "array",
           "description": "%config.ignored_locales%"
         },
-        "vue-i18n-ally.keystyle": {
+        "i18n-ally.keystyle": {
           "type": "string",
           "enum": [
             "auto",
@@ -310,7 +310,7 @@
           "default": "auto",
           "description": "%config.keystyle%"
         },
-        "vue-i18n-ally.dirStructure": {
+        "i18n-ally.dirStructure": {
           "type": "string",
           "enum": [
             "auto",
@@ -320,37 +320,37 @@
           "default": "auto",
           "description": "%config.dir_structure%"
         },
-        "vue-i18n-ally.annotations": {
+        "i18n-ally.annotations": {
           "type": "boolean",
           "default": true,
           "description": "%config.annotations%"
         },
-        "vue-i18n-ally.annotationMaxLength": {
+        "i18n-ally.annotationMaxLength": {
           "type": "number",
           "default": 40,
           "description": "%config.annotation_max_length%"
         },
-        "vue-i18n-ally.annotationDelimiter": {
+        "i18n-ally.annotationDelimiter": {
           "type": "string",
           "default": "·",
           "description": "%config.annotation_delimiter%"
         },
-        "vue-i18n-ally.filenameMatchRegex": {
+        "i18n-ally.filenameMatchRegex": {
           "type": "string",
           "default": "",
           "description": "%config.match_regex%"
         },
-        "vue-i18n-ally.includeSubfolders": {
+        "i18n-ally.includeSubfolders": {
           "type": "boolean",
           "default": false,
           "description": "%config.include_subfolders%"
         },
-        "vue-i18n-ally.fullReloadOnChanged": {
+        "i18n-ally.fullReloadOnChanged": {
           "type": "boolean",
           "default": false,
           "description": "%config.full_reload_on_changed%"
         },
-        "vue-i18n-ally.forceEnabled": {
+        "i18n-ally.forceEnabled": {
           "type": [
             "boolean",
             "array"
@@ -358,25 +358,79 @@
           "default": false,
           "description": "%config.force_enabled%"
         },
-        "vue-i18n-ally.sortKeys": {
+        "i18n-ally.sortKeys": {
           "type": "boolean",
           "default": false,
           "description": "%config.sort_keys%"
         },
-        "vue-i18n-ally.preferredDelimiter": {
+        "i18n-ally.preferredDelimiter": {
           "type": "string",
           "default": "-",
           "description": "%config.preferred_delimiter%"
         },
-        "vue-i18n-ally.readonly": {
+        "i18n-ally.readonly": {
           "type": "boolean",
           "default": false,
           "description": "%config.readonly%"
         },
-        "vue-i18n-ally.experimental.sfc": {
+        "i18n-ally.experimental.sfc": {
           "type": "boolean",
           "default": false,
           "description": "%config.sfc%"
+        },
+        "vue-i18n-ally.localesPaths": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.encoding": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.sourceLanguage": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.displayLanguage": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.ignoredLocales": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.keystyle": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.dirStructure": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.annotations": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.annotationMaxLength": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.annotationDelimiter": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.filenameMatchRegex": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.includeSubfolders": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.fullReloadOnChanged": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.forceEnabled": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.sortKeys": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.preferredDelimiter": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.readonly": {
+          "description": "%config.deprecated%"
+        },
+        "vue-i18n-ally.experimental.sfc": {
+          "description": "%config.deprecated%"
         }
       }
     }
