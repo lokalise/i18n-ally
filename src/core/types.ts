@@ -139,6 +139,9 @@ export class LocaleTree extends BaseNode implements ILocaleTree {
 
 export interface FlattenLocaleTree extends Record<string, LocaleNode> {}
 
+export type DirStructureAuto = 'auto' | 'file' | 'dir'
+export type DirStructure = 'file' | 'dir'
+
 export interface Coverage {
   locale: string
   translated: number

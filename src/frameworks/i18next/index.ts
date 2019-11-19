@@ -1,30 +1,31 @@
-import { FrameworkDefinition } from '../type'
+import { Framework } from '../base'
 
-const i18nextFrameworkDefinition: FrameworkDefinition = {
-  id: 'i18next',
-  display: 'General i18next ',
+class I18nextFramework extends Framework {
+  id ='i18next'
+  display = 'General i18next '
 
-  detection: {
+  detection = {
     packageJSON: (packages: string[]) => {
       return packages.includes('i18next') && ['react-i18n'].every(v => !packages.includes(v))
     },
-  },
+  }
 
-  languageIds: [
+  languageIds = [
     'javascript',
     'typescript',
     'tyspescriptreact',
     'typescriptreact',
-  ],
+  ]
 
-  // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg: {
+  keyMatchReg = {
     '*': [],
-  },
+  }
 
-  refactorTemplates: (keypath, languageId) => [
-    keypath,
-  ],
+  refactorTemplates (keypath: string) {
+    return [
+      keypath,
+    ]
+  }
 }
 
-export default i18nextFrameworkDefinition
+export default I18nextFramework

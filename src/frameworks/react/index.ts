@@ -1,37 +1,39 @@
-import { FrameworkDefinition } from '../type'
+import { Framework } from '../base'
 
-const ReactFrameworkDefinition: FrameworkDefinition = {
-  id: 'react',
-  display: 'React',
+class ReactFramework extends Framework {
+  id= 'react'
+  display= 'React'
 
-  detection: {
+  detection= {
     packageJSON: [
       'react-i18next',
       'react-intl',
       'next-i18next',
     ],
-  },
+  }
 
-  languageIds: [
+  languageIds= [
     'javascript',
     'typescript',
     'tyspescriptreact',
     'typescriptreact',
-  ],
+  ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg: {
+  keyMatchReg= {
     '*': [
       // eslint-disable-next-line no-useless-escape
       /(?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\()['"`]([\w\d\. -\[\]]+?)['"`]/g,
     ],
-  },
+  }
 
-  refactorTemplates: (keypath, languageId) => [
-    `{t('${keypath}')}`,
-    `t('${keypath}')`,
-    keypath,
-  ],
+  refactorTemplates (keypath: string) {
+    return [
+      `{t('${keypath}')}`,
+      `t('${keypath}')`,
+      keypath,
+    ]
+  }
 }
 
-export default ReactFrameworkDefinition
+export default ReactFramework

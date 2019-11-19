@@ -1,21 +1,16 @@
 import { Framework } from '../base'
 
-class VueFramework extends Framework {
-  id = 'vue'
-  display = 'Vue'
+class VSCodeFramework extends Framework {
+  id = 'vscode'
+  display = 'VSCode'
 
   detection = {
     packageJSON: [
-      'vue-i18n',
-      'vuex-i18n',
-      '@panter/vue-i18next',
-      'nuxt-i18n',
+      'vscode',
     ],
   }
 
   languageIds = [
-    'vue',
-    'vue-html',
     'javascript',
     'typescript',
   ]
@@ -30,13 +25,14 @@ class VueFramework extends Framework {
 
   refactorTemplates (keypath: string, languageId: string) {
     return [
-      `{{$t('${keypath}')}}`,
-      `this.$t('${keypath}')`,
-      `$t("${keypath}")`,
       `i18n.t('${keypath}')`,
       keypath,
     ]
   }
+
+  filenameMatchReg () {
+    return '^package.nls.?([\\w-]*)\\.json'
+  }
 }
 
-export default VueFramework
+export default VSCodeFramework

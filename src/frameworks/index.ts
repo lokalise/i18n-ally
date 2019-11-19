@@ -1,15 +1,17 @@
-import { FrameworkDefinition } from './type'
-import VueFrameworkDefinition from './vue'
-import ReactFrameworkDefinition from './react'
-import i18nextFrameworkDefinition from './i18next'
+import { Framework } from './base'
+import VueFramework from './vue'
+import ReactFramework from './react'
+import I18nextFramework from './i18next'
+import VSCodeFramework from './vscode'
 
 export const frameworks = [
-  VueFrameworkDefinition,
-  ReactFrameworkDefinition,
-  i18nextFrameworkDefinition,
+  new VueFramework(),
+  new ReactFramework(),
+  new VSCodeFramework(),
+  new I18nextFramework(),
 ]
 
-export function getFramework (id: string): FrameworkDefinition | undefined {
+export function getFramework (id: string): Framework | undefined {
   return frameworks.find(f => f.id === id)
 }
 

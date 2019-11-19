@@ -2,14 +2,15 @@ import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
-import { MATCH_REG_DIR, MATCH_REG_FILE, EXT_NAMESPACE, EXT_ID } from '../meta'
-import { KeyStyle } from '.'
+import { EXT_NAMESPACE, EXT_ID } from '../meta'
+import { KeyStyle, DirStructureAuto } from '.'
 
 export class Config {
   static readonly reloadConfigs = [
     'localesPaths',
     'filenameMatchRegex',
     'includeSubfolders',
+    'forceEnabled',
     'encoding',
   ]
 
@@ -83,14 +84,14 @@ export class Config {
   }
 
   static get forceEnabled (): boolean | string[] {
-    return this.getConfig<boolean|string[]>('forceEnabled') || false
+    return this.getConfig<boolean | string[]>('forceEnabled') || false
   }
 
-  static get dirStructure (): 'auto' | 'file' | 'dir' {
-    return (this.getConfig('dirStructure')) as ('auto' | 'file' | 'dir')
+  static get dirStructure (): DirStructureAuto {
+    return (this.getConfig('dirStructure')) as (DirStructureAuto)
   }
 
-  static set dirStructure (value: 'auto' | 'file' | 'dir') {
+  static set dirStructure (value: DirStructureAuto) {
     this.setConfig('dirStructure', value, true)
   }
 
@@ -118,15 +119,8 @@ export class Config {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
-  static getMatchRegex (dirStructure = this.dirStructure): string {
-    let regex = (this.getConfig('filenameMatchRegex')) as string
-    if (!regex) {
-      if (dirStructure === 'file')
-        regex = MATCH_REG_FILE
-      else
-        regex = MATCH_REG_DIR
-    }
-    return regex
+  static get filenameMatchRegex (): string | undefined {
+    return this.getConfig('filenameMatchRegex')
   }
 
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {

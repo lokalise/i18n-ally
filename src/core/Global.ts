@@ -6,9 +6,10 @@ import { getPackageDependencies } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log } from '../utils'
-import { FrameworkDefinition } from '../frameworks/type'
+import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
+import { DirStructure } from './types'
 import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
@@ -24,7 +25,7 @@ export class Global {
 
   static parsers = PARSERS
 
-  static enabledFrameworks: FrameworkDefinition[] = []
+  static enabledFrameworks: Framework[] = []
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
@@ -70,11 +71,21 @@ export class Global {
   }
 
   static isLanguageIdSupported (languageId: string) {
-    return this.enabledFrameworks.flatMap(f => f.languageIds).includes(languageId)
+    return this.enabledFrameworks
+      .flatMap(f => f.languageIds)
+      .includes(languageId)
   }
 
   static getDocumentSelectors () {
-    return this.enabledFrameworks.flatMap(f => f.languageIds).map(id => ({ scheme: 'file', language: id }))
+    return this.enabledFrameworks
+      .flatMap(f => f.languageIds)
+      .map(id => ({ scheme: 'file', language: id }))
+  }
+
+  static getFilenameMatchRegex (dirStructure: DirStructure) {
+    return this.enabledFrameworks
+      .flatMap(f => f.filenameMatchReg(dirStructure))
+      .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
   }
 
   static get rootpath () {
@@ -151,7 +162,7 @@ export class Global {
     }
 
     if (!Config.forceEnabled) {
-     const packages = getPackageDependencies(this._rootpath)
+      const packages = getPackageDependencies(this._rootpath)
       this.enabledFrameworks = getEnabledFrameworks({ packages })
     }
     else {

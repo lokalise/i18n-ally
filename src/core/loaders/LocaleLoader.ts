@@ -5,7 +5,7 @@ import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
 import i18n from '../../i18n'
-import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite } from '../types'
+import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite, DirStructure, DirStructureAuto } from '../types'
 import { AllyError, ErrorType } from '../Errors'
 import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
@@ -173,11 +173,17 @@ export class LocaleLoader extends Loader {
     await this.write(writes)
   }
 
-  private getFileInfo (filepath: string, dirStructure: 'dir'|'file') {
-    const regexp = new RegExp(Config.getMatchRegex(dirStructure), 'ig')
+  private getFileInfo (filepath: string, dirStructure: DirStructure) {
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
-    const match = regexp.exec(filename)
+    const regs = Global.getFilenameMatchRegex(dirStructure)
+
+    let match: RegExpExecArray | undefined
+    for (const reg of regs) {
+      const match = reg.exec(filename)
+      if (match && match.length > 0)
+        break
+    }
     // Log.info(`\nMatching filename: ${filename} ${JSON.stringify(match)}`)
     if (!match || match.length < 1)
       return
@@ -214,7 +220,7 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private async loadFile (filepath: string, dirStructure: 'dir'|'file' = 'file', parentPath?: string) {
+  private async loadFile (filepath: string, dirStructure: DirStructure = 'file', parentPath?: string) {
     try {
       const result = this.getFileInfo(filepath, dirStructure)
       if (!result)
@@ -248,7 +254,7 @@ export class LocaleLoader extends Loader {
     return stat.isDirectory()
   }
 
-  private async loadDirectory (rootPath: string, dirStructure: 'auto' | 'file'| 'dir') {
+  private async loadDirectory (rootPath: string, dirStructure: DirStructureAuto) {
     const paths = await fs.readdir(rootPath)
 
     for (const filename of paths) {
