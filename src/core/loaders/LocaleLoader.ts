@@ -184,7 +184,7 @@ export class LocaleLoader extends Loader {
       if (match && match.length > 0)
         break
     }
-    Log.info(`\nMatching filename: ${filename} ${dirStructure} ${JSON.stringify(match)}`)
+    // Log.info(`\nMatching filename: ${filename} ${dirStructure} ${JSON.stringify(match)}`)
     if (!match || match.length < 1)
       return
 
