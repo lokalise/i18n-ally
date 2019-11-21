@@ -1,6 +1,6 @@
 import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
-import { normalizeLocale } from '../utils'
+import { normalizeLocale, Log } from '../utils'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
@@ -64,7 +64,7 @@ export class Config {
   }
 
   static get annotations (): boolean {
-    return this.getConfig<boolean>('annotations') || false
+    return this.getConfig<boolean>('annotations') ?? true
   }
 
   static set annotations (value: boolean) {
@@ -72,7 +72,7 @@ export class Config {
   }
 
   static get annotationMaxLength (): number {
-    return this.getConfig<number>('annotationMaxLength') || 0
+    return this.getConfig<number>('annotationMaxLength') || 40
   }
 
   static set annotationMaxLength (value: number) {
@@ -163,6 +163,7 @@ export class Config {
   // locales
   static get localesPaths (): string[] {
     const paths = this.getConfig('localesPaths')
+    Log.info(JSON.stringify(paths))
     let localesPaths: string[]
     if (!paths)
       localesPaths = []

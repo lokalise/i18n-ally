@@ -275,7 +275,6 @@
             "string",
             "array"
           ],
-          "default": "",
           "items": {
             "type": "string"
           },
@@ -288,12 +287,10 @@
         },
         "i18n-ally.sourceLanguage": {
           "type": "string",
-          "default": "en",
           "description": "%config.source_language%"
         },
         "i18n-ally.displayLanguage": {
           "type": "string",
-          "default": "en",
           "description": "%config.display_language%"
         },
         "i18n-ally.ignoredLocales": {
@@ -307,7 +304,6 @@
             "nested",
             "flat"
           ],
-          "default": "auto",
           "description": "%config.keystyle%"
         },
         "i18n-ally.dirStructure": {
@@ -317,7 +313,6 @@
             "file",
             "dir"
           ],
-          "default": "auto",
           "description": "%config.dir_structure%"
         },
         "i18n-ally.annotations": {
