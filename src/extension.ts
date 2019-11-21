@@ -7,8 +7,8 @@ import editorModules from './editor'
 import viewsModules from './views'
 import { Log } from './utils'
 import { CurrentFile } from './core/CurrentFile'
-import { EXT_ID_I18N_ALLY, I18N_ALLY_URL } from './meta.js'
-import i18n from './i18n.js'
+import { EXT_ID_I18N_ALLY, I18N_ALLY_URL } from './meta'
+import i18n from './i18n'
 
 export async function checkI18nAllyExists () {
   const extension = extensions.getExtension(EXT_ID_I18N_ALLY)
