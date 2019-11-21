@@ -14,8 +14,10 @@
 Vue i18n Ally is now <b>i18n Ally</b>!</h3>
 <br>
 <br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration Guide</a></b> and <b><a href="#-supported-frameworks">Supported Frameworks</a></b>
+Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration Guide</a></b> and <b><a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
 </p>
+
+<br>
 
 <h2 align="center"> ⚡ Features </h2>
 
@@ -50,7 +52,7 @@ Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/d
 <h3 align="center"> Translations missing report </h3>
 
 <p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/problems.png?raw=true' width='500px'/>
+<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/problems.png?raw=true' width='600px'/>
 </p>
 
 
@@ -77,16 +79,16 @@ Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/d
 <h3 align="center"> Annonation for JSON and YAML </h3>
 
 <p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/locale-annotation.png?raw=true' width='600px'/>
+<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/locale-annotation.png?raw=true' width='700px'/>
 </p>
 
 
-<h3 align="center"> Overview </h3>
+<h3 align="center"> General </h3>
 
 - Multi-root workspace supported
 - Remote development supported
-- Supports both [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next) and [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
-- i18n for the extension itself, of course. **(supporting: English, 简体中文, 繁體中文 or [help us translate](https://github.com/antfu/i18n-ally#-help-translate-this-extension))**
+- Supports many popular frameworks
+- i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally/tree/i18n-ally#-help-translate-this-extension)
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
@@ -178,15 +180,24 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 
 ## 🌍 Help translate this extension
 
-This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. If you would like to help translate this extension, you can do it by following steps.
+This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor.
+
+| Language | Maintainer | Contributors |
+| --- | --- | --- |
+| English    | [@antfu](https://github.com/antfu)          | [@rubjo](https://github.com/rubjo) |
+| 简体中文    | [@antfu](https://github.com/antfu)           |       |
+| 繁體中文    | [@antfu](https://github.com/antfu)           |       |
+| Norwegian  |  | [@rubjo](https://github.com/rubjo)       |
+| Spanish    |  | [@Baltimer](https://github.com/Baltimer) |
+
+If you would like to help translate this extension, you can do it by following steps.
 
 1. Fork this repo and clone it to you local machine
 2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
 3. Translate every single message in the new json file you created.
 4. Commit changes and make a PR to this repo
 
-We would recommend you to use vscode with `i18n-ally` installed. It can helps you translate itself 😁, all the configs were already set in the workspace settings.
-
+We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode extension development which can help you translate itself 😁.
 
 ## 🎯 Troubleshooting
 
