@@ -30,11 +30,6 @@ All notable changes to this project will be documented in this file. See [standa
 * remove default values from some of settings ([73def5c](https://github.com/antfu/vue-i18n-ally/commit/73def5c4c5675fd9a10e27af2673322f3524262f))
 
 
-### chore
-
-* rename package name to i18n-ally ([60e0581](https://github.com/antfu/vue-i18n-ally/commit/60e0581693c205a59ddd3e539f2bbb40428acb32))
-
-
 ### ⚡ Features
 
 * add react-i18next framework support ([3e5ee9c](https://github.com/antfu/vue-i18n-ally/commit/3e5ee9c4a91ac165e708e05b9484973a154e76fb))

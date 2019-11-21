@@ -4,6 +4,7 @@ import ReactFramework from './react'
 import I18nextFramework from './i18next'
 import VSCodeFramework from './vscode'
 import NgxTranslateFramework from './ngx-translate'
+import I18nTagFramework from './i18n-tag'
 
 export const frameworks = [
   new VueFramework(),
@@ -11,6 +12,7 @@ export const frameworks = [
   new NgxTranslateFramework(),
   new VSCodeFramework(),
   new I18nextFramework(),
+  new I18nTagFramework(),
 ]
 
 export function getFramework (id: string): Framework | undefined {

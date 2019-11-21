@@ -2,7 +2,7 @@ import { Framework } from '../base'
 
 class I18nextFramework extends Framework {
   id ='i18next'
-  display = 'General i18next '
+  display = 'i18next'
 
   detection = {
     packageJSON: (packages: string[]) => {
