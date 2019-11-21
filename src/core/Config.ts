@@ -1,6 +1,6 @@
 import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
-import { normalizeLocale, Log } from '../utils'
+import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
@@ -88,7 +88,7 @@ export class Config {
   }
 
   static get dirStructure (): DirStructureAuto {
-    return (this.getConfig('dirStructure')) as (DirStructureAuto)
+    return (this.getConfig('dirStructure')) as (DirStructureAuto) || 'auto'
   }
 
   static set dirStructure (value: DirStructureAuto) {
@@ -163,7 +163,6 @@ export class Config {
   // locales
   static get localesPaths (): string[] {
     const paths = this.getConfig('localesPaths')
-    Log.info(JSON.stringify(paths))
     let localesPaths: string[]
     if (!paths)
       localesPaths = []

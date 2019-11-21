@@ -59,12 +59,12 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
 const m: ExtensionModule = (ctx) => {
   const treeDataProvider = new FileLocalesTreeProvider(ctx)
 
-  window.createTreeView('locales-tree-file', {
+  window.createTreeView('i18n-ally-locales-tree-file', {
     treeDataProvider,
     // @ts-ignore
     showCollapseAll: true,
   })
-  window.createTreeView('locales-tree-file-explorer', {
+  window.createTreeView('i18n-ally-locales-tree-file-explorer', {
     treeDataProvider,
     // @ts-ignore
     showCollapseAll: true,

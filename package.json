@@ -175,53 +175,53 @@
       "view/item/context": [
         {
           "command": "extension.i18n-ally.open-key",
-          "when": "view =~ /locales/ && viewItem =~ /openable/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /openable/",
           "group": "inline@1"
         },
         {
           "command": "extension.i18n-ally.copy-key",
-          "when": "view =~ /locales/ && viewItem =~ /node/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
           "group": "inline@2"
         },
         {
           "command": "extension.i18n-ally.translate-key",
-          "when": "view =~ /locales/ && viewItem =~ /translatable/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /translatable/",
           "group": "inline@3"
         },
         {
           "command": "extension.i18n-ally.edit-key",
-          "when": "view =~ /locales/ && viewItem =~ /editable/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /editable/",
           "group": "inline@4"
         },
         {
           "command": "extension.i18n-ally.fulfill-keys",
-          "when": "view =~ /locales/ && viewItem =~ /fulfillable/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /fulfillable/",
           "group": "inline@3"
         },
         {
           "command": "extension.i18n-ally.set-display-language",
-          "when": "view =~ /locales-progress/ && viewItem =~ /notdisply/"
+          "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /notdisply/"
         },
         {
           "command": "extension.i18n-ally.set-source-language",
-          "when": "view =~ /locales-progress/ && viewItem =~ /notsource/"
+          "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /notsource/"
         },
         {
           "command": "extension.i18n-ally.delete-key",
-          "when": "view =~ /locales/ && viewItem =~ /node/"
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/"
         },
         {
           "command": "extension.i18n-ally.rename-key",
-          "when": "view =~ /locales/ && viewItem =~ /node/"
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-show",
-          "when": "view =~ /locales-progress/ && viewItem =~ /show/",
+          "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /show/",
           "group": "inline@4"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-hide",
-          "when": "view =~ /locales-progress/ && viewItem =~ /hide/",
+          "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /hide/",
           "group": "inline@4"
         }
       ]
@@ -238,29 +238,29 @@
     "views": {
       "explorer": [
         {
-          "id": "locales-tree-file-explorer",
+          "id": "i18n-ally-locales-tree-file-explorer",
           "name": "%view.i18n_keys%",
           "when": "i18n-ally-enabled && i18n-ally-supported-file"
         }
       ],
       "i18n-ally": [
         {
-          "id": "locales-tree-file",
+          "id": "i18n-ally-locales-tree-file",
           "name": "%view.current_file%",
           "when": "i18n-ally-enabled && i18n-ally-supported-file"
         },
         {
-          "id": "locales-progress",
+          "id": "i18n-ally-locales-progress",
           "name": "%view.progress%",
           "when": "i18n-ally-enabled"
         },
         {
-          "id": "locales-tree",
+          "id": "i18n-ally-locales-tree",
           "name": "%view.tree%",
           "when": "i18n-ally-enabled"
         },
         {
-          "id": "help-feedback",
+          "id": "i18n-ally-help-feedback",
           "name": "%view.help_feedback%",
           "when": "i18n-ally-enabled"
         }
