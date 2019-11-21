@@ -371,7 +371,7 @@
         },
         "vue-i18n-ally.experimental.sfc": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "%config.sfc%"
         }
       }

@@ -103,7 +103,7 @@ export class Config {
   }
 
   static get sfc (): boolean {
-    return this.getConfig<boolean>('experimental.sfc') || false
+    return this.getConfig<boolean>('experimental.sfc') || true
   }
 
   static get includeSubfolders (): boolean {
