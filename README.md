@@ -1,3 +1,13 @@
+<h1>✨ BREAKING NEWS!</h1>
+
+Vue i18n Ally is coming to support React, Angular and numbers of other frameworks! [**Opt-in the beta**](https://github.com/antfu/i18n-ally/pull/112) now!
+
+<p align="center">
+<img src="https://github.com/antfu/i18n-ally/raw/i18n-ally/screenshots/migration.v1.png" alt="logo" width="600"/>
+</p>
+
+<hr>
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/antfu/vue-i18n-ally/master/res/logo.png" alt="logo" width="100"/>
 </p>
