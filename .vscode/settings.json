@@ -9,11 +9,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-
-  "vue-i18n-ally.localesPaths": ".",
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "i18n-ally.localesPaths": ".",
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "flat",
   "i18n-ally.preferredDelimiter": "_",
   "i18n-ally.sortKeys": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
