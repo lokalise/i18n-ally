@@ -1,6 +1,5 @@
 import { Disposable, EventEmitter } from 'vscode'
 import _ from 'lodash'
-import { Log } from '../../utils'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
 import { Config, Global } from '..'
 
@@ -256,7 +255,7 @@ export abstract class Loader extends Disposable {
   }
 
   protected onDispose () {
-    Log.info(`🗑 Disposing loader "${this.name}"`)
+    // Log.info(`🗑 Disposing loader "${this.name}"`)
     this._disposables.forEach(d => d.dispose())
     this._disposables = []
   }

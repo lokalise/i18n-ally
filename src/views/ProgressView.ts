@@ -1,7 +1,7 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event, window, TreeItemCollapsibleState } from 'vscode'
 import { Coverage, Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { unicodeProgressBar, decorateLocale, unicodeDecorate, Log } from '../utils'
+import { unicodeProgressBar, decorateLocale, unicodeDecorate } from '../utils'
 import { notEmpty } from '../utils/utils'
 import i18n, { i18nKeys } from '../i18n'
 import { BasicTreeView } from './Basic'
@@ -196,9 +196,9 @@ export class ProgressProvider implements TreeDataProvider<BasicTreeView> {
   ) {
     this.loader = CurrentFile.loader
 
-    let count = 0
+    // const count = 0
     this.loader.onDidChange((src) => {
-      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
+      // Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
       this.refresh()
     })
   }
@@ -226,7 +226,6 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
   const treeDataProvider = new ProgressProvider(ctx)
   window.createTreeView('i18n-ally-locales-progress', {
     treeDataProvider,
-    // @ts-ignore
     showCollapseAll: true,
   })
 

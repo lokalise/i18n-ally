@@ -2,7 +2,7 @@ import { TreeItem, ExtensionContext, TreeItemCollapsibleState, TreeDataProvider,
 import { sortBy } from 'lodash'
 import { Node, Loader, Translator, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import { decorateLocale, NodeHelper, Log } from '../utils'
+import { decorateLocale, NodeHelper } from '../utils'
 import { BasicTreeView } from './Basic'
 
 export class LocaleTreeView extends BasicTreeView {
@@ -120,9 +120,9 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeView> {
     this._flatten = flatten
     this.loader = CurrentFile.loader
 
-    let count = 0
+    // let count = 0
     this.loader.onDidChange((src) => {
-      Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
+      // Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
       this.refresh()
     })
   }
