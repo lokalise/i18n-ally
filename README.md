@@ -11,10 +11,10 @@
 </p>
 
 <p align='center'>
-<span style='font-size: 1.2em'>🎉 <span style='color:#34495E'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!</span>
+🎉 <span style='color:#34495E'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
 <br>
 <br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
+Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
 </p>
 
 <br>
@@ -88,7 +88,7 @@ Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/d
 - Multi-root workspace supported
 - Remote development supported
 - Supports many popular frameworks
-- i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally/tree/i18n-ally#-help-translate-this-extension)
+- i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-help-translate-this-extension)
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
@@ -101,13 +101,13 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | Framework | Status | Trigger Packages |
 | --- | --- | --- |
 | [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
+| [Vue SFC](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅  | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
 | [React](https://reactjs.org/) | ✅  | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |
-| [Angular](https://angular.io/)(native) | 👀Planing | |
+| [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
 | [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
-| [i18nTag](http://i18n-tag.kolmer.net/) | 🚧WIP | |
-| Custom | 👀Planing | |
+| [i18nTag](http://i18n-tag.kolmer.net/) | ✅  | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 
 If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
 
@@ -180,15 +180,15 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 
 ## 🌍 Help translate this extension
 
-This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor.
+This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. We have supported following languages.
 
 | Language | Maintainer | Contributors |
 | --- | --- | --- |
 | English    | [@antfu](https://github.com/antfu)          | [@rubjo](https://github.com/rubjo) |
-| 简体中文    | [@antfu](https://github.com/antfu)           |       |
-| 繁體中文    | [@antfu](https://github.com/antfu)           |       |
-| Norwegian  |  | [@rubjo](https://github.com/rubjo)       |
-| Spanish    |  | [@Baltimer](https://github.com/Baltimer) |
+| Simplified Chinese (简体中文)  | [@antfu](https://github.com/antfu)           |       |
+| Traditional Chinese (繁體中文)  | [@antfu](https://github.com/antfu)           |       |
+| Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
+| Spanish (Española) |  | [@Baltimer](https://github.com/Baltimer) |
 
 If you would like to help translate this extension, you can do it by following steps.
 
@@ -203,7 +203,7 @@ We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode ext
 
 ### Extension doesn't work/show up. There is no icon in activity bar
 
-This extension support numerous of frameworks, be sure the framework you are using is in [the list](https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks).
+This extension support numerous of frameworks, be sure the framework you are using is in [the list](https://github.com/antfu/i18n-ally#-supported-frameworks).
 
 Besides, `package.json` is relied on detecting which framework you are using. It should be at the root of your project as well.
 

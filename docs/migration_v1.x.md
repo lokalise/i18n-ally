@@ -8,7 +8,7 @@ This extension is now come to v1.x stage! From v1.x, we make it not limited to s
 
 There is not to much works to be done for this migration.
 
-1. Install the new `i18n Ally` from the marketplace
+1. Install the new `i18n Ally` from [the marketplace](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally)
 2. Uninstall the old `Vue i18n Ally`.
 3. You are done. 🎉
 
@@ -16,7 +16,7 @@ Configurations are backward compatible. And all the features for Vue will work a
 
 ## New Features
 
-- Support for Vue, React, Angular, i18next, VSCode extension and more. Check the <a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks" target="__blank">Supported Frameworks List</a>
+- Support for Vue, React, Angular, i18next, VSCode extension and more. Check the <a href="https://github.com/antfu/i18n-ally#-supported-frameworks" target="__blank">Supported Frameworks List</a>
 - Automatically detect what frameworks are using by reading `package.json`
 
 ## Breaking Changes

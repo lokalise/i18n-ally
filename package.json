@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "preview": true,
   "displayName": "%extname%",
-  "description": "🌍 i18n helpers for Vue, React, Angular and more!",
+  "description": "🌍 All in one i18n extension for VSCode",
   "version": "0.99.3",
   "publisher": "antfu",
   "engines": {
