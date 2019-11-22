@@ -203,11 +203,10 @@ We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode ext
 
 ### Extension doesn't work/show up. There is no icon in activity bar
 
-Extension will only be enabled on `vue-i18n`"-ish" project. Make sure you have one of the following package in the `dependencies` or `devDependencies` fields of your `package.json`
-  - [`vue-i18n`](https://github.com/kazupon/vue-i18n)
-  - [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n)
-  - [`vue-i18next`](https://github.com/panter/vue-i18next)
-  - [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n)
+This extension support numerous of frameworks, be sure the framework you are using is in [the list](https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks).
+
+Besides, `package.json` is relied on detecting which framework you are using. It should be at the root of your project as well.
+
 
 ### I can see the icon in activity bar, but nothing show up
 
@@ -250,43 +249,13 @@ You could change your config like this:
 }
 ```
 
-
-## 📅 TODOs
-
-We have not determined schedule to implement the TODOs. If you would like to see them implemented, please open an issue and share your use cases. PR is also welcome.
-
-Todo:
-- [ ] Tests
-- [ ] Live share support
-- [ ] `esm` hot reloading, #97
-- [ ] Enhance SFC support
-
-Done:
-- [x] Machine translating
-- [x] Locales Tree
-- [x] Translating progress
-- [x] Workspace support
-- [x] YAML support
-- [x] `$tc`, `$d`, `$n`, `v-t` support
-- [x] Hide/Show specific locales
-- [x] Language flags
-- [x] Goto definition
-- [x] Source language indicator
-- [x] i18n for the plugin itself
-- [x] Annoation config (on/off, maxlength)
-- [x] Option to force enabling on non-vue-i18n project
-- [x] Find all references
-- [x] Loading `.js` locales
-- [x] Loading `.ts` locales
-- [x] Analysis report
-- [x] JSON/YAML file annonation & hint
-- [x] [Single File Components i18n support](http://kazupon.github.io/vue-i18n/guide/sfc.html)
-
 ## 👨‍💻 Thanks
 
-This extension is original forked from [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it can't be existed without [@think2011](https://github.com/think2011)'s great work.
+This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it can't be existed without [@think2011](https://github.com/think2011)'s great work.
 
-And thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
+Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-locale-message](https://github.com/kazupon/vue-i18n-locale-message), which is created by the author of vue-i18n. Thanks for making this!
+
+And my great thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
 
 ## License
 
