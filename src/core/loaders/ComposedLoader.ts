@@ -34,11 +34,11 @@ export class ComposedLoader extends Loader {
         this._onDidChange.fire(`${e}+${this.name}`)
       }),
     )
-    // this._onDidChange.fire(this.name)
   }
 
   get loadersReversed () {
-    return this._loaders.reverse()
+    // slice for clone the array
+    return this._loaders.slice().reverse()
   }
 
   get root (): LocaleTree {
