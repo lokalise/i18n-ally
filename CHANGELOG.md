@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.99.3](https://github.com/antfu/vue-i18n-ally/compare/v0.99.2...v0.99.3) (2019-11-22)
+
+
+### 📚 Documentations
+
+* add issue templates ([#113](https://github.com/antfu/vue-i18n-ally/issues/113)) ([7ff9195](https://github.com/antfu/vue-i18n-ally/commit/7ff91956c2b6be7de5f697252a39ff9b2f987dc0))
+* update docs ([714a90a](https://github.com/antfu/vue-i18n-ally/commit/714a90a1d1992319d5208325c8b46884a34c96e9))
+
+
+### 🐞 Bug Fixes
+
+* key priority on sfc ([3a4076b](https://github.com/antfu/vue-i18n-ally/commit/3a4076bfd1ea0fb904e8800f4e4d030f8523fd22))
+* trigger of completion ([84ca8e6](https://github.com/antfu/vue-i18n-ally/commit/84ca8e62242217bdae47fdede850263eb7f24cfd))
+
 ### [0.99.2](https://github.com/antfu/vue-i18n-ally/compare/v0.99.1...v0.99.2) (2019-11-22)
 
 

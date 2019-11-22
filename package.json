@@ -3,7 +3,7 @@
   "preview": true,
   "displayName": "%extname%",
   "description": "🌍 i18n helpers for Vue, React, Angular and more!",
-  "version": "0.99.2",
+  "version": "0.99.3",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
