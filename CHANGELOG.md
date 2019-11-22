@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.36.3](https://github.com/antfu/vue-i18n-ally/compare/v0.36.2...v0.36.3) (2019-11-22)
+
+
+### 🐞 Bug Fixes
+
+* add namespace for tree view ([9304b87](https://github.com/antfu/vue-i18n-ally/commit/9304b87d6992e918756784f9bb6b8fc6a1f1cc6d))
+* key priority on sfc ([c9c2107](https://github.com/antfu/vue-i18n-ally/commit/c9c210754db657ff7448d3569c1d41f1c427842b))
+
+
+### 📚 Documentations
+
+* add issue templates ([#113](https://github.com/antfu/vue-i18n-ally/issues/113)) ([3ee180e](https://github.com/antfu/vue-i18n-ally/commit/3ee180efe60f503b414adc94ce1784ad2828d289))
+
 ### [0.36.2](https://github.com/antfu/vue-i18n-ally/compare/v0.36.1...v0.36.2) (2019-11-21)
 
 
