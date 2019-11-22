@@ -485,6 +485,7 @@
     "@types/lodash": "4.14.148",
     "@types/mocha": "5.2.7",
     "@types/node": "12.12.8",
+    "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "2.7.0",
     "@typescript-eslint/parser": "2.7.0",
@@ -493,7 +494,6 @@
     "rimraf": "3.0.0",
     "standard-version": "7.0.0",
     "ts-loader": "6.2.1",
-    "vscode": "1.1.36",
     "webpack": "4.41.2",
     "webpack-cli": "3.3.10",
     "webpack-filter-warnings-plugin": "^1.2.1"

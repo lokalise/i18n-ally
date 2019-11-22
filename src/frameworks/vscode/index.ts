@@ -7,6 +7,7 @@ class VSCodeFramework extends Framework {
   detection = {
     packageJSON: [
       'vscode',
+      '@types/vscode',
     ],
   }
 
