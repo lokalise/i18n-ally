@@ -1,3 +1,4 @@
+import { basename } from 'path'
 import { Framework } from '../base'
 
 class VSCodeFramework extends Framework {
@@ -12,15 +13,17 @@ class VSCodeFramework extends Framework {
   }
 
   languageIds = [
+    'json',
     'javascript',
     'typescript',
   ]
 
-  // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = [
-    // eslint-disable-next-line no-useless-escape
-    /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. -\[\]]+?)['"`]/g,
-  ]
+  keyMatchReg = (languageIds?: string, filename?: string) => {
+    if (filename && basename(filename) === 'package.json')
+      return /"%([\w\d\. -\[\]]+?)%"/g
+    // for visualize the regex, you can use https://regexper.com/
+    return /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. -\[\]]+?)['"`]/g
+  }
 
   refactorTemplates (keypath: string, languageId: string) {
     return [
