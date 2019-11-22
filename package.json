@@ -6,7 +6,7 @@
   "version": "0.99.1",
   "publisher": "antfu",
   "engines": {
-    "vscode": "^1.29.0"
+    "vscode": "^1.40.0"
   },
   "categories": [
     "Other"
