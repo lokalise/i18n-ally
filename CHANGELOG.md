@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.99.2](https://github.com/antfu/vue-i18n-ally/compare/v0.99.1...v0.99.2) (2019-11-22)
+
+
+### 📚 Documentations
+
+* update README ([b2eea53](https://github.com/antfu/vue-i18n-ally/commit/b2eea53da684615ee8a666bbb2135adecb42a3f4))
+* update README ([24985e8](https://github.com/antfu/vue-i18n-ally/commit/24985e8ab172a79f748bc4deff39299a9b8e9cc7))
+
+
+### ⚡ Features
+
+* support for i18n-tag ([fb37acb](https://github.com/antfu/vue-i18n-ally/commit/fb37acb7e7f1a3c08436d2edc9fbef6df065f0ba))
+* **vscode:** support annonation in package.json ([0e4086b](https://github.com/antfu/vue-i18n-ally/commit/0e4086ba639e5e35228371a32b15d3893289ed59))
+
+
+### 🔮 Refactor
+
+* framework class ([aeda41c](https://github.com/antfu/vue-i18n-ally/commit/aeda41c9c61d300e84617ad2b2a2df3b9eee0b0e))
+
 ### [0.99.1](https://github.com/antfu/vue-i18n-ally/compare/v0.36.0...v0.99.1) (2019-11-21)
 
 
