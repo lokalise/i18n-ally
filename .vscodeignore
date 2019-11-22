@@ -9,6 +9,7 @@ src/**
 screenshots/**
 examples/**
 test/**
+docs/**
 
 .gitignore
 .editorconfig

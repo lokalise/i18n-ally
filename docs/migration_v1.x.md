@@ -19,12 +19,16 @@ Configurations are backward compatible. And all the features for Vue will work a
 - Support for Vue, React, Angular, i18next, VSCode extension and more. Check the <a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks" target="__blank">Supported Frameworks List</a>
 - Automatically detect what frameworks are using by reading `package.json`
 
-## Changes
+## Breaking Changes
 
 - Extension and Repo are renamed to `i18n-ally`
 - Conguires namespace is renamed to `i18n-ally` with legacy `vue-i18n-ally` backward compatibility.
+- Config `forceEnabled` is deprecated, use `enabledFrameworks` instead.
+- Config `experimental.sfc` is deprecated. It will enabled automatically when you need it.
+
+## Changes
+
 - New Logo
 - Updated documents
 - `Vue i18n Ally` will disable itself when `i18n Ally` is installed.
 - `i18n Ally` comes to master branch and `Vue i18n Ally` is moved to branch [`vue-i18n-ally`](https://github.com/antfu/i18n-ally/tree/vue-i18n-ally)
-- Config `forceEnabled` is deprecated, use `enabledFrameworks` instead.

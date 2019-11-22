@@ -11,10 +11,10 @@
 </p>
 
 <p align='center'>
-Vue i18n Ally is now <b>i18n Ally</b>!</h3>
+<span style='font-size: 1.2em'>🎉 <span style='color:#34495E'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!</span>
 <br>
 <br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration Guide</a></b> and <b><a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
+Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally/tree/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
 </p>
 
 <br>
