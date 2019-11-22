@@ -81,7 +81,7 @@ export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
   const provider = new HelpFeedbackProvider(ctx)
-  return window.registerTreeDataProvider('help-feedback', provider)
+  return window.registerTreeDataProvider('vue-i18n-ally-help-feedback', provider)
 }
 
 export default m

@@ -191,7 +191,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeView> {
 
 const m: ExtensionModule = (ctx) => {
   const treeDataProvider = new LocalesTreeProvider(ctx)
-  window.createTreeView('locales-tree', {
+  window.createTreeView('vue-i18n-ally-locales-tree', {
     treeDataProvider,
     // @ts-ignore
     showCollapseAll: true,

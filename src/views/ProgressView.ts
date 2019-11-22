@@ -224,7 +224,7 @@ export class ProgressProvider implements TreeDataProvider<BasicTreeView> {
 
 const m: ExtensionModule = (ctx: ExtensionContext) => {
   const treeDataProvider = new ProgressProvider(ctx)
-  window.createTreeView('locales-progress', {
+  window.createTreeView('vue-i18n-ally-locales-progress', {
     treeDataProvider,
     // @ts-ignore
     showCollapseAll: true,
