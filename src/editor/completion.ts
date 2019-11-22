@@ -18,8 +18,6 @@ class CompletionProvider implements CompletionItemProvider {
     if (parts.length > 1)
       parent = parts.slice(0, -1).join('.')
 
-    console.log(key, parent)
-
     let node = loader.getTreeNodeByKey(key)
 
     if (!node && parent)

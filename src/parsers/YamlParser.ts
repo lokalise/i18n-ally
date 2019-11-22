@@ -35,8 +35,6 @@ export class YamlParser extends Parser {
       // @ts-ignore
         return _.flatMap(node.items, m => findPairs(m, path))
       if (node.type === 'PAIR' && node.value != null && node.key != null) {
-        console.log('----', path)
-        console.log('KEY', node.key, node.value)
         if (!['BLOCK_FOLDED', 'BLOCK_LITERAL', 'PLAIN', 'QUOTE_DOUBLE', 'QUOTE_SINGLE'].includes(node.value.type)) {
           return findPairs(node.value, [...path, node.key.toString()])
         }
@@ -46,7 +44,6 @@ export class YamlParser extends Parser {
             return []
           const { start, end, origStart, origEnd } = valueCST.valueRange
           const key = [...path, node.key.toString()].join('.')
-          console.log(key)
 
           return [{
             start: origStart || start,

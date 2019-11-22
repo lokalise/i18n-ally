@@ -4,6 +4,10 @@
     "out": true,
     "dist": true,
     "node_modules": true,
+    "CHANGELOG.md": true,
+    "examples": true,
+    "res": true,
+    "screenshots": true
   },
   "[json]": {
     "editor.formatOnSave": true,

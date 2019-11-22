@@ -83,7 +83,6 @@ export class VueSfcLoader extends Loader {
   }
 
   async write (pendings: PendingWrite | PendingWrite[]) {
-    console.log('Write to SFC')
     if (!Array.isArray(pendings))
       pendings = [pendings]
     pendings = pendings.filter(i => i)
