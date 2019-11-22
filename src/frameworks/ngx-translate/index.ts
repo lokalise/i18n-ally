@@ -16,12 +16,10 @@ class NgxTranslateFramework extends Framework {
   ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = {
-    '*': [
-      /{{\s?[`'"]([\w\d\. -\[\]]+?)[`'"]\s?\|\s?translate/g,
-      /translate\.get\(['"`]([\w\d\. -\[\]]+?)['"`]/g,
-    ],
-  }
+  keyMatchReg= [
+    /{{\s?[`'"]([\w\d\. -\[\]]+?)[`'"]\s?\|\s?translate/g,
+    /translate\.get\(['"`]([\w\d\. -\[\]]+?)['"`]/g,
+  ]
 
   refactorTemplates (keypath: string, languageId: string) {
     return [

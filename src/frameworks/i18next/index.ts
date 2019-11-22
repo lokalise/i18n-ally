@@ -5,8 +5,13 @@ class I18nextFramework extends Framework {
   display = 'i18next'
 
   detection = {
-    packageJSON: (packages: string[]) => {
-      return packages.includes('i18next') && ['react-i18n'].every(v => !packages.includes(v))
+    packageJSON: {
+      any: [
+        'i18next',
+      ],
+      none: [
+        'react-i18next',
+      ],
     },
   }
 
@@ -17,9 +22,7 @@ class I18nextFramework extends Framework {
     'typescriptreact',
   ]
 
-  keyMatchReg = {
-    '*': [],
-  }
+  keyMatchReg = []
 
   refactorTemplates (keypath: string) {
     return [

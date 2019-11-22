@@ -6,7 +6,7 @@ import VSCodeFramework from './vscode'
 import NgxTranslateFramework from './ngx-translate'
 import I18nTagFramework from './i18n-tag'
 
-export const frameworks = [
+export const frameworks: Framework[] = [
   new VueFramework(),
   new ReactFramework(),
   new NgxTranslateFramework(),
@@ -21,10 +21,20 @@ export function getFramework (id: string): Framework | undefined {
 
 export function getEnabledFrameworks ({ packages }: { packages: string[] }) {
   return frameworks.filter((f) => {
-    if (typeof f.detection.packageJSON === 'function')
-      return f.detection.packageJSON(packages)
-    else
-      return f.detection.packageJSON.some(key => packages.includes(key))
+    const req = f.detection.packageJSON
+    if (typeof req === 'function') {
+      return req(packages)
+    }
+    else if (Array.isArray(req)) {
+      return req.some(key => packages.includes(key))
+    }
+    else {
+      const none = req.none ? !req.none.some(key => packages.includes(key)) : true
+      const any = req.any ? req.any.some(key => packages.includes(key)) : true
+      const every = req.every ? req.every.every(key => packages.includes(key)) : true
+
+      return none && any && every
+    }
   })
 }
 

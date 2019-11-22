@@ -51,19 +51,9 @@ export class Global {
     await this.updateRootPath()
   }
 
-  static getKeyMatchReg (languageId?: string) {
-    let regex: RegExp[] = []
-    if (languageId) {
-      regex = regex.concat(
-        this.enabledFrameworks
-          .flatMap(f => f.keyMatchReg[languageId] || []),
-      )
-    }
-    regex = regex.concat(
-      this.enabledFrameworks
-        .flatMap(f => f.keyMatchReg['*'] || []),
-    )
-    return regex
+  static getKeyMatchReg (languageId?: string, filepath?: string) {
+    return this.enabledFrameworks
+      .flatMap(f => f.getKeyMatchReg(languageId, filepath))
   }
 
   static refactorTemplates (keypath: string, languageId?: string) {

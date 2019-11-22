@@ -18,11 +18,9 @@ class I18nTagFramework extends Framework {
     'vue',
   ]
 
-  keyMatchReg = {
-    '*': [
-      /i18n`[\w\d\. -\[\]]+?`/g,
-    ],
-  }
+  keyMatchReg = [
+    /i18n`[\w\d\. -\[\]]+?`/g,
+  ]
 
   refactorTemplates (keypath: string) {
     return [

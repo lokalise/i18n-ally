@@ -1,13 +1,14 @@
 import { DirStructure } from '../core'
 
-type LanguageId = string
-
 export abstract class Framework {
   abstract id: string
   abstract display: string
 
+  /**
+   * Packages names determine whether a frameworks should enable or not
+   */
   abstract detection: {
-    packageJSON: string[] | ((packages: string[]) => boolean)
+    packageJSON: string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[]) => boolean)
   }
 
   /**
@@ -16,9 +17,9 @@ export abstract class Framework {
   abstract languageIds: string[]
 
   /**
-   * Object of array of regex for detect keys in document
+   * Array of regex for detect keys in document
    */
-  abstract keyMatchReg: Record<LanguageId, RegExp[]>
+  abstract keyMatchReg: RegExp | RegExp[] | ((languageId?: string, filepath?: string) => RegExp| RegExp[])
 
   /**
    * Return possible choices of replacement for messages extracted from code
@@ -33,5 +34,18 @@ export abstract class Framework {
       return '^([\\w-_]*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
     else
       return '^(.*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
+  }
+
+  getKeyMatchReg (languageId = '*', filepath?: string): RegExp[] {
+    let reg: RegExp | RegExp[] | undefined
+    if (typeof this.keyMatchReg === 'function')
+      reg = this.keyMatchReg(languageId, filepath)
+    else
+      reg = this.keyMatchReg
+
+    if (!Array.isArray(reg))
+      reg = [reg]
+
+    return reg
   }
 }

@@ -1,16 +1,12 @@
-import * as vscode from 'vscode'
-import { File } from '../utils/File'
+import { TextDocument, Position, Range } from 'vscode'
 import { Global } from './Global'
 
 export class KeyDetector {
-  static get KeyMatchReg () {
-    return Global.getKeyMatchReg()
-  }
-
   static getKeyByContent (text: string) {
     const keys = new Set<string>()
+    const regs = Global.getKeyMatchReg()
 
-    for (const reg of this.KeyMatchReg) {
+    for (const reg of regs) {
       (text.match(reg) || [])
         .forEach(key =>
           keys.add(key.replace(reg, '$1')),
@@ -20,13 +16,9 @@ export class KeyDetector {
     return Array.from(keys)
   }
 
-  static getKeyByFile (filePath: string) {
-    const file: string = File.readSync(filePath)
-    return KeyDetector.getKeyByContent(file)
-  }
-
-  static getKeyRange (document: vscode.TextDocument, position: vscode.Position) {
-    for (const regex of this.KeyMatchReg) {
+  static getKeyRange (document: TextDocument, position: Position) {
+    const regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+    for (const regex of regs) {
       const range = document.getWordRangeAtPosition(position, regex)
       if (range) {
         const key = document.getText(range).replace(regex, '$1')
@@ -35,22 +27,22 @@ export class KeyDetector {
     }
   }
 
-  static getKey (document: vscode.TextDocument, position: vscode.Position) {
+  static getKey (document: TextDocument, position: Position) {
     const keyRange = KeyDetector.getKeyRange(document, position)
     if (!keyRange)
       return
     return keyRange.key
   }
 
-  static getKeyAndRange (document: vscode.TextDocument, position: vscode.Position) {
+  static getKeyAndRange (document: TextDocument, position: Position) {
     const { range, key } = KeyDetector.getKeyRange(document, position) || {}
     if (!range || !key)
       return
     const end = range.end.character - 1
     const start = end - key.length
-    const keyRange = new vscode.Range(
-      new vscode.Position(range.end.line, start),
-      new vscode.Position(range.end.line, end),
+    const keyRange = new Range(
+      new Position(range.end.line, start),
+      new Position(range.end.line, end),
     )
     return {
       range: keyRange,
@@ -58,11 +50,20 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (text: vscode.TextDocument | string) {
+  static getKeys (document: TextDocument | string) {
+    let regs = []
+    let text = ''
+    if (typeof document !== 'string') {
+      regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+      text = document.getText()
+    }
+    else {
+      regs = Global.getKeyMatchReg()
+      text = document
+    }
+
     const keys = []
-    if (typeof text !== 'string')
-      text = text.getText()
-    for (const reg of this.KeyMatchReg) {
+    for (const reg of regs) {
       let match = null
       // eslint-disable-next-line no-cond-assign
       while (match = reg.exec(text)) {
