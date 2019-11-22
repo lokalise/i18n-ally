@@ -19,6 +19,4 @@ export enum Commands {
   locale_visibility_hide = 'extension.i18n-ally.locale-visibility-hide',
   open_url = 'extension.i18n-ally.open-url',
   support = 'extension.i18n-ally.support',
-  // DEV
-  dev_load_sfc = 'extension.i18n-ally.dev.load-sfc',
 }

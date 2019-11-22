@@ -1,42 +1,52 @@
-import * as vscode from 'vscode'
+import { CompletionItemProvider, TextDocument, Position, CompletionItem, CompletionItemKind, ExtensionContext, languages } from 'vscode'
 import { Global, KeyDetector, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 
-class CompletionProvider implements vscode.CompletionItemProvider {
+class CompletionProvider implements CompletionItemProvider {
   public provideCompletionItems (
-    document: vscode.TextDocument,
-    position: vscode.Position,
+    document: TextDocument,
+    position: Position,
   ) {
     if (!Global.enabled)
       return
 
     const loader: Loader = CurrentFile.loader
-    let key = KeyDetector.getKey(document, position)
-    if (!key || !/\.$/.test(key))
+    const key = (KeyDetector.getKey(document, position) || '').replace(/[\.]?$/g, '')
+    let parent = ''
+
+    const parts = key.split('.')
+    if (parts.length > 1)
+      parent = parts.slice(0, -1).join('.')
+
+    console.log(key, parent)
+
+    let node = loader.getTreeNodeByKey(key)
+
+    if (!node && parent)
+      node = loader.getTreeNodeByKey(parent)
+
+    if (!node)
+      node = loader.root
+
+    if (!node || node.type !== 'tree')
       return
 
-    key = key.slice(0, -1)
-    const trans = loader.getTreeNodeByKey(key)
-
-    if (!trans || trans.type !== 'tree')
-      return
-
-    return Object.values(trans.children).map((node) => {
-      return new vscode.CompletionItem(
+    return Object.values(node.children).map((node) => {
+      return new CompletionItem(
         node.keyname,
         node.type === 'tree'
-          ? vscode.CompletionItemKind.Field
-          : vscode.CompletionItemKind.Text,
+          ? CompletionItemKind.Field
+          : CompletionItemKind.Text,
       )
     })
   }
 }
 
-const m: ExtensionModule = (ctx: vscode.ExtensionContext) => {
-  return vscode.languages.registerCompletionItemProvider(
+const m: ExtensionModule = (ctx: ExtensionContext) => {
+  return languages.registerCompletionItemProvider(
     Global.getDocumentSelectors(),
     new CompletionProvider(),
-    '.',
+    '.', '\'', '"', '`',
   )
 }
 
