@@ -1,3 +1,5 @@
+import i18n from '../i18n'
+import { Log } from '../utils'
 import { Framework } from './base'
 import VueFramework from './vue'
 import ReactFramework from './react'
@@ -39,5 +41,18 @@ export function getEnabledFrameworks ({ packages }: { packages: string[] }) {
 }
 
 export function getEnabledFrameworksByIds (ids: string[]) {
-  return frameworks.filter(f => ids.includes(f.id))
+  const missedFrameworks: string[] = []
+  const enabledFrameworks = ids.flatMap((id) => {
+    const framework = frameworks.find(f => f.id === id)
+    if (!framework) {
+      missedFrameworks.push(id)
+      return []
+    }
+    return [framework]
+  })
+
+  if (missedFrameworks.length > 0)
+    Log.warning(i18n.t('prompt.frameworks_not_found', missedFrameworks.join(', ')), true)
+
+  return enabledFrameworks
 }

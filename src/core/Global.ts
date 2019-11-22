@@ -153,12 +153,12 @@ export class Global {
         Log.info('🔁 Reloading loader')
     }
 
-    if (!Config.forceEnabled) {
+    if (!Config.enabledFrameworks) {
       const packages = getPackageDependencies(this._rootpath)
       this.enabledFrameworks = getEnabledFrameworks({ packages })
     }
     else {
-      const frameworks = Config.forceEnabled === true ? ['vue'] : Config.forceEnabled
+      const frameworks = Config.enabledFrameworks
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks)
     }
     const isValidProject = this.enabledFrameworks.length > 0

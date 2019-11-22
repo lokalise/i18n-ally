@@ -165,7 +165,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | --- | --- | --- |
 | `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
 | `displayLanguage` | `en` | Displaying language in annotations and tree views. |
-| `localesPaths` | Auto detect | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
+| `localesPaths` | auto | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
 | `sortedKeys` | `false` | Sorting keys alphabetically on saving |
 | `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
 | `annotations` | `true` | Enabling inline annotations |
@@ -176,9 +176,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | Field | Default | Description |
 | --- | --- | --- |
 | `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
-| `forceEnabled` | `false` | Extension will on enabled when `vue-i18n`-ish dependencies is installed in the project. Turning on this option will force the extension enabled anyway. |
-| `experimental.sfc` | `false` | Support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. Currently SFC only works in **READONLY** mode, the other features will be landed in future release. |
-
+| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically. |
 
 ## 🌍 Help translate this extension
 

@@ -345,13 +345,31 @@
           "default": false,
           "description": "%config.full_reload_on_changed%"
         },
-        "i18n-ally.forceEnabled": {
+        "i18n-ally.enabledFrameworks": {
           "type": [
-            "boolean",
+            "string",
             "array"
           ],
-          "default": false,
-          "description": "%config.force_enabled%"
+          "enum": [
+            "vue",
+            "react",
+            "vscode",
+            "ngx-translate",
+            "i18next",
+            "i18n-tag"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "vue",
+              "react",
+              "vscode",
+              "ngx-translate",
+              "i18next",
+              "i18n-tag"
+            ]
+          },
+          "description": "%config.enabled_frameworks%"
         },
         "i18n-ally.sortKeys": {
           "type": "boolean",
@@ -410,9 +428,6 @@
           "description": "%config.deprecated%"
         },
         "vue-i18n-ally.fullReloadOnChanged": {
-          "description": "%config.deprecated%"
-        },
-        "vue-i18n-ally.forceEnabled": {
           "description": "%config.deprecated%"
         },
         "vue-i18n-ally.sortKeys": {

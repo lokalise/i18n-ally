@@ -10,7 +10,7 @@ export class Config {
     'localesPaths',
     'filenameMatchRegex',
     'includeSubfolders',
-    'forceEnabled',
+    'enabledFrameworks',
     'encoding',
   ]
 
@@ -83,8 +83,13 @@ export class Config {
     return this.getConfig<string>('annotationDelimiter') || ''
   }
 
-  static get forceEnabled (): boolean | string[] {
-    return this.getConfig<boolean | string[]>('forceEnabled') || false
+  static get enabledFrameworks (): string[] | undefined {
+    let ids = this.getConfig<string | string[]>('enabledFrameworks')
+    if (!ids)
+      return undefined
+    if (typeof ids === 'string')
+      ids = [ids]
+    return ids
   }
 
   static get dirStructure (): DirStructureAuto {

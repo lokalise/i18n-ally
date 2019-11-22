@@ -5,6 +5,7 @@ import { Config, Global } from '../../core'
 import i18n from '../../i18n'
 import { ProgressRootView } from '../../views/ProgressView'
 import { CurrentFile } from '../../core/CurrentFile'
+import { Log } from '../../utils'
 import { CommandOptions, getNode, getRecordFromNode } from './common'
 
 export async function OpenKey (item?: LocaleTreeView | CommandOptions | ProgressRootView) {
@@ -66,7 +67,7 @@ export async function OpenKey (item?: LocaleTreeView | CommandOptions | Progress
       commands.executeCommand('workbench.action.focusActiveEditorGroup')
     }
     else {
-      window.showWarningMessage(i18n.t('prompt.failed_to_locate_key', keypath))
+      Log.warning(i18n.t('prompt.failed_to_locate_key', keypath), true)
     }
   }
 }
