@@ -31,4 +31,4 @@ Configurations are backward compatible. And all the features for Vue will work a
 - New Logo
 - Updated documents
 - `Vue i18n Ally` will disable itself when `i18n Ally` is installed.
-- `i18n Ally` comes to master branch and `Vue i18n Ally` is moved to branch [`vue-i18n-ally`](https://github.com/antfu/i18n-ally/tree/vue-i18n-ally)
+- `i18n Ally` comes to master branch and `Vue i18n Ally` is moved to branch [`v0.x`](https://github.com/antfu/i18n-ally/tree/v0.x)
