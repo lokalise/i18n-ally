@@ -1,0 +1,26 @@
+{
+  "folders": [
+    {
+      "path": "ngx-translate"
+    },
+    {
+      "path": "non-i18n-project"
+    },
+    {
+      "path": "react-i18next\\react"
+    },
+    {
+      "path": "vue-i18n\\sfc"
+    },
+    {
+      "path": "vue-i18n\\demo"
+    }
+  ],
+  "settings": {
+    "i18n-ally.localesPaths": [
+      "locales",
+      "public/locales",
+      "src/assets/i18n"
+    ]
+  }
+}
