@@ -4,86 +4,63 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.0.0](https://github.com/antfu/vue-i18n-ally/compare/v0.99.3...v1.0.0) (2019-11-22)
 
+![](https://github.com/antfu/i18n-ally/blob/master/screenshots/migration.v1.png?raw=true)
 
-### 📚 Documentations
-
-* update document ([d7c0a7b](https://github.com/antfu/vue-i18n-ally/commit/d7c0a7b))
-* update documents ([d7987ad](https://github.com/antfu/vue-i18n-ally/commit/d7987ad))
+This extension is now come to v1.x stage! From v1.x, we make it not limited to support Vue but other frameworks such as React.js, Angular and more all in one extension!
 
 
+## Migration from `Vue i18n Ally` (v0.x)
 
-### [0.99.3](https://github.com/antfu/vue-i18n-ally/compare/v0.99.2...v0.99.3) (2019-11-22)
+There is not to much works to be done for this migration.
+
+1. Install the new `i18n Ally` from [the marketplace](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally)
+2. Uninstall the old `Vue i18n Ally`.
+3. You are done. 🎉
+
+Configurations are backward compatible. And all the features for Vue will work as it would do.
+
+## New Features
+
+- Support for Vue, React, Angular, i18next, VSCode extension and more. Check the <a href="https://github.com/antfu/i18n-ally#-supported-frameworks" target="__blank">Supported Frameworks List</a>
+- Automatically detect what frameworks are using by reading `package.json`
+
+## Breaking Changes
+
+- Extension and Repo are renamed to `i18n-ally`
+- Conguires namespace is renamed to `i18n-ally` with legacy `vue-i18n-ally` backward compatibility.
+- Config `forceEnabled` is deprecated, use `enabledFrameworks` instead.
+- Config `experimental.sfc` is deprecated. It will enabled automatically when you need it.
+
+## Changes
+
+- New Logo
+- Updated documents
+- `Vue i18n Ally` will disable itself when `i18n Ally` is installed.
+- `i18n Ally` comes to master branch and `Vue i18n Ally` is moved to branch [`v0.x`](https://github.com/antfu/i18n-ally/tree/v0.x)
 
 
-### 📚 Documentations
+-----
 
-* add issue templates ([#113](https://github.com/antfu/vue-i18n-ally/issues/113)) ([7ff9195](https://github.com/antfu/vue-i18n-ally/commit/7ff91956c2b6be7de5f697252a39ff9b2f987dc0))
-* update docs ([714a90a](https://github.com/antfu/vue-i18n-ally/commit/714a90a1d1992319d5208325c8b46884a34c96e9))
-
-
-### 🐞 Bug Fixes
-
-* key priority on sfc ([3a4076b](https://github.com/antfu/vue-i18n-ally/commit/3a4076bfd1ea0fb904e8800f4e4d030f8523fd22))
-* trigger of completion ([84ca8e6](https://github.com/antfu/vue-i18n-ally/commit/84ca8e62242217bdae47fdede850263eb7f24cfd))
-
-### [0.99.2](https://github.com/antfu/vue-i18n-ally/compare/v0.99.1...v0.99.2) (2019-11-22)
-
-
-### 📚 Documentations
-
-* update README ([b2eea53](https://github.com/antfu/vue-i18n-ally/commit/b2eea53da684615ee8a666bbb2135adecb42a3f4))
-* update README ([24985e8](https://github.com/antfu/vue-i18n-ally/commit/24985e8ab172a79f748bc4deff39299a9b8e9cc7))
-
+## Commits
 
 ### ⚡ Features
 
 * support for i18n-tag ([fb37acb](https://github.com/antfu/vue-i18n-ally/commit/fb37acb7e7f1a3c08436d2edc9fbef6df065f0ba))
 * **vscode:** support annonation in package.json ([0e4086b](https://github.com/antfu/vue-i18n-ally/commit/0e4086ba639e5e35228371a32b15d3893289ed59))
-
-
-### 🔮 Refactor
-
-* framework class ([aeda41c](https://github.com/antfu/vue-i18n-ally/commit/aeda41c9c61d300e84617ad2b2a2df3b9eee0b0e))
-
-### [0.99.1](https://github.com/antfu/vue-i18n-ally/compare/v0.36.0...v0.99.1) (2019-11-21)
-
-
-### ⚠ BREAKING CHANGES
-
-* rename package name to i18n-ally
-
-### 📚 Documentations
-
-* add angular example ([dda136c](https://github.com/antfu/vue-i18n-ally/commit/dda136c62c816bd192cd02a70f18939f5819acf3))
-* add framworks field ([7c0c93e](https://github.com/antfu/vue-i18n-ally/commit/7c0c93e05b08b3a74365849990991d92503324c9))
-* add ngx-translate example ([07cb04d](https://github.com/antfu/vue-i18n-ally/commit/07cb04dfb204d10143a634c3479e31df7d1776e3))
-* change display name to "i18n Ally" ([cab39ec](https://github.com/antfu/vue-i18n-ally/commit/cab39ec6391b7dc8153449fea78c6be57c9dc553))
-* migration guide draft ([910b128](https://github.com/antfu/vue-i18n-ally/commit/910b128ce5347a0ace41f3e9e05a097aaa023933))
-* remove chinese README for now ([9ad602d](https://github.com/antfu/vue-i18n-ally/commit/9ad602dc9400920ef5e284b77b7363e5262a156d))
-* update documents ([5c98de7](https://github.com/antfu/vue-i18n-ally/commit/5c98de78ea54b151897c15dc3fa036f61139d991))
-* update README ([95f703d](https://github.com/antfu/vue-i18n-ally/commit/95f703d1c94242b98d0ab7dcebc810b7bf24f3e4))
-* update README ([d8eabbe](https://github.com/antfu/vue-i18n-ally/commit/d8eabbe603458146519b3211ac326ea67855414a))
-
-
-### 🐞 Bug Fixes
-
-* filenameMatchRegex override ([e04e51e](https://github.com/antfu/vue-i18n-ally/commit/e04e51eb1dca464fb764278b84644779cdf221b7))
-* key detector ([98837fe](https://github.com/antfu/vue-i18n-ally/commit/98837fe5b25742b804b1bc8afd2f3499eb8f54d9))
-* namespace for tree views ([7948dbf](https://github.com/antfu/vue-i18n-ally/commit/7948dbf40a8d2dd3e51443e216f3bf628c2ef5b4))
-* remove default values from some of settings ([73def5c](https://github.com/antfu/vue-i18n-ally/commit/73def5c4c5675fd9a10e27af2673322f3524262f))
-
-
-### ⚡ Features
-
 * add react-i18next framework support ([3e5ee9c](https://github.com/antfu/vue-i18n-ally/commit/3e5ee9c4a91ac165e708e05b9484973a154e76fb))
 * add support for react-intl ([6e56515](https://github.com/antfu/vue-i18n-ally/commit/6e565152849e81f0ae60f1411f7b39f8d17f6bdf))
 * support general i18next ([b23bd33](https://github.com/antfu/vue-i18n-ally/commit/b23bd332a4c22b456364ceb935f41b5fb23f8189))
 * **framework:** add ngx-translate support ([652ce69](https://github.com/antfu/vue-i18n-ally/commit/652ce6981e67864747a256d63c1073f0b2305df9))
 
+### 🐞 Bug Fixes
 
-### 🔮 Refactor
+* key priority on sfc ([3a4076b](https://github.com/antfu/vue-i18n-ally/commit/3a4076bfd1ea0fb904e8800f4e4d030f8523fd22))
+* trigger of completion ([84ca8e6](https://github.com/antfu/vue-i18n-ally/commit/84ca8e62242217bdae47fdede850263eb7f24cfd))
+* filenameMatchRegex override ([e04e51e](https://github.com/antfu/vue-i18n-ally/commit/e04e51eb1dca464fb764278b84644779cdf221b7))
+* key detector ([98837fe](https://github.com/antfu/vue-i18n-ally/commit/98837fe5b25742b804b1bc8afd2f3499eb8f54d9))
+* namespace for tree views ([7948dbf](https://github.com/antfu/vue-i18n-ally/commit/7948dbf40a8d2dd3e51443e216f3bf628c2ef5b4))
+* remove default values from some of settings ([73def5c](https://github.com/antfu/vue-i18n-ally/commit/73def5c4c5675fd9a10e27af2673322f3524262f))
 
-* use class for frameworks ([306e5cf](https://github.com/antfu/vue-i18n-ally/commit/306e5cf633ccf60e24fc3cb464bd42d6d7c4fa27))
 
 ## [0.36.0](https://github.com/antfu/vue-i18n-ally/compare/v0.35.0...v0.36.0) (2019-11-18)
 

@@ -14,7 +14,7 @@
 🎉 <span style='color:#34495E'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
 <br>
 <br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
+Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
 </p>
 
 <br>
