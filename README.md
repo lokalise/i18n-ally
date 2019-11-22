@@ -109,6 +109,8 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | [i18nTag](http://i18n-tag.kolmer.net/) | 🚧WIP | |
 | Custom | 👀Planing | |
 
+If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
+
 ## 📜 Supported Locale Formats
 
 | Format | Read | Write | Annonations | Note |
