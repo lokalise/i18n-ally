@@ -1,13 +1,16 @@
 import { workspace, ExtensionContext, Uri, window } from 'vscode'
 import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
-import { SFCLoader } from './loaders/SfcLoader'
-import { Config } from './Config'
+import { VueSfcLoader } from './loaders/VueSfcLoader'
 import { Loader, Analyst } from '.'
 
 export class CurrentFile {
-  static _sfc_loader: SFCLoader | null = null
+  static _vue_sfc_loader: VueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
+
+  static get VueSfc () {
+    return Global.hasFeatureEnabled('VueSfc')
+  }
 
   static watch (ctx: ExtensionContext) {
     ctx.subscriptions.push(workspace.onDidSaveTextDocument(e => this.update(e.uri)))
@@ -18,36 +21,37 @@ export class CurrentFile {
     }))
     ctx.subscriptions.push(Analyst.watch())
     this.update(window.activeTextEditor && window.activeTextEditor.document.uri)
-    if (!Config.sfc)
-      this.updateLoaders()
+    this.updateLoaders()
   }
 
   static update (uri?: Uri) {
     if (!Global.enabled)
       return
-    if (!Config.sfc)
-      return
 
-    if (this._sfc_loader) {
-      if (uri && this._sfc_loader.uri.path === uri.path) {
-        this._sfc_loader.load()
-        return
+    if (this.VueSfc) {
+      if (this._vue_sfc_loader) {
+        if (uri && this._vue_sfc_loader.uri.path === uri.path) {
+          this._vue_sfc_loader.load()
+          return
+        }
+        else {
+          this._vue_sfc_loader.dispose()
+          this._vue_sfc_loader = null
+        }
       }
-      else {
-        this._sfc_loader.dispose()
-        this._sfc_loader = null
-      }
+      if (uri && uri.fsPath.endsWith('.vue'))
+        this._vue_sfc_loader = new VueSfcLoader(uri)
     }
-    if (uri && uri.fsPath.endsWith('.vue'))
-      this._sfc_loader = new SFCLoader(uri)
 
     this.updateLoaders()
   }
 
   static updateLoaders () {
     const loaders: Loader[] = [Global.loader]
-    if (this._sfc_loader)
-      loaders.push(this._sfc_loader)
+
+    if (this.VueSfc && this._vue_sfc_loader)
+      loaders.push(this._vue_sfc_loader)
+
     this._composed_loader.loaders = loaders
   }
 

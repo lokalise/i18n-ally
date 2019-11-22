@@ -37,7 +37,7 @@ export async function EditKey (item?: LocaleTreeView | CommandOptions) {
         keypath: node.keypath,
         filepath: node.filepath,
         locale: node.locale,
-        sfc: node.sfc,
+        features: node.features,
       })
     }
   }

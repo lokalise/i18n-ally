@@ -33,7 +33,6 @@
   "config.match_regex": "Regex string to match locale filename. (The first group should be the locale code)",
   "config.preferred_delimiter": "Preferred delimiter of composed keypath, default to \"-\"(dash)",
   "config.readonly": "Readonly mode",
-  "config.sfc": "Support for locales in Vue Single file components (SFC)",
   "config.sort_keys": "Save with sorted json/yaml",
   "config.source_language": "Source language for machine translation",
   "extname": "i18n Ally",

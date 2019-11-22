@@ -64,7 +64,7 @@ export abstract class Loader extends Disposable {
       keypath,
       keyname,
       isCollection,
-      sfc: options.sfc,
+      features: options.features,
       meta: options.meta,
     })
     tree.values[options.locale] = data
@@ -104,7 +104,7 @@ export abstract class Loader extends Disposable {
           keypath: newKeyPath,
           keyname: key,
           readonly: options.readonly,
-          sfc: options.sfc,
+          features: options.features,
           meta: options.meta,
         })
         tree.setChild(key, node)
@@ -119,7 +119,7 @@ export abstract class Loader extends Disposable {
           value: `${value}`,
           locale: options.locale,
           filepath: options.filepath,
-          sfc: options.sfc,
+          features: options.features,
           meta: options.meta,
           readonly: options.readonly,
         })

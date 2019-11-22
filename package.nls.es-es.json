@@ -31,7 +31,6 @@
   "config.match_regex": "Regex para que coincida con el nombre de archivo de configuración regional. (El primer grupo debe ser el código de configuración regional)",
   "config.preferred_delimiter": "Delimitador preferido para las rutas de acceso compuestas, por defecto \"-\"(guión)",
   "config.readonly": "Modo solo lectura",
-  "config.sfc": "Compatibilidad para configuración regional en componentes de archivo único de Vue (SFC)",
   "config.sort_keys": "Guardar con json/yaml ordenado",
   "config.source_language": "Código fuente para la traducción automática",
   "extname": "i18n Ally",

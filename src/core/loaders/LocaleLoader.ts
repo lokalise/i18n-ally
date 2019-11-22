@@ -21,8 +21,6 @@ export class LocaleLoader extends Loader {
     Log.info(`🚀 Initializing loader "${this.rootpath}"`)
     await this.loadAll()
     this.update()
-    if (Config.sfc)
-      window.showInformationMessage('Experimental SFC support enabled.')
   }
 
   get localesPaths () {
@@ -130,7 +128,7 @@ export class LocaleLoader extends Loader {
   }
 
   canHandleWrites (pending: PendingWrite) {
-    return !pending.sfc
+    return !pending.features?.VueSfc
   }
 
   async renameKey (oldkey: string, newkey: string) {

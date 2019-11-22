@@ -5,7 +5,7 @@ import { LocaleTree, PendingWrite, NodeOptions } from '../types'
 import { Loader } from './Loader'
 import { Global } from '..'
 
-export class SFCLoader extends Loader {
+export class VueSfcLoader extends Loader {
   constructor (
     public readonly uri: Uri,
   ) {
@@ -40,9 +40,11 @@ export class SFCLoader extends Loader {
     return {
       filepath: section.src || this.uri.fsPath,
       locale,
-      sfc: true,
+      features: {
+        VueSfc: true,
+      },
       meta: {
-        sfcSectionIndex: index,
+        VueSfcSectionIndex: index,
       },
     }
   }
@@ -60,7 +62,7 @@ export class SFCLoader extends Loader {
     this._flattenLocaleTree = {}
     this._locales = new Set()
 
-    const tree = new LocaleTree({ keypath: '', sfc: true })
+    const tree = new LocaleTree({ keypath: '', features: { VueSfc: true } })
     for (const [index, section] of this._parsedSections.entries()) {
       if (!section.messages)
         continue
@@ -94,7 +96,7 @@ export class SFCLoader extends Loader {
       if (!record)
         continue
 
-      const sectionIndex = record.meta ? (record.meta.sfcSectionIndex || 0) : 0
+      const sectionIndex = record.meta ? (record.meta.VueSfcSectionIndex || 0) : 0
 
       const section = this._meta.components[this.filepath][sectionIndex]
 

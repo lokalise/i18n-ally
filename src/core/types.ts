@@ -4,6 +4,14 @@ import { Range } from 'vscode'
 import { getKeyname } from '../utils/utils'
 import { Config } from './Config'
 
+export interface OptionalFeatures {
+  VueSfc?: boolean
+}
+
+export interface NodeMeta {
+  VueSfcSectionIndex?: number
+}
+
 export interface FileInfo {
   filepath: string
   locale: string
@@ -19,12 +27,8 @@ export interface NodeOptions{
   locale: string
   readonly?: boolean
   filepath: string
-  sfc?: boolean
+  features?: OptionalFeatures
   meta?: NodeMeta
-}
-
-export interface NodeMeta {
-  sfcSectionIndex?: number
 }
 
 export interface INode {
@@ -33,7 +37,7 @@ export interface INode {
   filepath?: string
   shadow?: boolean
   readonly?: boolean
-  sfc?: boolean
+  features?: OptionalFeatures
   meta?: NodeMeta
 }
 
@@ -58,7 +62,7 @@ abstract class BaseNode implements INode {
   readonly filepath?: string
   readonly shadow?: boolean
   readonly readonly?: boolean
-  readonly sfc?: boolean
+  readonly features?: OptionalFeatures
   readonly meta?: NodeMeta
 
   constructor (data: INode) {
@@ -67,7 +71,7 @@ abstract class BaseNode implements INode {
     this.filepath = data.filepath
     this.shadow = data.shadow
     this.readonly = data.readonly
-    this.sfc = data.sfc
+    this.features = data.features
     this.meta = data.meta
   }
 }
@@ -158,7 +162,7 @@ export interface PendingWrite {
   keypath: string
   filepath?: string
   value?: string
-  sfc?: boolean
+  features?: OptionalFeatures
 }
 
 export interface ExtractTextOptions {

@@ -1,4 +1,4 @@
-import { DirStructure } from '../core'
+import { DirStructure, OptionalFeatures } from '../core'
 
 export abstract class Framework {
   abstract id: string
@@ -35,6 +35,8 @@ export abstract class Framework {
     else
       return '^(.*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
   }
+
+  enableFeatures?: OptionalFeatures
 
   getKeyMatchReg (languageId = '*', filepath?: string): RegExp[] {
     let reg: RegExp | RegExp[] | undefined

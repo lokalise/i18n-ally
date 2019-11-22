@@ -9,7 +9,7 @@ import { Log } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
-import { DirStructure } from './types'
+import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader, Config } from '.'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
@@ -78,6 +78,13 @@ export class Global {
     return this.enabledFrameworks
       .flatMap(f => f.filenameMatchReg(dirStructure))
       .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
+  }
+
+  static hasFeatureEnabled (name: keyof OptionalFeatures) {
+    return this.enabledFrameworks
+      .map(i => i.enableFeatures)
+      .filter(i => i)
+      .some(i => i && i[name])
   }
 
   static get rootpath () {

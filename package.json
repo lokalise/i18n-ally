@@ -139,10 +139,6 @@
           "light": "./res/light/eye-off.svg",
           "dark": "./res/dark/eye-off.svg"
         }
-      },
-      {
-        "command": "extension.i18n-ally.dev.load-sfc",
-        "title": "DEV: Load SFC"
       }
     ],
     "menus": {
@@ -386,11 +382,6 @@
           "default": false,
           "description": "%config.readonly%"
         },
-        "i18n-ally.experimental.sfc": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.sfc%"
-        },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"
         },
@@ -437,9 +428,6 @@
           "description": "%config.deprecated%"
         },
         "vue-i18n-ally.readonly": {
-          "description": "%config.deprecated%"
-        },
-        "vue-i18n-ally.experimental.sfc": {
           "description": "%config.deprecated%"
         }
       }

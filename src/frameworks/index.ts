@@ -7,6 +7,7 @@ import I18nextFramework from './i18next'
 import VSCodeFramework from './vscode'
 import NgxTranslateFramework from './ngx-translate'
 import I18nTagFramework from './i18n-tag'
+import VueSFCFramework from './vue-sfc'
 
 export const frameworks: Framework[] = [
   new VueFramework(),
@@ -15,6 +16,7 @@ export const frameworks: Framework[] = [
   new VSCodeFramework(),
   new I18nextFramework(),
   new I18nTagFramework(),
+  new VueSFCFramework(),
 ]
 
 export function getFramework (id: string): Framework | undefined {

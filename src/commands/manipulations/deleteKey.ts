@@ -22,7 +22,7 @@ export async function DeleteKey ({ node }: LocaleTreeView) {
         keypath: record.keypath,
         filepath: record.filepath,
         locale: record.locale,
-        sfc: record.sfc,
+        features: record.features,
       })))
   }
   catch (err) {
