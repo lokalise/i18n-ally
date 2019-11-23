@@ -188,7 +188,7 @@ This extension itself supports i18n as well, it will be auto matched to the disp
 | Simplified Chinese (简体中文)  | [@antfu](https://github.com/antfu)           |       |
 | Traditional Chinese (繁體中文)  | [@antfu](https://github.com/antfu)           |       |
 | Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
-| Spanish (Española) |  | [@Baltimer](https://github.com/Baltimer) |
+| Spanish (Español) |  | [@Baltimer](https://github.com/Baltimer) |
 
 If you would like to help translate this extension, you can do it by following steps.
 
