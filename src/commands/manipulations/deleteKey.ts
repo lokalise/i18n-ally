@@ -1,8 +1,8 @@
-import { LocaleTreeView } from '../../views/LocalesTreeView'
+import { LocaleTreeItem } from '../../views'
 import { LocaleRecord, CurrentFile } from '../../core'
 import { Log } from '../../utils'
 
-export async function DeleteKey ({ node }: LocaleTreeView) {
+export async function DeleteKey ({ node }: LocaleTreeItem) {
   let records: LocaleRecord[] = []
 
   if (node.type === 'tree')

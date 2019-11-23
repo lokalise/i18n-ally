@@ -85,7 +85,7 @@
   "refactor.extract_text": "Extract text into i18n messages",
   "view.current_file": "Current file",
   "view.help_feedback": "Help & Feedback",
-  "view.i18n_keys": "Vue i18n Keys",
+  "view.i18n_keys": "i18n Keys",
   "view.progress": "Progress",
   "view.progress_submenu.empty_keys": "Empty",
   "view.progress_submenu.missing_keys": "Missing",

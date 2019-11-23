@@ -1,11 +1,11 @@
 import { window } from 'vscode'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
+import { LocaleTreeItem } from '../../views'
 import { Config, CurrentFile } from '../../core'
 import i18n from '../../i18n'
 import { decorateLocale, Log } from '../../utils'
 import { CommandOptions, getNode, getRecordFromNode } from './common'
 
-export async function EditKey (item?: LocaleTreeView | CommandOptions) {
+export async function EditKey (item?: LocaleTreeItem | CommandOptions) {
   let node = getNode(item)
 
   if (!node)
@@ -16,7 +16,7 @@ export async function EditKey (item?: LocaleTreeView | CommandOptions) {
 
   if (node.type === 'node') {
     let locale = Config.displayLanguage
-    if (item instanceof LocaleTreeView && item.displayLocale)
+    if (item instanceof LocaleTreeItem && item.displayLocale)
       locale = item.displayLocale
 
     const record = await getRecordFromNode(node, locale)

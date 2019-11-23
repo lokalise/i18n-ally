@@ -1,15 +1,12 @@
 import { window } from 'vscode'
-import { ProgressSubmenuView } from '../../views/ProgressView'
+import { ProgressSubmenuItem, LocaleTreeItem } from '../../views'
+import { Global, PendingWrite, CurrentFile } from '../../core'
 import i18n from '../../i18n'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
-import { Global } from '../../core/Global'
-import { CurrentFile } from '../../core/CurrentFile'
-import { PendingWrite } from '../../core/types'
 import { CommandOptions } from './common'
 
 const FULFILL_VALUE = ''
 
-export async function FulfillMissingKeysForProgress (item: ProgressSubmenuView) {
+export async function FulfillMissingKeysForProgress (item: ProgressSubmenuItem) {
   const Yes = i18n.t('prompt.button_yes')
   const locale = item.node.locale
   const keys = item.getKeys()
@@ -59,10 +56,10 @@ export async function FulfillAllMissingKeys () {
   await CurrentFile.loader.write(pendings)
 }
 
-export async function FulfillKeys (item?: LocaleTreeView | ProgressSubmenuView | CommandOptions) {
+export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
   if (!item)
     return FulfillAllMissingKeys()
 
-  if (item instanceof ProgressSubmenuView)
+  if (item instanceof ProgressSubmenuItem)
     return FulfillMissingKeysForProgress(item)
 }

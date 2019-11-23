@@ -67,7 +67,7 @@
   "refactor.extract_text": "Ekstraher tekst til vue-i18n-oversettelser",
   "view.current_file": "Denne filen",
   "view.help_feedback": "Hjelp & Tilbakemeldinger",
-  "view.i18n_keys": "Vue i18n Nøkler",
+  "view.i18n_keys": "i18n Nøkler",
   "view.progress": "Framdrift",
   "view.tree": "Tre"
 }

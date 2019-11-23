@@ -1,8 +1,8 @@
-import { TreeItem, ExtensionContext, TreeDataProvider, window, Command } from 'vscode'
-import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
-import { Commands } from '../core'
-import Links from '../links'
+import { TreeItem, ExtensionContext, TreeDataProvider, Command } from 'vscode'
+import i18n from '../../i18n'
+import { Commands } from '../../core'
+import Links from '../../links'
+import { FeedbackItem } from '../items/FeedbackItem'
 
 export interface FeedbackItemDefintion {
   text: string
@@ -37,31 +37,6 @@ const items: FeedbackItemDefintion[] = [{
   },
 }]
 
-export class FeedbackItem extends TreeItem {
-  constructor (
-    ctx: ExtensionContext,
-    define: FeedbackItemDefintion,
-  ) {
-    super(define.text)
-    this.iconPath = {
-      light: ctx.asAbsolutePath(`res/light/${define.icon}.svg`),
-      dark: ctx.asAbsolutePath(`res/dark/${define.icon}.svg`),
-    }
-    if (define.desc)
-      this.tooltip = define.desc
-    if (define.command) {
-      this.command = define.command
-    }
-    else if (define.url) {
-      this.command = {
-        title: define.text,
-        command: Commands.open_url,
-        arguments: [define.url],
-      }
-    }
-  }
-}
-
 export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
   constructor (
     private ctx: ExtensionContext,
@@ -78,10 +53,3 @@ export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
     return items.map(i => new FeedbackItem(this.ctx, i))
   }
 }
-
-const m: ExtensionModule = (ctx: ExtensionContext) => {
-  const provider = new HelpFeedbackProvider(ctx)
-  return window.registerTreeDataProvider('i18n-ally-help-feedback', provider)
-}
-
-export default m

@@ -1,5 +1,5 @@
 import { window } from 'vscode'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
+import { LocaleTreeItem } from '../../views'
 import { CurrentFile, Global, Node } from '../../core'
 import i18n from '../../i18n'
 
@@ -9,11 +9,11 @@ export interface CommandOptions {
   from?: string
 }
 
-export function getNode (item?: LocaleTreeView | CommandOptions) {
+export function getNode (item?: LocaleTreeItem | CommandOptions) {
   if (!item)
     return
 
-  if (item instanceof LocaleTreeView)
+  if (item instanceof LocaleTreeItem)
     return item.node
 
   return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)

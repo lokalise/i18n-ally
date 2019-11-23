@@ -1,15 +1,13 @@
 import * as path from 'path'
 import { workspace, window, Selection, TextEditorRevealType, commands } from 'vscode'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
-import { Config, Global } from '../../core'
+import { LocaleTreeItem, ProgressRootItem } from '../../views'
+import { Config, Global, CurrentFile } from '../../core'
 import i18n from '../../i18n'
-import { ProgressRootView } from '../../views/ProgressView'
-import { CurrentFile } from '../../core/CurrentFile'
 import { Log } from '../../utils'
 import { CommandOptions, getNode, getRecordFromNode } from './common'
 
-export async function OpenKey (item?: LocaleTreeView | CommandOptions | ProgressRootView) {
-  if (item instanceof ProgressRootView) {
+export async function OpenKey (item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
+  if (item instanceof ProgressRootItem) {
     const locale = item.locale
     const files = CurrentFile.loader.files.filter(f => f.locale === locale).map(f => f.filepath)
     let filepath: string| undefined
@@ -36,7 +34,7 @@ export async function OpenKey (item?: LocaleTreeView | CommandOptions | Progress
       return
 
     let locale = Config.displayLanguage
-    if (item instanceof LocaleTreeView && item.displayLocale)
+    if (item instanceof LocaleTreeItem && item.displayLocale)
       locale = item.displayLocale
 
     const record = await getRecordFromNode(node, locale)

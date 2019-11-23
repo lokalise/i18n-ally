@@ -1,7 +1,7 @@
 import { commands, window } from 'vscode'
 import { Global, Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
-import { ProgressView } from '../views/ProgressView'
+import { ProgressBaseItem } from '../views'
 import i18n from '../i18n'
 
 async function pickLocale (locale: any, type: 'displayLanguage' | 'sourceLanguage') {
@@ -32,7 +32,7 @@ function handler (type: 'displayLanguage' | 'sourceLanguage') {
 }
 
 function visibilityHandler (value?: boolean) {
-  return (item: ProgressView) => {
+  return (item: ProgressBaseItem) => {
     Config.toggleLocaleVisibility(item.node.locale, value)
   }
 }

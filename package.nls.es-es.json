@@ -82,7 +82,7 @@
   "refactor.extract_text": "Extraer texto en mensajes i18n",
   "view.current_file": "Archivo actual",
   "view.help_feedback": "Ayuda y comentarios",
-  "view.i18n_keys": "Claves Vue i18n",
+  "view.i18n_keys": "Claves i18n",
   "view.progress": "Progreso",
   "view.progress_submenu.empty_keys": "Vacío",
   "view.progress_submenu.missing_keys": "Falta",

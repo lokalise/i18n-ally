@@ -1,8 +1,8 @@
 import { ExtensionContext, window, commands } from 'vscode'
-import { EXT_NAMESPACE } from '../meta'
-import { KeyDetector, LocaleNode, Global } from '../core'
-import { ExtensionModule } from '../modules'
-import { LocalesTreeProvider, LocaleTreeView } from './LocalesTreeView'
+import { EXT_NAMESPACE } from '../../meta'
+import { KeyDetector, LocaleNode, Global } from '../../core'
+import { LocaleTreeItem } from '../items/LocaleTreeItem'
+import { LocalesTreeProvider } from './LocalesTreeProvider'
 
 export class FileLocalesTreeProvider extends LocalesTreeProvider {
   protected name = 'FileLocalesTreeProvider'
@@ -44,33 +44,14 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     for (const keypath of shadowPaths) {
       let node = this.loader.getTreeNodeByKey(keypath)
       if (node && node.type === 'tree') {
-        roots.push(new LocaleTreeView(this.ctx, node))
+        roots.push(new LocaleTreeItem(this.ctx, node))
       }
       else {
         node = new LocaleNode({ keypath, shadow: true })
-        roots.push(new LocaleTreeView(this.ctx, node))
+        roots.push(new LocaleTreeItem(this.ctx, node))
       }
     }
 
     return this.sort(roots)
   }
 }
-
-const m: ExtensionModule = (ctx) => {
-  const treeDataProvider = new FileLocalesTreeProvider(ctx)
-
-  window.createTreeView('i18n-ally-locales-tree-file', {
-    treeDataProvider,
-    // @ts-ignore
-    showCollapseAll: true,
-  })
-  window.createTreeView('i18n-ally-locales-tree-file-explorer', {
-    treeDataProvider,
-    // @ts-ignore
-    showCollapseAll: true,
-  })
-
-  return []
-}
-
-export default m

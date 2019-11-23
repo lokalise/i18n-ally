@@ -1,10 +1,10 @@
 import { window, workspace } from 'vscode'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
+import { LocaleTreeItem } from '../../views'
 import { Node, CurrentFile, Global } from '../../core'
 import i18n from '../../i18n'
 import { Log } from '../../utils'
 
-export async function RenameKey (item?: LocaleTreeView | string) {
+export async function RenameKey (item?: LocaleTreeItem | string) {
   if (!item)
     return
 

@@ -1,14 +1,14 @@
 import { window } from 'vscode'
-import { LocaleTreeView } from '../../views/LocalesTreeView'
+import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
 import { Translator, CurrentFile, Config } from '../../core'
 import { Log } from '../../utils'
-import { ProgressSubmenuView } from '../../views/ProgressView'
+
 import i18n from '../../i18n'
 import { getNode, CommandOptions } from './common'
 
-export async function TranslateSingleKey (item?: LocaleTreeView | CommandOptions) {
+export async function TranslateSingleKey (item?: LocaleTreeItem | CommandOptions) {
   const node = getNode(item)
-  const targetLocales = item instanceof LocaleTreeView ? item.listedLocales : undefined
+  const targetLocales = item instanceof LocaleTreeItem ? item.listedLocales : undefined
 
   if (!node)
     return
@@ -16,7 +16,7 @@ export async function TranslateSingleKey (item?: LocaleTreeView | CommandOptions
   if (node.type === 'tree')
     return
 
-  const from = (item && !(item instanceof LocaleTreeView) && item.from) || Config.sourceLanguage
+  const from = (item && !(item instanceof LocaleTreeItem) && item.from) || Config.sourceLanguage
 
   try {
     await Translator.MachineTranslate(CurrentFile.loader, node, from, targetLocales)
@@ -26,7 +26,7 @@ export async function TranslateSingleKey (item?: LocaleTreeView | CommandOptions
   }
 }
 
-export async function TranslateMultipleKeys (item: ProgressSubmenuView) {
+export async function TranslateMultipleKeys (item: ProgressSubmenuItem) {
   const Yes = i18n.t('prompt.button_yes')
   const to = item.node.locale
   const from = Config.sourceLanguage
@@ -44,8 +44,8 @@ export async function TranslateMultipleKeys (item: ProgressSubmenuView) {
   }
 }
 
-export async function TranslateKeys (item?: LocaleTreeView | ProgressSubmenuView | CommandOptions) {
-  if (item instanceof ProgressSubmenuView)
+export async function TranslateKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+  if (item instanceof ProgressSubmenuItem)
     return TranslateMultipleKeys(item)
   else
     return TranslateSingleKey(item)

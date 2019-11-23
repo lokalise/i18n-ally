@@ -1,14 +1,14 @@
 import { ExtensionContext, TreeItem } from 'vscode'
-import { getFlagFilename } from '../utils/utils'
+import { getFlagFilename } from '../../utils/utils'
 
-export abstract class BasicTreeView extends TreeItem {
+export abstract class BaseTreeItem extends TreeItem {
   constructor (
     public readonly ctx: ExtensionContext,
   ) {
     super('')
   }
 
-  async getChildren (): Promise<BasicTreeView[]> {
+  async getChildren (): Promise<BaseTreeItem[]> {
     return []
   }
 
