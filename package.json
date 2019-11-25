@@ -476,7 +476,6 @@
     "lint:fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
     "watch": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
