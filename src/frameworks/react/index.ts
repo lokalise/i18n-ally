@@ -21,8 +21,7 @@ class ReactFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    // eslint-disable-next-line no-useless-escape
-    /(?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\()['"`]([\w\d\. -\[\]]+?)['"`]/g,
+    /[^\w\d](?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\()['"`]([\w\d\. -\[\]]+?)['"`]/g,
   ]
 
   refactorTemplates (keypath: string) {
