@@ -3,7 +3,7 @@
   "preview": true,
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VSCode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"

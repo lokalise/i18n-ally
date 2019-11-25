@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/antfu/vue-i18n-ally/compare/v1.0.0...v1.0.1) (2019-11-25)
+
+
+### 🐞 Bug Fixes
+
+* **react:** fix regex ([c1f8459](https://github.com/antfu/vue-i18n-ally/commit/c1f845966f8359391d4d33600a120163bdeaea1a))
+
+
+### 🔮 Refactor
+
+* tree views ([357263f](https://github.com/antfu/vue-i18n-ally/commit/357263fcb7058460ad44e7debface4439df9a9ca))
+
 ## [1.0.0](https://github.com/antfu/vue-i18n-ally/compare/v0.99.3...v1.0.0) (2019-11-22)
 
 ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/migration.v1.png?raw=true)
