@@ -371,8 +371,8 @@
         },
         "vue-i18n-ally.experimental.sfc": {
           "type": "boolean",
-          "default": true,
-          "description": "%config.sfc%"
+          "default": false,
+          "description": "Warning: this is unstable, please use i18n-ally instead."
         }
       }
     }

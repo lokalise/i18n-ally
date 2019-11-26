@@ -1,6 +1,6 @@
 <h1>✨ BREAKING NEWS!</h1>
 
-Vue i18n Ally is coming to support React, Angular and numbers of other frameworks! [**Opt-in the beta**](https://github.com/antfu/i18n-ally) now!
+Vue i18n Ally is coming to support React, Angular and numbers of other frameworks! [**Update now!**](https://github.com/antfu/i18n-ally)
 
 <p align="center">
 <img src="https://github.com/antfu/i18n-ally/raw/i18n-ally/screenshots/migration.v1.png" alt="logo" width="600"/>
@@ -24,10 +24,6 @@ Vue i18n Ally is coming to support React, Angular and numbers of other framework
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.vue-i18n-ally"><img src="https://img.shields.io/visual-studio-marketplace/i/antfu.vue-i18n-ally.svg" alt="Visual Studio Marketplace Installs" /></a>
 <a href="https://github.com/antfu/i18n-ally"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg" alt="GitHub last commit" /></a>
 <a href="https://github.com/antfu/i18n-ally/issues"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg" alt="GitHub issues" /></a>
-</p>
-
-<p align='center'>
-Now with <a href="https://github.com/antfu/i18n-ally/tree/v0.x#-experimental-sfc-support">Single File Component</a> support! 🎉
 </p>
 
 <h2 align="center"> ⚡ Features </h2>
@@ -171,7 +167,7 @@ All fields should add prefix "`vue-i18n-ally.`" in the setting.
 | --- | --- | --- |
 | `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
 | `forceEnabled` | `false` | Extension will on enabled when `vue-i18n`-ish dependencies is installed in the project. Turning on this option will force the extension enabled anyway. |
-| `experimental.sfc` | `false` | Support for loading [Single File Components](http://kazupon.github.io/vue-i18n/guide/sfc.html) `<i18n>` section. Currently SFC only works in **READONLY** mode, the other features will be landed in future release. |
+| `experimental.sfc` | `false` | The SFC support in this version is unstable. Please update to [`i18n-ally`](https://github.com/antfu/i18n-ally) |
 
 
 ## 🌍 Help translate this extension
