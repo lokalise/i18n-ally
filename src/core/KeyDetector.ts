@@ -1,4 +1,5 @@
 import { TextDocument, Position, Range } from 'vscode'
+import { KeyInDocument } from '../core'
 import { Global } from './Global'
 
 export class KeyDetector {
@@ -50,7 +51,7 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (document: TextDocument | string) {
+  static getKeys (document: TextDocument | string): KeyInDocument[] {
     let regs = []
     let text = ''
     if (typeof document !== 'string') {

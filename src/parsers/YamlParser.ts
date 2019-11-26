@@ -1,7 +1,8 @@
 import * as yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
-import { Parser, KeyInDocument } from './Parser'
+import { KeyInDocument } from '../core'
+import { Parser } from './Parser'
 
 export class YamlParser extends Parser {
   constructor () {

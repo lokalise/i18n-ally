@@ -1,4 +1,5 @@
 import { ExtensionContext, window, commands } from 'vscode'
+import { uniq } from 'lodash'
 import { EXT_NAMESPACE } from '../../meta'
 import { KeyDetector, LocaleNode, Global } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
@@ -25,7 +26,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     }
     else {
       commands.executeCommand('setContext', `${EXT_NAMESPACE}-supported-file`, true)
-      this.includePaths = KeyDetector.getKeyByContent(editor.document.getText())
+      this.includePaths = uniq(KeyDetector.getKeys(editor.document).map(i => i.key))
     }
 
     this.refresh()

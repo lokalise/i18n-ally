@@ -1,22 +1,6 @@
 import { TextDocument } from 'vscode'
-import { KeyStyle } from '../core'
+import { KeyStyle, ParserOptions, KeyInDocument } from '../core'
 import { File } from '../utils'
-
-export interface PositionRange {
-  start: number
-  end: number
-}
-
-export interface ParserOptions {
-  indent: number
-  tab: string
-}
-
-export interface KeyInDocument {
-  start: number
-  end: number
-  key: string
-}
 
 export abstract class Parser {
   private supportedExtsRegex: RegExp

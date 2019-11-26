@@ -172,4 +172,20 @@ export interface ExtractTextOptions {
   languageId?: string
 }
 
+export interface PositionRange {
+  start: number
+  end: number
+}
+
+export interface ParserOptions {
+  indent: number
+  tab: string
+}
+
+export interface KeyInDocument {
+  start: number
+  end: number
+  key: string
+}
+
 export type Node = LocaleNode | LocaleRecord | LocaleTree
