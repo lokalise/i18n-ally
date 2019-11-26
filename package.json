@@ -69,6 +69,7 @@
       },
       {
         "command": "extension.i18n-ally.copy-key",
+        "category": "%extname%",
         "title": "%command.copy_key%",
         "icon": {
           "light": "./res/light/file.svg",
@@ -77,6 +78,7 @@
       },
       {
         "command": "extension.i18n-ally.translate-key",
+        "category": "%extname%",
         "title": "%command.translate_key%",
         "icon": {
           "light": "./res/light/translate.svg",
@@ -85,6 +87,7 @@
       },
       {
         "command": "extension.i18n-ally.edit-key",
+        "category": "%extname%",
         "title": "%command.edit_key%",
         "icon": {
           "light": "./res/light/edit.svg",
@@ -93,6 +96,7 @@
       },
       {
         "command": "extension.i18n-ally.open-key",
+        "category": "%extname%",
         "title": "%command.open_key%",
         "icon": {
           "light": "./res/light/open-file.svg",
@@ -101,14 +105,17 @@
       },
       {
         "command": "extension.i18n-ally.delete-key",
+        "category": "%extname%",
         "title": "%command.delete_key%"
       },
       {
         "command": "extension.i18n-ally.rename-key",
+        "category": "%extname%",
         "title": "%command.rename_key%"
       },
       {
         "command": "extension.i18n-ally.open-url",
+        "category": "%extname%",
         "title": "%command.open_url%"
       },
       {
@@ -122,10 +129,12 @@
       },
       {
         "command": "extension.i18n-ally.support",
+        "category": "%extname%",
         "title": "%feedback.support%"
       },
       {
         "command": "extension.i18n-ally.locale-visibility-show",
+        "category": "%extname%",
         "title": "%command.locale_visibility_show%",
         "icon": {
           "light": "./res/light/eye.svg",
@@ -134,6 +143,7 @@
       },
       {
         "command": "extension.i18n-ally.locale-visibility-hide",
+        "category": "%extname%",
         "title": "%command.locale_visibility_hide%",
         "icon": {
           "light": "./res/light/eye-off.svg",
@@ -152,6 +162,14 @@
           "when": "config.no_exits"
         },
         {
+          "command": "extension.i18n-ally.copy-key",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.i18n-ally.edit-key",
+          "when": "config.no_exits"
+        },
+        {
           "command": "extension.i18n-ally.delete-key",
           "when": "config.no_exits"
         },
@@ -160,12 +178,28 @@
           "when": "config.no_exits"
         },
         {
+          "command": "extension.i18n-ally.translate-key",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.i18n-ally.open-key",
+          "when": "config.no_exits"
+        },
+        {
           "command": "extension.i18n-ally.open-url",
           "when": "config.no_exits"
         },
         {
           "command": "extension.i18n-ally.fulfill-keys",
-          "when": "i18n-ally-enabled"
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.i18n-ally.locale-visibility-hide",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.i18n-ally.locale-visibility-show",
+          "when": "config.no_exits"
         }
       ],
       "view/item/context": [
