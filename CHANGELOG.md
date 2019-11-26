@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.36.5](https://github.com/antfu/vue-i18n-ally/compare/v0.36.4...v0.36.5) (2019-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* disabled sfc for default. If you would like to use SFC, please update to i18n-ally.
+
+### 🐞 Bug Fixes
+
+* disabled sfc for default. If you would like to use SFC, please update to i18n-ally. ([8811651](https://github.com/antfu/vue-i18n-ally/commit/881165110e9e7d50ba5f364ee8697ef5d336021d))
+
 ### [0.36.4](https://github.com/antfu/vue-i18n-ally/compare/v0.36.3...v0.36.4) (2019-11-22)
 
 
