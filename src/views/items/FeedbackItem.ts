@@ -1,14 +1,13 @@
-import { TreeItem, ExtensionContext } from 'vscode'
+import { ExtensionContext } from 'vscode'
 import { Commands } from '../../core'
 import { FeedbackItemDefintion } from '../providers/HelpFeedbackProvider'
+import { BaseTreeItem } from './Base'
 
-export class FeedbackItem extends TreeItem {
+export class FeedbackItem extends BaseTreeItem {
   constructor (ctx: ExtensionContext, define: FeedbackItemDefintion) {
-    super(define.text)
-    this.iconPath = {
-      light: ctx.asAbsolutePath(`res/light/${define.icon}.svg`),
-      dark: ctx.asAbsolutePath(`res/dark/${define.icon}.svg`),
-    }
+    super(ctx)
+    this.getLabel = () => define.text
+    this.iconPath = this.getIcon(define.icon)
     if (define.desc)
       this.tooltip = define.desc
     if (define.command) {

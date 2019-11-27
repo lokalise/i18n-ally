@@ -188,4 +188,21 @@ export interface KeyInDocument {
   key: string
 }
 
+export interface KeyOccurrence {
+  keypath: string
+  filepath: string
+  start: number
+  end: number
+}
+
+export interface KeyUsage {
+  keypath: string
+  occurrences: KeyOccurrence[]
+}
+
+export interface UsageReport {
+  active: KeyUsage[]
+  idle: KeyUsage[]
+}
+
 export type Node = LocaleNode | LocaleRecord | LocaleTree

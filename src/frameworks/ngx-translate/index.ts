@@ -1,4 +1,5 @@
 import { Framework } from '../base'
+import { LanguageId } from '../../utils'
 
 class NgxTranslateFramework extends Framework {
   id = 'ngx-translate'
@@ -10,7 +11,7 @@ class NgxTranslateFramework extends Framework {
     ],
   }
 
-  languageIds = [
+  languageIds: LanguageId[] = [
     'javascript',
     'typescript',
   ]

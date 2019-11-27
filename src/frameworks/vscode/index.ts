@@ -1,5 +1,6 @@
 import { basename } from 'path'
 import { Framework } from '../base'
+import { LanguageId } from '../../utils'
 
 class VSCodeFramework extends Framework {
   id = 'vscode'
@@ -12,7 +13,7 @@ class VSCodeFramework extends Framework {
     ],
   }
 
-  languageIds = [
+  languageIds: LanguageId[] = [
     'json',
     'javascript',
     'typescript',

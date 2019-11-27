@@ -1,3 +1,4 @@
+import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures } from '../core'
 
 export abstract class Framework {
@@ -14,7 +15,7 @@ export abstract class Framework {
   /**
    * Language Ids to enables annotations
    */
-  abstract languageIds: string[]
+  abstract languageIds: LanguageId[]
 
   /**
    * Array of regex for detect keys in document
