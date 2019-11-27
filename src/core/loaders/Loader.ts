@@ -1,5 +1,5 @@
 import { Disposable, EventEmitter } from 'vscode'
-import _ from 'lodash'
+import _, { uniq } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
 import { Config, Global } from '..'
 
@@ -33,12 +33,16 @@ export abstract class Loader extends Disposable {
     return []
   }
 
+  get keys (): string[] {
+    return uniq(Object.keys(this.flattenLocaleTree))
+  }
+
   splitKeypath (keypath: string): string[] {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 
   getCoverage (locale: string, keys?: string[]): Coverage | undefined {
-    const totalKeys = keys || Object.keys(this.flattenLocaleTree)
+    const totalKeys = keys || this.keys
     totalKeys.sort()
     const translatedKeys = totalKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
     const missingKeys = totalKeys.filter(key => (!this.flattenLocaleTree[key]) || this.flattenLocaleTree[key].getValue(locale) == null)

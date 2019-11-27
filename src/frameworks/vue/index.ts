@@ -1,4 +1,5 @@
 import { Framework } from '../base'
+import { LanguageId } from '../../utils'
 
 class VueFramework extends Framework {
   id = 'vue'
@@ -13,7 +14,7 @@ class VueFramework extends Framework {
     ],
   }
 
-  languageIds = [
+  languageIds: LanguageId[] = [
     'vue',
     'vue-html',
     'javascript',

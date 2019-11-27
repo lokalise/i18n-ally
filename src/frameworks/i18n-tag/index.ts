@@ -1,4 +1,5 @@
 import { Framework } from '../base'
+import { LanguageId } from '../../utils'
 
 class I18nTagFramework extends Framework {
   id ='i18n-tag'
@@ -10,7 +11,7 @@ class I18nTagFramework extends Framework {
     ],
   }
 
-  languageIds = [
+  languageIds: LanguageId[] = [
     'javascript',
     'typescript',
     'tyspescriptreact',

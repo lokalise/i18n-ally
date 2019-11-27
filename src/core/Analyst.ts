@@ -1,20 +1,21 @@
-import { resolve } from 'path'
-import { workspace, Range, Location, TextDocument } from 'vscode'
-import * as fg from 'fast-glob'
-import { SUPPORTED_LANG_GLOBS } from '../meta'
-import { Log, File } from '../utils'
+import { resolve, join } from 'path'
+import fs from 'fs'
+import { workspace, Range, Location, TextDocument, Uri, EventEmitter } from 'vscode'
+import _, { uniq } from 'lodash'
+// @ts-ignore
+import parseGitIgnore from 'parse-gitignore'
+// @ts-ignore
+import { glob } from 'glob-gitignore'
+import { Log } from '../utils'
 import { Global } from './Global'
-import { KeyDetector, Config } from '.'
-
-export interface Occurrence {
-  keypath: string
-  filepath: string
-  start: number
-  end: number
-}
+import { CurrentFile } from './CurrentFile'
+import { UsageReport } from './types'
+import { KeyDetector, Config, KeyOccurrence, KeyUsage } from '.'
 
 export class Analyst {
-  private static _cache: Occurrence[] | null = null
+  private static _cache: KeyOccurrence[] | null = null
+  static readonly _onDidUsageReportChanged = new EventEmitter<UsageReport>()
+  static readonly onDidUsageReportChanged = Analyst._onDidUsageReportChanged.event
 
   static invalidateCache () {
     this._cache = null
@@ -38,39 +39,48 @@ export class Analyst {
     const filepath = doc.uri.fsPath
     Log.info(`Update cache of ${filepath}`)
     this.invalidateCacheOf(filepath)
-    const occurrences = await this.getOccurrencesOfText(doc.getText(), filepath)
+    const occurrences = await this.getOccurrencesOfText(doc, filepath)
     this._cache.push(...occurrences)
   }
 
-  private static async getDocumentPaths () {
+  private static async enumerateDocumentPaths () {
     const root = workspace.rootPath
     if (!root)
       return []
 
-    const ignore = [ // TODO: read from gitignore, configs
+    let ignore = [
       'node_modules',
-      '**/**/node_modules',
       'dist',
-      '**/**/dist',
-      '**/**/coverage',
       ...Config.localesPaths,
     ]
-    const files = await fg(SUPPORTED_LANG_GLOBS, {
+
+    const gitignorePath = join(root, '.gitignore')
+    try {
+      if (fs.existsSync(gitignorePath))
+        ignore = ignore.concat(parseGitIgnore(await fs.promises.readFile(gitignorePath)))
+    }
+    catch (e) {
+      Log.error(e)
+    }
+
+    const files = await glob(Global.getSupportLangGlob(), {
       cwd: root,
       ignore,
-    })
+    }) as string[]
+
+    // TODO: configs for custom ignore
 
     return files.map(f => resolve(root, f))
   }
 
   private static async getOccurrencesOfFile (filepath: string) {
-    const text = await File.read(filepath)
-    return await this.getOccurrencesOfText(text, filepath)
+    const doc = await workspace.openTextDocument(Uri.file(filepath))
+    return await this.getOccurrencesOfText(doc, filepath)
   }
 
-  private static async getOccurrencesOfText (text: string, filepath: string) {
-    const keys = KeyDetector.getKeys(text)
-    const occurrences: Occurrence[] = []
+  private static async getOccurrencesOfText (doc: TextDocument, filepath: string) {
+    const keys = KeyDetector.getKeys(doc)
+    const occurrences: KeyOccurrence[] = []
 
     for (const { start, end, key } of keys) {
       occurrences.push({
@@ -84,10 +94,13 @@ export class Analyst {
     return occurrences
   }
 
-  static async getAllOccurrences (targetKey?: string) {
+  static async getAllOccurrences (targetKey?: string, useCache = true) {
+    if (!useCache)
+      this._cache = null
+
     if (!this._cache) {
-      const occurrences: Occurrence[] = []
-      const filepaths = await this.getDocumentPaths()
+      const occurrences: KeyOccurrence[] = []
+      const filepaths = await this.enumerateDocumentPaths()
 
       for (const filepath of filepaths)
         occurrences.push(...await this.getOccurrencesOfFile(filepath))
@@ -105,12 +118,29 @@ export class Analyst {
     return await Promise.all(occurrences.map(o => this.getLocationOf(o)))
   }
 
-  static async getLocationOf (occurrence: Occurrence) {
+  static async getLocationOf (occurrence: KeyOccurrence) {
     const document = await workspace.openTextDocument(occurrence.filepath)
     const range = new Range(
       document.positionAt(occurrence.start),
       document.positionAt(occurrence.end),
     )
     return new Location(document.uri, range)
+  }
+
+  static async analyzeUsage (useCache = true): Promise<UsageReport> {
+    const occurrences = await this.getAllOccurrences(undefined, useCache)
+    const usages: KeyUsage[] = _(occurrences)
+      .groupBy('keypath')
+      .entries()
+      .map(([keypath, occurrences]) => ({ keypath, occurrences }))
+      .value()
+    const activeKeys = uniq(usages.map(i => i.keypath))
+    const idleKeys = CurrentFile.loader.keys.filter(i => !activeKeys.includes(i)).map(i => ({ keypath: i, occurrences: [] }))
+    const report = {
+      active: usages,
+      idle: idleKeys,
+    }
+    this._onDidUsageReportChanged.fire(report)
+    return report
   }
 }

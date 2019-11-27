@@ -1,3 +1,4 @@
+import { LanguageId } from '../../utils'
 import { Framework } from '../base'
 
 class I18nextFramework extends Framework {
@@ -15,7 +16,7 @@ class I18nextFramework extends Framework {
     },
   }
 
-  languageIds = [
+  languageIds: LanguageId[] = [
     'javascript',
     'typescript',
     'tyspescriptreact',

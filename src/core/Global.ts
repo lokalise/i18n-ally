@@ -5,7 +5,7 @@ import { EXT_NAMESPACE } from '../meta'
 import { getPackageDependencies } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
-import { Log } from '../utils'
+import { Log, getExtOfLanguageId } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
 import { CurrentFile } from './CurrentFile'
@@ -62,8 +62,16 @@ export class Global {
 
   static isLanguageIdSupported (languageId: string) {
     return this.enabledFrameworks
-      .flatMap(f => f.languageIds)
+      .flatMap(f => f.languageIds as string[])
       .includes(languageId)
+  }
+
+  static getSupportLangGlob () {
+    const exts = uniq(this.enabledFrameworks
+      .flatMap(f => f.languageIds)
+      .flatMap(id => getExtOfLanguageId(id)))
+
+    return `**/*.{${exts.join(',')}}`
   }
 
   static getDocumentSelectors () {

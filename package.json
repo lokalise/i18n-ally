@@ -128,6 +128,15 @@
         }
       },
       {
+        "command": "extension.i18n-ally.refresh-usage",
+        "category": "%extname%",
+        "title": "%command.refresh_usage%",
+        "icon": {
+          "light": "./res/light/refresh.svg",
+          "dark": "./res/dark/refresh.svg"
+        }
+      },
+      {
         "command": "extension.i18n-ally.support",
         "category": "%extname%",
         "title": "%feedback.support%"
@@ -254,6 +263,13 @@
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /hide/",
           "group": "inline@4"
         }
+      ],
+      "view/title": [
+        {
+          "command": "extension.i18n-ally.refresh-usage",
+          "group": "navigation",
+          "when": "view =~ /i18n-ally-locales-usage/"
+        }
       ]
     },
     "viewsContainers": {
@@ -288,6 +304,11 @@
           "id": "i18n-ally-locales-tree",
           "name": "%view.tree%",
           "when": "i18n-ally-enabled"
+        },
+        {
+          "id": "i18n-ally-locales-usage",
+          "name": "%view.usage%",
+          "when": "i18n-ally-enabled && i18n-ally-has-report"
         },
         {
           "id": "i18n-ally-help-feedback",
@@ -537,6 +558,7 @@
   "dependencies": {
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
+    "glob-gitignore": "^1.0.14",
     "iconv-lite": "^0.5.0",
     "js-yaml": "^3.13.1",
     "jschardet": "^2.1.1",
@@ -546,6 +568,7 @@
     "limax": "^2.0.0",
     "lodash": "^4.17.11",
     "node-html-parser": "^1.1.16",
+    "parse-gitignore": "^1.0.1",
     "translation.js": "^0.7.8",
     "ts-node": "^8.3.0",
     "typescript": "3.7.2",

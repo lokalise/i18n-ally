@@ -1,4 +1,5 @@
 import { Framework } from '../base'
+import { LanguageId } from '../../utils'
 
 class ReactFramework extends Framework {
   id= 'react'
@@ -12,7 +13,7 @@ class ReactFramework extends Framework {
     ],
   }
 
-  languageIds= [
+  languageIds: LanguageId[] = [
     'javascript',
     'typescript',
     'tyspescriptreact',

@@ -11,6 +11,7 @@
   "command.locale_visibility_show": "Show locale",
   "command.open_key": "Go to definition",
   "command.open_url": "Open url",
+  "command.refresh_usage": "Refresh usage report",
   "command.rename_key": "Rename Key",
   "command.set_display_language": "Set as display language",
   "command.set_source_language": "Set as source language",
@@ -90,5 +91,8 @@
   "view.progress_submenu.empty_keys": "Empty",
   "view.progress_submenu.missing_keys": "Missing",
   "view.progress_submenu.translated_keys": "Translated",
-  "view.tree": "Tree"
+  "view.tree": "Tree",
+  "view.usage": "Usage Report",
+  "view.usage_keys_in_use": "{0} keys are in use",
+  "view.usage_keys_not_in_use": "{0} keys are NOT in use"
 }

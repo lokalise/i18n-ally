@@ -31,6 +31,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   }
 
   set collapsibleState (_) { }
+
   get description (): string {
     if (this.node.type === 'node')
       return this.node.getValue(this.displayLocale)
