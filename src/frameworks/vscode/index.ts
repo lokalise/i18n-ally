@@ -20,9 +20,9 @@ class VSCodeFramework extends Framework {
 
   keyMatchReg = (languageIds?: string, filename?: string) => {
     if (filename && basename(filename) === 'package.json')
-      return /"%([\w\d\. -\[\]]+?)%"/g
+      return /"%([\w\d\. -\[\]]*?)%"/g
     // for visualize the regex, you can use https://regexper.com/
-    return /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. -\[\]]+?)['"`]/g
+    return /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. -\[\]]*?)['"`]/g
   }
 
   refactorTemplates (keypath: string, languageId: string) {

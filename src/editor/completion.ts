@@ -1,5 +1,5 @@
 import { CompletionItemProvider, TextDocument, Position, CompletionItem, CompletionItemKind, ExtensionContext, languages } from 'vscode'
-import { Global, KeyDetector, Loader, CurrentFile } from '../core'
+import { Global, KeyDetector, Loader, CurrentFile, LocaleTree, LocaleNode } from '../core'
 import { ExtensionModule } from '../modules'
 
 class CompletionProvider implements CompletionItemProvider {
@@ -11,28 +11,36 @@ class CompletionProvider implements CompletionItemProvider {
       return
 
     const loader: Loader = CurrentFile.loader
-    const key = (KeyDetector.getKey(document, position) || '').replace(/[\.]?$/g, '')
+    const key = KeyDetector.getKey(document, position)
+
+    if (key == null)
+      return
+
     let parent = ''
 
     const parts = key.split('.')
+
     if (parts.length > 1)
       parent = parts.slice(0, -1).join('.')
 
-    let node = loader.getTreeNodeByKey(key)
+    let node: LocaleTree | LocaleNode | undefined
+
+    if (!key)
+      node = loader.root
+
+    if (!node)
+      node = loader.getTreeNodeByKey(key)
 
     if (!node && parent)
       node = loader.getTreeNodeByKey(parent)
 
-    if (!node)
-      node = loader.root
-
     if (!node || node.type !== 'tree')
       return
 
-    return Object.values(node.children).map((node) => {
+    return Object.values(node.children).map((child) => {
       return new CompletionItem(
-        node.keyname,
-        node.type === 'tree'
+        child.keyname,
+        child.type === 'tree'
           ? CompletionItemKind.Field
           : CompletionItemKind.Text,
       )
