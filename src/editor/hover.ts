@@ -1,6 +1,6 @@
 import { MarkdownString } from 'vscode'
 import { CurrentFile, Global, Commands } from '../core'
-import { decorateLocale, escapeMarkdown, NodeHelper, GlyphChars } from '../utils'
+import { decorateLocale, escapeMarkdown, NodeHelper } from '../utils'
 import i18n from '../i18n'
 
 function makeMarkdownCommand (command: Commands, args: object): string {
@@ -10,6 +10,8 @@ function makeMarkdownCommand (command: Commands, args: object): string {
 function formatValue (text: string) {
   return escapeMarkdown(text.replace('\n', ' '))
 }
+
+const EmptyButton = '⠀⠀'
 
 export function createHover (keypath: string, maxLength = 0) {
   const loader = CurrentFile.loader
@@ -28,26 +30,37 @@ export function createHover (keypath: string, maxLength = 0) {
         if (NodeHelper.isTranslatable(record)) {
           commands.push({
             text: i18n.t('command.translate_key'),
-            icon: GlyphChars.Translate,
+            icon: '🌍', // GlyphChars.Translate,
             command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
           })
+        }
+        else {
+          commands.push(EmptyButton)
         }
         if (NodeHelper.isEditable(record)) {
           commands.push({
             text: i18n.t('command.edit_key'),
-            icon: GlyphChars.Pencil,
+            icon: '📝', // GlyphChars.Pencil,
             command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
           })
+        }
+        else {
+          commands.push(EmptyButton)
         }
         if (NodeHelper.isOpenable(record)) {
           commands.push({
             text: i18n.t('command.open_key'),
-            icon: GlyphChars.ArrowUpRight,
+            icon: '💬', // GlyphChars.ArrowUpRight,
             command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
           })
         }
+        else {
+          commands.push(EmptyButton)
+        }
       }
-      row.commands = commands.map(c => `[${c.icon}](${c.command} "${c.text}")`).join(' ')
+      row.commands = commands
+        .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
+        .join(' ')
       return row
     })
     .map(item => `| | **${item.locale}** | | ${item.value} | ${item.commands} |`)
