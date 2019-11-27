@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/antfu/vue-i18n-ally/compare/v1.0.2...v1.0.3) (2019-11-27)
+
+
+### 🐞 Bug Fixes
+
+* clean unwanted command displayed in the palette ([4f4035b](https://github.com/antfu/vue-i18n-ally/commit/4f4035bcf43447f9ec3dcbaeae0e356bad8554bf))
+* completion triggering ([03b6c75](https://github.com/antfu/vue-i18n-ally/commit/03b6c750a8da32584c96553ba3e3051110f37a18))
+
 ### [1.0.2](https://github.com/antfu/vue-i18n-ally/compare/v1.0.1...v1.0.2) (2019-11-26)
 
 
