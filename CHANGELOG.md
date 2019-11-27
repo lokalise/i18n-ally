@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/antfu/vue-i18n-ally/compare/v1.1.0...v1.1.1) (2019-11-27)
+
+
+### 🐞 Bug Fixes
+
+* use emoji for hover buttons, [#121](https://github.com/antfu/vue-i18n-ally/issues/121) ([a43c18f](https://github.com/antfu/vue-i18n-ally/commit/a43c18f880e461ead51e00a21a9805651f842e3d))
+
 ## [1.1.0](https://github.com/antfu/vue-i18n-ally/compare/v1.0.3...v1.1.0) (2019-11-27)
 
 
