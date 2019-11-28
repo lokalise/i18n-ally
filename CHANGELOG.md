@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.36.6](https://github.com/antfu/vue-i18n-ally/compare/v0.36.5...v0.36.6) (2019-11-28)
+
+
+### ⚡ Features
+
+* migration script ([0a64842](https://github.com/antfu/vue-i18n-ally/commit/0a64842070718af3444ab42749f86b84911d79d2))
+
 ### [0.36.5](https://github.com/antfu/vue-i18n-ally/compare/v0.36.4...v0.36.5) (2019-11-26)
 
 
