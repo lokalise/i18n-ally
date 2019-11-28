@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: "[BUG]"
+title: ""
 labels: bug
 assignees: ''
 
@@ -10,12 +10,17 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+**Extension Version**
+<!-- i18n Ally or Vue i18n Ally (v0.x) -->
+
+**Framework/i18n package you are using**
+<!-- vue-i18n, react-i18next, npx-translate, etc. -->
+
 **To Reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Click on '....'=
+3. See error
 
 **Extension Log**
 Go to `View` -> `Output` -> `i18n Ally`, and paste the content below. **You should mask any sensitive information**
@@ -29,8 +34,4 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
  - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.

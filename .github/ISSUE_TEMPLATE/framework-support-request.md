@@ -1,7 +1,7 @@
 ---
 name: Framework Support Request
 about: Request support for an i18n framework
-title: "[Framework Request]"
+title: ""
 labels: framework request
 assignees: ''
 
