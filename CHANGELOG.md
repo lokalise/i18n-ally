@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/antfu/vue-i18n-ally/compare/v1.3.0...v1.3.1) (2019-11-29)
+
+
+### 🐞 Bug Fixes
+
+* add key match reg for i18next ([5c93259](https://github.com/antfu/vue-i18n-ally/commit/5c93259ec117fb75778719433ec82ae52fc80d56))
+* key match reg across all frameworks ([a9c98f8](https://github.com/antfu/vue-i18n-ally/commit/a9c98f84a0c543747435da45318df1a9d68db8f4))
+
 ## [1.3.0](https://github.com/antfu/vue-i18n-ally/compare/v1.2.0...v1.3.0) (2019-11-29)
 
 
