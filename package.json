@@ -1,6 +1,5 @@
 {
   "name": "i18n-ally",
-  "preview": true,
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VSCode",
   "version": "1.3.0",
