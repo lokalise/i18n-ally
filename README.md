@@ -11,7 +11,7 @@
 </p>
 
 <p align='center'>
-🎉 <span style='color:#34495E'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/i18n-ally/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
+🎉 <a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</span> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
 <br>
 <br>
 Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
@@ -101,13 +101,14 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | Framework | Status | Trigger Packages |
 | --- | --- | --- |
 | [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
-| [Vue SFC](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅  | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
-| [React](https://reactjs.org/) | ✅  | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |
+| [Vue SFC](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
+| [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |
 | [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
 | [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
-| [i18nTag](http://i18n-tag.kolmer.net/) | ✅  | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
+| [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
+| Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
 
 If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
 
@@ -189,13 +190,15 @@ This extension itself supports i18n as well, it will be auto matched to the disp
 | Traditional Chinese (繁體中文)  | [@antfu](https://github.com/antfu)           |       |
 | Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
 | Spanish (Español) |  | [@Baltimer](https://github.com/Baltimer) |
+| Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
 
 If you would like to help translate this extension, you can do it by following steps.
 
 1. Fork this repo and clone it to you local machine
 2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
 3. Translate every single message in the new json file you created.
-4. Commit changes and make a PR to this repo
+4. You may also update the table above in README.md
+5. Commit changes and make a PR to this repo
 
 We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode extension development which can help you translate itself 😁.
 
