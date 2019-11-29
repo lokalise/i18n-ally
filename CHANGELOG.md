@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/antfu/vue-i18n-ally/compare/v1.1.1...v1.2.0) (2019-11-29)
+
+
+### 📚 Documentations
+
+* update issue template ([ed36c4b](https://github.com/antfu/vue-i18n-ally/commit/ed36c4b3dc1f4c85b2877571069d84e3c51cac57))
+* update README ([b227745](https://github.com/antfu/vue-i18n-ally/commit/b227745d7da75604bd203a401bcecafb4e0ed695))
+
+
+### ⚡ Features
+
+* **framework:** support for flutter ([6ad5d8e](https://github.com/antfu/vue-i18n-ally/commit/6ad5d8ed07959a3f55de1b987ab74e5edd36044f))
+
+
+### 🌍 Internationalization
+
+* add ja-jp translation ([#125](https://github.com/antfu/vue-i18n-ally/issues/125)), thanks [@isdh](https://github.com/isdh) ([e0d7bdf](https://github.com/antfu/vue-i18n-ally/commit/e0d7bdfa8f6ca714481f24d985129343e39082ca))
+
 ### [1.1.1](https://github.com/antfu/vue-i18n-ally/compare/v1.1.0...v1.1.1) (2019-11-27)
 
 
