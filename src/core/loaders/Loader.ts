@@ -38,7 +38,10 @@ export abstract class Loader extends Disposable {
   }
 
   splitKeypath (keypath: string): string[] {
-    return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
+    return keypath
+      .replace(/\[(.*?)\]/g, '.$1')
+      .replace(/:/g, '.')
+      .split('.')
   }
 
   getCoverage (locale: string, keys?: string[]): Coverage | undefined {
@@ -67,6 +70,7 @@ export abstract class Loader extends Disposable {
       keypath,
       keyname,
       isCollection,
+      namespace: options.namespace,
       features: options.features,
       meta: options.meta,
     })

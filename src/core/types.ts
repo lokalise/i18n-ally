@@ -6,6 +6,7 @@ import { Config } from './Config'
 
 export interface OptionalFeatures {
   VueSfc?: boolean
+  namespace?: boolean
 }
 
 export interface NodeMeta {
@@ -16,6 +17,7 @@ export interface FileInfo {
   filepath: string
   locale: string
   nested: boolean
+  namespace?: string
   readonly?: boolean
 }
 
@@ -23,10 +25,11 @@ export interface ParsedFile extends FileInfo {
   value: object
 }
 
-export interface NodeOptions{
+export interface NodeOptions {
   locale: string
   readonly?: boolean
   filepath: string
+  namespace?: string
   features?: OptionalFeatures
   meta?: NodeMeta
 }
@@ -36,6 +39,7 @@ export interface INode {
   keyname?: string
   filepath?: string
   shadow?: boolean
+  namespace?: string
   readonly?: boolean
   features?: OptionalFeatures
   meta?: NodeMeta
@@ -64,6 +68,7 @@ abstract class BaseNode implements INode {
   readonly readonly?: boolean
   readonly features?: OptionalFeatures
   readonly meta?: NodeMeta
+  readonly namespace?: string
 
   constructor (data: INode) {
     this.keypath = data.keypath
@@ -72,6 +77,7 @@ abstract class BaseNode implements INode {
     this.shadow = data.shadow
     this.readonly = data.readonly
     this.features = data.features
+    this.namespace = data.namespace
     this.meta = data.meta
   }
 }

@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as _ from 'lodash'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
+import { uniq } from 'lodash'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite, DirStructure, DirStructureAuto } from '../types'
@@ -190,6 +191,7 @@ export class LocaleLoader extends Loader {
 
     let locale = ''
     let nested = false
+    let namespace: string | undefined
 
     if (dirStructure === 'file') {
       if (!match || match.length < 2)
@@ -203,6 +205,7 @@ export class LocaleLoader extends Loader {
     if (dirStructure === 'dir') {
       nested = true
       locale = normalizeLocale(path.basename(info.dir), '')
+      namespace = info.name
     }
 
     if (!locale)
@@ -215,6 +218,7 @@ export class LocaleLoader extends Loader {
       nested,
       parser,
       ext,
+      namespace,
     }
   }
 
@@ -223,8 +227,8 @@ export class LocaleLoader extends Loader {
       const result = this.getFileInfo(filepath, dirStructure)
       if (!result)
         return
-      const { locale, nested, parser } = result
-      Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
+      const { locale, nested, parser, namespace } = result
+      Log.info(`📑 Loading (${locale}) ${namespace} ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
@@ -234,6 +238,7 @@ export class LocaleLoader extends Loader {
         locale,
         value,
         nested,
+        namespace,
         readonly: parser.readonly,
       }
     }
@@ -328,10 +333,26 @@ export class LocaleLoader extends Loader {
   private updateLocalesTree () {
     this._flattenLocaleTree = {}
 
-    const tree = new LocaleTree({ keypath: '' })
-    for (const file of Object.values(this._files))
-      this.updateTree(tree, file.value, '', '', file)
-    this._localeTree = tree
+    if (Global.hasFeatureEnabled('namespace')) {
+      const namespaces = uniq(Object.values(this._files).map(f => f.namespace).filter(i => i)) as string[]
+      const root = new LocaleTree({ keypath: '' })
+      for (const namespace of namespaces) {
+        const files = Object.values(this._files).filter(f => f.namespace === namespace)
+        const tree = new LocaleTree({ keypath: namespace })
+        for (const file of files)
+          this.updateTree(tree, file.value, namespace, namespace, file)
+        root.children[namespace] = tree
+      }
+      this._localeTree = root
+    }
+    else {
+      const tree = new LocaleTree({ keypath: '' })
+      for (const file of Object.values(this._files))
+        this.updateTree(tree, file.value, '', '', file)
+      this._localeTree = tree
+    }
+
+    console.log(this._localeTree)
   }
 
   private update () {
