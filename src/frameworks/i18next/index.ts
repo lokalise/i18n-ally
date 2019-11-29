@@ -12,6 +12,7 @@ class I18nextFramework extends Framework {
       ],
       none: [
         'react-i18next',
+        'next-i18next',
       ],
     },
   }
@@ -23,7 +24,10 @@ class I18nextFramework extends Framework {
     'typescriptreact',
   ]
 
-  keyMatchReg = []
+  // for visualize the regex, you can use https://regexper.com/
+  keyMatchReg = [
+    /(?:i18next|i18n)\.t\(['"`]([\w\d\. \-\[\]]*?)['"`]/g,
+  ]
 
   refactorTemplates (keypath: string) {
     return [
