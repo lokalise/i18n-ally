@@ -349,14 +349,13 @@ export class LocaleLoader extends Loader {
       }
       this._localeTree = root
     }
+
     else {
       const tree = new LocaleTree({ keypath: '' })
       for (const file of Object.values(this._files))
         this.updateTree(tree, file.value, '', '', file)
       this._localeTree = tree
     }
-
-    console.log(this._localeTree)
   }
 
   private update () {

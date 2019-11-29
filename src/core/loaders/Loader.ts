@@ -40,7 +40,7 @@ export abstract class Loader extends Disposable {
   splitKeypath (keypath: string): string[] {
     return keypath
       .replace(/\[(.*?)\]/g, '.$1')
-      .replace(/:/g, '.')
+      .replace(/:\s?/g, '.')
       .split('.')
   }
 
