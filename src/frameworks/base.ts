@@ -1,6 +1,10 @@
 import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures } from '../core'
 
+export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[]) => boolean)
+
+export type PackageFileType = 'packageJSON' | 'pubspecYAML'
+
 export abstract class Framework {
   abstract id: string
   abstract display: string
@@ -8,9 +12,7 @@ export abstract class Framework {
   /**
    * Packages names determine whether a frameworks should enable or not
    */
-  abstract detection: {
-    packageJSON: string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[]) => boolean)
-  }
+  abstract detection: Partial<Record<PackageFileType, FrameworkDetectionDefine>>
 
   /**
    * Language Ids to enables annotations

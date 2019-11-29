@@ -1,8 +1,7 @@
 import * as path from 'path'
-import { workspace } from 'vscode'
 import _ from 'lodash'
 import { PendingWrite, Config } from '../core'
-import { Log, File } from '.'
+import { Log } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -64,26 +63,6 @@ export function escapeMarkdown (text: string) {
     .replace(/\]/g, '\\]')
     .replace(/\(/g, '\\(')
     .replace(/\)/g, '\\)')
-}
-
-export function getPackageDependencies (projectUrl: string): string[] {
-  if (!projectUrl || !workspace.workspaceFolders)
-    return []
-
-  try {
-    const rawPackageJSON = File.readSync(`${projectUrl}/package.json`)
-    const {
-      dependencies = {},
-      devDependencies = {},
-      peerDependencies = {},
-    } = JSON.parse(rawPackageJSON)
-
-    return [...Object.keys(dependencies), ...Object.keys(devDependencies), ...Object.keys(peerDependencies)]
-  }
-  catch (err) {
-    Log.info('Error on parsing package.json')
-  }
-  return []
 }
 
 export async function applyPendingToObject (obj: any, pending: PendingWrite) {

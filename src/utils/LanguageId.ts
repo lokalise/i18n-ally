@@ -7,6 +7,7 @@ export const LanguageIdExtMap = {
   vue: 'vue',
   'vue-html': 'vue',
   json: 'json',
+  dart: 'dart',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap

@@ -13,12 +13,14 @@
   ],
   "activationEvents": [
     "workspaceContains:package.json",
+    "workspaceContains:pubspec.yaml",
     "onLanguage:vue",
     "onLanguage:javascript",
     "onLanguage:typescript",
     "onLanguage:json",
     "onLanguage:yaml",
-    "onLanguage:json5"
+    "onLanguage:json5",
+    "onLanguage:dart"
   ],
   "keywords": [
     "vue",

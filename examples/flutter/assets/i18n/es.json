@@ -1,0 +1,18 @@
+{
+  "title": "Test app",
+  "label": {
+    "main": "Hola {user}!"
+  },
+  "button": {
+    "label": {
+      "clickMe": "Haga clic aquí",
+      "language": "cambiar idioma"
+    },
+    "toastMessage": "Hiciste clic en el botón!"
+  },
+  "clicked": {
+    "times-0": "Hiciste clic {times} veces!",
+    "times-1": "Hiciste clic {time} vez!",
+    "times-2": "Hiciste clic {times} veces!"
+  }
+}

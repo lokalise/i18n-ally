@@ -2,12 +2,11 @@ import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { uniq } from 'lodash'
 import { EXT_NAMESPACE } from '../meta'
-import { getPackageDependencies } from '../utils/utils'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
 import { Log, getExtOfLanguageId } from '../utils'
 import { Framework } from '../frameworks/base'
-import { getEnabledFrameworks, getEnabledFrameworksByIds } from '../frameworks/index'
+import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { CurrentFile } from './CurrentFile'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader, Config } from '.'
@@ -170,7 +169,7 @@ export class Global {
 
     if (!Config.enabledFrameworks) {
       const packages = getPackageDependencies(this._rootpath)
-      this.enabledFrameworks = getEnabledFrameworks({ packages })
+      this.enabledFrameworks = getEnabledFrameworks(packages)
     }
     else {
       const frameworks = Config.enabledFrameworks
