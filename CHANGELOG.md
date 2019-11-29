@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/antfu/vue-i18n-ally/compare/v1.2.0...v1.3.0) (2019-11-29)
+
+
+### 🐞 Bug Fixes
+
+* ja-jp flag ([f0aaf44](https://github.com/antfu/vue-i18n-ally/commit/f0aaf4424d091c38c04e4f4b86ed5fc344d71c7d))
+
 ## [1.2.0](https://github.com/antfu/vue-i18n-ally/compare/v1.1.1...v1.2.0) (2019-11-29)
 
 
