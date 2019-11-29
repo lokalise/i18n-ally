@@ -43,6 +43,7 @@ const annotation: ExtensionModule = (ctx) => {
         let missing = false
 
         let text = loader.getValueByKey(key, undefined, maxLength)
+
         // fallback to source
         if (!text && Config.displayLanguage !== Config.sourceLanguage) {
           text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)

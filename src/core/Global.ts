@@ -1,5 +1,5 @@
 import { extname } from 'path'
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument } from 'vscode'
 import { uniq } from 'lodash'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
@@ -85,6 +85,13 @@ export class Global {
     return this.enabledFrameworks
       .flatMap(f => f.filenameMatchReg(dirStructure))
       .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
+  }
+
+  static getDefaultNamespaces (document: TextDocument) {
+    return this.enabledFrameworks
+      .map(i => i.getDefaultNamespaces)
+      .filter(i => i)
+      .flatMap(i => (i && i(document)) || [])
   }
 
   static hasFeatureEnabled (name: keyof OptionalFeatures) {

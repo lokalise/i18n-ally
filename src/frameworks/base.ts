@@ -1,3 +1,4 @@
+import { TextDocument } from 'vscode'
 import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures } from '../core'
 
@@ -40,6 +41,8 @@ export abstract class Framework {
   }
 
   enableFeatures?: OptionalFeatures
+
+  getDefaultNamespaces?: (document: TextDocument) => string[]| undefined
 
   getKeyMatchReg (languageId = '*', filepath?: string): RegExp[] {
     let reg: RegExp | RegExp[] | undefined

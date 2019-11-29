@@ -54,14 +54,22 @@ export class KeyDetector {
   static getKeys (document: TextDocument | string): KeyInDocument[] {
     let regs = []
     let text = ''
+
+    let namespaces: string[] = []
+
     if (typeof document !== 'string') {
       regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
       text = document.getText()
+
+      if (Global.hasFeatureEnabled('namespace'))
+        namespaces = Global.getDefaultNamespaces(document)
     }
     else {
       regs = Global.getKeyMatchReg()
       text = document
     }
+
+    const namespace = namespaces[0] // TODO: enumerate multiple namespaces
 
     const keys = []
     for (const reg of regs) {
@@ -72,8 +80,9 @@ export class KeyDetector {
         const key = match[1]
         const start = match.index + matchString.indexOf(key)
         const end = start + key.length
+        const keypath = namespace ? `${namespace}.${key}` : key
         keys.push({
-          key,
+          key: keypath,
           start,
           end,
         })
