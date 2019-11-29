@@ -101,11 +101,15 @@ export class LocaleLoader extends Loader {
     if (!parser)
       throw new AllyError(ErrorType.unsupported_file_type, ext)
 
+    let keypath = pending.keypath
+    if (Global.hasFeatureEnabled('namespace'))
+      keypath = this.splitKeypath(keypath).slice(1).join('.')
+
     let original: any = {}
     if (existsSync(filepath))
       original = await parser.load(filepath)
 
-    original = await applyPendingToObject(original, pending)
+    original = await applyPendingToObject(original, keypath, pending.value)
 
     await parser.save(filepath, original, Config.sortKeys)
   }

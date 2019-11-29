@@ -1,6 +1,6 @@
 import * as path from 'path'
 import _ from 'lodash'
-import { PendingWrite, Config } from '../core'
+import { Config } from '../core'
 import { Log } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -65,11 +65,11 @@ export function escapeMarkdown (text: string) {
     .replace(/\)/g, '\\)')
 }
 
-export async function applyPendingToObject (obj: any, pending: PendingWrite) {
+export async function applyPendingToObject (obj: any, keypath: string, value: any) {
   const keyStyle = await Config.requestKeyStyle()
   if (keyStyle === 'flat')
-    obj[pending.keypath] = pending.value
+    obj[keypath] = value
   else
-    _.set(obj, pending.keypath, pending.value)
+    _.set(obj, keypath, value)
   return obj
 }

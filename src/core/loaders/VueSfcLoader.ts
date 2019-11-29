@@ -99,7 +99,7 @@ export class VueSfcLoader extends Loader {
 
       const section = this._meta.components[this.filepath][sectionIndex]
 
-      section.messages[pending.locale] = await applyPendingToObject(section.messages[pending.locale] || {}, pending)
+      section.messages[pending.locale] = await applyPendingToObject(section.messages[pending.locale] || {}, pending.keypath, pending.value)
     }
 
     const doc = await workspace.openTextDocument(this.uri)
