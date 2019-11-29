@@ -80,7 +80,10 @@ export class KeyDetector {
         const key = match[1]
         const start = match.index + matchString.indexOf(key)
         const end = start + key.length
-        const keypath = namespace ? `${namespace}.${key}` : key
+        const keypath = namespace && !key.includes(':')
+          ? `${namespace}.${key}`
+          : key
+
         keys.push({
           key: keypath,
           start,
