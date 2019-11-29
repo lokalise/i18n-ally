@@ -20,7 +20,7 @@ class I18nTagFramework extends Framework {
   ]
 
   keyMatchReg = [
-    /i18n`[\w\d\. -\[\]]*?`/g,
+    /i18n`[\w\d\. \-\[\]]*?`/g,
   ]
 
   refactorTemplates (keypath: string) {

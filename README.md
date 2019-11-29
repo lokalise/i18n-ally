@@ -102,7 +102,7 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | --- | --- | --- |
 | [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
 | [Vue SFC](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
-| [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl) |
+| [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
 | [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
