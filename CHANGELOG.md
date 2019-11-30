@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/antfu/i18n-ally/compare/v1.3.1...v1.3.2) (2019-11-30)
+
+
+### 🐞 Bug Fixes
+
+* repo address ([b2347b3](https://github.com/antfu/i18n-ally/commit/b2347b3259c62eb1a41d56b178e92f7d1125eed3))
+
 ### [1.3.1](https://github.com/antfu/vue-i18n-ally/compare/v1.3.0...v1.3.1) (2019-11-29)
 
 
