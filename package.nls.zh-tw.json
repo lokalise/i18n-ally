@@ -79,7 +79,7 @@
   "prompt.translate_missing_done": "已翻譯 {0} 個文案",
   "prompt.translate_missing_in_progress": "翻譯中...",
   "prompt.writing_js": "不支援寫入文案至 js/ts 文件",
-  "refactor.extract_text": "提取文案到 vue-i18n",
+  "refactor.extract_text": "提取文案到 i18n",
   "view.current_file": "當前檔案",
   "view.help_feedback": "幫助和反饋",
   "view.i18n_keys": "翻譯字段",
