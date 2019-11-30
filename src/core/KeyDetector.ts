@@ -61,7 +61,7 @@ export class KeyDetector {
       regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
       text = document.getText()
 
-      if (Global.hasFeatureEnabled('namespace'))
+      if (Global.usingNamespace)
         namespaces = Global.getDefaultNamespaces(document)
     }
     else {

@@ -8,7 +8,6 @@ const m: ExtensionModule = (ctx) => {
   return [
     commands.registerCommand(Commands.open_url,
       async (url: string) => {
-        // @ts-ignore
         await env.openExternal(Uri.parse(url))
       }),
 
@@ -27,7 +26,6 @@ const m: ExtensionModule = (ctx) => {
         )
         const selected = options.find(i => i.text === result)
         if (selected)
-          // @ts-ignore
           await env.openExternal(Uri.parse(selected.url))
       }),
   ]

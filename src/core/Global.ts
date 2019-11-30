@@ -101,6 +101,10 @@ export class Global {
       .some(i => i && i[name])
   }
 
+  static get usingNamespace () {
+    return this.hasFeatureEnabled('namespace')
+  }
+
   static get rootpath () {
     return this._rootpath
   }

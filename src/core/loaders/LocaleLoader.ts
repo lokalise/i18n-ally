@@ -1,9 +1,8 @@
 import { promises as fs, existsSync } from 'fs'
 import * as path from 'path'
-import * as _ from 'lodash'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import { uniq } from 'lodash'
+import _, { uniq } from 'lodash'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite, DirStructure, DirStructureAuto } from '../types'
@@ -67,10 +66,15 @@ export class LocaleLoader extends Loader {
         placeHolder: `path/to/${locale}.json`,
       })
     }
-    return await window.showQuickPick(paths, {
+    const pathesToSelect = paths.map(p => ({
+      label: path.relative(Global.rootpath, p),
+      path: p,
+    }))
+    const result = await window.showQuickPick(pathesToSelect, {
       placeHolder: i18n.t('prompt.select_file_to_store_key'),
       ignoreFocusOut: true,
     })
+    return result?.path
   }
 
   getShadowFilePath (keypath: string, locale: string) {
@@ -89,6 +93,10 @@ export class LocaleLoader extends Loader {
 
   private async writeToSingleFile (pending: PendingWrite) {
     let filepath = pending.filepath
+    let keypath = pending.keypath
+    if (Global.usingNamespace && filepath)
+      keypath = this.splitKeypath(keypath).slice(1).join('.')
+
     if (!filepath)
       filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
 
@@ -100,10 +108,6 @@ export class LocaleLoader extends Loader {
     const parser = Global.getMatchedParser(ext)
     if (!parser)
       throw new AllyError(ErrorType.unsupported_file_type, ext)
-
-    let keypath = pending.keypath
-    if (Global.hasFeatureEnabled('namespace'))
-      keypath = this.splitKeypath(keypath).slice(1).join('.')
 
     let original: any = {}
     if (existsSync(filepath))
@@ -337,7 +341,7 @@ export class LocaleLoader extends Loader {
   private updateLocalesTree () {
     this._flattenLocaleTree = {}
 
-    if (Global.hasFeatureEnabled('namespace')) {
+    if (Global.usingNamespace) {
       const namespaces = uniq(Object.values(this._files).map(f => f.namespace).filter(i => i)) as string[]
       const root = new LocaleTree({ keypath: '' })
       for (const namespace of namespaces) {
