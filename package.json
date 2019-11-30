@@ -31,10 +31,10 @@
   "icon": "res/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/vue-i18n-ally"
+    "url": "https://github.com/antfu/i18n-ally"
   },
-  "homepage": "https://github.com/antfu/vue-i18n-ally",
-  "bugs": "https://github.com/antfu/vue-i18n-ally/issues",
+  "homepage": "https://github.com/antfu/i18n-ally",
+  "bugs": "https://github.com/antfu/i18n-ally/issues",
   "main": "./dist/extension",
   "contributes": {
     "commands": [
@@ -522,9 +522,8 @@
     ]
   },
   "scripts": {
-    "release": "standard-version",
-    "publish:minor": "standard-version --release-as minor && git push --follow-tags && vsce publish",
-    "publish:patch": "standard-version --release-as patch && git push --follow-tags && vsce publish",
+    "publish:minor": "standard-version --release-as minor && git push --follow-tags && vsce publish && npm run gh-release",
+    "publish:patch": "standard-version --release-as patch && git push --follow-tags && vsce publish && npm run gh-release",
     "gh-release": "conventional-github-releaser -p angular",
     "vscode:prepublish": "webpack --mode development",
     "compile": "webpack --mode development",
