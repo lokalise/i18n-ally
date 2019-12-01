@@ -14,6 +14,7 @@ class NgxTranslateFramework extends Framework {
   languageIds: LanguageId[] = [
     'javascript',
     'typescript',
+    'html',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
