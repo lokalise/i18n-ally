@@ -26,7 +26,7 @@ class I18nextFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /(?:i18next|i18n)\.t\(['"`]([\w\d\. \-\[\]]*?)['"`]/g,
+    /(?:i18next|i18n)\.t\(\s*['"`]([\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
   refactorTemplates (keypath: string) {
