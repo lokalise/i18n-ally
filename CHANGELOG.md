@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/antfu/i18n-ally/compare/v1.3.3...v1.3.4) (2019-12-05)
+
+
+### 🐞 Bug Fixes
+
+* support multilines key detection, [#132](https://github.com/antfu/i18n-ally/issues/132) ([6770c13](https://github.com/antfu/i18n-ally/commit/6770c1305c2f7c57ad3c924e60ec291d28d6924d))
+
 ### [1.3.3](https://github.com/antfu/i18n-ally/compare/v1.3.2...v1.3.3) (2019-12-01)
 
 
