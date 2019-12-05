@@ -51,11 +51,10 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (document: TextDocument | string): KeyInDocument[] {
-    let regs = []
+  static getKeys (document: TextDocument | string, regs?: RegExp[]): KeyInDocument[] {
     let text = ''
     if (typeof document !== 'string') {
-      regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+      regs = regs ?? Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
       text = document.getText()
     }
     else {
@@ -66,7 +65,6 @@ export class KeyDetector {
     const keys = []
     for (const reg of regs) {
       let match = null
-      // eslint-disable-next-line no-cond-assign
       while (match = reg.exec(text)) {
         const matchString = match[0]
         const key = match[1]
