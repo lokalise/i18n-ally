@@ -1,5 +1,6 @@
 import { TextDocument, Position, Range } from 'vscode'
 import { KeyInDocument } from '../core'
+import { regexFindKeys } from '../utils'
 import { Global } from './Global'
 
 export class KeyDetector {
@@ -62,21 +63,6 @@ export class KeyDetector {
       text = document
     }
 
-    const keys = []
-    for (const reg of regs) {
-      let match = null
-      while (match = reg.exec(text)) {
-        const matchString = match[0]
-        const key = match[1]
-        const start = match.index + matchString.indexOf(key)
-        const end = start + key.length
-        keys.push({
-          key,
-          start,
-          end,
-        })
-      }
-    }
-    return keys
+    return regexFindKeys(text, regs)
   }
 }
