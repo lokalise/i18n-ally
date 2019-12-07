@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as _ from 'lodash'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
+import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflattenObject } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite, DirStructure, DirStructureAuto } from '../types'
 import { AllyError, ErrorType } from '../Errors'
@@ -228,7 +228,9 @@ export class LocaleLoader extends Loader {
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
-      const value = await parser.load(filepath)
+      const data = await parser.load(filepath)
+      const value = unflattenObject(data)
+
       this._files[filepath] = {
         filepath,
         locale,

@@ -73,3 +73,14 @@ export async function applyPendingToObject (obj: any, pending: PendingWrite) {
     _.set(obj, pending.keypath, pending.value)
   return obj
 }
+
+export function unflattenObject (data: any) {
+  const result: any = {}
+  for (const key of Object.keys(data)) {
+    const keys = key.split('.')
+    keys.reduce((r, e, j) => {
+      return r[e] || (r[e] = isNaN(Number(keys[j + 1])) ? (keys.length - 1 === j ? data[key] : {}) : [])
+    }, result)
+  }
+  return result
+}
