@@ -203,6 +203,7 @@ export interface KeyUsage {
 export interface UsageReport {
   active: KeyUsage[]
   idle: KeyUsage[]
+  missing: KeyUsage[]
 }
 
 export type Node = LocaleNode | LocaleRecord | LocaleTree

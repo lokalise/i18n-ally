@@ -42,6 +42,7 @@
   "feedback.report_issues": "Report Issues",
   "feedback.support": "Support Us",
   "feedback.twitter_feedback": "Provide Feedback",
+  "misc.missing_key": "{0}: i18n key \"{1}\" not exists",
   "misc.missing_translation": "{0}: Translation of \"{1}\" is missing",
   "misc.not_exists": "No translation",
   "prompt.button_cancel": "Cancel",
@@ -89,10 +90,11 @@
   "view.i18n_keys": "i18n Keys",
   "view.progress": "Progress",
   "view.progress_submenu.empty_keys": "Empty",
-  "view.progress_submenu.missing_keys": "Missing",
+  "view.progress_submenu.missing_keys": "No Translation",
   "view.progress_submenu.translated_keys": "Translated",
   "view.tree": "Tree",
   "view.usage": "Usage Report",
   "view.usage_keys_in_use": "{0} keys are in use",
+  "view.usage_keys_missing": "{0} keys are missing",
   "view.usage_keys_not_in_use": "{0} keys are NOT in use"
 }

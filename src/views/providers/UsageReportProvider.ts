@@ -5,7 +5,7 @@ import { UsageReportTreeItem, UsageReportRootItem, LocationTreeItem } from '../i
 export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   private _onDidChangeTreeData = new EventEmitter<TreeItem | undefined>()
   readonly onDidChangeTreeData = this._onDidChangeTreeData.event
-  private usages: UsageReport = { active: [], idle: [] }
+  private usages: UsageReport = { active: [], idle: [], missing: [] }
   // readonly view: TreeView<UsageReportTreeItem | LocationTreeItem>
 
   constructor (
@@ -42,6 +42,8 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
         items.push(new UsageReportRootItem(this.ctx, 'active', this.usages.active.length))
       if (this.usages.idle.length)
         items.push(new UsageReportRootItem(this.ctx, 'idle', this.usages.idle.length))
+      if (this.usages.missing.length)
+        items.push(new UsageReportRootItem(this.ctx, 'missing', this.usages.missing.length))
 
       return items
     }
