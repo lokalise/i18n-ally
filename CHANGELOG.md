@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.5](https://github.com/antfu/i18n-ally/compare/v1.3.4...v1.3.5) (2019-12-07)
+
+
+### 🐞 Bug Fixes
+
+* make tree view nested for flatten messages, [#133](https://github.com/antfu/i18n-ally/issues/133) ([13f958e](https://github.com/antfu/i18n-ally/commit/13f958ed5208f99c907202cf243331da78f1db37))
+
+
+### 🔮 Refactor
+
+* tests utils ([7228299](https://github.com/antfu/i18n-ally/commit/7228299becb03cf442a9ad859dd61b79749f7e2f))
+
+
+### ⚗ Tests
+
+* add bearbone test ([58533e3](https://github.com/antfu/i18n-ally/commit/58533e376c81c55e9b3ff3ea0d97ff67ad45badb))
+* add test ([293f778](https://github.com/antfu/i18n-ally/commit/293f7789b2980b39eaaba2acf3236d5911e7c0ba))
+
 ### [1.3.4](https://github.com/antfu/i18n-ally/compare/v1.3.3...v1.3.4) (2019-12-05)
 
 
