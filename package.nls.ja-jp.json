@@ -42,6 +42,7 @@
   "feedback.report_issues": "Issuesを報告する",
   "feedback.support": "支援する",
   "feedback.twitter_feedback": "Feedbackする",
+  "misc.missing_key": "{0}: \"{1}\"は存在しません",
   "misc.missing_translation": "{0}: \"{1}\"の翻訳がありません",
   "misc.not_exists": "翻訳がありません",
   "prompt.button_cancel": "キャンセル",
