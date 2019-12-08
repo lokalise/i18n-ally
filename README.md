@@ -103,13 +103,14 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 
 | Framework | Status | Trigger Packages |
 | --- | --- | --- |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vue.svg) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vue.svg) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/react.svg) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/angular.svg) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/angular.svg) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/flutter.svg) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
-| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vscode.svg) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vue.svg?raw=true) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vue.svg?raw=true) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/react.svg?raw=true) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/angular.svg?raw=true) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/angular.svg?raw=true) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/flutter.svg?raw=true) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/ember.svg?raw=true) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
+| ![](https://github.com/antfu/i18n-ally/blob/master/screenshots/frameworks/vscode.svg?raw=true) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
 | [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
 | [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 
