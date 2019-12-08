@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/antfu/i18n-ally/compare/v1.3.6...v1.4.0) (2019-12-08)
+
+
+### ⚡ Features
+
+* new config "keepFulfilled" ([7780ede](https://github.com/antfu/i18n-ally/commit/7780ede17682d90a7663956b54106cbf886afabe))
+* **framework:** support for ember.js, close [#135](https://github.com/antfu/i18n-ally/issues/135) ([3f91f07](https://github.com/antfu/i18n-ally/commit/3f91f0747f558794c53f65204c1f31d7ddeae5a9))
+
+
+### 📚 Documentations
+
+* add badge ([07cb6e7](https://github.com/antfu/i18n-ally/commit/07cb6e71410c4a6cd3fdbe070c33ea53ee4962de))
+* add icons for frameworks ([0ebee3a](https://github.com/antfu/i18n-ally/commit/0ebee3ab93581eb6daa8077e23c78805a64a04fa))
+* update icons ([debf607](https://github.com/antfu/i18n-ally/commit/debf6075ea17bee783f8bffba9f7b6d1e0cc938d))
+* update readme ([c4b1c3e](https://github.com/antfu/i18n-ally/commit/c4b1c3ed5c0acb46faaa04acd17262afed4dd5b9))
+* update readme ([f260e3a](https://github.com/antfu/i18n-ally/commit/f260e3a79c791223700f087b35eaa290273aefdc))
+
 ### [1.3.6](https://github.com/antfu/i18n-ally/compare/v1.3.5...v1.3.6) (2019-12-07)
 
 
