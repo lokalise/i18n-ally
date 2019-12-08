@@ -22,6 +22,28 @@ Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs
 
 <br>
 
+
+## 🧱 Supported Frameworks
+
+Frameworks will be auto-detected when one of the dependencies can be found in the project.
+
+| Framework | Status | Trigger Packages |
+| --- | --- | --- |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
+| [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
+| [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
+
+
+If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
+
+
 <h2 align="center"> ⚡ Features </h2>
 
 <h3 align="center"> Inline annotation </h3>
@@ -96,26 +118,6 @@ Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
-
-## 🧱 Supported Frameworks
-
-Frameworks will be auto-detected when one of the dependencies can be found in the project.
-
-| Framework | Status | Trigger Packages |
-| --- | --- | --- |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.svg?sanitize=true) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.svg?sanitize=true) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.svg?sanitize=true) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.svg?sanitize=true) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.svg?sanitize=true) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.svg?sanitize=true) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.svg?sanitize=true) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.svg?sanitize=true) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
-| [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
-| [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
-
-
-If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
 
 
 ## 📜 Supported Locale Formats
