@@ -3,7 +3,7 @@
 </p>
 
 <p align='center'>
-English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.md">简体中文</a>
+<a href="https://github.com/antfu/i18n-ally/blob/master/README.md">English</a> | 简体中文
 </p>
 
 <p align="center">
@@ -14,29 +14,23 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg" alt="GitHub last commit" /></a>
 <a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg" alt="GitHub issues" /></a>
 
-
-</p>
-
-<p align='center'>
-🎉 <a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</a> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
-<br>
-<br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
-</p>
+<p align='center'><b>
+🚧 请注意，本中文文档并非实时更新，可能会有和英文版不对应的情况，仅供参考。如有歧义，请一切以<a href="https://github.com/antfu/i18n-ally/blob/master/README.md">英文版</a>文档为主。
+</b></p>
 
 <br>
 
 
-## 🧱 Supported Frameworks
+## 🧱 支持的框架
 
-Frameworks will be auto-detected when one of the dependencies can be found in the project.
+插件会根据当前项目的依赖自动检测框架。
 
-| Framework | Status | Trigger Packages |
+| 框架 | 状态 | 触发的依赖 |
 | --- | --- | --- |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [投票](https://github.com/antfu/i18n-ally/issues/114) |  |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
@@ -45,25 +39,25 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 
 
-If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
+如果您希望插件支持上面未列出的框架，你可以发起一个 [框架支持请求](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) 或者直接PR。（如果可以请尽量使用英文，让更多人可以看到并参与进来，感谢！）
 
 
-<h2 align="center"> ⚡ Features </h2>
+<h2 align="center"> ⚡ 主要功能 </h2>
 
-<h3 align="center"> Inline annotation </h3>
+<h3 align="center"> 内联翻译显示 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/annotation.png?raw=true' width='700px'/>
 </p>
 
-<h3 align="center"> Hover & Direct actions </h3>
+<h3 align="center"> 悬浮窗 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/hover.png?raw=true' width='600px'/>
 </p>
 
 
-<h3 align="center"> Manage all translations in one place </h3>
+<h3 align="center"> 统一管理所有翻译文案 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/progress_report.png?raw=true' width='600px'/>
@@ -78,80 +72,80 @@ If you would like to add support for frameworks not listed above, you can open u
 </p>
 
 
-<h3 align="center"> Translations missing report </h3>
+<h3 align="center"> 一键机器翻译 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/problems.png?raw=true' width='600px'/>
 </p>
 
 
-<h3 align="center"> Multiple formats supported </h3>
+<h3 align="center"> 支持多种文案格式 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' width='500px'/>
 </p>
 
 
-<h3 align="center"> Refactors & Auto translate </h3>
+<h3 align="center"> 重构 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/refactor_translate.png?raw=true' width='500px'/>
 </p>
 
 
-<h3 align="center"> Extract translations from code </h3>
+<h3 align="center"> 从代码中提取文案 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/extract.png?raw=true' width='500px'/>
 </p>
 
-<h3 align="center"> Annonation for JSON and YAML </h3>
+<h3 align="center"> JSON 和 YAML 的内联翻译显示 </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/locale-annotation.png?raw=true' width='700px'/>
 </p>
 
 
-<h3 align="center"> General </h3>
+<h3 align="center"> 整体 </h3>
 
-- Multi-root workspace supported
-- Remote development supported
-- Supports many popular frameworks
-- i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-help-translate-this-extension)
+- 支持多目录工作区
+- 支持远程开发 (Remote Development)
+- 支持大多数流行框架
+- 插件自身多语言支持 [翻译列表](https://github.com/antfu/i18n-ally#-help-translate-this-extension)
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
 
 
-## 📜 Supported Locale Formats
+## 📜 支持的文案格式
 
-| Format | Read | Write | Annonations | Note |
+| 文件格式 | 读 | 写 | 内联显示 | 备注 |
 | --- | --- | --- | --- | --- |
 | JSON | ✅ | ✅ | ✅ | |
-| YAML | ✅ | ✅ | ✅ | *Comments will NOT preserved\** |
-| JSON5 | ✅ | ✅ | ❌ | *Comments will NOT preserved\** |
-| JavaScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
-| TypeScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
+| YAML | ✅ | ✅ | ✅ | *注释不会保留\** |
+| JSON5 | ✅ | ✅ | ❌ | *注释不会保留\** |
+| JavaScript | ✅ | ❌ | ❌ | *强制只读模式* |
+| TypeScript | ✅ | ❌ | ❌ | *强制只读模式* |
 
-*\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on readonly mode by `i18n-ally.readonly` to prevent lossing comments.*
+*\* 受限于 `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) 和 `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **YAML 和 JSON5 的注释在任何写入操作后将会丢失**。如果你希望保留注释，可以可以通过设置 `i18n-ally.readonly` 让插件在只读模式工作。*
 
 
-## 📂 Directory structure
+## 📂 目录结构
 
-You can have locales directory structured like this with zero-configuration
+您可以将语言目录置为一下两种形式
 
 ```
-  locales         # i18n, langs, locale are also acceptable
+  locales
   ├── en.json
   ├── de-DE.json
-  ├── zh-CN.yml   # YAML
-  ├── zh-TW.ts    # You can mix different formats
+  ├── zh-CN.yml   # YAML 格式同样支持
+  ├── zh-TW.ts    # 你也可以混合不同的格式
   ├── ...
   └── <contry-code>.json
 ```
 
-or
+或者
 
 ```
   locales
@@ -171,127 +165,53 @@ or
 ```
 
 
-## ⚙ Common Configurations
+## ⚙ 常用设置
 
-All fields should add prefix "`i18n-ally.`" in the setting.
+下列所有的设置需要加上 "`i18n-ally.`" 前缀
 
-| Field | Default | Description |
+| 字段 | 默认值 | 描述 |
 | --- | --- | --- |
-| `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
-| `displayLanguage` | `en` | Displaying language in annotations and tree views. |
-| `localesPaths` | auto | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
-| `sortedKeys` | `false` | Sorting keys alphabetically on saving |
-| `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}). |
-| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
-| `annotations` | `true` | Enabling inline annotations |
-| `keepFulfilled` | `false` | Always keep all keys fulfilled with empty string |
-| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically. |
+| `sourceLanguage` | `en` | 翻译源语言 |
+| `displayLanguage` | `en` | 显示语言 |
+| `localesPaths` | 自动 | 翻译文件夹路径 (相对于项目根目录)，你也可以使用Glob匹配模式。 |
+| `sortedKeys` | `false` | 保存排序后的JSON/YAML |
+| `keystyle` | 自动 | 翻译路径格式, 可以是 `flat`({"a.b.c": "..."}) 或 `nested`({"a": {"b": {"c": "..."}}}). |
+| `readonly` | `false` | 只读模式 |
+| `annotations` | `true` | 启用内联注释 |
+| `keepFulfilled` | `false` | 始终用空字符串填充所有的键 |
+| `enabledFrameworks` | 自动 | 指定要使用的框架支持。如果未设置任何值，插件将自动检测框架。|
 
 
-## 🔩 Advanced Configurations
+## 🎯 常见问题
+
+### 插件没有作用 (侧边栏没有显示图标)
+
+本插件支持许多不同的框架框架，请确保您正在使用的框架在[支持列表](https://github.com/antfu/i18n-ally#-supported-frameworks)中。
+
+### 我可以看到插件的图标显示在侧边栏，但没有任何的翻译文案
+
+1. **区域设置路径配置缺失**，您可能需要通过下列任一方式手动配置翻译文件路径
+     - 打开**命令面板**（`Ctrl-Shift-P`或`⌘⇧P`），选择 `Vue i18n 助手: 手动设置语言目录` 并按照指南操作。
+     - 打开 VSCode 的设置文件并手动设置 `vue-i18n-ally.localesPaths`。
+2. **源语言/显示语言设置**。 默认语言环境设置为英语（`en`）。 如果您的项目不支持英语，则可能需要通过命令 `Vue i18n 助手: 更改源语言` 进行修改。
+3. 检查你的 **目录结构**
+
+## 👨‍💻 感谢
+
+本插件最初来源于 [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n)，非常感谢 [@think2011](https://github.com/think2011) 的支持和启发。
+
+Vue SFC 的支持来自于 vue-i18n 的作者 [kazupon](https://github.com/kazupon) 的 [kazupon/vue-i18n-locale-message](https://github.com/kazupon/vue-i18n-locale-message)。感谢提供的帮助!
+
+也十分感谢所有这些很棒的[贡献者](https://github.com/antfu/i18n-ally/graphs/contributors)。
 
 
-| Field | Default | Description |
-| --- | --- | --- |
-| `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
+## ☕ 请我喝杯咖啡
 
+我在这个项目里投入了许多心力和时间 ❤
 
-## 🌍 Help translate this extension
+如果您觉得它有用，也许你可以考虑请我喝杯咖啡！
 
-This extension itself supports i18n as well, it will be auto matched to the display language you used in your vscode editor. We have supported following languages.
-
-| Language | Maintainer | Contributors |
-| --- | --- | --- |
-| English    | [@antfu](https://github.com/antfu)          | [@rubjo](https://github.com/rubjo) |
-| Simplified Chinese (简体中文)  | [@antfu](https://github.com/antfu)           |       |
-| Traditional Chinese (繁體中文)  | [@antfu](https://github.com/antfu)           |       |
-| Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
-| Spanish (Español) |  | [@Baltimer](https://github.com/Baltimer) |
-| Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
-
-If you would like to help translate this extension, you can do it by following steps.
-
-1. Fork this repo and clone it to you local machine
-2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
-3. Translate every single message in the new json file you created.
-4. You may also update the table above in README.md
-5. Commit changes and make a PR to this repo
-
-We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode extension development which can help you translate itself 😁.
-
-
-## 🎯 Troubleshooting
-
-### Extension doesn't work/show up (There is no icon in activity bar)
-
-This extension support numerous of frameworks, be sure the framework you are using is in [the list](https://github.com/antfu/i18n-ally#-supported-frameworks).
-
-Besides, `package.json` is relied on detecting which framework you are using. It should be at the root of your project as well.
-
-
-### I can see the icon in activity bar, but nothing show up
-
-1. **Locales path config missing**. `locales` path will be detected automatically at the first time you open a project. If the nothing show up, you may need to configure it manually. There are two ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Goto to the settings of VSCode and set `i18n-ally.localesPaths` manually.
-2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `i18n Ally: Change source language`
-3. Check your **Directory structure**
-
-
-### I am working on a monorepo and the extension can not detect my project
-
-Usually, `i18n ally` looks for your `package.json` file at the root of your project. If you don't have it at the root, you can always specify the framework(s) you are using by `i18n-ally.enabledFrameworks` config.
-
-
-### Advanced folder directory configurations
-
-In some cases, you may use modules, monorepo or other philosophies to organize your locale files.
-
-**For example**, you have following directory structure need to be config.
-
-```
-  packages
-  ├── pkgA
-  |   └── i18n
-  |       ├── en.messages.json
-  |       ├── zh-CN.messages.json
-  |       └── ...
-  ├── pkgB
-  |   └── i18n
-  |       ├── en.messages.json
-  |       ├── zh-CN.messages.json
-  |       └── ...
-  └── ...
-```
-
-You could change your config like this:
-
-```json
-{
-  "i18n-ally.localesPaths": [
-    "packages/**/**/i18n"
-  ],
-  "i18n-ally.filenameMatchRegex": "^([\\w-]*)\\.messages\\.json",
-}
-```
-
-
-## 👨‍💻 Thanks
-
-This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it can't be existed without [@think2011](https://github.com/think2011)'s great work.
-
-Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-locale-message](https://github.com/kazupon/vue-i18n-locale-message), which is created by the author of vue-i18n. Thanks for making this!
-
-And my great thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
-
-
-## ☕ Buy Me Coffee
-
-I made this project with heart ❤
-
-If you found it useful, you may consider by me a cup of coffee!
-
-[Donate via PayPal](https://paypal.me/antfu7), **Cheers!!! 🙌**
+通过 [PayPal](https://paypal.me/antfu7) 或者 [支付宝](https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/alipay.jpg)，**干杯！！！ 🙌**
 
 
 ## 📄 License

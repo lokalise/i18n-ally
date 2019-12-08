@@ -29,6 +29,7 @@
   "config.full_reload_on_changed": "当语言文件被修改时执行完整的重载。（用于.js/.ts动态导入）",
   "config.ignored_locales": "隐藏的语言",
   "config.include_subfolders": "搜索子目录",
+  "config.keep_fulfill": "始终用空字符串填充所有的键",
   "config.keystyle": "翻译路径格式",
   "config.locales_paths": "翻译文件夹路径 (相对于项目根目录)，你也可以使用Glob匹配模式。",
   "config.match_regex": "匹配语言环境文件名的正则表达式字符串（返回结果的第一个组应是语言代码）",
