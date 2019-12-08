@@ -200,10 +200,6 @@
           "when": "config.no_exits"
         },
         {
-          "command": "extension.i18n-ally.fulfill-keys",
-          "when": "config.no_exits"
-        },
-        {
           "command": "extension.i18n-ally.locale-visibility-hide",
           "when": "config.no_exits"
         },
@@ -437,6 +433,11 @@
           "type": "boolean",
           "default": false,
           "description": "%config.readonly%"
+        },
+        "i18n-ally.keepFulfilled": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.keep_fulfill%"
         },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"

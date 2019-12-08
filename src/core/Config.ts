@@ -124,6 +124,10 @@ export class Config {
     return this.getConfig('filenameMatchRegex')
   }
 
+  static get keepFulfilled (): boolean {
+    return this.getConfig<boolean>('keepFulfilled') || false
+  }
+
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {
     if (this.keyStyle !== 'auto')
       return this.keyStyle

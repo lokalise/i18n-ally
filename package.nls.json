@@ -36,6 +36,7 @@
   "config.readonly": "Readonly mode",
   "config.sort_keys": "Save with sorted json/yaml",
   "config.source_language": "Source language for machine translation",
+  "config.keep_fulfill": "Always keep all keys fulfilled with empty string",
   "extname": "i18n Ally",
   "feedback.document": "Read Documentation",
   "feedback.github": "Star on Github",
