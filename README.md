@@ -115,6 +115,7 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 
 If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
 
+
 ## 📜 Supported Locale Formats
 
 | Format | Read | Write | Annonations | Note |
@@ -126,6 +127,7 @@ If you would like to add support for frameworks not listed above, you can open u
 | TypeScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 
 *\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on readonly mode by `i18n-ally.readonly` to prevent lossing comments.*
+
 
 ## 📂 Directory structure
 
@@ -171,16 +173,20 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `displayLanguage` | `en` | Displaying language in annotations and tree views. |
 | `localesPaths` | auto | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
 | `sortedKeys` | `false` | Sorting keys alphabetically on saving |
+| `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}). |
 | `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
 | `annotations` | `true` | Enabling inline annotations |
+| `keepFulfilled` | `false` | Always keep all keys fulfilled with empty string |
+| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically. |
 
 
 ## 🔩 Advanced Configurations
 
+
 | Field | Default | Description |
 | --- | --- | --- |
 | `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
-| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically. |
+
 
 ## 🌍 Help translate this extension
 
@@ -205,9 +211,10 @@ If you would like to help translate this extension, you can do it by following s
 
 We recommend you to use vscode with `i18n-ally`. It supports i18n for vscode extension development which can help you translate itself 😁.
 
+
 ## 🎯 Troubleshooting
 
-### Extension doesn't work/show up. There is no icon in activity bar
+### Extension doesn't work/show up (There is no icon in activity bar)
 
 This extension support numerous of frameworks, be sure the framework you are using is in [the list](https://github.com/antfu/i18n-ally#-supported-frameworks).
 
@@ -223,7 +230,12 @@ Besides, `package.json` is relied on detecting which framework you are using. It
 3. Check your **Directory structure**
 
 
-### 🗂 Advanced folder directory configurations
+### I am working on a monorepo and the extension can not detect my project
+
+Usually, `i18n ally` looks for your `package.json` file at the root of your project. If you don't have it at the root, you can always specify the framework(s) you are using by `i18n-ally.enabledFrameworks` config.
+
+
+### Advanced folder directory configurations
 
 In some cases, you may use modules, monorepo or other philosophies to organize your locale files.
 
@@ -255,6 +267,7 @@ You could change your config like this:
 }
 ```
 
+
 ## 👨‍💻 Thanks
 
 This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it can't be existed without [@think2011](https://github.com/think2011)'s great work.
@@ -263,8 +276,16 @@ Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-loca
 
 And my great thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
 
-## License
 
-[MIT License](https://github.com/antfu/i18n-ally/blob/master/LICENSE) © 2019 [Anthony Fu](https://github.com/antfu)
+## ☕ Buy Me Coffee
 
-MIT License © 2018-2019 [think2011](https://github.com/think2011)
+I made this project with heart ❤
+
+If you found it useful, you may consider by me a cup of coffee!
+
+[Donate via PayPal](https://paypal.me/antfu7), **Cheers!!! 🙌**
+
+
+## 📄 License
+
+[MIT License](https://github.com/antfu/i18n-ally/blob/master/LICENSE) © 2019-2020 [Anthony Fu](https://github.com/antfu)
