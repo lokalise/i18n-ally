@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/antfu/i18n-ally/compare/v1.4.0...v1.4.1) (2019-12-08)
+
+
+### 📚 Documentations
+
+* add png icons ([1cc0f82](https://github.com/antfu/i18n-ally/commit/1cc0f82fa8ab55931c73fa5912d3db25240b4b4d))
+* add zh-cn readme ([3d60dc0](https://github.com/antfu/i18n-ally/commit/3d60dc008c1f9e5d63797ef77ec5aed3c9b73110))
+* fix svg link ([5ea4b0b](https://github.com/antfu/i18n-ally/commit/5ea4b0b97c55d8865cb3d50ad69e9e88e4785771))
+
 ## [1.4.0](https://github.com/antfu/i18n-ally/compare/v1.3.6...v1.4.0) (2019-12-08)
 
 
