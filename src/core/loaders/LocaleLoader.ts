@@ -192,8 +192,6 @@ export class LocaleLoader extends Loader {
 
     let match: RegExpExecArray | null = null
     for (const reg of regs) {
-      console.log(reg.source)
-      console.log(info.base)
       match = reg.exec(info.base)
       if (match && match.length > 0)
         break

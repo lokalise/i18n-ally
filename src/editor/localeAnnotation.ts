@@ -22,8 +22,8 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
     // Enable only for locale files
     const filepath = document.uri.fsPath
-    const file = loader.files.find(f => f.filepath === filepath)
-    if (!file)
+    const fileInfo = loader.files.find(f => f.filepath === filepath)
+    if (!fileInfo)
       return
 
     // find matched parser
@@ -35,7 +35,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
     const annotations: DecorationOptions[] = []
     const color = 'rgba(153, 153, 153, .7)'
     let displayLanguage = Config.displayLanguage
-    if (displayLanguage === file.locale) {
+    if (displayLanguage === fileInfo.locale) {
       displayLanguage = Config.sourceLanguage
       if (Config.sourceLanguage === Config.displayLanguage)
         displayLanguage = ''
@@ -43,10 +43,14 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
     const maxLength = Config.annotationMaxLength
     const keys = parser.annotationGetKeys(document)
+    const namespace = fileInfo.namespace
+
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
       if (Config.annotations) {
         let text = ''
+        if (namespace)
+          key = `${namespace}.${key}`
 
         if (Config.annotations && displayLanguage) {
           const node = loader.getTreeNodeByKey(key)

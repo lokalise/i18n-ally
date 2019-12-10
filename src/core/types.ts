@@ -85,7 +85,7 @@ abstract class BaseNode implements INode {
     if (!this.namespace)
       return this.keypath
 
-    return this.keypath.slice(this.namespace.length)
+    return this.keypath.slice(this.namespace.length + 1)
   }
 }
 

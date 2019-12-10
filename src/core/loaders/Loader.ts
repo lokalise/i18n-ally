@@ -67,10 +67,10 @@ export abstract class Loader extends Disposable {
 
   protected updateTree (tree: LocaleTree | undefined, data: any, keypath: string, keyname: string, options: NodeOptions, isCollection = false) {
     tree = tree || new LocaleTree({
+      ...options,
       keypath,
       keyname,
       isCollection,
-      ...options,
     })
     tree.values[options.locale] = data
     for (const [key, value] of Object.entries(data)) {
@@ -106,9 +106,9 @@ export abstract class Loader extends Disposable {
       // init node
       if (!node) {
         node = new LocaleNode({
+          ...options,
           keypath: newKeyPath,
           keyname: key,
-          ...options,
         })
         tree.setChild(key, node)
         this._flattenLocaleTree[node.keypath] = node
@@ -117,10 +117,10 @@ export abstract class Loader extends Disposable {
       // add locales to exitsing node
       if (node && node.type === 'node') {
         node.locales[options.locale] = new LocaleRecord({
+          ...options,
           keypath: newKeyPath,
           keyname: key,
           value: `${value}`,
-          ...options,
         })
       }
     }

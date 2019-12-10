@@ -20,7 +20,7 @@ export class ComposedLoader extends Loader {
   _isFlattenLocaleTreeDirty = true
 
   get files () {
-    return _.flatten(this._loaders.map(l => l.files))
+    return this._loaders.flatMap(l => l.files)
   }
 
   get loaders () {
