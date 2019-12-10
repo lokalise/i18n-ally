@@ -13,6 +13,8 @@ export enum Commands {
   open_key = 'extension.i18n-ally.open-key',
   delete_key = 'extension.i18n-ally.delete-key',
   rename_key = 'extension.i18n-ally.rename-key',
+  new_key = 'extension.i18n-ally.new-key',
+  duplicate_key = 'extension.i18n-ally.duplicate-key',
   fulfill_keys = 'extension.i18n-ally.fulfill-keys',
   locale_visibility_toggle = 'extension.i18n-ally.locale-visibility-toggle',
   locale_visibility_show = 'extension.i18n-ally.locale-visibility-show',

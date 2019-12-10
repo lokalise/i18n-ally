@@ -4,6 +4,6 @@ export enum ViewIds {
   tree = 'i18n-ally-locales-tree',
   feedback = 'i18n-ally-help-feedback',
   usage = 'i18n-ally-locales-usage',
-  file = 'i18n-ally-locales-tree-file',
-  file_in_explorer = 'i18n-ally-locales-tree-file-explorer',
+  file = 'i18n-ally-locales-sidebar-file',
+  file_in_explorer = 'i18n-ally-locales-file-explorer',
 }

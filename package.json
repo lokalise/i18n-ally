@@ -159,6 +159,20 @@
           "light": "./res/light/eye-off.svg",
           "dark": "./res/dark/eye-off.svg"
         }
+      },
+      {
+        "command": "extension.i18n-ally.new-key",
+        "category": "%extname%",
+        "title": "%command.new-key%",
+        "icon": {
+          "light": "./res/light/plus.svg",
+          "dark": "./res/dark/plus.svg"
+        }
+      },
+      {
+        "command": "extension.i18n-ally.duplicate-key",
+        "category": "%extname%",
+        "title": "%command.duplicate-key%"
       }
     ],
     "menus": {
@@ -251,6 +265,10 @@
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/"
         },
         {
+          "command": "extension.i18n-ally.duplicate-key",
+          "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/"
+        },
+        {
           "command": "extension.i18n-ally.locale-visibility-show",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /show/",
           "group": "inline@4"
@@ -266,6 +284,11 @@
           "command": "extension.i18n-ally.refresh-usage",
           "group": "navigation",
           "when": "view =~ /i18n-ally-locales-usage/"
+        },
+        {
+          "command": "extension.i18n-ally.new-key",
+          "group": "navigation",
+          "when": "view =~ /i18n-ally-locales-tree/"
         }
       ]
     },
@@ -281,14 +304,14 @@
     "views": {
       "explorer": [
         {
-          "id": "i18n-ally-locales-tree-file-explorer",
+          "id": "i18n-ally-locales-file-explorer",
           "name": "%view.i18n_keys%",
           "when": "i18n-ally-enabled && i18n-ally-supported-file"
         }
       ],
       "i18n-ally": [
         {
-          "id": "i18n-ally-locales-tree-file",
+          "id": "i18n-ally-locales-sidebar-file",
           "name": "%view.current_file%",
           "when": "i18n-ally-enabled && i18n-ally-supported-file"
         },

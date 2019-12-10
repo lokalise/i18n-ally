@@ -9,5 +9,12 @@
       }
     }
   },
-  "intro": "Brings a better translating experience"
+  "intro": "Brings a better translating experience",
+  "hi": "Hi",
+  "yes": {
+    "no": {
+      "and": "good"
+    }
+  },
+  "yad": "asd"
 }

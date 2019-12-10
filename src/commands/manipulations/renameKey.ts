@@ -3,6 +3,8 @@ import { LocaleTreeItem } from '../../views'
 import { Node, CurrentFile, Global } from '../../core'
 import i18n from '../../i18n'
 import { Log } from '../../utils'
+import { overrideConfirm } from '../overrideConfirm'
+import { keypathValidate } from '../keypathValidate'
 
 export async function RenameKey (item?: LocaleTreeItem | string) {
   if (!item)
@@ -26,6 +28,12 @@ export async function RenameKey (item?: LocaleTreeItem | string) {
     })
 
     if (!newkeypath)
+      return
+
+    if (!keypathValidate(newkeypath))
+      return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
+
+    if (await overrideConfirm(newkeypath) !== 'override')
       return
 
     const edit = await Global.loader.renameKey(oldkeypath, newkeypath) // TODO:sfc

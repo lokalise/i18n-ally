@@ -5,6 +5,8 @@ import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
 import { ExtractTextOptions, Global, Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
+import { overrideConfirm } from './overrideConfirm'
+import { keypathValidate } from './keypathValidate'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
@@ -23,34 +25,17 @@ const m: ExtensionModule = () => {
         return
       }
 
-      // keypath existence check
-      const node = CurrentFile.loader.getNodeByKey(keypath)
-      let willSkip = false
-      if (node) {
-        const Override = i18n.t('prompt.button_override')
-        const Skip = i18n.t('prompt.button_skip')
-        const Reenter = i18n.t('prompt.button_reenter')
-        const result = await window.showInformationMessage(
-          i18n.t('prompt.key_already_exists'),
-          { modal: true },
-          Override,
-          Skip,
-          Reenter,
-        )
+      if (!keypathValidate(keypath))
+        return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
 
-        // canceled
-        if (!result) {
-          return
-        }
-        else if (result === Reenter) {
-          commands.executeCommand(Commands.extract_text, options)
-          return
-        }
-        else if (result === Skip) {
-          willSkip = true
-        }
-        // else override
+      const shouldOverride = await overrideConfirm(keypath, true, true)
+
+      if (shouldOverride === 'retry') {
+        commands.executeCommand(Commands.extract_text, options)
+        return
       }
+      if (shouldOverride === 'canceled')
+        return
 
       const value = trim(text, '\'"')
 
@@ -76,7 +61,7 @@ const m: ExtensionModule = () => {
         editBuilder.replace(range, replacer)
       })
 
-      if (willSkip)
+      if (shouldOverride === 'skip')
         return
 
       // save key
