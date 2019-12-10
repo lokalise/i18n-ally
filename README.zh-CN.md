@@ -207,9 +207,7 @@ Vue SFC 的支持来自于 vue-i18n 的作者 [kazupon](https://github.com/kazup
 
 ## ☕ 请我喝杯咖啡
 
-我在这个项目里投入了许多心力和时间 ❤
-
-如果您觉得它有用，也许你可以考虑请我喝杯咖啡！
+我在这个项目里投入了许多精力和时间，如果您觉得它有用，你也可以考虑请我喝杯咖啡！
 
 通过 [PayPal](https://paypal.me/antfu7) 或者 [支付宝](https://github.com/antfu/vue-i18n-ally/blob/master/screenshots/alipay.jpg)，**干杯！！！ 🙌**
 

@@ -177,23 +177,25 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 
 | Field | Default | Description |
 | --- | --- | --- |
-| `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating. |
-| `displayLanguage` | `en` | Displaying language in annotations and tree views. |
-| `localesPaths` | auto | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable. |
+| `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating |
+| `displayLanguage` | `en` | Displaying language in annotations and tree views |
+| `localesPaths` | auto | Locales directory path, relative to root of the project. Can also be an array of paths. Glob patterns are acceptable |
 | `sortedKeys` | `false` | Sorting keys alphabetically on saving |
-| `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}). |
-| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled. |
+| `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}) |
+| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
 | `annotations` | `true` | Enabling inline annotations |
 | `keepFulfilled` | `false` | Always keep all keys fulfilled with empty string |
-| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically. |
+| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically |
+| `indent` | 2 | Indentation size for your locale files |
+| `tabStyle` | `space` | Tab style for your locale files |
 
 
-## 🔩 Advanced Configurations
+### 🔩 Advanced Configurations
 
 
 | Field | Default | Description |
 | --- | --- | --- |
-| `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code. |
+| `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code |
 
 
 ## 🌍 Help translate this extension
