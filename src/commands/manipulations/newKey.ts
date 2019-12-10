@@ -1,5 +1,5 @@
-import { window, commands } from 'vscode'
-import { CurrentFile, Config, Commands } from '../../core'
+import { window } from 'vscode'
+import { CurrentFile, Config } from '../../core'
 import i18n from '../../i18n'
 import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
@@ -15,13 +15,15 @@ export async function NewKey (keypath?: string) {
     if (!keypath)
       return
 
-    if (!keypathValidate(keypath))
-      return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
+    if (!keypathValidate(keypath)) {
+      window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
+      await NewKey(keypath)
+    }
 
     const shouldOverride = await overrideConfirm(keypath, false, true)
 
     if (shouldOverride === 'retry') {
-      commands.executeCommand(Commands.new_key, keypath)
+      await NewKey(keypath)
       return
     }
 

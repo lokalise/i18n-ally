@@ -1,7 +1,7 @@
 import { commands } from 'vscode'
 import { Commands } from '../core'
 import { ExtensionModule } from '../modules'
-import { TranslateKeys, OpenKey, CopyKey, RenameKey, DeleteKey, NewKey, FulfillKeys } from './manipulations'
+import { TranslateKeys, OpenKey, CopyKey, RenameKey, DeleteKey, NewKey, FulfillKeys, DuplicateKey } from './manipulations'
 
 const m: ExtensionModule = () => {
   return [
@@ -13,6 +13,7 @@ const m: ExtensionModule = () => {
     commands.registerCommand(Commands.delete_key, DeleteKey),
     commands.registerCommand(Commands.fulfill_keys, FulfillKeys),
     commands.registerCommand(Commands.new_key, NewKey),
+    commands.registerCommand(Commands.duplicate_key, DuplicateKey),
   ]
 }
 

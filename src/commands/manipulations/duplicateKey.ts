@@ -1,12 +1,12 @@
-import { window, workspace } from 'vscode'
+import { window } from 'vscode'
 import { LocaleTreeItem } from '../../views'
-import { Node, CurrentFile, Global } from '../../core'
+import { Node, CurrentFile, PendingWrite } from '../../core'
 import i18n from '../../i18n'
 import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
 
-export async function RenameKey (item?: LocaleTreeItem | string) {
+export async function DuplicateKey (item?: LocaleTreeItem | string) {
   if (!item)
     return
 
@@ -17,7 +17,7 @@ export async function RenameKey (item?: LocaleTreeItem | string) {
   else
     node = item.node
 
-  if (!node)
+  if (!node || node.type !== 'node')
     return
 
   try {
@@ -30,17 +30,26 @@ export async function RenameKey (item?: LocaleTreeItem | string) {
     if (!newkeypath)
       return
 
-    if (!keypathValidate(newkeypath)){
+    if (!keypathValidate(newkeypath)) {
       window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
-      await RenameKey(item)
+      await DuplicateKey(item)
       return
     }
 
     if (await overrideConfirm(newkeypath) !== 'override')
       return
 
-    const edit = await Global.loader.renameKey(oldkeypath, newkeypath) // TODO:sfc
-    await workspace.applyEdit(edit)
+    const writes: PendingWrite[] = Object.values(node.locales)
+      .map(v=>{
+        return ({
+          value: v.value,
+          keypath: newkeypath,
+          filepath: v.filepath,
+          locale: v.locale,
+        })
+      })
+
+    await CurrentFile.loader.write(writes)
   }
   catch (err) {
     Log.error(err)

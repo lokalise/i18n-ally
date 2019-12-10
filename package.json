@@ -163,7 +163,7 @@
       {
         "command": "extension.i18n-ally.new-key",
         "category": "%extname%",
-        "title": "%command.new-key%",
+        "title": "%command.new_key%",
         "icon": {
           "light": "./res/light/plus.svg",
           "dark": "./res/dark/plus.svg"
@@ -172,7 +172,7 @@
       {
         "command": "extension.i18n-ally.duplicate-key",
         "category": "%extname%",
-        "title": "%command.duplicate-key%"
+        "title": "%command.duplicate_key%"
       }
     ],
     "menus": {
@@ -257,16 +257,19 @@
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /notsource/"
         },
         {
-          "command": "extension.i18n-ally.delete-key",
-          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/"
-        },
-        {
           "command": "extension.i18n-ally.rename-key",
-          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/"
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
+          "group": "i18nally@1"
         },
         {
           "command": "extension.i18n-ally.duplicate-key",
-          "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/"
+          "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/",
+          "group": "i18nally@2"
+        },
+        {
+          "command": "extension.i18n-ally.delete-key",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
+          "group": "i18nally@3"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-show",
