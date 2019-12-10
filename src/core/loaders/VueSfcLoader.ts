@@ -1,6 +1,6 @@
 import { workspace, Uri, TextDocument, WorkspaceEdit, Range } from 'vscode'
 import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
-import { Log, applyPendingToObject, File } from '../../utils'
+import { Log, applyPendingToObject, File, unflattenObject } from '../../utils'
 import { LocaleTree, PendingWrite, NodeOptions } from '../types'
 import { Loader } from './Loader'
 import { Global } from '..'
@@ -66,7 +66,8 @@ export class VueSfcLoader extends Loader {
     for (const [index, section] of this._parsedSections.entries()) {
       if (!section.messages)
         continue
-      for (const [locale, value] of Object.entries(section.messages)) {
+      const messages = unflattenObject(section.messages)
+      for (const [locale, value] of Object.entries(messages)) {
         this._locales.add(locale)
         this.updateTree(tree, value, '', '', this.getOptions(section, locale, index))
       }

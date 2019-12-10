@@ -80,6 +80,13 @@ abstract class BaseNode implements INode {
     this.namespace = data.namespace
     this.meta = data.meta
   }
+
+  get relativeKeyPath () {
+    if (!this.namespace)
+      return this.keypath
+
+    return this.keypath.slice(this.namespace.length)
+  }
 }
 
 export class LocaleRecord extends BaseNode implements ILocaleRecord {
@@ -209,6 +216,7 @@ export interface KeyUsage {
 export interface UsageReport {
   active: KeyUsage[]
   idle: KeyUsage[]
+  missing: KeyUsage[]
 }
 
 export type Node = LocaleNode | LocaleRecord | LocaleTree

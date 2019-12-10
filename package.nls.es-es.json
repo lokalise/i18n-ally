@@ -87,5 +87,6 @@
   "view.progress_submenu.empty_keys": "Vacío",
   "view.progress_submenu.missing_keys": "Falta",
   "view.progress_submenu.translated_keys": "Traducido",
-  "view.tree": "Árbol"
+  "view.tree": "Árbol",
+  "view.usage": "Informe de uso"
 }

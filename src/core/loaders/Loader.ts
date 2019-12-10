@@ -70,9 +70,7 @@ export abstract class Loader extends Disposable {
       keypath,
       keyname,
       isCollection,
-      namespace: options.namespace,
-      features: options.features,
-      meta: options.meta,
+      ...options,
     })
     tree.values[options.locale] = data
     for (const [key, value] of Object.entries(data)) {
@@ -110,9 +108,7 @@ export abstract class Loader extends Disposable {
         node = new LocaleNode({
           keypath: newKeyPath,
           keyname: key,
-          readonly: options.readonly,
-          features: options.features,
-          meta: options.meta,
+          ...options,
         })
         tree.setChild(key, node)
         this._flattenLocaleTree[node.keypath] = node
@@ -124,11 +120,7 @@ export abstract class Loader extends Disposable {
           keypath: newKeyPath,
           keyname: key,
           value: `${value}`,
-          locale: options.locale,
-          filepath: options.filepath,
-          features: options.features,
-          meta: options.meta,
-          readonly: options.readonly,
+          ...options,
         })
       }
     }

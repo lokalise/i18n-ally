@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq } from 'lodash'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
+import { unflattenObject, replaceLocalePath, normalizeLocale, Log, applyPendingToObject } from '../../utils'
 import i18n from '../../i18n'
 import { LocaleTree, ParsedFile, LocaleRecord, PendingWrite, DirStructure } from '../types'
 import { AllyError, ErrorType } from '../Errors'
@@ -245,7 +245,9 @@ export class LocaleLoader extends Loader {
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
-      const value = await parser.load(filepath)
+      const data = await parser.load(filepath)
+      const value = unflattenObject(data)
+
       this._files[filepath] = {
         filepath,
         locale,
@@ -321,7 +323,7 @@ export class LocaleLoader extends Loader {
     this._disposables.push(watcher)
   }
 
-  get usingNamespace(){
+  get usingNamespace () {
     return Global.usingNamespace && this.dirStructure === 'dir'
   }
 
@@ -404,20 +406,19 @@ export class LocaleLoader extends Loader {
     }
     this.dirStructure = dirStructure
     Log.info(`📂 Loading as "${dirStructure}" structure`)
-    if (this.usingNamespace) {
-      Log.info(`🗄 Namespace support enabled`)
-    }
+    if (this.usingNamespace)
+      Log.info('🗄 Namespace support enabled')
 
     for (const dirname of paths) {
       try {
         const dirpath = path.resolve(this.rootpath, dirname)
         Log.info(`\n📂 Loading locales under ${dirpath}`)
+
         const localeFiles = await fg('**/**/*.*', {
           cwd: dirpath,
           onlyFiles: true,
         })
-        Log.info(JSON.stringify(localeFiles))
-        // await this.loadDirectory(dirpath)
+
         for (const filepath of localeFiles)
           await this.loadFile(path.join(this.rootpath, dirname), filepath)
 

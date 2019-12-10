@@ -1,14 +1,13 @@
 import { Framework } from '../base'
 import { LanguageId } from '../../utils'
 
-class ReactFramework extends Framework {
-  id= 'react'
-  display= 'React'
+class EmberFramework extends Framework {
+  id = 'ember'
+  display= 'ember'
 
   detection= {
     packageJSON: [
-      'react-i18next',
-      'react-intl',
+      'ember-intl',
     ],
   }
 
@@ -21,16 +20,16 @@ class ReactFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /[^\w\d](?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\(\s*)['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
+    /(?:{{\s*t\s+|[^\w\d]intl\.t\(\s*)['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
   refactorTemplates (keypath: string) {
     return [
-      `{t('${keypath}')}`,
-      `t('${keypath}')`,
+      `{{ t '${keypath}' }}`,
+      `this.intl.t('${keypath}')`,
       keypath,
     ]
   }
 }
 
-export default ReactFramework
+export default EmberFramework

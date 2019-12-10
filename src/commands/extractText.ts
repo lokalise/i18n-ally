@@ -24,7 +24,7 @@ const m: ExtensionModule = () => {
       }
 
       // keypath existence check
-      const node = Global.loader.getNodeByKey(keypath)
+      const node = CurrentFile.loader.getNodeByKey(keypath)
       let willSkip = false
       if (node) {
         const Override = i18n.t('prompt.button_override')

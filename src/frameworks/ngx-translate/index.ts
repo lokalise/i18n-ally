@@ -14,12 +14,13 @@ class NgxTranslateFramework extends Framework {
   languageIds: LanguageId[] = [
     'javascript',
     'typescript',
+    'html',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg= [
-    /{{\s?[`'"]([[\w\d\. \-\[\]]*?)[`'"]\s*\|\s*translate/g,
-    /translate\.get\(['"`]([[\w\d\. \-\[\]]*?)['"`]/g,
+    /{{\s?[`'"]([[\w\d\. \-\[\]]*?)[`'"]\s*\|\s*translate/gm,
+    /translate\.get\(\s*['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
   refactorTemplates (keypath: string, languageId: string) {

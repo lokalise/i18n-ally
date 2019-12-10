@@ -26,18 +26,20 @@ export async function FulfillMissingKeysForProgress (item: ProgressSubmenuItem) 
     keypath: key,
   }))
 
-  await CurrentFile.loader.write(pendings)
+  await CurrentFile.loader.write(pendings, false)
 }
 
-export async function FulfillAllMissingKeys () {
-  const Yes = i18n.t('prompt.button_yes')
-  const result = await window.showWarningMessage(
-    i18n.t('prompt.fullfill_missing_all_confirm'),
-    { modal: true },
-    Yes,
-  )
-  if (result !== Yes)
-    return
+export async function FulfillAllMissingKeys (prompt = true) {
+  if (prompt) {
+    const Yes = i18n.t('prompt.button_yes')
+    const result = await window.showWarningMessage(
+      i18n.t('prompt.fullfill_missing_all_confirm'),
+      { modal: true },
+      Yes,
+    )
+    if (result !== Yes)
+      return
+  }
 
   let pendings: PendingWrite[] = []
   const loader = CurrentFile.loader
@@ -53,7 +55,7 @@ export async function FulfillAllMissingKeys () {
       keypath: key,
     })))
   }
-  await CurrentFile.loader.write(pendings)
+  await CurrentFile.loader.write(pendings, false)
 }
 
 export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {

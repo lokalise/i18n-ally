@@ -134,11 +134,17 @@ export class Analyst {
       .entries()
       .map(([keypath, occurrences]) => ({ keypath, occurrences }))
       .value()
-    const activeKeys = uniq(usages.map(i => i.keypath))
-    const idleKeys = CurrentFile.loader.keys.filter(i => !activeKeys.includes(i)).map(i => ({ keypath: i, occurrences: [] }))
+    const usingKeys = uniq(usages.map(i => i.keypath))
+    const activeKeys = usingKeys.filter(i => !!CurrentFile.loader.getNodeByKey(i, false))
+    const missingKeys = usingKeys.filter(i => !activeKeys.includes(i))
+
+    const idleKeys = CurrentFile.loader.keys.filter(i => !usingKeys.includes(i))
+    const idleUsages = idleKeys.map(i => ({ keypath: i, occurrences: [] }))
+
     const report = {
-      active: usages,
-      idle: idleKeys,
+      active: usages.filter(i => activeKeys.includes(i.keypath)),
+      missing: usages.filter(i => missingKeys.includes(i.keypath)),
+      idle: idleUsages,
     }
     this._onDidUsageReportChanged.fire(report)
     return report

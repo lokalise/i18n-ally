@@ -1,5 +1,6 @@
 import { TextDocument, Position, Range } from 'vscode'
 import { KeyInDocument } from '../core'
+import { regexFindKeys } from '../utils'
 import { Global } from './Global'
 
 export class KeyDetector {
@@ -51,14 +52,13 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (document: TextDocument | string): KeyInDocument[] {
-    let regs = []
+  static getKeys (document: TextDocument | string, regs?: RegExp[]): KeyInDocument[] {
     let text = ''
 
     let namespaces: string[] = []
 
     if (typeof document !== 'string') {
-      regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+      regs = regs ?? Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
       text = document.getText()
 
       if (Global.usingNamespace)
@@ -69,28 +69,6 @@ export class KeyDetector {
       text = document
     }
 
-    const namespace = namespaces[0] // TODO: enumerate multiple namespaces
-
-    const keys = []
-    for (const reg of regs) {
-      let match = null
-      // eslint-disable-next-line no-cond-assign
-      while (match = reg.exec(text)) {
-        const matchString = match[0]
-        const key = match[1]
-        const start = match.index + matchString.indexOf(key)
-        const end = start + key.length
-        const keypath = namespace && !key.includes(':')
-          ? `${namespace}.${key}`
-          : key
-
-        keys.push({
-          key: keypath,
-          start,
-          end,
-        })
-      }
-    }
-    return keys
+    return regexFindKeys(text, regs, namespaces)
   }
 }

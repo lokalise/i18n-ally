@@ -2,6 +2,83 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/antfu/i18n-ally/compare/v1.4.0...v1.4.1) (2019-12-08)
+
+
+### 📚 Documentations
+
+* add png icons ([1cc0f82](https://github.com/antfu/i18n-ally/commit/1cc0f82fa8ab55931c73fa5912d3db25240b4b4d))
+* add zh-cn readme ([3d60dc0](https://github.com/antfu/i18n-ally/commit/3d60dc008c1f9e5d63797ef77ec5aed3c9b73110))
+* fix svg link ([5ea4b0b](https://github.com/antfu/i18n-ally/commit/5ea4b0b97c55d8865cb3d50ad69e9e88e4785771))
+
+## [1.4.0](https://github.com/antfu/i18n-ally/compare/v1.3.6...v1.4.0) (2019-12-08)
+
+
+### ⚡ Features
+
+* new config "keepFulfilled" ([7780ede](https://github.com/antfu/i18n-ally/commit/7780ede17682d90a7663956b54106cbf886afabe))
+* **framework:** support for ember.js, close [#135](https://github.com/antfu/i18n-ally/issues/135) ([3f91f07](https://github.com/antfu/i18n-ally/commit/3f91f0747f558794c53f65204c1f31d7ddeae5a9))
+
+
+### 📚 Documentations
+
+* add badge ([07cb6e7](https://github.com/antfu/i18n-ally/commit/07cb6e71410c4a6cd3fdbe070c33ea53ee4962de))
+* add icons for frameworks ([0ebee3a](https://github.com/antfu/i18n-ally/commit/0ebee3ab93581eb6daa8077e23c78805a64a04fa))
+* update icons ([debf607](https://github.com/antfu/i18n-ally/commit/debf6075ea17bee783f8bffba9f7b6d1e0cc938d))
+* update readme ([c4b1c3e](https://github.com/antfu/i18n-ally/commit/c4b1c3ed5c0acb46faaa04acd17262afed4dd5b9))
+* update readme ([f260e3a](https://github.com/antfu/i18n-ally/commit/f260e3a79c791223700f087b35eaa290273aefdc))
+
+### [1.3.6](https://github.com/antfu/i18n-ally/compare/v1.3.5...v1.3.6) (2019-12-07)
+
+
+### 🌍 Internationalization
+
+* translations for zh-cn, zh-tw ([fe3743d](https://github.com/antfu/i18n-ally/commit/fe3743d3176ef0c656105f4b6f4866d57add7649))
+
+
+### ⚡ Features
+
+* improved usage report ([6c51981](https://github.com/antfu/i18n-ally/commit/6c51981fe049cb5dd87aa347ddf0dd5573b84cd5))
+
+### [1.3.5](https://github.com/antfu/i18n-ally/compare/v1.3.4...v1.3.5) (2019-12-07)
+
+
+### 🐞 Bug Fixes
+
+* make tree view nested for flatten messages, [#133](https://github.com/antfu/i18n-ally/issues/133) ([13f958e](https://github.com/antfu/i18n-ally/commit/13f958ed5208f99c907202cf243331da78f1db37))
+
+
+### 🔮 Refactor
+
+* tests utils ([7228299](https://github.com/antfu/i18n-ally/commit/7228299becb03cf442a9ad859dd61b79749f7e2f))
+
+
+### ⚗ Tests
+
+* add bearbone test ([58533e3](https://github.com/antfu/i18n-ally/commit/58533e376c81c55e9b3ff3ea0d97ff67ad45badb))
+* add test ([293f778](https://github.com/antfu/i18n-ally/commit/293f7789b2980b39eaaba2acf3236d5911e7c0ba))
+
+### [1.3.4](https://github.com/antfu/i18n-ally/compare/v1.3.3...v1.3.4) (2019-12-05)
+
+
+### 🐞 Bug Fixes
+
+* support multilines key detection, [#132](https://github.com/antfu/i18n-ally/issues/132) ([6770c13](https://github.com/antfu/i18n-ally/commit/6770c1305c2f7c57ad3c924e60ec291d28d6924d))
+
+### [1.3.3](https://github.com/antfu/i18n-ally/compare/v1.3.2...v1.3.3) (2019-12-01)
+
+
+### 🐞 Bug Fixes
+
+* **ngx-translate:** annonation for html ([dcb4898](https://github.com/antfu/i18n-ally/commit/dcb48985a40af41a436c6684b35271ce9ab4228f))
+
+### [1.3.2](https://github.com/antfu/i18n-ally/compare/v1.3.1...v1.3.2) (2019-11-30)
+
+
+### 🐞 Bug Fixes
+
+* repo address ([b2347b3](https://github.com/antfu/i18n-ally/commit/b2347b3259c62eb1a41d56b178e92f7d1125eed3))
+
 ### [1.3.1](https://github.com/antfu/vue-i18n-ally/compare/v1.3.0...v1.3.1) (2019-11-29)
 
 

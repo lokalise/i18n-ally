@@ -28,15 +28,26 @@ export class ProblemProvider {
       const keys = KeyDetector.getKeys(document)
       // get all keys of current file
       keys.forEach(({ key, start, end }) => {
-        const text = loader.getValueByKey(key, locale)
-        if (text)
+        const has_translation = !!loader.getValueByKey(key, locale)
+        if (has_translation)
           return
 
-        problems.push({
-          message: i18n.t('misc.missing_translation', locale, key),
-          range: new Range(document.positionAt(start), document.positionAt(end)),
-          severity: DiagnosticSeverity.Information,
-        })
+        const exists = !!loader.getNodeByKey(key)
+
+        if (exists) {
+          problems.push({
+            message: i18n.t('misc.missing_translation', locale, key),
+            range: new Range(document.positionAt(start), document.positionAt(end)),
+            severity: DiagnosticSeverity.Information,
+          })
+        }
+        else {
+          problems.push({
+            message: i18n.t('misc.missing_key', locale, key),
+            range: new Range(document.positionAt(start), document.positionAt(end)),
+            severity: DiagnosticSeverity.Information,
+          })
+        }
       })
 
       this.collection.set(document.uri, problems)

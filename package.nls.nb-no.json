@@ -64,7 +64,7 @@
   "prompt.star_on_github": "Gi stjerne på Github",
   "prompt.support": "i18n Ally er tilgjengelig gratis. Hvis du synes det er nyttig, vennligst vurder å støtte prosjektet. Takk! ❤",
   "prompt.writing_js": "Skriving til js/ts fil støttes ikke.",
-  "refactor.extract_text": "Ekstraher tekst til vue-i18n-oversettelser",
+  "refactor.extract_text": "Ekstraher tekst til i18n ally",
   "view.current_file": "Denne filen",
   "view.help_feedback": "Hjelp & Tilbakemeldinger",
   "view.i18n_keys": "i18n Nøkler",

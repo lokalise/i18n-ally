@@ -43,7 +43,7 @@ export async function OpenKey (item?: LocaleTreeItem | CommandOptions | Progress
       return
 
     const filepath = record.filepath
-    const keypath = node.keypath
+    const keypath = node.relativeKeyPath
 
     const document = await workspace.openTextDocument(filepath)
     const editor = await window.showTextDocument(document)

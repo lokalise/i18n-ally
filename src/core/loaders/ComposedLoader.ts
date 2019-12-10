@@ -3,6 +3,8 @@ import { Disposable } from 'vscode'
 import { LocaleNode, LocaleTree, FlattenLocaleTree, PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Log } from '../../utils'
+import { Config } from '../Config'
+import { FulfillAllMissingKeys } from '../../commands/manipulations'
 import { Loader } from './Loader'
 
 export class ComposedLoader extends Loader {
@@ -107,7 +109,7 @@ export class ComposedLoader extends Loader {
     this._onDidChange.fire(src || this.name)
   }
 
-  async write (pendings: PendingWrite | PendingWrite[]) {
+  async write (pendings: PendingWrite | PendingWrite[], triggerFullfilled = true) {
     if (!Array.isArray(pendings))
       pendings = [pendings]
     pendings = pendings.filter(i => i)
@@ -132,6 +134,9 @@ export class ComposedLoader extends Loader {
       if (distrubtedPendings[index] && distrubtedPendings[index].length)
         await loader.write(distrubtedPendings[index])
     }))
+
+    if (Config.keepFulfilled && triggerFullfilled)
+      await FulfillAllMissingKeys(false)
   }
 
   // TODO:sfc merge tree nodes
