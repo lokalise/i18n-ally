@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/antfu/i18n-ally/compare/v1.4.2...v1.4.3) (2019-12-10)
+
+
+### 🐞 Bug Fixes
+
+* edit key and keepFulfilled on new key, thanks @JohanBeekers ([e8f5869](https://github.com/antfu/i18n-ally/commit/e8f5869555b2d45fb584466e18c95a1810ac55b8))
+
+
+### 📚 Documentations
+
+* fix typo ([86e4006](https://github.com/antfu/i18n-ally/commit/86e400648e21717a26bc4a7652d22448ab2cb5fb))
+* update readme ([98c1e7e](https://github.com/antfu/i18n-ally/commit/98c1e7e08670df5e481aedde005900153e652644))
+
 ### [1.4.2](https://github.com/antfu/i18n-ally/compare/v1.4.1...v1.4.2) (2019-12-10)
 
 
