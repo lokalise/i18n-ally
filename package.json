@@ -442,6 +442,20 @@
           "default": false,
           "description": "%config.keep_fulfill%"
         },
+        "i18n-ally.indent": {
+          "type": "number",
+          "default": 2,
+          "description": "%config.indent%"
+        },
+        "i18n-ally.tabStyle": {
+          "type": "string",
+          "default": "space",
+          "enum": [
+            "space",
+            "tab"
+          ],
+          "description": "%config.tab_style%"
+        },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"
         },

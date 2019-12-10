@@ -207,6 +207,14 @@ export class Config {
     return this.getConfig<string>('encoding') || 'auto'
   }
 
+  static get indent () {
+    return this.getConfig<number>('indent') ?? 2
+  }
+
+  static get tabStyle () {
+    return this.getConfig<string>('tabStyle') === 'tab' ? '\t' : ' '
+  }
+
   // config
   private static getConfig<T = any> (key: string): T | undefined {
     let config = workspace

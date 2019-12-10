@@ -1,5 +1,5 @@
 import { TextDocument } from 'vscode'
-import { KeyStyle, ParserOptions, KeyInDocument } from '../core'
+import { KeyStyle, ParserOptions, KeyInDocument, Config } from '../core'
 import { File } from '../utils'
 
 export abstract class Parser {
@@ -10,7 +10,14 @@ export abstract class Parser {
   constructor (
     public readonly languageIds: string[],
     public readonly supportedExts: string|RegExp,
-    public options: ParserOptions = { indent: 2, tab: ' ' },
+    public options: ParserOptions = {
+      get indent () {
+        return Config.indent
+      },
+      get tab () {
+        return Config.tabStyle
+      },
+    },
   ) {
     this.supportedExtsRegex = new RegExp(supportedExts)
   }
