@@ -13,6 +13,7 @@ import { Analyst, Global, Config } from '..'
 export class LocaleLoader extends Loader {
   private _files: Record<string, ParsedFile> = {}
   dirStructure: DirStructure = 'file'
+  localePathes: string[] = []
 
   constructor (public readonly rootpath: string) {
     super(`[LOCALE]${rootpath}`)
@@ -282,12 +283,15 @@ export class LocaleLoader extends Loader {
     const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
       if (this._ignoreChanges)
         return
-      filepath = path.resolve(filepath)
-      const { ext, base } = path.parse(filepath)
-      const related = path.relative(rootPath, filepath)
 
+      const { ext } = path.parse(filepath)
       if (!Global.getMatchedParser(ext))
         return
+      const dirpath = this.localePathes.find(i => filepath.startsWith(i))
+      if (!dirpath)
+        return
+
+      const related = path.relative(dirpath, filepath)
 
       Log.info(`🐱‍🚀 Update detected <${type}> ${filepath} [${related}]`)
 
@@ -306,10 +310,7 @@ export class LocaleLoader extends Loader {
 
         case 'change':
         case 'create':
-          if (related !== base)
-            await this.loadFile(filepath)
-          else
-            await this.loadFile(filepath)
+          await this.loadFile(dirpath, related)
           this.update()
           break
       }
@@ -374,10 +375,10 @@ export class LocaleLoader extends Loader {
 
   private async loadAll (watch = true) {
     this._files = {}
-    let paths: string[] = []
+    let dirnames: string[] = []
     if (this.localesPaths.length > 0) {
       try {
-        paths = await fg(this.localesPaths, {
+        dirnames = await fg(this.localesPaths, {
           cwd: this.rootpath,
           onlyDirectories: true,
         })
@@ -386,13 +387,14 @@ export class LocaleLoader extends Loader {
         Log.error(e)
       }
     }
-    if (paths.length === 0)
+    if (dirnames.length === 0)
       Log.info('\n⚠ No locales paths.')
 
+    this.localePathes = dirnames.map(name => path.resolve(this.rootpath, name))
+
     let dirStructure: DirStructure = 'file'
-    for (const dirname of paths) {
+    for (const dirpath of this.localePathes) {
       try {
-        const dirpath = path.resolve(this.rootpath, dirname)
         const files = await fs.readdir(dirpath)
         dirStructure = await this.detectDirStructure(dirpath, files)
         if (dirStructure === 'dir')
@@ -407,7 +409,7 @@ export class LocaleLoader extends Loader {
     if (this.usingNamespace)
       Log.info('🗄 Namespace support enabled')
 
-    for (const dirname of paths) {
+    for (const dirname of dirnames) {
       try {
         const dirpath = path.resolve(this.rootpath, dirname)
         Log.info(`\n📂 Loading locales under ${dirpath}`)
@@ -421,7 +423,7 @@ export class LocaleLoader extends Loader {
           await this.loadFile(path.join(this.rootpath, dirname), filepath)
 
         if (watch)
-          this.watchOn(dirname)
+          this.watchOn(dirpath)
       }
       catch (e) {
         Log.error(e)
