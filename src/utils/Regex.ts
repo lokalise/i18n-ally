@@ -11,9 +11,14 @@ export function regexFindKeys (text: string, regs: RegExp[], namespaces: string[
       const key = match[1]
       const start = match.index + matchString.indexOf(key)
       const end = start + key.length
-      const keypath = namespace && !key.includes(':')
-        ? `${namespace}.${key}`
-        : key
+      let keypath = key
+
+      if (namespace) {
+        if (key.includes(':'))
+          keypath = key.replace(/:/g, '.')
+        else
+          keypath = `${namespace}.${key}`
+      }
 
       keys.push({
         key: keypath,
