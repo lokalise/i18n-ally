@@ -287,11 +287,11 @@ Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-loca
 And my great thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
 
 
-## ☕ Buy Me Coffee
+## ☕ Buy Me a Coffee
 
 I made this project with heart ❤
 
-If you found it useful, you may consider by me a cup of coffee!
+If you found it useful, you may consider buy me a coffee!
 
 [Donate via PayPal](https://paypal.me/antfu7), **Cheers!!! 🙌**
 
