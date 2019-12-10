@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/antfu/i18n-ally/compare/v1.4.1...v1.4.2) (2019-12-10)
+
+
+### ⚡ Features
+
+* new command "duplicate key", [#137](https://github.com/antfu/i18n-ally/issues/137) ([8aeb217](https://github.com/antfu/i18n-ally/commit/8aeb217362dc576e86e1c859b72db070eb41b8e1))
+* new command "new key", [#137](https://github.com/antfu/i18n-ally/issues/137) ([20e09f2](https://github.com/antfu/i18n-ally/commit/20e09f2db7548adf6c11b75a6566fb364b80057d))
+* new config "indent" and "tabStyle", [#138](https://github.com/antfu/i18n-ally/issues/138) ([37e1ec9](https://github.com/antfu/i18n-ally/commit/37e1ec9149e55be6c444554beb86c5d10f0aa672))
+
 ### [1.4.1](https://github.com/antfu/i18n-ally/compare/v1.4.0...v1.4.1) (2019-12-08)
 
 
