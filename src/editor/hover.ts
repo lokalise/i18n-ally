@@ -78,14 +78,14 @@ export function createTable (visibleLocales: string[], records: Record<string, L
   return `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 }
 
-export function createHover (keypath: string, maxLength = 0) {
+export function createHover (keypath: string, maxLength = 0, mainLocale?: string) {
   const loader = CurrentFile.loader
   const records = loader.getTranslationsByKey(keypath)
-  const displayLocale = Config.displayLanguage
+  mainLocale = mainLocale || Config.displayLanguage
 
-  const locales = Global.visibleLocales.filter(i => i !== displayLocale)
+  const locales = Global.visibleLocales.filter(i => i !== mainLocale)
   const table1 = createTable(locales, records, maxLength)
-  const table2 = createTable([displayLocale], records, maxLength)
+  const table2 = createTable([mainLocale], records, maxLength)
   const markdown = `${table1}\n\n-----\n\n${table2}`
 
   const markdownText = new MarkdownString(markdown)

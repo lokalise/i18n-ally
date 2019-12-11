@@ -82,7 +82,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
             fontStyle: 'normal',
           },
         },
-        hoverMessage: createHover(key, maxLength),
+        hoverMessage: createHover(key, maxLength, file.locale),
       }
 
       if (currentText)
