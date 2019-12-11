@@ -26,7 +26,7 @@ export class Log {
 
   static error (err: Error | string, prompt = true, intend = 0) {
     if (prompt)
-      window.showErrorMessage(`VueI18nAlly Error: ${err.toString()}`)
+      window.showErrorMessage(`${EXT_NAME} Error: ${err.toString()}`)
     if (typeof err === 'string')
       Log.info(`🐛 ERROR: ${err}`, intend)
     else
