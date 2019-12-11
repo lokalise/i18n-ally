@@ -3,7 +3,7 @@ import { CurrentFile } from '../core'
 import i18n from '../i18n'
 
 export async function overrideConfirm (keypath: string, allowSkip = false, allowRenter = false) {
-  const node = CurrentFile.loader.getNodeByKey(keypath)
+  const node = CurrentFile.loader.getTreeNodeByKey(keypath)
 
   if (node) {
     const Override = i18n.t('prompt.button_override')
