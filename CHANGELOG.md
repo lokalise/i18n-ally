@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/antfu/i18n-ally/compare/v1.4.4...v1.4.5) (2019-12-11)
+
+
+### 🐞 Bug Fixes
+
+* make hover more make sense ([a161fc5](https://github.com/antfu/i18n-ally/commit/a161fc5e869147911466e039a402a49665ed5a2a))
+* override confirm ignores object ([d3382e8](https://github.com/antfu/i18n-ally/commit/d3382e8a7815ace6f1a6a9a2cc70c48113938637))
+* reorder hover locales ([da2fdcb](https://github.com/antfu/i18n-ally/commit/da2fdcbd07e144933e3f4b2d871c2204a4b11202))
+
+
+### ⚡ Features
+
+* new options "promptTranslatingSource" ([71b1606](https://github.com/antfu/i18n-ally/commit/71b16067a2462b453970c7fcdec19c9baa3548e2))
+
+
+### 🌍 Internationalization
+
+* fulfill missing keys ([3a50582](https://github.com/antfu/i18n-ally/commit/3a5058253826483600910df2c660fd765fab967f))
+
 ### [1.4.4](https://github.com/antfu/i18n-ally/compare/v1.4.3...v1.4.4) (2019-12-11)
 
 
