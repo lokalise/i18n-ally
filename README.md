@@ -186,6 +186,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically |
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
+| `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
 
 
 ### 🔩 Advanced Configurations

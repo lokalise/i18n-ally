@@ -18,11 +18,13 @@ export class NodeHelper {
   }
 
   static isTranslatable (node: Node) {
-    return !Config.readonly
-      && !node.readonly
-      && !this.isSource(node)
-      && node.type !== 'tree'
-      && this.notShadowOrHasFilepath(node)
+    if (Config.readonly || node.readonly || node.type === 'tree' || !this.notShadowOrHasFilepath(node))
+      return false
+
+    if (Config.promptTranslatingSource)
+      return true
+
+    return !this.isSource(node)
   }
 
   static isOpenable (node: Node) {

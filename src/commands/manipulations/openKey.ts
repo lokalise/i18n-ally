@@ -4,7 +4,7 @@ import { LocaleTreeItem, ProgressRootItem } from '../../views'
 import { Config, Global, CurrentFile } from '../../core'
 import i18n from '../../i18n'
 import { Log } from '../../utils'
-import { CommandOptions, getNode, getRecordFromNode } from './common'
+import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 
 export async function OpenKey (item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
   if (item instanceof ProgressRootItem) {
@@ -29,7 +29,7 @@ export async function OpenKey (item?: LocaleTreeItem | CommandOptions | Progress
     await window.showTextDocument(document)
   }
   else {
-    const node = getNode(item)
+    const node = getNodeOrRecord(item)
     if (!node)
       return
 

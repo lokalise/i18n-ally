@@ -1,5 +1,5 @@
 import { window } from 'vscode'
-import { LocaleTreeItem } from '../../views'
+import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
 import { CurrentFile, Global, Node } from '../../core'
 import i18n from '../../i18n'
 
@@ -9,7 +9,7 @@ export interface CommandOptions {
   from?: string
 }
 
-export function getNode (item?: LocaleTreeItem | CommandOptions) {
+export function getNodeOrRecord (item?: LocaleTreeItem | CommandOptions) {
   if (!item)
     return
 
@@ -17,6 +17,22 @@ export function getNode (item?: LocaleTreeItem | CommandOptions) {
     return item.node
 
   return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
+}
+
+export function getNode (item?: LocaleTreeItem | CommandOptions | ProgressSubmenuItem) {
+  if (!item)
+    return
+
+  if (item instanceof ProgressSubmenuItem)
+    return
+
+  if (item instanceof LocaleTreeItem) {
+    if (item.node.type === 'node')
+      return item.node
+    return
+  }
+
+  return CurrentFile.loader.getNodeByKey(item.keypath, true)
 }
 
 export async function getRecordFromNode (node: Node, defaultLocale?: string) {

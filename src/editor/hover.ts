@@ -10,7 +10,7 @@ function makeMarkdownCommand (command: Commands, args: object): string {
 }
 
 function formatValue (text: string) {
-  return escapeMarkdown(text.replace(/\n/g, ' '))
+  return escapeMarkdown(text.replace(/[\s]+/g, ' '))
 }
 
 function getAvaliableCommands (record?: LocaleRecord) {

@@ -3,10 +3,10 @@ import { LocaleTreeItem } from '../../views'
 import { Config, CurrentFile } from '../../core'
 import i18n from '../../i18n'
 import { decorateLocale, Log } from '../../utils'
-import { CommandOptions, getNode, getRecordFromNode } from './common'
+import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 
 export async function EditKey (item?: LocaleTreeItem | CommandOptions) {
-  let node = getNode(item)
+  let node = getNodeOrRecord(item)
 
   if (!node)
     return

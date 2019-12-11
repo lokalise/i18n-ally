@@ -482,6 +482,11 @@
           ],
           "description": "%config.tab_style%"
         },
+        "i18n-ally.promptTranslatingSource": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.prompt_translating_source%"
+        },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"
         },

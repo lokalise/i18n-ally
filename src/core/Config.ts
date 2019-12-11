@@ -215,6 +215,10 @@ export class Config {
     return this.getConfig<string>('tabStyle') === 'tab' ? '\t' : ' '
   }
 
+  static get promptTranslatingSource () {
+    return this.getConfig<boolean>('promptTranslatingSource') ?? false
+  }
+
   // config
   private static getConfig<T = any> (key: string): T | undefined {
     let config = workspace
