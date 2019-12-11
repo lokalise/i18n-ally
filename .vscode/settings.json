@@ -14,13 +14,14 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": [
+    "Unflatten",
+    "regs"
+  ],
   "i18n-ally.localesPaths": ".",
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "flat",
   "i18n-ally.preferredDelimiter": "_",
   "i18n-ally.sortKeys": true,
-  "cSpell.words": [
-    "Unflatten",
-    "regs"
-  ],
+  "i18n-ally.keepFulfilled": true,
 }

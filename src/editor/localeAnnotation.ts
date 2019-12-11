@@ -3,9 +3,12 @@ import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { createHover } from './hover'
 
-const noneDecorationType = window.createTextEditorDecorationType({})
-
 const localeAnnotation: ExtensionModule = (ctx) => {
+  const noneDecorationType = window.createTextEditorDecorationType({})
+  const missingDecorationType = window.createTextEditorDecorationType({
+    gutterIconPath: ctx.asAbsolutePath('res/dark/info.svg'),
+  })
+
   const supportedParsers = Global.parsers.filter(p => p.annotationSupported)
 
   function update () {
@@ -33,6 +36,8 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
     const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptions[] = []
+    const annotationsMissing: DecorationOptions[] = []
+
     const color = 'rgba(153, 153, 153, .7)'
     let displayLanguage = Config.displayLanguage
     if (displayLanguage === file.locale) {
@@ -45,41 +50,49 @@ const localeAnnotation: ExtensionModule = (ctx) => {
     const keys = parser.annotationGetKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
-      if (Config.annotations) {
-        let text = ''
+      let sourceText = ''
+      let currentText = ''
 
-        if (Config.annotations && displayLanguage) {
-          const node = loader.getTreeNodeByKey(key)
-          if (!node || node.type === 'tree')
-            return
-          text = node.getValue(displayLanguage)
+      const node = loader.getTreeNodeByKey(key)
+      const showAnnonations = Config.annotations && displayLanguage
 
-          if (text) {
-            if (maxLength && text.length > maxLength)
-              text = `${text.substring(0, maxLength)}…`
-            text = `${annotationDelimiter}${text}`
-          }
-        }
-
-        annotations.push({
-          range: new Range(
-            document.positionAt(start),
-            document.positionAt(end),
-          ),
-          renderOptions: {
-            after: {
-              color,
-              contentText: text,
-              fontWeight: 'normal',
-              fontStyle: 'normal',
-            },
-          },
-          hoverMessage: createHover(key, maxLength),
-        })
+      if (node) {
+        if (node.type !== 'node')
+          return
+        sourceText = node.getValue(displayLanguage)
+        currentText = node.getValue(file.locale || Config.sourceLanguage)
       }
+
+      if (sourceText) {
+        if (maxLength && sourceText.length > maxLength)
+          sourceText = `${sourceText.substring(0, maxLength)}…`
+        sourceText = `${annotationDelimiter}${sourceText}`
+      }
+
+      const annotation: DecorationOptions = {
+        range: new Range(
+          document.positionAt(start),
+          document.positionAt(end),
+        ),
+        renderOptions: {
+          after: {
+            color,
+            contentText: showAnnonations ? sourceText : undefined,
+            fontWeight: 'normal',
+            fontStyle: 'normal',
+          },
+        },
+        hoverMessage: createHover(key, maxLength),
+      }
+
+      if (currentText)
+        annotations.push(annotation)
+      else
+        annotationsMissing.push(annotation)
     })
 
     activeTextEditor.setDecorations(noneDecorationType, annotations)
+    activeTextEditor.setDecorations(missingDecorationType, annotationsMissing)
   }
 
   const disposables: Disposable[] = []
