@@ -19,9 +19,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 <p align='center'>
 🎉 <a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</a> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
-<br>
-<br>
-Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b> and <b><a href="https://github.com/antfu/i18n-ally#-supported-frameworks">Supported Frameworks</a></b>
+Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b>
 </p>
 
 <br>
@@ -40,9 +38,9 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`vscode`](https://www.npmjs.com/package/vscode) |
-| [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
-| [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18next.png) [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 
 
 If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
