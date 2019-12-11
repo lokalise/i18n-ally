@@ -1,63 +1,69 @@
 import { MarkdownString } from 'vscode'
-import { CurrentFile, Global, Commands } from '../core'
+import { CurrentFile, Global, Commands, LocaleRecord, Config } from '../core'
 import { decorateLocale, escapeMarkdown, NodeHelper } from '../utils'
 import i18n from '../i18n'
+
+const EmptyButton = '⠀⠀'
 
 function makeMarkdownCommand (command: Commands, args: object): string {
   return `command:${command}?${encodeURIComponent(JSON.stringify(args))}`
 }
 
 function formatValue (text: string) {
-  return escapeMarkdown(text.replace('\n', ' '))
+  return escapeMarkdown(text.replace(/\n/g, ' '))
 }
 
-const EmptyButton = '⠀⠀'
+function getAvaliableCommands (record?: LocaleRecord) {
+  const commands = []
 
-export function createHover (keypath: string, maxLength = 0) {
-  const loader = CurrentFile.loader
-  const locales = loader.getTranslationsByKey(keypath)
+  if (record) {
+    const { keypath, locale } = record
 
-  const transTable = Global.visibleLocales
+    if (NodeHelper.isTranslatable(record)) {
+      commands.push({
+        text: i18n.t('command.translate_key'),
+        icon: '🌍',
+        command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
+      })
+    }
+    else {
+      commands.push(EmptyButton)
+    }
+    if (NodeHelper.isEditable(record)) {
+      commands.push({
+        text: i18n.t('command.edit_key'),
+        icon: '📝',
+        command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
+      })
+    }
+    else {
+      commands.push(EmptyButton)
+    }
+    if (NodeHelper.isOpenable(record)) {
+      commands.push({
+        text: i18n.t('command.open_key'),
+        icon: '💬',
+        command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
+      })
+    }
+    else {
+      commands.push(EmptyButton)
+    }
+  }
+
+  return commands
+}
+
+export function createTable (visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0) {
+  const transTable = visibleLocales
     .map((locale) => {
-      const commands = []
+      const record = records[locale]
       const row = {
         locale: decorateLocale(locale),
-        value: formatValue(loader.getValueByKey(keypath, locale, maxLength) || '-'),
+        value: formatValue(CurrentFile.loader.getValueByKey(record.keypath, locale, maxLength) || '-'),
         commands: '',
       }
-      const record = locales[locale]
-      if (record) {
-        if (NodeHelper.isTranslatable(record)) {
-          commands.push({
-            text: i18n.t('command.translate_key'),
-            icon: '🌍', // GlyphChars.Translate,
-            command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
-          })
-        }
-        else {
-          commands.push(EmptyButton)
-        }
-        if (NodeHelper.isEditable(record)) {
-          commands.push({
-            text: i18n.t('command.edit_key'),
-            icon: '📝', // GlyphChars.Pencil,
-            command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
-          })
-        }
-        else {
-          commands.push(EmptyButton)
-        }
-        if (NodeHelper.isOpenable(record)) {
-          commands.push({
-            text: i18n.t('command.open_key'),
-            icon: '💬', // GlyphChars.ArrowUpRight,
-            command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
-          })
-        }
-        else {
-          commands.push(EmptyButton)
-        }
-      }
+      const commands = getAvaliableCommands(record)
       row.commands = commands
         .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
         .join(' ')
@@ -67,9 +73,20 @@ export function createHover (keypath: string, maxLength = 0) {
     .join('\n')
 
   if (!transTable)
-    return
+    return ''
 
-  const markdown = `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
+  return `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
+}
+
+export function createHover (keypath: string, maxLength = 0) {
+  const loader = CurrentFile.loader
+  const records = loader.getTranslationsByKey(keypath)
+  const displayLocale = Config.displayLanguage
+
+  const locales = Global.visibleLocales.filter(i => i !== displayLocale)
+  const table1 = createTable(locales, records, maxLength)
+  const table2 = createTable([displayLocale], records, maxLength)
+  const markdown = `${table1}\n\n-----\n\n${table2}`
 
   const markdownText = new MarkdownString(markdown)
   markdownText.isTrusted = true
