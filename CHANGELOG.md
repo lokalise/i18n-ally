@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.6](https://github.com/antfu/i18n-ally/compare/v1.4.5...v1.4.6) (2019-12-11)
+
+
+### 🐞 Bug Fixes
+
+* error log app name ([82c460f](https://github.com/antfu/i18n-ally/commit/82c460f035112687af8f73d52e509e529fb3760d))
+* sidebar view disordered ([cb564ef](https://github.com/antfu/i18n-ally/commit/cb564efe482334030a6b9d4f90812091275764e6))
+
 ### [1.4.5](https://github.com/antfu/i18n-ally/compare/v1.4.4...v1.4.5) (2019-12-11)
 
 
