@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/antfu/i18n-ally/compare/v1.4.3...v1.4.4) (2019-12-11)
+
+
+### ⚡ Features
+
+* display gutter icon for missing translation in locales ([cfa0a04](https://github.com/antfu/i18n-ally/commit/cfa0a042fb0bc309ad7d77a8d1d7cc74d7197c8f))
+
+
+### 📚 Documentations
+
+* logos ([e4872af](https://github.com/antfu/i18n-ally/commit/e4872af17454db8d17135c50b8427bb5c3677ea7))
+
 ### [1.4.3](https://github.com/antfu/i18n-ally/compare/v1.4.2...v1.4.3) (2019-12-10)
 
 
