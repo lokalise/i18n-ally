@@ -1,6 +1,5 @@
-import { ExtensionContext, window, commands } from 'vscode'
+import { ExtensionContext, window } from 'vscode'
 import { uniq } from 'lodash'
-import { EXT_NAMESPACE } from '../../meta'
 import { KeyDetector, LocaleNode, Global } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 import { LocalesTreeProvider } from './LocalesTreeProvider'
@@ -20,14 +19,10 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
   loadCurrentDocument () {
     const editor = window.activeTextEditor
 
-    if (!editor || !Global.isLanguageIdSupported(editor.document.languageId)) {
-      commands.executeCommand('setContext', `${EXT_NAMESPACE}-supported-file`, false)
+    if (!editor || !Global.isLanguageIdSupported(editor.document.languageId))
       this.includePaths = []
-    }
-    else {
-      commands.executeCommand('setContext', `${EXT_NAMESPACE}-supported-file`, true)
+    else
       this.includePaths = uniq(KeyDetector.getKeys(editor.document).map(i => i.key))
-    }
 
     this.refresh()
   }

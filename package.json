@@ -309,14 +309,14 @@
         {
           "id": "i18n-ally-locales-file-explorer",
           "name": "%view.i18n_keys%",
-          "when": "i18n-ally-enabled && i18n-ally-supported-file"
+          "when": "i18n-ally-enabled"
         }
       ],
       "i18n-ally": [
         {
           "id": "i18n-ally-locales-sidebar-file",
           "name": "%view.current_file%",
-          "when": "i18n-ally-enabled && i18n-ally-supported-file"
+          "when": "i18n-ally-enabled"
         },
         {
           "id": "i18n-ally-locales-progress",

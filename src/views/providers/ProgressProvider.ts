@@ -9,6 +9,7 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   private _onDidChangeTreeData: EventEmitter<BaseTreeItem | undefined> = new EventEmitter<BaseTreeItem | undefined>()
   readonly onDidChangeTreeData: Event<BaseTreeItem | undefined> = this._onDidChangeTreeData.event
   private loader: Loader
+
   constructor (private ctx: ExtensionContext) {
     this.loader = CurrentFile.loader
     // const count = 0
