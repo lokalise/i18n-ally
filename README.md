@@ -16,7 +16,6 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg?color=a38eed" alt="GitHub last commit" /></a>
 <a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg?color=c977be" alt="GitHub issues" /></a>
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/antfu/i18n-ally?style=social"></a>
-
 </p>
 
 <p align='center'>
@@ -36,13 +35,14 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18next.png) [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://github.com/svenfuchs/rails-i18n) | [Vote Here](https://github.com/antfu/i18n-ally/issues/136) |  |
 
 
 If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
@@ -299,7 +299,9 @@ This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/th
 
 Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-locale-message](https://github.com/kazupon/vue-i18n-locale-message), which is created by the author of vue-i18n. Thanks for making this!
 
-And my great thanks for all [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors).
+Also my thanks to [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors) and YOU for reading this!
+
+Lastly, I want to have a **special thanks to my partner [@iiiiiiines](https://github.com/iiiiiiines)** who have encouraged and supported me working on this project.
 
 
 ## ☕ Buy Me a Coffee
