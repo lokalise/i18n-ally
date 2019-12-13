@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.7](https://github.com/antfu/i18n-ally/compare/v1.4.6...v1.4.7) (2019-12-13)
+
+
+### 🐞 Bug Fixes
+
+* ignore keys ends with '.' and minor fix ([3949806](https://github.com/antfu/i18n-ally/commit/39498067f16073af96d721c6a46205c78db63bfa))
+
 ### [1.4.6](https://github.com/antfu/i18n-ally/compare/v1.4.5...v1.4.6) (2019-12-11)
 
 
