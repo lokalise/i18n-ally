@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.8](https://github.com/antfu/i18n-ally/compare/v1.4.7...v1.4.8) (2019-12-13)
+
+
+### 📚 Documentations
+
+* update readme ([51ce555](https://github.com/antfu/i18n-ally/commit/51ce5552f8f05ef699b0023de03e5fe2d92113d3))
+* update readme ([d6ea8ff](https://github.com/antfu/i18n-ally/commit/d6ea8ffcb7b5591818ae7f3160d70954eff6c535))
+
 ### [1.4.7](https://github.com/antfu/i18n-ally/compare/v1.4.6...v1.4.7) (2019-12-13)
 
 
