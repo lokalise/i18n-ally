@@ -39,39 +39,37 @@ const annotation: ExtensionModule = (ctx) => {
         ),
       })
 
-      if (Config.annotations) {
-        let missing = false
+      let missing = false
 
-        let text = loader.getValueByKey(key, undefined, maxLength)
-        // fallback to source
-        if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
-          missing = true
-        }
-
-        if (text)
-          text = `${annotationDelimiter}${text}`
-
-        const color = missing
-          ? 'rgba(153, 153, 153, .3)'
-          : 'rgba(153, 153, 153, .7)'
-
-        annotations.push({
-          range: new Range(
-            document.positionAt(start - 1),
-            document.positionAt(end + 1),
-          ),
-          renderOptions: {
-            after: {
-              color,
-              contentText: text,
-              fontWeight: 'normal',
-              fontStyle: 'normal',
-            },
-          },
-          hoverMessage: createHover(key, maxLength),
-        })
+      let text = loader.getValueByKey(key, undefined, maxLength)
+      // fallback to source
+      if (!text && Config.displayLanguage !== Config.sourceLanguage) {
+        text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
+        missing = true
       }
+
+      if (text)
+        text = `${annotationDelimiter}${text}`
+
+      const color = missing
+        ? 'rgba(153, 153, 153, .3)'
+        : 'rgba(153, 153, 153, .7)'
+
+      annotations.push({
+        range: new Range(
+          document.positionAt(start - 1),
+          document.positionAt(end + 1),
+        ),
+        renderOptions: {
+          after: {
+            color,
+            contentText: Config.annotations ? text : '',
+            fontWeight: 'normal',
+            fontStyle: 'normal',
+          },
+        },
+        hoverMessage: createHover(key, maxLength),
+      })
     })
 
     activeTextEditor.setDecorations(noneDecorationType, annotations)

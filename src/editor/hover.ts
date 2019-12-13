@@ -56,8 +56,11 @@ function getAvaliableCommands (record?: LocaleRecord) {
 
 export function createTable (visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0) {
   const transTable = visibleLocales
-    .map((locale) => {
+    .flatMap((locale) => {
       const record = records[locale]
+      if (!record)
+        return []
+
       const row = {
         locale: decorateLocale(locale),
         value: formatValue(CurrentFile.loader.getValueByKey(record.keypath, locale, maxLength) || '-'),
@@ -67,7 +70,7 @@ export function createTable (visibleLocales: string[], records: Record<string, L
       row.commands = commands
         .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
         .join(' ')
-      return row
+      return [row]
     })
     .map(item => `| | **${item.locale}** | | ${item.value} | ${item.commands} |`)
     .join('\n')
@@ -81,6 +84,9 @@ export function createTable (visibleLocales: string[], records: Record<string, L
 export function createHover (keypath: string, maxLength = 0, mainLocale?: string) {
   const loader = CurrentFile.loader
   const records = loader.getTranslationsByKey(keypath)
+  if (!Object.keys(records).length)
+    return undefined
+
   mainLocale = mainLocale || Config.displayLanguage
 
   const locales = Global.visibleLocales.filter(i => i !== mainLocale)

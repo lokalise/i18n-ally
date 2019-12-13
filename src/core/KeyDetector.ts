@@ -18,26 +18,28 @@ export class KeyDetector {
     return Array.from(keys)
   }
 
-  static getKeyRange (document: TextDocument, position: Position) {
+  static getKeyRange (document: TextDocument, position: Position, dotEnding?: boolean) {
     const regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
     for (const regex of regs) {
       const range = document.getWordRangeAtPosition(position, regex)
       if (range) {
         const key = document.getText(range).replace(regex, '$1')
-        return { range, key }
+
+        if (key && (dotEnding || !key.endsWith('.')))
+          return { range, key }
       }
     }
   }
 
-  static getKey (document: TextDocument, position: Position) {
-    const keyRange = KeyDetector.getKeyRange(document, position)
+  static getKey (document: TextDocument, position: Position, dotEnding?: boolean) {
+    const keyRange = KeyDetector.getKeyRange(document, position, dotEnding)
     if (!keyRange)
       return
     return keyRange.key
   }
 
-  static getKeyAndRange (document: TextDocument, position: Position) {
-    const { range, key } = KeyDetector.getKeyRange(document, position) || {}
+  static getKeyAndRange (document: TextDocument, position: Position, dotEnding?: boolean) {
+    const { range, key } = KeyDetector.getKeyRange(document, position, dotEnding) || {}
     if (!range || !key)
       return
     const end = range.end.character - 1
@@ -52,7 +54,7 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (document: TextDocument | string, regs?: RegExp[]): KeyInDocument[] {
+  static getKeys (document: TextDocument | string, regs?: RegExp[], dotEnding?: boolean): KeyInDocument[] {
     let text = ''
     if (typeof document !== 'string') {
       regs = regs ?? Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
@@ -63,6 +65,6 @@ export class KeyDetector {
       text = document
     }
 
-    return regexFindKeys(text, regs)
+    return regexFindKeys(text, regs, dotEnding)
   }
 }

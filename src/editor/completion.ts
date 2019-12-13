@@ -11,7 +11,7 @@ class CompletionProvider implements CompletionItemProvider {
       return
 
     const loader: Loader = CurrentFile.loader
-    const key = KeyDetector.getKey(document, position)
+    const key = KeyDetector.getKey(document, position, true)
 
     if (key == null)
       return
