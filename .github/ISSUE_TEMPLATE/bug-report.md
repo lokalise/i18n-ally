@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+<!-- A clear and concise description of what the bug is.-->
 
 **Extension Version**
 <!-- i18n Ally or Vue i18n Ally (v0.x) -->
@@ -22,6 +22,11 @@ Steps to reproduce the behavior:
 2. Click on '....'=
 3. See error
 
+**Device Infomation**
+ - OS:
+ - Version:
+ - VSCode Version:
+
 **Extension Log**
 Go to `View` -> `Output` -> `i18n Ally`, and paste the content below. **You should mask any sensitive information**
 
@@ -30,8 +35,4 @@ Go to `View` -> `Output` -> `i18n Ally`, and paste the content below. **You shou
 ```
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Version [e.g. 22]
+<!-- If applicable, add screenshots to help explain your problem.-->
