@@ -27,7 +27,6 @@
   "config.display_language": "Displaying language",
   "config.enabled_frameworks": "You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically.",
   "config.encoding": "Locale files encoding, default to \"auto\" (auto detect)",
-  "config.force_enabled": "Enable this extension anyway. (At your own RISK!)",
   "config.full_reload_on_changed": "Perform a full reload on locale file changed. (for .js/.ts dynamic import)",
   "config.ignored_locales": "Locale codes to be ignored",
   "config.include_subfolders": "Search recursively inside locale directories",
