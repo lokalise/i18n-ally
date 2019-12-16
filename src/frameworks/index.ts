@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
-import YAML from 'js-yaml'
 import i18n from '../i18n'
-import { Log, File } from '../utils'
+import { Log } from '../utils'
+import { PackageJSONParser, PubspecYAMLParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
 import ReactFramework from './react'
@@ -37,32 +37,8 @@ export function getPackageDependencies (projectUrl: string): PackageDependencies
   if (!projectUrl || !workspace.workspaceFolders)
     return result
 
-  try {
-    const rawPackageJSON = File.readSync(`${projectUrl}/package.json`)
-    const {
-      dependencies = {},
-      devDependencies = {},
-      peerDependencies = {},
-    } = JSON.parse(rawPackageJSON)
-
-    result.packageJSON = [...Object.keys(dependencies), ...Object.keys(devDependencies), ...Object.keys(peerDependencies)]
-  }
-  catch (err) {
-    Log.info('Error on parsing package.json')
-  }
-
-  try {
-    const rawPubspecYAML = File.readSync(`${projectUrl}/pubspec.yaml`)
-    const {
-      dependencies = {},
-      dev_dependencies = {},
-    } = YAML.safeLoad(rawPubspecYAML)
-
-    result.pubspecYAML = [...Object.keys(dependencies), ...Object.keys(dev_dependencies)]
-  }
-  catch (err) {
-    Log.info('Error on parsing pubspec.yaml')
-  }
+  result.packageJSON = PackageJSONParser.load(projectUrl)
+  result.pubspecYAML = PubspecYAMLParser.load(projectUrl)
 
   return result
 }
