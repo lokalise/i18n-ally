@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.9](https://github.com/antfu/i18n-ally/compare/v1.4.8...v1.4.9) (2019-12-16)
+
+
+### 🌍 Internationalization
+
+* add Dutch languaga, thanks @Niekvdm ([9a6eb49](https://github.com/antfu/i18n-ally/commit/9a6eb492c83901223b5fb3f98a74042841360631))
+
+
+### 📚 Documentations
+
+* update issue template ([0219d3e](https://github.com/antfu/i18n-ally/commit/0219d3e53bd8c1d878fb82477622baed541f7545))
+
 ### [1.4.8](https://github.com/antfu/i18n-ally/compare/v1.4.7...v1.4.8) (2019-12-13)
 
 
