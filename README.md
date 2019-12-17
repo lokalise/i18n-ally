@@ -3,7 +3,7 @@
 Vue i18n Ally is coming to support React, Angular and numbers of other frameworks! [**Update now!**](https://github.com/antfu/i18n-ally)
 
 <p align="center">
-<img src="https://github.com/antfu/i18n-ally/raw/i18n-ally/screenshots/migration.v1.png" alt="logo" width="600"/>
+<img src="https://github.com/antfu/i18n-ally/blob/master/screenshots/migration.v1.png?raw=true" alt="logo" width="600"/>
 </p>
 
 <hr>
