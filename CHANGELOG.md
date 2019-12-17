@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/antfu/i18n-ally/compare/v1.5.0...v1.6.0) (2019-12-17)
+
+
+### ⚡ Features
+
+* support linked locale messages, [#147](https://github.com/antfu/i18n-ally/issues/147) ([c2856e3](https://github.com/antfu/i18n-ally/commit/c2856e32d8dd2837fba02b7372cc386fc2c7502e))
+
+
+### 📚 Documentations
+
+* update docs ([d44c272](https://github.com/antfu/i18n-ally/commit/d44c2723536cbda1e6dee8693d1e1dbf64ff1143))
+
 ## [1.5.0](https://github.com/antfu/i18n-ally/compare/v1.4.9...v1.5.0) (2019-12-17)
 
 
