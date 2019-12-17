@@ -135,6 +135,7 @@ If you would like to make it work for frameworks not listed above, you can:
 | JSON | ✅ | ✅ | ✅ | |
 | YAML | ✅ | ✅ | ✅ | *Comments will NOT preserved\** |
 | JSON5 | ✅ | ✅ | ❌ | *Comments will NOT preserved\** |
+| INI | ✅ | ✅ | ❌ | *Comments will NOT preserved\** |
 | JavaScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 | TypeScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 
