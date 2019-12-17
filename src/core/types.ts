@@ -8,6 +8,7 @@ export interface OptionalFeatures {
 
 export interface NodeMeta {
   VueSfcSectionIndex?: number
+  VueSfcLocale?: string
 }
 
 export interface FileInfo {

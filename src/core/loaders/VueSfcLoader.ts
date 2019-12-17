@@ -1,6 +1,6 @@
 import { workspace, Uri, TextDocument, WorkspaceEdit, Range } from 'vscode'
 import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
-import { Log, applyPendingToObject, File, unflattenObject } from '../../utils'
+import { Log, applyPendingToObject, File, unflattenObject, normalizeLocale } from '../../utils'
 import { PendingWrite, NodeOptions } from '../types'
 import { LocaleTree } from '../Nodes'
 import { Global } from '../Global'
@@ -40,12 +40,13 @@ export class VueSfcLoader extends Loader {
   private getOptions (section: SFCI18nBlock, locale: string, index: number): NodeOptions {
     return {
       filepath: section.src || this.uri.fsPath,
-      locale,
+      locale: normalizeLocale(locale),
       features: {
         VueSfc: true,
       },
       meta: {
         VueSfcSectionIndex: index,
+        VueSfcLocale: locale,
       },
     }
   }
@@ -69,7 +70,7 @@ export class VueSfcLoader extends Loader {
         continue
       const messages = unflattenObject(section.messages)
       for (const [locale, value] of Object.entries(messages)) {
-        this._locales.add(locale)
+        this._locales.add(normalizeLocale(locale))
         this.updateTree(tree, value, '', '', this.getOptions(section, locale, index))
       }
     }
@@ -101,7 +102,9 @@ export class VueSfcLoader extends Loader {
 
       const section = this._meta.components[this.filepath][sectionIndex]
 
-      section.messages[pending.locale] = await applyPendingToObject(section.messages[pending.locale] || {}, pending)
+      const locale = record?.meta?.VueSfcLocale || pending.locale
+
+      section.messages[locale] = await applyPendingToObject(section.messages[locale] || {}, pending)
     }
 
     const doc = await workspace.openTextDocument(this.uri)
