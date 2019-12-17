@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/antfu/i18n-ally/compare/v1.4.9...v1.5.0) (2019-12-17)
+
+
+### ⚡ Features
+
+* support custom framework config! ([37305d8](https://github.com/antfu/i18n-ally/commit/37305d833afd1091cf9cc851df2dfa7609804bdb))
+
+
+### 🌍 Internationalization
+
+* remove unsed messages ([14ba7f4](https://github.com/antfu/i18n-ally/commit/14ba7f40e392e1be295bf781e62a86347c37be61))
+
+
+### 🔮 Refactor
+
+* extract packages parser ([48c94ec](https://github.com/antfu/i18n-ally/commit/48c94ec1f91dd349f5d3e62af6cbd9c8e8702052))
+
 ### [1.4.9](https://github.com/antfu/i18n-ally/compare/v1.4.8...v1.4.9) (2019-12-16)
 
 
