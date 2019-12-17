@@ -72,7 +72,7 @@ class CustomFramework extends Framework {
         }
         catch (e) {
           Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)
-          Log.error(e)
+          Log.error(e, false)
           return undefined
         }
       })
