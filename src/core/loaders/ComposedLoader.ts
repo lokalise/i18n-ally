@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { Disposable } from 'vscode'
+import { KEEP_FULFILL_DELAY } from '../../meta'
 import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Log } from '../../utils'
@@ -136,8 +137,11 @@ export class ComposedLoader extends Loader {
         await loader.write(distrubtedPendings[index])
     }))
 
-    if (Config.keepFulfilled && triggerFullfilled)
-      await FulfillAllMissingKeys(false)
+    if (Config.keepFulfilled && triggerFullfilled) {
+      setTimeout(() => {
+        FulfillAllMissingKeys(false)
+      }, KEEP_FULFILL_DELAY)
+    }
   }
 
   // TODO:sfc merge tree nodes
