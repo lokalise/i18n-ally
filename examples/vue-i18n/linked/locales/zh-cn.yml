@@ -1,0 +1,8 @@
+﻿project: 演示
+intro: 带来更好的翻译体验
+good_morning: 早上好
+hello: ''
+some:
+  deep:
+    nested:
+      key: ''

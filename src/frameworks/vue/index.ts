@@ -36,6 +36,10 @@ class VueFramework extends Framework {
       keypath,
     ]
   }
+
+  enableFeatures = {
+    LinkedMessages: true,
+  }
 }
 
 export default VueFramework

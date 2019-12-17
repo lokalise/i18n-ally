@@ -8,8 +8,9 @@ import { Log, getExtOfLanguageId } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { CurrentFile } from './CurrentFile'
+import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
-import { LocaleLoader, Config } from '.'
+import { LocaleLoader } from './loaders/LocaleLoader'
 
 export type KeyStyle = 'auto' | 'nested' | 'flat'
 

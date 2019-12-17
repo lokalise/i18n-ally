@@ -40,7 +40,7 @@ export async function DuplicateKey (item?: LocaleTreeItem | string) {
       return
 
     const writes: PendingWrite[] = Object.values(node.locales)
-      .map(v=>{
+      .map((v) => {
         return ({
           value: v.value,
           keypath: newkeypath,

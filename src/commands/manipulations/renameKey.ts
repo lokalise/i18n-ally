@@ -30,7 +30,7 @@ export async function RenameKey (item?: LocaleTreeItem | string) {
     if (!newkeypath)
       return
 
-    if (!keypathValidate(newkeypath)){
+    if (!keypathValidate(newkeypath)) {
       window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
       await RenameKey(item)
       return

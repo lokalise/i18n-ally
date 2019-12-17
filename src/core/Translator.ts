@@ -3,8 +3,7 @@ import { google, baidu, youdao } from 'translation.js'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
-import { LocaleTree } from './types'
-import { LocaleNode, LocaleRecord, Config, Loader, CurrentFile } from '.'
+import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, CurrentFile } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string

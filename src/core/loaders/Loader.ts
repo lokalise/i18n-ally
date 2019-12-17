@@ -1,6 +1,7 @@
 import { Disposable, EventEmitter } from 'vscode'
 import _, { uniq } from 'lodash'
-import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree, Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
+import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
+import { Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -188,7 +189,7 @@ export abstract class Loader extends Disposable {
       return text
     }
     else {
-      let value = node.getValue(locale)
+      let value = node.getValue(locale, true)
       if (!value)
         return
       if (maxlength && value.length > maxlength)

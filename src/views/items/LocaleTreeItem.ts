@@ -34,7 +34,7 @@ export class LocaleTreeItem extends BaseTreeItem {
 
   get description (): string {
     if (this.node.type === 'node')
-      return this.node.getValue(this.displayLocale)
+      return this.node.getValue(this.displayLocale, true)
     if (this.node.type === 'record')
       return this.node.value
     return ''

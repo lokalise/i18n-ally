@@ -1,0 +1,21 @@
+{
+  "project": "Demo",
+  "hello": "Hello!",
+  "good_morning": "Good morning",
+  "some": {
+    "deep": {
+      "nested": {
+        "key": "Nested!"
+      }
+    }
+  },
+  "linked": "@:project @.upper:hello",
+  "intro": "Brings a better translating experience",
+  "hi": "Hi",
+  "yes": {
+    "no": {
+      "and": "good"
+    }
+  },
+  "yad": "asd"
+}

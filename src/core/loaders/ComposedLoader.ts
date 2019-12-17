@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import { Disposable } from 'vscode'
-import { LocaleNode, LocaleTree, FlattenLocaleTree, PendingWrite } from '../types'
+import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Log } from '../../utils'
 import { Config } from '../Config'
 import { FulfillAllMissingKeys } from '../../commands/manipulations'
+import { LocaleTree, LocaleNode, FlattenLocaleTree } from '../Nodes'
 import { Loader } from './Loader'
 
 export class ComposedLoader extends Loader {

@@ -1,5 +1,5 @@
 import { commands } from 'vscode'
-import { Commands } from '../core'
+import { Commands } from '../core/Commands'
 import { ExtensionModule } from '../modules'
 import { TranslateKeys, OpenKey, CopyKey, RenameKey, DeleteKey, NewKey, FulfillKeys, DuplicateKey, EditKey } from './manipulations'
 

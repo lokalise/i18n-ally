@@ -1,0 +1,12 @@
+{
+  "project": "Démo",
+  "some": {
+    "deep": {
+      "nested": {
+        "key": "Imbriqué!"
+      }
+    }
+  },
+  "linked": "",
+  "intro": "Apporte une meilleure expérience de traduction"
+}

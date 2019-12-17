@@ -1,9 +1,10 @@
 import { workspace, Uri, TextDocument, WorkspaceEdit, Range } from 'vscode'
 import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
 import { Log, applyPendingToObject, File, unflattenObject } from '../../utils'
-import { LocaleTree, PendingWrite, NodeOptions } from '../types'
+import { PendingWrite, NodeOptions } from '../types'
+import { LocaleTree } from '../Nodes'
+import { Global } from '../Global'
 import { Loader } from './Loader'
-import { Global } from '..'
 
 export class VueSfcLoader extends Loader {
   constructor (
