@@ -1,11 +1,10 @@
 import _ from 'lodash'
 import { Disposable } from 'vscode'
-import { KEEP_FULFILL_DELAY } from '../../meta'
 import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Log } from '../../utils'
 import { Config } from '../Config'
-import { FulfillAllMissingKeys } from '../../commands/manipulations'
+import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { LocaleTree, LocaleNode, FlattenLocaleTree } from '../Nodes'
 import { Loader } from './Loader'
 
@@ -137,11 +136,8 @@ export class ComposedLoader extends Loader {
         await loader.write(distrubtedPendings[index])
     }))
 
-    if (Config.keepFulfilled && triggerFullfilled) {
-      setTimeout(() => {
-        FulfillAllMissingKeys(false)
-      }, KEEP_FULFILL_DELAY)
-    }
+    if (Config.keepFulfilled && triggerFullfilled)
+      FulfillAllMissingKeysDelay()
   }
 
   // TODO:sfc merge tree nodes

@@ -8,6 +8,7 @@ import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, DirStructureAuto } from '../types'
 import { LocaleRecord, LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
+import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
 
@@ -311,8 +312,8 @@ export class LocaleLoader extends Loader {
           this.update()
           break
 
-        case 'change':
         case 'create':
+        case 'change':
           if (related !== base)
             await this.loadFile(filepath, 'dir', rootPath)
           else
@@ -320,6 +321,9 @@ export class LocaleLoader extends Loader {
           this.update()
           break
       }
+
+      if (type === 'create' && Config.keepFulfilled)
+        FulfillAllMissingKeysDelay()
     }
     watcher.onDidChange(updateFile.bind(this, 'change'))
     watcher.onDidCreate(updateFile.bind(this, 'create'))

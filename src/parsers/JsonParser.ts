@@ -9,6 +9,8 @@ export class JsonParser extends Parser {
   }
 
   async parse (text: string) {
+    if (!text || !text.trim())
+      return {}
     return JSON.parse(text)
   }
 
@@ -23,6 +25,9 @@ export class JsonParser extends Parser {
   annotationLanguageIds = ['json']
 
   parseAST (text: string) {
+    if (!text || !text.trim())
+      return []
+
     const map = JsonMap.parse(text).pointers
     const pairs = Object.entries<any>(map)
       .filter(([k, v]) => k)

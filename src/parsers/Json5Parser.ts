@@ -8,6 +8,8 @@ export class Json5Parser extends Parser {
   }
 
   async parse (text: string) {
+    if (!text || !text.trim())
+      return {}
     return JSON5.parse(text)
   }
 

@@ -2,6 +2,7 @@ import { window } from 'vscode'
 import { ProgressSubmenuItem, LocaleTreeItem } from '../../views'
 import { Global, PendingWrite, CurrentFile } from '../../core'
 import i18n from '../../i18n'
+import { KEEP_FULFILL_DELAY } from '../../meta'
 import { CommandOptions } from './common'
 
 const FULFILL_VALUE = ''
@@ -64,4 +65,10 @@ export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem |
 
   if (item instanceof ProgressSubmenuItem)
     return FulfillMissingKeysForProgress(item)
+}
+
+export function FulfillAllMissingKeysDelay () {
+  setTimeout(() => {
+    FulfillAllMissingKeys(false)
+  }, KEEP_FULFILL_DELAY)
 }
