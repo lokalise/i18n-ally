@@ -1,5 +1,6 @@
 import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures } from '../core'
+import { ParserExtRegEx } from '../parsers'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -35,9 +36,9 @@ export abstract class Framework {
    */
   filenameMatchReg (dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
-      return '^([\\w-_]*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
+      return `^([\\w-_]*)\\.(${ParserExtRegEx})$`
     else
-      return '^(.*)\\.(json5?|ya?ml|jsx?|tsx?|mjs)$'
+      return `^(.*)\\.(${ParserExtRegEx})$`
   }
 
   enableFeatures?: OptionalFeatures

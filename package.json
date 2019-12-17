@@ -584,6 +584,7 @@
   "devDependencies": {
     "@antfu/eslint-config-ts": "0.2.10",
     "@antfu/eslint-config-vue": "0.2.10",
+    "@types/ini": "^1.3.30",
     "@types/jest": "^24.0.23",
     "@types/js-yaml": "3.12.1",
     "@types/json-stable-stringify": "1.0.32",
@@ -597,6 +598,7 @@
     "@typescript-eslint/parser": "2.11.0",
     "conventional-github-releaser": "3.1.3",
     "eslint": "6.7.2",
+    "ini": "^1.3.5",
     "jest": "^24.9.0",
     "rimraf": "3.0.0",
     "standard-version": "7.0.1",
