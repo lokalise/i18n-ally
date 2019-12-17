@@ -4,8 +4,6 @@ import { YamlParser } from './YamlParser'
 import { JavascriptParser } from './JavascriptParser'
 import { IniParser } from './IniParser'
 
-export const ParserExtRegEx = 'json5?|ya?ml|jsx?|tsx?|mjs|ini'
-
 export const PARSERS = [
   new JsonParser(),
   new YamlParser(),

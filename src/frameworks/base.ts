@@ -1,6 +1,6 @@
 import { LanguageId } from '../utils'
-import { DirStructure, OptionalFeatures } from '../core'
-import { ParserExtRegEx } from '../parsers'
+import { DirStructure, OptionalFeatures } from '../core/types'
+import { ParserExtRegEx } from '../meta'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
