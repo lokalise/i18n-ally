@@ -65,6 +65,7 @@
   "prompt.enter_file_path_to_store_key": "Enter the file path to store key \"{0}\"",
   "prompt.enter_i18n_key": "Enter the i18n key path (for example: home.document.title)",
   "prompt.enter_new_keypath": "Enter the new keypath",
+  "prompt.error_on_parse_custom_regex": "Failed to parse RegExp string {0}. Please check your config",
   "prompt.extraction_canceled": "Extraction canceled",
   "prompt.failed_to_locate_key": "Failed to locate key \"{0}\".",
   "prompt.frameworks_not_found": "The following framework(s) are not found, please check your settings.\n{0}",

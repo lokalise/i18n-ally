@@ -140,7 +140,7 @@ export class Global {
     }
   }
 
-  private static async update (e?: ConfigurationChangeEvent) {
+  static async update (e?: ConfigurationChangeEvent) {
     let reload = false
     if (e) {
       let affected = false
@@ -169,7 +169,7 @@ export class Global {
 
     if (!Config.enabledFrameworks) {
       const packages = getPackageDependencies(this._rootpath)
-      this.enabledFrameworks = getEnabledFrameworks(packages)
+      this.enabledFrameworks = getEnabledFrameworks(packages, this._rootpath)
     }
     else {
       const frameworks = Config.enabledFrameworks
@@ -181,7 +181,7 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
+      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.\n`)
       await this.initLoader(this._rootpath, reload)
     }
     else {

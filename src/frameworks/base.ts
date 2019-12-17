@@ -1,13 +1,14 @@
 import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures } from '../core'
 
-export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[]) => boolean)
+export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
-export type PackageFileType = 'packageJSON' | 'pubspecYAML'
+export type PackageFileType = 'packageJSON' | 'pubspecYAML' | 'none'
 
 export abstract class Framework {
   abstract id: string
   abstract display: string
+  monopoly?: boolean
 
   /**
    * Packages names determine whether a frameworks should enable or not

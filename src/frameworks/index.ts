@@ -12,10 +12,12 @@ import I18nTagFramework from './i18n-tag'
 import VueSFCFramework from './vue-sfc'
 import FlutterFramework from './flutter'
 import EmberFramework from './ember'
+import CustomFramework from './custom'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
 export const frameworks: Framework[] = [
+  new CustomFramework(),
   new VueFramework(),
   new ReactFramework(),
   new NgxTranslateFramework(),
@@ -37,22 +39,23 @@ export function getPackageDependencies (projectUrl: string): PackageDependencies
   if (!projectUrl || !workspace.workspaceFolders)
     return result
 
+  result.none = []
   result.packageJSON = PackageJSONParser.load(projectUrl)
   result.pubspecYAML = PubspecYAMLParser.load(projectUrl)
 
   return result
 }
 
-export function getEnabledFrameworks (dependencies: PackageDependencies) {
-  return frameworks.filter((f) => {
+export function getEnabledFrameworks (dependencies: PackageDependencies, root: string) {
+  const enabledFrameworks = frameworks.filter((framework) => {
     for (const k of Object.keys(dependencies)) {
       const key = k as PackageFileType
       const packages = dependencies[key]
-      const req = f.detection[key]
+      const req = framework.detection[key]
 
       if (packages && req) {
         if (typeof req === 'function') {
-          return req(packages)
+          return req(packages, root)
         }
         else if (Array.isArray(req)) {
           return req.some(key => packages.includes(key))
@@ -69,6 +72,13 @@ export function getEnabledFrameworks (dependencies: PackageDependencies) {
 
     return false
   })
+
+  for (const framework of enabledFrameworks) {
+    if (framework.monopoly)
+      return [framework]
+  }
+
+  return enabledFrameworks
 }
 
 export function getEnabledFrameworksByIds (ids: string[]) {

@@ -43,9 +43,12 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://github.com/svenfuchs/rails-i18n) | [Vote Here](https://github.com/antfu/i18n-ally/issues/136) |  |
+| 🎎 **Custom**  | ✅ | **For almost any frameworks! [How to](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
 
-
-If you would like to add support for frameworks not listed above, you can open up a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) or raise a Pull Request.
+If you would like to make it work for frameworks not listed above, you can:
+  - Open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D)
+  - Fork and Raise a Pull Request
+  - [Config your custom framework](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)
 
 
 <h2 align="center"> ⚡ Features </h2>
