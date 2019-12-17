@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/antfu/i18n-ally/compare/v1.6.0...v1.7.0) (2019-12-17)
+
+
+### 🐞 Bug Fixes
+
+* add a delay for keepFulfilled ([02d11ab](https://github.com/antfu/i18n-ally/commit/02d11abf2de89369db9d367bad0ef9722a16c5dc))
+* keepFulfill triggered by new locale file ([b96152e](https://github.com/antfu/i18n-ally/commit/b96152eb4eaa1f9c28d7d3a5f222da6269b14b81))
+
+
+### ⚡ Features
+
+* add ini parser ([b07bd80](https://github.com/antfu/i18n-ally/commit/b07bd8093af6fd49b02552b5e98e4ecf40f960f4))
+
+
+### 📚 Documentations
+
+* update README ([ba3728f](https://github.com/antfu/i18n-ally/commit/ba3728f77e564ed3f7c4c1ddb1fe8c5c1f39af2e))
+
 ## [1.6.0](https://github.com/antfu/i18n-ally/compare/v1.5.0...v1.6.0) (2019-12-17)
 
 
