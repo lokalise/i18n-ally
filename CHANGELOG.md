@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/antfu/i18n-ally/compare/v1.7.0...v1.7.1) (2019-12-17)
+
+
+### 🐞 Bug Fixes
+
+* test ([6a9e242](https://github.com/antfu/i18n-ally/commit/6a9e24236d24f87fd2a51dc616aef3e5047b3702))
+* vue sfc loader locale normalize ([dcd59c8](https://github.com/antfu/i18n-ally/commit/dcd59c8e3654bb5093e357789529370fd1219a76))
+
+
+### 📚 Documentations
+
+* update readme ([3977172](https://github.com/antfu/i18n-ally/commit/397717238fb64f9a4bb0aa0e3b36e5dc3a3fb2fe))
+
 ## [1.7.0](https://github.com/antfu/i18n-ally/compare/v1.6.0...v1.7.0) (2019-12-17)
 
 
