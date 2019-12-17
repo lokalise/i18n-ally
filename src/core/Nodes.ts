@@ -62,6 +62,8 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
     locale = locale || Config.displayLanguage
     let value = (this.locales[locale] && this.locales[locale].value)
 
+    // This is for interplate linked messages
+    // Refer to: https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages
     if (value && interpolate && Global.hasFeatureEnabled('LinkedMessages')) {
       const matches = value.match(linkKeyMatcher)
       if (matches) {

@@ -119,7 +119,8 @@ If you would like to make it work for frameworks not listed above, you can:
 
 - Multi-root workspace supported
 - Remote development supported
-- Supports many popular frameworks
+- Supports numbers of popular frameworks
+- Supports [linked locale messages](https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages)
 - i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-help-translate-this-extension)
 
 <p align="center">
