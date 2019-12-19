@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.2](https://github.com/antfu/i18n-ally/compare/v1.7.1...v1.7.2) (2019-12-19)
+
+
+### 🌍 Internationalization
+
+* fix dynamic i18n ([7542a3b](https://github.com/antfu/i18n-ally/commit/7542a3bbb8d75fe8e5b93196922869cc9860c839))
+
 ### [1.7.1](https://github.com/antfu/i18n-ally/compare/v1.7.0...v1.7.1) (2019-12-17)
 
 
