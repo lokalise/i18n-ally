@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/antfu/i18n-ally/compare/v1.8.0...v1.8.1) (2019-12-19)
+
+
+### 🐞 Bug Fixes
+
+* extension trigger event ([fb40a9e](https://github.com/antfu/i18n-ally/commit/fb40a9ed71bb5c5d0558ccc49c7884b7257d6131))
+
 ## [1.8.0](https://github.com/antfu/i18n-ally/compare/v1.7.3...v1.8.0) (2019-12-19)
 
 
