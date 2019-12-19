@@ -65,6 +65,7 @@
   "prompt.enter_file_path_to_store_key": "Introduzca la ruta del archivo para almacenar la clave \"{0}\"",
   "prompt.enter_i18n_key": "Introduzca la ruta para la clave i18n (Por ejemplo: inicio.documento.titulo)",
   "prompt.enter_new_keypath": "Introduzca la nueva ruta de acceso",
+  "prompt.error_on_parse_custom_regex": "",
   "prompt.extraction_canceled": "Extracción cancelada",
   "prompt.failed_to_locate_key": "No se pudo localizar la clave \"{0}\".",
   "prompt.frameworks_not_found": "",

@@ -65,6 +65,7 @@
   "prompt.enter_file_path_to_store_key": "ファイルパスをキー\"{0}\"に入力する",
   "prompt.enter_i18n_key": "i18nキーのパスを入力してください (例: home.document.title)",
   "prompt.enter_new_keypath": "新しいキーパスを入力する",
+  "prompt.error_on_parse_custom_regex": "",
   "prompt.extraction_canceled": "抽出を中止する",
   "prompt.failed_to_locate_key": "\"{0}\"キーの配置に失敗しました。",
   "prompt.frameworks_not_found": "次のフレームワークは見つかりませんでした。設定を確認してください。\n{0}",

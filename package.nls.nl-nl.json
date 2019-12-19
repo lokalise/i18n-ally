@@ -65,6 +65,7 @@
   "prompt.enter_file_path_to_store_key": "Vul het bestands pad in om de sleutel op te slaan \"{0}\"",
   "prompt.enter_i18n_key": "Vul de i18n sleutel pad in (voorbeeld: home.document.title)",
   "prompt.enter_new_keypath": "Voer een nieuwe sleutel pad in",
+  "prompt.error_on_parse_custom_regex": "",
   "prompt.extraction_canceled": "Extraheren geannuleerd",
   "prompt.failed_to_locate_key": "De sleutel \"{0}\" kon niet worden gevonden.",
   "prompt.frameworks_not_found": "De volgende framework(s) konden niet gevonden worden, controleer uw instellingen.\n{0}",

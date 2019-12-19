@@ -65,6 +65,7 @@
   "prompt.enter_file_path_to_store_key": "Skriv filbanen for å lagre nøkkel \"{0}\"",
   "prompt.enter_i18n_key": "Skriv i18n-nøkkelbanen (f. eks. home.document.title)",
   "prompt.enter_new_keypath": "Skriv den nye nøkkelbanen",
+  "prompt.error_on_parse_custom_regex": "",
   "prompt.extraction_canceled": "Ekstraksjon avbrutt",
   "prompt.failed_to_locate_key": "Kunne ikke finne nøkkel \"{0}\".",
   "prompt.frameworks_not_found": "",
