@@ -13,13 +13,18 @@
   "activationEvents": [
     "workspaceContains:package.json",
     "workspaceContains:pubspec.yaml",
+    "workspaceContains:composer.json",
     "onLanguage:vue",
     "onLanguage:javascript",
+    "onLanguage:javascriptreact",
     "onLanguage:typescript",
+    "onLanguage:typescriptreact",
     "onLanguage:json",
     "onLanguage:yaml",
     "onLanguage:json5",
-    "onLanguage:dart"
+    "onLanguage:dart",
+    "onLanguage:php",
+    "onLanguage:ini"
   ],
   "keywords": [
     "vue",
