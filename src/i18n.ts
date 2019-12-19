@@ -1,6 +1,10 @@
 import { env } from 'vscode'
 import en from '../package.nls.json'
 import zhcn from '../package.nls.zh-cn.json'
+import zhtw from '../package.nls.zh-tw.json'
+import nlnl from '../package.nls.nl-nl.json'
+import jajp from '../package.nls.ja-jp.json'
+import nbno from '../package.nls.nb-no.json'
 
 export type i18nMessage = typeof en
 export type i18nKeys = keyof i18nMessage
@@ -10,6 +14,10 @@ export default class i18n {
   static readonly messages: Record<string, Record<string, string>> = {
     en,
     'zh-cn': zhcn,
+    'zh-tw': zhtw,
+    'nl-nl': nlnl,
+    'ja-jp': jajp,
+    'nb-no': nbno,
   }
 
   static get language () {
