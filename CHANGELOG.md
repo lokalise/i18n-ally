@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.3](https://github.com/antfu/i18n-ally/compare/v1.7.2...v1.7.3) (2019-12-19)
+
+
+### 🌍 Internationalization
+
+* update zh-cn, zh-tw ([b48d3ac](https://github.com/antfu/i18n-ally/commit/b48d3ac52984e8846d7d40c24a6c93a3c6882b9f))
+
 ### [1.7.2](https://github.com/antfu/i18n-ally/compare/v1.7.1...v1.7.2) (2019-12-19)
 
 
