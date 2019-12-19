@@ -16,6 +16,7 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
     "Unflatten",
+    "joomla",
     "regs"
   ],
   "i18n-ally.localesPaths": ".",

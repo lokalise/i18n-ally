@@ -4,7 +4,7 @@ import { ParserExtRegEx } from '../meta'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
-export type PackageFileType = 'packageJSON' | 'pubspecYAML' | 'none'
+export type PackageFileType = 'packageJSON' | 'pubspecYAML' | 'composerJSON' | 'none'
 
 export abstract class Framework {
   abstract id: string

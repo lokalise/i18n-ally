@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
 import i18n from '../i18n'
 import { Log } from '../utils'
-import { PackageJSONParser, PubspecYAMLParser } from '../packagesParsers'
+import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
 import ReactFramework from './react'
@@ -13,6 +13,7 @@ import VueSFCFramework from './vue-sfc'
 import FlutterFramework from './flutter'
 import EmberFramework from './ember'
 import CustomFramework from './custom'
+import PhpJoomlaFramework from './php-joomla'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -26,6 +27,7 @@ export const frameworks: Framework[] = [
   new EmberFramework(),
   new I18nextFramework(),
   new I18nTagFramework(),
+  new PhpJoomlaFramework(),
   new VueSFCFramework(),
 ]
 
@@ -42,6 +44,7 @@ export function getPackageDependencies (projectUrl: string): PackageDependencies
   result.none = []
   result.packageJSON = PackageJSONParser.load(projectUrl)
   result.pubspecYAML = PubspecYAMLParser.load(projectUrl)
+  result.composerJSON = ComposerJSONParser.load(projectUrl)
 
   return result
 }

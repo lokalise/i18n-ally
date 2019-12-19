@@ -7,7 +7,7 @@ export abstract class PackageParser {
   static load (root: string) {
     const filepath = `${root}/${this.filename}`
     if (!fs.existsSync(filepath)) {
-      Log.info(`📦 Packages file "${this.filename}" not exists`)
+      Log.info(`🕳 Packages file "${this.filename}" not exists`)
       return undefined
     }
 

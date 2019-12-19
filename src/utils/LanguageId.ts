@@ -9,6 +9,7 @@ export const LanguageIdExtMap = {
   json: 'json',
   html: 'html',
   dart: 'dart',
+  php: 'php',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap
