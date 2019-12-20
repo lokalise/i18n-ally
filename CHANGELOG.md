@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.2](https://github.com/antfu/i18n-ally/compare/v1.8.1...v1.8.2) (2019-12-20)
+
+
+### 🐞 Bug Fixes
+
+* copying key should not come with $t, [#151](https://github.com/antfu/i18n-ally/issues/151) thanks @JohanBeekers ([3a8489f](https://github.com/antfu/i18n-ally/commit/3a8489f0d2970ae313631058d1ad7d29a13c1be2))
+* improve writing logic, [#150](https://github.com/antfu/i18n-ally/issues/150) ([f16c82d](https://github.com/antfu/i18n-ally/commit/f16c82de8e85a00b9487c5a65fcc61c9f4c6860c))
+
 ### [1.8.1](https://github.com/antfu/i18n-ally/compare/v1.8.0...v1.8.1) (2019-12-19)
 
 
