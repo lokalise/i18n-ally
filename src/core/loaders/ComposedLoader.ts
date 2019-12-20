@@ -4,7 +4,7 @@ import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Log } from '../../utils'
 import { Config } from '../Config'
-import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
+import { FulfillAllMissingKeys } from '../../commands/manipulations'
 import { LocaleTree, LocaleNode, FlattenLocaleTree } from '../Nodes'
 import { Loader } from './Loader'
 
@@ -113,6 +113,10 @@ export class ComposedLoader extends Loader {
   async write (pendings: PendingWrite | PendingWrite[], triggerFullfilled = true) {
     if (!Array.isArray(pendings))
       pendings = [pendings]
+
+    if (Config.keepFulfilled && triggerFullfilled)
+      pendings = [...await FulfillAllMissingKeys(false) || [], ...pendings]
+
     pendings = pendings.filter(i => i)
 
     const distrubtedPendings: PendingWrite[][] = new Array(this.loadersReversed.length).fill(null).map(_ => [])
@@ -135,9 +139,6 @@ export class ComposedLoader extends Loader {
       if (distrubtedPendings[index] && distrubtedPendings[index].length)
         await loader.write(distrubtedPendings[index])
     }))
-
-    if (Config.keepFulfilled && triggerFullfilled)
-      FulfillAllMissingKeysDelay()
   }
 
   // TODO:sfc merge tree nodes

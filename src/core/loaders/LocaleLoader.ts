@@ -88,39 +88,47 @@ export class LocaleLoader extends Loader {
     return undefined
   }
 
-  private async writeToSingleFile (pending: PendingWrite) {
-    let filepath = pending.filepath
-    if (!filepath)
-      filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
-
-    if (!filepath)
-      throw new AllyError(ErrorType.filepath_not_specified)
-
-    Log.info(`💾 Writing ${filepath}`)
-    const ext = path.extname(filepath)
-    const parser = Global.getMatchedParser(ext)
-    if (!parser)
-      throw new AllyError(ErrorType.unsupported_file_type, ext)
-
-    let original: any = {}
-    if (existsSync(filepath))
-      original = await parser.load(filepath)
-
-    original = await applyPendingToObject(original, pending)
-
-    await parser.save(filepath, original, Config.sortKeys)
-  }
-
   private _ignoreChanges = false
 
   async write (pendings: PendingWrite|PendingWrite[]) {
     this._ignoreChanges = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
+
     pendings = pendings.filter(i => i)
+
+    const distrubtedPendings: Record<string, PendingWrite[]> = {}
+
+    for (const pending of pendings) {
+      let filepath = pending.filepath
+      if (!filepath)
+        filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
+      if (!filepath) {
+        Log.info(`💥 Unable to file path for writing ${JSON.stringify(pending)}`)
+        continue
+      }
+      if (!distrubtedPendings[filepath])
+        distrubtedPendings[filepath] = []
+      distrubtedPendings[filepath].push(pending)
+    }
+
     try {
-      for (const pending of pendings)
-        await this.writeToSingleFile(pending)
+      for (const [filepath, pendings] of Object.entries(distrubtedPendings)) {
+        Log.info(`💾 Writing ${filepath}`)
+        const ext = path.extname(filepath)
+        const parser = Global.getMatchedParser(ext)
+        if (!parser)
+          throw new AllyError(ErrorType.unsupported_file_type, ext)
+
+        let original: any = {}
+        if (existsSync(filepath))
+          original = await parser.load(filepath)
+
+        for (const pending of pendings)
+          original = await applyPendingToObject(original, pending)
+
+        await parser.save(filepath, original, Config.sortKeys)
+      }
     }
     catch (e) {
       this._ignoreChanges = false

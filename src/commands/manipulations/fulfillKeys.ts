@@ -27,7 +27,7 @@ export async function FulfillMissingKeysForProgress (item: ProgressSubmenuItem) 
     keypath: key,
   }))
 
-  await CurrentFile.loader.write(pendings, false)
+  return pendings
 }
 
 export async function FulfillAllMissingKeys (prompt = true) {
@@ -56,19 +56,25 @@ export async function FulfillAllMissingKeys (prompt = true) {
       keypath: key,
     })))
   }
-  await CurrentFile.loader.write(pendings, false)
+
+  return pendings
 }
 
 export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+  let pendings: PendingWrite[] | undefined
+
   if (!item)
-    return FulfillAllMissingKeys()
+    pendings = await FulfillAllMissingKeys()
 
   if (item instanceof ProgressSubmenuItem)
-    return FulfillMissingKeysForProgress(item)
+    pendings = await FulfillMissingKeysForProgress(item)
+
+  if (pendings?.length)
+    await CurrentFile.loader.write(pendings, false)
 }
 
 export function FulfillAllMissingKeysDelay () {
-  setTimeout(() => {
-    FulfillAllMissingKeys(false)
+  setTimeout(async () => {
+    await CurrentFile.loader.write([])
   }, KEEP_FULFILL_DELAY)
 }
