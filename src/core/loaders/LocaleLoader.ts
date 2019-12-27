@@ -181,7 +181,7 @@ export class LocaleLoader extends Loader {
     await this.write(writes)
   }
 
-  private getFileInfo (filepath: string, dirStructure: DirStructure) {
+  private getFileInfo (filepath: string, dirStructure: DirStructure, rootPath?: string) {
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const regs = Global.getFilenameMatchRegex(dirStructure)
@@ -201,6 +201,8 @@ export class LocaleLoader extends Loader {
     let locale = ''
     let nested = false
 
+    console.log(dirStructure, rootPath, path.relative(rootPath || '', filepath), path.sep)
+
     if (dirStructure === 'file') {
       if (!match || match.length < 2)
         return
@@ -212,7 +214,9 @@ export class LocaleLoader extends Loader {
 
     if (dirStructure === 'dir') {
       nested = true
-      locale = normalizeLocale(path.basename(info.dir), '')
+      locale = rootPath
+        ? normalizeLocale(path.relative(rootPath, filepath).split(path.sep)[0], '')
+        : normalizeLocale(path.basename(info.dir), '')
     }
 
     if (!locale)
@@ -230,7 +234,7 @@ export class LocaleLoader extends Loader {
 
   private async loadFile (filepath: string, dirStructure: DirStructure = 'file', parentPath?: string) {
     try {
-      const result = this.getFileInfo(filepath, dirStructure)
+      const result = this.getFileInfo(filepath, dirStructure, parentPath)
       if (!result)
         return
       const { locale, nested, parser } = result
@@ -264,15 +268,16 @@ export class LocaleLoader extends Loader {
     return stat.isDirectory()
   }
 
-  private async loadDirectory (rootPath: string, dirStructure: DirStructureAuto) {
-    const paths = await fs.readdir(rootPath)
+  private async loadDirectory (searchingPath: string, dirStructure: DirStructureAuto, rootPath?: string) {
+    rootPath = rootPath || searchingPath
+    const paths = await fs.readdir(searchingPath)
 
     for (const filename of paths) {
-      const filepath = path.resolve(rootPath, filename)
+      const filepath = path.resolve(searchingPath, filename)
       const isDirectory = await this.isDirectory(filepath)
 
       if (['auto', 'file'].includes(dirStructure) && !isDirectory)
-        await this.loadFile(filepath, 'file', rootPath)
+        await this.loadFile(filepath, 'file', searchingPath)
 
       if (['auto', 'dir'].includes(dirStructure) && isDirectory) {
         for (const p of await fs.readdir(filepath)) {
@@ -280,7 +285,7 @@ export class LocaleLoader extends Loader {
           if (!await this.isDirectory(subfilepath))
             await this.loadFile(subfilepath, 'dir', rootPath)
           else if (Config.includeSubfolders)
-            await this.loadDirectory(subfilepath, 'dir')
+            await this.loadDirectory(filepath, 'dir', rootPath)
         }
       }
     }
