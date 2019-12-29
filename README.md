@@ -232,6 +232,7 @@ This extension itself supports i18n as well, it will be auto matched to the disp
 | Spanish (Español) |  | [@Baltimer](https://github.com/Baltimer) |
 | Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
 | Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm) |
+| Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
 
 If you would like to help translate this extension, you can do it by following steps.
 
