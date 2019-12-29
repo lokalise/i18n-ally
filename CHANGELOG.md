@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.5](https://github.com/antfu/i18n-ally/compare/v1.8.4...v1.8.5) (2019-12-29)
+
+
+### 🌍 Internationalization
+
+* Add Portuguese-BR Translation ([#159](https://github.com/antfu/i18n-ally/issues/159), thanks [@lbcs16](https://github.com/lbcs16)) ([7adfa05](https://github.com/antfu/i18n-ally/commit/7adfa05856c73eb4f4a598613d08670a5a205f88))
+
 ### [1.8.4](https://github.com/antfu/i18n-ally/compare/v1.8.3...v1.8.4) (2019-12-27)
 
 ### [1.8.3](https://github.com/antfu/i18n-ally/compare/v1.8.2...v1.8.3) (2019-12-27)
