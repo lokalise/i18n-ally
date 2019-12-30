@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/antfu/i18n-ally/compare/v1.8.5...v1.9.0) (2019-12-30)
+
+
+### 🐞 Bug Fixes
+
+* add message for empty usage report ([2f151b1](https://github.com/antfu/i18n-ally/commit/2f151b1c3a1bbee93d61e9f74b0a60dfdfcf2f0e))
+
+
+### ⚡ Features
+
+* delete keys that are not in use ([c535293](https://github.com/antfu/i18n-ally/commit/c535293d668ea48a76ebf0e2dd77ca83f45a297d))
+
 ### [1.8.5](https://github.com/antfu/i18n-ally/compare/v1.8.4...v1.8.5) (2019-12-29)
 
 
