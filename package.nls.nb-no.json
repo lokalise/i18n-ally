@@ -107,5 +107,6 @@
   "view.usage": "",
   "view.usage_keys_in_use": "",
   "view.usage_keys_missing": "",
-  "view.usage_keys_not_in_use": ""
+  "view.usage_keys_not_in_use": "",
+  "view.usage_report_none": ""
 }

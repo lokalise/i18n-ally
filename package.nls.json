@@ -107,5 +107,6 @@
   "view.usage": "Usage Report",
   "view.usage_keys_in_use": "{0} keys are in use",
   "view.usage_keys_missing": "{0} keys are missing",
-  "view.usage_keys_not_in_use": "{0} keys are NOT in use"
+  "view.usage_keys_not_in_use": "{0} keys are NOT in use",
+  "view.usage_report_none": "Press refresh to start analyst key usages."
 }

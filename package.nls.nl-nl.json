@@ -107,5 +107,6 @@
   "view.usage": "Verbruiksrapport",
   "view.usage_keys_in_use": "{0} sleutels zijn in gebruik",
   "view.usage_keys_missing": "{0} ontbrekende sleutels",
-  "view.usage_keys_not_in_use": "{0} sleutels zijn NIET in gebruik"
+  "view.usage_keys_not_in_use": "{0} sleutels zijn NIET in gebruik",
+  "view.usage_report_none": ""
 }

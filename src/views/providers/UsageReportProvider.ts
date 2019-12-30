@@ -1,6 +1,7 @@
 import { TreeDataProvider, EventEmitter, ExtensionContext, TreeItem, commands, TreeView } from 'vscode'
 import { Analyst, UsageReport } from '../../core'
 import { UsageReportTreeItem, UsageReportRootItem, LocationTreeItem } from '../items'
+import i18n from '../../i18n'
 
 export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   private _onDidChangeTreeData = new EventEmitter<TreeItem | undefined>()
@@ -36,14 +37,16 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   }
 
   async getChildren (element?: TreeItem) {
+    this.rootItems = []
     if (!element) {
-      this.rootItems = []
       if (this.usages.active.length)
         this.rootItems.push(new UsageReportRootItem(this.ctx, 'active', this.usages.active))
       if (this.usages.idle.length)
         this.rootItems.push(new UsageReportRootItem(this.ctx, 'idle', this.usages.idle))
       if (this.usages.missing.length)
         this.rootItems.push(new UsageReportRootItem(this.ctx, 'missing', this.usages.missing))
+      if (!this.rootItems.length)
+        this.rootItems.push(new TreeItem(i18n.t('view.usage_report_none')))
     }
     else if (element instanceof UsageReportRootItem) {
       this.rootItems = this.usages[element.key]
@@ -54,9 +57,6 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
         const location = await Analyst.getLocationOf(o)
         return new LocationTreeItem(this.ctx, location)
       }))
-    }
-    else {
-      this.rootItems = []
     }
     return this.rootItems
   }

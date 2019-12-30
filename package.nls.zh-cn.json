@@ -107,5 +107,6 @@
   "view.usage": "使用情况分析",
   "view.usage_keys_in_use": "{0}个文案使用中",
   "view.usage_keys_missing": "{0}个文案缺失",
-  "view.usage_keys_not_in_use": "{0}个文案未被使用"
+  "view.usage_keys_not_in_use": "{0}个文案未被使用",
+  "view.usage_report_none": "点击刷新开始使用分析"
 }

@@ -107,5 +107,6 @@
   "view.usage": "使用状況レポート",
   "view.usage_keys_in_use": "{0} キーを使用中",
   "view.usage_keys_missing": "",
-  "view.usage_keys_not_in_use": "{0} キーは使用していません"
+  "view.usage_keys_not_in_use": "{0} キーは使用していません",
+  "view.usage_report_none": ""
 }
