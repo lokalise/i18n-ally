@@ -4,7 +4,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-empty-function': 'off',
     'no-useless-escape': 'off',
-    'no-cond-assign': 'off'
+    'no-cond-assign': 'off',
+    'no-unused-expressions': 'off'
   },
   env: {
     jest: true

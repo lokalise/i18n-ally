@@ -1,15 +1,23 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
+import { KeyUsage } from '../../core'
 import i18n from '../../i18n'
 import { BaseTreeItem } from '.'
 
 export class UsageReportRootItem extends BaseTreeItem {
-  constructor (ctx: ExtensionContext, public readonly key: 'active' | 'idle' | 'missing', public readonly count: number) {
+  public readonly count: number
+
+  constructor (
+    ctx: ExtensionContext,
+    public readonly key: 'active' | 'idle' | 'missing',
+    public readonly keys: KeyUsage[],
+  ) {
     super(ctx)
     this.iconPath = this.getIcon({
       active: 'checkmark',
       idle: 'warning',
       missing: 'icon-unknown',
     }[this.key])
+    this.count = keys.length
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
   }
 
@@ -20,4 +28,10 @@ export class UsageReportRootItem extends BaseTreeItem {
       missing: i18n.t('view.usage_keys_missing', this.count),
     }[this.key]
   }
+
+  get contextValue () {
+    return this.key
+  }
+
+  set contextValue (_) {}
 }

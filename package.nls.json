@@ -60,6 +60,7 @@
   "prompt.config_locales_button": "Config Now",
   "prompt.config_locales_info": "Config the locales directory for your project",
   "prompt.config_locales_success": "Locales path successfully configured.",
+  "prompt.delete_keys_not_in_use": "Are you sure to delete {0} keys that are not in use?",
   "prompt.donate_via_paypal": "Donate via Paypal",
   "prompt.edit_key_in_locale": "{1} | Editing key \"{0}\"",
   "prompt.enter_file_path_to_store_key": "Enter the file path to store key \"{0}\"",

@@ -286,6 +286,11 @@
           "command": "extension.i18n-ally.locale-visibility-hide",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /hide/",
           "group": "inline@4"
+        },
+        {
+          "command": "extension.i18n-ally.delete-key",
+          "when": "view =~ /i18n-ally-locales-usage/ && viewItem =~ /idle/",
+          "group": "i18nally@1"
         }
       ],
       "view/title": [
@@ -337,7 +342,7 @@
         {
           "id": "i18n-ally-locales-usage",
           "name": "%view.usage%",
-          "when": "i18n-ally-enabled && i18n-ally-has-report"
+          "when": "i18n-ally-enabled"
         },
         {
           "id": "i18n-ally-help-feedback",

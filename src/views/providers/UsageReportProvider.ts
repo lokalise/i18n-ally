@@ -1,4 +1,4 @@
-import { TreeDataProvider, EventEmitter, ExtensionContext, TreeItem, commands } from 'vscode'
+import { TreeDataProvider, EventEmitter, ExtensionContext, TreeItem, commands, TreeView } from 'vscode'
 import { Analyst, UsageReport } from '../../core'
 import { UsageReportTreeItem, UsageReportRootItem, LocationTreeItem } from '../items'
 
@@ -6,7 +6,8 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   private _onDidChangeTreeData = new EventEmitter<TreeItem | undefined>()
   readonly onDidChangeTreeData = this._onDidChangeTreeData.event
   private usages: UsageReport = { active: [], idle: [], missing: [] }
-  // readonly view: TreeView<UsageReportTreeItem | LocationTreeItem>
+  view: TreeView<TreeItem> | undefined
+  rootItems: TreeItem[] = []
 
   constructor (
     private ctx: ExtensionContext,
@@ -22,8 +23,8 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
 
     commands.executeCommand('setContext', 'i18n-ally-has-report', enabled)
     this.refresh()
-    // if (enabled)
-    //  this.view.reveal(this.items[0])
+    if (enabled && this.rootItems.length)
+      this.view?.reveal(this.rootItems[0])
   }
 
   refresh (): void {
@@ -36,29 +37,31 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
 
   async getChildren (element?: TreeItem) {
     if (!element) {
-      const items: UsageReportRootItem[] = []
-
+      this.rootItems = []
       if (this.usages.active.length)
-        items.push(new UsageReportRootItem(this.ctx, 'active', this.usages.active.length))
+        this.rootItems.push(new UsageReportRootItem(this.ctx, 'active', this.usages.active))
       if (this.usages.idle.length)
-        items.push(new UsageReportRootItem(this.ctx, 'idle', this.usages.idle.length))
+        this.rootItems.push(new UsageReportRootItem(this.ctx, 'idle', this.usages.idle))
       if (this.usages.missing.length)
-        items.push(new UsageReportRootItem(this.ctx, 'missing', this.usages.missing.length))
-
-      return items
+        this.rootItems.push(new UsageReportRootItem(this.ctx, 'missing', this.usages.missing))
     }
-    if (element instanceof UsageReportRootItem) {
-      return this.usages[element.key]
+    else if (element instanceof UsageReportRootItem) {
+      this.rootItems = this.usages[element.key]
         .map(usage => new UsageReportTreeItem(this.ctx, usage))
     }
-    if (element instanceof UsageReportTreeItem) {
-      return await Promise.all(element.usage.occurrences.map(async (o) => {
+    else if (element instanceof UsageReportTreeItem) {
+      this.rootItems = await Promise.all(element.usage.occurrences.map(async (o) => {
         const location = await Analyst.getLocationOf(o)
         return new LocationTreeItem(this.ctx, location)
       }))
     }
     else {
-      return []
+      this.rootItems = []
     }
+    return this.rootItems
+  }
+
+  getParent () {
+    return null
   }
 }

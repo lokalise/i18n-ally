@@ -60,6 +60,7 @@
   "prompt.config_locales_button": "配置",
   "prompt.config_locales_info": "配置当前项目的翻译文件夹",
   "prompt.config_locales_success": "翻译文件夹配置成功",
+  "prompt.delete_keys_not_in_use": "确定要删除未被使用的{0}条文案吗？",
   "prompt.donate_via_paypal": "通过Paypal捐款",
   "prompt.edit_key_in_locale": "{1} | 编辑 \"{0}\" 的文案",
   "prompt.enter_file_path_to_store_key": "输入存储文案 \"{0}\" 的文件路径",

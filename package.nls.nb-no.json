@@ -60,6 +60,7 @@
   "prompt.config_locales_button": "Konfigurer nå",
   "prompt.config_locales_info": "Konfigurer oversettelsesmappe for ditt project",
   "prompt.config_locales_success": "Oversettelsesmappe ble konfigurert.",
+  "prompt.delete_keys_not_in_use": "",
   "prompt.donate_via_paypal": "Doner via Paypal",
   "prompt.edit_key_in_locale": "{1} | Redigerer nøkkel \"{0}\"",
   "prompt.enter_file_path_to_store_key": "Skriv filbanen for å lagre nøkkel \"{0}\"",

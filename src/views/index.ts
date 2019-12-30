@@ -32,8 +32,9 @@ const m: ExtensionModule = (ctx) => {
     showCollapseAll: true,
   })
 
-  window.createTreeView(ViewIds.usage, {
-    treeDataProvider: new UsageReportProvider(ctx),
+  const usageReportProvider = new UsageReportProvider(ctx)
+  usageReportProvider.view = window.createTreeView(ViewIds.usage, {
+    treeDataProvider: usageReportProvider,
     showCollapseAll: true,
   })
 
