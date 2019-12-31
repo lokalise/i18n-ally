@@ -22,6 +22,7 @@ class I18nextFramework extends Framework {
     'typescript',
     'tyspescriptreact',
     'typescriptreact',
+    'ejs',
   ]
 
   // for visualize the regex, you can use https://regexper.com/

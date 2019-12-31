@@ -10,10 +10,11 @@ export const LanguageIdExtMap = {
   html: 'html',
   dart: 'dart',
   php: 'php',
+  ejs: 'ejs',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap
 
 export function getExtOfLanguageId (id: LanguageId) {
-  return LanguageIdExtMap[id]
+  return LanguageIdExtMap[id] || id
 }

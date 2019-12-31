@@ -71,6 +71,7 @@ export class Analyst {
     // TODO: configs for custom ignore
 
     return files.map(f => resolve(root, f))
+      .filter(f => !fs.lstatSync(f).isDirectory())
   }
 
   private static async getOccurrencesOfFile (filepath: string) {

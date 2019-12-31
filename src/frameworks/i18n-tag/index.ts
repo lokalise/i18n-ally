@@ -17,6 +17,7 @@ class I18nTagFramework extends Framework {
     'tyspescriptreact',
     'typescriptreact',
     'vue',
+    'ejs',
   ]
 
   keyMatchReg = [

@@ -19,6 +19,7 @@ class VueFramework extends Framework {
     'vue-html',
     'javascript',
     'typescript',
+    'ejs',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
