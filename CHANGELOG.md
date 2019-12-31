@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/antfu/i18n-ally/compare/v1.9.0...v1.9.1) (2019-12-31)
+
+
+### ⚡ Features
+
+* support for ejs ([3971011](https://github.com/antfu/i18n-ally/commit/3971011306ce6167a05a6f5b0d5eec01f6022556))
+
 ## [1.9.0](https://github.com/antfu/i18n-ally/compare/v1.8.5...v1.9.0) (2019-12-30)
 
 
