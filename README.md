@@ -307,7 +307,9 @@ This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/th
 
 Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-locale-message](https://github.com/kazupon/vue-i18n-locale-message), which is created by the author of vue-i18n. Thanks for making this!
 
-Also my thanks to [the awesome contributors](https://github.com/antfu/i18n-ally/graphs/contributors) and YOU for reading this!
+Also my great thanks to all the awesome contributors and YOU for reading this!
+
+<a href="https://github.com/antfu/i18n-ally/graphs/contributors"><img src="https://opencollective.com/i18n-ally/contributors.svg?width=890"/></a>
 
 Lastly, I want to have a **special thanks to my partner [@iiiiiiines](https://github.com/iiiiiiines)** who have encouraged and supported me working on this project.
 
@@ -318,7 +320,9 @@ I made this project with heart ❤
 
 If you found it useful, you may consider buy me a coffee!
 
-[Donate via PayPal](https://paypal.me/antfu7), **Cheers!!! 🙌**
+[Open Collective](https://opencollective.com/i18n-ally)
+
+[Donate via PayPal](https://paypal.me/antfu7)
 
 
 ## 📄 License
