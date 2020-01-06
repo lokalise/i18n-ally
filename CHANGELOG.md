@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/antfu/i18n-ally/compare/v1.9.1...v1.10.0) (2020-01-06)
+
+
+### ⚡ Features
+
+* new framework chrome-ext ([fe6839d](https://github.com/antfu/i18n-ally/commit/fe6839d5d2198476d1b2d4adc8adda07a006b9b6))
+
 ### [1.9.1](https://github.com/antfu/i18n-ally/compare/v1.9.0...v1.9.1) (2019-12-31)
 
 
