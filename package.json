@@ -603,11 +603,11 @@
     "@types/json5": "0.0.30",
     "@types/lodash": "4.14.149",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.12.22",
+    "@types/node": "12.12.24",
     "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "2.13.0",
-    "@typescript-eslint/parser": "2.13.0",
+    "@typescript-eslint/eslint-plugin": "2.14.0",
+    "@typescript-eslint/parser": "2.14.0",
     "conventional-github-releaser": "3.1.3",
     "eslint": "6.8.0",
     "ini": "^1.3.5",
@@ -616,7 +616,7 @@
     "standard-version": "7.0.1",
     "ts-jest": "^24.2.0",
     "ts-loader": "6.2.1",
-    "webpack": "4.41.4",
+    "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
@@ -639,7 +639,7 @@
     "ts-node": "^8.3.0",
     "typescript": "3.7.4",
     "vue": "^2.6.10",
-    "vue-i18n-locale-message": "^0.9.0",
+    "vue-i18n-locale-message": "^0.10.0",
     "yaml": "^1.7.2"
   }
 }
