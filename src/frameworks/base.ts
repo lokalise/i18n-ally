@@ -1,5 +1,5 @@
 import { LanguageId } from '../utils'
-import { DirStructure, OptionalFeatures } from '../core/types'
+import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext } from '../core/types'
 import { ParserExtRegEx } from '../meta'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
@@ -54,5 +54,9 @@ export abstract class Framework {
       reg = [reg]
 
     return reg
+  }
+
+  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+    return key
   }
 }

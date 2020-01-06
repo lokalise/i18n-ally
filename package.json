@@ -454,7 +454,8 @@
               "i18n-tag",
               "flutter",
               "vue-sfc",
-              "ember"
+              "ember",
+              "chrome-ext"
             ]
           },
           "description": "%config.enabled_frameworks%"

@@ -1,7 +1,7 @@
 import { Disposable, EventEmitter } from 'vscode'
 import _, { uniq } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
-import { Coverage, FileInfo, PendingWrite, NodeOptions } from '../types'
+import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext } from '../types'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -132,19 +132,25 @@ export abstract class Loader extends Disposable {
     return tree
   }
 
-  getTreeNodeByKey (keypath: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
+  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+    for (const framework of Global.enabledFrameworks)
+      key = framework.rewriteKeys(key, source, context)
+    return key
+  }
+
+  getTreeNodeByKey (key: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     const root = !tree
     tree = tree || this.root
 
     // flatten style
     if (root) {
-      const node = tree.getChild(keypath)
+      const node = tree.getChild(key)
       if (node)
         return node
     }
 
     // tree style
-    const keys = this.splitKeypath(keypath)
+    const keys = this.splitKeypath(key)
     const head = keys[0]
     const remaining = keys.slice(1).join('.')
     const node = tree.getChild(head)
@@ -157,16 +163,19 @@ export abstract class Loader extends Disposable {
 
   getFilepathByKey (key: string, locale?: string) {
     locale = locale || Config.displayLanguage
+    key = this.rewriteKeys(key, 'reference', { locale })
     const record = this.getRecordByKey(key, locale)
     if (record && record.filepath)
       return record.filepath
     return undefined
   }
 
-  getValueByKey (keypath: string, locale?: string, maxlength = 0, stringifySpace?: number) {
+  getValueByKey (key: string, locale?: string, maxlength = 0, stringifySpace?: number) {
     locale = locale || Config.displayLanguage
 
-    const node = this.getTreeNodeByKey(keypath)
+    key = this.rewriteKeys(key, 'reference')
+
+    const node = this.getTreeNodeByKey(key)
 
     if (!node)
       return undefined
@@ -198,20 +207,23 @@ export abstract class Loader extends Disposable {
     }
   }
 
-  getShadowNodeByKey (keypath: string) {
-    return new LocaleNode({ keypath, shadow: true })
+  getShadowNodeByKey (key: string) {
+    key = this.rewriteKeys(key, 'reference')
+    return new LocaleNode({ keypath: key, shadow: true })
   }
 
-  getNodeByKey (keypath: string, shadow = false): LocaleNode | undefined {
-    const node = this.getTreeNodeByKey(keypath)
+  getNodeByKey (key: string, shadow = false): LocaleNode | undefined {
+    key = this.rewriteKeys(key, 'reference')
+    const node = this.getTreeNodeByKey(key)
     if (!node && shadow)
-      return this.getShadowNodeByKey(keypath)
+      return this.getShadowNodeByKey(key)
     if (node && node.type !== 'tree')
       return node
   }
 
-  getTranslationsByKey (keypath: string, shadow = true) {
-    const node = this.getNodeByKey(keypath, shadow)
+  getTranslationsByKey (key: string, shadow = true) {
+    key = this.rewriteKeys(key, 'reference')
+    const node = this.getNodeByKey(key, shadow)
     if (!node)
       return {}
     if (shadow)
@@ -220,8 +232,9 @@ export abstract class Loader extends Disposable {
       return node.locales
   }
 
-  getRecordByKey (keypath: string, locale: string, shadow = false): LocaleRecord | undefined {
-    const trans = this.getTranslationsByKey(keypath, shadow)
+  getRecordByKey (key: string, locale: string, shadow = false): LocaleRecord | undefined {
+    key = this.rewriteKeys(key, 'reference')
+    const trans = this.getTranslationsByKey(key, shadow)
     return trans[locale]
   }
 

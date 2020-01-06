@@ -92,3 +92,10 @@ export interface UsageReport {
   idle: KeyUsage[]
   missing: KeyUsage[]
 }
+
+export type RewriteKeySource = 'source' | 'reference' | 'write'
+
+export interface RewriteKeyContext {
+  locale?: string
+  targetFile?: string
+}

@@ -48,6 +48,7 @@ export class LocaleLoader extends Loader {
   }
 
   getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
+    key = this.rewriteKeys(key, 'reference', { locale: Config.displayLanguage })
     const node = this.getNodeByKey(key)
     return node && node.locales[Config.displayLanguage]
   }
@@ -74,12 +75,13 @@ export class LocaleLoader extends Loader {
     })
   }
 
-  getShadowFilePath (keypath: string, locale: string) {
+  getShadowFilePath (key: string, locale: string) {
+    key = this.rewriteKeys(key, 'reference', { locale })
     const paths = this.getFilepathsOfLocale(locale)
     if (paths.length === 1)
       return paths[0]
 
-    const node = this.getNodeByKey(keypath)
+    const node = this.getNodeByKey(key)
     if (node) {
       const sourceRecord = node.locales[Config.sourceLanguage] || Object.values(node.locales)[0]
       if (sourceRecord && sourceRecord.filepath)
@@ -143,6 +145,9 @@ export class LocaleLoader extends Loader {
 
   async renameKey (oldkey: string, newkey: string) {
     const edit = new WorkspaceEdit()
+
+    oldkey = this.rewriteKeys(oldkey, 'source')
+    newkey = this.rewriteKeys(newkey, 'reference')
 
     const locations = await Analyst.getAllOccurrenceLocations(oldkey)
 

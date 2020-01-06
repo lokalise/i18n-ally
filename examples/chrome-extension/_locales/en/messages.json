@@ -1,0 +1,10 @@
+{
+  "errorRemoved": {
+    "message": "Removed",
+    "description": ""
+  },
+  "showInFolderTitle": {
+    "message": "Show in Folder",
+    "description": "Alt text for show in folder icon"
+  }
+}

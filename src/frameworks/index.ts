@@ -14,6 +14,7 @@ import FlutterFramework from './flutter'
 import EmberFramework from './ember'
 import CustomFramework from './custom'
 import PhpJoomlaFramework from './php-joomla'
+import ChromeExtensionFramework from './chrome-ext'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -28,6 +29,7 @@ export const frameworks: Framework[] = [
   new I18nextFramework(),
   new I18nTagFramework(),
   new PhpJoomlaFramework(),
+  new ChromeExtensionFramework(),
   new VueSFCFramework(),
 ]
 

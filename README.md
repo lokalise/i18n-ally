@@ -42,6 +42,7 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18next.png) [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/joomla.png) [Joomla](https://www.joomla.org/) | ✅ | [`joomla/application`](https://docs.joomla.org/Application) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config by `"i18n-ally.enabledFrameworks": "chrome-ext"` |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://github.com/svenfuchs/rails-i18n) | [Vote Here](https://github.com/antfu/i18n-ally/issues/136) |  |
 | 🎎 **Custom**  | ✅ | **For almost any frameworks! [How to...](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
