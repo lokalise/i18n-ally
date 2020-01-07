@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.2](https://github.com/antfu/i18n-ally/compare/v1.10.1...v1.10.2) (2020-01-07)
+
+
+### 🌍 Internationalization
+
+* add french language support ([#166](https://github.com/antfu/i18n-ally/issues/166), thanks @Nicoxx45) ([72fdcab](https://github.com/antfu/i18n-ally/commit/72fdcab9d9fab5f7d1cdf4c9f599915021c582e5))
+
+
+### 🐞 Bug Fixes
+
+* **chrome-ext:** refactorTemplates ([1d250c3](https://github.com/antfu/i18n-ally/commit/1d250c3682a0eea5c53dcf266f887a82d1b5900b))
+
 ### [1.10.1](https://github.com/antfu/i18n-ally/compare/v1.10.0...v1.10.1) (2020-01-06)
 
 ## [1.10.0](https://github.com/antfu/i18n-ally/compare/v1.9.1...v1.10.0) (2020-01-06)
