@@ -23,7 +23,8 @@ class ChromeExtensionFramework extends Framework {
 
   refactorTemplates (keypath: string, languageId: string) {
     return [
-      `i18n.getMessage('${keypath}')`,
+      `chrome.i18n.getMessage('${keypath}')`,
+      `browser.i18n.getMessage('${keypath}')`,
       keypath,
     ]
   }
