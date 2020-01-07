@@ -5,6 +5,8 @@ import zhtw from '../package.nls.zh-tw.json'
 import nlnl from '../package.nls.nl-nl.json'
 import jajp from '../package.nls.ja-jp.json'
 import nbno from '../package.nls.nb-no.json'
+import frfr from '../package.nls.fr-fr.json'
+import ptbr from '../package.nls.pt-br.json'
 
 export type i18nMessage = typeof en
 export type i18nKeys = keyof i18nMessage
@@ -18,6 +20,8 @@ export default class i18n {
     'nl-nl': nlnl,
     'ja-jp': jajp,
     'nb-no': nbno,
+    'fr-fr': frfr,
+    'pt-br': ptbr,
   }
 
   static get language () {
