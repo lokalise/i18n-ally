@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.3](https://github.com/antfu/i18n-ally/compare/v1.10.2...v1.10.3) (2020-01-08)
+
+
+### 🐞 Bug Fixes
+
+* remove monopoly for chrome-ext ([b64c584](https://github.com/antfu/i18n-ally/commit/b64c5846c3d9adf3ccf7700e742ce662831d1bcf))
+
 ### [1.10.2](https://github.com/antfu/i18n-ally/compare/v1.10.1...v1.10.2) (2020-01-07)
 
 
