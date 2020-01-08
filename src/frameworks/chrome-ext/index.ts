@@ -5,11 +5,8 @@ import { RewriteKeySource, RewriteKeyContext } from '../../core/types'
 class ChromeExtensionFramework extends Framework {
   id = 'chrome-ext'
   display = 'Chrome Extension'
-  monopoly = true
 
-  detection = {
-
-  }
+  detection = {}
 
   languageIds: LanguageId[] = [
     'javascript',
