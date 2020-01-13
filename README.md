@@ -19,12 +19,13 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </p>
 
 <p align='center'>
-Ruby on Rails now get supported! 🎉
-<hr/>
+<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png"/><b>Rails i18n</b> is now supported! 🎉
+</p>
+<p align='center'>--------</p>
+<p align='center'>
 <a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</a> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
 Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b>
 </p>
-
 <br>
 
 
