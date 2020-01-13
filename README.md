@@ -19,7 +19,9 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </p>
 
 <p align='center'>
-🎉 <a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</a> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
+Ruby on Rails now get supported! 🎉
+<hr/>
+<a style='color:#34495E' href='https://github.com/antfu/i18n-ally/tree/v0.x'>Vue i18n Ally</a> is now <a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md"><b style='color:#70C9C7'>i18n Ally</b></a>!
 Please check out <b><a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Changes and Migration</a></b>
 </p>
 
@@ -43,8 +45,8 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/joomla.png) [Joomla](https://www.joomla.org/) | ✅ | [`joomla/application`](https://docs.joomla.org/Application) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config by `"i18n-ally.enabledFrameworks": "chrome-ext"` |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://github.com/svenfuchs/rails-i18n) | [Vote Here](https://github.com/antfu/i18n-ally/issues/136) |  |
 | 🎎 **Custom**  | ✅ | **For almost any frameworks! [How to...](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
 
 If you would like to make it work for frameworks not listed above, you can:
