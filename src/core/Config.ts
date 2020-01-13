@@ -128,6 +128,10 @@ export class Config {
     return this.getConfig<boolean>('keepFulfilled') || false
   }
 
+  static get frameworksRubyRailsScopeRoot (): string {
+    return this.getConfig<string>('frameworks.ruby-rails.scopeRoot') || ''
+  }
+
   static async requestKeyStyle (): Promise<KeyStyle | undefined> {
     if (this.keyStyle !== 'auto')
       return this.keyStyle

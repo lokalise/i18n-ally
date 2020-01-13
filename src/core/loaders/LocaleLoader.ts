@@ -6,7 +6,7 @@ import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflattenObject } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, DirStructureAuto } from '../types'
-import { LocaleRecord, LocaleTree } from '../Nodes'
+import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
@@ -45,12 +45,6 @@ export class LocaleLoader extends Loader {
           ? 1
           : 0)
       .value()
-  }
-
-  getDisplayingTranslateByKey (key: string): LocaleRecord | undefined {
-    key = this.rewriteKeys(key, 'reference', { locale: Config.displayLanguage })
-    const node = this.getNodeByKey(key)
-    return node && node.locales[Config.displayLanguage]
   }
 
   private getFilepathsOfLocale (locale: string) {
@@ -117,19 +111,31 @@ export class LocaleLoader extends Loader {
     try {
       for (const [filepath, pendings] of Object.entries(distrubtedPendings)) {
         Log.info(`💾 Writing ${filepath}`)
+
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
           throw new AllyError(ErrorType.unsupported_file_type, ext)
 
         let original: any = {}
-        if (existsSync(filepath))
+        if (existsSync(filepath)) {
           original = await parser.load(filepath)
+          original = this.preprocessData(original, {
+            locale: pendings[0].locale,
+            targetFile: filepath,
+          })
+        }
 
+        let modified = original
         for (const pending of pendings)
-          original = await applyPendingToObject(original, pending)
+          modified = await applyPendingToObject(modified, pending)
 
-        await parser.save(filepath, original, Config.sortKeys)
+        modified = this.deprocessData(modified, {
+          locale: pendings[0].locale,
+          targetFile: filepath,
+        })
+
+        await parser.save(filepath, modified, Config.sortKeys)
       }
     }
     catch (e) {
@@ -247,7 +253,8 @@ export class LocaleLoader extends Loader {
       if (!parser)
         throw new AllyError(ErrorType.unsupported_file_type)
 
-      const data = await parser.load(filepath)
+      let data = await parser.load(filepath)
+      data = this.preprocessData(data, { locale, targetFile: filepath })
       const value = unflattenObject(data)
 
       this._files[filepath] = {

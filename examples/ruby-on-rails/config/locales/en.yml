@@ -1,0 +1,28 @@
+en:
+  welcome: 'hi'
+  post_mailer:
+    notify:
+      subject: "New post %{title} was added!"
+  posts:
+    index:
+      count:
+        one: "%{count} post"
+        other: "%{count} posts"
+  pages:
+    index:
+      #bold_text_html: '<b>Semibold text</b>'
+      bold_text:
+        html: '<b>Semibold text</b>'
+      welcome: "Welcome!"
+      new_post: 'New post'
+      posts: 'Posts'
+  activerecord:
+    models:
+      post: 'Post'
+    attributes:
+      post:
+        title: 'Title'
+        body: 'Body'
+  time:
+    formats:
+      own: '%H:%M:%S, %d %B'

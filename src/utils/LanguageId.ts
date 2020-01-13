@@ -11,6 +11,9 @@ export const LanguageIdExtMap = {
   dart: 'dart',
   php: 'php',
   ejs: 'ejs',
+  ruby: 'rb',
+  erb: 'erb',
+  haml: 'haml',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap

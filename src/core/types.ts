@@ -99,3 +99,8 @@ export interface RewriteKeyContext {
   locale?: string
   targetFile?: string
 }
+
+export interface DataProcessContext {
+  locale?: string
+  targetFile?: string
+}

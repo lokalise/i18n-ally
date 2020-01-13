@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
 import i18n from '../i18n'
 import { Log } from '../utils'
-import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser } from '../packagesParsers'
+import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
 import ReactFramework from './react'
@@ -15,6 +15,7 @@ import EmberFramework from './ember'
 import CustomFramework from './custom'
 import PhpJoomlaFramework from './php-joomla'
 import ChromeExtensionFramework from './chrome-ext'
+import RubyRailsFramework from './ruby-rails'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -30,6 +31,7 @@ export const frameworks: Framework[] = [
   new I18nTagFramework(),
   new PhpJoomlaFramework(),
   new ChromeExtensionFramework(),
+  new RubyRailsFramework(),
   new VueSFCFramework(),
 ]
 
@@ -47,6 +49,7 @@ export function getPackageDependencies (projectUrl: string): PackageDependencies
   result.packageJSON = PackageJSONParser.load(projectUrl)
   result.pubspecYAML = PubspecYAMLParser.load(projectUrl)
   result.composerJSON = ComposerJSONParser.load(projectUrl)
+  result.gemfile = GemfileParser.load(projectUrl)
 
   return result
 }

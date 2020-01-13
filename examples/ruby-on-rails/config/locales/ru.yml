@@ -1,0 +1,29 @@
+ru:
+  post_mailer:
+    notify:
+      subject: 'Была добавлена новая запись %{title}!'
+  posts:
+    index:
+      count:
+        zero: '%{count} записей'
+        one: '%{count} запись'
+        few: '%{count} записи'
+        many: '%{count} записей'
+        other: '%{count} записи'
+  pages:
+    index:
+      bold_text:
+        html: <b>Полужирный текст</b>
+      welcome: Добро пожаловать!
+      new_post: Добавить запись
+      posts: Список записей
+  activerecord:
+    models:
+      post: Запись
+    attributes:
+      post:
+        title: Заголовок
+        body: ok
+  time:
+    formats:
+      own: '%H:%M:%S, %d %B'

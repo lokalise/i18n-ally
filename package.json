@@ -14,6 +14,7 @@
     "workspaceContains:package.json",
     "workspaceContains:pubspec.yaml",
     "workspaceContains:composer.json",
+    "workspaceContains:Gemfile",
     "workspaceContains:.vscode/i18n-ally-custom-framework.yml",
     "onLanguage:vue",
     "onLanguage:javascript",
@@ -441,7 +442,9 @@
             "vscode",
             "ngx-translate",
             "i18next",
-            "i18n-tag"
+            "i18n-tag",
+            "chrome-ext",
+            "ruby-rails"
           ],
           "items": {
             "type": "string",
@@ -455,7 +458,8 @@
               "flutter",
               "vue-sfc",
               "ember",
-              "chrome-ext"
+              "chrome-ext",
+              "ruby-rails"
             ]
           },
           "description": "%config.enabled_frameworks%"
@@ -498,6 +502,10 @@
           "type": "boolean",
           "default": false,
           "description": "%config.prompt_translating_source%"
+        },
+        "i18n-ally.frameworks.ruby-rails.scopeRoot": {
+          "type": "string",
+          "default": "app/views"
         },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"

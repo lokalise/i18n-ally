@@ -1,0 +1,15 @@
+<h1><%= t('.welcome') %></h1>
+
+<%= t '.bold_text.html' %>
+
+<%= t 'welcome' %>
+
+<br>
+
+<%= number_to_currency 1234567890.50 %><br>
+<%= number_to_human(1234567) %><br>
+<%= number_to_phone(1235551234) %><br>
+<%= number_to_human_size(1234567890) %>
+
+<%= link_to t('.new_post'), new_post_path %><br>
+<%= link_to t('.posts'), posts_path %>

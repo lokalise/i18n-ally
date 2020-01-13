@@ -2,6 +2,7 @@ import { TextDocument, Position, Range } from 'vscode'
 import { KeyInDocument } from '../core'
 import { regexFindKeys } from '../utils'
 import { Global } from './Global'
+import { RewriteKeyContext } from './types'
 
 export class KeyDetector {
   static getKeyByContent (text: string) {
@@ -56,15 +57,19 @@ export class KeyDetector {
 
   static getKeys (document: TextDocument | string, regs?: RegExp[], dotEnding?: boolean): KeyInDocument[] {
     let text = ''
+    let rewriteContext: RewriteKeyContext| undefined
     if (typeof document !== 'string') {
       regs = regs ?? Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
       text = document.getText()
+      rewriteContext = {
+        targetFile: document.uri.fsPath,
+      }
     }
     else {
       regs = Global.getKeyMatchReg()
       text = document
     }
 
-    return regexFindKeys(text, regs, dotEnding)
+    return regexFindKeys(text, regs, dotEnding, rewriteContext)
   }
 }

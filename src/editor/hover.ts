@@ -83,7 +83,7 @@ export function createTable (visibleLocales: string[], records: Record<string, L
 
 export function createHover (keypath: string, maxLength = 0, mainLocale?: string) {
   const loader = CurrentFile.loader
-  const records = loader.getTranslationsByKey(keypath)
+  const records = loader.getTranslationsByKey(keypath, undefined)
   if (!Object.keys(records).length)
     return undefined
 

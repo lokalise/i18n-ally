@@ -1,10 +1,15 @@
 import { LanguageId } from '../utils'
-import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext } from '../core/types'
+import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../core/types'
 import { ParserExtRegEx } from '../meta'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
-export type PackageFileType = 'packageJSON' | 'pubspecYAML' | 'composerJSON' | 'none'
+export type PackageFileType
+= 'packageJSON'
+| 'pubspecYAML'
+| 'composerJSON'
+| 'gemfile'
+| 'none'
 
 export abstract class Framework {
   abstract id: string
@@ -58,5 +63,13 @@ export abstract class Framework {
 
   rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     return key
+  }
+
+  preprocessData (data: object, context: DataProcessContext): object {
+    return data
+  }
+
+  deprocessData (data: object, context: DataProcessContext): object {
+    return data
   }
 }
