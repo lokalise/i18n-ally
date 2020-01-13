@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/antfu/i18n-ally/compare/v1.10.3...v1.11.0) (2020-01-13)
+
+
+### 📚 Documentations
+
+* update readme ([843f9a8](https://github.com/antfu/i18n-ally/commit/843f9a89b048165b2a40384ea705530d8ae004be))
+
+
+### ⚡ Features
+
+* support for rails i18n ([544056a](https://github.com/antfu/i18n-ally/commit/544056a76aa7188ce39c59f603698bc8cde74ee6))
+
 ### [1.10.3](https://github.com/antfu/i18n-ally/compare/v1.10.2...v1.10.3) (2020-01-08)
 
 
