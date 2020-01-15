@@ -12,7 +12,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/i/antfu.i18n-ally.svg?color=63ba83" alt="Visual Studio Marketplace Installs" /></a>
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://vsmarketplacebadge.apphb.com/trending-monthly/antfu.i18n-ally.svg?color=a1b858" alt="Marketplace Trending Monthly" /></a>
 <br/>
-<a href="https://circleci.com/gh/antfu/i18n-ally/" target="__blank"><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/antfu/i18n-ally"></a>
+<!--<a href="https://circleci.com/gh/antfu/i18n-ally/" target="__blank"><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/antfu/i18n-ally"></a>-->
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg?color=a38eed" alt="GitHub last commit" /></a>
 <a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg?color=c977be" alt="GitHub issues" /></a>
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/antfu/i18n-ally?style=social"></a>
