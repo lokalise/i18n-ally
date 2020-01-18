@@ -26,4 +26,6 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.keepFulfilled": true,
   "i18n-ally.promptTranslatingSource": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": false,
 }

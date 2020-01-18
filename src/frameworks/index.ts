@@ -89,7 +89,7 @@ export function getEnabledFrameworks (dependencies: PackageDependencies, root: s
   return enabledFrameworks
 }
 
-export function getEnabledFrameworksByIds (ids: string[]) {
+export function getEnabledFrameworksByIds (ids: string[], root: string) {
   const missedFrameworks: string[] = []
   const enabledFrameworks = ids.flatMap((id) => {
     const framework = frameworks.find(f => f.id === id)
@@ -97,6 +97,10 @@ export function getEnabledFrameworksByIds (ids: string[]) {
       missedFrameworks.push(id)
       return []
     }
+
+    if (framework instanceof CustomFramework)
+      framework.load(root)
+
     return [framework]
   })
 

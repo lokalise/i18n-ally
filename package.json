@@ -444,7 +444,8 @@
             "i18next",
             "i18n-tag",
             "chrome-ext",
-            "ruby-rails"
+            "ruby-rails",
+            "custom"
           ],
           "items": {
             "type": "string",
@@ -459,7 +460,8 @@
               "vue-sfc",
               "ember",
               "chrome-ext",
-              "ruby-rails"
+              "ruby-rails",
+              "custom"
             ]
           },
           "description": "%config.enabled_frameworks%"

@@ -174,7 +174,7 @@ export class Global {
     }
     else {
       const frameworks = Config.enabledFrameworks
-      this.enabledFrameworks = getEnabledFrameworksByIds(frameworks)
+      this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
     const isValidProject = this.enabledFrameworks.length > 0
     const hasLocalesSet = Config.localesPaths.length > 0
