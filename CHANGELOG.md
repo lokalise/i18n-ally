@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/antfu/i18n-ally/compare/v1.11.2...v1.11.3) (2020-01-18)
+
+
+### ⚡ Features
+
+* custom refactor templates ([2812dbf](https://github.com/antfu/i18n-ally/commit/2812dbf80c7aec0e74dda130068d64f965a871af))
+
+
+### 🐞 Bug Fixes
+
+* key rewrite for extracting ([bd82fee](https://github.com/antfu/i18n-ally/commit/bd82feea25595c6ebcc090c5496f6267a6304879))
+
 ### [1.11.2](https://github.com/antfu/i18n-ally/compare/v1.11.1...v1.11.2) (2020-01-18)
 
 
