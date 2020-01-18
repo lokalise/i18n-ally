@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.2](https://github.com/antfu/i18n-ally/compare/v1.11.1...v1.11.2) (2020-01-18)
+
+
+### 🐞 Bug Fixes
+
+* custom framework loading ([a607187](https://github.com/antfu/i18n-ally/commit/a60718744280869b771a03edfeb25d39aced040e))
+* i18n-tag ([5da27af](https://github.com/antfu/i18n-ally/commit/5da27af2eb469a244742628efa17af259dfda041))
+
 ### [1.11.1](https://github.com/antfu/i18n-ally/compare/v1.11.0...v1.11.1) (2020-01-13)
 
 
