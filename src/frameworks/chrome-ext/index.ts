@@ -29,7 +29,9 @@ class ChromeExtensionFramework extends Framework {
   rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     if (source === 'reference' && !key.endsWith('.message'))
       return `${key}.message`
-    else if (source === 'source' && key.endsWith('.message'))
+    if (source === 'write' && !key.endsWith('.message'))
+      return `${key}.message`
+    if (source === 'source' && key.endsWith('.message'))
       return key.slice(0, -'.message'.length - 1)
     return key
   }

@@ -13,6 +13,7 @@ const m: ExtensionModule = () => {
     async (options: ExtractTextOptions) => {
       const { filepath, text, range, languageId } = options
       const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+      const locale = Config.sourceLanguage
 
       // prompt for keypath
       const keypath = await window.showInputBox({
@@ -28,7 +29,9 @@ const m: ExtensionModule = () => {
       if (!keypathValidate(keypath))
         return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
 
-      const shouldOverride = await overrideConfirm(keypath, true, true)
+      const writeKeypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale })
+
+      const shouldOverride = await overrideConfirm(writeKeypath, true, true)
 
       if (shouldOverride === 'retry') {
         commands.executeCommand(Commands.extract_text, options)
@@ -67,9 +70,9 @@ const m: ExtensionModule = () => {
       // save key
       await CurrentFile.loader.write({
         filepath: undefined,
-        keypath,
+        keypath: writeKeypath,
         value,
-        locale: Config.sourceLanguage,
+        locale,
       })
     })
 }
