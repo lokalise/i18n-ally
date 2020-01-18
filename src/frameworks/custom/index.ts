@@ -13,6 +13,7 @@ interface CustomFrameworkConfig {
   monopoly?: boolean
   languageIds?: LanguageId[] | LanguageId
   keyMatchReg?: string[] | string
+  refactorTemplates?: string[]
 }
 
 class CustomFramework extends Framework {
@@ -84,9 +85,8 @@ class CustomFramework extends Framework {
   }
 
   refactorTemplates (keypath: string) {
-    return [
-      keypath,
-    ]
+    return (this.data?.refactorTemplates || ['$1'])
+      .map(i => i.replace(/\$1/g, keypath))
   }
 
   startWatch (root?: string) {

@@ -1,8 +1,8 @@
 ## 🎎 Custom Framework Config
 
-If your are using an i18n framework do not have built-in support by this extension or you are using a custom i18n implementation, you can always make this extension support for your framework.
+If you are using an i18n framework does not have built-in support by this extension or you are using a custom i18n implementation, you can always make this extension support for your framework.
 
-By create file `.vscode/i18n-ally-custom-framework.yml` and copy paste the configs below.
+Create file `.vscode/i18n-ally-custom-framework.yml` and copy paste the configs below.
 
 ```yaml
 # .vscode/i18n-ally-custom-framework.yml
@@ -22,8 +22,17 @@ keyMatchReg:
   # The following examples show how to detect `t("your.i18n.keys")`
   - "[^\\w\\d]t\\(['\"`]([[\\w\\d\\. \\-\\[\\]]*?)['\"`]"
 
+
+# An Array of string contains refactor templates.
+# The "$1" will be replaced by the keypath specified.
+# Optional, uncomment the following two lines to use
+
+# refactorTemplates:
+#  - i18n.get("$1")
+
+
 # If set to true, only enables custom framework (will disable all built-in frameworks)
-monopoly: false
+monopoly: true
 ```
 
 The extension will detect the changes and enable it automatically. Enjoy! 🎉
