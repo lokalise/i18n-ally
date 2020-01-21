@@ -613,11 +613,11 @@
     "@types/json5": "0.0.30",
     "@types/lodash": "4.14.149",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.12.24",
+    "@types/node": "12.12.25",
     "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "2.15.0",
-    "@typescript-eslint/parser": "2.15.0",
+    "@typescript-eslint/eslint-plugin": "2.17.0",
+    "@typescript-eslint/parser": "2.17.0",
     "conventional-github-releaser": "3.1.3",
     "eslint": "6.8.0",
     "ini": "^1.3.5",
@@ -647,9 +647,9 @@
     "po2json": "^1.0.0-alpha",
     "translation.js": "^0.7.8",
     "ts-node": "^8.3.0",
-    "typescript": "3.7.4",
+    "typescript": "3.7.5",
     "vue": "^2.6.10",
-    "vue-i18n-locale-message": "^0.13.0",
+    "vue-i18n-locale-message": "^0.14.0",
     "yaml": "^1.7.2"
   }
 }
