@@ -61,6 +61,7 @@
   "prompt.config_locales_info": "プロジェクトのためのロケールファイルを設定します",
   "prompt.config_locales_success": "ロケールパスの設定は成功しました。",
   "prompt.delete_keys_not_in_use": "",
+  "prompt.donate": "",
   "prompt.donate_via_paypal": "Paypal経由で寄付する",
   "prompt.edit_key_in_locale": "{1} | キーを編集する \"{0}\"",
   "prompt.enter_file_path_to_store_key": "ファイルパスをキー\"{0}\"に入力する",

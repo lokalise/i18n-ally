@@ -18,8 +18,8 @@ const m: ExtensionModule = (ctx) => {
           text: i18n.t('prompt.star_on_github'),
           url: Links.github,
         }, {
-          text: i18n.t('prompt.donate_via_paypal'),
-          url: Links.paypal,
+          text: i18n.t('prompt.donate'),
+          url: Links.open_collective,
         }]
         const result = await window.showInformationMessage(
           i18n.t('prompt.support'),

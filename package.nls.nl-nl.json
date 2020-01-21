@@ -61,6 +61,7 @@
   "prompt.config_locales_info": "Configureer de locale folder voor uw project",
   "prompt.config_locales_success": "Locale pad is succesvol geconfigureerd.",
   "prompt.delete_keys_not_in_use": "",
+  "prompt.donate": "",
   "prompt.donate_via_paypal": "Doneer via Paypal",
   "prompt.edit_key_in_locale": "{1} | Bewerken van sleutel \"{0}\"",
   "prompt.enter_file_path_to_store_key": "Vul het bestands pad in om de sleutel op te slaan \"{0}\"",

@@ -61,6 +61,7 @@
   "prompt.config_locales_info": "Configurar o diretório dos arquivos de localização (locales) para o projeto ",
   "prompt.config_locales_success": "Caminho das localizações (locales) configurado com sucesso",
   "prompt.delete_keys_not_in_use": "",
+  "prompt.donate": "",
   "prompt.donate_via_paypal": "Doar pelo Paypal",
   "prompt.edit_key_in_locale": "{1} | Editando chave \"{0}\"",
   "prompt.enter_file_path_to_store_key": "Inserir o caminho do arquivo para guardar a chave \"{0}\"",

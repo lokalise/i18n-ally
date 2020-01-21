@@ -61,6 +61,7 @@
   "prompt.config_locales_info": "Configurer le répertoire de la locale pour votre projet.",
   "prompt.config_locales_success": "Chemin de la locale configurer avec succès.",
   "prompt.delete_keys_not_in_use": "Souhaitez-vous réèllement supprimer {0} Clé(s) n'étant pas utilisée(s) ?",
+  "prompt.donate": "",
   "prompt.donate_via_paypal": "Faire un don via PayPal",
   "prompt.edit_key_in_locale": "{1} | Edition de la Clé \"{0}\"",
   "prompt.enter_file_path_to_store_key": "Entrer le chemin du fichier où stocker la Clé \"{0}\"",
