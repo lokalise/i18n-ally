@@ -443,6 +443,9 @@
             "ngx-translate",
             "i18next",
             "i18n-tag",
+            "flutter",
+            "vue-sfc",
+            "ember",
             "chrome-ext",
             "ruby-rails",
             "custom"
@@ -465,6 +468,34 @@
             ]
           },
           "description": "%config.enabled_frameworks%"
+        },
+        "i18n-ally.enabledParsers": {
+          "type": [
+            "array",
+            "string"
+          ],
+          "enum": [
+            "js",
+            "ts",
+            "json",
+            "json5",
+            "yaml",
+            "ini",
+            "pot"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "js",
+              "ts",
+              "json",
+              "json5",
+              "yaml",
+              "ini",
+              "pot"
+            ]
+          },
+          "description": "%config.enabled_parsers%"
         },
         "i18n-ally.sortKeys": {
           "type": "boolean",

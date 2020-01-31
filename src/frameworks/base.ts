@@ -15,6 +15,7 @@ export abstract class Framework {
   abstract id: string
   abstract display: string
   monopoly?: boolean
+  enabledParsers?: string[]
 
   /**
    * Packages names determine whether a frameworks should enable or not

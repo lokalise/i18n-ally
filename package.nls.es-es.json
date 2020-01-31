@@ -26,6 +26,7 @@
   "config.dir_structure": "Estructura de directorios preferida para organizar los archivos de configuración regional",
   "config.display_language": "Idioma de visualización",
   "config.enabled_frameworks": "",
+  "config.enabled_parsers": "",
   "config.encoding": "Codificación de los archivos de configuración regional, por defecto \"auto\" (auto detect)",
   "config.full_reload_on_changed": "Realizar una recarga completa en el archivo de configuración regional cambiado. (Importar dinámicamente para .js/.ts)",
   "config.ignored_locales": "Códigos de configuración regional a ignorar",

@@ -2,6 +2,8 @@ import ini from 'ini'
 import { Parser } from './Parser'
 
 export class IniParser extends Parser {
+  id = 'ini'
+
   constructor () {
     super(['ini'], /\.?ini$/g)
   }

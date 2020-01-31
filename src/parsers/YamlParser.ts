@@ -5,6 +5,8 @@ import { KeyInDocument } from '../core'
 import { Parser } from './Parser'
 
 export class YamlParser extends Parser {
+  id = 'yaml'
+
   constructor () {
     super(['yaml'], /\.?ya?ml$/g)
   }

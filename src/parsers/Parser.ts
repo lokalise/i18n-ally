@@ -3,6 +3,8 @@ import { KeyStyle, ParserOptions, KeyInDocument, Config } from '../core'
 import { File } from '../utils'
 
 export abstract class Parser {
+  abstract readonly id: string
+
   private supportedExtsRegex: RegExp
 
   readonly readonly: boolean = false

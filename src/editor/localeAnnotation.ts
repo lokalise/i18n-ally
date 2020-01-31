@@ -9,7 +9,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
     gutterIconPath: ctx.asAbsolutePath('res/dark/info.svg'),
   })
 
-  const supportedParsers = Global.parsers.filter(p => p.annotationSupported)
+  const supportedParsers = Global.enabledParsers.filter(p => p.annotationSupported)
 
   function update () {
     if (!Global.enabled)

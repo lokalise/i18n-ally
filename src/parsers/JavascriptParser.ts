@@ -6,6 +6,8 @@ import { Parser } from './Parser'
 process.env.ESM_DISABLE_CACHE = '1'
 
 export class JavascriptParser extends Parser {
+  id = 'js'
+
   private esm: (filepath: string, options?: any) => any
   readonly readonly = true
 

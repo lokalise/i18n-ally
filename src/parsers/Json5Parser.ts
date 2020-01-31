@@ -3,6 +3,8 @@ import { KeyStyle } from '../core'
 import { Parser } from './Parser'
 
 export class Json5Parser extends Parser {
+  id = 'json5'
+
   constructor () {
     super(['json5'], /\.?json5$/g)
   }

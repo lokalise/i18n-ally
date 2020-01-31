@@ -195,7 +195,9 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
 | `annotations` | `true` | Enabling inline annotations |
 | `keepFulfilled` | `false` | Always keep all keys fulfilled with empty string |
-| `enabledFrameworks` | auto | You can specify what frameworks support you would like to enable. If no value is set, the extension will detect frameworks automatically |
+| `enabledFrameworks` | auto | Specify the frameworks support to enable. If no value is set, the extension will detect frameworks automatically |
+| `enabledParsers` | auto | Specify the parsers of local file formats. It will enable all the possible parsers by default |
+| `encoding` | auto | The locale file encoding. Auto detect by default |
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
 | `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |

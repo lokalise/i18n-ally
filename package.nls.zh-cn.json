@@ -26,6 +26,7 @@
   "config.dir_structure": "用于组织本地文件的首选目录结构",
   "config.display_language": "显示语言",
   "config.enabled_frameworks": "指定要使用的框架支持。\n如果未设置任何值，插件将自动检测框架。",
+  "config.enabled_parsers": "",
   "config.encoding": "语言文件编码，默认为 \"auto\"（自动识别）",
   "config.full_reload_on_changed": "当语言文件被修改时执行完整的重载。（用于.js/.ts动态导入）",
   "config.ignored_locales": "隐藏的语言",

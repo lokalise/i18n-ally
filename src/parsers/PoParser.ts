@@ -3,6 +3,8 @@ import po2json from 'po2json'
 import { Parser } from './Parser'
 
 export class PoParser extends Parser {
+  id = 'po'
+
   constructor () {
     super(['po'], /\.?po(?:t|tx)?$/g)
   }

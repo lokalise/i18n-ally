@@ -4,6 +4,8 @@ import JsonMap from 'json-source-map'
 import { Parser } from './Parser'
 
 export class JsonParser extends Parser {
+  id = 'json'
+
   constructor () {
     super(['json'], /\.?json$/g)
   }

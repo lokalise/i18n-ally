@@ -26,6 +26,7 @@
   "config.dir_structure": "Foretrukket mappestruktur for organisering av oversettelsesfiler",
   "config.display_language": "Visningsspråk",
   "config.enabled_frameworks": "",
+  "config.enabled_parsers": "",
   "config.encoding": "",
   "config.full_reload_on_changed": "",
   "config.ignored_locales": "Oversettelseskoder å ignorere",

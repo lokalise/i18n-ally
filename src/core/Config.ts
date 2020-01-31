@@ -11,6 +11,7 @@ export class Config {
     'filenameMatchRegex',
     'includeSubfolders',
     'enabledFrameworks',
+    'enabledParsers',
     'encoding',
   ]
 
@@ -85,6 +86,15 @@ export class Config {
 
   static get enabledFrameworks (): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledFrameworks')
+    if (!ids)
+      return undefined
+    if (typeof ids === 'string')
+      ids = [ids]
+    return ids
+  }
+
+  static get enabledParsers (): string[] | undefined {
+    let ids = this.getConfig<string | string[]>('enabledParsers')
     if (!ids)
       return undefined
     if (typeof ids === 'string')

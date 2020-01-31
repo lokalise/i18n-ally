@@ -23,8 +23,6 @@ export class Global {
 
   static context: ExtensionContext
 
-  static parsers = PARSERS
-
   static enabledFrameworks: Framework[] = []
 
   // events
@@ -182,7 +180,8 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.\n`)
+      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
+      Log.info(`🧬 Parsers ${this.enabledParsers.map(i => `"${i.id}"`).join(', ')} enabled.\n`)
       await this.initLoader(this._rootpath, reload)
     }
     else {
@@ -209,10 +208,27 @@ export class Global {
     return this._loaders[this._rootpath]
   }
 
+  static get enabledParsers () {
+    let ids = Config.enabledParsers
+
+    if (!ids || !ids.length) {
+      ids = []
+      for (const f of this.enabledFrameworks) {
+        if (f.enabledParsers)
+          ids.push(...f.enabledParsers)
+      }
+
+      if (!ids.length)
+        ids = PARSERS.map(i => i.id)
+    }
+
+    return PARSERS.filter(i => ids!.includes(i.id))
+  }
+
   static getMatchedParser (ext: string) {
     if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
-    return this.parsers.find(parser => parser.supports(ext))
+    return this.enabledParsers.find(parser => parser.supports(ext))
   }
 
   // enables

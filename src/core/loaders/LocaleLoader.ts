@@ -249,9 +249,9 @@ export class LocaleLoader extends Loader {
       if (!result)
         return
       const { locale, nested, parser } = result
-      Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
       if (!parser)
-        throw new AllyError(ErrorType.unsupported_file_type)
+        return
+      Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
 
       let data = await parser.load(filepath)
       data = this.preprocessData(data, { locale, targetFile: filepath })
