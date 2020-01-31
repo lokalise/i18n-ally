@@ -8,7 +8,7 @@ export function regexFindKeys (text: string, regs: RegExp[], dotEnding = false, 
     while (match = reg.exec(text)) {
       const matchString = match[0]
       let key = match[1]
-      const start = match.index + matchString.indexOf(key)
+      const start = match.index + matchString.lastIndexOf(key)
       const end = start + key.length
 
       if (key && (dotEnding || !key.endsWith('.'))) {
