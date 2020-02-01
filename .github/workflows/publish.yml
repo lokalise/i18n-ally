@@ -1,4 +1,4 @@
-name: Node.js Package
+name: VSCE Publish
 
 on:
   release:
@@ -13,6 +13,6 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npx vsce publish -p $VSCE_TOKEN
+      - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
           VSCE_TOKEN: ${{secrets.VSCE_TOKEN}}
