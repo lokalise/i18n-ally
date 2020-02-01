@@ -15,7 +15,6 @@ export class PoParser extends Parser {
     const result = po2json.parse(text)
     for (const key of Object.keys(result))
       result[key] = result[key][1]
-    console.log(result)
     return result
   }
 

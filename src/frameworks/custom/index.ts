@@ -33,7 +33,6 @@ class CustomFramework extends Framework {
   load (root: string) {
     this.startWatch(root)
     const filename = path.resolve(root, CustomFrameworkConfigFilename)
-    console.log(filename)
 
     if (!fs.existsSync(filename)) {
       this.data = undefined

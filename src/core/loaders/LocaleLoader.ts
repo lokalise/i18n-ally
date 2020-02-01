@@ -212,8 +212,6 @@ export class LocaleLoader extends Loader {
     let locale = ''
     let nested = false
 
-    console.log(dirStructure, rootPath, path.relative(rootPath || '', filepath), path.sep)
-
     if (dirStructure === 'file') {
       if (!match || match.length < 2)
         return
