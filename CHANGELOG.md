@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.5](https://github.com/antfu/i18n-ally/compare/v1.11.4...v1.11.5) (2020-02-01)
+
+
+### ⚡ Features
+
+* new options enabledParsers ([905cebb](https://github.com/antfu/i18n-ally/commit/905cebbd1810f4a8797fd9e9b83e8b7539ce7197))
+
+
+### 🐞 Bug Fixes
+
+* wrong annonation position for single letter keypath, [#178](https://github.com/antfu/i18n-ally/issues/178) ([d982dd3](https://github.com/antfu/i18n-ally/commit/d982dd35bf4b03fa5e1730e429603064a1ed8dea))
+
 ### [1.11.4](https://github.com/antfu/i18n-ally/compare/v1.11.3...v1.11.4) (2020-01-21)
 
 ### [1.11.3](https://github.com/antfu/i18n-ally/compare/v1.11.2...v1.11.3) (2020-01-18)
