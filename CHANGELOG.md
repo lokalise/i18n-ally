@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/antfu/i18n-ally/compare/v1.11.5-re...v1.12.0) (2020-02-06)
+
+
+### ⚡ Features
+
+* allowing flatten scope, [#184](https://github.com/antfu/i18n-ally/issues/184) [#194](https://github.com/antfu/i18n-ally/issues/194) ([3581f76](https://github.com/antfu/i18n-ally/commit/3581f76aab8b131412a7953fdd25ff48f956fb65))
+
 ### [1.11.5](https://github.com/antfu/i18n-ally/compare/v1.11.4...v1.11.5) (2020-02-01)
 
 
