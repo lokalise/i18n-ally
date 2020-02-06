@@ -643,7 +643,7 @@
     "@types/json-stable-stringify": "1.0.32",
     "@types/json5": "0.0.30",
     "@types/lodash": "4.14.149",
-    "@types/mocha": "5.2.7",
+    "@types/mocha": "7.0.1",
     "@types/node": "12.12.26",
     "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
