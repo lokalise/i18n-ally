@@ -1,11 +1,12 @@
 import { ExtensionContext, window } from 'vscode'
 import { uniq } from 'lodash'
+import { resolveFlattenRootKeypath } from '../../utils'
 import { KeyDetector, LocaleNode, Global } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 import { LocalesTreeProvider } from './LocalesTreeProvider'
 
-export class FileLocalesTreeProvider extends LocalesTreeProvider {
-  protected name = 'FileLocalesTreeProvider'
+export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
+  protected name = 'CurrentFileLocalesTreeProvider'
 
   constructor (
     ctx: ExtensionContext,
@@ -29,7 +30,7 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
 
   getRoots () {
     const roots = super.getRoots()
-    const realPaths = roots.map(i => i.node.keypath)
+    const realPaths = roots.map(i => resolveFlattenRootKeypath(i.node.keypath))
     if (!this.includePaths)
       return roots
 
@@ -40,11 +41,11 @@ export class FileLocalesTreeProvider extends LocalesTreeProvider {
     for (const keypath of shadowPaths) {
       let node = this.loader.getTreeNodeByKey(keypath)
       if (node && node.type === 'tree') {
-        roots.push(new LocaleTreeItem(this.ctx, node))
+        roots.push(new LocaleTreeItem(this.ctx, node, this.flatten))
       }
       else {
         node = new LocaleNode({ keypath, shadow: true })
-        roots.push(new LocaleTreeItem(this.ctx, node))
+        roots.push(new LocaleTreeItem(this.ctx, node, this.flatten))
       }
     }
 

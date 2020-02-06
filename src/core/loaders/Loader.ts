@@ -2,6 +2,7 @@ import { Disposable, EventEmitter } from 'vscode'
 import _, { uniq } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
 import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../types'
+import { resolveFlattenRootKeypath, resolveFlattenRoot } from '../../utils'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -112,7 +113,7 @@ export abstract class Loader extends Disposable {
           meta: options.meta,
         })
         tree.setChild(key, node)
-        this._flattenLocaleTree[node.keypath] = node
+        this._flattenLocaleTree[resolveFlattenRootKeypath(node.keypath)] = node
       }
 
       // add locales to exitsing node
@@ -181,10 +182,18 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
+  private stripAnnotationString (str: string, maxlength = 0) {
+    if (!str)
+      return
+    if (maxlength && str.length > maxlength)
+      str = `${str.substring(0, maxlength)}…`
+    return str
+  }
+
   getValueByKey (key: string, locale?: string, maxlength = 0, stringifySpace?: number, context: RewriteKeyContext = {}) {
     locale = locale || Config.displayLanguage
 
-    const node = this.getTreeNodeByKey(key)
+    const node = resolveFlattenRoot(this.getTreeNodeByKey(key))
 
     if (!node)
       return undefined
@@ -193,6 +202,7 @@ export abstract class Loader extends Disposable {
       const value = node.values[locale]
       if (!value)
         return undefined
+
       let text = JSON
         .stringify(value, null, stringifySpace)
         .replace(/"(\w+?)":/g, ' $1:')
@@ -207,12 +217,7 @@ export abstract class Loader extends Disposable {
       return text
     }
     else {
-      let value = node.getValue(locale, true)
-      if (!value)
-        return
-      if (maxlength && value.length > maxlength)
-        value = `${value.substring(0, maxlength)}…`
-      return value
+      return this.stripAnnotationString(node.getValue(locale, true), maxlength)
     }
   }
 
@@ -221,7 +226,7 @@ export abstract class Loader extends Disposable {
   }
 
   getNodeByKey (key: string, shadow = false): LocaleNode | undefined {
-    const node = this.getTreeNodeByKey(key)
+    const node = resolveFlattenRoot(this.getTreeNodeByKey(key))
     if (!node && shadow)
       return this.getShadowNodeByKey(key)
     if (node && node.type !== 'tree')

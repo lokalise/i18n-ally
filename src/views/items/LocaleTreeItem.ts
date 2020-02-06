@@ -1,15 +1,21 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
 import { Node, Translator, CurrentFile } from '../../core'
-import { decorateLocale, NodeHelper } from '../../utils'
+import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '../../utils'
 import { BaseTreeItem } from './Base'
 
 export class LocaleTreeItem extends BaseTreeItem {
-  constructor (ctx: ExtensionContext, public readonly node: Node, public flatten = false, public readonly displayLocale?: string, public readonly listedLocales?: string[]) {
+  public readonly node: Node
+  constructor (ctx: ExtensionContext, node: Node, public flatten = false, public readonly displayLocale?: string, public readonly listedLocales?: string[]) {
     super(ctx)
+
+    if (this.flatten && node.type !== 'record')
+      this.node = resolveFlattenRoot(node)
+    else
+      this.node = node
   }
 
   get tooltip (): string {
-    return this.node.keypath
+    return resolveFlattenRootKeypath(this.node.keypath)
   }
 
   getLabel (): string {
@@ -18,8 +24,10 @@ export class LocaleTreeItem extends BaseTreeItem {
     }
     else {
       return this.flatten
-        ? this.node.keypath
-        : this.node.keyname
+        ? resolveFlattenRootKeypath(this.node.keypath)
+        : this.node.keyname === ROOT_KEY
+          ? '<root>'
+          : this.node.keyname
     }
   }
 
@@ -74,13 +82,14 @@ export class LocaleTreeItem extends BaseTreeItem {
     return values.join('-')
   }
 
-  async getChildren () {
+  async getChildren (filter: (node: Node) => boolean = () => true) {
     let nodes: Node[] = []
     if (this.node.type === 'tree')
       nodes = Object.values(this.node.children)
     else if (this.node.type === 'node')
       nodes = Object.values(CurrentFile.loader.getShadowLocales(this.node, this.listedLocales))
     const items = nodes
+      .filter(filter)
       .map(node => new LocaleTreeItem(this.ctx, node, false))
     return items
   }

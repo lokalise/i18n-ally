@@ -1,14 +1,14 @@
 import { window } from 'vscode'
 import { ExtensionModule } from '../modules'
 import { ViewIds } from './ViewIds'
-import { FileLocalesTreeProvider, HelpFeedbackProvider, ProgressProvider, LocalesTreeProvider } from './providers'
+import { CurrentFileLocalesTreeProvider, HelpFeedbackProvider, ProgressProvider, LocalesTreeProvider } from './providers'
 import { UsageReportProvider } from './providers/UsageReportProvider'
 
 export * from './items'
 export * from './providers'
 
 const m: ExtensionModule = (ctx) => {
-  const currentFileTreeProvider = new FileLocalesTreeProvider(ctx)
+  const currentFileTreeProvider = new CurrentFileLocalesTreeProvider(ctx)
 
   // Explorer tab
   window.createTreeView(ViewIds.file_in_explorer, {

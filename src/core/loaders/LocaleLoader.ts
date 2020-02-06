@@ -3,7 +3,7 @@ import * as path from 'path'
 import _ from 'lodash'
 import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflattenObject } from '../../utils'
+import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, DirStructureAuto } from '../types'
 import { LocaleTree } from '../Nodes'
@@ -128,7 +128,7 @@ export class LocaleLoader extends Loader {
 
         let modified = original
         for (const pending of pendings)
-          modified = await applyPendingToObject(modified, pending)
+          modified = applyPendingToObject(modified, pending, await Config.requestKeyStyle())
 
         modified = this.deprocessData(modified, {
           locale: pendings[0].locale,
@@ -253,7 +253,7 @@ export class LocaleLoader extends Loader {
 
       let data = await parser.load(filepath)
       data = this.preprocessData(data, { locale, targetFile: filepath })
-      const value = unflattenObject(data)
+      const value = unflatten(data)
 
       this._files[filepath] = {
         filepath,
@@ -361,6 +361,7 @@ export class LocaleLoader extends Loader {
     const tree = new LocaleTree({ keypath: '' })
     for (const file of Object.values(this._files))
       this.updateTree(tree, file.value, '', '', file)
+
     this._localeTree = tree
   }
 

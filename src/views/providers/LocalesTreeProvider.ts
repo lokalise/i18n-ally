@@ -1,6 +1,7 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event } from 'vscode'
 import { sortBy } from 'lodash'
-import { Node, Loader, CurrentFile } from '../../core'
+import { resolveFlattenRootKeypath } from '../../utils'
+import { Node, Loader, CurrentFile, LocaleTree, LocaleNode } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
@@ -48,13 +49,21 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     if (!this.includePaths)
       return true
 
+    const flatten = resolveFlattenRootKeypath(node.keypath)
+
     for (const includePath of this.includePaths) {
       if (includePath.startsWith(node.keypath))
         return true
       if (!root && node.keypath.startsWith(includePath))
         return true
+      if (this.flatten && flatten !== node.keypath && flatten === includePath)
+        return true
     }
     return false
+  }
+
+  protected filterNodes (nodes: (LocaleTree | LocaleNode)[]) {
+    return nodes
   }
 
   protected getRoots () {
@@ -66,6 +75,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
       : Object.values(this.loader.root.children)
 
     return nodes
+      .filter(node => this.filter(node, true))
       .map(node => new LocaleTreeItem(this.ctx, node, this.flatten))
   }
 
@@ -77,11 +87,9 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     let elements: LocaleTreeItem[] = []
 
     if (element)
-      elements = await element.getChildren()
+      elements = await element.getChildren(node => this.filter(node, true))
     else
       elements = this.getRoots()
-
-    elements = elements.filter(el => this.filter(el.node, true))
 
     return this.sort(elements)
   }

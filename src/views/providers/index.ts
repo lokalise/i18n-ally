@@ -1,4 +1,4 @@
-export * from './FileLocalesTreeProvider'
+export * from './CurrentFileLocalesTreeProvider'
 export * from './HelpFeedbackProvider'
 export * from './LocalesTreeProvider'
 export * from './ProgressProvider'

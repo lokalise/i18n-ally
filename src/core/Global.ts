@@ -12,8 +12,6 @@ import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 
-export type KeyStyle = 'auto' | 'nested' | 'flat'
-
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
 

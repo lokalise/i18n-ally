@@ -94,6 +94,7 @@ export interface UsageReport {
 }
 
 export type RewriteKeySource = 'source' | 'reference' | 'write'
+export type KeyStyle = 'auto' | 'nested' | 'flat'
 
 export interface RewriteKeyContext {
   locale?: string

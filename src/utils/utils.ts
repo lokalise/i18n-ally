@@ -1,6 +1,8 @@
 import * as path from 'path'
-import _ from 'lodash'
-import { PendingWrite, Config } from '../core'
+import { set } from 'lodash'
+import { Node, LocaleTree, LocaleNode, LocaleRecord } from '../core'
+import { PendingWrite, KeyStyle } from '../core/types'
+import { ROOT_KEY } from './flat'
 import { Log } from '.'
 
 export function caseInsensitiveMatch (a: string, b: string) {
@@ -65,22 +67,30 @@ export function escapeMarkdown (text: string) {
     .replace(/\)/g, '\\)')
 }
 
-export async function applyPendingToObject (obj: any, pending: PendingWrite) {
-  const keyStyle = await Config.requestKeyStyle()
-  if (keyStyle === 'flat')
-    obj[pending.keypath] = pending.value
-  else
-    _.set(obj, pending.keypath, pending.value)
-  return obj
+export function resolveFlattenRootKeypath (keypath: string) {
+  if (keypath.endsWith(ROOT_KEY))
+    keypath = keypath.slice(0, -ROOT_KEY.length)
+  if (keypath.endsWith('.'))
+    keypath = keypath.slice(0, -1)
+  return keypath
 }
 
-export function unflattenObject (data: any) {
-  const result: any = {}
-  for (const key of Object.keys(data)) {
-    const keys = key.split('.')
-    keys.reduce((r, e, j) => {
-      return r[e] || (r[e] = isNaN(Number(keys[j + 1])) ? (keys.length - 1 === j ? data[key] : {}) : [])
-    }, result)
-  }
-  return result
+export function resolveFlattenRoot (node: undefined): undefined
+export function resolveFlattenRoot (node: LocaleRecord): LocaleRecord
+export function resolveFlattenRoot (node: LocaleTree | LocaleNode): LocaleTree | LocaleNode
+export function resolveFlattenRoot (node?: LocaleTree | LocaleNode): LocaleTree | LocaleNode | undefined
+export function resolveFlattenRoot (node?: Node) {
+  if (node?.type === 'tree' && node.getChild(ROOT_KEY)?.type === 'node')
+    return node.getChild(ROOT_KEY)
+  return node
+}
+
+export function applyPendingToObject (obj: any, pending: PendingWrite, keyStyle?: KeyStyle) {
+  const keypath = resolveFlattenRootKeypath(pending.keypath)
+
+  if (keyStyle === 'flat')
+    obj[keypath] = pending.value
+  else
+    set(obj, keypath, pending.value)
+  return obj
 }

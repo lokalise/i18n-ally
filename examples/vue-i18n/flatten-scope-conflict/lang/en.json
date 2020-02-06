@@ -1,0 +1,5 @@
+{
+  "FOO": "foo",
+  "FOO.BAR": "bar",
+  "FOO.BAR.FOO": "foobar"
+}
