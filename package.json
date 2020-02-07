@@ -624,10 +624,10 @@
     ]
   },
   "scripts": {
-    "publish:minor": "standard-version --release-as minor && git push --follow-tags && vsce publish && npm run gh-release",
-    "publish:patch": "standard-version --release-as patch && git push --follow-tags && vsce publish && npm run gh-release",
-    "gh-release": "conventional-github-releaser -p angular",
-    "vscode:prepublish": "webpack --mode development",
+    "release:minor": "standard-version --release-as minor && npm run gh-release",
+    "release:patch": "standard-version --release-as patch && npm run gh-release",
+    "gh-release": "git push --follow-tags && conventional-github-releaser -p angular",
+    "build": "webpack --mode development",
     "compile": "webpack --mode development",
     "lint": "eslint --ext .ts,.js,.vue .",
     "lint:fix": "npm run lint -- --fix",

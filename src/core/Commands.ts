@@ -1,5 +1,5 @@
 
-export enum Commands {
+export const enum Commands {
   config_locales_auto = 'extension.i18n-ally.config-locales-auto',
   config_display_language = 'extension.i18n-ally.config-display-language',
   config_source_language = 'extension.i18n-ally.config-source-language',

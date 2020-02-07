@@ -1,0 +1,19 @@
+name: VSCE Publish
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm run build
+      - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
+        env:
+          VSCE_TOKEN: ${{secrets.VSCE_TOKEN}}
