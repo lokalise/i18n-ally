@@ -1,14 +1,15 @@
 import { resolve, join } from 'path'
 import fs from 'fs'
 import { workspace, Range, Location, TextDocument, Uri, EventEmitter } from 'vscode'
-// @ts-ignore
-// @ts-ignore
+
 import { Log } from '../utils'
 import { Global } from './Global'
 import { CurrentFile } from './CurrentFile'
 import { UsageReport } from './types'
 import { KeyDetector, Config, KeyOccurrence, KeyUsage } from '.'
+// @ts-ignore
 import { glob } from 'glob-gitignore'
+// @ts-ignore
 import parseGitIgnore from 'parse-gitignore'
 import _, { uniq } from 'lodash'
 

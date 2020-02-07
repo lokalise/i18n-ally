@@ -1,5 +1,5 @@
-// @ts-ignore
 import { Parser } from './Parser'
+// @ts-ignore
 import po2json from 'po2json'
 
 export class PoParser extends Parser {
