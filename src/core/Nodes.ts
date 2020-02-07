@@ -25,7 +25,7 @@ abstract class BaseNode implements INode {
   readonly features?: OptionalFeatures
   readonly meta?: NodeMeta
 
-  constructor (data: INode) {
+  constructor(data: INode) {
     this.keypath = data.keypath
     this.keyname = data.keyname || getKeyname(data.keypath)
     this.filepath = data.filepath
@@ -42,7 +42,7 @@ export class LocaleRecord extends BaseNode implements ILocaleRecord {
   readonly locale: string
   readonly value: string
 
-  constructor (data: ILocaleRecord) {
+  constructor(data: ILocaleRecord) {
     super(data)
     this.value = data.value
     this.locale = data.locale
@@ -53,12 +53,12 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
   readonly type: 'node' = 'node'
   readonly locales: Record<string, LocaleRecord>
 
-  constructor (data: ILocaleNode) {
+  constructor(data: ILocaleNode) {
     super(data)
     this.locales = data.locales || {}
   }
 
-  public getValue (locale?: string, interpolate = false, visitedStack: string[] = []) {
+  public getValue(locale?: string, interpolate = false, visitedStack: string[] = []) {
     locale = locale || Config.displayLanguage
     let value = (this.locales[locale] && this.locales[locale].value)
 
@@ -92,7 +92,7 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
     return value
   }
 
-  get value () {
+  get value() {
     return this.getValue(undefined, true) || ''
   }
 }
@@ -104,14 +104,14 @@ export class LocaleTree extends BaseNode implements ILocaleTree {
   readonly values: Record<string, object>
   readonly isCollection: boolean
 
-  constructor (data: ILocaleTree) {
+  constructor(data: ILocaleTree) {
     super(data)
     this.children = data.children || {}
     this.values = data.values || {}
     this.isCollection = data.isCollection || false
   }
 
-  getChild (key: string) {
+  getChild(key: string) {
     let child = this.children[key]
     if (this.isCollection && !child) {
       const index = parseInt(key)
@@ -121,7 +121,7 @@ export class LocaleTree extends BaseNode implements ILocaleTree {
     return child
   }
 
-  setChild (key: string, value: LocaleTree | LocaleNode) {
+  setChild(key: string, value: LocaleTree | LocaleNode) {
     const index = parseInt(key)
     if (this.isCollection && !isNaN(index))
       this.children[index] = value

@@ -1,14 +1,14 @@
 import { workspace, Uri, TextDocument, WorkspaceEdit, Range } from 'vscode'
-import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
 import { Log, applyPendingToObject, File, normalizeLocale, unflatten } from '../../utils'
 import { PendingWrite, NodeOptions } from '../types'
 import { LocaleTree } from '../Nodes'
 import { Global } from '../Global'
 import { Config } from '../Config'
 import { Loader } from './Loader'
+import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
 
 export class VueSfcLoader extends Loader {
-  constructor (
+  constructor(
     public readonly uri: Uri,
   ) {
     super(`[SFC]${uri.fsPath}`)
@@ -19,15 +19,15 @@ export class VueSfcLoader extends Loader {
   _parsedSections: SFCI18nBlock[] = []
   _meta: MetaLocaleMessage | undefined
 
-  get filepath () {
+  get filepath() {
     return this.uri.fsPath
   }
 
-  get files () {
+  get files() {
     return [{ filepath: this.filepath, locale: '', nested: false }]
   }
 
-  async load () {
+  async load() {
     const filepath = this.filepath
     Log.info(`📑 Loading sfc ${filepath}`)
     const doc = await workspace.openTextDocument(this.uri)
@@ -38,7 +38,7 @@ export class VueSfcLoader extends Loader {
     this._onDidChange.fire(this.name)
   }
 
-  private getOptions (section: SFCI18nBlock, locale: string, index: number): NodeOptions {
+  private getOptions(section: SFCI18nBlock, locale: string, index: number): NodeOptions {
     return {
       filepath: section.src || this.uri.fsPath,
       locale: normalizeLocale(locale),
@@ -52,7 +52,7 @@ export class VueSfcLoader extends Loader {
     }
   }
 
-  private getSFCFileInfo (doc: TextDocument) {
+  private getSFCFileInfo(doc: TextDocument) {
     return [{
       path: this.filepath,
       content: doc.getText(),
@@ -61,7 +61,7 @@ export class VueSfcLoader extends Loader {
 
   _locales = new Set<string>()
 
-  private updateLocalesTree () {
+  private updateLocalesTree() {
     this._flattenLocaleTree = {}
     this._locales = new Set()
 
@@ -78,15 +78,15 @@ export class VueSfcLoader extends Loader {
     this._localeTree = tree
   }
 
-  get locales () {
+  get locales() {
     return Array.from(this._locales)
   }
 
-  getShadowFilePath (keypath: string, locale: string) {
+  getShadowFilePath(keypath: string, locale: string) {
     return this.uri.fsPath
   }
 
-  async write (pendings: PendingWrite | PendingWrite[]) {
+  async write(pendings: PendingWrite | PendingWrite[]) {
     if (!Array.isArray(pendings))
       pendings = [pendings]
     pendings = pendings.filter(i => i)
@@ -124,7 +124,7 @@ export class VueSfcLoader extends Loader {
     await this.load()
   }
 
-  canHandleWrites (pending: PendingWrite) {
+  canHandleWrites(pending: PendingWrite) {
     return !!this._meta && pending.filepath === this.filepath
   }
 }

@@ -38,15 +38,15 @@ const items: FeedbackItemDefintion[] = [{
 }]
 
 export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
-  constructor (
+  constructor(
     private ctx: ExtensionContext,
   ) {}
 
-  getTreeItem (element: FeedbackItem): TreeItem {
+  getTreeItem(element: FeedbackItem): TreeItem {
     return element
   }
 
-  async getChildren (element?: FeedbackItem) {
+  async getChildren(element?: FeedbackItem) {
     if (element)
       return [] // no child
 

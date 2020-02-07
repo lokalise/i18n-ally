@@ -4,7 +4,7 @@ import { FeedbackItemDefintion } from '../providers/HelpFeedbackProvider'
 import { BaseTreeItem } from './Base'
 
 export class FeedbackItem extends BaseTreeItem {
-  constructor (ctx: ExtensionContext, define: FeedbackItemDefintion) {
+  constructor(ctx: ExtensionContext, define: FeedbackItemDefintion) {
     super(ctx)
     this.getLabel = () => define.text
     this.iconPath = this.getIcon(define.icon)

@@ -1,12 +1,12 @@
 import * as path from 'path'
-import * as fg from 'fast-glob'
 import { Uri, workspace, window, commands } from 'vscode'
 import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
+import * as fg from 'fast-glob'
 
 export class ConfigLocalesGuide {
-  static async prompt () {
+  static async prompt() {
     const okText = i18n.t('prompt.config_locales_button')
     const result = await window.showInformationMessage(
       i18n.t('prompt.config_locales_info'),
@@ -19,14 +19,14 @@ export class ConfigLocalesGuide {
     this.config()
   }
 
-  static async config () {
+  static async config() {
     const dirs = await this.pickDir()
     Config.updateLocalesPaths(dirs)
 
     this.success()
   }
 
-  static async pickDir (): Promise<string[]> {
+  static async pickDir(): Promise<string[]> {
     const rootPath = workspace.rootPath
     if (!rootPath)
       return []
@@ -48,11 +48,11 @@ export class ConfigLocalesGuide {
       .map(pa => path.relative(rootPath, pa))
   }
 
-  static async success () {
+  static async success() {
     await window.showInformationMessage(i18n.t('prompt.config_locales_success'))
   }
 
-  static async autoSet () {
+  static async autoSet() {
     const rootPath = workspace.rootPath
     if (!rootPath)
       return

@@ -1,6 +1,5 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
-import { uniq } from 'lodash'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
@@ -11,6 +10,7 @@ import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
+import { uniq } from 'lodash'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -36,7 +36,7 @@ export class Global {
 
   static readonly onDidChangeLoader: Event<LocaleLoader> = Global._onDidChangeLoader.event
 
-  static async init (context: ExtensionContext) {
+  static async init(context: ExtensionContext) {
     this.context = context
 
     context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(e => this.updateRootPath()))
@@ -47,22 +47,22 @@ export class Global {
     await this.updateRootPath()
   }
 
-  static getKeyMatchReg (languageId?: string, filepath?: string) {
+  static getKeyMatchReg(languageId?: string, filepath?: string) {
     return this.enabledFrameworks
       .flatMap(f => f.getKeyMatchReg(languageId, filepath))
   }
 
-  static refactorTemplates (keypath: string, languageId?: string) {
+  static refactorTemplates(keypath: string, languageId?: string) {
     return uniq(this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)))
   }
 
-  static isLanguageIdSupported (languageId: string) {
+  static isLanguageIdSupported(languageId: string) {
     return this.enabledFrameworks
       .flatMap(f => f.languageIds as string[])
       .includes(languageId)
   }
 
-  static getSupportLangGlob () {
+  static getSupportLangGlob() {
     const exts = uniq(this.enabledFrameworks
       .flatMap(f => f.languageIds)
       .flatMap(id => getExtOfLanguageId(id)))
@@ -70,13 +70,13 @@ export class Global {
     return `**/*.{${exts.join(',')}}`
   }
 
-  static getDocumentSelectors () {
+  static getDocumentSelectors() {
     return this.enabledFrameworks
       .flatMap(f => f.languageIds)
       .map(id => ({ scheme: 'file', language: id }))
   }
 
-  static getFilenameMatchRegex (dirStructure: DirStructure) {
+  static getFilenameMatchRegex(dirStructure: DirStructure) {
     if (Config.filenameMatchRegex)
       return [new RegExp(Config.filenameMatchRegex, 'ig')]
     return this.enabledFrameworks
@@ -84,18 +84,18 @@ export class Global {
       .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
   }
 
-  static hasFeatureEnabled (name: keyof OptionalFeatures) {
+  static hasFeatureEnabled(name: keyof OptionalFeatures) {
     return this.enabledFrameworks
       .map(i => i.enableFeatures)
       .filter(i => i)
       .some(i => i && i[name])
   }
 
-  static get rootpath () {
+  static get rootpath() {
     return this._rootpath
   }
 
-  private static async initLoader (rootpath: string, reload = false) {
+  private static async initLoader(rootpath: string, reload = false) {
     if (!rootpath)
       return
 
@@ -111,7 +111,7 @@ export class Global {
     return this._loaders[rootpath]
   }
 
-  private static async updateRootPath () {
+  private static async updateRootPath() {
     const editor = window.activeTextEditor
     let rootpath = ''
 
@@ -137,7 +137,7 @@ export class Global {
     }
   }
 
-  static async update (e?: ConfigurationChangeEvent) {
+  static async update(e?: ConfigurationChangeEvent) {
     let reload = false
     if (e) {
       let affected = false
@@ -197,16 +197,16 @@ export class Global {
     this._onDidChangeLoader.fire(this.loader)
   }
 
-  private static unloadAll () {
+  private static unloadAll() {
     Object.values(this._loaders).forEach(loader => loader.dispose())
     this._loaders = {}
   }
 
-  static get loader () {
+  static get loader() {
     return this._loaders[this._rootpath]
   }
 
-  static get enabledParsers () {
+  static get enabledParsers() {
     let ids = Config.enabledParsers
 
     if (!ids || !ids.length) {
@@ -223,18 +223,18 @@ export class Global {
     return PARSERS.filter(i => ids!.includes(i.id))
   }
 
-  static getMatchedParser (ext: string) {
+  static getMatchedParser(ext: string) {
     if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
     return this.enabledParsers.find(parser => parser.supports(ext))
   }
 
   // enables
-  static get enabled () {
+  static get enabled() {
     return this._enabled
   }
 
-  private static setEnabled (value: boolean) {
+  private static setEnabled(value: boolean) {
     if (this._enabled !== value) {
       Log.info(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
@@ -243,15 +243,15 @@ export class Global {
     }
   }
 
-  static get allLocales () {
+  static get allLocales() {
     return CurrentFile.loader.locales
   }
 
-  static get visibleLocales () {
+  static get visibleLocales() {
     return this.getVisibleLocales(this.allLocales)
   }
 
-  static getVisibleLocales (locales: string[]) {
+  static getVisibleLocales(locales: string[]) {
     const ignored = Config.ignoredLocales
     return locales.filter(locale => !ignored.includes(locale))
   }

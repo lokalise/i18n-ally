@@ -30,7 +30,7 @@ class I18nextFramework extends Framework {
     /(?:i18next|i18n)\.t\(\s*['"`]([\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       keypath,
     ]

@@ -23,7 +23,7 @@ class EmberFramework extends Framework {
     /(?:{{\s*t\s+|[^\w\d]intl\.t\(\s*)['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       `{{ t '${keypath}' }}`,
       `this.intl.t('${keypath}')`,

@@ -1,16 +1,16 @@
 // @ts-ignore
-import * as limax from 'limax'
 import { commands, window, workspace } from 'vscode'
-import { trim } from 'lodash'
 import { ExtensionModule } from '../modules'
 import { ExtractTextOptions, Global, Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
+import { trim } from 'lodash'
+import * as limax from 'limax'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
-    async (options: ExtractTextOptions) => {
+    async(options: ExtractTextOptions) => {
       const { filepath, text, range, languageId } = options
       const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
       const locale = Config.sourceLanguage

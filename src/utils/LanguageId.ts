@@ -18,6 +18,6 @@ export const LanguageIdExtMap = {
 
 export type LanguageId = keyof typeof LanguageIdExtMap
 
-export function getExtOfLanguageId (id: LanguageId) {
+export function getExtOfLanguageId(id: LanguageId) {
   return LanguageIdExtMap[id] || id
 }

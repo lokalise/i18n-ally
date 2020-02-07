@@ -7,11 +7,11 @@ import i18n from '../i18n'
 export class ProblemProvider {
   private collection: DiagnosticCollection
 
-  constructor (public readonly ctx: ExtensionContext) {
+  constructor(public readonly ctx: ExtensionContext) {
     this.collection = languages.createDiagnosticCollection(EXT_NAMESPACE)
   }
 
-  update (document: TextDocument): void {
+  update(document: TextDocument): void {
     if (!Global.enabled)
       return this.collection.clear()
 
@@ -57,11 +57,11 @@ export class ProblemProvider {
     }
   }
 
-  clear () {
+  clear() {
     this.collection.clear()
   }
 
-  clearUri (uri: Uri) {
+  clearUri(uri: Uri) {
     this.collection.delete(uri)
   }
 }

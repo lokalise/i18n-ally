@@ -1,10 +1,10 @@
-import YAML from 'js-yaml'
 import { PackageParser } from './base'
+import YAML from 'js-yaml'
 
 export class PubspecYAMLParser extends PackageParser {
   static filename = 'pubspec.yaml'
 
-  protected static parserRaw (raw: string) {
+  protected static parserRaw(raw: string) {
     const {
       dependencies = {},
       dev_dependencies = {},

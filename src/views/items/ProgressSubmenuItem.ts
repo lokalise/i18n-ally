@@ -6,34 +6,34 @@ import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressRootItem } from './ProgressRootItem'
 
 export abstract class ProgressSubmenuItem extends ProgressBaseItem {
-  constructor (protected root: ProgressRootItem, public readonly labelKey: i18nKeys, public readonly icon?: string) {
+  constructor(protected root: ProgressRootItem, public readonly labelKey: i18nKeys, public readonly icon?: string) {
     super(root.ctx, root.node)
     this.id = `progress-${this.node.locale}-${labelKey}`
   }
 
-  get iconPath () {
+  get iconPath() {
     if (this.icon)
       return this.getIcon(this.icon)
   }
 
-  getLabel () {
+  getLabel() {
     return i18n.t(this.labelKey) + this.getSuffix()
   }
 
-  getSuffix () {
+  getSuffix() {
     return ` (${this.getKeys().length})`
   }
 
   abstract getKeys(): string[]
-  get collapsibleState () {
+  get collapsibleState() {
     if (this.getKeys().length)
       return TreeItemCollapsibleState.Collapsed
     else
       return TreeItemCollapsibleState.None
   }
 
-  set collapsibleState (_) { }
-  async getChildren () {
+  set collapsibleState(_) { }
+  async getChildren() {
     const locales = Array.from(new Set([this.node.locale, Config.sourceLanguage]))
     return this.getKeys()
       .map(key => CurrentFile.loader.getNodeByKey(key))

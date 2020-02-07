@@ -7,7 +7,7 @@ import { CommandOptions } from './common'
 
 const FULFILL_VALUE = ''
 
-export async function FulfillMissingKeysForProgress (item: ProgressSubmenuItem) {
+export async function FulfillMissingKeysForProgress(item: ProgressSubmenuItem) {
   const Yes = i18n.t('prompt.button_yes')
   const locale = item.node.locale
   const keys = item.getKeys()
@@ -30,7 +30,7 @@ export async function FulfillMissingKeysForProgress (item: ProgressSubmenuItem) 
   return pendings
 }
 
-export async function FulfillAllMissingKeys (prompt = true) {
+export async function FulfillAllMissingKeys(prompt = true) {
   if (prompt) {
     const Yes = i18n.t('prompt.button_yes')
     const result = await window.showWarningMessage(
@@ -60,7 +60,7 @@ export async function FulfillAllMissingKeys (prompt = true) {
   return pendings
 }
 
-export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+export async function FulfillKeys(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
   let pendings: PendingWrite[] | undefined
 
   if (!item)
@@ -73,8 +73,8 @@ export async function FulfillKeys (item?: LocaleTreeItem | ProgressSubmenuItem |
     await CurrentFile.loader.write(pendings, false)
 }
 
-export function FulfillAllMissingKeysDelay () {
-  setTimeout(async () => {
+export function FulfillAllMissingKeysDelay() {
+  setTimeout(async() => {
     await CurrentFile.loader.write([])
   }, KEEP_FULFILL_DELAY)
 }

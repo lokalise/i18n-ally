@@ -2,38 +2,38 @@ import { ExtensionContext, TreeItem } from 'vscode'
 import { getFlagFilename } from '../../utils/utils'
 
 export abstract class BaseTreeItem extends TreeItem {
-  constructor (
+  constructor(
     public readonly ctx: ExtensionContext,
   ) {
     super('')
   }
 
-  async getChildren (): Promise<BaseTreeItem[]> {
+  async getChildren(): Promise<BaseTreeItem[]> {
     return []
   }
 
-  protected getLabel () {
+  protected getLabel() {
     return ''
   }
 
-  protected setLabel (value: string) {}
+  protected setLabel(value: string) {}
 
-  get label () {
+  get label() {
     return this.getLabel()
   }
 
-  set label (v) {
+  set label(v) {
     this.setLabel(v)
   }
 
-  getIcon (name: string) {
+  getIcon(name: string) {
     return {
       light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
       dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
     }
   }
 
-  getFlagIcon (locale: string) {
+  getFlagIcon(locale: string) {
     return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(locale)}`)
   }
 }

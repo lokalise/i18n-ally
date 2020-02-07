@@ -1,18 +1,18 @@
-import ini from 'ini'
 import { Parser } from './Parser'
+import ini from 'ini'
 
 export class IniParser extends Parser {
   id = 'ini'
 
-  constructor () {
+  constructor() {
     super(['ini'], /\.?ini$/g)
   }
 
-  async parse (text: string) {
+  async parse(text: string) {
     return ini.parse(text)
   }
 
-  async dump (object: object) {
+  async dump(object: object) {
     return ini.stringify(object)
   }
 }

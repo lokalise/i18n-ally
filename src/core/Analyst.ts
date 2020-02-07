@@ -1,36 +1,36 @@
 import { resolve, join } from 'path'
 import fs from 'fs'
 import { workspace, Range, Location, TextDocument, Uri, EventEmitter } from 'vscode'
-import _, { uniq } from 'lodash'
 // @ts-ignore
-import parseGitIgnore from 'parse-gitignore'
 // @ts-ignore
-import { glob } from 'glob-gitignore'
 import { Log } from '../utils'
 import { Global } from './Global'
 import { CurrentFile } from './CurrentFile'
 import { UsageReport } from './types'
 import { KeyDetector, Config, KeyOccurrence, KeyUsage } from '.'
+import { glob } from 'glob-gitignore'
+import parseGitIgnore from 'parse-gitignore'
+import _, { uniq } from 'lodash'
 
 export class Analyst {
   private static _cache: KeyOccurrence[] | null = null
   static readonly _onDidUsageReportChanged = new EventEmitter<UsageReport>()
   static readonly onDidUsageReportChanged = Analyst._onDidUsageReportChanged.event
 
-  static invalidateCache () {
+  static invalidateCache() {
     this._cache = null
   }
 
-  static invalidateCacheOf (filepath: string) {
+  static invalidateCacheOf(filepath: string) {
     if (this._cache)
       this._cache = this._cache.filter(o => o.filepath !== filepath)
   }
 
-  static watch () {
+  static watch() {
     return workspace.onDidSaveTextDocument(doc => this.updateCache(doc))
   }
 
-  private static async updateCache (doc: TextDocument) {
+  private static async updateCache(doc: TextDocument) {
     if (!this._cache)
       return
     if (!Global.isLanguageIdSupported(doc.languageId))
@@ -43,7 +43,7 @@ export class Analyst {
     this._cache.push(...occurrences)
   }
 
-  private static async enumerateDocumentPaths () {
+  private static async enumerateDocumentPaths() {
     const root = workspace.rootPath
     if (!root)
       return []
@@ -74,12 +74,12 @@ export class Analyst {
       .filter(f => !fs.lstatSync(f).isDirectory())
   }
 
-  private static async getOccurrencesOfFile (filepath: string) {
+  private static async getOccurrencesOfFile(filepath: string) {
     const doc = await workspace.openTextDocument(Uri.file(filepath))
     return await this.getOccurrencesOfText(doc, filepath)
   }
 
-  private static async getOccurrencesOfText (doc: TextDocument, filepath: string) {
+  private static async getOccurrencesOfText(doc: TextDocument, filepath: string) {
     const keys = KeyDetector.getKeys(doc)
     const occurrences: KeyOccurrence[] = []
 
@@ -95,7 +95,7 @@ export class Analyst {
     return occurrences
   }
 
-  static async getAllOccurrences (targetKey?: string, useCache = true) {
+  static async getAllOccurrences(targetKey?: string, useCache = true) {
     if (!useCache)
       this._cache = null
 
@@ -114,12 +114,12 @@ export class Analyst {
     return this._cache
   }
 
-  static async getAllOccurrenceLocations (targetKey: string) {
+  static async getAllOccurrenceLocations(targetKey: string) {
     const occurrences = await this.getAllOccurrences(targetKey)
     return await Promise.all(occurrences.map(o => this.getLocationOf(o)))
   }
 
-  static async getLocationOf (occurrence: KeyOccurrence) {
+  static async getLocationOf(occurrence: KeyOccurrence) {
     const document = await workspace.openTextDocument(occurrence.filepath)
     const range = new Range(
       document.positionAt(occurrence.start),
@@ -128,7 +128,7 @@ export class Analyst {
     return new Location(document.uri, range)
   }
 
-  static async analyzeUsage (useCache = true): Promise<UsageReport> {
+  static async analyzeUsage(useCache = true): Promise<UsageReport> {
     const occurrences = await this.getAllOccurrences(undefined, useCache)
     const usages: KeyUsage[] = _(occurrences)
       .groupBy('keypath')

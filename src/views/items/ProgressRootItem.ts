@@ -6,7 +6,7 @@ import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressTranslatedListItem } from './ProgressTranslatedListItem'
 
 export class ProgressRootItem extends ProgressBaseItem {
-  get description (): string {
+  get description(): string {
     const rate = this.node.translated / this.node.total
     const percent = +(rate * 100).toFixed(1)
     const progress = unicodeProgressBar(Math.round(percent))
@@ -18,29 +18,29 @@ export class ProgressRootItem extends ProgressBaseItem {
     return description
   }
 
-  get locale () {
+  get locale() {
     return this.node.locale
   }
 
-  get visible () {
+  get visible() {
     return !Config.ignoredLocales.includes(this.locale)
   }
 
-  get isSource () {
+  get isSource() {
     return this.locale === Config.sourceLanguage
   }
 
-  get isDisplay () {
+  get isDisplay() {
     return this.locale === Config.displayLanguage
   }
 
-  get iconPath () {
+  get iconPath() {
     if (!this.visible)
       return this.getIcon('eye-off-fade')
     return this.getFlagIcon(this.locale)
   }
 
-  get contextValue () {
+  get contextValue() {
     const context = ['progress']
     if (!this.isSource)
       context.push('notsource')
@@ -54,7 +54,7 @@ export class ProgressRootItem extends ProgressBaseItem {
     return context.join('-')
   }
 
-  async getChildren () {
+  async getChildren() {
     return [
       new ProgressTranslatedListItem(this),
       new ProgressEmptyListItem(this),

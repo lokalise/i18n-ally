@@ -10,7 +10,7 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   readonly onDidChangeTreeData: Event<BaseTreeItem | undefined> = this._onDidChangeTreeData.event
   private loader: Loader
 
-  constructor (private ctx: ExtensionContext) {
+  constructor(private ctx: ExtensionContext) {
     this.loader = CurrentFile.loader
     // const count = 0
     this.loader.onDidChange((src) => {
@@ -19,15 +19,15 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
     })
   }
 
-  refresh (): void {
+  refresh(): void {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: BaseTreeItem): TreeItem {
+  getTreeItem(element: BaseTreeItem): TreeItem {
     return element
   }
 
-  async getChildren (element?: BaseTreeItem) {
+  async getChildren(element?: BaseTreeItem) {
     if (element)
       return await element.getChildren()
     return Object.values(Global.allLocales)

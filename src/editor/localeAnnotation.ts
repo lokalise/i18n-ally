@@ -11,7 +11,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
   const supportedParsers = Global.enabledParsers.filter(p => p.annotationSupported)
 
-  function update () {
+  function update() {
     if (!Global.enabled)
       return
 

@@ -7,13 +7,13 @@ import i18n from '../i18n'
 const m: ExtensionModule = (ctx) => {
   return [
     commands.registerCommand(Commands.open_url,
-      async (url: string) => {
+      async(url: string) => {
         // @ts-ignore
         await env.openExternal(Uri.parse(url))
       }),
 
     commands.registerCommand(Commands.support,
-      async () => {
+      async() => {
         const options = [{
           text: i18n.t('prompt.star_on_github'),
           url: Links.github,

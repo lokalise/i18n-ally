@@ -10,7 +10,7 @@ const underlineDecorationType = window.createTextEditorDecorationType({
 })
 
 const annotation: ExtensionModule = (ctx) => {
-  function update () {
+  function update() {
     if (!Global.enabled)
       return
 

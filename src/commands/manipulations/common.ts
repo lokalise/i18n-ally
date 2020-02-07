@@ -9,7 +9,7 @@ export interface CommandOptions {
   from?: string
 }
 
-export function getNodeOrRecord (item?: LocaleTreeItem | CommandOptions) {
+export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions) {
   if (!item)
     return
 
@@ -19,7 +19,7 @@ export function getNodeOrRecord (item?: LocaleTreeItem | CommandOptions) {
   return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
 }
 
-export function getNode (item?: LocaleTreeItem | CommandOptions | ProgressSubmenuItem) {
+export function getNode(item?: LocaleTreeItem | CommandOptions | ProgressSubmenuItem) {
   if (!item)
     return
 
@@ -35,7 +35,7 @@ export function getNode (item?: LocaleTreeItem | CommandOptions | ProgressSubmen
   return CurrentFile.loader.getNodeByKey(item.keypath, true)
 }
 
-export async function getRecordFromNode (node: Node, defaultLocale?: string) {
+export async function getRecordFromNode(node: Node, defaultLocale?: string) {
   if (node.type === 'tree')
     return
 

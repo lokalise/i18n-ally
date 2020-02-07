@@ -6,7 +6,7 @@ import i18n from '../../i18n'
 import { Log } from '../../utils'
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 
-export async function OpenKey (item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
+export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
   if (item instanceof ProgressRootItem) {
     const locale = item.locale
     const files = CurrentFile.loader.files.filter(f => f.locale === locale).map(f => f.filepath)

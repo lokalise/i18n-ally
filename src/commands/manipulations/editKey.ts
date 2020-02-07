@@ -5,7 +5,7 @@ import i18n from '../../i18n'
 import { decorateLocale, Log } from '../../utils'
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 
-export async function EditKey (item?: LocaleTreeItem | CommandOptions) {
+export async function EditKey(item?: LocaleTreeItem | CommandOptions) {
   let node = getNodeOrRecord(item)
 
   if (!node)

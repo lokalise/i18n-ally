@@ -24,19 +24,19 @@ export default class i18n {
     'pt-br': ptbr,
   }
 
-  static get language () {
+  static get language() {
     return env.language.toLocaleLowerCase()
   }
 
-  static get fallbackMessages () {
+  static get fallbackMessages() {
     return this.messages.en
   }
 
-  static get currentMessages () {
+  static get currentMessages() {
     return this.messages[this.language] || this.fallbackMessages
   }
 
-  static format (str: string, args: any[]) {
+  static format(str: string, args: any[]) {
     return str.replace(/{(\d+)}/g, (match, number) => {
       return typeof args[number] !== 'undefined'
         ? args[number].toString()
@@ -44,7 +44,7 @@ export default class i18n {
     })
   }
 
-  static t (key: i18nKeys, ...args: any[]) {
+  static t(key: i18nKeys, ...args: any[]) {
     let text = this.currentMessages[key] || this.fallbackMessages[key]
 
     if (args && args.length)

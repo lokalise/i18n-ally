@@ -6,7 +6,7 @@ import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
 
-export async function RenameKey (item?: LocaleTreeItem | string) {
+export async function RenameKey(item?: LocaleTreeItem | string) {
   if (!item)
     return
 

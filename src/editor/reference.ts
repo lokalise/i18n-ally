@@ -4,7 +4,7 @@ import { KeyDetector, Analyst } from '../core'
 import { Global } from '../core/Global'
 
 class Provider implements ReferenceProvider, RenameProvider {
-  async provideReferences (document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
+  async provideReferences(document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
     if (!Global.enabled)
       return []
 
@@ -16,7 +16,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     return await Analyst.getAllOccurrenceLocations(key)
   }
 
-  prepareRename (document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
+  prepareRename(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
     const result = KeyDetector.getKeyAndRange(document, position)
     if (!result)
       return
@@ -24,7 +24,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     return { range, placeholder: key }
   }
 
-  async provideRenameEdits (document: TextDocument, position: Position, newName: string, token: CancellationToken): Promise<WorkspaceEdit | undefined> {
+  async provideRenameEdits(document: TextDocument, position: Position, newName: string, token: CancellationToken): Promise<WorkspaceEdit | undefined> {
     if (!Global.enabled)
       return
 
@@ -36,7 +36,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     return await Global.loader.renameKey(key, newName) // TODO:sfc
   }
 
-  constructor (public readonly ctx: ExtensionContext) {}
+  constructor(public readonly ctx: ExtensionContext) {}
 }
 
 const m: ExtensionModule = (ctx) => {

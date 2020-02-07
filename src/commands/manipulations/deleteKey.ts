@@ -4,7 +4,7 @@ import { LocaleRecord, CurrentFile, Analyst } from '../../core'
 import { Log } from '../../utils'
 import i18n from '../../i18n'
 
-export async function DeleteRecords (records: LocaleRecord[]) {
+export async function DeleteRecords(records: LocaleRecord[]) {
   try {
     await CurrentFile.loader.write(records
       .filter(record => !record.shadow)
@@ -21,7 +21,7 @@ export async function DeleteRecords (records: LocaleRecord[]) {
   }
 }
 
-export async function DeleteKey (item: LocaleTreeItem | UsageReportRootItem) {
+export async function DeleteKey(item: LocaleTreeItem | UsageReportRootItem) {
   if (item instanceof LocaleTreeItem) {
     let records: LocaleRecord[] = []
     const { node } = item

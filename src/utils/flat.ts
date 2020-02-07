@@ -3,10 +3,10 @@ import { set, get, isObject } from 'lodash'
 
 export const ROOT_KEY = '__i18n_ally_root__'
 
-export function flatten (data: any) {
+export function flatten(data: any) {
   const output: any = {}
 
-  function step (obj: any, prev?: string) {
+  function step(obj: any, prev?: string) {
     Object.keys(obj).forEach((key) => {
       const value = obj[key]
       const isarray = Array.isArray(value)
@@ -33,7 +33,7 @@ export function flatten (data: any) {
   return output
 }
 
-export function unflatten (data: any) {
+export function unflatten(data: any) {
   const output: any = {}
 
   Object.keys(data)

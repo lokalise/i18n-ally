@@ -3,11 +3,11 @@ import { ProgressRootItem } from './ProgressRootItem'
 import { ProgressSubmenuItem } from './ProgressSubmenuItem'
 
 export class ProgressMissingListItem extends ProgressSubmenuItem {
-  constructor (protected root: ProgressRootItem) {
+  constructor(protected root: ProgressRootItem) {
     super(root, 'view.progress_submenu.missing_keys', 'icon-unknown')
   }
 
-  get contextValue () {
+  get contextValue() {
     const values: string[] = []
     if (this.node.locale !== Config.sourceLanguage)
       values.push('translatable')
@@ -15,7 +15,7 @@ export class ProgressMissingListItem extends ProgressSubmenuItem {
     return values.join('-')
   }
 
-  getKeys () {
+  getKeys() {
     return this.root.node.missingKeys
   }
 }

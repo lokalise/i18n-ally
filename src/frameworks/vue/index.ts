@@ -28,7 +28,7 @@ class VueFramework extends Framework {
     /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?,|(?:t|tc|te)\()\s*)['"`]([\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, languageId: string) {
     return [
       `{{$t('${keypath}')}}`,
       `this.$t('${keypath}')`,

@@ -19,7 +19,7 @@ const bar_styles = [
   '⚪⚫',
 ]
 
-export function unicodeProgressBar (p: number, style = 7, min_size = 8, max_size = 8) {
+export function unicodeProgressBar(p: number, style = 7, min_size = 8, max_size = 8) {
   let d; let full; let m; let middle; let r; let rest; let x
   let min_delta = Number.POSITIVE_INFINITY
   const bar_style = bar_styles[style]

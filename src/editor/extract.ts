@@ -4,7 +4,7 @@ import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
 class ExtractProvider implements CodeActionProvider {
-  public async provideCodeActions (document: TextDocument, selection: Range | Selection): Promise<Command[]> {
+  public async provideCodeActions(document: TextDocument, selection: Range | Selection): Promise<Command[]> {
     if (!Global.enabled)
       return []
 

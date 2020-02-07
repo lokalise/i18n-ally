@@ -8,14 +8,14 @@ export enum ErrorType {
 }
 
 export class AllyError extends Error {
-  constructor (
+  constructor(
     public readonly type: ErrorType,
     public readonly data?: any,
     public readonly errors?: Error | Error[]) {
     super(ErrorType[type].toString())
   }
 
-  toString () {
+  toString() {
     return ErrorType[this.type].toString()
   }
 }

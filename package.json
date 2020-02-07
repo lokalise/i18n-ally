@@ -629,8 +629,8 @@
     "gh-release": "conventional-github-releaser -p angular",
     "vscode:prepublish": "webpack --mode development",
     "compile": "webpack --mode development",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "lint:fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "lint": "eslint --ext .ts,.js,.vue .",
+    "lint:fix": "npm run lint -- --fix",
     "watch": "webpack --mode development --watch",
     "test": "jest"
   },

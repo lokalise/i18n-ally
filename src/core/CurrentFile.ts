@@ -8,11 +8,11 @@ export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
 
-  static get VueSfc () {
+  static get VueSfc() {
     return Global.hasFeatureEnabled('VueSfc')
   }
 
-  static watch (ctx: ExtensionContext) {
+  static watch(ctx: ExtensionContext) {
     ctx.subscriptions.push(workspace.onDidSaveTextDocument(e => this.update(e.uri)))
     ctx.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.update(e && e.document.uri)))
     ctx.subscriptions.push(Global.onDidChangeLoader(() => {
@@ -24,7 +24,7 @@ export class CurrentFile {
     this.updateLoaders()
   }
 
-  static update (uri?: Uri) {
+  static update(uri?: Uri) {
     if (!Global.enabled)
       return
 
@@ -46,7 +46,7 @@ export class CurrentFile {
     this.updateLoaders()
   }
 
-  static updateLoaders () {
+  static updateLoaders() {
     const loaders: Loader[] = [Global.loader]
 
     if (this.VueSfc && this._vue_sfc_loader)
@@ -55,7 +55,7 @@ export class CurrentFile {
     this._composed_loader.loaders = loaders
   }
 
-  static get loader () {
+  static get loader() {
     return this._composed_loader
   }
 }

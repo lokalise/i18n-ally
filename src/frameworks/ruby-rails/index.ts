@@ -25,24 +25,24 @@ class RubyRailsFramework extends Framework {
     /[^\w\d]t(?:\(| )['"`]([[\w\d\. \-\[\]]*?)['"`]/g,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       `t(".${keypath}")`,
       keypath,
     ]
   }
 
-  preprocessData (data: any, context: DataProcessContext): object {
+  preprocessData(data: any, context: DataProcessContext): object {
     return data[context.locale || ''] || {}
   }
 
-  deprocessData (data: any, context: DataProcessContext): object {
+  deprocessData(data: any, context: DataProcessContext): object {
     return {
       [context.locale || '']: data,
     }
   }
 
-  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     if (source === 'reference' && key.startsWith('.') && context.targetFile) {
       const root = path.resolve(Global.rootpath, Config.frameworksRubyRailsScopeRoot)
       let scope = path.relative(root, context.targetFile)

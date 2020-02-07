@@ -20,7 +20,7 @@ class FlutterFramework extends Framework {
     /[^\w\d]FlutterI18n\.(?:plural|translate)\([\w\d]+,\s?['"`]([[\w\d\. \-\[\]]*?)['"`]/g,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       `FlutterI18n.translate(buildContext, "${keypath}")`,
       keypath,

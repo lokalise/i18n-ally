@@ -10,7 +10,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   view: TreeView<TreeItem> | undefined
   rootItems: TreeItem[] = []
 
-  constructor (
+  constructor(
     private ctx: ExtensionContext,
   ) {
     Analyst.onDidUsageReportChanged((u) => {
@@ -18,7 +18,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
     })
   }
 
-  private set (usages: UsageReport) {
+  private set(usages: UsageReport) {
     this.usages = usages
     const enabled = !!(this.usages.active.length || this.usages.idle.length)
 
@@ -28,15 +28,15 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
       this.view?.reveal(this.rootItems[0])
   }
 
-  refresh (): void {
+  refresh(): void {
     this._onDidChangeTreeData.fire()
   }
 
-  getTreeItem (element: TreeItem): TreeItem {
+  getTreeItem(element: TreeItem): TreeItem {
     return element
   }
 
-  async getChildren (element?: TreeItem) {
+  async getChildren(element?: TreeItem) {
     this.rootItems = []
     if (!element) {
       if (this.usages.active.length)
@@ -53,7 +53,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
         .map(usage => new UsageReportTreeItem(this.ctx, usage))
     }
     else if (element instanceof UsageReportTreeItem) {
-      this.rootItems = await Promise.all(element.usage.occurrences.map(async (o) => {
+      this.rootItems = await Promise.all(element.usage.occurrences.map(async(o) => {
         const location = await Analyst.getLocationOf(o)
         return new LocationTreeItem(this.ctx, location)
       }))
@@ -61,7 +61,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
     return this.rootItems
   }
 
-  getParent () {
+  getParent() {
     return null
   }
 }

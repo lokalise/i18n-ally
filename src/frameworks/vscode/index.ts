@@ -26,14 +26,14 @@ class VSCodeFramework extends Framework {
     return /(?:i18n[ (]path=|v-t=['"`{]|(?:this\.|\$|i18n\.)(?:(?:d|n)\(.*?, ?|(?:t|tc|te)\())['"`]([\w\d\. \-\[\]]*?)['"`]/g
   }
 
-  refactorTemplates (keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, languageId: string) {
     return [
       `i18n.t('${keypath}')`,
       keypath,
     ]
   }
 
-  filenameMatchReg () {
+  filenameMatchReg() {
     return '^package.nls.?([\\w-]*)\\.json'
   }
 }

@@ -1,11 +1,11 @@
 import path from 'path'
 import fs from 'fs'
-import YAML from 'js-yaml'
 import { workspace, FileSystemWatcher } from 'vscode'
 import { Global } from '../../core'
 import { Framework } from '../base'
 import { LanguageId, File, Log } from '../../utils'
 import i18n from '../../i18n'
+import YAML from 'js-yaml'
 
 const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 
@@ -30,7 +30,7 @@ class CustomFramework extends Framework {
     },
   }
 
-  load (root: string) {
+  load(root: string) {
     this.startWatch(root)
     const filename = path.resolve(root, CustomFrameworkConfigFilename)
 
@@ -52,7 +52,7 @@ class CustomFramework extends Framework {
     }
   }
 
-  get languageIds (): LanguageId[] {
+  get languageIds(): LanguageId[] {
     let id = this.data?.languageIds || []
     if (typeof id === 'string')
       id = [id]
@@ -60,7 +60,7 @@ class CustomFramework extends Framework {
     return id
   }
 
-  get keyMatchReg (): RegExp[] {
+  get keyMatchReg(): RegExp[] {
     let id = this.data?.keyMatchReg || []
     if (typeof id === 'string')
       id = [id]
@@ -79,16 +79,16 @@ class CustomFramework extends Framework {
       .filter(i => i) as RegExp[]
   }
 
-  get monopoly () {
+  get monopoly() {
     return this.data?.monopoly || false
   }
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return (this.data?.refactorTemplates || ['$1'])
       .map(i => i.replace(/\$1/g, keypath))
   }
 
-  startWatch (root?: string) {
+  startWatch(root?: string) {
     if (this.watchingFor) {
       this.watchingFor = undefined
       if (this.watcher)

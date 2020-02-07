@@ -1,8 +1,8 @@
 import { Disposable, EventEmitter } from 'vscode'
-import _, { uniq } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
 import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../types'
 import { resolveFlattenRootKeypath, resolveFlattenRoot } from '../../utils'
+import _, { uniq } from 'lodash'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -13,7 +13,7 @@ export abstract class Loader extends Disposable {
   protected _flattenLocaleTree: FlattenLocaleTree = {}
   protected _localeTree: LocaleTree = new LocaleTree({ keypath: '' })
 
-  constructor (
+  constructor(
     public readonly name: string,
   ) {
     super(() => this.onDispose())
@@ -23,27 +23,27 @@ export abstract class Loader extends Disposable {
 
   abstract getShadowFilePath(keypath: string, locale: string): string | undefined
 
-  get root () {
+  get root() {
     return this._localeTree
   }
 
-  get flattenLocaleTree () {
+  get flattenLocaleTree() {
     return this._flattenLocaleTree
   }
 
-  get files (): FileInfo[] {
+  get files(): FileInfo[] {
     return []
   }
 
-  get keys (): string[] {
+  get keys(): string[] {
     return uniq(Object.keys(this.flattenLocaleTree))
   }
 
-  splitKeypath (keypath: string): string[] {
+  splitKeypath(keypath: string): string[] {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 
-  getCoverage (locale: string, keys?: string[]): Coverage | undefined {
+  getCoverage(locale: string, keys?: string[]): Coverage | undefined {
     const totalKeys = keys || this.keys
     totalKeys.sort()
     const translatedKeys = totalKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
@@ -64,7 +64,7 @@ export abstract class Loader extends Disposable {
     }
   }
 
-  protected updateTree (tree: LocaleTree | undefined, data: any, keypath: string, keyname: string, options: NodeOptions, isCollection = false) {
+  protected updateTree(tree: LocaleTree | undefined, data: any, keypath: string, keyname: string, options: NodeOptions, isCollection = false) {
     tree = tree || new LocaleTree({
       keypath,
       keyname,
@@ -133,25 +133,25 @@ export abstract class Loader extends Disposable {
     return tree
   }
 
-  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     for (const framework of Global.enabledFrameworks)
       key = framework.rewriteKeys(key, source, context)
     return key
   }
 
-  preprocessData (data: object, context: DataProcessContext = {}) {
+  preprocessData(data: object, context: DataProcessContext = {}) {
     for (const framework of Global.enabledFrameworks)
       data = framework.preprocessData(data, context)
     return data
   }
 
-  deprocessData (data: object, context: DataProcessContext = {}) {
+  deprocessData(data: object, context: DataProcessContext = {}) {
     for (const framework of Global.enabledFrameworks)
       data = framework.deprocessData(data, context)
     return data
   }
 
-  getTreeNodeByKey (key: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
+  getTreeNodeByKey(key: string, tree?: LocaleTree): LocaleNode | LocaleTree | undefined {
     const root = !tree
     tree = tree || this.root
 
@@ -174,7 +174,7 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
-  getFilepathByKey (key: string, locale?: string) {
+  getFilepathByKey(key: string, locale?: string) {
     locale = locale || Config.displayLanguage
     const record = this.getRecordByKey(key, locale)
     if (record && record.filepath)
@@ -182,7 +182,7 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
-  private stripAnnotationString (str: string, maxlength = 0) {
+  private stripAnnotationString(str: string, maxlength = 0) {
     if (!str)
       return
     if (maxlength && str.length > maxlength)
@@ -190,7 +190,7 @@ export abstract class Loader extends Disposable {
     return str
   }
 
-  getValueByKey (key: string, locale?: string, maxlength = 0, stringifySpace?: number, context: RewriteKeyContext = {}) {
+  getValueByKey(key: string, locale?: string, maxlength = 0, stringifySpace?: number, context: RewriteKeyContext = {}) {
     locale = locale || Config.displayLanguage
 
     const node = resolveFlattenRoot(this.getTreeNodeByKey(key))
@@ -221,11 +221,11 @@ export abstract class Loader extends Disposable {
     }
   }
 
-  getShadowNodeByKey (key: string) {
+  getShadowNodeByKey(key: string) {
     return new LocaleNode({ keypath: key, shadow: true })
   }
 
-  getNodeByKey (key: string, shadow = false): LocaleNode | undefined {
+  getNodeByKey(key: string, shadow = false): LocaleNode | undefined {
     const node = resolveFlattenRoot(this.getTreeNodeByKey(key))
     if (!node && shadow)
       return this.getShadowNodeByKey(key)
@@ -233,7 +233,7 @@ export abstract class Loader extends Disposable {
       return node
   }
 
-  getTranslationsByKey (key: string, shadow = true) {
+  getTranslationsByKey(key: string, shadow = true) {
     const node = this.getNodeByKey(key, shadow)
     if (!node)
       return {}
@@ -243,12 +243,12 @@ export abstract class Loader extends Disposable {
       return node.locales
   }
 
-  getRecordByKey (key: string, locale: string, shadow = false): LocaleRecord | undefined {
+  getRecordByKey(key: string, locale: string, shadow = false): LocaleRecord | undefined {
     const trans = this.getTranslationsByKey(key, shadow)
     return trans[locale]
   }
 
-  getShadowLocales (node: LocaleNode, listedLocales?: string[]) {
+  getShadowLocales(node: LocaleNode, listedLocales?: string[]) {
     const locales: Record<string, LocaleRecord> = {}
 
     listedLocales = listedLocales || Global.getVisibleLocales(this.locales)
@@ -278,11 +278,11 @@ export abstract class Loader extends Disposable {
 
   abstract async write (pendings: PendingWrite | PendingWrite[]): Promise<void>
 
-  canHandleWrites (pending: PendingWrite) {
+  canHandleWrites(pending: PendingWrite) {
     return false
   }
 
-  protected onDispose () {
+  protected onDispose() {
     // Log.info(`🗑 Disposing loader "${this.name}"`)
     this._disposables.forEach(d => d.dispose())
     this._disposables = []

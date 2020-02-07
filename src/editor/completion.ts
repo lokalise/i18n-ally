@@ -3,7 +3,7 @@ import { Global, KeyDetector, Loader, CurrentFile, LocaleTree, LocaleNode } from
 import { ExtensionModule } from '../modules'
 
 class CompletionProvider implements CompletionItemProvider {
-  public provideCompletionItems (
+  public provideCompletionItems(
     document: TextDocument,
     position: Position,
   ) {

@@ -26,7 +26,7 @@ class ReactFramework extends Framework {
     /[^\w\d](?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\(\s*)['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       `{t('${keypath}')}`,
       `t('${keypath}')`,

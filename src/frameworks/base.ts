@@ -40,7 +40,7 @@ export abstract class Framework {
   /**
    * Locale file's name match
    */
-  filenameMatchReg (dirStructure?: DirStructure): RegExp | string {
+  filenameMatchReg(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
       return `^([\\w-_]*)\\.(${ParserExtRegEx})$`
     else
@@ -49,7 +49,7 @@ export abstract class Framework {
 
   enableFeatures?: OptionalFeatures
 
-  getKeyMatchReg (languageId = '*', filepath?: string): RegExp[] {
+  getKeyMatchReg(languageId = '*', filepath?: string): RegExp[] {
     let reg: RegExp | RegExp[] | undefined
     if (typeof this.keyMatchReg === 'function')
       reg = this.keyMatchReg(languageId, filepath)
@@ -62,15 +62,15 @@ export abstract class Framework {
     return reg
   }
 
-  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     return key
   }
 
-  preprocessData (data: object, context: DataProcessContext): object {
+  preprocessData(data: object, context: DataProcessContext): object {
     return data
   }
 
-  deprocessData (data: object, context: DataProcessContext): object {
+  deprocessData(data: object, context: DataProcessContext): object {
     return data
   }
 }

@@ -1,9 +1,9 @@
 import { window, workspace, extensions } from 'vscode'
-import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
+import { trimEnd, uniq } from 'lodash'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -25,23 +25,23 @@ export class Config {
   // #region ====== Configurations ======
 
   // languages
-  static get displayLanguage (): string {
+  static get displayLanguage(): string {
     return normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
   }
 
-  static set displayLanguage (value) {
+  static set displayLanguage(value) {
     this.setConfig('displayLanguage', normalizeLocale(value), true)
   }
 
-  static get sourceLanguage (): string {
+  static get sourceLanguage(): string {
     return normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
   }
 
-  static set sourceLanguage (value) {
+  static set sourceLanguage(value) {
     this.setConfig('sourceLanguage', normalizeLocale(value))
   }
 
-  static get ignoredLocales (): string[] {
+  static get ignoredLocales(): string[] {
     const ignored = this.getConfig('ignoredLocales')
     if (!ignored)
       return []
@@ -52,39 +52,39 @@ export class Config {
     return []
   }
 
-  static set ignoredLocales (value) {
+  static set ignoredLocales(value) {
     this.setConfig('ignoredLocales', value, true)
   }
 
-  static get keyStyle (): KeyStyle {
+  static get keyStyle(): KeyStyle {
     return this.getConfig<KeyStyle>('keystyle') || 'auto'
   }
 
-  static set keyStyle (value: KeyStyle) {
+  static set keyStyle(value: KeyStyle) {
     this.setConfig('keystyle', value, false)
   }
 
-  static get annotations (): boolean {
+  static get annotations(): boolean {
     return this.getConfig<boolean>('annotations') ?? true
   }
 
-  static set annotations (value: boolean) {
+  static set annotations(value: boolean) {
     this.setConfig('annotations', value, true)
   }
 
-  static get annotationMaxLength (): number {
+  static get annotationMaxLength(): number {
     return this.getConfig<number>('annotationMaxLength') || 40
   }
 
-  static set annotationMaxLength (value: number) {
+  static set annotationMaxLength(value: number) {
     this.setConfig('annotationMaxLength', value, true)
   }
 
-  static get annotationDelimiter (): string {
+  static get annotationDelimiter(): string {
     return this.getConfig<string>('annotationDelimiter') || ''
   }
 
-  static get enabledFrameworks (): string[] | undefined {
+  static get enabledFrameworks(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledFrameworks')
     if (!ids)
       return undefined
@@ -93,7 +93,7 @@ export class Config {
     return ids
   }
 
-  static get enabledParsers (): string[] | undefined {
+  static get enabledParsers(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledParsers')
     if (!ids)
       return undefined
@@ -102,47 +102,47 @@ export class Config {
     return ids
   }
 
-  static get dirStructure (): DirStructureAuto {
+  static get dirStructure(): DirStructureAuto {
     return (this.getConfig('dirStructure')) as (DirStructureAuto) || 'auto'
   }
 
-  static set dirStructure (value: DirStructureAuto) {
+  static set dirStructure(value: DirStructureAuto) {
     this.setConfig('dirStructure', value, true)
   }
 
-  static get sortKeys (): boolean {
+  static get sortKeys(): boolean {
     return this.getConfig<boolean>('sortKeys') || false
   }
 
-  static get readonly (): boolean {
+  static get readonly(): boolean {
     return this.getConfig<boolean>('readonly') || false
   }
 
-  static get includeSubfolders (): boolean {
+  static get includeSubfolders(): boolean {
     return this.getConfig<boolean>('includeSubfolders') || false
   }
 
-  static get fullReloadOnChanged (): boolean {
+  static get fullReloadOnChanged(): boolean {
     return this.getConfig<boolean>('fullReloadOnChanged') || false
   }
 
-  static get preferredDelimiter (): string {
+  static get preferredDelimiter(): string {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
-  static get filenameMatchRegex (): string | undefined {
+  static get filenameMatchRegex(): string | undefined {
     return this.getConfig('filenameMatchRegex')
   }
 
-  static get keepFulfilled (): boolean {
+  static get keepFulfilled(): boolean {
     return this.getConfig<boolean>('keepFulfilled') || false
   }
 
-  static get frameworksRubyRailsScopeRoot (): string {
+  static get frameworksRubyRailsScopeRoot(): string {
     return this.getConfig<string>('frameworks.ruby-rails.scopeRoot') || ''
   }
 
-  static async requestKeyStyle (): Promise<KeyStyle | undefined> {
+  static async requestKeyStyle(): Promise<KeyStyle | undefined> {
     if (this.keyStyle !== 'auto')
       return this.keyStyle
 
@@ -166,7 +166,7 @@ export class Config {
     return result.value as KeyStyle
   }
 
-  static toggleLocaleVisibility (locale: string, visible?: boolean) {
+  static toggleLocaleVisibility(locale: string, visible?: boolean) {
     const ignored = this.ignoredLocales
     if (visible == null)
       visible = !ignored.includes(locale)
@@ -180,7 +180,7 @@ export class Config {
   }
 
   // locales
-  static get localesPaths (): string[] {
+  static get localesPaths(): string[] {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
     if (!paths)
@@ -192,49 +192,49 @@ export class Config {
     return localesPaths.map(i => trimEnd(i, '/\\'))
   }
 
-  static set localesPaths (paths: string[]) {
+  static set localesPaths(paths: string[]) {
     if (paths.length === 1)
       this.setConfig('localesPaths', paths[0])
     else
       this.setConfig('localesPaths', paths)
   }
 
-  static updateLocalesPaths (paths: string[]) {
+  static updateLocalesPaths(paths: string[]) {
     this.localesPaths = uniq(this.localesPaths.concat(paths))
   }
 
-  static get hasLocalesConfigured () {
+  static get hasLocalesConfigured() {
     return !!this.localesPaths.length
   }
 
-  static get extension () {
+  static get extension() {
     return extensions.getExtension(EXT_ID)
   }
 
-  static get extensionPath () {
+  static get extensionPath() {
     if (this.extension)
       return this.extension.extensionPath
     return undefined
   }
 
-  static get encoding () {
+  static get encoding() {
     return this.getConfig<string>('encoding') || 'auto'
   }
 
-  static get indent () {
+  static get indent() {
     return this.getConfig<number>('indent') ?? 2
   }
 
-  static get tabStyle () {
+  static get tabStyle() {
     return this.getConfig<string>('tabStyle') === 'tab' ? '\t' : ' '
   }
 
-  static get promptTranslatingSource () {
+  static get promptTranslatingSource() {
     return this.getConfig<boolean>('promptTranslatingSource') ?? false
   }
 
   // config
-  private static getConfig<T = any> (key: string): T | undefined {
+  private static getConfig<T = any>(key: string): T | undefined {
     let config = workspace
       .getConfiguration(EXT_NAMESPACE)
       .get<T>(key)
@@ -249,7 +249,7 @@ export class Config {
     return config
   }
 
-  private static async setConfig (key: string, value: any, isGlobal = false) {
+  private static async setConfig(key: string, value: any, isGlobal = false) {
     // transfer legacy config
     if (workspace
       .getConfiguration(EXT_LEGACY_NAMESPACE)

@@ -5,7 +5,7 @@ import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
 
-export async function NewKey (keypath?: string) {
+export async function NewKey(keypath?: string) {
   try {
     keypath = await window.showInputBox({
       value: keypath || '',

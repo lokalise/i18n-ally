@@ -18,7 +18,7 @@ class ChromeExtensionFramework extends Framework {
     /i18n\.getMessage\(\s*['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, languageId: string) {
     return [
       `chrome.i18n.getMessage('${keypath}')`,
       `browser.i18n.getMessage('${keypath}')`,
@@ -26,7 +26,7 @@ class ChromeExtensionFramework extends Framework {
     ]
   }
 
-  rewriteKeys (key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     if (source === 'reference' && !key.endsWith('.message'))
       return `${key}.message`
     if (source === 'write' && !key.endsWith('.message'))

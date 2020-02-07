@@ -10,7 +10,7 @@ export class Refactor implements CodeActionProvider {
     CodeActionKind.QuickFix,
   ]
 
-  public provideCodeActions (document: TextDocument, { start }: Range): CodeAction[] | undefined {
+  public provideCodeActions(document: TextDocument, { start }: Range): CodeAction[] | undefined {
     const keyInfo = KeyDetector.getKeyAndRange(document, start)
     if (!keyInfo)
       return
@@ -34,7 +34,7 @@ export class Refactor implements CodeActionProvider {
     return actions
   }
 
-  private createEditQuickFix (key: string) {
+  private createEditQuickFix(key: string) {
     const title = i18n.t('command.edit_key')
     const action = new CodeAction(title, CodeActionKind.QuickFix)
     action.command = {
@@ -48,7 +48,7 @@ export class Refactor implements CodeActionProvider {
     return action
   }
 
-  private createTranslateQuickFix (key: string, from?: string, to?: string) {
+  private createTranslateQuickFix(key: string, from?: string, to?: string) {
     from = from || Config.sourceLanguage
     to = to || Config.displayLanguage
     const title = i18n.t('command.translate_key_from', from)

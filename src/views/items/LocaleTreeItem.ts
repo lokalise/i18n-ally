@@ -5,7 +5,7 @@ import { BaseTreeItem } from './Base'
 
 export class LocaleTreeItem extends BaseTreeItem {
   public readonly node: Node
-  constructor (ctx: ExtensionContext, node: Node, public flatten = false, public readonly displayLocale?: string, public readonly listedLocales?: string[]) {
+  constructor(ctx: ExtensionContext, node: Node, public flatten = false, public readonly displayLocale?: string, public readonly listedLocales?: string[]) {
     super(ctx)
 
     if (this.flatten && node.type !== 'record')
@@ -14,11 +14,11 @@ export class LocaleTreeItem extends BaseTreeItem {
       this.node = node
   }
 
-  get tooltip (): string {
+  get tooltip(): string {
     return resolveFlattenRootKeypath(this.node.keypath)
   }
 
-  getLabel (): string {
+  getLabel(): string {
     if (this.node.type === 'record') {
       return decorateLocale(this.node.locale)
     }
@@ -31,16 +31,16 @@ export class LocaleTreeItem extends BaseTreeItem {
     }
   }
 
-  get collapsibleState () {
+  get collapsibleState() {
     if (this.node.type === 'record')
       return TreeItemCollapsibleState.None
     else
       return TreeItemCollapsibleState.Collapsed
   }
 
-  set collapsibleState (_) { }
+  set collapsibleState(_) { }
 
-  get description (): string {
+  get description(): string {
     if (this.node.type === 'node')
       return this.node.getValue(this.displayLocale, true)
     if (this.node.type === 'record')
@@ -48,7 +48,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     return ''
   }
 
-  get iconPath () {
+  get iconPath() {
     if (Translator.isTranslating(this.node))
       return this.getIcon('loading')
     if (this.node.type === 'record') {
@@ -71,7 +71,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     }
   }
 
-  get contextValue () {
+  get contextValue() {
     const values: string[] = [this.node.type]
     if (NodeHelper.isTranslatable(this.node))
       values.push('translatable')
@@ -82,7 +82,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     return values.join('-')
   }
 
-  async getChildren (filter: (node: Node) => boolean = () => true) {
+  async getChildren(filter: (node: Node) => boolean = () => true) {
     let nodes: Node[] = []
     if (this.node.type === 'tree')
       nodes = Object.values(this.node.children)

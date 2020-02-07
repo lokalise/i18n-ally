@@ -5,7 +5,7 @@ import { Global } from './Global'
 import { RewriteKeyContext } from './types'
 
 export class KeyDetector {
-  static getKeyByContent (text: string) {
+  static getKeyByContent(text: string) {
     const keys = new Set<string>()
     const regs = Global.getKeyMatchReg()
 
@@ -19,7 +19,7 @@ export class KeyDetector {
     return Array.from(keys)
   }
 
-  static getKeyRange (document: TextDocument, position: Position, dotEnding?: boolean) {
+  static getKeyRange(document: TextDocument, position: Position, dotEnding?: boolean) {
     const regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
     for (const regex of regs) {
       const range = document.getWordRangeAtPosition(position, regex)
@@ -32,14 +32,14 @@ export class KeyDetector {
     }
   }
 
-  static getKey (document: TextDocument, position: Position, dotEnding?: boolean) {
+  static getKey(document: TextDocument, position: Position, dotEnding?: boolean) {
     const keyRange = KeyDetector.getKeyRange(document, position, dotEnding)
     if (!keyRange)
       return
     return keyRange.key
   }
 
-  static getKeyAndRange (document: TextDocument, position: Position, dotEnding?: boolean) {
+  static getKeyAndRange(document: TextDocument, position: Position, dotEnding?: boolean) {
     const { range, key } = KeyDetector.getKeyRange(document, position, dotEnding) || {}
     if (!range || !key)
       return
@@ -55,7 +55,7 @@ export class KeyDetector {
     }
   }
 
-  static getKeys (document: TextDocument | string, regs?: RegExp[], dotEnding?: boolean): KeyInDocument[] {
+  static getKeys(document: TextDocument | string, regs?: RegExp[], dotEnding?: boolean): KeyInDocument[] {
     let text = ''
     let rewriteContext: RewriteKeyContext| undefined
     if (typeof document !== 'string') {

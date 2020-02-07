@@ -3,7 +3,7 @@ import { ExtensionModule } from '../modules'
 import { Global, KeyDetector, Config, CurrentFile } from '../core'
 
 class DefinitionProvider {
-  async provideDefinition (document: TextDocument, position: Position, token: CancellationToken): Promise<Definition | DefinitionLink[]> {
+  async provideDefinition(document: TextDocument, position: Position, token: CancellationToken): Promise<Definition | DefinitionLink[]> {
     const key = KeyDetector.getKey(document, position)
     if (!key)
       return []

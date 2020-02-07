@@ -1,21 +1,21 @@
+import { KeyInDocument } from '../core'
+import { Parser } from './Parser'
 import * as yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
-import { KeyInDocument } from '../core'
-import { Parser } from './Parser'
 
 export class YamlParser extends Parser {
   id = 'yaml'
 
-  constructor () {
+  constructor() {
     super(['yaml'], /\.?ya?ml$/g)
   }
 
-  async parse (text: string) {
+  async parse(text: string) {
     return yaml.safeLoad(text)
   }
 
-  async dump (object: object, sort: boolean) {
+  async dump(object: object, sort: boolean) {
     object = JSON.parse(JSON.stringify(object))
     return yaml.safeDump(object, {
       indent: this.options.indent,
@@ -26,7 +26,7 @@ export class YamlParser extends Parser {
   annotationSupported = true
   annotationLanguageIds = ['yaml']
 
-  parseAST (text: string) {
+  parseAST(text: string) {
     const cst = YAML.parseCST(text)
     cst.setOrigRanges() // Workaround for CRLF eol, https://github.com/eemeli/yaml/issues/127
     const doc = new YAML.Document({ keepCstNodes: true }).parse(cst[0])

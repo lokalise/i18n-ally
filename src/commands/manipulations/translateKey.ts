@@ -5,7 +5,7 @@ import { Log } from '../../utils'
 import i18n from '../../i18n'
 import { getNodeOrRecord, CommandOptions, getNode } from './common'
 
-export async function TranslateSingleKey (item?: LocaleTreeItem | CommandOptions, source?: string) {
+export async function TranslateSingleKey(item?: LocaleTreeItem | CommandOptions, source?: string) {
   const node = getNodeOrRecord(item)
   const targetLocales = item instanceof LocaleTreeItem ? item.listedLocales : undefined
   source = source || Config.sourceLanguage
@@ -24,7 +24,7 @@ export async function TranslateSingleKey (item?: LocaleTreeItem | CommandOptions
   }
 }
 
-export async function TranslateMultipleKeys (item: ProgressSubmenuItem, source: string) {
+export async function TranslateMultipleKeys(item: ProgressSubmenuItem, source: string) {
   const Yes = i18n.t('prompt.button_yes')
   const to = item.node.locale
   source = source || Config.sourceLanguage
@@ -43,7 +43,7 @@ export async function TranslateMultipleKeys (item: ProgressSubmenuItem, source: 
   }
 }
 
-export async function promptForSourceLocale (defaultLocale: string, node?: LocaleNode, to?: string) {
+export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode, to?: string) {
   const locales = Global.allLocales
   const placeHolder = i18n.t('prompt.select_source_language_for_translating', defaultLocale)
 
@@ -61,7 +61,7 @@ export async function promptForSourceLocale (defaultLocale: string, node?: Local
   return result.label || defaultLocale
 }
 
-export async function TranslateKeys (item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
   let source: string | undefined
 
   if (item && !(item instanceof LocaleTreeItem) && !(item instanceof ProgressSubmenuItem) && item.from) {

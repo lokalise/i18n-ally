@@ -5,15 +5,15 @@ import i18n from '../i18n'
 
 const EmptyButton = '⠀⠀'
 
-function makeMarkdownCommand (command: Commands, args: object): string {
+function makeMarkdownCommand(command: Commands, args: object): string {
   return `command:${command}?${encodeURIComponent(JSON.stringify(args))}`
 }
 
-function formatValue (text: string) {
+function formatValue(text: string) {
   return escapeMarkdown(text.replace(/[\s]+/g, ' '))
 }
 
-function getAvaliableCommands (record?: LocaleRecord) {
+function getAvaliableCommands(record?: LocaleRecord) {
   const commands = []
 
   if (record) {
@@ -54,7 +54,7 @@ function getAvaliableCommands (record?: LocaleRecord) {
   return commands
 }
 
-export function createTable (visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0) {
+export function createTable(visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0) {
   const transTable = visibleLocales
     .flatMap((locale) => {
       const record = records[locale]
@@ -81,7 +81,7 @@ export function createTable (visibleLocales: string[], records: Record<string, L
   return `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 }
 
-export function createHover (keypath: string, maxLength = 0, mainLocale?: string) {
+export function createHover(keypath: string, maxLength = 0, mainLocale?: string) {
   const loader = CurrentFile.loader
   const records = loader.getTranslationsByKey(keypath, undefined)
   if (!Object.keys(records).length)

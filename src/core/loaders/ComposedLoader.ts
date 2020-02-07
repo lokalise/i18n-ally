@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { Disposable } from 'vscode'
 import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
@@ -7,9 +6,10 @@ import { Config } from '../Config'
 import { FulfillAllMissingKeys } from '../../commands/manipulations'
 import { LocaleTree, LocaleNode, FlattenLocaleTree } from '../Nodes'
 import { Loader } from './Loader'
+import _ from 'lodash'
 
 export class ComposedLoader extends Loader {
-  constructor () {
+  constructor() {
     super('[Composed]')
     this._disposables.push(
       Translator.onDidChange(() => this._onDidChange.fire()),
@@ -20,15 +20,15 @@ export class ComposedLoader extends Loader {
   _watchers: Disposable[] = []
   _isFlattenLocaleTreeDirty = true
 
-  get files () {
+  get files() {
     return _.flatten(this._loaders.map(l => l.files))
   }
 
-  get loaders () {
+  get loaders() {
     return this._loaders
   }
 
-  set loaders (value: Loader[]) {
+  set loaders(value: Loader[]) {
     this._watchers.forEach(d => d.dispose())
     this._loaders = value
     this._watchers = this.loaders.filter(i => i).map(loader =>
@@ -39,12 +39,12 @@ export class ComposedLoader extends Loader {
     )
   }
 
-  get loadersReversed () {
+  get loadersReversed() {
     // slice for clone the array
     return this._loaders.slice().reverse()
   }
 
-  get root (): LocaleTree {
+  get root(): LocaleTree {
     const children: Record<string | number, LocaleTree | LocaleNode> = {}
     for (const loader of this._loaders) {
       const loaderChildren = loader.root.children
@@ -54,7 +54,7 @@ export class ComposedLoader extends Loader {
     return new LocaleTree({ keypath: '', children })
   }
 
-  get flattenLocaleTree (): FlattenLocaleTree {
+  get flattenLocaleTree(): FlattenLocaleTree {
     if (!this._isFlattenLocaleTreeDirty)
       return this._flattenLocaleTree
 
@@ -67,14 +67,14 @@ export class ComposedLoader extends Loader {
     return this._flattenLocaleTree
   }
 
-  get locales (): string[] {
+  get locales(): string[] {
     return _(this._loaders)
       .flatMap(l => l.locales)
       .uniq()
       .value()
   }
 
-  getShadowFilePath (keypath: string, locale: string) {
+  getShadowFilePath(keypath: string, locale: string) {
     for (const loader of this.loadersReversed) {
       const value = loader.getShadowFilePath(keypath, locale)
       if (value)
@@ -82,7 +82,7 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  getTreeNodeByKey (keypath: string, tree?: LocaleTree) {
+  getTreeNodeByKey(keypath: string, tree?: LocaleTree) {
     for (const loader of this.loadersReversed) {
       const value = loader.getTreeNodeByKey(keypath, tree)
       if (value)
@@ -90,7 +90,7 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  getFilepathByKey (keypath: string, locale?: string) {
+  getFilepathByKey(keypath: string, locale?: string) {
     for (const loader of this.loadersReversed) {
       const value = loader.getFilepathByKey(keypath, locale)
       if (value)
@@ -98,7 +98,7 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  getValueByKey (keypath: string, locale?: string, maxLength = 0, stringifySpace?: number) {
+  getValueByKey(keypath: string, locale?: string, maxLength = 0, stringifySpace?: number) {
     for (const loader of this.loadersReversed) {
       const value = loader.getValueByKey(keypath, locale, maxLength, stringifySpace)
       if (value)
@@ -106,11 +106,11 @@ export class ComposedLoader extends Loader {
     }
   }
 
-  fire (src?: string) {
+  fire(src?: string) {
     this._onDidChange.fire(src || this.name)
   }
 
-  async write (pendings: PendingWrite | PendingWrite[], triggerFullfilled = true) {
+  async write(pendings: PendingWrite | PendingWrite[], triggerFullfilled = true) {
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
@@ -135,7 +135,7 @@ export class ComposedLoader extends Loader {
         Log.info(`💥 Unhandled write ${JSON.stringify(pending)}`)
     }
 
-    await Promise.all(loaders.map(async (loader, index) => {
+    await Promise.all(loaders.map(async(loader, index) => {
       if (distrubtedPendings[index] && distrubtedPendings[index].length)
         await loader.write(distrubtedPendings[index])
     }))

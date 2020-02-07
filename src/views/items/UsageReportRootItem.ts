@@ -6,7 +6,7 @@ import { BaseTreeItem } from '.'
 export class UsageReportRootItem extends BaseTreeItem {
   public readonly count: number
 
-  constructor (
+  constructor(
     ctx: ExtensionContext,
     public readonly key: 'active' | 'idle' | 'missing',
     public readonly keys: KeyUsage[],
@@ -21,7 +21,7 @@ export class UsageReportRootItem extends BaseTreeItem {
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
   }
 
-  getLabel () {
+  getLabel() {
     return {
       active: i18n.t('view.usage_keys_in_use', this.count),
       idle: i18n.t('view.usage_keys_not_in_use', this.count),
@@ -29,9 +29,9 @@ export class UsageReportRootItem extends BaseTreeItem {
     }[this.key]
   }
 
-  get contextValue () {
+  get contextValue() {
     return this.key
   }
 
-  set contextValue (_) {}
+  set contextValue(_) {}
 }

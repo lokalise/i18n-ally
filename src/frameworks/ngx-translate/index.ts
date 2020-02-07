@@ -23,7 +23,7 @@ class NgxTranslateFramework extends Framework {
     /translate\.get\(\s*['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
-  refactorTemplates (keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, languageId: string) {
     return [
       `{{ '${keypath}' | translate }}`,
       keypath,

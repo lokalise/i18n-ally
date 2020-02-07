@@ -19,7 +19,7 @@ const enabledPlatforms = [
   'win32',
 ]
 
-export function unicodeTransform (text: string, from: FontNames, to: FontNames) {
+export function unicodeTransform(text: string, from: FontNames, to: FontNames) {
   if (!enabledPlatforms.includes(process.platform))
     return text
 
@@ -33,10 +33,10 @@ export function unicodeTransform (text: string, from: FontNames, to: FontNames) 
     }).join('')
 }
 
-export function unicodeDecorate (text: string, to: FontNames) {
+export function unicodeDecorate(text: string, to: FontNames) {
   return unicodeTransform(text, 'plain', to)
 }
 
-export function decorateLocale (locale: string) {
+export function decorateLocale(locale: string) {
   return unicodeDecorate(locale, 'regional_indicator')
 }

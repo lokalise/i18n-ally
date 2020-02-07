@@ -24,7 +24,7 @@ class I18nTagFramework extends Framework {
     /i18n`([\w\d\. \-\[\]]*?)`/g,
   ]
 
-  refactorTemplates (keypath: string) {
+  refactorTemplates(keypath: string) {
     return [
       `i18n\`${keypath}\``,
       keypath,

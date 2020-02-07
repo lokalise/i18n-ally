@@ -9,7 +9,7 @@ const statusbar: ExtensionModule = (ctx) => {
   const priority = -1000
   const bar1 = window.createStatusBarItem(StatusBarAlignment.Right, priority + 1)
   const bar2 = window.createStatusBarItem(StatusBarAlignment.Right, priority)
-  function update () {
+  function update() {
     if (!Global.enabled) {
       bar1.hide()
       bar2.hide()

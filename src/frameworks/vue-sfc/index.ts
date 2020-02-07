@@ -14,7 +14,7 @@ class VueSFCFramework extends Framework {
 
   keyMatchReg = []
 
-  refactorTemplates () {
+  refactorTemplates() {
     return []
   }
 

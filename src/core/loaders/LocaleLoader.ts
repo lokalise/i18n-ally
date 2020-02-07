@@ -1,7 +1,5 @@
 import { promises as fs, existsSync } from 'fs'
 import * as path from 'path'
-import _ from 'lodash'
-import * as fg from 'fast-glob'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten } from '../../utils'
 import i18n from '../../i18n'
@@ -10,30 +8,32 @@ import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
+import * as fg from 'fast-glob'
+import _ from 'lodash'
 import { Analyst, Global, Config } from '..'
 
 export class LocaleLoader extends Loader {
   private _files: Record<string, ParsedFile> = {}
 
-  constructor (public readonly rootpath: string) {
+  constructor(public readonly rootpath: string) {
     super(`[LOCALE]${rootpath}`)
   }
 
-  async init () {
+  async init() {
     Log.info(`🚀 Initializing loader "${this.rootpath}"`)
     await this.loadAll()
     this.update()
   }
 
-  get localesPaths () {
+  get localesPaths() {
     return Config.localesPaths
   }
 
-  get files () {
+  get files() {
     return Object.values(this._files)
   }
 
-  get locales () {
+  get locales() {
     const source = Config.sourceLanguage
     return _(this._files)
       .values()
@@ -47,13 +47,13 @@ export class LocaleLoader extends Loader {
       .value()
   }
 
-  private getFilepathsOfLocale (locale: string) {
+  private getFilepathsOfLocale(locale: string) {
     return Object.values(this._files)
       .filter(f => f.locale === locale)
       .map(f => f.filepath)
   }
 
-  async requestMissingFilepath (locale: string, keypath: string) {
+  async requestMissingFilepath(locale: string, keypath: string) {
     const paths = this.getFilepathsOfLocale(locale)
     if (paths.length === 1)
       return paths[0]
@@ -69,7 +69,7 @@ export class LocaleLoader extends Loader {
     })
   }
 
-  getShadowFilePath (key: string, locale: string) {
+  getShadowFilePath(key: string, locale: string) {
     key = this.rewriteKeys(key, 'reference', { locale })
     const paths = this.getFilepathsOfLocale(locale)
     if (paths.length === 1)
@@ -86,7 +86,7 @@ export class LocaleLoader extends Loader {
 
   private _ignoreChanges = false
 
-  async write (pendings: PendingWrite|PendingWrite[]) {
+  async write(pendings: PendingWrite|PendingWrite[]) {
     this._ignoreChanges = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
@@ -145,11 +145,11 @@ export class LocaleLoader extends Loader {
     this._ignoreChanges = false
   }
 
-  canHandleWrites (pending: PendingWrite) {
+  canHandleWrites(pending: PendingWrite) {
     return !pending.features?.VueSfc
   }
 
-  async renameKey (oldkey: string, newkey: string) {
+  async renameKey(oldkey: string, newkey: string) {
     const edit = new WorkspaceEdit()
 
     oldkey = this.rewriteKeys(oldkey, 'source')
@@ -165,7 +165,7 @@ export class LocaleLoader extends Loader {
     return edit
   }
 
-  async renameKeyInLocales (oldkey: string, newkey: string) {
+  async renameKeyInLocales(oldkey: string, newkey: string) {
     const writes = _(this._files)
       .entries()
       .flatMap(([filepath, file]) => {
@@ -192,7 +192,7 @@ export class LocaleLoader extends Loader {
     await this.write(writes)
   }
 
-  private getFileInfo (filepath: string, dirStructure: DirStructure, rootPath?: string) {
+  private getFileInfo(filepath: string, dirStructure: DirStructure, rootPath?: string) {
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const regs = Global.getFilenameMatchRegex(dirStructure)
@@ -241,7 +241,7 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private async loadFile (filepath: string, dirStructure: DirStructure = 'file', parentPath?: string) {
+  private async loadFile(filepath: string, dirStructure: DirStructure = 'file', parentPath?: string) {
     try {
       const result = this.getFileInfo(filepath, dirStructure, parentPath)
       if (!result)
@@ -269,16 +269,16 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private unsetFile (filepath: string) {
+  private unsetFile(filepath: string) {
     delete this._files[filepath]
   }
 
-  private async isDirectory (filepath: string) {
+  private async isDirectory(filepath: string) {
     const stat = await fs.lstat(filepath)
     return stat.isDirectory()
   }
 
-  private async loadDirectory (searchingPath: string, dirStructure: DirStructureAuto, rootPath?: string) {
+  private async loadDirectory(searchingPath: string, dirStructure: DirStructureAuto, rootPath?: string) {
     rootPath = rootPath || searchingPath
     const paths = await fs.readdir(searchingPath)
 
@@ -301,7 +301,7 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private async watchOn (rootPath: string) {
+  private async watchOn(rootPath: string) {
     Log.info(`\n👀 Watching change on ${rootPath}`)
     const watcher = workspace.createFileSystemWatcher(
       new RelativePattern(
@@ -310,7 +310,7 @@ export class LocaleLoader extends Loader {
       ),
     )
 
-    const updateFile = async (type: string, { fsPath: filepath }: { fsPath: string }) => {
+    const updateFile = async(type: string, { fsPath: filepath }: { fsPath: string }) => {
       if (this._ignoreChanges)
         return
       filepath = path.resolve(filepath)
@@ -355,7 +355,7 @@ export class LocaleLoader extends Loader {
     this._disposables.push(watcher)
   }
 
-  private updateLocalesTree () {
+  private updateLocalesTree() {
     this._flattenLocaleTree = {}
 
     const tree = new LocaleTree({ keypath: '' })
@@ -365,7 +365,7 @@ export class LocaleLoader extends Loader {
     this._localeTree = tree
   }
 
-  private update () {
+  private update() {
     try {
       this.updateLocalesTree()
       this._onDidChange.fire(this.name)
@@ -375,7 +375,7 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  private async loadAll (watch = true) {
+  private async loadAll(watch = true) {
     this._files = {}
     let paths: string[] = []
     if (this.localesPaths.length > 0) {

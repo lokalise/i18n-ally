@@ -1,14 +1,14 @@
 import { ExtensionContext, window } from 'vscode'
-import { uniq } from 'lodash'
 import { resolveFlattenRootKeypath } from '../../utils'
 import { KeyDetector, LocaleNode, Global } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 import { LocalesTreeProvider } from './LocalesTreeProvider'
+import { uniq } from 'lodash'
 
 export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
   protected name = 'CurrentFileLocalesTreeProvider'
 
-  constructor (
+  constructor(
     ctx: ExtensionContext,
   ) {
     super(ctx, [], true)
@@ -17,7 +17,7 @@ export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
     window.onDidChangeTextEditorSelection(() => this.loadCurrentDocument())
   }
 
-  loadCurrentDocument () {
+  loadCurrentDocument() {
     const editor = window.activeTextEditor
 
     if (!editor || !Global.isLanguageIdSupported(editor.document.languageId))
@@ -28,7 +28,7 @@ export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
     this.refresh()
   }
 
-  getRoots () {
+  getRoots() {
     const roots = super.getRoots()
     const realPaths = roots.map(i => resolveFlattenRootKeypath(i.node.keypath))
     if (!this.includePaths)
