@@ -1,27 +1,27 @@
-import JSON5 from 'json5'
 import { KeyStyle } from '../core'
 import { Parser } from './Parser'
+import JSON5 from 'json5'
 
 export class Json5Parser extends Parser {
   id = 'json5'
 
-  constructor () {
+  constructor() {
     super(['json5'], /\.?json5$/g)
   }
 
-  async parse (text: string) {
+  async parse(text: string) {
     if (!text || !text.trim())
       return {}
     return JSON5.parse(text)
   }
 
-  async dump (object: object, sort: boolean) {
+  async dump(object: object, sort: boolean) {
     return JSON5.stringify(object, {
       space: this.options.indent,
     })
   }
 
-  navigateToKey (text: string, keypath: string, keystyle: KeyStyle) {
+  navigateToKey(text: string, keypath: string, keystyle: KeyStyle) {
     const keys = keystyle === 'flat'
       ? [keypath]
       : keypath.split('.')

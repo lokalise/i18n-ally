@@ -16,6 +16,7 @@ import CustomFramework from './custom'
 import PhpJoomlaFramework from './php-joomla'
 import ChromeExtensionFramework from './chrome-ext'
 import RubyRailsFramework from './ruby-rails'
+import LaravelFramework from './laravel'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -30,16 +31,17 @@ export const frameworks: Framework[] = [
   new I18nextFramework(),
   new I18nTagFramework(),
   new PhpJoomlaFramework(),
+  new LaravelFramework(),
   new ChromeExtensionFramework(),
   new RubyRailsFramework(),
   new VueSFCFramework(),
 ]
 
-export function getFramework (id: string): Framework | undefined {
+export function getFramework(id: string): Framework | undefined {
   return frameworks.find(f => f.id === id)
 }
 
-export function getPackageDependencies (projectUrl: string): PackageDependencies {
+export function getPackageDependencies(projectUrl: string): PackageDependencies {
   const result: PackageDependencies = {}
 
   if (!projectUrl || !workspace.workspaceFolders)
@@ -54,7 +56,7 @@ export function getPackageDependencies (projectUrl: string): PackageDependencies
   return result
 }
 
-export function getEnabledFrameworks (dependencies: PackageDependencies, root: string) {
+export function getEnabledFrameworks(dependencies: PackageDependencies, root: string) {
   const enabledFrameworks = frameworks.filter((framework) => {
     for (const k of Object.keys(dependencies)) {
       const key = k as PackageFileType
@@ -89,7 +91,7 @@ export function getEnabledFrameworks (dependencies: PackageDependencies, root: s
   return enabledFrameworks
 }
 
-export function getEnabledFrameworksByIds (ids: string[], root: string) {
+export function getEnabledFrameworksByIds(ids: string[], root: string) {
   const missedFrameworks: string[] = []
   const enabledFrameworks = ids.flatMap((id) => {
     const framework = frameworks.find(f => f.id === id)

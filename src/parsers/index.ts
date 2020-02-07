@@ -4,6 +4,7 @@ import { YamlParser } from './YamlParser'
 import { JavascriptParser } from './JavascriptParser'
 import { IniParser } from './IniParser'
 import { PoParser } from './PoParser'
+import { PhpParser } from './PhpParser'
 
 export const PARSERS = [
   new JsonParser(),
@@ -12,4 +13,5 @@ export const PARSERS = [
   new Json5Parser(),
   new IniParser(),
   new PoParser(),
+  new PhpParser(),
 ]

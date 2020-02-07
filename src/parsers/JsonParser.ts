@@ -1,22 +1,22 @@
+import { Parser } from './Parser'
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
-import { Parser } from './Parser'
 
 export class JsonParser extends Parser {
   id = 'json'
 
-  constructor () {
+  constructor() {
     super(['json'], /\.?json$/g)
   }
 
-  async parse (text: string) {
+  async parse(text: string) {
     if (!text || !text.trim())
       return {}
     return JSON.parse(text)
   }
 
-  async dump (object: object, sort: boolean) {
+  async dump(object: object, sort: boolean) {
     if (sort)
       return SortedStringify(object, { space: this.options.indent })
     else
@@ -26,7 +26,7 @@ export class JsonParser extends Parser {
   annotationSupported = true
   annotationLanguageIds = ['json']
 
-  parseAST (text: string) {
+  parseAST(text: string) {
     if (!text || !text.trim())
       return []
 

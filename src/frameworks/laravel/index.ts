@@ -1,13 +1,13 @@
 import { Framework } from '../base'
 import { LanguageId } from '../../utils'
 
-class PhpJoomlaFramework extends Framework {
-  id = 'php-joomla'
-  display = 'Joomla'
+class LaravelFramework extends Framework {
+  id = 'laravel'
+  display = 'Laravel'
 
   detection = {
     composerJSON: [
-      'joomla/application',
+      'laravel/framework',
     ],
   }
 
@@ -17,15 +17,18 @@ class PhpJoomlaFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /J?Text::(?:_|[\w]+)\(['"]([\w\d\. \-\[\]]*?)['"]/g,
+    /[^\w\d](?:__|trans|@lang|trans_choice)\(['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
   ]
 
   refactorTemplates(keypath: string) {
     return [
-      `JText::_('${keypath}')`,
+      `__('${keypath}')`,
+      `trans_choice('${keypath}')`,
+      `trans('${keypath}')`,
+      `@lang('${keypath}')`,
       keypath,
     ]
   }
 }
 
-export default PhpJoomlaFramework
+export default LaravelFramework
