@@ -19,7 +19,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </p>
 
 <p align='center'>
-<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png"/><b>Rails i18n</b> is now supported! 🎉
+<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png"/>&nbsp;&nbsp;<b>Laravel</b> is now supported! 🎉
 </p>
 <p align='center'>--------</p>
 <p align='center'>
@@ -47,6 +47,7 @@ Frameworks will be auto-detected when one of the dependencies can be found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/joomla.png) [Joomla](https://www.joomla.org/) | ✅ | [`joomla/application`](https://docs.joomla.org/Application) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config by `"i18n-ally.enabledFrameworks": "chrome-ext"` |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png) [Laravel](https://laravel.com/docs/localization) | ✅ | [`laravel/framework`](https://laravel.com/) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | 🎎 **Custom**  | ✅ | **For almost any frameworks! [How to...](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
 
