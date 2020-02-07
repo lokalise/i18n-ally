@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/antfu/i18n-ally/compare/v1.12.0...v1.12.1) (2020-02-07)
+
+
+### 📚 Documentations
+
+* update readme ([9fb1e62](https://github.com/antfu/i18n-ally/commit/9fb1e6225c32649575275651ce5c9042da4a5f1b))
+
+
+### ⚡ Features
+
+* **framework:** support for Laravel ([3f50900](https://github.com/antfu/i18n-ally/commit/3f50900df867f0eb1ee26d4d1143f06043aa790d))
+
 ## [1.12.0](https://github.com/antfu/i18n-ally/compare/v1.11.5-re...v1.12.0) (2020-02-06)
 
 
