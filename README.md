@@ -144,6 +144,7 @@ If you would like to make it work for frameworks not listed above, you can:
 | INI | ✅ | ✅ | ❌ | *Comments will NOT preserved\** |
 | JavaScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 | TypeScript | ✅ | ❌ | ❌ | *Forced in readonly mode* |
+| PHP | ✅ | ❌ | ❌ | *Forced in readonly mode* |
 
 *\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on readonly mode by `i18n-ally.readonly` to prevent lossing comments.*
 
