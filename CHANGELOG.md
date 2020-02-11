@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.4](https://github.com/antfu/i18n-ally/compare/v1.12.3...v1.12.4) (2020-02-11)
+
+
+### ⚡ Features
+
+* load namespace ([99563d1](https://github.com/antfu/i18n-ally/commit/99563d1826fe0001723985677bd85c31b8125e10))
+* write to namespaces ([7359430](https://github.com/antfu/i18n-ally/commit/73594301ceb5ae530ebcbf0184de9f081caf4c45))
+
 ### [1.12.3](https://github.com/antfu/i18n-ally/compare/v1.12.2...v1.12.3) (2020-02-07)
 
 
