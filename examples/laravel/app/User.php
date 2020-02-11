@@ -1,5 +1,7 @@
 <?php
 
-{{ __('welcome') }}
+__('messages.welcome')
 
-@lang('I love programming')
+@lang('messages.I love programming')
+
+trans('validation.max.file')

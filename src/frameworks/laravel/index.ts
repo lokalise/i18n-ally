@@ -4,6 +4,7 @@ import { LanguageId } from '../../utils'
 class LaravelFramework extends Framework {
   id = 'laravel'
   display = 'Laravel'
+  monopoly = true
 
   detection = {
     composerJSON: [
@@ -28,6 +29,10 @@ class LaravelFramework extends Framework {
       `@lang('${keypath}')`,
       keypath,
     ]
+  }
+
+  enableFeatures = {
+    namespace: true,
   }
 }
 

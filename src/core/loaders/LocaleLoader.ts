@@ -1,6 +1,8 @@
 import { promises as fs, existsSync } from 'fs'
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
+import * as fg from 'fast-glob'
+import _, { uniq } from 'lodash'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, DirStructureAuto } from '../types'
@@ -8,8 +10,6 @@ import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
-import * as fg from 'fast-glob'
-import _ from 'lodash'
 import { Analyst, Global, Config } from '..'
 
 export class LocaleLoader extends Loader {
@@ -196,6 +196,7 @@ export class LocaleLoader extends Loader {
     const filename = path.basename(filepath)
     const ext = path.extname(filepath)
     const regs = Global.getFilenameMatchRegex(dirStructure)
+    let namespace: string| undefined
 
     let match: RegExpExecArray | null = null
     for (const reg of regs) {
@@ -226,6 +227,7 @@ export class LocaleLoader extends Loader {
       locale = rootPath
         ? normalizeLocale(path.relative(rootPath, filepath).split(path.sep)[0], '')
         : normalizeLocale(path.basename(info.dir), '')
+      namespace = info.name
     }
 
     if (!locale)
@@ -238,6 +240,7 @@ export class LocaleLoader extends Loader {
       nested,
       parser,
       ext,
+      namespace,
     }
   }
 
@@ -246,7 +249,7 @@ export class LocaleLoader extends Loader {
       const result = this.getFileInfo(filepath, dirStructure, parentPath)
       if (!result)
         return
-      const { locale, nested, parser } = result
+      const { locale, nested, parser, namespace } = result
       if (!parser)
         return
       Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
@@ -260,6 +263,7 @@ export class LocaleLoader extends Loader {
         locale,
         value,
         nested,
+        namespace,
         readonly: parser.readonly,
       }
     }
@@ -358,11 +362,25 @@ export class LocaleLoader extends Loader {
   private updateLocalesTree() {
     this._flattenLocaleTree = {}
 
-    const tree = new LocaleTree({ keypath: '' })
-    for (const file of Object.values(this._files))
-      this.updateTree(tree, file.value, '', '', file)
+    if (Global.hasFeatureEnabled('namespace')) {
+      const namespaces = uniq(this.files.map(f => f.namespace)) as string[]
+      const root = new LocaleTree({ keypath: '' })
+      for (const ns of namespaces) {
+        const files = this.files.filter(f => f.namespace === ns)
+        const tree = new LocaleTree({ keypath: ns })
+        for (const file of files)
+          this.updateTree(tree, file.value, ns, ns, file)
+        root.children[ns] = tree
+      }
+      this._localeTree = root
+    }
+    else {
+      const tree = new LocaleTree({ keypath: '' })
+      for (const file of Object.values(this._files))
+        this.updateTree(tree, file.value, '', '', file)
 
-    this._localeTree = tree
+      this._localeTree = tree
+    }
   }
 
   private update() {

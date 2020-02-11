@@ -4,6 +4,7 @@ import { Range } from 'vscode'
 export interface OptionalFeatures {
   VueSfc?: boolean
   LinkedMessages?: boolean
+  namespace?: boolean
 }
 
 export interface NodeMeta {
@@ -16,6 +17,7 @@ export interface FileInfo {
   locale: string
   nested: boolean
   readonly?: boolean
+  namespace?: string
 }
 
 export interface ParsedFile extends FileInfo {

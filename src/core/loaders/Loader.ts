@@ -1,8 +1,8 @@
 import { Disposable, EventEmitter } from 'vscode'
+import { uniq, isObject } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
 import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../types'
 import { resolveFlattenRootKeypath, resolveFlattenRoot } from '../../utils'
-import _, { uniq } from 'lodash'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -85,7 +85,7 @@ export abstract class Loader extends Disposable {
       let node = tree.getChild(key)
 
       // should go nested
-      if (_.isArray(value)) {
+      if (Array.isArray(value)) {
         let subtree: LocaleTree|undefined
         if (node && node.type === 'tree')
           subtree = node as LocaleTree
@@ -94,7 +94,7 @@ export abstract class Loader extends Disposable {
         continue
       }
 
-      if (_.isObject(value)) {
+      if (isObject(value)) {
         let subtree: LocaleTree|undefined
         if (node && node.type === 'tree')
           subtree = node as LocaleTree
