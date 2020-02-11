@@ -110,12 +110,14 @@ export class LocaleLoader extends Loader {
 
     try {
       for (const [filepath, pendings] of Object.entries(distrubtedPendings)) {
-        Log.info(`💾 Writing ${filepath}`)
-
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
           throw new AllyError(ErrorType.unsupported_file_type, ext)
+        if (parser.readonly)
+          throw new AllyError(ErrorType.write_in_readonly_mode)
+
+        Log.info(`💾 Writing ${filepath}`)
 
         let original: any = {}
         if (existsSync(filepath)) {
@@ -127,8 +129,19 @@ export class LocaleLoader extends Loader {
         }
 
         let modified = original
-        for (const pending of pendings)
-          modified = applyPendingToObject(modified, pending, await Config.requestKeyStyle())
+        for (const pending of pendings) {
+          let keypath = pending.keypath
+
+          if (Global.hasFeatureEnabled('namespace'))
+            keypath = this.splitKeypath(keypath).slice(1).join('.')
+
+          modified = applyPendingToObject(
+            modified,
+            keypath,
+            pending.value,
+            await Config.requestKeyStyle(),
+          )
+        }
 
         modified = this.deprocessData(modified, {
           locale: pendings[0].locale,

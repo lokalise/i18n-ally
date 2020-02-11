@@ -105,7 +105,12 @@ export class VueSfcLoader extends Loader {
 
       const locale = record?.meta?.VueSfcLocale || pending.locale
 
-      section.messages[locale] = applyPendingToObject(section.messages[locale] || {}, pending, await Config.requestKeyStyle())
+      section.messages[locale] = applyPendingToObject(
+        section.messages[locale] || {},
+        pending.keypath,
+        pending.value,
+        await Config.requestKeyStyle(),
+      )
     }
 
     const doc = await workspace.openTextDocument(this.uri)

@@ -1,9 +1,9 @@
 import * as path from 'path'
+import { set } from 'lodash'
 import { Node, LocaleTree, LocaleNode, LocaleRecord } from '../core'
-import { PendingWrite, KeyStyle } from '../core/types'
+import { KeyStyle } from '../core/types'
 import { ROOT_KEY } from './flat'
 import { Log } from '.'
-import { set } from 'lodash'
 
 export function caseInsensitiveMatch(a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -85,12 +85,12 @@ export function resolveFlattenRoot(node?: Node) {
   return node
 }
 
-export function applyPendingToObject(obj: any, pending: PendingWrite, keyStyle?: KeyStyle) {
-  const keypath = resolveFlattenRootKeypath(pending.keypath)
+export function applyPendingToObject(obj: any, keypath: string, value: any, keyStyle?: KeyStyle) {
+  keypath = resolveFlattenRootKeypath(keypath)
 
   if (keyStyle === 'flat')
-    obj[keypath] = pending.value
+    obj[keypath] = value
   else
-    set(obj, keypath, pending.value)
+    set(obj, keypath, value)
   return obj
 }
