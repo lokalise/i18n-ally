@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.5](https://github.com/antfu/i18n-ally/compare/v1.12.4...v1.12.5) (2020-02-12)
+
+
+### 📚 Documentations
+
+* update readme ([ba75b15](https://github.com/antfu/i18n-ally/commit/ba75b1515e1d256cf8c4ed4e6ad4898e2c2281c4))
+
+
+### 🐞 Bug Fixes
+
+* invalid locale ([85180bf](https://github.com/antfu/i18n-ally/commit/85180bf9c54d41a28101d5b6e7aaaac8e12d0f73))
+
 ### [1.12.4](https://github.com/antfu/i18n-ally/compare/v1.12.3...v1.12.4) (2020-02-11)
 
 
