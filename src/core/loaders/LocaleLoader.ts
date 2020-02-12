@@ -265,6 +265,9 @@ export class LocaleLoader extends Loader {
       const { locale, nested, parser, namespace } = result
       if (!parser)
         return
+      if (!locale)
+        return
+
       Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
 
       let data = await parser.load(filepath)
