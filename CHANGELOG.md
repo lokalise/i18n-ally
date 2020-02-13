@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.6](https://github.com/antfu/i18n-ally/compare/v1.12.5...v1.12.6) (2020-02-13)
+
+
+### 🐞 Bug Fixes
+
+* keypath rewrite for creating new keys ([c2a3f44](https://github.com/antfu/i18n-ally/commit/c2a3f44bccbd4e20ac5dea7faad9d02571ecc6d0))
+
 ### [1.12.5](https://github.com/antfu/i18n-ally/compare/v1.12.4...v1.12.5) (2020-02-12)
 
 
