@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.7](https://github.com/antfu/i18n-ally/compare/v1.12.6...v1.12.7) (2020-02-13)
+
+
+### 🐞 Bug Fixes
+
+* ignore more dirs for locale paths auto setting ([5c9b5c6](https://github.com/antfu/i18n-ally/commit/5c9b5c6f3fc54be3bbb69d4a8fc4e1fe98dbd1ee))
+
 ### [1.12.6](https://github.com/antfu/i18n-ally/compare/v1.12.5...v1.12.6) (2020-02-13)
 
 
