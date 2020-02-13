@@ -18,7 +18,10 @@ export async function NewKey(keypath?: string) {
     if (!keypathValidate(keypath)) {
       window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
       await NewKey(keypath)
+      return
     }
+
+    keypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale: Config.sourceLanguage })
 
     const shouldOverride = await overrideConfirm(keypath, false, true)
 
