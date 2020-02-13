@@ -60,7 +60,19 @@ export class ConfigLocalesGuide {
     const pattern = ['**/**/(locales|locale|i18n|lang|langs|language|languages)']
     const result: string[] = await fg(pattern, {
       cwd: rootPath,
-      ignore: ['**/node_modules'],
+      ignore: [
+        '**/node_modules',
+        '**/dist',
+        '**/test',
+        '**/tests',
+        '**/tmp',
+        '**/build',
+        '**/.build',
+        '**/logs',
+        '**/vendor', // PHP
+        '**/vendors', // PHP
+        '**/target', // Rust
+      ],
       onlyDirectories: true,
     })
 
