@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.8](https://github.com/antfu/i18n-ally/compare/v1.12.7...v1.12.8) (2020-02-18)
+
+
+### ⚡ Features
+
+* new config fileNamespace ([f4bdb97](https://github.com/antfu/i18n-ally/commit/f4bdb97e85aa812ac2570b6daad27475c8590520))
+
 ### [1.12.7](https://github.com/antfu/i18n-ally/compare/v1.12.6...v1.12.7) (2020-02-13)
 
 
