@@ -426,6 +426,10 @@
           "default": false,
           "description": "%config.include_subfolders%"
         },
+        "i18n-ally.fileNamespace": {
+          "type": "boolean",
+          "description": "%config.file_namespace%"
+        },
         "i18n-ally.fullReloadOnChanged": {
           "type": "boolean",
           "default": false,
@@ -448,7 +452,8 @@
             "ember",
             "chrome-ext",
             "ruby-rails",
-            "custom"
+            "custom",
+            "laravel"
           ],
           "items": {
             "type": "string",
@@ -464,7 +469,8 @@
               "ember",
               "chrome-ext",
               "ruby-rails",
-              "custom"
+              "custom",
+              "laravel"
             ]
           },
           "description": "%config.enabled_frameworks%"

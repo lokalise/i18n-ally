@@ -28,6 +28,7 @@
   "config.enabled_frameworks": "指定要使用的框架支持。\n如果未设置任何值，插件将自动检测框架。",
   "config.enabled_parsers": "",
   "config.encoding": "语言文件编码，默认为 \"auto\"（自动识别）",
+  "config.file_namespace": "",
   "config.full_reload_on_changed": "当语言文件被修改时执行完整的重载。（用于.js/.ts动态导入）",
   "config.ignored_locales": "隐藏的语言",
   "config.include_subfolders": "搜索子目录",

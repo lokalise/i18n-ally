@@ -28,6 +28,7 @@
   "config.enabled_frameworks": "",
   "config.enabled_parsers": "",
   "config.encoding": "",
+  "config.file_namespace": "",
   "config.full_reload_on_changed": "",
   "config.ignored_locales": "Oversettelseskoder å ignorere",
   "config.include_subfolders": "",
