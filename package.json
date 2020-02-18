@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VSCode",
-  "version": "1.12.5",
+  "version": "1.12.7",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
@@ -650,7 +650,7 @@
     "@types/json5": "0.0.30",
     "@types/lodash": "4.14.149",
     "@types/mocha": "7.0.1",
-    "@types/node": "12.12.26",
+    "@types/node": "12.12.27",
     "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "2.19.2",
@@ -664,8 +664,8 @@
     "standard-version": "7.1.0",
     "ts-jest": "^25.0.0",
     "ts-loader": "6.2.1",
-    "webpack": "4.41.5",
-    "webpack-cli": "3.3.10",
+    "webpack": "4.41.6",
+    "webpack-cli": "3.3.11",
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "dependencies": {
