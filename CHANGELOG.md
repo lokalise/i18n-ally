@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.9](https://github.com/antfu/i18n-ally/compare/v1.12.8...v1.12.9) (2020-02-21)
+
+
+### ⚡ Features
+
+* **ember:** support for hbs files ([2a47963](https://github.com/antfu/i18n-ally/commit/2a47963790ec46848dec8a09740cb45b4c73975a))
+
 ### [1.12.8](https://github.com/antfu/i18n-ally/compare/v1.12.7...v1.12.8) (2020-02-18)
 
 
