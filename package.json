@@ -26,6 +26,7 @@
     "onLanguage:json5",
     "onLanguage:dart",
     "onLanguage:php",
+    "onLanguage:handlebars",
     "onLanguage:ini"
   ],
   "keywords": [

@@ -16,6 +16,7 @@ class EmberFramework extends Framework {
     'typescript',
     'tyspescriptreact',
     'typescriptreact',
+    'handlebars',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
