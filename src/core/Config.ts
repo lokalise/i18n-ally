@@ -1,9 +1,9 @@
 import { window, workspace, extensions } from 'vscode'
+import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
-import { trimEnd, uniq } from 'lodash'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -13,6 +13,7 @@ export class Config {
     'enabledFrameworks',
     'enabledParsers',
     'encoding',
+    'fileNamespace',
   ]
 
   static readonly refreshConfigs = [
@@ -82,6 +83,10 @@ export class Config {
 
   static get annotationDelimiter(): string {
     return this.getConfig<string>('annotationDelimiter') || ''
+  }
+
+  static get fileNamespace(): boolean | undefined {
+    return this.getConfig<boolean>('fileNamespace')
   }
 
   static get enabledFrameworks(): string[] | undefined {

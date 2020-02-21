@@ -28,6 +28,7 @@
   "config.enabled_frameworks": "Specify the frameworks support to enable. If no value is set, the extension will detect frameworks automatically.",
   "config.enabled_parsers": "Specify the parsers of local file formats. It will enables all the possible parser by default.",
   "config.encoding": "Locale files encoding, default to \"auto\" (auto detect)",
+  "config.file_namespace": "Use filename as messages root",
   "config.full_reload_on_changed": "Perform a full reload on locale file changed. (for .js/.ts dynamic import)",
   "config.ignored_locales": "Locale codes to be ignored",
   "config.include_subfolders": "Search recursively inside locale directories",

@@ -28,6 +28,7 @@
   "config.enabled_frameworks": "",
   "config.enabled_parsers": "",
   "config.encoding": "Codificación de los archivos de configuración regional, por defecto \"auto\" (auto detect)",
+  "config.file_namespace": "",
   "config.full_reload_on_changed": "Realizar una recarga completa en el archivo de configuración regional cambiado. (Importar dinámicamente para .js/.ts)",
   "config.ignored_locales": "Códigos de configuración regional a ignorar",
   "config.include_subfolders": "Buscar recursivamente dentro de los directorios de configuración regional",

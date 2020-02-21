@@ -132,7 +132,7 @@ export class LocaleLoader extends Loader {
         for (const pending of pendings) {
           let keypath = pending.keypath
 
-          if (Global.hasFeatureEnabled('namespace'))
+          if (Global.fileNamespaceEnabled)
             keypath = this.splitKeypath(keypath).slice(1).join('.')
 
           modified = applyPendingToObject(
@@ -378,7 +378,7 @@ export class LocaleLoader extends Loader {
   private updateLocalesTree() {
     this._flattenLocaleTree = {}
 
-    if (Global.hasFeatureEnabled('namespace')) {
+    if (Global.fileNamespaceEnabled) {
       const namespaces = uniq(this.files.map(f => f.namespace)) as string[]
       const root = new LocaleTree({ keypath: '' })
       for (const ns of namespaces) {

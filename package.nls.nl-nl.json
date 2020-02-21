@@ -28,6 +28,7 @@
   "config.enabled_frameworks": "Specificeer welke frameworks ondersteuning je wilt inschakelen. Als er geen waarde is gezet dan zal de extensie automatisch de frameworks detecteren.",
   "config.enabled_parsers": "",
   "config.encoding": "Locale bestanden encodering, Standaard waarde \"auto\" (automatisch detecteren)",
+  "config.file_namespace": "",
   "config.full_reload_on_changed": "Herlaad volledige bij locale bestand wijzigingen. (voor .js/.ts dynamische import)",
   "config.ignored_locales": "Locale codes uitsluiten",
   "config.include_subfolders": "Recursief zoeken binnen locale folders",

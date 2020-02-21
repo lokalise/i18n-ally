@@ -203,7 +203,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
 | `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
-
+| `fileNamespace` | auto | Use filename as the root of locale messages |
 
 ### 🔩 Advanced Configurations
 
