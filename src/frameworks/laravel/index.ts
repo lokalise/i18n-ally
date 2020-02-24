@@ -14,6 +14,7 @@ class LaravelFramework extends Framework {
 
   languageIds: LanguageId[] = [
     'php',
+    'blade',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
