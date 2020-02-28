@@ -18,13 +18,13 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/antfu/i18n-ally?style=social"></a>
 </p>
 
-<table><tr><td align='center'>
-<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png"/>&nbsp;&nbsp;<b>Laravel</b> is now supported! 🎉
-</td></tr></table>
-
 <p align='center'>
-<a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Mirgrate from Vue i18n Ally?</a>
+<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png"/>&nbsp;&nbsp;<b>Laravel</b> is now supported! 🎉
 </p>
+
+<p align='center'><i>
+<a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Mirgrate from Vue i18n Ally</a>
+</i></p>
 <br>
 
 
