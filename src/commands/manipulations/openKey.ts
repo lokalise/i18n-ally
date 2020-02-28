@@ -3,7 +3,7 @@ import { workspace, window, Selection, TextEditorRevealType, commands } from 'vs
 import { LocaleTreeItem, ProgressRootItem } from '../../views'
 import { Config, Global, CurrentFile } from '../../core'
 import i18n from '../../i18n'
-import { Log } from '../../utils'
+import { Log, NodeHelper } from '../../utils'
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 
 export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
@@ -54,7 +54,7 @@ export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressR
       return
 
     const text = editor.document.getText()
-    const range = parser.navigateToKey(text, keypath, Config.keyStyle)
+    const range = parser.navigateToKey(text, NodeHelper.getPathWithoutNamespace(node), Config.keyStyle)
 
     if (range) {
       editor.selection = new Selection(

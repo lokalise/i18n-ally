@@ -11,7 +11,7 @@ export abstract class PackageParser {
       return undefined
     }
 
-    Log.info(`📦 Packages file "${this.filename}" founded`)
+    Log.info(`📦 Packages file "${this.filename}" found`)
 
     try {
       const raw = this.loadFile(filepath)

@@ -3,7 +3,7 @@ import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import * as fg from 'fast-glob'
 import _, { uniq } from 'lodash'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten } from '../../utils'
+import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, DirStructureAuto } from '../types'
 import { LocaleTree } from '../Nodes'
@@ -132,8 +132,11 @@ export class LocaleLoader extends Loader {
         for (const pending of pendings) {
           let keypath = pending.keypath
 
-          if (Global.fileNamespaceEnabled)
-            keypath = this.splitKeypath(keypath).slice(1).join('.')
+          if (Global.fileNamespaceEnabled) {
+            const node = this.getNodeByKey(keypath)
+            if (node)
+              keypath = NodeHelper.getPathWithoutNamespace(node)
+          }
 
           modified = applyPendingToObject(
             modified,
@@ -383,10 +386,16 @@ export class LocaleLoader extends Loader {
       const root = new LocaleTree({ keypath: '' })
       for (const ns of namespaces) {
         const files = this.files.filter(f => f.namespace === ns)
-        const tree = new LocaleTree({ keypath: ns })
+
+        const tree = ns
+          ? new LocaleTree({ keypath: ns })
+          : root // no namespace, put it in the root
+
         for (const file of files)
-          this.updateTree(tree, file.value, ns, ns, file)
-        root.children[ns] = tree
+          this.updateTree(tree, file.value, ns || '', ns || '', { ...file, meta: { namespace: file.namespace } })
+
+        if (tree !== root)
+          root.children[ns] = tree
       }
       this._localeTree = root
     }

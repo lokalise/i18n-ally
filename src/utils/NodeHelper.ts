@@ -1,4 +1,4 @@
-import { Node, Config } from '../core'
+import { Node, Config, Global } from '../core'
 
 export class NodeHelper {
   static isSource(node: Node) {
@@ -36,5 +36,16 @@ export class NodeHelper {
     return !Config.readonly
       && !node.readonly
       && node.type !== 'tree'
+  }
+
+  static splitKeypath(keypath: string): string[] {
+    return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
+  }
+
+  static getPathWithoutNamespace(node: Node) {
+    if (Global.fileNamespaceEnabled && node.meta?.namespace != null)
+      return this.splitKeypath(node.keypath).slice(1).join('.')
+
+    return node.keypath
   }
 }

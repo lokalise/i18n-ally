@@ -10,6 +10,7 @@ export interface OptionalFeatures {
 export interface NodeMeta {
   VueSfcSectionIndex?: number
   VueSfcLocale?: string
+  namespace?: string
 }
 
 export interface FileInfo {

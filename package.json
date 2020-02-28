@@ -639,6 +639,7 @@
     "lint": "eslint --ext .ts,.js,.vue .",
     "lint:fix": "npm run lint -- --fix",
     "watch": "webpack --mode development --watch",
+    "dev": "npm run watch",
     "test": "jest"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import { Disposable, EventEmitter } from 'vscode'
 import { uniq, isObject } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
 import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../types'
-import { resolveFlattenRootKeypath, resolveFlattenRoot } from '../../utils'
+import { resolveFlattenRootKeypath, resolveFlattenRoot, NodeHelper } from '../../utils'
 import { Config, Global } from '..'
 
 export abstract class Loader extends Disposable {
@@ -37,10 +37,6 @@ export abstract class Loader extends Disposable {
 
   get keys(): string[] {
     return uniq(Object.keys(this.flattenLocaleTree))
-  }
-
-  splitKeypath(keypath: string): string[] {
-    return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 
   getCoverage(locale: string, keys?: string[]): Coverage | undefined {
@@ -163,7 +159,7 @@ export abstract class Loader extends Disposable {
     }
 
     // tree style
-    const keys = this.splitKeypath(key)
+    const keys = NodeHelper.splitKeypath(key)
     const head = keys[0]
     const remaining = keys.slice(1).join('.')
     const node = tree.getChild(head)
