@@ -178,7 +178,7 @@
 | `sourceLanguage` | `en` | 翻译源语言 |
 | `displayLanguage` | `en` | 显示语言 |
 | `localesPaths` | 自动 | 翻译文件夹路径 (相对于项目根目录)，你也可以使用Glob匹配模式。 |
-| `sortedKeys` | `false` | 保存排序后的JSON/YAML |
+| `sortKeys` | `false` | 保存排序后的JSON/YAML |
 | `keystyle` | 自动 | 翻译路径格式, 可以是 `flat`({"a.b.c": "..."}) 或 `nested`({"a": {"b": {"c": "..."}}}). |
 | `readonly` | `false` | 只读模式 |
 | `annotations` | `true` | 启用内联注释 |

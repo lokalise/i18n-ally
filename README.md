@@ -191,7 +191,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language on translating |
 | `displayLanguage` | `en` | Displaying language in annotations and tree views |
 | `localesPaths` | auto | Locales directory path, relative to the root of your project. It can also be an array of paths. Glob patterns are acceptable |
-| `sortedKeys` | `false` | Sorting keys alphabetically on saving |
+| `sortKeys` | `false` | Sorting keys alphabetically on saving |
 | `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}) |
 | `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
 | `annotations` | `true` | Enabling inline annotations |
@@ -221,7 +221,7 @@ To get the best experience of this extension (and other translation services as 
 
 ```jsonc
 {
-  "i18n-ally.sortedKeys": true,
+  "i18n-ally.sortKeys": true,
   "i18n-ally.keepFulfilled": true,
 }
 ```
