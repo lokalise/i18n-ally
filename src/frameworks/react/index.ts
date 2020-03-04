@@ -23,7 +23,7 @@ class ReactFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /[^\w\d](?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\(\s*)['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
+    '[^\\w\\d](?:Trans[ (]i18nKey=|FormattedMessage[ (]id=|(?:t)\\(\\s*)[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

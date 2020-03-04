@@ -35,6 +35,7 @@
   "config.include_subfolders": "Pesquisar recursivamente em diretórios de tradução (locales)",
   "config.indent": "Tamanho do espaço de identação dos arquivos de tradução (locales)",
   "config.keep_fulfill": "Sempre manter chaves com string vazias",
+  "config.key_match_regex": "",
   "config.keystyle": "Estilo de chave de tradução",
   "config.locales_paths": "Caminho para os arquivos de tradução (relativo à raiz do projeto). O padrão glob também é aceito.",
   "config.match_regex": "Regex para corresponder com o arquivo de tradução. O primeiro grupo deve ser o código do idioma)",

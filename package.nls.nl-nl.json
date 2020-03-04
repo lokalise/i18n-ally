@@ -35,6 +35,7 @@
   "config.include_subfolders": "Recursief zoeken binnen locale folders",
   "config.indent": "Spatie inspringing grootte voor locale bestanden",
   "config.keep_fulfill": "Behoud alle sleutels aanvullingn met een lege string waarde",
+  "config.key_match_regex": "",
   "config.keystyle": "Locale sleutel style",
   "config.locales_paths": "Pad naar locale folder (relatief aan project root), glob patroon is acceptabel.",
   "config.match_regex": "Regex string om locale bestandsnamen te matchen. (De eerste groep moet de locale code bevatten)",

@@ -38,6 +38,7 @@
   "config.keystyle": "Locale key style",
   "config.locales_paths": "Path to locales directory (relative to project root), glob pattern is also acceptable.",
   "config.match_regex": "Regex string to match locale filename. (The first group should be the locale code)",
+  "config.key_match_regex": "Regex string to match keypath",
   "config.preferred_delimiter": "Preferred delimiter of composed keypath, default to \"-\"(dash)",
   "config.prompt_translating_source": "Prompt to select source locale on translating every time. If set false, the source language in the config will be used.",
   "config.readonly": "Readonly mode",

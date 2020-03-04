@@ -7,6 +7,8 @@ export const EXT_NAME = 'i18n Ally'
 export const KEEP_FULFILL_DELAY = 1000
 export const ParserExtRegEx = 'json5?|ya?ml|jsx?|tsx?|mjs|ini|pot|php?'
 
+export const DEFAULT_KEY_REG = '[\\w\\d\\. \\-\\[\\]]*?'
+
 export const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 export const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 export const bracketsMatcher = /[()]/g

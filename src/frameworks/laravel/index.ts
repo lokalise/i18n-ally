@@ -19,7 +19,7 @@ class LaravelFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /[^\w\d](?:__|trans|@lang|trans_choice)\(['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
+    '[^\\w\\d](?:__|trans|@lang|trans_choice)\\([\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

@@ -35,6 +35,7 @@
   "config.include_subfolders": "Buscar recursivamente dentro de los directorios de configuración regional",
   "config.indent": "",
   "config.keep_fulfill": "",
+  "config.key_match_regex": "",
   "config.keystyle": "Estilo de la clave de configuración regional",
   "config.locales_paths": "Ruta de acceso al directorio de configuración regional (relativa a la raíz del proyecto). Acepta patrón Glob.",
   "config.match_regex": "Regex para que coincida con el nombre de archivo de configuración regional. (El primer grupo debe ser el código de configuración regional)",

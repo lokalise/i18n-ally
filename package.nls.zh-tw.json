@@ -35,6 +35,7 @@
   "config.include_subfolders": "搜索子目錄",
   "config.indent": "文案檔案的縮進大小",
   "config.keep_fulfill": "始終用空字符串填充所有的鍵",
+  "config.key_match_regex": "",
   "config.keystyle": "翻譯路徑格式",
   "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)，你也可以使用Glob匹配模式。",
   "config.match_regex": "匹配語言環境檔案名的正規運算式字串（返回結果的第一個群組應是語言代碼）",

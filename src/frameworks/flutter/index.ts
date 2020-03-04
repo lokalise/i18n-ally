@@ -17,7 +17,7 @@ class FlutterFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /[^\w\d]FlutterI18n\.(?:plural|translate)\([\w\d]+,\s?['"`]([[\w\d\. \-\[\]]*?)['"`]/g,
+    '[^\\w\\d]FlutterI18n\\.(?:plural|translate)\\([\\w\\d]+,\\s?[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

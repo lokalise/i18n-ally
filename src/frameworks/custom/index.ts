@@ -1,11 +1,10 @@
 import path from 'path'
 import fs from 'fs'
 import { workspace, FileSystemWatcher } from 'vscode'
+import YAML from 'js-yaml'
 import { Global } from '../../core'
 import { Framework } from '../base'
 import { LanguageId, File, Log } from '../../utils'
-import i18n from '../../i18n'
-import YAML from 'js-yaml'
 
 const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 
@@ -42,7 +41,7 @@ class CustomFramework extends Framework {
     try {
       const raw = File.readSync(filename)
       this.data = YAML.safeLoad(raw)
-      Log.info(`🍱 Custom framework setting loaded. \n\tLanguage Ids:\n\t\t${this.languageIds.join('\n\t\t')}\n\tKey Match Regex:\n\t\t${this.keyMatchReg.map(r => r.source).join('\n\t\t')}`)
+      Log.info(`🍱 Custom framework setting loaded. \n\tLanguage Ids:\n\t\t${this.languageIds.join('\n\t\t')}\n\tKey Match Regex:\n\t\t${this.getKeyMatchReg().map(r => r.source).join('\n\t\t')}`)
       return true
     }
     catch (e) {
@@ -60,23 +59,12 @@ class CustomFramework extends Framework {
     return id
   }
 
-  get keyMatchReg(): RegExp[] {
+  get keyMatchReg(): string[] {
     let id = this.data?.keyMatchReg || []
     if (typeof id === 'string')
       id = [id]
 
     return id
-      .map((i) => {
-        try {
-          return new RegExp(i, 'gm')
-        }
-        catch (e) {
-          Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)
-          Log.error(e, false)
-          return undefined
-        }
-      })
-      .filter(i => i) as RegExp[]
   }
 
   get monopoly() {

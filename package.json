@@ -534,6 +534,10 @@
           "default": false,
           "description": "%config.disable_path_parsing%"
         },
+        "i18n-ally.keyMatchRegex": {
+          "type": "string",
+          "description": "%config.key_match_regex%"
+        },
         "i18n-ally.tabStyle": {
           "type": "string",
           "default": "space",

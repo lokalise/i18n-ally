@@ -20,9 +20,8 @@ class RubyRailsFramework extends Framework {
     'erb',
   ]
 
-  // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /[^\w\d]t(?:\(| )['"`]([[\w\d\. \-\[\]]*?)['"`]/g,
+    '[^\\w\\d]t(?:\\(| )[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

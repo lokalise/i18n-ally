@@ -1,8 +1,8 @@
 ## 🎎 Custom Framework Config
 
-If you are using an i18n framework does not have built-in support by this extension or you are using a custom i18n implementation, you can always make this extension support for your framework.
+If you are using an i18n framework that does not have built-in support by this extension or you are using a custom i18n implementation, you can always make this extension support for your framework.
 
-Create file `.vscode/i18n-ally-custom-framework.yml` and copy paste the configs below.
+Create file `.vscode/i18n-ally-custom-framework.yml` then copy and paste the configs below.
 
 ```yaml
 # .vscode/i18n-ally-custom-framework.yml
@@ -20,7 +20,9 @@ languageIds:
 # for that, you can use https://www.freeformatter.com/json-escape.html
 keyMatchReg:
   # The following examples show how to detect `t("your.i18n.keys")`
-  - "[^\\w\\d]t\\(['\"`]([[\\w\\d\\. \\-\\[\\]]*?)['\"`]"
+  # the `{key}` will be placed by a proper keypath matching regex,
+  # you can ignore it and use your own matching rules as well
+  - "[^\\w\\d]t\\(['\"`]({key})['\"`]"
 
 
 # An Array of string contains refactor templates.
@@ -37,4 +39,4 @@ monopoly: true
 
 The extension will detect the changes and enable it automatically. Enjoy! 🎉
 
-> 💡 If you believe your custom framework config can be works for others, you can open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) **with your custom config**! This can help me better integerate the framework to have built-in support. Thanks!
+> 💡 If you believe your custom framework config can be helpful for others, you can open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D) **with your custom config**! This can help me better integrate the framework to have built-in support. Thanks!

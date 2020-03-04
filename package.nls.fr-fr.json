@@ -35,6 +35,7 @@
   "config.include_subfolders": "Recherche récursive dans les répertoires locaux.",
   "config.indent": "Taille de l'espace d'indentation pour les fichiers locaux.",
   "config.keep_fulfill": "Toujours garder les Clés remplies automatiquement.",
+  "config.key_match_regex": "",
   "config.keystyle": "Style de Clé locale.",
   "config.locales_paths": "Chemin du répertoire de la locale (par rapport à la racine). Les schémas globaux sont acceptés.",
   "config.match_regex": "Chaîne d'expressions régulières pour correspondre au nom de fichiers de la locale. (Le premier groupe doit être du code local)",

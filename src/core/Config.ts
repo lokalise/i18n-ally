@@ -2,7 +2,7 @@ import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
-import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE } from '../meta'
+import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, DEFAULT_KEY_REG } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
 
 export class Config {
@@ -22,6 +22,7 @@ export class Config {
     'ignoredLocales',
     'displayLanguage',
     'readonly',
+    'keyMathRegex',
   ]
 
   // languages
@@ -139,6 +140,10 @@ export class Config {
 
   static get filenameMatchRegex(): string | undefined {
     return this.getConfig('filenameMatchRegex')
+  }
+
+  static get keyMatchRegex(): string {
+    return this.getConfig('keyMatchRegex') || DEFAULT_KEY_REG
   }
 
   static get keepFulfilled(): boolean {

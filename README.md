@@ -206,6 +206,7 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | Field | Default | Description |
 | --- | --- | --- |
 | `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code |
+| `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. You can set it to `.*?` to allowing Unicode |
 | `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
 | `fileNamespace` | auto | Use filename as the root of locale messages |
 | `encoding` | auto | The locale file encoding. Auto-detect by default |

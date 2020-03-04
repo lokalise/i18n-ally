@@ -17,7 +17,7 @@ class PhpJoomlaFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
-    /J?Text::(?:_|[\w]+)\(['"]([\w\d\. \-\[\]]*?)['"]/g,
+    'J?Text::(?:_|[\\w]+)\\([\'"]({key})[\'"]',
   ]
 
   refactorTemplates(keypath: string) {

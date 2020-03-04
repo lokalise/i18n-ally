@@ -15,7 +15,7 @@ class ChromeExtensionFramework extends Framework {
   ]
 
   keyMatchReg = [
-    /i18n\.getMessage\(\s*['"`]([[\w\d\. \-\[\]]*?)['"`]/gm,
+    'i18n\\.getMessage\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string, languageId: string) {
