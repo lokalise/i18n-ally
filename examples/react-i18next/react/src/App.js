@@ -11,8 +11,8 @@ class LegacyWelcomeClass extends Component {
     return (
       <div>
         <h2>{t('title')}</h2>
-        <h2>{intl.formatPlural('title')}</h2>
-        <h2>{intl.formatMessage('title')}</h2>
+        <h2>{intl.formatPlural({ id: 'title' })}</h2>
+        <h2>{intl.formatMessage({ id: 'title' })}</h2>
       </div>
     )
   }
