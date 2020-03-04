@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.11](https://github.com/antfu/i18n-ally/compare/v1.12.10...v1.12.11) (2020-03-04)
+
+
+### 📚 Documentations
+
+* update README ([30beeab](https://github.com/antfu/i18n-ally/commit/30beeab73ac22cea497f850402554107c000dcd2))
+
+
+### 🐞 Bug Fixes
+
+* typo ([739f4b3](https://github.com/antfu/i18n-ally/commit/739f4b3b016a7594c2fadba50458580cb4e8155b))
+
+
+### ⚡ Features
+
+* new config disablePathParsing ([7a1b812](https://github.com/antfu/i18n-ally/commit/7a1b812df6647c27bbfbc97c862a819b453bc999))
+
 ### [1.12.10](https://github.com/antfu/i18n-ally/compare/v1.12.9...v1.12.10) (2020-02-28)
 
 
