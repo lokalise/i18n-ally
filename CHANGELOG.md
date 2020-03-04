@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.3](https://github.com/antfu/i18n-ally/compare/v1.13.2...v1.13.3) (2020-03-04)
+
+
+### 🐞 Bug Fixes
+
+* **react:** useIntl ([6c6c0b2](https://github.com/antfu/i18n-ally/commit/6c6c0b263906a14747cc51589c80f72fb8593979))
+
 ### [1.13.2](https://github.com/antfu/i18n-ally/compare/v1.13.1...v1.13.2) (2020-03-04)
 
 
