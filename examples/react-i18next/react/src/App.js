@@ -5,15 +5,21 @@ import './App.css'
 
 // use hoc for class based components
 class LegacyWelcomeClass extends Component {
-  render () {
+  render() {
     const { t } = this.props
-    return <h2>{t('title')}</h2>
+    return (
+      <div>
+        <h2>{t('title')}</h2>
+        <h2>{useIntl('title')}</h2>
+        <h2>{formatMessage('title')}</h2>
+      </div>
+    )
   }
 }
 const Welcome = withTranslation()(LegacyWelcomeClass)
 
 // Component using the Trans component
-function MyComponent () {
+function MyComponent() {
   return (
     <Trans i18nKey="description.part1">
       To get started, edit <code>src/App.js</code> and save to reload.
@@ -22,7 +28,7 @@ function MyComponent () {
 }
 
 // page uses the hook
-function Page () {
+function Page() {
   const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng) => {
@@ -52,7 +58,7 @@ const Loader = () => (
 )
 
 // here app catches the suspense from page in case translations are not yet loaded
-export default function App () {
+export default function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Page />
