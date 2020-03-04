@@ -1,7 +1,7 @@
-import { Parser } from './Parser'
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
+import { Parser } from './Parser'
 
 export class JsonParser extends Parser {
   id = 'json'
@@ -33,7 +33,14 @@ export class JsonParser extends Parser {
     const map = JsonMap.parse(text).pointers
     const pairs = Object.entries<any>(map)
       .filter(([k, v]) => k)
-      .map(([k, v]) => ({ start: v.value.pos, end: v.valueEnd.pos, key: k.replace(/\//g, '.').slice(1) }))
+      .map(([k, v]) => ({
+        start: v.value.pos,
+        end: v.valueEnd.pos,
+        // https://tools.ietf.org/html/rfc6901
+        key: k.slice(1)
+          .replace(/~0/g, '~')
+          .replace(/~1/g, '/'),
+      }))
 
     return pairs
   }

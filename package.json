@@ -529,6 +529,11 @@
           "default": 2,
           "description": "%config.indent%"
         },
+        "i18n-ally.disablePathParsing": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.disable_path_parsing%"
+        },
         "i18n-ally.tabStyle": {
           "type": "string",
           "default": "space",

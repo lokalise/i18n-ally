@@ -152,7 +152,7 @@ export abstract class Loader extends Disposable {
     tree = tree || this.root
 
     // flatten style
-    if (root) {
+    if (root || Config.disablePathParsing) {
       const node = tree.getChild(key)
       if (node)
         return node

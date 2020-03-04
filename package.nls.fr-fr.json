@@ -24,6 +24,7 @@
   "config.annotations": "Activer les annotations.",
   "config.deprecated": "Déprécié. Utilisez le préfixe \"i18n-ally.\" directement.",
   "config.dir_structure": "Structure de répertoire préferé pour organiser les fichiers de la locale.",
+  "config.disable_path_parsing": "",
   "config.display_language": "Afficher la langue",
   "config.enabled_frameworks": "Vous pouvez choisir les Frameworks supportés. Si aucune valeur n'est spécifiée, l'extension choisira automatiquement les Frameworks supportés.",
   "config.enabled_parsers": "",

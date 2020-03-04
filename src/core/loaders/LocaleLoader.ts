@@ -274,8 +274,12 @@ export class LocaleLoader extends Loader {
       Log.info(`📑 Loading (${locale}) ${path.relative(parentPath || this.rootpath, filepath)}`, parentPath ? 1 : 0)
 
       let data = await parser.load(filepath)
+
       data = this.preprocessData(data, { locale, targetFile: filepath })
-      const value = unflatten(data)
+
+      const value = Config.disablePathParsing
+        ? data
+        : unflatten(data)
 
       this._files[filepath] = {
         filepath,

@@ -1,4 +1,5 @@
 import { ExtensionContext } from 'vscode'
+import { flatten } from 'lodash'
 import { version } from '../package.json'
 import { Global } from './core'
 import commandsModules from './commands'
@@ -6,7 +7,6 @@ import editorModules from './editor'
 import viewsModules from './views'
 import { Log } from './utils'
 import { CurrentFile } from './core/CurrentFile'
-import { flatten } from 'lodash'
 
 export async function activate(ctx: ExtensionContext) {
   Log.info(`🈶 Activated, v${version}`)

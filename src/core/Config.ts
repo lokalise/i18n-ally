@@ -14,6 +14,7 @@ export class Config {
     'enabledParsers',
     'encoding',
     'fileNamespace',
+    'disablePathParsing',
   ]
 
   static readonly refreshConfigs = [
@@ -22,8 +23,6 @@ export class Config {
     'displayLanguage',
     'readonly',
   ]
-
-  // #region ====== Configurations ======
 
   // languages
   static get displayLanguage(): string {
@@ -58,7 +57,10 @@ export class Config {
   }
 
   static get keyStyle(): KeyStyle {
-    return this.getConfig<KeyStyle>('keystyle') || 'auto'
+    const style = this.getConfig<KeyStyle>('keystyle') || 'auto'
+    if (style === 'auto' && this.disablePathParsing)
+      return 'flat'
+    return style
   }
 
   static set keyStyle(value: KeyStyle) {
@@ -238,6 +240,10 @@ export class Config {
     return this.getConfig<boolean>('promptTranslatingSource') ?? false
   }
 
+  static get disablePathParsing() {
+    return this.getConfig<boolean>('disablePathParsing') ?? false
+  }
+
   // config
   private static getConfig<T = any>(key: string): T | undefined {
     let config = workspace
@@ -269,6 +275,4 @@ export class Config {
       .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
   }
-
-  // #endregion
 }

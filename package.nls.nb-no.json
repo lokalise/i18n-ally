@@ -24,6 +24,7 @@
   "config.annotations": "Slå på hjelpevindu",
   "config.deprecated": "",
   "config.dir_structure": "Foretrukket mappestruktur for organisering av oversettelsesfiler",
+  "config.disable_path_parsing": "",
   "config.display_language": "Visningsspråk",
   "config.enabled_frameworks": "",
   "config.enabled_parsers": "",

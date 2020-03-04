@@ -193,24 +193,23 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 | `localesPaths` | auto | Locales directory path, relative to the root of your project. It can also be an array of paths. Glob patterns are acceptable |
 | `sortKeys` | `false` | Sorting keys alphabetically on saving |
 | `keystyle` | auto | Key style in your locale files, can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}) |
-| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
 | `annotations` | `true` | Enabling inline annotations |
 | `keepFulfilled` | `false` | Always keep all keys fulfilled with empty string |
 | `enabledFrameworks` | auto | Specify the frameworks support to enable. If no value is set, the extension will detect frameworks automatically |
 | `enabledParsers` | auto | Specify the parsers of local file formats. It will enable all the possible parsers by default |
-| `encoding` | auto | The locale file encoding. Auto-detect by default |
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
-| `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
-| `fileNamespace` | auto | Use filename as the root of locale messages |
+| `disablePathParsing` | `false` | Enable this if you use natural languages as the key of your locale messages |
 
 ### 🔩 Advanced Configurations
-
 
 | Field | Default | Description |
 | --- | --- | --- |
 | `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code |
-
+| `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
+| `fileNamespace` | auto | Use filename as the root of locale messages |
+| `encoding` | auto | The locale file encoding. Auto-detect by default |
+| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
 
 ## ✌ Recommend Setup
 

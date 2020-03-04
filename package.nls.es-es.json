@@ -24,6 +24,7 @@
   "config.annotations": "Habilitar las anotaciones en línea.",
   "config.deprecated": "",
   "config.dir_structure": "Estructura de directorios preferida para organizar los archivos de configuración regional",
+  "config.disable_path_parsing": "",
   "config.display_language": "Idioma de visualización",
   "config.enabled_frameworks": "",
   "config.enabled_parsers": "",

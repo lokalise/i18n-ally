@@ -24,6 +24,7 @@
   "config.annotations": "Inline annotaties inschakelen.",
   "config.deprecated": "Verouderd. Gebruik de \"i18n-ally.\" prefix als vervanging.",
   "config.dir_structure": "Geweenste folder structuur om locale bestanden te organiseren",
+  "config.disable_path_parsing": "",
   "config.display_language": "Weergave taal",
   "config.enabled_frameworks": "Specificeer welke frameworks ondersteuning je wilt inschakelen. Als er geen waarde is gezet dan zal de extensie automatisch de frameworks detecteren.",
   "config.enabled_parsers": "",

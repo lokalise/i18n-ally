@@ -39,6 +39,9 @@ export class NodeHelper {
   }
 
   static splitKeypath(keypath: string): string[] {
+    if (Config.disablePathParsing)
+      return [keypath]
+
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 

@@ -24,6 +24,7 @@
   "config.annotations": "Habilitar anotações inline",
   "config.deprecated": "Depreciado. Utilize o prefixo \"i18-ally.\"",
   "config.dir_structure": "Diretório de preferência para organizar os arquivos de tradução (locales)",
+  "config.disable_path_parsing": "",
   "config.display_language": "Idioma de exibição",
   "config.enabled_frameworks": "Você pode especificar quais frameworks a serem suportados. Caso não passe nenhum valor, a extensão detectará os frameworks automaticamente",
   "config.enabled_parsers": "",
