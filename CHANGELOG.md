@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/antfu/i18n-ally/compare/v1.12.11...v1.13.0) (2020-03-04)
+
+
+### ⚡ Features
+
+* new config keyMatchRegex ([0f3934b](https://github.com/antfu/i18n-ally/commit/0f3934b04142a2c3f67d2f6ba05b0dcfe37acef1))
+
 ### [1.12.11](https://github.com/antfu/i18n-ally/compare/v1.12.10...v1.12.11) (2020-03-04)
 
 
