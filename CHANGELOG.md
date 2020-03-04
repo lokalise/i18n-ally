@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.2](https://github.com/antfu/i18n-ally/compare/v1.13.1...v1.13.2) (2020-03-04)
+
+
+### 🐞 Bug Fixes
+
+* **react:** keymatch ([6506867](https://github.com/antfu/i18n-ally/commit/650686739e529dda5c7d6aaa7ae5b31e680f1953))
+
 ### [1.13.1](https://github.com/antfu/i18n-ally/compare/v1.13.0...v1.13.1) (2020-03-04)
 
 
