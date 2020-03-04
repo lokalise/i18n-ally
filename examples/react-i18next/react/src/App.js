@@ -7,11 +7,12 @@ import './App.css'
 class LegacyWelcomeClass extends Component {
   render() {
     const { t } = this.props
+    const intl = useIntl()
     return (
       <div>
         <h2>{t('title')}</h2>
-        <h2>{useIntl('title')}</h2>
-        <h2>{formatMessage('title')}</h2>
+        <h2>{intl.formatPlural('title')}</h2>
+        <h2>{intl.formatMessage('title')}</h2>
       </div>
     )
   }
