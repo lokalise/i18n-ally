@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.5](https://github.com/antfu/i18n-ally/compare/v1.13.4...v1.13.5) (2020-03-05)
+
+
+### 🐞 Bug Fixes
+
+* disablePathParsing for dotEnding ([78c70f2](https://github.com/antfu/i18n-ally/commit/78c70f209a86c686d9d611b593ef8e658573ba9a))
+
 ### [1.13.4](https://github.com/antfu/i18n-ally/compare/v1.13.3...v1.13.4) (2020-03-05)
 
 
