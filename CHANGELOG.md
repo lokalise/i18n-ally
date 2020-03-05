@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.4](https://github.com/antfu/i18n-ally/compare/v1.13.3...v1.13.4) (2020-03-05)
+
+
+### 🐞 Bug Fixes
+
+* json annotation ([6482f8f](https://github.com/antfu/i18n-ally/commit/6482f8f97dc2aa7edbe003d72346b54acbcc227d))
+
 ### [1.13.3](https://github.com/antfu/i18n-ally/compare/v1.13.2...v1.13.3) (2020-03-04)
 
 
