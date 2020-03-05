@@ -1,7 +1,10 @@
-import { CurrentFile } from '../core'
+import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
 
 export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, rewriteContext?: RewriteKeyContext): KeyInDocument[] {
+  if (Config.disablePathParsing)
+    dotEnding = true
+
   const keys = []
   for (const reg of regs) {
     let match = null

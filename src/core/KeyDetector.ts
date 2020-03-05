@@ -3,6 +3,7 @@ import { KeyInDocument } from '../core'
 import { regexFindKeys } from '../utils'
 import { Global } from './Global'
 import { RewriteKeyContext } from './types'
+import { Config } from './Config'
 
 export class KeyDetector {
   static getKeyByContent(text: string) {
@@ -20,6 +21,9 @@ export class KeyDetector {
   }
 
   static getKeyRange(document: TextDocument, position: Position, dotEnding?: boolean) {
+    if (Config.disablePathParsing)
+      dotEnding = true
+
     const regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
     for (const regex of regs) {
       const range = document.getWordRangeAtPosition(position, regex)

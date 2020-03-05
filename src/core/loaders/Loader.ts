@@ -130,6 +130,9 @@ export abstract class Loader extends Disposable {
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+    if (Config.disablePathParsing)
+      return key
+
     for (const framework of Global.enabledFrameworks)
       key = framework.rewriteKeys(key, source, context)
     return key
