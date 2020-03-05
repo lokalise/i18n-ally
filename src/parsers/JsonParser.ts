@@ -38,6 +38,7 @@ export class JsonParser extends Parser {
         end: v.valueEnd.pos,
         // https://tools.ietf.org/html/rfc6901
         key: k.slice(1)
+          .replace(/\//g, '.')
           .replace(/~0/g, '~')
           .replace(/~1/g, '/'),
       }))
