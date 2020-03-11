@@ -14,7 +14,7 @@ class EmberFramework extends Framework {
   languageIds: LanguageId[] = [
     'javascript',
     'typescript',
-    'tyspescriptreact',
+    'javascriptreact',
     'typescriptreact',
     'handlebars',
   ]

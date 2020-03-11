@@ -2,8 +2,8 @@
 export const LanguageIdExtMap = {
   javascript: 'js',
   typescript: 'ts',
-  typescriptreact: 'jsx',
-  tyspescriptreact: 'tsx',
+  javascriptreact: 'jsx',
+  typescriptreact: 'tsx',
   vue: 'vue',
   'vue-html': 'vue',
   json: 'json',

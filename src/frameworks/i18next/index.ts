@@ -20,7 +20,7 @@ class I18nextFramework extends Framework {
   languageIds: LanguageId[] = [
     'javascript',
     'typescript',
-    'tyspescriptreact',
+    'javascriptreact',
     'typescriptreact',
     'ejs',
   ]

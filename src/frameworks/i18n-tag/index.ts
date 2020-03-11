@@ -14,7 +14,7 @@ class I18nTagFramework extends Framework {
   languageIds: LanguageId[] = [
     'javascript',
     'typescript',
-    'tyspescriptreact',
+    'javascriptreact',
     'typescriptreact',
     'vue',
     'ejs',
