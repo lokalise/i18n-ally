@@ -1,3 +1,4 @@
+import { RewriteKeySource, RewriteKeyContext } from '../../core'
 import { LanguageId } from '../../utils'
 import { Framework } from '../base'
 
@@ -34,6 +35,10 @@ class I18nextFramework extends Framework {
     return [
       keypath,
     ]
+  }
+
+  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+    return key.replace(/:/g, '.')
   }
 }
 
