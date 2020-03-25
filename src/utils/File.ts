@@ -101,6 +101,6 @@ export class File {
   }
 
   static encode(string: string, encoding: string, addBOM = true): Buffer {
-    return iconv.encode(string, encoding, { addBOM })
+    return iconv.encode(`${string}\n`, encoding, { addBOM })
   }
 }
