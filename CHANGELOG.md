@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.7](https://github.com/antfu/i18n-ally/compare/v1.13.6...v1.13.7) (2020-03-25)
+
+
+### ⚡ Features
+
+* support colon for i18next ([388cd2e](https://github.com/antfu/i18n-ally/commit/388cd2ef5eccc99985272ad21b759c5917ad967d))
+
 ### [1.13.6](https://github.com/antfu/i18n-ally/compare/v1.13.5...v1.13.6) (2020-03-11)
 
 
