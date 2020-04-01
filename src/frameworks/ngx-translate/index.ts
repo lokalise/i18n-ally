@@ -19,8 +19,8 @@ class NgxTranslateFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg= [
-    '{{\\s?[`\'"]({key})[`\'"]\\s*\\|\\s*translate',
-    'translate\\.get\\(\\s*[\'"`]({key})[\'"`]',
+    '{{[\\s\\n]*[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*translate',
+    'translate\\.get\\([\\s\\n]*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string, languageId: string) {

@@ -7,7 +7,9 @@ import { TranslateService } from '@ngx-translate/core'
     <div>
       <h2>{{ 'HOME.TITLE' | translate }}</h2>
       <label>
-        {{ 'HOME.SELECT' | translate }}
+        {{
+          'HOME.SELECT' | translate
+        }}
         <select #langSelect (change)="translate.use(langSelect.value)">
           <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
         </select>
@@ -16,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core'
   `,
 })
 export class AppComponent {
-  constructor (public translate: TranslateService) {
+  constructor(public translate: TranslateService) {
     translate.addLangs(['en', 'fr'])
     translate.setDefaultLang('en')
 
