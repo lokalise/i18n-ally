@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core'
         {{
           'HOME.SELECT' | translate
         }}
-        <select #langSelect (change)="translate.use(langSelect.value)">
+        <select attr="'HOME.SELECT' | translate">
           <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
         </select>
       </label>
