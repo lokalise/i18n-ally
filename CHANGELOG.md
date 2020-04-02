@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.8](https://github.com/antfu/i18n-ally/compare/v1.13.7...v1.13.8) (2020-04-02)
+
+
+### 🐞 Bug Fixes
+
+* **ngx-translate:** capturing, [#229](https://github.com/antfu/i18n-ally/issues/229) ([4641157](https://github.com/antfu/i18n-ally/commit/46411573479126705b8d35b9cb1bcf85931a05da))
+* **ngx-translate:** multi-lines capture, [#228](https://github.com/antfu/i18n-ally/issues/228) ([2b042c1](https://github.com/antfu/i18n-ally/commit/2b042c115c37286aa63702dc6f658125b0b784b5))
+* Write file with newline at the end of file ([#225](https://github.com/antfu/i18n-ally/issues/225)) ([ad9a7ac](https://github.com/antfu/i18n-ally/commit/ad9a7ac1582f06be83eee9ba5657fa3399bb4676))
+
 ### [1.13.7](https://github.com/antfu/i18n-ally/compare/v1.13.6...v1.13.7) (2020-03-25)
 
 
