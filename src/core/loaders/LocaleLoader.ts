@@ -173,7 +173,7 @@ export class LocaleLoader extends Loader {
         for (const pending of pendings) {
           let keypath = pending.keypath
 
-          if (Global.fileNamespaceEnabled) {
+          if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
             if (node)
               keypath = NodeHelper.getPathWithoutNamespace(node)
@@ -403,7 +403,7 @@ export class LocaleLoader extends Loader {
   private updateLocalesTree() {
     this._flattenLocaleTree = {}
 
-    if (Global.fileNamespaceEnabled) {
+    if (Global.namespaceEnabled) {
       const namespaces = uniq(this.files.map(f => f.namespace)) as string[]
       const root = new LocaleTree({ keypath: '' })
       for (const ns of namespaces) {
@@ -416,8 +416,16 @@ export class LocaleLoader extends Loader {
         for (const file of files)
           this.updateTree(tree, file.value, ns || '', ns || '', { ...file, meta: { namespace: file.namespace } })
 
-        if (tree !== root)
-          root.children[ns] = tree
+        if ((tree !== root) && ns) {
+          const parts = ns.split('.')
+          let parent = root
+          for (const n of parts.slice(0, -1)) {
+            if (!parent.children[n])
+              parent.children[n] = new LocaleTree({ keypath: ns, keyname: n })
+            parent = parent.children[n] as LocaleTree
+          }
+          parent.children[parts[parts.length - 1]] = tree
+        }
       }
       this._localeTree = root
     }

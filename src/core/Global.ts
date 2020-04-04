@@ -92,8 +92,8 @@ export class Global {
       .some(i => i && i[name])
   }
 
-  static get fileNamespaceEnabled() {
-    return Config.fileNamespace || this.hasFeatureEnabled('namespace')
+  static get namespaceEnabled() {
+    return Config.namespace || this.hasFeatureEnabled('namespace')
   }
 
   static get rootpath() {

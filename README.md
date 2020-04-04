@@ -205,12 +205,12 @@ All fields should add prefix "`i18n-ally.`" in the setting.
 
 | Field | Default | Description |
 | --- | --- | --- |
-| `filenameMatchRegex` | null | Accept a regex allows you to map the filenames. The first group in regex should be the locale code |
+| `pathMatcher` | null | Allows you to map the custom filename/namespace. [More details](./docs/path_matcher.md). |
 | `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. You can set it to `.*?` to allowing Unicode |
 | `promptTranslatingSource` | `false` | Prompt to select source locale on translating every time. If set false, the source language in the config will be used |
-| `fileNamespace` | auto | Use filename as the root of locale messages |
+| `namespace` | auto | Enabled [namespace](./docs/namespace.md) support |
 | `encoding` | auto | The locale file encoding. Auto-detect by default |
-| `readonly` | `false` | Work on readonly mode. Translating and editing will be disabled |
+| `readonly` | `false` | Work in readonly mode. Translating and editing will be disabled |
 
 ## ✌ Recommend Setup
 

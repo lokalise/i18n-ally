@@ -45,7 +45,7 @@ export abstract class Framework {
   pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
       return `{locale}.{${ParserExtRegEx}}`
-    else if (Config.fileNamespace)
+    else if (Config.namespace)
       return `{locale}/**/{namespace}.{${ParserExtRegEx}}`
     else
       return `{locale}/**/*.{${ParserExtRegEx}}`
@@ -66,7 +66,7 @@ export abstract class Framework {
     return reg.map((i) => {
       if (typeof i === 'string') {
         try {
-          return new RegExp(i.replace(/\{key\}/g, Config.keyMatchRegex), 'gm')
+          return new RegExp(i.replace(/{key}/g, Config.keyMatchRegex), 'gm')
         }
         catch (e) {
           Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)
