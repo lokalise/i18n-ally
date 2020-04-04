@@ -18,9 +18,9 @@ export class JsonParser extends Parser {
 
   async dump(object: object, sort: boolean) {
     if (sort)
-      return SortedStringify(object, { space: this.options.indent })
+      return `${SortedStringify(object, { space: this.options.indent })}\n`
     else
-      return JSON.stringify(object, null, this.options.indent)
+      return `${JSON.stringify(object, null, this.options.indent)}\n`
   }
 
   annotationSupported = true
