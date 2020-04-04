@@ -45,6 +45,8 @@ export abstract class Framework {
   pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
       return `{locale}.{${ParserExtRegEx}}`
+    else if (Config.fileNamespace)
+      return `{locale}/**/{namespace}.{${ParserExtRegEx}}`
     else
       return `{locale}/**/*.{${ParserExtRegEx}}`
   }

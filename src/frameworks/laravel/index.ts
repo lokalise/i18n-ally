@@ -35,6 +35,8 @@ class LaravelFramework extends Framework {
   enableFeatures = {
     namespace: true,
   }
+
+  pathMatcher = () => '{locale}/**/{namespace}.php'
 }
 
 export default LaravelFramework
