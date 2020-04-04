@@ -1,6 +1,7 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { uniq } from 'lodash'
+import { ParsePathMatcher } from '../utils/PathMatching'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
@@ -76,12 +77,12 @@ export class Global {
       .map(id => ({ scheme: 'file', language: id }))
   }
 
-  static getFilenameMatchRegex(dirStructure: DirStructure) {
-    if (Config.filenameMatchRegex)
-      return [new RegExp(Config.filenameMatchRegex, 'ig')]
+  static getPathMatcher(dirStructure: DirStructure) {
+    if (Config.pathMatcher)
+      return [ParsePathMatcher(Config.pathMatcher)]
     return this.enabledFrameworks
-      .flatMap(f => f.filenameMatchReg(dirStructure))
-      .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
+      .flatMap(f => f.pathMatcher(dirStructure))
+      .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg))
   }
 
   static hasFeatureEnabled(name: keyof OptionalFeatures) {

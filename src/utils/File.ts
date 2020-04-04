@@ -1,8 +1,8 @@
 import { normalize } from 'path'
 import { readFileSync, writeFileSync, promises as fsPromises } from 'fs'
-import { Config } from '../core'
 import * as iconv from 'iconv-lite'
 import * as jschardet from 'jschardet'
+import { Config } from '../core'
 
 interface FileEncoding {
   encoding: string
@@ -48,7 +48,7 @@ export class File {
   static async read(filepath: string, encodingConfig: string = Config.encoding): Promise<string> {
     const raw = await fsPromises.readFile(filepath)
     const { encoding, bom, content } = File.decode(raw, encodingConfig)
-    console.log('READ', filepath, encoding, bom)
+    // console.log('READ', filepath, encoding, bom)
     this.__setFileEncoding(filepath, { encoding, bom })
     return content
   }
@@ -62,7 +62,7 @@ export class File {
 
   static async write(filepath: string, data: any, opts?: FileEncoding) {
     const { encoding, bom } = opts || this.__getFileEncoding(filepath)
-    console.log('WRITE', filepath, encoding, bom)
+    // console.log('WRITE', filepath, encoding, bom)
     const buffer = Buffer.from(File.encode(data, encoding, bom))
     await fsPromises.writeFile(filepath, buffer)
   }

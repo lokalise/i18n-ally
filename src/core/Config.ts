@@ -12,6 +12,7 @@ export class Config {
     'includeSubfolders',
     'enabledFrameworks',
     'enabledParsers',
+    'dirStructure',
     'encoding',
     'fileNamespace',
     'disablePathParsing',
@@ -138,7 +139,7 @@ export class Config {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
-  static get filenameMatchRegex(): string | undefined {
+  static get pathMatcher(): string | undefined {
     return this.getConfig('filenameMatchRegex')
   }
 

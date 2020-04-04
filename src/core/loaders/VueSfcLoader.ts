@@ -24,7 +24,7 @@ export class VueSfcLoader extends Loader {
   }
 
   get files() {
-    return [{ filepath: this.filepath, locale: '', nested: false }]
+    return [{ filepath: this.filepath, locale: '', dirpath: '' }]
   }
 
   async load() {

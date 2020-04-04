@@ -33,8 +33,8 @@ class VSCodeFramework extends Framework {
     ]
   }
 
-  filenameMatchReg() {
-    return '^package.nls.?([\\w-]*)\\.json'
+  pathMatcher() {
+    return 'package.nls.?{locale}.json'
   }
 }
 

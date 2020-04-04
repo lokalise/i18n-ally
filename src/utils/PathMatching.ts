@@ -7,13 +7,14 @@ export function ParsePathMatcher(mapping: string) {
   let regstr = mapping
     .replace(/\./g, '\\.')
     .replace('.*', '..*')
-    .replace('**/', '.*/')
-    .replace('{locale}', '(?<locale>[\\w-]+)')
+    .replace('*\\.', '.*\\.')
+    .replace(/\/?\*\*\//g, '(?:.*/|^)')
+    .replace('{locale}', '(?<locale>[\\w-_]+)')
     .replace('{namespace}', '(?<namespace>[^/\\\\]+)')
     .replace('{namespaces}', '(?<namespace>.+)')
     .replace(/{(.+)}/, '(?:$1)')
 
   regstr = `^${regstr}$`
 
-  return new RegExp(regstr, 'u')
+  return new RegExp(regstr)
 }

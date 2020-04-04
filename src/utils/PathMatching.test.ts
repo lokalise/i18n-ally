@@ -9,6 +9,10 @@ describe('PathMatching', () => {
     ['{namespace}/{locale}.*', 'nested/en.whatever', 'nested', 'en'],
     ['{locale}/{namespaces}.*', 'zh-cn/hello/world/messages.json', 'hello/world/messages', 'zh-cn'],
     ['{locale}/modules/{namespaces}.*', 'jp/modules/hello/world.json', 'hello/world', 'jp'],
+    ['{locale}/modules/*.*', 'jp/modules/a.json', undefined, 'jp'],
+    ['{locale}/modules/*.js', 'jp/modules/a.js', undefined, 'jp'],
+    ['**/{locale}.json', 'fr.json', undefined, 'fr'],
+    ['hello/**/{locale}.json', 'hello/fr.json', undefined, 'fr'],
   ] as const
 
   for (const [map, path, expectedNamespace, expectedLocale] of cases) {

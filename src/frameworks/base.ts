@@ -42,11 +42,11 @@ export abstract class Framework {
   /**
    * Locale file's name match
    */
-  filenameMatchReg(dirStructure?: DirStructure): RegExp | string {
+  pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
-      return `^([\\w-_]*)\\.(${ParserExtRegEx})$`
+      return `{locale}.{${ParserExtRegEx}}`
     else
-      return `^(.*)\\.(${ParserExtRegEx})$`
+      return `{locale}/**/*.{${ParserExtRegEx}}`
   }
 
   enableFeatures?: OptionalFeatures

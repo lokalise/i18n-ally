@@ -15,8 +15,8 @@ export interface NodeMeta {
 
 export interface FileInfo {
   filepath: string
+  dirpath: string
   locale: string
-  nested: boolean
   readonly?: boolean
   namespace?: string
 }
