@@ -14,14 +14,20 @@ Some i18n framework requires you to use some kinda name conversions. For example
 
 > Note if you are using i18n-ally for VSCode i18n, you don't need to do this. It's already setup out of box.
 
-### Custom namespaces match
+### Custom [namespaces](./namespace.md) match
 
-> If you don't know what is `namespaces`, please refer to [this page](./namespace.md).
+You can use path matcher to custom how namespaces are captured. You need to turn on namespace config before make it work.
 
-// TODO:
+```jsonc
+"i18n-ally.namespace": true,
+"i18n-ally.pathMatcher": "{locale}/{namespaces}.json"
+```
 
+Please check out the [examples](#example-1) below.
 
-### Advanced
+----------
+
+### Options
 
 The path matcher matchs relative path from your locale folder. File paths with no match will not be loaded.
 
@@ -31,7 +37,7 @@ A common path matcher would be like:
 {locale}/{namespace}.*
 ```
 
-The following table listed some keywords you may want to use. `{locale}` is required while others are optional.
+The following table listed some keywords you may want to use. `{locale}` is required while the others are optional.
 
 | Keyword      | Description |
 | -----------  | ----------- |
@@ -65,7 +71,7 @@ i18n
 '{locale}/{namespaces}.yaml'
 
 // Example Path
-'nl-NL/attributes/foo.yml'
+'nl-NL/attributes/foo.yaml'
 
 // Matched result
 { locale: 'nl-NL', namespace: 'attributes.foo' }
@@ -101,10 +107,10 @@ i18n
 
 ```js
 // Path Matcher
-'{namespaces}/{locales}.json'
+'{namespaces}/{locales}.yaml'
 
 // Example Path
-'attributes/bar/en.json'
+'attributes/bar/en.yaml'
 
 // Matched result
 { locale: 'en', namespace: 'attributes.bar' }
