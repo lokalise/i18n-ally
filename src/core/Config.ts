@@ -2,7 +2,7 @@ import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
-import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, DEFAULT_KEY_REG } from '../meta'
+import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
 
 export class Config {
@@ -143,7 +143,8 @@ export class Config {
   }
 
   static get keyMatchRegex(): string {
-    return this.getConfig('keyMatchRegex') || DEFAULT_KEY_REG
+    return this.getConfig('keyMatchRegex')
+     || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
   static get keepFulfilled(): boolean {
