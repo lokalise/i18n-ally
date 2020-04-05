@@ -1,0 +1,6 @@
+{
+  "i18n-ally.localesPaths": "i18n",
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.(yml|json)",
+  "i18n-ally.namespace": true,
+  "i18n-ally.keystyle": "nested",
+}

@@ -183,7 +183,7 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
+      Log.info(`✅ ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
       Log.info(`🧬 Parsers ${this.enabledParsers.map(i => `"${i.id}"`).join(', ')} enabled.\n`)
       await this.initLoader(this._rootpath, reload)
     }
