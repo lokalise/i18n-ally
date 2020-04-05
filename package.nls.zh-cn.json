@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "翻译路径格式",
   "config.locales_paths": "翻译文件夹路径 (相对于项目根目录)，你也可以使用Glob匹配模式。",
+  "config.match_RegEx": "",
   "config.match_regex": "匹配语言环境文件名的正则表达式字符串（返回结果的第一个组应是语言代码）",
   "config.preferred_delimiter": "组合键路径的默认分隔符，默认为 \"-\"（短划线）",
   "config.prompt_translating_source": "每次翻译时都会提示选择源语言环境。\n如果设置为false，将使用配置中的源语言。",

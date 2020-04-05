@@ -1,9 +1,9 @@
 import { EventEmitter } from 'vscode'
 import { TranslateResult } from 'translation.js/declaration/api/types'
+import { google, baidu, youdao } from 'translation.js'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
 import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, CurrentFile } from '.'
-import { google, baidu, youdao } from 'translation.js'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -47,19 +47,34 @@ export class Translator {
       this._onDidChange.fire({ keypath, locale, action: 'end' })
   }
 
+  private static getValueOfKey(loader: Loader, keypath: string, sourceLanguage: string) {
+    const sourceNode = loader.getNodeByKey(keypath)
+    if (!sourceNode) {
+      if (Config.translateFallbackToKey)
+        return keypath
+      throw new AllyError(ErrorType.translating_empty_source_value)
+    }
+
+    const sourceRecord = sourceNode.locales[sourceLanguage]
+    if (!sourceRecord || !sourceRecord.value) {
+      if (Config.translateFallbackToKey)
+        return keypath
+      throw new AllyError(ErrorType.translating_empty_source_value)
+    }
+
+    return sourceRecord.value
+  }
+
   private static async MachineTranslateRecord(loader: Loader, record: LocaleRecord, sourceLanguage: string) {
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
-    const sourceNode = loader.getNodeByKey(record.keypath)
-    if (!sourceNode)
-      throw new AllyError(ErrorType.translating_empty_source_value)
-    const sourceRecord = sourceNode.locales[sourceLanguage]
-    if (!sourceRecord || !sourceRecord.value)
-      throw new AllyError(ErrorType.translating_empty_source_value)
+
+    const value = this.getValueOfKey(loader, record.keypath, sourceLanguage)
+
     try {
       Log.info(`🌍 Translating "${record.keypath}" (${sourceLanguage}->${record.locale})`)
       this.start(record.keypath, record.locale)
-      const result = await this.translateText(sourceRecord.value, sourceLanguage, record.locale)
+      const result = await this.translateText(value, sourceLanguage, record.locale)
       this.end(record.keypath, record.locale)
 
       const pending = {

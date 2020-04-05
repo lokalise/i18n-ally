@@ -534,6 +534,11 @@
           "default": false,
           "description": "%config.disable_path_parsing%"
         },
+        "i18n-ally.translate.fallbackToKey": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.translate.fallbackToKey%"
+        },
         "i18n-ally.keyMatchRegex": {
           "type": "string",
           "description": "%config.key_match_regex%"

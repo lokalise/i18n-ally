@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "Estilo de la clave de configuración regional",
   "config.locales_paths": "Ruta de acceso al directorio de configuración regional (relativa a la raíz del proyecto). Acepta patrón Glob.",
+  "config.match_RegEx": "",
   "config.match_regex": "Regex para que coincida con el nombre de archivo de configuración regional. (El primer grupo debe ser el código de configuración regional)",
   "config.preferred_delimiter": "Delimitador preferido para las rutas de acceso compuestas, por defecto \"-\"(guión)",
   "config.prompt_translating_source": "",

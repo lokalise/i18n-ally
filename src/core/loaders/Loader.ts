@@ -161,6 +161,9 @@ export abstract class Loader extends Disposable {
         return node
     }
 
+    if (Config.disablePathParsing)
+      return
+
     // tree style
     const keys = NodeHelper.splitKeypath(key)
     const head = keys[0]
@@ -170,6 +173,7 @@ export abstract class Loader extends Disposable {
       return node
     if (node && node.type === 'tree')
       return this.getTreeNodeByKey(remaining, node)
+
     return undefined
   }
 

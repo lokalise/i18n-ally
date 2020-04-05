@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "Estilo de chave de tradução",
   "config.locales_paths": "Caminho para os arquivos de tradução (relativo à raiz do projeto). O padrão glob também é aceito.",
+  "config.match_RegEx": "",
   "config.match_regex": "Regex para corresponder com o arquivo de tradução. O primeiro grupo deve ser o código do idioma)",
   "config.preferred_delimiter": "Delimitador para o caminho da chave, o padrão é \"-\"(hífen)",
   "config.prompt_translating_source": "Sempre perguntar idioma de origem durante tradução. Se o valor for \"false\", será usado o idioma de origem das configurações.",

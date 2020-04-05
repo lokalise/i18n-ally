@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "Locale sleutel style",
   "config.locales_paths": "Pad naar locale folder (relatief aan project root), glob patroon is acceptabel.",
+  "config.match_RegEx": "",
   "config.match_regex": "Regex string om locale bestandsnamen te matchen. (De eerste groep moet de locale code bevatten)",
   "config.preferred_delimiter": "Gewenst scheidingsteken voor sleutel pad, standaard waarde \"-\"(dash)",
   "config.prompt_translating_source": "Altijd vragen om de bron locale te selectering bij vertalingen. Indien false, dan zal de bron taal in de configuratie gebruikt worden.",

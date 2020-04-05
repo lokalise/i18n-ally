@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "ロケールキースタイル",
   "config.locales_paths": "ロケールディレクトリのパス (プロジェクトルートの相対パス), glob pattern が有効です。",
+  "config.match_RegEx": "",
   "config.match_regex": "正規表現をロケールファイル名と合致させます。 (The first group should be the locale code)",
   "config.preferred_delimiter": "キーパスを構成するデリミタ。デフォルトは\"-\"(ダッシュ)",
   "config.prompt_translating_source": "",

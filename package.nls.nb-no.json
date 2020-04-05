@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "Oversettelseskodestil",
   "config.locales_paths": "Bane til oversettelsesmappe (relativt til prosjektets rotmappe). Glob-mønster er også akseptabelt.",
+  "config.match_RegEx": "",
   "config.match_regex": "Regex-uttrykk for å matche oversettelsesfilnavn. (Den første gruppen bør være oversettelseskoden)",
   "config.preferred_delimiter": "Foretrukket skilletegn for komponert nøkkelbane, \"-\"(bindestrek) som standard",
   "config.prompt_translating_source": "",

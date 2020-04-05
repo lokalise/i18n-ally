@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "翻譯路徑格式",
   "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)，你也可以使用Glob匹配模式。",
+  "config.match_RegEx": "",
   "config.match_regex": "匹配語言環境檔案名的正規運算式字串（返回結果的第一個群組應是語言代碼）",
   "config.preferred_delimiter": "組合鍵路徑的首選分隔符，默認為 \"-\"（短劃線）",
   "config.prompt_translating_source": "每次翻譯時都會提示選擇源語言環境。\n如果設置為false，將使用配置中的源語言。",

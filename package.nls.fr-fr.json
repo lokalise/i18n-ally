@@ -38,6 +38,7 @@
   "config.key_match_regex": "",
   "config.keystyle": "Style de Clé locale.",
   "config.locales_paths": "Chemin du répertoire de la locale (par rapport à la racine). Les schémas globaux sont acceptés.",
+  "config.match_RegEx": "",
   "config.match_regex": "Chaîne d'expressions régulières pour correspondre au nom de fichiers de la locale. (Le premier groupe doit être du code local)",
   "config.preferred_delimiter": "Délimiteur recommandé pour les noms de chemins à trous, par défaut \"-\"(tiret)",
   "config.prompt_translating_source": "Invite à sélectionner la langue source à chaque fois. Si défini sur False, le langage du système sera autmatiquement utilisé.",
