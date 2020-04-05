@@ -58,20 +58,20 @@ If you would like to make it work for frameworks not listed above, you can:
 
 <h2 align="center"> ⚡ Features </h2>
 
-<h3 align="center"> Inline annotations </h3>
+<h3 align="center"> Inline Annotations </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/annotation.png?raw=true' width='700px'/>
 </p>
 
-<h3 align="center"> Hover and direct actions </h3>
+<h3 align="center"> Hover and Direct Actions </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/hover.png?raw=true' width='600px'/>
 </p>
 
 
-<h3 align="center"> Manage all translations in one place </h3>
+<h3 align="center"> Manage All Translations in One Place </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/progress_report.png?raw=true' width='600px'/>
@@ -86,28 +86,28 @@ If you would like to make it work for frameworks not listed above, you can:
 </p>
 
 
-<h3 align="center"> Report missing translations </h3>
+<h3 align="center"> Report Missing Translations </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/problems.png?raw=true' width='600px'/>
 </p>
 
 
-<h3 align="center"> Multiple formats supported </h3>
+<h3 align="center"> Multiple Formats Supported </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' width='500px'/>
 </p>
 
 
-<h3 align="center"> Refactor and auto-translate </h3>
+<h3 align="center"> Refactor and Auto-translate </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/refactor_translate.png?raw=true' width='500px'/>
 </p>
 
 
-<h3 align="center"> Extract translations from code </h3>
+<h3 align="center"> Extract Translations from Code </h3>
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/extract.png?raw=true' width='500px'/>
@@ -148,7 +148,7 @@ If you would like to make it work for frameworks not listed above, you can:
 *\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on read-only mode by `i18n-ally.readonly` to prevent losing comments.*
 
 
-## 📂 Directory structure
+## 📂 Directory Structure
 
 Your locales directory can be structured like this with zero-configuration
 
@@ -226,7 +226,7 @@ To get the best experience from this extension (and other translation services a
 }
 ```
 
-## 🌍 Help translate this extension
+## 🌍 Help Translate This Extension
 
 This extension itself supports i18n as well. It will be auto-matched to the display language you use in your VSCode editor. We currently support the following languages.
 
