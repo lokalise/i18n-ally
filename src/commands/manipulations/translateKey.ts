@@ -5,7 +5,7 @@ import { Log } from '../../utils'
 import i18n from '../../i18n'
 import { getNodeOrRecord, CommandOptions, getNode } from './common'
 
-export async function TranslateSingleKey(item?: LocaleTreeItem | CommandOptions, source?: string) {
+export async function TranslateSingleKey(item?: LocaleTreeItem | CommandOptions, source?: string, prompt = true) {
   const node = getNodeOrRecord(item)
   const targetLocales = item instanceof LocaleTreeItem ? item.listedLocales : undefined
   source = source || Config.sourceLanguage
@@ -17,7 +17,11 @@ export async function TranslateSingleKey(item?: LocaleTreeItem | CommandOptions,
     return
 
   try {
+    if (prompt)
+      window.showInformationMessage(i18n.t('prompt.translate_missing_in_progress'))
     await Translator.MachineTranslate(CurrentFile.loader, node, source, targetLocales)
+    if (prompt)
+      window.showInformationMessage(i18n.t('prompt.translate_missing_done_single'))
   }
   catch (err) {
     Log.error(err.toString())
@@ -38,7 +42,7 @@ export async function TranslateMultipleKeys(item: ProgressSubmenuItem, source: s
   if (result === Yes) {
     window.showInformationMessage(i18n.t('prompt.translate_missing_in_progress'))
     for (const key of keys)
-      await TranslateSingleKey({ locale: to, keypath: key }, source)
+      await TranslateSingleKey({ locale: to, keypath: key }, source, false)
     window.showInformationMessage(i18n.t('prompt.translate_missing_done', keys.length))
   }
 }

@@ -99,6 +99,7 @@
   "prompt.support": "i18n Ally is offered to everyone for free. If you find it useful, please consider supporting it. Thank you! ❤",
   "prompt.translate_missing_confirm": "Are you sure you want to translate {0} missing keys for language \"{1}\" from \"{2}\"?\n\nThis operation cannot be undone!",
   "prompt.translate_missing_done": "{0} keys translated.",
+  "prompt.translate_missing_done_single": "Translation finished.",
   "prompt.translate_missing_in_progress": "Translating...",
   "prompt.writing_js": "Writing to js/ts files is not supported.",
   "refactor.extract_text": "Extract text into i18n messages",
