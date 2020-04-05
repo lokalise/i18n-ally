@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.9](https://github.com/antfu/i18n-ally/compare/v1.13.8...v1.13.9) (2020-04-05)
+
+
+### 📚 Documentations
+
+* fix spelling and grammer in English README ([#234](https://github.com/antfu/i18n-ally/issues/234)) ([f61c5d2](https://github.com/antfu/i18n-ally/commit/f61c5d2b3ea49aa42fe100da0f44f85bcf9dc110))
+
+
+### 🐞 Bug Fixes
+
+* i18n key names ([5a6a684](https://github.com/antfu/i18n-ally/commit/5a6a68449fcfca728b3037587dd2f849c73b7a2a))
+* spelling & grammar for English ([5c6b59c](https://github.com/antfu/i18n-ally/commit/5c6b59c50f9855e1712be6d8b492e6b4656d7841))
+
+
+### ⚡ Features
+
+* improve DX for natural language keys ([c9cd232](https://github.com/antfu/i18n-ally/commit/c9cd2326c5106c7be2c6ec88db32efef66e154fc))
+* minor improves in [#231](https://github.com/antfu/i18n-ally/issues/231) ([c6a6c61](https://github.com/antfu/i18n-ally/commit/c6a6c61cd0162e736b5787d9c2f4baa67a96fb5c))
+* translation notification ([497e8c8](https://github.com/antfu/i18n-ally/commit/497e8c8fa7151a8de48677ff5285b541b09e2d34))
+
 ### [1.13.8](https://github.com/antfu/i18n-ally/compare/v1.13.7...v1.13.8) (2020-04-02)
 
 
