@@ -25,9 +25,14 @@ export async function EditKey(item?: LocaleTreeItem | CommandOptions) {
     node = record
   }
 
+  let placeholder = node.value
+
+  if (Config.disablePathParsing && node.shadow && !node.value)
+    placeholder = node.keypath
+
   try {
     const newvalue = await window.showInputBox({
-      value: node.value,
+      value: placeholder,
       prompt: i18n.t('prompt.edit_key_in_locale', node.keypath, decorateLocale(node.locale)),
     })
 
