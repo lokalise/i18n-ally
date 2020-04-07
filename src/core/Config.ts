@@ -8,12 +8,13 @@ import { KeyStyle, DirStructureAuto } from '.'
 export class Config {
   static readonly reloadConfigs = [
     'localesPaths',
-    'filenameMatchRegex',
+    'pathMatcher',
     'includeSubfolders',
     'enabledFrameworks',
     'enabledParsers',
+    'dirStructure',
     'encoding',
-    'fileNamespace',
+    'namespace',
     'disablePathParsing',
   ]
 
@@ -88,8 +89,8 @@ export class Config {
     return this.getConfig<string>('annotationDelimiter') || ''
   }
 
-  static get fileNamespace(): boolean | undefined {
-    return this.getConfig<boolean>('fileNamespace')
+  static get namespace(): boolean | undefined {
+    return this.getConfig<boolean>('namespace')
   }
 
   static get enabledFrameworks(): string[] | undefined {
@@ -138,8 +139,8 @@ export class Config {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
-  static get filenameMatchRegex(): string | undefined {
-    return this.getConfig('filenameMatchRegex')
+  static get pathMatcher(): string | undefined {
+    return this.getConfig('pathMatcher')
   }
 
   static get keyMatchRegex(): string {

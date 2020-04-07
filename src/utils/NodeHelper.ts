@@ -46,8 +46,8 @@ export class NodeHelper {
   }
 
   static getPathWithoutNamespace(node: Node) {
-    if (Global.fileNamespaceEnabled && node.meta?.namespace != null)
-      return this.splitKeypath(node.keypath).slice(1).join('.')
+    if (Global.namespaceEnabled && node.meta?.namespace != null)
+      return node.keypath.slice(node.meta?.namespace.length + 1)
 
     return node.keypath
   }

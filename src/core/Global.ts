@@ -1,6 +1,7 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { uniq } from 'lodash'
+import { ParsePathMatcher } from '../utils/PathMatching'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { PARSERS } from '../parsers'
@@ -76,12 +77,12 @@ export class Global {
       .map(id => ({ scheme: 'file', language: id }))
   }
 
-  static getFilenameMatchRegex(dirStructure: DirStructure) {
-    if (Config.filenameMatchRegex)
-      return [new RegExp(Config.filenameMatchRegex, 'ig')]
+  static getPathMatcher(dirStructure: DirStructure) {
+    if (Config.pathMatcher)
+      return [ParsePathMatcher(Config.pathMatcher)]
     return this.enabledFrameworks
-      .flatMap(f => f.filenameMatchReg(dirStructure))
-      .map(reg => reg instanceof RegExp ? new RegExp(reg) : new RegExp(reg, 'ig'))
+      .flatMap(f => f.pathMatcher(dirStructure))
+      .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg))
   }
 
   static hasFeatureEnabled(name: keyof OptionalFeatures) {
@@ -91,8 +92,8 @@ export class Global {
       .some(i => i && i[name])
   }
 
-  static get fileNamespaceEnabled() {
-    return Config.fileNamespace || this.hasFeatureEnabled('namespace')
+  static get namespaceEnabled() {
+    return Config.namespace || this.hasFeatureEnabled('namespace')
   }
 
   static get rootpath() {
@@ -182,7 +183,7 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`🐱‍🏍 ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
+      Log.info(`✅ ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
       Log.info(`🧬 Parsers ${this.enabledParsers.map(i => `"${i.id}"`).join(', ')} enabled.\n`)
       await this.initLoader(this._rootpath, reload)
     }

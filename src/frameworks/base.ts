@@ -42,11 +42,13 @@ export abstract class Framework {
   /**
    * Locale file's name match
    */
-  filenameMatchReg(dirStructure?: DirStructure): RegExp | string {
+  pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
-      return `^([\\w-_]*)\\.(${ParserExtRegEx})$`
+      return `{locale}.{${ParserExtRegEx}}`
+    else if (Config.namespace)
+      return `{locale}/**/{namespace}.{${ParserExtRegEx}}`
     else
-      return `^(.*)\\.(${ParserExtRegEx})$`
+      return `{locale}/**/*.{${ParserExtRegEx}}`
   }
 
   enableFeatures?: OptionalFeatures
@@ -64,7 +66,7 @@ export abstract class Framework {
     return reg.map((i) => {
       if (typeof i === 'string') {
         try {
-          return new RegExp(i.replace(/\{key\}/g, Config.keyMatchRegex), 'gm')
+          return new RegExp(i.replace(/{key}/g, Config.keyMatchRegex), 'gm')
         }
         catch (e) {
           Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)

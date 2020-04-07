@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "vue-i18n": "*"
+  }
+}

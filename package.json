@@ -417,19 +417,10 @@
           "default": "·",
           "description": "%config.annotation_delimiter%"
         },
-        "i18n-ally.filenameMatchRegex": {
-          "type": "string",
-          "default": "",
-          "description": "%config.match_regex%"
-        },
         "i18n-ally.includeSubfolders": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "%config.include_subfolders%"
-        },
-        "i18n-ally.fileNamespace": {
-          "type": "boolean",
-          "description": "%config.file_namespace%"
         },
         "i18n-ally.fullReloadOnChanged": {
           "type": "boolean",
@@ -560,6 +551,22 @@
         "i18n-ally.frameworks.ruby-rails.scopeRoot": {
           "type": "string",
           "default": "app/views"
+        },
+        "i18n-ally.namespace": {
+          "type": "boolean",
+          "description": "%config.namespace%"
+        },
+        "i18n-ally.pathMatcher": {
+          "type": "string",
+          "description": "%config.path_matcher%"
+        },
+        "i18n-ally.filenameMatchRegex": {
+          "type": "string",
+          "description": "%config.depreacted_match_regex%"
+        },
+        "i18n-ally.fileNamespace": {
+          "type": "boolean",
+          "description": "%config.deprecated_file_namespace%"
         },
         "vue-i18n-ally.localesPaths": {
           "description": "%config.deprecated%"
