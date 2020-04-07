@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/antfu/i18n-ally/compare/v1.13.9...v1.14.0) (2020-04-07)
+
+
+### ⚡ Features
+
+* new file loading engine ([b6a0dd0](https://github.com/antfu/i18n-ally/commit/b6a0dd00e346afee662f0557e49e707f986a246c))
+* path matcher parser ([3b4ff43](https://github.com/antfu/i18n-ally/commit/3b4ff43e922e2db1cf4fbbf8b751f077f7ce2cf1))
+
+
+### 🐞 Bug Fixes
+
+* laravel in new engine ([4df8b2c](https://github.com/antfu/i18n-ally/commit/4df8b2c352e08096e2fd76edd0598d239a4917b3))
+
+
+### 📚 Documentations
+
+* update ([16e3169](https://github.com/antfu/i18n-ally/commit/16e31691ab9006ba6aa65f38748150ee204e956d))
+* update docs ([9a5c67f](https://github.com/antfu/i18n-ally/commit/9a5c67ff8c29db088a48c6b09d62826a92fabfd7))
+* **examples:** add examples for path-matcher ([1fe8efa](https://github.com/antfu/i18n-ally/commit/1fe8efa1dce46bb4dc922d48cd7346dcace18446))
+
 ### [1.13.9](https://github.com/antfu/i18n-ally/compare/v1.13.8...v1.13.9) (2020-04-05)
 
 
