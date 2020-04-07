@@ -22,7 +22,7 @@
   "config.annotation_delimiter": "內聯註釋的分隔符",
   "config.annotation_max_length": "內聯註釋顯示的最大字符數。超出的部分將顯示為省略號（...）",
   "config.annotations": "啟用內聯註釋",
-  "config.depreacted_match_regex": "",
+  "config.deprecated_match_regex": "",
   "config.deprecated": "不推薦使用。\n請使用 \"i18n-ally\" 前綴",
   "config.deprecated_file_namespace": "",
   "config.dir_structure": "用於組織本地檔案的首選目錄結構",

@@ -22,7 +22,7 @@
   "config.annotation_delimiter": "デリミタアノテーション",
   "config.annotation_max_length": "インラインアノテーションの最大文字数です。超過している部分は(...)と表示されます。",
   "config.annotations": "インラインアノテーションを有効にする.",
-  "config.depreacted_match_regex": "",
+  "config.deprecated_match_regex": "",
   "config.deprecated": "非推奨です。 \"i18n-ally\" を使用してください。.",
   "config.deprecated_file_namespace": "",
   "config.dir_structure": "ロケールファイルをオーガナイズするために推奨しているディレクトリ構造",
