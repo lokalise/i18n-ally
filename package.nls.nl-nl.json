@@ -100,7 +100,7 @@
   "prompt.select_source_language_for_translating": "Selecteer brontaal voor het vertalen van ({0})",
   "prompt.select_source_locale": "Selecteer brontaal ({0})",
   "prompt.star_on_github": "Ster op Github",
-  "prompt.support": "i18n Ally is gratis voor iedereen. Als je deze extensie nuttig vindt, overweeg alsjeblieft om het te steunen. Alvast bedankt! ❤",
+  "prompt.support": "i18n Ally is gratis voor iedereen. Als je deze extensie handig vindt, overweeg alsjeblieft om het te steunen. Alvast bedankt! ?",
   "prompt.translate_missing_confirm": "Weet u zeker dat u {0} missende sleutels voor de taal \"{1}\" van \"{2}\" wilt vertalen?\n\nDeze actie kan niet ongedaan worden gemaakt.",
   "prompt.translate_missing_done": "{0} sleutels vertaald.",
   "prompt.translate_missing_done_single": "Sleutel vertaald.",
