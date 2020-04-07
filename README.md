@@ -199,7 +199,6 @@ All fields must be prefixed with "`i18n-ally.`" in settings.
 | `enabledParsers` | auto | Specify the parsers for local file formats. All the possible parsers are enabled by default |
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
-| `disablePathParsing` | `false` | Enable this if you use natural languages as the key of your locale messages |
 
 ### 🔩 Advanced Configurations
 
@@ -209,9 +208,9 @@ All fields must be prefixed with "`i18n-ally.`" in settings.
 | `pathMatcher` | null | Allows you to map the custom filename/namespace. [More details](./docs/path_matcher.md). |
 | `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. Set it to `.*?` to allow Unicode |
 | `promptTranslatingSource` | `false` | Prompt to select the source locale on translating every time. If set to false, the source language in the config will be used |
+| `disablePathParsing` | `false` | Enable this if you use natural languages as the key of your locale messages |
 | `encoding` | auto | The locale file encoding. Auto-detect by default |
 | `readonly` | `false` | Work on read-only mode. Translating and editing will be disabled |
-| `fileNamespace` | auto | Use filename as the root of locale messages. *DEPRECATED:* Use the `namespace` option instead.|
 
 ## ✌ Recommended Setup
 
