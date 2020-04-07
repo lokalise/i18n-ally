@@ -159,7 +159,7 @@ Your locales directory can be structured like this with zero-configuration
   ├── zh-CN.yml   # YAML
   ├── zh-TW.ts    # You can mix different formats
   ├── ...
-  └── <contry-code>.json
+  └── <country-code>.json
 ```
 
 or
@@ -175,7 +175,7 @@ or
   |   ├── common.json
   |   ├── buttons.json
   |   └── ...
-  └── <contry-code>
+  └── <country-code>
       ├── common.json
       ├── buttons.json
       └── ...
@@ -205,14 +205,15 @@ All fields must be prefixed with "`i18n-ally.`" in settings.
 
 | Field | Default | Description |
 | --- | --- | --- |
+| `namespace` | `false` | Enable namespacing of keys by filename/directory structure. [More details](./docs/namespace.md) |
 | `pathMatcher` | null | Allows you to map the custom filename/namespace. [More details](./docs/path_matcher.md). |
-| `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. Set it to `.*?` to allowing Unicode |
+| `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. Set it to `.*?` to allow Unicode |
 | `promptTranslatingSource` | `false` | Prompt to select the source locale on translating every time. If set to false, the source language in the config will be used |
-| `fileNamespace` | auto | Use filename as the root of locale messages |
 | `encoding` | auto | The locale file encoding. Auto-detect by default |
 | `readonly` | `false` | Work on read-only mode. Translating and editing will be disabled |
+| `fileNamespace` | auto | Use filename as the root of locale messages. *DEPRECATED:* Use the `namespace` option instead.|
 
-## ✌ Recommend Setup
+## ✌ Recommended Setup
 
 To get the best experience from this extension (and other translation services as well), We recommend you use the following setup:
 
@@ -238,7 +239,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
 | Spanish (Español) |  | [@Baltimer](https://github.com/Baltimer) |
 | Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
-| Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm) |
+| Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm), [@Excalibaard](https://github.com/Excalibaard) |
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
 | Français |  | [@Nicoxx45](https://github.com/Nicoxx45) |
 
@@ -304,7 +305,7 @@ You could change your config like this:
   "i18n-ally.localesPaths": [
     "packages/**/**/i18n"
   ],
-  "i18n-ally.filenameMatchRegex": "^([\\w-]*)\\.messages\\.json",
+  "i18n-ally.pathMatcher": "{locale}.messages.json",
 }
 ```
 

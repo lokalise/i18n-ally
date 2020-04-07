@@ -562,7 +562,7 @@
         },
         "i18n-ally.filenameMatchRegex": {
           "type": "string",
-          "description": "%config.depreacted_match_regex%"
+          "description": "%config.deprecated_match_regex%"
         },
         "i18n-ally.fileNamespace": {
           "type": "boolean",

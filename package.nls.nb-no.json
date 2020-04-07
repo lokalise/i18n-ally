@@ -22,7 +22,7 @@
   "config.annotation_delimiter": "",
   "config.annotation_max_length": "Maksimalt antall tegn vist i hjelpevindu. Resterende del vil bli vist som (...)",
   "config.annotations": "Slå på hjelpevindu",
-  "config.depreacted_match_regex": "",
+  "config.deprecated_match_regex": "",
   "config.deprecated": "",
   "config.deprecated_file_namespace": "",
   "config.dir_structure": "Foretrukket mappestruktur for organisering av oversettelsesfiler",

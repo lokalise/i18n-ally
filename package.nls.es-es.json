@@ -22,7 +22,7 @@
   "config.annotation_delimiter": "Delimintador de anotaciones",
   "config.annotation_max_length": "Máximo número de caracteres que se mostrarán en las anotaciones en línea. Los restantes se mostrarán como elipses (...)",
   "config.annotations": "Habilitar las anotaciones en línea.",
-  "config.depreacted_match_regex": "",
+  "config.deprecated_match_regex": "",
   "config.deprecated": "",
   "config.deprecated_file_namespace": "",
   "config.dir_structure": "Estructura de directorios preferida para organizar los archivos de configuración regional",
