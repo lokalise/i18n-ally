@@ -11,6 +11,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.15.0](https://github.com/antfu/i18n-ally/compare/v1.14.1...v1.15.0) (2020-04-08)
 
+### BREAKING CHANGE
+
+* "i18n-ally.encoding" is now default to "utf-8" instead of "auto"
+
 ### [1.14.1](https://github.com/antfu/i18n-ally/compare/v1.14.0...v1.14.1) (2020-04-08)
 
 
@@ -32,6 +36,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.14.0](https://github.com/antfu/i18n-ally/compare/v1.13.9...v1.14.0) (2020-04-07)
 
+### BREAKING CHANGE
+
+* config "filenameMatchRegex" and "fileNamespace" are now deprecated.
+* "fileNamespace" renamed to "namespace"
+* "filenameMatchRegex" are deprecated. Use "pathMatcher" instead.
 
 ### ⚡ Features
 
