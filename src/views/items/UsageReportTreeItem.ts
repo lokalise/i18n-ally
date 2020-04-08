@@ -4,7 +4,7 @@ import { NodeHelper } from '../../utils'
 import { LocaleTreeItem } from '.'
 
 export class UsageReportTreeItem extends LocaleTreeItem {
-  constructor(ctx: ExtensionContext, public readonly usage: KeyUsage) {
+  constructor(ctx: ExtensionContext, public readonly usage: KeyUsage, public readonly type: string) {
     super(ctx, CurrentFile.loader.getTreeNodeByKey(usage.keypath) || new LocaleNode({ shadow: true, keypath: usage.keypath }), true)
   }
 
@@ -26,6 +26,9 @@ export class UsageReportTreeItem extends LocaleTreeItem {
         values.push('openable')
       if (NodeHelper.isEditable(this.node))
         values.push('editable')
+
+      values.push(`key_${this.type}`)
+
       return values.join('-')
     }
     return ''

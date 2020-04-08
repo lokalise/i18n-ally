@@ -12,6 +12,7 @@ import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
+import { Analyst } from './Analyst'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -146,6 +147,7 @@ export class Global {
     let reload = false
     if (e) {
       let affected = false
+
       for (const config of Config.reloadConfigs) {
         const key = `${EXT_NAMESPACE}.${config}`
         if (e.affectsConfiguration(key)) {
@@ -155,6 +157,7 @@ export class Global {
           break
         }
       }
+
       for (const config of Config.refreshConfigs) {
         const key = `${EXT_NAMESPACE}.${config}`
         if (e.affectsConfiguration(key)) {
@@ -163,8 +166,20 @@ export class Global {
           break
         }
       }
+
+      for (const config of Config.usageRefreshConfigs) {
+        const key = `${EXT_NAMESPACE}.${config}`
+        if (e.affectsConfiguration(key)) {
+          Analyst.refresh()
+
+          Log.info(`🧰 Config "${key}" changed`)
+          break
+        }
+      }
+
       if (!affected)
         return
+
       if (reload)
         Log.info('🔁 Reloading loader')
     }

@@ -19,6 +19,7 @@ export class UsageReportRootItem extends BaseTreeItem {
     }[this.key])
     this.count = keys.length
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
+    this.id = `usage-root-${this.key}`
   }
 
   getLabel() {
@@ -30,7 +31,7 @@ export class UsageReportRootItem extends BaseTreeItem {
   }
 
   get contextValue() {
-    return this.key
+    return `usage_${this.key}`
   }
 
   set contextValue(_) {}

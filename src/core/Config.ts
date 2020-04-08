@@ -26,6 +26,11 @@ export class Config {
     'keyMathRegex',
   ]
 
+  static readonly usageRefreshConfigs = [
+    'keysInUse',
+    'derivedKeys',
+  ]
+
   // languages
   static get displayLanguage(): string {
     return normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
@@ -256,6 +261,18 @@ export class Config {
 
   static get disablePathParsing() {
     return this.getConfig<boolean>('disablePathParsing') ?? false
+  }
+
+  static get keysInUse() {
+    return this.getConfig<string[]>('keysInUse') || []
+  }
+
+  static set keysInUse(value) {
+    this.setConfig('keysInUse', value)
+  }
+
+  static get derivedKeys() {
+    return this.getConfig<string[]>('derivedKeys') || []
   }
 
   // config

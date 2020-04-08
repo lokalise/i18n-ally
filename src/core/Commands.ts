@@ -22,4 +22,5 @@ export const enum Commands {
   open_url = 'extension.i18n-ally.open-url',
   support = 'extension.i18n-ally.support',
   refresh_usage = 'extension.i18n-ally.refresh-usage',
+  mark_key_as_in_use = 'extension.i18n-ally.mark-key-as-in-use',
 }

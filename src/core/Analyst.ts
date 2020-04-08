@@ -30,6 +30,15 @@ export class Analyst {
     return workspace.onDidSaveTextDocument(doc => this.updateCache(doc))
   }
 
+  static hasCache() {
+    return !!this._cache
+  }
+
+  static refresh() {
+    if (this.hasCache())
+      this.analyzeUsage(true)
+  }
+
   private static async updateCache(doc: TextDocument) {
     if (!this._cache)
       return
@@ -135,11 +144,13 @@ export class Analyst {
       .entries()
       .map(([keypath, occurrences]) => ({ keypath, occurrences }))
       .value()
-    const usingKeys = uniq(usages.map(i => i.keypath))
-    const activeKeys = usingKeys.filter(i => !!CurrentFile.loader.getNodeByKey(i, false))
-    const missingKeys = usingKeys.filter(i => !activeKeys.includes(i))
 
+    const usingKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse])
+
+    const activeKeys = usingKeys.filter(i => CurrentFile.loader.getNodeByKey(i, false))
+    const missingKeys = usingKeys.filter(i => !activeKeys.includes(i))
     const idleKeys = CurrentFile.loader.keys.filter(i => !usingKeys.includes(i))
+
     const idleUsages = idleKeys.map(i => ({ keypath: i, occurrences: [] }))
 
     const report = {

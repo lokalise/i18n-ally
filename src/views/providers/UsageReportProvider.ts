@@ -50,7 +50,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
     }
     else if (element instanceof UsageReportRootItem) {
       this.rootItems = this.usages[element.key]
-        .map(usage => new UsageReportTreeItem(this.ctx, usage))
+        .map(usage => new UsageReportTreeItem(this.ctx, usage, element.key))
     }
     else if (element instanceof UsageReportTreeItem) {
       this.rootItems = await Promise.all(element.usage.occurrences.map(async(o) => {

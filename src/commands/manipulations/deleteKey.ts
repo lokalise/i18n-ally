@@ -55,9 +55,11 @@ export async function DeleteKey(item: LocaleTreeItem | UsageReportRootItem) {
     }
 
     await DeleteRecords(records)
+  }
 
+  if (Analyst.hasCache()) {
     setTimeout(() => {
       Analyst.analyzeUsage(false)
-    }, 1000)
+    }, 500)
   }
 }

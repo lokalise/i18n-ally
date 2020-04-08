@@ -181,6 +181,11 @@
         "command": "extension.i18n-ally.duplicate-key",
         "category": "%extname%",
         "title": "%command.duplicate_key%"
+      },
+      {
+        "command": "extension.i18n-ally.mark-key-as-in-use",
+        "category": "%extname%",
+        "title": "%command.mark_key_as_in_use%"
       }
     ],
     "menus": {
@@ -227,6 +232,10 @@
         },
         {
           "command": "extension.i18n-ally.locale-visibility-show",
+          "when": "config.no_exits"
+        },
+        {
+          "command": "extension.i18n-ally.mark-key-as-in-use",
           "when": "config.no_exits"
         }
       ],
@@ -291,7 +300,12 @@
         },
         {
           "command": "extension.i18n-ally.delete-key",
-          "when": "view =~ /i18n-ally-locales-usage/ && viewItem =~ /idle/",
+          "when": "view =~ /i18n-ally-locales-usage/ && viewItem =~ /usage_idle/",
+          "group": "i18nally@1"
+        },
+        {
+          "command": "extension.i18n-ally.mark-key-as-in-use",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /key_idle/",
           "group": "i18nally@1"
         }
       ],
@@ -494,6 +508,20 @@
             ]
           },
           "description": "%config.enabled_parsers%"
+        },
+        "i18n-ally.keysInUse": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.keys_in_use%"
+        },
+        "i18n-ally.derivedKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.derived_keys%"
         },
         "i18n-ally.sortKeys": {
           "type": "boolean",
