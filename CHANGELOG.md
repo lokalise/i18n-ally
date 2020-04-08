@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.1](https://github.com/antfu/i18n-ally/compare/v1.14.0...v1.14.1) (2020-04-08)
+
+
+### ⚡ Features
+
+* **translations:** add missing NL translations ([3bcd79f](https://github.com/antfu/i18n-ally/commit/3bcd79fc6d57251a66f56d5b092e2158de78863c))
+
+
+### 🐞 Bug Fixes
+
+* locale annotation with path matcher ([123c90f](https://github.com/antfu/i18n-ally/commit/123c90f32456dce333dff82b93fd90a10f6a65a2))
+* **i18n:** ❤ character ([e2f5478](https://github.com/antfu/i18n-ally/commit/e2f5478af6769fd79f22cf2a247eba3b54bb3e79))
+* **vscode:** locale fallback ([c383d85](https://github.com/antfu/i18n-ally/commit/c383d856d43404c1258f6ed2778b3b9c5a1e81a2))
+
+
+### 📚 Documentations
+
+* update ([b12bd56](https://github.com/antfu/i18n-ally/commit/b12bd56a025111c030314d53b7ef3a76f3b7bf42))
+
 ## [1.14.0](https://github.com/antfu/i18n-ally/compare/v1.13.9...v1.14.0) (2020-04-07)
 
 
