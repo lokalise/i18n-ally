@@ -44,11 +44,11 @@ export abstract class Framework {
    */
   pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
-      return `{locale}.{${ParserExtRegEx}}`
+      return `{locale}.(${ParserExtRegEx})`
     else if (Config.namespace)
-      return `{locale}/**/{namespace}.{${ParserExtRegEx}}`
+      return `{locale}/**/{namespace}.(${ParserExtRegEx})`
     else
-      return `{locale}/**/*.{${ParserExtRegEx}}`
+      return `{locale}/**/*.(${ParserExtRegEx})`
   }
 
   enableFeatures?: OptionalFeatures
