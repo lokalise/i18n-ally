@@ -9,7 +9,8 @@ export class ProgressRootItem extends ProgressBaseItem {
   get description(): string {
     const rate = this.node.translated / this.node.total
     const percent = +(rate * 100).toFixed(1)
-    const progress = unicodeProgressBar(Math.round(percent))
+    const progressStyle = process.platform === 'darwin' ? 2 : 7
+    const progress = unicodeProgressBar(Math.round(percent), progressStyle)
     let description = `${progress}  ${percent}%  (${this.node.translated}/${this.node.total})`
     if (this.isSource)
       description += unicodeDecorate('  source', 'regional_indicator')
