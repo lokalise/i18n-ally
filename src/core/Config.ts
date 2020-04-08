@@ -28,7 +28,7 @@ export class Config {
 
   static readonly usageRefreshConfigs = [
     'keysInUse',
-    'derivedKeys',
+    'derivedKeyRules',
   ]
 
   // languages
@@ -271,8 +271,8 @@ export class Config {
     this.setConfig('keysInUse', value)
   }
 
-  static get derivedKeys() {
-    return this.getConfig<string[]>('derivedKeys') || []
+  static get derivedKeyRules() {
+    return this.getConfig<string[]>('derivedKeyRules') ?? undefined
   }
 
   // config

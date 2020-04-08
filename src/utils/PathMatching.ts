@@ -1,9 +1,11 @@
 
+import { ParserExtRegEx } from '../meta'
+
 // Examples
 // {namespaces}/{lang}.json
 // {lang}/{namespace}/**/*.json
 // something/{lang}/{namespace}/**/*.*
-export function ParsePathMatcher(mapping: string) {
+export function ParsePathMatcher(mapping: string, exts: string = ParserExtRegEx) {
   let regstr = mapping
     .replace(/\./g, '\\.')
     .replace('.*', '..*')
@@ -13,6 +15,7 @@ export function ParsePathMatcher(mapping: string) {
     .replace('{locale?}', '(?<locale>[\\w-_]*)')
     .replace('{namespace}', '(?<namespace>[^/\\\\]+)')
     .replace('{namespaces}', '(?<namespace>.+)')
+    .replace('{ext}', `(?<ext>${exts})`)
 
   regstr = `^${regstr}$`
 

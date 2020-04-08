@@ -72,17 +72,35 @@ export class Global {
     return `**/*.{${exts.join(',')}}`
   }
 
+  static get derivedKeyRules() {
+    const rules = Config.derivedKeyRules
+      ? Config.derivedKeyRules
+      : this.enabledFrameworks
+        .flatMap(f => f.derivedKeyRules || [])
+
+    return uniq(rules)
+      .map((rule) => {
+        const reg = rule
+          .replace(/\./g, '\\.')
+          .replace(/{key}/, '(.+)')
+
+        return new RegExp(`^${reg}$`)
+      })
+  }
+
   static getDocumentSelectors() {
     return this.enabledFrameworks
       .flatMap(f => f.languageIds)
       .map(id => ({ scheme: 'file', language: id }))
   }
 
-  static getPathMatcher(dirStructure: DirStructure) {
-    if (Config.pathMatcher)
-      return [ParsePathMatcher(Config.pathMatcher)]
-    return this.enabledFrameworks
-      .flatMap(f => f.pathMatcher(dirStructure))
+  static getPathMatchers(dirStructure: DirStructure) {
+    const rules = Config.pathMatcher
+      ? [Config.pathMatcher]
+      : this.enabledFrameworks
+        .flatMap(f => f.pathMatcher(dirStructure))
+
+    return uniq(rules)
       .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg))
   }
 

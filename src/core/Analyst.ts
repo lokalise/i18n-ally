@@ -145,19 +145,35 @@ export class Analyst {
       .map(([keypath, occurrences]) => ({ keypath, occurrences }))
       .value()
 
-    const usingKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse])
+    // all the keys you have
+    const allKeys = CurrentFile.loader.keys
+    // keys occur in your code
+    const inUseKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse])
 
-    const activeKeys = usingKeys.filter(i => CurrentFile.loader.getNodeByKey(i, false))
-    const missingKeys = usingKeys.filter(i => !activeKeys.includes(i))
-    const idleKeys = CurrentFile.loader.keys.filter(i => !usingKeys.includes(i))
+    // keys in use
+    const activeKeys = inUseKeys.filter(i => allKeys.includes(i))
+    // keys not in use
+    let idleKeys = allKeys.filter(i => !inUseKeys.includes(i))
+    // keys in use, but actually you don't have them
+    const missingKeys = inUseKeys.filter(i => !allKeys.includes(i))
 
-    const idleUsages = idleKeys.map(i => ({ keypath: i, occurrences: [] }))
+    // remove dervied keys from idle, if the source key is in use
+    const rules = Global.derivedKeyRules
+    idleKeys = idleKeys.filter((key) => {
+      for (const r of rules) {
+        const match = r.exec(key)
+        if (match && match[1] && activeKeys.includes(match[1]))
+          return false
+      }
+      return true
+    })
 
     const report = {
       active: usages.filter(i => activeKeys.includes(i.keypath)),
       missing: usages.filter(i => missingKeys.includes(i.keypath)),
-      idle: idleUsages,
+      idle: idleKeys.map(i => ({ keypath: i, occurrences: [] })),
     }
+
     this._onDidUsageReportChanged.fire(report)
     return report
   }

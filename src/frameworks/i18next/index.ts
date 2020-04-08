@@ -31,6 +31,20 @@ class I18nextFramework extends Framework {
     '(?:i18next|i18n|req)\\.t\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
+  derivedKeyRules = [
+    '{key}_plural',
+    '{key}_0',
+    '{key}_1',
+    '{key}_2',
+    '{key}_3',
+    '{key}_4',
+    '{key}_5',
+    '{key}_6',
+    '{key}_7',
+    '{key}_8',
+    '{key}_9',
+  ]
+
   refactorTemplates(keypath: string) {
     return [
       keypath,

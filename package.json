@@ -516,11 +516,12 @@
           },
           "description": "%config.keys_in_use%"
         },
-        "i18n-ally.derivedKeys": {
+        "i18n-ally.derivedKeyRules": {
           "type": "array",
           "items": {
             "type": "string"
           },
+          "default": null,
           "description": "%config.derived_keys%"
         },
         "i18n-ally.sortKeys": {

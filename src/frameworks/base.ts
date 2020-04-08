@@ -18,6 +18,7 @@ export abstract class Framework {
   abstract display: string
   monopoly?: boolean
   enabledParsers?: string[]
+  derivedKeyRules?: string[]
 
   /**
    * Packages names determine whether a frameworks should enable or not
