@@ -39,14 +39,14 @@ Supported frameworks are auto-detected when a matching dependency is found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png) [Laravel](https://laravel.com/docs/localization) | ✅ | [`laravel/framework`](https://laravel.com/) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18next.png) [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/joomla.png) [Joomla](https://www.joomla.org/) | ✅ | [`joomla/application`](https://docs.joomla.org/Application) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config with `"i18n-ally.enabledFrameworks": "chrome-ext"` |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png) [Laravel](https://laravel.com/docs/localization) | ✅ | [`laravel/framework`](https://laravel.com/) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
 | 🎎 **Custom**  | ✅ | **For almost any framework! [How to...](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
 
@@ -232,7 +232,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 
 | Language | Maintainer | Contributors |
 | --- | --- | --- |
-| English    | [@antfu](https://github.com/antfu)          | [@rubjo](https://github.com/rubjo) |
+| English    | [@antfu](https://github.com/antfu)          | [@rubjo](https://github.com/rubjo), [@EdRands](https://github.com/EdRands) |
 | Simplified Chinese (简体中文)  | [@antfu](https://github.com/antfu)           |       |
 | Traditional Chinese (繁體中文)  | [@antfu](https://github.com/antfu)           |       |
 | Norwegian (Norsk)  |  | [@rubjo](https://github.com/rubjo)       |
@@ -247,10 +247,12 @@ If you would like to help translate this extension, you can do it by following s
 1. Fork this repo and clone it to you local machine
 2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
 3. Translate every single message in the new JSON file you created.
-4. You may also update the table above in README.md
+4. You may also update the table above in README.md.
 5. Commit changes and make a PR to this repo
 
 We recommend you to use VSCode with `i18n-ally`. It supports i18n for VSCode extension development which can help you translate itself 😁.
+
+> 👨‍💻 If you would like to help a language's translation up to date, feel free to put your name in the **Maintainers** field. I will @mention you when needed. Much appreciated.
 
 
 ## 🎯 Troubleshooting
@@ -297,7 +299,7 @@ In some cases, you may use modules, monorepo or other philosophies to organize y
   └── ...
 ```
 
-You could change your config like this:
+The following config would make it work,
 
 ```json
 {
@@ -308,6 +310,7 @@ You could change your config like this:
 }
 ```
 
+> Learn more about [`pathMatcher`](./docs/path-matcher.md)
 
 ## 👨‍💻 Thanks
 
