@@ -652,8 +652,8 @@
     ]
   },
   "scripts": {
-    "release:minor": "standard-version --release-as minor && npm run gh-release",
-    "release:patch": "standard-version --release-as patch && npm run gh-release",
+    "release:minor": "npm i && standard-version --release-as minor && npm run gh-release",
+    "release:patch": "npm i && standard-version --release-as patch && npm run gh-release",
     "gh-release": "git push --follow-tags && conventional-github-releaser -p angular",
     "build": "webpack --mode development",
     "compile": "webpack --mode development",
