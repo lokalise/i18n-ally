@@ -94,6 +94,12 @@ export class Global {
       .map(id => ({ scheme: 'file', language: id }))
   }
 
+  static get enabledParserExts() {
+    return this.enabledParsers
+      .map(f => f.supportedExts)
+      .join('|')
+  }
+
   static getPathMatchers(dirStructure: DirStructure) {
     const rules = Config.pathMatcher
       ? [Config.pathMatcher]
@@ -101,7 +107,7 @@ export class Global {
         .flatMap(f => f.pathMatcher(dirStructure))
 
     return uniq(rules)
-      .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg))
+      .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg, this.enabledParserExts))
   }
 
   static hasFeatureEnabled(name: keyof OptionalFeatures) {
@@ -245,20 +251,15 @@ export class Global {
   }
 
   static get enabledParsers() {
-    let ids = Config.enabledParsers
+    let ids = Config.enabledParsers?.length
+      ? Config.enabledParsers
+      : this.enabledFrameworks
+        .flatMap(f => f.enabledParsers || [])
 
-    if (!ids || !ids.length) {
-      ids = []
-      for (const f of this.enabledFrameworks) {
-        if (f.enabledParsers)
-          ids.push(...f.enabledParsers)
-      }
+    if (!ids.length)
+      ids = PARSERS.map(i => i.id)
 
-      if (!ids.length)
-        ids = PARSERS.map(i => i.id)
-    }
-
-    return PARSERS.filter(i => ids!.includes(i.id))
+    return PARSERS.filter(i => ids.includes(i.id))
   }
 
   static getMatchedParser(ext: string) {

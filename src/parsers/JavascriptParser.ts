@@ -1,7 +1,7 @@
+import { register as registerTsNode } from 'ts-node'
 import i18n from '../i18n'
 import { Log } from '../utils'
 import { Parser } from './Parser'
-import { register as registerTsNode } from 'ts-node'
 
 process.env.ESM_DISABLE_CACHE = '1'
 
@@ -12,7 +12,7 @@ export class JavascriptParser extends Parser {
   readonly readonly = true
 
   constructor() {
-    super(['javascript', 'typescript'], /\.?(jsx?|tsx?)$/g)
+    super(['javascript', 'typescript'], 'jsx?|tsx?')
     registerTsNode()
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const esm = require('esm')

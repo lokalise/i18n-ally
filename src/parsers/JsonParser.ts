@@ -7,7 +7,7 @@ export class JsonParser extends Parser {
   id = 'json'
 
   constructor() {
-    super(['json'], /\.?json$/g)
+    super(['json'], 'json')
   }
 
   async parse(text: string) {

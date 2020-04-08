@@ -31,10 +31,14 @@ Please check out the [examples](#example-1) below.
 
 The path matcher matchs relative path from your locale folder. File paths with no match will not be loaded.
 
-A common path matcher would be like:
+Common examples would be like:
 
-```
-{locale}/{namespace}.*
+```bash
+{locale}/{namespace}.{ext}   # matches "zh-CN/attributes.yaml"
+
+{namespaces}/{locale}.{ext}  # matches "common/users/en-US.json"
+
+{locale}.json                # matches "fr-FR.json"
 ```
 
 The following table listed some keywords you may want to use. `{locale}` is required while the others are optional.
@@ -42,8 +46,10 @@ The following table listed some keywords you may want to use. `{locale}` is requ
 | Keyword      | Description |
 | -----------  | ----------- |
 | {locale}     | Match the locale code, `en-US` `zh-CN` `fr` etc |
+| {locale?}    | Optional version of `{locale}`, if not locale caputured, the current source language will be applied |
 | {namespace}  | Match anything exclude folder seperator `/`. It only matchs up to one level of directories |
 | {namespaces} | Match anything. It can match multiple levels of directories. The folder seperator will be converted to `.` in keypath |
+| {ext}        | File extensions, based on current enabled parsers |
 
 
 ### Example 1

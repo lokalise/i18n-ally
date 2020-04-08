@@ -11,7 +11,7 @@ export abstract class Parser {
 
   constructor(
     public readonly languageIds: string[],
-    public readonly supportedExts: string|RegExp,
+    public readonly supportedExts: string,
     public options: ParserOptions = {
       get indent() {
         return Config.indent
@@ -21,7 +21,7 @@ export abstract class Parser {
       },
     },
   ) {
-    this.supportedExtsRegex = new RegExp(supportedExts)
+    this.supportedExtsRegex = new RegExp(`.?(${this.supportedExts})$`)
   }
 
   supports(ext: string) {

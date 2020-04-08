@@ -17,6 +17,8 @@ class LaravelFramework extends Framework {
     'blade',
   ]
 
+  enabledParsers = ['php']
+
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
     '[^\\w\\d](?:__|trans|@lang|trans_choice)\\([\'"`]({key})[\'"`]',
@@ -36,7 +38,7 @@ class LaravelFramework extends Framework {
     namespace: true,
   }
 
-  pathMatcher = () => '{locale}/**/{namespace}.php'
+  pathMatcher = () => '{locale}/**/{namespace}.{ext}'
 }
 
 export default LaravelFramework

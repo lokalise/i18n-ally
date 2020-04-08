@@ -1,14 +1,14 @@
-import { Parser } from './Parser'
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import parser from 'php-array-parser'
+import { Parser } from './Parser'
 
 export class PhpParser extends Parser {
   id = 'php'
   readonly = true
 
   constructor() {
-    super(['php'], /\.?php$/g)
+    super(['php'], 'php')
   }
 
   async parse(text: string) {

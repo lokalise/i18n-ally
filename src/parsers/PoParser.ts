@@ -1,12 +1,12 @@
-import { Parser } from './Parser'
 // @ts-ignore
 import po2json from 'po2json'
+import { Parser } from './Parser'
 
 export class PoParser extends Parser {
   id = 'po'
 
   constructor() {
-    super(['po'], /\.?po(?:t|tx)?$/g)
+    super(['po'], 'po(?:t|tx)?')
   }
 
   readonly = true

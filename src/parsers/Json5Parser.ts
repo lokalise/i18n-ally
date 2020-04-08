@@ -1,12 +1,12 @@
+import JSON5 from 'json5'
 import { KeyStyle } from '../core'
 import { Parser } from './Parser'
-import JSON5 from 'json5'
 
 export class Json5Parser extends Parser {
   id = 'json5'
 
   constructor() {
-    super(['json5'], /\.?json5$/g)
+    super(['json5'], 'json5')
   }
 
   async parse(text: string) {

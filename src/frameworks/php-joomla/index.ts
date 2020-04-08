@@ -15,6 +15,8 @@ class PhpJoomlaFramework extends Framework {
     'php',
   ]
 
+  enabledParsers = ['php']
+
   // for visualize the regex, you can use https://regexper.com/
   keyMatchReg = [
     'J?Text::(?:_|[\\w]+)\\([\'"]({key})[\'"]',

@@ -1,14 +1,14 @@
-import { KeyInDocument } from '../core'
-import { Parser } from './Parser'
 import * as yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
+import { KeyInDocument } from '../core'
+import { Parser } from './Parser'
 
 export class YamlParser extends Parser {
   id = 'yaml'
 
   constructor() {
-    super(['yaml'], /\.?ya?ml$/g)
+    super(['yaml'], 'ya?ml')
   }
 
   async parse(text: string) {

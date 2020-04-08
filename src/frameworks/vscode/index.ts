@@ -13,11 +13,15 @@ class VSCodeFramework extends Framework {
     ],
   }
 
+  enabledParsers = ['json']
+
   languageIds: LanguageId[] = [
     'json',
     'javascript',
     'typescript',
   ]
+
+  pathMatcher = () => 'package.nls.?{locale?}.json'
 
   keyMatchReg = (languageIds?: string, filename?: string) => {
     if (filename && basename(filename) === 'package.json')
@@ -27,14 +31,17 @@ class VSCodeFramework extends Framework {
   }
 
   refactorTemplates(keypath: string, languageId: string) {
+    if (languageId === 'json') {
+      return [
+        `%${keypath}%`,
+        keypath,
+      ]
+    }
+
     return [
       `i18n.t('${keypath}')`,
       keypath,
     ]
-  }
-
-  pathMatcher() {
-    return 'package.nls.?{locale?}.json'
   }
 }
 
