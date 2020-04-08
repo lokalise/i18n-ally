@@ -34,7 +34,7 @@ class VSCodeFramework extends Framework {
   }
 
   pathMatcher() {
-    return 'package.nls.?{locale}.json'
+    return 'package.nls.?{locale?}.json'
   }
 }
 
