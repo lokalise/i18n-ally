@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.2](https://github.com/antfu/i18n-ally/compare/v1.15.1...v1.15.2) (2020-04-08)
+
+
+### 🌍 Internationalization
+
+* remove unused keys ([3c9e6aa](https://github.com/antfu/i18n-ally/commit/3c9e6aa2b1cab7b053f9eb40b53ba7cc136d7b4a))
+
+
+### 📚 Documentations
+
+* update changelog ([9e061d7](https://github.com/antfu/i18n-ally/commit/9e061d74fa3ef3f32bb20b0b2077058df622c01c))
+
+
+### ⚡ Features
+
+* new config "derivedKeyRules" ([8118a53](https://github.com/antfu/i18n-ally/commit/8118a5398fcc6f1678c8e2fddc4c2865725c0146))
+* new config and command "keysInUse" ([395f016](https://github.com/antfu/i18n-ally/commit/395f01655a1760fce072ac01d1205a94765edace))
+
 ### [1.15.1](https://github.com/antfu/i18n-ally/compare/v1.15.0...v1.15.1) (2020-04-08)
 
 
