@@ -253,6 +253,13 @@ export class LocaleLoader extends Loader {
     await this.write(writes)
   }
 
+  getNamespaceFromFilepath(filepath: string) {
+    const file = this._files[filepath]
+
+    if (file)
+      return file.namespace
+  }
+
   private getFileInfo(dirpath: string, relativePath: string) {
     const fullpath = path.resolve(dirpath, relativePath)
     const ext = path.extname(relativePath)

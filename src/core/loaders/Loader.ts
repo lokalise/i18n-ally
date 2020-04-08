@@ -185,6 +185,10 @@ export abstract class Loader extends Disposable {
     return undefined
   }
 
+  getNamespaceFromFilepath(filepath: string): string | undefined {
+    return undefined
+  }
+
   private stripAnnotationString(str: string, maxlength = 0) {
     if (!str)
       return

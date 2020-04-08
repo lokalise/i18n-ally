@@ -48,10 +48,19 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
     const maxLength = Config.annotationMaxLength
     const keys = parser.annotationGetKeys(document)
+
+    let namespace: string | undefined
+
+    if (Global.namespaceEnabled)
+      namespace = loader.getNamespaceFromFilepath(filepath)
+
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
       let sourceText = ''
       let currentText = ''
+
+      if (namespace)
+        key = `${namespace}.${key}`
 
       const node = loader.getTreeNodeByKey(key)
       const showAnnonations = Config.annotations && displayLanguage
