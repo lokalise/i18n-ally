@@ -1,8 +1,0 @@
-{
-  "name": "custom-locales-path",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "vue": "^2.6.10"
-  }
-}
