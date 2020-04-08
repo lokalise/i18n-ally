@@ -369,7 +369,7 @@
         },
         "i18n-ally.encoding": {
           "type": "string",
-          "default": "auto",
+          "default": "utf-8",
           "description": "%config.encoding%"
         },
         "i18n-ally.sourceLanguage": {

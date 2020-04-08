@@ -30,7 +30,7 @@
   "config.display_language": "Idioma de exibição",
   "config.enabled_frameworks": "Você pode especificar quais frameworks a serem suportados. Caso não passe nenhum valor, a extensão detectará os frameworks automaticamente",
   "config.enabled_parsers": "",
-  "config.encoding": "Encoding de arquivos de tradução (locales). Padrão é \"auto\" (auto-detecção)",
+  "config.encoding": "Encoding de arquivos de tradução (locales)",
   "config.file_namespace": "",
   "config.full_reload_on_changed": "Recarregar totalmente arquivos de tradução alterados (em arquivos .js/.ts com imports dinâmicos)",
   "config.ignored_locales": "Códigos de linguagem a serem ignorados",

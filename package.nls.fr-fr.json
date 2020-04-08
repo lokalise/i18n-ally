@@ -30,7 +30,7 @@
   "config.display_language": "Afficher la langue",
   "config.enabled_frameworks": "Vous pouvez choisir les Frameworks supportés. Si aucune valeur n'est spécifiée, l'extension choisira automatiquement les Frameworks supportés.",
   "config.enabled_parsers": "",
-  "config.encoding": "Encodage des fichiers de la locale, par défaut \"automatique\" (Détection automatique)",
+  "config.encoding": "Encodage des fichiers de la locale.",
   "config.file_namespace": "",
   "config.full_reload_on_changed": "Effectuer un rechargement complet du fichier de la locale modifié. (Pour l'importation dynamique .js/.ts)",
   "config.ignored_locales": "Scripts de lalocale à ignorer.",

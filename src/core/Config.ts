@@ -239,7 +239,7 @@ export class Config {
   }
 
   static get encoding() {
-    return this.getConfig<string>('encoding') || 'auto'
+    return this.getConfig<string>('encoding') || 'utf-8'
   }
 
   static get indent() {

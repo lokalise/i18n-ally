@@ -209,7 +209,7 @@ All fields must be prefixed with "`i18n-ally.`" in settings.
 | `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. Set it to `.*?` to allow Unicode |
 | `promptTranslatingSource` | `false` | Prompt to select the source locale on translating every time. If set to false, the source language in the config will be used |
 | `disablePathParsing` | `false` | Enable this if you use natural languages as the key of your locale messages |
-| `encoding` | auto | The locale file encoding. Auto-detect by default |
+| `encoding` | `utf-8` | File encoding for reading and writing locale files. Set to `auto` to let it decide for you. |
 | `readonly` | `false` | Work on read-only mode. Translating and editing will be disabled |
 
 ## ✌ Recommended Setup
