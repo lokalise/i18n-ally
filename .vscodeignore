@@ -12,6 +12,7 @@ test/**
 docs/**
 
 .gitignore
+.gitattributes
 .editorconfig
 .eslintrc.js
 .eslintignore
@@ -20,6 +21,9 @@ tsconfig.json
 tslint.json
 webpack.config.js
 renovate.json
+jest.config.js
+*.zip
+*.vsix
 
 # Externals
 # jieba
