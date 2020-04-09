@@ -1,5 +1,5 @@
-import { Framework } from '../base'
-import { LanguageId } from '../../utils'
+import { LanguageId } from '../utils'
+import { Framework } from './base'
 
 class EmberFramework extends Framework {
   id = 'ember'

@@ -1,4 +1,4 @@
-import { Framework } from '../base'
+import { Framework } from './base'
 
 class VueSFCFramework extends Framework {
   id = 'vue-sfc'

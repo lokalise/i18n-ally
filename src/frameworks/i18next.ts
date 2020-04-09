@@ -1,6 +1,6 @@
-import { RewriteKeySource, RewriteKeyContext } from '../../core'
-import { LanguageId } from '../../utils'
-import { Framework } from '../base'
+import { RewriteKeySource, RewriteKeyContext } from '../core'
+import { LanguageId } from '../utils'
+import { Framework } from './base'
 
 class I18nextFramework extends Framework {
   id ='i18next'

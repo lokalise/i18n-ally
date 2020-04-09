@@ -1,5 +1,5 @@
-import { Framework } from '../base'
-import { LanguageId } from '../../utils'
+import { LanguageId } from '../utils'
+import { Framework } from './base'
 
 class NgxTranslateFramework extends Framework {
   id = 'ngx-translate'

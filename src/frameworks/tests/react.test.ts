@@ -1,5 +1,5 @@
 import { forRegex } from '../../tests/utils'
-import Framework from '.'
+import Framework from '../react'
 
 describe('regex', () => {
   const framework = new Framework()
