@@ -27,7 +27,7 @@ keyMatchReg:
 
 # An array of strings containing refactor templates.
 # The "$1" will be replaced by the keypath specified.
-# Optionally, uncomment the following two lines to use
+# Optional: uncomment the following two lines to use
 
 # refactorTemplates:
 #  - i18n.get("$1")
