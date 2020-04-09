@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.3](https://github.com/antfu/i18n-ally/compare/v1.15.2...v1.15.3) (2020-04-09)
+
+
+### ⚡ Features
+
+* {ext} for path matcher ([7269ad1](https://github.com/antfu/i18n-ally/commit/7269ad15017bf4f5c0d20b9a5f44bcb069c1ac47))
+
+
+### 🔮 Refactor
+
+* reorganize frameworks ([69f5e8d](https://github.com/antfu/i18n-ally/commit/69f5e8dd91e59e6b5831b0722a3f5b6aa64393b6))
+
+
+### 🐞 Bug Fixes
+
+* **pref:** throttle loading functions ([9168daf](https://github.com/antfu/i18n-ally/commit/9168daf9351ec9af2108ec7f51a98c0507cb3d56))
+* improve progess bar looking on macos ([248e57c](https://github.com/antfu/i18n-ally/commit/248e57cacec6a364788dcf49f91c773be8beced3))
+
 ### [1.15.2](https://github.com/antfu/i18n-ally/compare/v1.15.1...v1.15.2) (2020-04-08)
 
 
