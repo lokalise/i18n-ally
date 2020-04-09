@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.4](https://github.com/antfu/i18n-ally/compare/v1.15.3...v1.15.4) (2020-04-09)
+
+
+### 🐞 Bug Fixes
+
+* English locale grammar improvements ([#244](https://github.com/antfu/i18n-ally/issues/244)) ([efe9a58](https://github.com/antfu/i18n-ally/commit/efe9a584b08c210ccc50244205468c89431f0de6))
+
+
+### ⚡ Features
+
+* **transloco:** new framework support ([14a3b18](https://github.com/antfu/i18n-ally/commit/14a3b181caa8ea0ce709f14a0c17293f1263cee1))
+
+
+### 📚 Documentations
+
+* **transloco:** new example ([717e6e3](https://github.com/antfu/i18n-ally/commit/717e6e3e377bb8d5f645752cdf8907f8bbad96ba))
+* fix spelling and improve grammar ([#245](https://github.com/antfu/i18n-ally/issues/245)) ([5de08ea](https://github.com/antfu/i18n-ally/commit/5de08ea6d4a344e37c457c1d6fbca61f56cdd403))
+
 ### [1.15.3](https://github.com/antfu/i18n-ally/compare/v1.15.2...v1.15.3) (2020-04-09)
 
 
