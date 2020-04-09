@@ -459,7 +459,8 @@
             "chrome-ext",
             "ruby-rails",
             "custom",
-            "laravel"
+            "laravel",
+            "transloco"
           ],
           "items": {
             "type": "string",
@@ -476,7 +477,8 @@
               "chrome-ext",
               "ruby-rails",
               "custom",
-              "laravel"
+              "laravel",
+              "transloco"
             ]
           },
           "description": "%config.enabled_frameworks%"
