@@ -1,7 +1,7 @@
 import { Json5Parser } from './json5'
 import { JsonParser } from './json'
 import { YamlParser } from './yaml'
-import { JavascriptParser } from './js'
+import { EcmascriptParser } from './es'
 import { IniParser } from './ini'
 import { PoParser } from './po'
 import { PhpParser } from './php'
@@ -14,7 +14,8 @@ export const AvaliablePasers: Parser[] = [
   new YamlParser(),
   new Json5Parser(),
 
-  new JavascriptParser(),
+  new EcmascriptParser('js'),
+  new EcmascriptParser('ts'),
   new IniParser(),
   new PoParser(),
   new PhpParser(),

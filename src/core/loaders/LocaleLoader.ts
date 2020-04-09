@@ -345,6 +345,8 @@ export class LocaleLoader extends Loader {
 
       let data = await parser.load(filepath)
 
+      console.log(data)
+
       data = this.preprocessData(data, { locale, targetFile: filepath })
 
       const value = Config.disablePathParsing

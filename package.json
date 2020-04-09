@@ -493,7 +493,8 @@
             "json5",
             "yaml",
             "ini",
-            "pot"
+            "pot",
+            "php"
           ],
           "items": {
             "type": "string",
@@ -504,7 +505,8 @@
               "json5",
               "yaml",
               "ini",
-              "pot"
+              "pot",
+              "php"
             ]
           },
           "description": "%config.enabled_parsers%"
