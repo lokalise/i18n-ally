@@ -2,7 +2,7 @@ import { existsSync } from 'fs'
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import * as fg from 'fast-glob'
-import _, { uniq } from 'lodash'
+import _, { uniq, throttle } from 'lodash'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
@@ -11,6 +11,8 @@ import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
+
+const THROTTLE_DELAY = 1500
 
 export class LocaleLoader extends Loader {
   private _files: Record<string, ParsedFile> = {}
@@ -36,6 +38,7 @@ export class LocaleLoader extends Loader {
       await this.loadAll()
     }
     this.update()
+    Log.divider()
   }
 
   get localesPaths() {
@@ -59,6 +62,34 @@ export class LocaleLoader extends Loader {
           : 0)
       .value()
   }
+
+  // #region throttled functions
+  private throttledFullReload = throttle(async() => {
+    Log.info('🔄 Perfroming a full reload', 2)
+    await this.loadAll(false)
+    this.update()
+  }, THROTTLE_DELAY, { leading: true })
+
+  private throttledUpdate = throttle(() => {
+    this.update()
+  }, THROTTLE_DELAY, { leading: true })
+
+  private throttledLoadFileWaitingList: [string, string][] = []
+
+  private throttledLoadFileExecutor = throttle(async() => {
+    const list = this.throttledLoadFileWaitingList
+    this.throttledLoadFileWaitingList = []
+    for (const [d, r] of list)
+      await this.loadFile(d, r)
+    this.update()
+  }, THROTTLE_DELAY, { leading: true })
+
+  private throttledLoadFile = (d: string, r: string) => {
+    if (!this.throttledLoadFileWaitingList.find(([a, b]) => a === d && b === r))
+      this.throttledLoadFileWaitingList.push([d, r])
+    this.throttledLoadFileExecutor()
+  }
+  // #endregion
 
   private getFilepathsOfLocale(locale: string) {
     return Object.values(this._files)
@@ -328,6 +359,8 @@ export class LocaleLoader extends Loader {
         namespace,
         readonly: parser.readonly,
       }
+
+      return true
     }
     catch (e) {
       this.unsetFile(relativePath)
@@ -368,6 +401,10 @@ export class LocaleLoader extends Loader {
         return
 
       filepath = path.resolve(filepath)
+
+      if (type !== 'create' && !this._files[filepath])
+        return
+
       const { ext } = path.parse(filepath)
 
       if (!Global.getMatchedParser(ext))
@@ -379,25 +416,22 @@ export class LocaleLoader extends Loader {
 
       const relative = path.relative(dirpath, filepath)
 
-      Log.info(`🐱‍🚀 Update detected <${type}> ${filepath} [${relative}]`)
+      Log.info(`🔄 File changed (${type}) ${relative}`)
 
       if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
-        Log.info('🐱‍🚀 Perfroming a full reload')
-        await this.loadAll(false)
-        this.update()
+        this.throttledFullReload()
         return
       }
 
       switch (type) {
         case 'del':
           delete this._files[filepath]
-          this.update()
+          this.throttledUpdate()
           break
 
         case 'create':
         case 'change':
-          await this.loadFile(dirpath, relative)
-          this.update()
+          this.throttledLoadFile(dirpath, relative)
           break
       }
 
@@ -453,6 +487,7 @@ export class LocaleLoader extends Loader {
     try {
       this.updateLocalesTree()
       this._onDidChange.fire(this.name)
+      Log.info('✅ Loading finished\n')
     }
     catch (e) {
       Log.error(e)
@@ -497,7 +532,5 @@ export class LocaleLoader extends Loader {
         Log.error(e)
       }
     }
-    Log.info('\n✅ Loading finished')
-    Log.divider()
   }
 }
