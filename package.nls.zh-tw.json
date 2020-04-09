@@ -31,7 +31,7 @@
   "config.disable_path_parsing": "禁用路徑解析",
   "config.display_language": "顯示語言",
   "config.enabled_frameworks": "指定要使用的框架支持。\n如果未設置任何值，插件將自動檢測框架。",
-  "config.enabled_parsers": "指定啟用檔案格式。在默認情况下，將啟用所有可能的檔案格式。",
+  "config.enabled_parsers": "指定啟用檔案格式",
   "config.encoding": "档案編碼",
   "config.full_reload_on_changed": "當語言檔案被修改時執行完整的重載。\n（用於.js/.ts動態導入）",
   "config.ignored_locales": "隱藏的語言",

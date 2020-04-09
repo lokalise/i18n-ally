@@ -31,7 +31,7 @@
   "config.disable_path_parsing": "Schakel padresolutie uit (voor het gebruik van taal in plaats van pad als sleutel).",
   "config.display_language": "Weergave taal",
   "config.enabled_frameworks": "Specificeer welke framework ondersteuningen je wilt gebruiken. Als er geen waarde is gezet dan zal de extensie automatisch de frameworks detecteren.",
-  "config.enabled_parsers": "Specifieer welke bestandstypen worden gebruikt voor vertalingen. Standaard worden alle mogelijke bestandstypen ondersteund.",
+  "config.enabled_parsers": "",
   "config.encoding": "Locale bestanden encodering.",
   "config.full_reload_on_changed": "Herlaad volledig bij locale bestand wijzigingen. (voor .js/.ts dynamische import)",
   "config.ignored_locales": "Locale codes uitsluiten",

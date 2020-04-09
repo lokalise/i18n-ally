@@ -1,7 +1,7 @@
 import { register as registerTsNode } from 'ts-node'
 import i18n from '../i18n'
 import { Log } from '../utils'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 process.env.ESM_DISABLE_CACHE = '1'
 

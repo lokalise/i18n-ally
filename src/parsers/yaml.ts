@@ -2,7 +2,7 @@ import * as yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
 import { KeyInDocument } from '../core'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 export class YamlParser extends Parser {
   id = 'yaml'

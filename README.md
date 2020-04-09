@@ -136,17 +136,19 @@ If you would like to make it work for frameworks not listed above, you can:
 ## 📜 Supported Locale Formats
 
 | Format | Read | Write | Annotations | Note |
-| --- | --- | --- | --- | --- |
-| JSON | ✅ | ✅ | ✅ | |
-| YAML | ✅ | ✅ | ✅ | *Comments will NOT be preserved\** |
-| JSON5 | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
-| INI | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
-| JavaScript | ✅ | ❌ | ❌ | *Locked to read-only mode* |
-| TypeScript | ✅ | ❌ | ❌ | *Locked to read-only mode* |
-| PHP | ✅ | ❌ | ❌ | *Locked to read-only mode* |
+| ---    | ---  | ---   | ---         | ---  |
+| **JSON**   | ✅ | ✅ | ✅ |  |
+| **YAML**   | ✅ | ✅ | ✅ | *Comments will NOT be preserved\** |
+| **JSON5**  | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
+| INI        | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
+| POT        | ✅ | ✅ | ❌ |  |
+| JavaScript | ✅ | ❌ | ❌ | *Read-only* |
+| TypeScript | ✅ | ❌ | ❌ | *Read-only* |
+| PHP        | ✅ | ❌ | ❌ | *Read-only* |
 
 *\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on read-only mode by `i18n-ally.readonly` to prevent losing comments.*
 
+> 💡 From v1.16, only `JSON`, `YAML` and `JSON5` would be enabled by default. Other formats would be enabled by the activated frameworks or by manually configured (e.g. `"i18n-ally.enabledParsers": ["js", "ts"]`).
 
 ## 📂 Directory Structure
 
@@ -196,7 +198,7 @@ All fields must be prefixed with "`i18n-ally.`" in settings.
 | `annotations` | `true` | Enable inline annotations |
 | `keepFulfilled` | `false` | Always keep all keys fulfilled with empty strings |
 | `enabledFrameworks` | auto | Specify the supported framework(s) to enable. If no value is set, the extension will detect frameworks automatically |
-| `enabledParsers` | auto | Specify the parsers for local file formats. All the possible parsers are enabled by default |
+| `enabledParsers` | auto | Locale file format parsers. By default, It will be handled by activated frameworks |
 | `indent` | 2 | Indentation size for your locale files |
 | `tabStyle` | `space` | Tab style for your locale files |
 

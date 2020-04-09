@@ -1,5 +1,5 @@
 import ini from 'ini'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 export class IniParser extends Parser {
   id = 'ini'

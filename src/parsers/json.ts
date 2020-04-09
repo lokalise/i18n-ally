@@ -1,7 +1,7 @@
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 export class JsonParser extends Parser {
   id = 'json'

@@ -4,7 +4,7 @@ import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatching'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
-import { PARSERS } from '../parsers'
+import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
 import { Log, getExtOfLanguageId } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
@@ -222,8 +222,9 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`✅ ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
-      Log.info(`🧬 Parsers ${this.enabledParsers.map(i => `"${i.id}"`).join(', ')} enabled.\n`)
+      Log.info(`🧩 Enabled frameworks: ${this.enabledFrameworks.map(i => i.display).join(', ')}`)
+      Log.info(`🧬 Enabled parsers: ${this.enabledParsers.map(i => i.id).join(', ')}`)
+      Log.info('')
       await this.initLoader(this._rootpath, reload)
     }
     else {
@@ -257,9 +258,9 @@ export class Global {
         .flatMap(f => f.enabledParsers || [])
 
     if (!ids.length)
-      ids = PARSERS.map(i => i.id)
+      ids = DefaultEnabledParsers
 
-    return PARSERS.filter(i => ids.includes(i.id))
+    return AvaliablePasers.filter(i => ids.includes(i.id))
   }
 
   static getMatchedParser(ext: string) {

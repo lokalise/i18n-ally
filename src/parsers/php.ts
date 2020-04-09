@@ -1,7 +1,7 @@
 import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import parser from 'php-array-parser'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 export class PhpParser extends Parser {
   id = 'php'

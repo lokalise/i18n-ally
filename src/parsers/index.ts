@@ -1,16 +1,20 @@
-import { Json5Parser } from './Json5Parser'
-import { JsonParser } from './JsonParser'
-import { YamlParser } from './YamlParser'
-import { JavascriptParser } from './JavascriptParser'
-import { IniParser } from './IniParser'
-import { PoParser } from './PoParser'
-import { PhpParser } from './PhpParser'
+import { Json5Parser } from './json5'
+import { JsonParser } from './json'
+import { YamlParser } from './yaml'
+import { JavascriptParser } from './js'
+import { IniParser } from './ini'
+import { PoParser } from './po'
+import { PhpParser } from './php'
+import { Parser } from './base'
 
-export const PARSERS = [
+export const DefaultEnabledParsers = ['json', 'yaml', 'json5']
+
+export const AvaliablePasers: Parser[] = [
   new JsonParser(),
   new YamlParser(),
-  new JavascriptParser(),
   new Json5Parser(),
+
+  new JavascriptParser(),
   new IniParser(),
   new PoParser(),
   new PhpParser(),
