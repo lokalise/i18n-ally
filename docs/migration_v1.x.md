@@ -12,7 +12,7 @@ There is not much to be done for this migration.
 2. Uninstall the old `Vue i18n Ally`.
 3. You are done. 🎉
 
-Configurations are backwards compatible. All the features for Vue will work as befores.
+Configurations are backward compatible. All the features for Vue will work as before.
 
 ## New Features
 
