@@ -1,7 +1,7 @@
 import { Json5Parser } from './json5'
 import { JsonParser } from './json'
 import { YamlParser } from './yaml'
-import { EcmascriptParser } from './es'
+import { EcmascriptParser } from './ecmascript'
 import { IniParser } from './ini'
 import { PoParser } from './po'
 import { PhpParser } from './php'

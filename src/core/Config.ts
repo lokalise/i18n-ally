@@ -1,3 +1,4 @@
+import path from 'path'
 import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
@@ -163,6 +164,18 @@ export class Config {
 
   static get frameworksRubyRailsScopeRoot(): string {
     return this.getConfig<string>('frameworks.ruby-rails.scopeRoot') || ''
+  }
+
+  static get parsersTypescriptTsNodePath(): string {
+    const config = this.getConfig<string>('parsers.typescript.tsNodePath')!
+    if (config === 'ts-node')
+      return config
+
+    return `node "${path.resolve(this.extensionPath!, config)}"`
+  }
+
+  static get parsersTypescriptCompilerOption(): object {
+    return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
   }
 
   static async requestKeyStyle(): Promise<KeyStyle | undefined> {

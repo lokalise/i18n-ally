@@ -1,4 +1,4 @@
-import cp from 'child_process'
+import child_process from 'child_process'
 import path from 'path'
 import i18n from '../i18n'
 import { Log } from '../utils'
@@ -21,21 +21,21 @@ export class EcmascriptParser extends Parser {
   }
 
   async load(filepath: string) {
-    const extensionPath = Config.extensionPath!
-    const loader = path.resolve(extensionPath, 'assets/loader.js')
-    const tsNode = path.resolve(extensionPath, 'node_modules/ts-node/dist/bin.js')
+    const loader = path.resolve(Config.extensionPath!, 'assets/loader.js')
+    const tsNode = Config.parsersTypescriptTsNodePath
     const dir = Global.rootpath
-    const override = {
+    const compilerOptions = {
+      ...Config.parsersTypescriptCompilerOption,
       allowJs: true,
     }
 
     return new Promise<any>((resolve, reject) => {
-      const cmd = `node "${tsNode}" --dir "${dir}" -O '${JSON.stringify(override)}' "${loader}" "${filepath}"`
-      cp.exec(cmd, (err, stdout) => {
+      const cmd = `${tsNode} --dir "${dir}" --compiler-options '${JSON.stringify(compilerOptions)}' "${loader}" "${filepath}"`
+      child_process.exec(cmd, (err, stdout) => {
         if (err)
           return reject(err)
 
-        console.log(cmd, stdout)
+        console.log(`[i18n-ally] spawn: ${cmd}`)
         resolve(JSON.parse(stdout.trim()))
       })
     })
