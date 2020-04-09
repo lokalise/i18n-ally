@@ -1,0 +1,9 @@
+{
+  "hello": "Hola",
+  "params": "Hello {{value}} spanish",
+  "some": {
+    "nested": {
+      "key": "nested key spanish"
+    }
+  }
+}
