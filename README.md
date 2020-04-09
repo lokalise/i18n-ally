@@ -19,7 +19,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </p>
 
 <p align='center'>
-<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png"/>&nbsp;&nbsp;<b>Laravel</b> is now supported! 🎉
+<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png"/>&nbsp;&nbsp;<b><a href="https://github.com/ngneat/transloco">Transloco</a></b> is now supported! 🎉
 </p>
 
 <p align='center'><i>
