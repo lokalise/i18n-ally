@@ -15,7 +15,7 @@ languageIds:
   - javascriptreact
   - typescriptreact
 
-# An array of RegExs to find the key usage. **The key should be captured in the first match group**.
+# An array of RegExes to find the key usage. **The key should be captured in the first match group**.
 # You should unescape RegEx strings in order to fit in the YAML file
 # To help with this, you can use https://www.freeformatter.com/json-escape.html
 keyMatchReg:
