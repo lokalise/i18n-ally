@@ -51,6 +51,7 @@
   "config.source_language": "機械翻訳のための元言語",
   "config.tab_style": "",
   "config.translate.fallbackToKey": "",
+  "config.usage.scanning_ignore": "",
   "extname": "i18n Ally",
   "feedback.document": "Documentationを読む",
   "feedback.github": "Star on Github",

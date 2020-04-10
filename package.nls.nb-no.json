@@ -51,6 +51,7 @@
   "config.source_language": "Kildespråk for maskinoversettelse",
   "config.tab_style": "",
   "config.translate.fallbackToKey": "",
+  "config.usage.scanning_ignore": "",
   "extname": "i18n Ally",
   "feedback.document": "Les dokumentasjon",
   "feedback.github": "Gi stjerne på Github",

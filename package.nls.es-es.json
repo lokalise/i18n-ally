@@ -51,6 +51,7 @@
   "config.source_language": "Código fuente para la traducción automática",
   "config.tab_style": "",
   "config.translate.fallbackToKey": "",
+  "config.usage.scanning_ignore": "",
   "extname": "i18n Ally",
   "feedback.document": "Leer la documentación",
   "feedback.github": "Estrella en Github",

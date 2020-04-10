@@ -51,6 +51,7 @@
   "config.source_language": "翻译源语言",
   "config.tab_style": "文案文件的缩进样式",
   "config.translate.fallbackToKey": "当对应路径没有翻译时，使用路径本身进行翻译",
+  "config.usage.scanning_ignore": "",
   "extname": "Vue i18n 助手",
   "feedback.document": "查看文档",
   "feedback.github": "Star on Github",

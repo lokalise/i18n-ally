@@ -23,7 +23,7 @@ export async function FulfillMissingKeysForProgress(item: ProgressSubmenuItem) {
   const pendings = keys.map(key => ({
     locale,
     value: FULFILL_VALUE,
-    filepath: Global.loader.getFilepathByKey(key, locale),
+    filepath: CurrentFile.loader.getFilepathByKey(key, locale),
     keypath: key,
   }))
 

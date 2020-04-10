@@ -1,6 +1,8 @@
 import { existsSync } from 'fs'
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
+import _, { uniq, throttle } from 'lodash'
+import * as fg from 'fast-glob'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
@@ -8,8 +10,6 @@ import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
-import _, { uniq, throttle } from 'lodash'
-import * as fg from 'fast-glob'
 import { Analyst, Global, Config } from '..'
 
 const THROTTLE_DELAY = 1500
@@ -75,19 +75,36 @@ export class LocaleLoader extends Loader {
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFileWaitingList: [string, string][] = []
+  private _fileWatcherOnHold = false
+
+  private get fileWatcherOnHold() {
+    return this._fileWatcherOnHold
+  }
+
+  private set fileWatcherOnHold(v) {
+    if (this._fileWatcherOnHold !== v) {
+      this._fileWatcherOnHold = v
+      Log.info(`fileWatcherOnHold: ${v}`)
+      if (!v)
+        this.throttledLoadFileExecutor()
+    }
+  }
 
   private throttledLoadFileExecutor = throttle(async() => {
     const list = this.throttledLoadFileWaitingList
     this.throttledLoadFileWaitingList = []
-    for (const [d, r] of list)
-      await this.loadFile(d, r)
-    this.update()
+    if (list.length) {
+      for (const [d, r] of list)
+        await this.loadFile(d, r)
+      this.update()
+    }
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFile = (d: string, r: string) => {
     if (!this.throttledLoadFileWaitingList.find(([a, b]) => a === d && b === r))
       this.throttledLoadFileWaitingList.push([d, r])
-    this.throttledLoadFileExecutor()
+    if (!this.fileWatcherOnHold)
+      this.throttledLoadFileExecutor()
   }
   // #endregion
 
@@ -160,10 +177,8 @@ export class LocaleLoader extends Loader {
     return undefined
   }
 
-  private _ignoreChanges = false
-
   async write(pendings: PendingWrite|PendingWrite[]) {
-    this._ignoreChanges = true
+    this.fileWatcherOnHold = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
@@ -231,10 +246,10 @@ export class LocaleLoader extends Loader {
       }
     }
     catch (e) {
-      this._ignoreChanges = false
+      this.fileWatcherOnHold = false
       throw e
     }
-    this._ignoreChanges = false
+    this.fileWatcherOnHold = false
   }
 
   canHandleWrites(pending: PendingWrite) {
@@ -397,9 +412,6 @@ export class LocaleLoader extends Loader {
     )
 
     const updateFile = async(type: string, { fsPath: filepath }: { fsPath: string }) => {
-      if (this._ignoreChanges)
-        return
-
       filepath = path.resolve(filepath)
 
       if (type !== 'create' && !this._files[filepath])

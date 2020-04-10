@@ -51,6 +51,7 @@
   "config.source_language": "Langage source pour la traduction par machine",
   "config.tab_style": "Style de tabulation pour les fichiers de la locale",
   "config.translate.fallbackToKey": "",
+  "config.usage.scanning_ignore": "",
   "extname": "i18n Ally",
   "feedback.document": "Lire la Documentation",
   "feedback.github": "Mettre une étoile sur Github",

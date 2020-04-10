@@ -1,5 +1,6 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
@@ -12,7 +13,6 @@ import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
-import { uniq } from 'lodash'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}

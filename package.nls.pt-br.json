@@ -51,6 +51,7 @@
   "config.source_language": "Idioma de origem para tradução de máquina",
   "config.tab_style": "Estilo da aba para arquivos de lozalização (locales)",
   "config.translate.fallbackToKey": "",
+  "config.usage.scanning_ignore": "",
   "extname": "i18n Ally",
   "feedback.document": "Ler documentação",
   "feedback.github": "Avaliar no Github",
