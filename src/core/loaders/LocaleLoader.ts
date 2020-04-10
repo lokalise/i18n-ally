@@ -84,7 +84,6 @@ export class LocaleLoader extends Loader {
   private set fileWatcherOnHold(v) {
     if (this._fileWatcherOnHold !== v) {
       this._fileWatcherOnHold = v
-      Log.info(`fileWatcherOnHold: ${v}`)
       if (!v)
         this.throttledLoadFileExecutor()
     }

@@ -1,0 +1,12 @@
+hello: Hello
+thanks: Thank you!
+goodbye: Goodbye
+color: Color
+weekdays:
+  monday: Monday
+  tuesday: Tuesday
+  wednesday: Wednesday
+  thursday: Thursday
+  friday: Friday
+  saturday: Saturday
+  sunday: Sunday
