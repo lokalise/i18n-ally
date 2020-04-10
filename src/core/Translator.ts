@@ -1,9 +1,11 @@
-import { EventEmitter, CancellationToken } from 'vscode'
+import { EventEmitter, CancellationToken, window, ProgressLocation, commands } from 'vscode'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { google, baidu, youdao } from 'translation.js'
+import i18n from '../i18n'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
-import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, CurrentFile } from '.'
+import { PendingWrite } from './types'
+import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, Commands } from '.'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -11,35 +13,26 @@ interface TranslatorChangeEvent {
   action: 'start' | 'end'
 }
 
+export interface TranslateJob {
+  loader: Loader
+  locale: string
+  keypath: string
+  source: string
+  filepath?: string
+  token?: CancellationToken
+}
+
+export type AccaptableTranslateItem =
+  | LocaleNode
+  | LocaleRecord
+  | {locale: string; keypath: string; type: undefined}
+
 export class Translator {
   private static translatingKeys: {keypath: string; locale: string}[] = []
   private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
   static readonly onDidChange = Translator._onDidChange.event
 
-  static async MachineTranslate(
-    loader: Loader,
-    node: LocaleNode| LocaleRecord,
-    sourceLanguage?: string,
-    targetLocales?: string[],
-    token?: CancellationToken,
-  ) {
-    sourceLanguage = sourceLanguage || Config.sourceLanguage
-    if (node.type === 'node')
-      return await this.MachineTranslateNode(loader, node, sourceLanguage, targetLocales, token)
-    else
-      return await this.MachineTranslateRecord(loader, node, sourceLanguage, token)
-  }
-
-  static isTranslating(node: LocaleNode| LocaleRecord | LocaleTree) {
-    if (node.type === 'record')
-      return !!this.translatingKeys.find(i => i.keypath === node.keypath && i.locale === node.locale)
-    if (node.type === 'node')
-      return !!this.translatingKeys.find(i => i.keypath === node.keypath)
-    if (node.type === 'tree')
-      return !!this.translatingKeys.find(i => i.keypath.startsWith(node.keypath))
-    return false
-  }
-
+  // #region utils
   private static start(keypath: string, locale: string, update = true) {
     this.end(keypath, locale, false)
     this.translatingKeys.push({ keypath, locale })
@@ -51,6 +44,16 @@ export class Translator {
     this.translatingKeys = this.translatingKeys.filter(i => !(i.keypath === keypath && i.locale === locale))
     if (update)
       this._onDidChange.fire({ keypath, locale, action: 'end' })
+  }
+
+  static isTranslating(node: LocaleNode| LocaleRecord | LocaleTree) {
+    if (node.type === 'record')
+      return !!this.translatingKeys.find(i => i.keypath === node.keypath && i.locale === node.locale)
+    if (node.type === 'node')
+      return !!this.translatingKeys.find(i => i.keypath === node.keypath)
+    if (node.type === 'tree')
+      return !!this.translatingKeys.find(i => i.keypath.startsWith(node.keypath))
+    return false
   }
 
   private static getValueOfKey(loader: Loader, keypath: string, sourceLanguage: string) {
@@ -70,56 +73,156 @@ export class Translator {
 
     return sourceRecord.value
   }
+  // #endregion
 
-  private static async MachineTranslateRecord(
+  static async translateNodes(
     loader: Loader,
-    record: LocaleRecord,
+    nodes: AccaptableTranslateItem[],
     sourceLanguage: string,
-    token?: CancellationToken,
+    targetLocales?: string[],
   ) {
+    if (!nodes.length)
+      return
+
+    window.withProgress({
+      location: ProgressLocation.Notification,
+      title: i18n.t('prompt.translate_in_progress'),
+      cancellable: true,
+    },
+    async(progress, token) => {
+      const jobs = this.getTranslateJobs(loader, nodes, sourceLanguage, targetLocales, token)
+
+      const successJobs: TranslateJob[] = []
+      const failedJobs: [TranslateJob, Error][] = []
+      let finished = 0
+      const total = jobs.length
+
+      const increment = 1 / total * 100
+
+      for (const job of jobs) {
+        const message = `"${job.keypath}" (${job.source}->${job.locale}) ${finished + 1}/${total}`
+        progress.report({ message })
+        try {
+          await this.translateJob(job)
+          successJobs.push(job)
+        }
+        catch (err) {
+          failedJobs.push([job, err])
+        }
+        finished += 1
+        progress.report({ increment, message })
+      }
+
+      if (successJobs.length === 1) {
+        const job = successJobs[0]
+        const editButton = i18n.t('prompt.translate_edit_translated')
+        const result = await window.showInformationMessage(
+          i18n.t('prompt.translate_missing_done_single', job.keypath),
+          editButton,
+        )
+        if (result === editButton)
+          commands.executeCommand(Commands.edit_key, { keypath: job.keypath, locale: job.locale })
+      }
+      else if (successJobs.length > 0) {
+        window.showInformationMessage(i18n.t('prompt.translate_missing_done', successJobs.length))
+      }
+
+      if (failedJobs.length) {
+        for (const [job, error] of failedJobs) {
+          Log.info(`🌎⚠️ Failed to translate "${job.keypath}" (${job.source}->${job.locale})`)
+          Log.error(error, false)
+        }
+
+        const message = failedJobs.length === 1
+          ? i18n.t('prompt.translate_failed_single', failedJobs[0][0].keypath, failedJobs[0][0].locale)
+          : i18n.t('prompt.translate_failed_many', failedJobs.length)
+
+        Log.error(message)
+      }
+    })
+  }
+
+  static getTranslateJobs(
+    loader: Loader,
+    nodes: AccaptableTranslateItem[],
+    sourceLanguage: string,
+    targetLocales?: string[],
+    token?: CancellationToken,
+  ): TranslateJob[] {
+    let jobs: TranslateJob[] = []
+
+    for (const node of nodes) {
+      if (!node.type) {
+        jobs.push({
+          loader,
+          locale: node.locale,
+          keypath: node.keypath,
+          source: sourceLanguage,
+          token,
+        })
+      }
+      else if (node.type === 'record') {
+        jobs.push({
+          loader,
+          locale: node.locale,
+          keypath: node.keypath,
+          filepath: node.filepath,
+          source: sourceLanguage,
+          token,
+        })
+      }
+      else {
+        jobs = jobs.concat(
+          Object.values(loader.getShadowLocales(node, targetLocales))
+            .filter(record => record.locale !== sourceLanguage)
+            .map(record => ({
+              loader,
+              locale: record.locale,
+              keypath: record.keypath,
+              filepath: record.filepath,
+              source: sourceLanguage,
+              token,
+            })),
+        )
+      }
+    }
+    return jobs
+  }
+
+  static async translateJob(
+    request: TranslateJob,
+  ): Promise<void> {
+    const { loader, locale, keypath, filepath, token, source } = request
     if (token?.isCancellationRequested)
       return
 
-    if (record.locale === sourceLanguage)
+    if (locale === source)
       throw new AllyError(ErrorType.translating_same_locale)
 
-    const value = this.getValueOfKey(loader, record.keypath, sourceLanguage)
+    const value = this.getValueOfKey(loader, keypath, source)
 
     try {
-      Log.info(`🌍 Translating "${record.keypath}" (${sourceLanguage}->${record.locale})`)
-      this.start(record.keypath, record.locale)
-      const result = await this.translateText(value, sourceLanguage, record.locale)
-      this.end(record.keypath, record.locale)
+      Log.info(`🌍 Translating "${keypath}" (${source}->${locale})`)
+      this.start(keypath, locale)
+      const result = await this.translateText(value, source, locale)
+      this.end(keypath, locale)
 
       if (token?.isCancellationRequested)
         return
 
-      const pending = {
-        locale: record.locale,
+      const pending: PendingWrite = {
+        locale,
         value: result,
-        filepath: record.filepath,
-        keypath: record.keypath,
+        filepath,
+        keypath,
       }
-      await CurrentFile.loader.write(pending)
+
+      loader.write(pending)
     }
     catch (e) {
-      this.end(record.keypath, record.locale)
+      this.end(keypath, locale)
       throw new AllyError(ErrorType.translating_unknown_error, undefined, e)
     }
-  }
-
-  private static async MachineTranslateNode(
-    loader: Loader,
-    node: LocaleNode,
-    sourceLanguage: string,
-    targetLocales?: string[],
-    token?: CancellationToken,
-  ) {
-    const tasks = Object.values(loader.getShadowLocales(node, targetLocales))
-      .filter(record => record.locale !== sourceLanguage)
-      .map(record => this.MachineTranslateRecord(loader, record, sourceLanguage, token))
-
-    await Promise.all(tasks)
   }
 
   private static async translateText(text: string, from: string, to: string) {
