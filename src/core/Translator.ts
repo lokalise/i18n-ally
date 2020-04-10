@@ -106,11 +106,12 @@ export class Translator {
 
       const increment = 1 / total * 100
 
-      for (const job of jobs) {
+      const doJob = async(job: TranslateJob) => {
+        let pending: PendingWrite | undefined
         const message = `"${job.keypath}" (${job.source}->${job.locale}) ${finished + 1}/${total}`
-        progress.report({ message })
+        progress.report({ increment: 0, message })
         try {
-          await this.translateJob(job)
+          pending = await this.translateJob(job)
           successJobs.push(job)
         }
         catch (err) {
@@ -118,6 +119,19 @@ export class Translator {
         }
         finished += 1
         progress.report({ increment, message })
+        return pending
+      }
+
+      const parallels = Config.translateParallels
+      const slices = Math.ceil(jobs.length / parallels)
+      for (let i = 0; i < slices; i++) {
+        const pendings = await Promise.all(
+          jobs
+            .slice(i * parallels, (i + 1) * parallels)
+            .map(job => doJob(job)),
+        )
+        // @ts-ignore
+        loader.write(pendings.filter(i => i))
       }
 
       if (successJobs.length === 1) {
@@ -198,7 +212,7 @@ export class Translator {
 
   static async translateJob(
     request: TranslateJob,
-  ): Promise<void> {
+  ) {
     const { loader, locale, keypath, filepath, token, source } = request
     if (token?.isCancellationRequested)
       return
@@ -224,7 +238,7 @@ export class Translator {
         keypath,
       }
 
-      loader.write(pending)
+      return pending
     }
     catch (e) {
       this.end(keypath, locale)

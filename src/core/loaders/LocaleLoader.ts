@@ -203,7 +203,7 @@ export class LocaleLoader extends Loader {
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
-          throw new AllyError(ErrorType.unsupported_file_type, ext)
+          throw new AllyError(ErrorType.unsupported_file_type, undefined, ext)
         if (parser.readonly)
           throw new AllyError(ErrorType.write_in_readonly_mode)
 
