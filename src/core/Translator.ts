@@ -1,4 +1,4 @@
-import { EventEmitter } from 'vscode'
+import { EventEmitter, CancellationToken } from 'vscode'
 import { TranslateResult } from 'translation.js/declaration/api/types'
 import { google, baidu, youdao } from 'translation.js'
 import { Log } from '../utils'
@@ -16,12 +16,18 @@ export class Translator {
   private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
   static readonly onDidChange = Translator._onDidChange.event
 
-  static async MachineTranslate(loader: Loader, node: LocaleNode| LocaleRecord, sourceLanguage?: string, targetLocales?: string[]) {
+  static async MachineTranslate(
+    loader: Loader,
+    node: LocaleNode| LocaleRecord,
+    sourceLanguage?: string,
+    targetLocales?: string[],
+    token?: CancellationToken,
+  ) {
     sourceLanguage = sourceLanguage || Config.sourceLanguage
     if (node.type === 'node')
-      return await this.MachineTranslateNode(loader, node, sourceLanguage, targetLocales)
-
-    await this.MachineTranslateRecord(loader, node, sourceLanguage)
+      return await this.MachineTranslateNode(loader, node, sourceLanguage, targetLocales, token)
+    else
+      return await this.MachineTranslateRecord(loader, node, sourceLanguage, token)
   }
 
   static isTranslating(node: LocaleNode| LocaleRecord | LocaleTree) {
@@ -65,7 +71,15 @@ export class Translator {
     return sourceRecord.value
   }
 
-  private static async MachineTranslateRecord(loader: Loader, record: LocaleRecord, sourceLanguage: string) {
+  private static async MachineTranslateRecord(
+    loader: Loader,
+    record: LocaleRecord,
+    sourceLanguage: string,
+    token?: CancellationToken,
+  ) {
+    if (token?.isCancellationRequested)
+      return
+
     if (record.locale === sourceLanguage)
       throw new AllyError(ErrorType.translating_same_locale)
 
@@ -76,6 +90,9 @@ export class Translator {
       this.start(record.keypath, record.locale)
       const result = await this.translateText(value, sourceLanguage, record.locale)
       this.end(record.keypath, record.locale)
+
+      if (token?.isCancellationRequested)
+        return
 
       const pending = {
         locale: record.locale,
@@ -91,10 +108,16 @@ export class Translator {
     }
   }
 
-  private static async MachineTranslateNode(loader: Loader, node: LocaleNode, sourceLanguage: string, targetLocales?: string[]) {
+  private static async MachineTranslateNode(
+    loader: Loader,
+    node: LocaleNode,
+    sourceLanguage: string,
+    targetLocales?: string[],
+    token?: CancellationToken,
+  ) {
     const tasks = Object.values(loader.getShadowLocales(node, targetLocales))
       .filter(record => record.locale !== sourceLanguage)
-      .map(record => this.MachineTranslateRecord(loader, record, sourceLanguage))
+      .map(record => this.MachineTranslateRecord(loader, record, sourceLanguage, token))
 
     await Promise.all(tasks)
   }

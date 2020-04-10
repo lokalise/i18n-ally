@@ -24,4 +24,9 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.keepFulfilled": true,
   "i18n-ally.promptTranslatingSource": true,
+  "i18n-ally.keysInUse": [
+    "view.progress_submenu.translated_keys",
+    "view.progress_submenu.missing_keys",
+    "view.progress_submenu.empty_keys"
+  ],
 }
