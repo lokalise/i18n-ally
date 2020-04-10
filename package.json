@@ -556,11 +556,6 @@
           "default": false,
           "description": "%config.disable_path_parsing%"
         },
-        "i18n-ally.translate.fallbackToKey": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.translate.fallbackToKey%"
-        },
         "i18n-ally.keyMatchRegex": {
           "type": "string",
           "description": "%config.key_match_regex%"
@@ -574,7 +569,35 @@
           ],
           "description": "%config.tab_style%"
         },
-        "i18n-ally.promptTranslatingSource": {
+        "i18n-ally.namespace": {
+          "type": "boolean",
+          "description": "%config.namespace%"
+        },
+        "i18n-ally.translate.fallbackToKey": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.translate.fallbackToKey%"
+        },
+        "i18n-ally.translate.services": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "google",
+              "google.cn",
+              "baidu",
+              "youdao"
+            ]
+          },
+          "default": ["google", "baidu"],
+          "description": "%config.translate.services%"
+        },
+        "i18n-ally.translate.parallels": {
+          "type": "number",
+          "default": 5,
+          "description": "%config.translate.parallels%"
+        },
+        "i18n-ally.translate.promptSource": {
           "type": "boolean",
           "default": false,
           "description": "%config.prompt_translating_source%"
@@ -590,10 +613,7 @@
           },
           "description": "%config.usage.scanning_ignore%"
         },
-        "i18n-ally.namespace": {
-          "type": "boolean",
-          "description": "%config.namespace%"
-        },
+
         "i18n-ally.pathMatcher": {
           "type": "string",
           "description": "%config.path_matcher%"
