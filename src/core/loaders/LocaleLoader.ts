@@ -1,8 +1,6 @@
 import { existsSync } from 'fs'
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import * as fg from 'fast-glob'
-import _, { uniq, throttle } from 'lodash'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
@@ -10,6 +8,8 @@ import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
+import _, { uniq, throttle } from 'lodash'
+import * as fg from 'fast-glob'
 import { Analyst, Global, Config } from '..'
 
 const THROTTLE_DELAY = 1500
@@ -410,11 +410,16 @@ export class LocaleLoader extends Loader {
       if (!Global.getMatchedParser(ext))
         return
 
-      const dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
+      let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
       if (!dirpath)
         return
 
-      const relative = path.relative(dirpath, filepath)
+      let relative = path.relative(dirpath, filepath)
+
+      if (process.platform === 'win32') {
+        relative = relative.replace(/\\/g, '/')
+        dirpath = dirpath.replace(/\\/g, '/')
+      }
 
       Log.info(`🔄 File changed (${type}) ${relative}`)
 
