@@ -275,6 +275,10 @@ export class Config {
     return this.getConfig<string[]>('derivedKeyRules') ?? undefined
   }
 
+  static get usageScanningIgnore() {
+    return this.getConfig<string[]>('usage.scanningIgnore') || []
+  }
+
   // config
   private static getConfig<T = any>(key: string): T | undefined {
     let config = workspace

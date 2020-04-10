@@ -57,20 +57,23 @@ export class Analyst {
     if (!root)
       return []
 
-    let ignore = [
-      'node_modules',
-      'dist',
-      ...Config.localesPaths,
-    ]
-
     const gitignorePath = join(root, '.gitignore')
+    let gitignore = []
     try {
       if (fs.existsSync(gitignorePath))
-        ignore = ignore.concat(parseGitIgnore(await fs.promises.readFile(gitignorePath)))
+        gitignore = parseGitIgnore(await fs.promises.readFile(gitignorePath))
     }
     catch (e) {
       Log.error(e)
     }
+
+    const ignore = [
+      'node_modules',
+      'dist',
+      ...gitignore,
+      ...Config.localesPaths,
+      ...Config.usageScanningIgnore,
+    ]
 
     const files = await glob(Global.getSupportLangGlob(), {
       cwd: root,

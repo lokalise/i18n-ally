@@ -29,4 +29,7 @@
     "view.progress_submenu.missing_keys",
     "view.progress_submenu.empty_keys"
   ],
+  "i18n-ally.usage.scanningIgnore": [
+    "examples",
+  ]
 }

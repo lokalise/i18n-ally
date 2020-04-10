@@ -51,6 +51,7 @@
   "config.source_language": "Source language for machine translation",
   "config.tab_style": "Tab style for locale files",
   "config.translate.fallbackToKey": "Use key itself to translate when there is no source translation for that key.",
+  "config.usage.scanning_ignore": "Ignore glob patterns for scanning key usage",
   "extname": "i18n Ally",
   "feedback.document": "Read Documentation",
   "feedback.github": "Star on GitHub",

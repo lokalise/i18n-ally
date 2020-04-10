@@ -583,6 +583,13 @@
           "type": "string",
           "default": "app/views"
         },
+        "i18n-ally.usage.scanningIgnore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.usage.scanning_ignore%"
+        },
         "i18n-ally.namespace": {
           "type": "boolean",
           "description": "%config.namespace%"
