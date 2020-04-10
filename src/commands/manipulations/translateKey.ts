@@ -32,7 +32,7 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
     const node = getNode(item)
 
     source = Config.sourceLanguage
-    if (Config.promptTranslatingSource)
+    if (Config.translatePromptSource)
       source = await promptForSourceLocale(source, node)
 
     if (source == null)

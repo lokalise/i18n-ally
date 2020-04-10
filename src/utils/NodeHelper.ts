@@ -21,7 +21,7 @@ export class NodeHelper {
     if (Config.readonly || node.readonly || node.type === 'tree' || !this.notShadowOrHasFilepath(node))
       return false
 
-    if (Config.promptTranslatingSource)
+    if (Config.translatePromptSource)
       return true
 
     return !this.isSource(node)

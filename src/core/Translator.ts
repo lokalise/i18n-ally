@@ -1,5 +1,5 @@
 import { EventEmitter, CancellationToken, window, ProgressLocation, commands } from 'vscode'
-import { TranslateResult } from 'translation.js/declaration/api/types'
+import { TranslateResult, TranslateOptions } from 'translation.js/declaration/api/types'
 import { google, baidu, youdao } from 'translation.js'
 import i18n from '../i18n'
 import { Log } from '../utils'
@@ -26,6 +26,13 @@ export type AccaptableTranslateItem =
   | LocaleNode
   | LocaleRecord
   | {locale: string; keypath: string; type: undefined}
+
+const Services: Record<string, (options: TranslateOptions) => Promise<TranslateResult>> = {
+  google: (options: TranslateOptions) => google.translate({ ...options, com: true }),
+  'google-cn': (options: TranslateOptions) => google.translate({ ...options, com: false }),
+  baidu: baidu.translate,
+  youdao: youdao.translate,
+}
 
 export class Translator {
   private static translatingKeys: {keypath: string; locale: string}[] = []
@@ -221,19 +228,19 @@ export class Translator {
     }
     catch (e) {
       this.end(keypath, locale)
-      throw new AllyError(ErrorType.translating_unknown_error, undefined, e)
+      throw e
     }
   }
 
   private static async translateText(text: string, from: string, to: string) {
-    const plans = [google, baidu, youdao]
+    const services = Config.translateServices.map(i => Services[i])
     let trans_result: TranslateResult | undefined
 
     const errors: Error[] = []
 
-    for (const plan of plans) {
+    for (const translate of services) {
       try {
-        trans_result = await plan.translate({ text, from, to, com: true })
+        trans_result = await translate({ text, from, to })
         break
       }
       catch (e) {
@@ -244,7 +251,7 @@ export class Translator {
     const result = trans_result && (trans_result.result || []).join('\n')
 
     if (!result)
-      throw errors
+      throw errors[0]
 
     return result
   }

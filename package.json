@@ -584,7 +584,7 @@
             "type": "string",
             "enum": [
               "google",
-              "google.cn",
+              "google-cn",
               "baidu",
               "youdao"
             ]
