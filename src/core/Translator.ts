@@ -138,14 +138,14 @@ export class Translator {
         const job = successJobs[0]
         const editButton = i18n.t('prompt.translate_edit_translated')
         const result = await window.showInformationMessage(
-          i18n.t('prompt.translate_missing_done_single', job.keypath),
+          i18n.t('prompt.translate_done_single', job.keypath),
           editButton,
         )
         if (result === editButton)
           commands.executeCommand(Commands.edit_key, { keypath: job.keypath, locale: job.locale })
       }
       else if (successJobs.length > 0) {
-        window.showInformationMessage(i18n.t('prompt.translate_missing_done', successJobs.length))
+        window.showInformationMessage(i18n.t('prompt.translate_done_multiple', successJobs.length))
       }
 
       if (failedJobs.length) {
@@ -156,7 +156,7 @@ export class Translator {
 
         const message = failedJobs.length === 1
           ? i18n.t('prompt.translate_failed_single', failedJobs[0][0].keypath, failedJobs[0][0].locale)
-          : i18n.t('prompt.translate_failed_many', failedJobs.length)
+          : i18n.t('prompt.translate_failed_multiple', failedJobs.length)
 
         Log.error(message)
       }
