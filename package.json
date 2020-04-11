@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VSCode",
-  "version": "1.15.2",
+  "version": "1.15.5",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
@@ -459,7 +459,8 @@
             "chrome-ext",
             "ruby-rails",
             "custom",
-            "laravel"
+            "laravel",
+            "transloco"
           ],
           "items": {
             "type": "string",
@@ -476,7 +477,8 @@
               "chrome-ext",
               "ruby-rails",
               "custom",
-              "laravel"
+              "laravel",
+              "transloco"
             ]
           },
           "description": "%config.enabled_frameworks%"
@@ -556,11 +558,6 @@
           "default": false,
           "description": "%config.disable_path_parsing%"
         },
-        "i18n-ally.translate.fallbackToKey": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.translate.fallbackToKey%"
-        },
         "i18n-ally.keyMatchRegex": {
           "type": "string",
           "description": "%config.key_match_regex%"
@@ -574,15 +571,54 @@
           ],
           "description": "%config.tab_style%"
         },
-        "i18n-ally.promptTranslatingSource": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.prompt_translating_source%"
-        },
         "i18n-ally.namespace": {
           "type": "boolean",
           "description": "%config.namespace%"
         },
+        "i18n-ally.translate.fallbackToKey": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.translate.fallbackToKey%"
+        },
+        "i18n-ally.translate.services": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "google",
+              "google-cn",
+              "baidu",
+              "youdao"
+            ]
+          },
+          "default": ["google", "baidu"],
+          "description": "%config.translate.services%"
+        },
+        "i18n-ally.translate.parallels": {
+          "type": "number",
+          "default": 5,
+          "description": "%config.translate.parallels%"
+        },
+        "i18n-ally.translate.promptSource": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.prompt_translating_source%"
+        },
+        "i18n-ally.frameworks.ruby-rails.scopeRoot": {
+          "type": "string",
+          "default": "app/views"
+        },
+        "i18n-ally.usage.scanningIgnore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.usage.scanning_ignore%"
+        "i18n-ally.namespace": {
+          "type": "boolean",
+          "description": "%config.namespace%"
+        },
+
         "i18n-ally.pathMatcher": {
           "type": "string",
           "description": "%config.path_matcher%"

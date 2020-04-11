@@ -1,8 +1,8 @@
 import { existsSync } from 'fs'
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import * as fg from 'fast-glob'
 import _, { uniq, throttle } from 'lodash'
+import * as fg from 'fast-glob'
 import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
@@ -75,19 +75,35 @@ export class LocaleLoader extends Loader {
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFileWaitingList: [string, string][] = []
+  private _fileWatcherOnHold = false
+
+  private get fileWatcherOnHold() {
+    return this._fileWatcherOnHold
+  }
+
+  private set fileWatcherOnHold(v) {
+    if (this._fileWatcherOnHold !== v) {
+      this._fileWatcherOnHold = v
+      if (!v)
+        this.throttledLoadFileExecutor()
+    }
+  }
 
   private throttledLoadFileExecutor = throttle(async() => {
     const list = this.throttledLoadFileWaitingList
     this.throttledLoadFileWaitingList = []
-    for (const [d, r] of list)
-      await this.loadFile(d, r)
-    this.update()
+    if (list.length) {
+      for (const [d, r] of list)
+        await this.loadFile(d, r)
+      this.update()
+    }
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFile = (d: string, r: string) => {
     if (!this.throttledLoadFileWaitingList.find(([a, b]) => a === d && b === r))
       this.throttledLoadFileWaitingList.push([d, r])
-    this.throttledLoadFileExecutor()
+    if (!this.fileWatcherOnHold)
+      this.throttledLoadFileExecutor()
   }
   // #endregion
 
@@ -160,10 +176,8 @@ export class LocaleLoader extends Loader {
     return undefined
   }
 
-  private _ignoreChanges = false
-
   async write(pendings: PendingWrite|PendingWrite[]) {
-    this._ignoreChanges = true
+    this.fileWatcherOnHold = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
@@ -189,7 +203,7 @@ export class LocaleLoader extends Loader {
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
-          throw new AllyError(ErrorType.unsupported_file_type, ext)
+          throw new AllyError(ErrorType.unsupported_file_type, undefined, ext)
         if (parser.readonly)
           throw new AllyError(ErrorType.write_in_readonly_mode)
 
@@ -231,10 +245,10 @@ export class LocaleLoader extends Loader {
       }
     }
     catch (e) {
-      this._ignoreChanges = false
+      this.fileWatcherOnHold = false
       throw e
     }
-    this._ignoreChanges = false
+    this.fileWatcherOnHold = false
   }
 
   canHandleWrites(pending: PendingWrite) {
@@ -397,9 +411,6 @@ export class LocaleLoader extends Loader {
     )
 
     const updateFile = async(type: string, { fsPath: filepath }: { fsPath: string }) => {
-      if (this._ignoreChanges)
-        return
-
       filepath = path.resolve(filepath)
 
       if (type !== 'create' && !this._files[filepath])
@@ -410,11 +421,16 @@ export class LocaleLoader extends Loader {
       if (!Global.getMatchedParser(ext))
         return
 
-      const dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
+      let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
       if (!dirpath)
         return
 
-      const relative = path.relative(dirpath, filepath)
+      let relative = path.relative(dirpath, filepath)
+
+      if (process.platform === 'win32') {
+        relative = relative.replace(/\\/g, '/')
+        dirpath = dirpath.replace(/\\/g, '/')
+      }
 
       Log.info(`🔄 File changed (${type}) ${relative}`)
 

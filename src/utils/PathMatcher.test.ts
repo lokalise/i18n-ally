@@ -1,4 +1,4 @@
-import { ParsePathMatcher } from './PathMatching'
+import { ParsePathMatcher } from './PathMatcher'
 
 describe('PathMatching', () => {
   const cases = [

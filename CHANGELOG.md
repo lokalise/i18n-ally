@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.5](https://github.com/antfu/i18n-ally/compare/v1.15.4...v1.15.5) (2020-04-10)
+
+
+### 🐞 Bug Fixes
+
+* file watcher on windows ([e566dd5](https://github.com/antfu/i18n-ally/commit/e566dd57eebbe11ae05d3820712563d66a0888af))
+
+
+### 📚 Documentations
+
+* update ([934af7b](https://github.com/antfu/i18n-ally/commit/934af7bfb19a85b2c6b7fb93a3eea34004b663b5))
+
+### [1.15.4](https://github.com/antfu/i18n-ally/compare/v1.15.3...v1.15.4) (2020-04-09)
+
+
+### 🐞 Bug Fixes
+
+* English locale grammar improvements ([#244](https://github.com/antfu/i18n-ally/issues/244)) ([efe9a58](https://github.com/antfu/i18n-ally/commit/efe9a584b08c210ccc50244205468c89431f0de6))
+
+
+### ⚡ Features
+
+* **transloco:** new framework support ([14a3b18](https://github.com/antfu/i18n-ally/commit/14a3b181caa8ea0ce709f14a0c17293f1263cee1))
+
+
+### 📚 Documentations
+
+* **transloco:** new example ([717e6e3](https://github.com/antfu/i18n-ally/commit/717e6e3e377bb8d5f645752cdf8907f8bbad96ba))
+* fix spelling and improve grammar ([#245](https://github.com/antfu/i18n-ally/issues/245)) ([5de08ea](https://github.com/antfu/i18n-ally/commit/5de08ea6d4a344e37c457c1d6fbca61f56cdd403))
+
+### [1.15.3](https://github.com/antfu/i18n-ally/compare/v1.15.2...v1.15.3) (2020-04-09)
+
+
+### ⚡ Features
+
+* {ext} for path matcher ([7269ad1](https://github.com/antfu/i18n-ally/commit/7269ad15017bf4f5c0d20b9a5f44bcb069c1ac47))
+
+
+### 🔮 Refactor
+
+* reorganize frameworks ([69f5e8d](https://github.com/antfu/i18n-ally/commit/69f5e8dd91e59e6b5831b0722a3f5b6aa64393b6))
+
+
+### 🐞 Bug Fixes
+
+* **pref:** throttle loading functions ([9168daf](https://github.com/antfu/i18n-ally/commit/9168daf9351ec9af2108ec7f51a98c0507cb3d56))
+* improve progess bar looking on macos ([248e57c](https://github.com/antfu/i18n-ally/commit/248e57cacec6a364788dcf49f91c773be8beced3))
+
 ### [1.15.2](https://github.com/antfu/i18n-ally/compare/v1.15.1...v1.15.2) (2020-04-08)
 
 

@@ -1,6 +1,6 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { CurrentFile, Global, Node } from '../../core'
+import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '../../core'
 import i18n from '../../i18n'
 
 export interface CommandOptions {
@@ -9,12 +9,15 @@ export interface CommandOptions {
   from?: string
 }
 
-export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions) {
+export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleNode | LocaleRecord | undefined {
   if (!item)
     return
 
-  if (item instanceof LocaleTreeItem)
-    return item.node
+  if (item instanceof LocaleTreeItem) {
+    return item.node.type !== 'tree'
+      ? item.node
+      : undefined
+  }
 
   return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
 }

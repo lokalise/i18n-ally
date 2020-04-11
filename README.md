@@ -19,7 +19,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </p>
 
 <p align='center'>
-<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png"/>&nbsp;&nbsp;<b>Laravel</b> is now supported! 🎉
+<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png"/>&nbsp;&nbsp;<b><a href="https://github.com/ngneat/transloco">Transloco</a></b> is now supported! 🎉
 </p>
 
 <p align='center'><i>
@@ -38,6 +38,7 @@ Supported frameworks are auto-detected when a matching dependency is found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
+| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([transloco](https://github.com/ngneat/transloco)) | ✅ | [`@ngneat/transloco`](https://github.com/ngneat/transloco) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png) [Laravel](https://laravel.com/docs/localization) | ✅ | [`laravel/framework`](https://laravel.com/) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |

@@ -11,9 +11,6 @@ export async function EditKey(item?: LocaleTreeItem | CommandOptions) {
   if (!node)
     return
 
-  if (node.type === 'tree')
-    return
-
   if (node.type === 'node') {
     let locale = Config.displayLanguage
     if (item instanceof LocaleTreeItem && item.displayLocale)

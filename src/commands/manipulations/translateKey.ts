@@ -1,51 +1,8 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { Translator, CurrentFile, Config, Global, LocaleNode } from '../../core'
-import { Log } from '../../utils'
+import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '../../core'
 import i18n from '../../i18n'
 import { getNodeOrRecord, CommandOptions, getNode } from './common'
-
-export async function TranslateSingleKey(item?: LocaleTreeItem | CommandOptions, source?: string, prompt = true) {
-  const node = getNodeOrRecord(item)
-  const targetLocales = item instanceof LocaleTreeItem ? item.listedLocales : undefined
-  source = source || Config.sourceLanguage
-
-  if (!node)
-    return
-
-  if (node.type === 'tree')
-    return
-
-  try {
-    if (prompt)
-      window.showInformationMessage(i18n.t('prompt.translate_missing_in_progress'))
-    await Translator.MachineTranslate(CurrentFile.loader, node, source, targetLocales)
-    if (prompt)
-      window.showInformationMessage(i18n.t('prompt.translate_missing_done_single'))
-  }
-  catch (err) {
-    Log.error(err.toString())
-  }
-}
-
-export async function TranslateMultipleKeys(item: ProgressSubmenuItem, source: string) {
-  const Yes = i18n.t('prompt.button_yes')
-  const to = item.node.locale
-  source = source || Config.sourceLanguage
-
-  const keys = item.getKeys()
-  const result = await window.showWarningMessage(
-    i18n.t('prompt.translate_missing_confirm', keys.length, to, source),
-    { modal: true },
-    Yes,
-  )
-  if (result === Yes) {
-    window.showInformationMessage(i18n.t('prompt.translate_missing_in_progress'))
-    for (const key of keys)
-      await TranslateSingleKey({ locale: to, keypath: key }, source, false)
-    window.showInformationMessage(i18n.t('prompt.translate_missing_done', keys.length))
-  }
-}
 
 export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode, to?: string) {
   const locales = Global.allLocales
@@ -75,15 +32,27 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
     const node = getNode(item)
 
     source = Config.sourceLanguage
-    if (Config.promptTranslatingSource)
+    if (Config.translatePromptSource)
       source = await promptForSourceLocale(source, node)
 
     if (source == null)
       return
   }
 
-  if (item instanceof ProgressSubmenuItem)
-    return TranslateMultipleKeys(item, source)
-  else
-    return TranslateSingleKey(item, source)
+  let nodes: AccaptableTranslateItem[] = []
+  let targetLocales: string[] | undefined
+
+  if (item instanceof ProgressSubmenuItem) {
+    const to = item.node.locale
+    nodes = item.getKeys().map(key => ({ locale: to, keypath: key, type: undefined }))
+  }
+  else {
+    if (item instanceof LocaleTreeItem)
+      targetLocales = item.listedLocales
+    const node = getNodeOrRecord(item)
+    if (node)
+      nodes.push(node)
+  }
+
+  Translator.translateNodes(CurrentFile.loader, nodes, source, targetLocales)
 }

@@ -17,6 +17,7 @@ import PhpJoomlaFramework from './php-joomla'
 import ChromeExtensionFramework from './chrome-ext'
 import RubyRailsFramework from './ruby-rails'
 import LaravelFramework from './laravel'
+import TranslocoFramework from './transloco'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -34,6 +35,7 @@ export const frameworks: Framework[] = [
   new LaravelFramework(),
   new ChromeExtensionFramework(),
   new RubyRailsFramework(),
+  new TranslocoFramework(),
   new VueSFCFramework(),
 ]
 

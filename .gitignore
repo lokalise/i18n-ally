@@ -3,6 +3,7 @@ out
 node_modules
 .vscode-test/
 *.vsix
+*.zip
 .DS_Store
 
 examples/**/package-lock.json

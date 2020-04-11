@@ -1,7 +1,7 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
 import { uniq } from 'lodash'
-import { ParsePathMatcher } from '../utils/PathMatching'
+import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'

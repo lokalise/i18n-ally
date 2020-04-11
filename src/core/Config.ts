@@ -268,8 +268,16 @@ export class Config {
     return this.getConfig<string>('tabStyle') === 'tab' ? '\t' : ' '
   }
 
-  static get promptTranslatingSource() {
-    return this.getConfig<boolean>('promptTranslatingSource') ?? false
+  static get translatePromptSource() {
+    return this.getConfig<boolean>('translate.promptSource') ?? false
+  }
+
+  static get translateParallels() {
+    return this.getConfig<number>('translate.parallels') || 5
+  }
+
+  static get translateServices() {
+    return this.getConfig<string[]>('translate.services') || ['google', 'baidu', 'youdao']
   }
 
   static get disablePathParsing() {
@@ -286,6 +294,10 @@ export class Config {
 
   static get derivedKeyRules() {
     return this.getConfig<string[]>('derivedKeyRules') ?? undefined
+  }
+
+  static get usageScanningIgnore() {
+    return this.getConfig<string[]>('usage.scanningIgnore') || []
   }
 
   // config
