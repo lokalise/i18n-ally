@@ -112,7 +112,7 @@
   "prompt.support": "i18n Ally is offered to everyone for free. If you find it useful, please consider supporting it. Thank you! ❤",
   "prompt.translate_cancelled_multiple": "{0} keys translation cancelled.",
   "prompt.translate_done_multiple": "{0} keys translated.",
-  "prompt.translate_done_single": "Translating of {0} finished.",
+  "prompt.translate_done_single": "Translating of \"{0}\" finished.",
   "prompt.translate_edit_translated": "Edit result",
   "prompt.translate_failed_multiple": "{0} keys are failed to translate.",
   "prompt.translate_failed_single": "\"{0}\" is failed to translate to \"{1}\"",
