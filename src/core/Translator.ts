@@ -99,8 +99,20 @@ export class Translator {
     async(progress, token) => {
       const jobs = this.getTranslateJobs(loader, nodes, sourceLanguage, targetLocales, token)
 
+      if (jobs.length > 1) {
+        const Yes = i18n.t('prompt.button_yes')
+        const result = await window.showWarningMessage(
+          i18n.t('prompt.translate_multiple_confirm', jobs.length),
+          { modal: true },
+          Yes,
+        )
+        if (result !== Yes)
+          return
+      }
+
       const successJobs: TranslateJob[] = []
       const failedJobs: [TranslateJob, Error][] = []
+      const cancelledJobs: TranslateJob[] = []
       let finished = 0
       const total = jobs.length
 
@@ -112,7 +124,10 @@ export class Translator {
         progress.report({ increment: 0, message })
         try {
           pending = await this.translateJob(job)
-          successJobs.push(job)
+          if (pending)
+            successJobs.push(job)
+          else
+            cancelledJobs.push(job)
         }
         catch (err) {
           failedJobs.push([job, err])
@@ -136,6 +151,7 @@ export class Translator {
 
       if (successJobs.length === 1) {
         const job = successJobs[0]
+
         const editButton = i18n.t('prompt.translate_edit_translated')
         const result = await window.showInformationMessage(
           i18n.t('prompt.translate_done_single', job.keypath),
@@ -160,6 +176,9 @@ export class Translator {
 
         Log.error(message)
       }
+
+      if (cancelledJobs.length)
+        window.showInformationMessage(i18n.t('prompt.translate_cancelled_multiple', cancelledJobs.length))
     })
   }
 

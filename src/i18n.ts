@@ -8,9 +8,6 @@ import nbno from '../package.nls.nb-no.json'
 import frfr from '../package.nls.fr-fr.json'
 import ptbr from '../package.nls.pt-br.json'
 
-export type i18nMessage = typeof en
-export type i18nKeys = keyof i18nMessage
-
 // eslint-disable-next-line @typescript-eslint/class-name-casing
 export default class i18n {
   static readonly messages: Record<string, Record<string, string>> = {
@@ -44,7 +41,7 @@ export default class i18n {
     })
   }
 
-  static t(key: i18nKeys, ...args: any[]) {
+  static t(key: string, ...args: any[]) {
     let text = this.currentMessages[key] || this.fallbackMessages[key]
 
     if (args && args.length)
