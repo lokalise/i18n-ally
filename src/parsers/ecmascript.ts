@@ -5,11 +5,21 @@ import { Log } from '../utils'
 import { Config, Global } from '../core'
 import { Parser } from './base'
 
+const LanguageIds = {
+  js: 'javascript',
+  ts: 'typescript',
+} as const
+
+const LanguageExts = {
+  js: 'm?js',
+  ts: 'ts',
+} as const
+
 export class EcmascriptParser extends Parser {
   readonly readonly = true
 
   constructor(public readonly id: 'js'|'ts' = 'js') {
-    super([id === 'js' ? 'javascript' : 'typescript'], id)
+    super([LanguageIds[id]], LanguageExts[id])
   }
 
   async parse() {
@@ -28,9 +38,10 @@ export class EcmascriptParser extends Parser {
       ...Config.parsersTypescriptCompilerOption,
       allowJs: true,
     }
+    const options = JSON.stringify(compilerOptions).replace(/"/g, '\\"')
 
     return new Promise<any>((resolve, reject) => {
-      const cmd = `${tsNode} --dir "${dir}" --compiler-options '${JSON.stringify(compilerOptions)}' "${loader}" "${filepath}"`
+      const cmd = `${tsNode} --dir "${dir}" --compiler-options "${options}" "${loader}" "${filepath}"`
       child_process.exec(cmd, (err, stdout) => {
         if (err)
           return reject(err)
