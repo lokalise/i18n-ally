@@ -9,7 +9,12 @@
     "res": true,
     "screenshots": true
   },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "cSpell.words": [
+    "Exts",
     "Unflatten",
     "exts",
     "joomla",

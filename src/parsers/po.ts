@@ -1,6 +1,6 @@
 // @ts-ignore
 import po2json from 'po2json'
-import { Parser } from './Parser'
+import { Parser } from './base'
 
 export class PoParser extends Parser {
   id = 'po'

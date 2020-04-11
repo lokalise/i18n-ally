@@ -495,7 +495,8 @@
             "json5",
             "yaml",
             "ini",
-            "pot"
+            "pot",
+            "php"
           ],
           "items": {
             "type": "string",
@@ -506,7 +507,8 @@
               "json5",
               "yaml",
               "ini",
-              "pot"
+              "pot",
+              "php"
             ]
           },
           "description": "%config.enabled_parsers%"
@@ -573,6 +575,10 @@
           "type": "boolean",
           "description": "%config.namespace%"
         },
+        "i18n-ally.pathMatcher": {
+          "type": "string",
+          "description": "%config.path_matcher%"
+        },
         "i18n-ally.translate.fallbackToKey": {
           "type": "boolean",
           "default": false,
@@ -589,7 +595,10 @@
               "youdao"
             ]
           },
-          "default": ["google", "baidu"],
+          "default": [
+            "google",
+            "baidu"
+          ],
           "description": "%config.translate.services%"
         },
         "i18n-ally.translate.parallels": {
@@ -602,10 +611,6 @@
           "default": false,
           "description": "%config.prompt_translating_source%"
         },
-        "i18n-ally.frameworks.ruby-rails.scopeRoot": {
-          "type": "string",
-          "default": "app/views"
-        },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
           "items": {
@@ -613,17 +618,22 @@
           },
           "description": "%config.usage.scanning_ignore%"
         },
-
-        "i18n-ally.pathMatcher": {
+        "i18n-ally.frameworks.ruby-rails.scopeRoot": {
           "type": "string",
-          "description": "%config.path_matcher%"
+          "default": "app/views"
+        },
+        "i18n-ally.parsers.typescript.tsNodePath": {
+          "type": "string",
+          "default": "node_modules/ts-node/dist/bin.js"
+        },
+        "i18n-ally.parsers.typescript.compilerOptions": {
+          "type": "object",
+          "default": {}
         },
         "i18n-ally.filenameMatchRegex": {
-          "type": "string",
           "description": "%config.deprecated_match_regex%"
         },
         "i18n-ally.fileNamespace": {
-          "type": "boolean",
           "description": "%config.deprecated_file_namespace%"
         },
         "vue-i18n-ally.localesPaths": {
