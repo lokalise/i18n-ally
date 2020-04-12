@@ -6,6 +6,7 @@ import keyManipulations from './keyManipulations'
 import extractText from './extractText'
 import help from './help'
 import refreshUsageReport from './refreshUsageReport'
+import editor from './editor'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -15,6 +16,7 @@ const m: ExtensionModule = (ctx) => {
     extractText(ctx),
     help(ctx),
     refreshUsageReport(ctx),
+    editor(ctx),
   ])
 }
 

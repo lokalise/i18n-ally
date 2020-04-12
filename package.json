@@ -11,23 +11,7 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:package.json",
-    "workspaceContains:pubspec.yaml",
-    "workspaceContains:composer.json",
-    "workspaceContains:Gemfile",
-    "workspaceContains:.vscode/i18n-ally-custom-framework.yml",
-    "onLanguage:vue",
-    "onLanguage:javascript",
-    "onLanguage:javascriptreact",
-    "onLanguage:typescript",
-    "onLanguage:typescriptreact",
-    "onLanguage:json",
-    "onLanguage:yaml",
-    "onLanguage:json5",
-    "onLanguage:dart",
-    "onLanguage:php",
-    "onLanguage:handlebars",
-    "onLanguage:ini"
+    "*"
   ],
   "keywords": [
     "vue",
@@ -186,6 +170,11 @@
         "command": "extension.i18n-ally.mark-key-as-in-use",
         "category": "%extname%",
         "title": "%command.mark_key_as_in_use%"
+      },
+      {
+        "command": "extension.i18n-ally.open-in-editor",
+        "category": "%extname%",
+        "title": "%command.open_in_editor%"
       }
     ],
     "menus": {
@@ -287,6 +276,11 @@
           "command": "extension.i18n-ally.delete-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
           "group": "i18nally@3"
+        },
+        {
+          "command": "extension.i18n-ally.open-in-editor",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
+          "group": "i18nally@4"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-show",
@@ -720,15 +714,17 @@
     ]
   },
   "scripts": {
-    "release:minor": "npm i && standard-version --release-as minor && npm run gh-release",
-    "release:patch": "npm i && standard-version --release-as patch && npm run gh-release",
-    "gh-release": "git push --follow-tags && conventional-github-releaser -p angular",
-    "build": "webpack --mode development",
-    "compile": "webpack --mode development",
+    "release:minor": "npm i && standard-version --release-as minor && npm run publish:gh",
+    "release:patch": "npm i && standard-version --release-as patch && npm run publish:gh",
+    "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
+    "build": "rimraf dist && npm run main:build && npm run editor:build",
+    "dev": "npm run main:dev",
+    "main:build": "webpack --mode development",
+    "main:dev": "webpack --mode development --watch",
+    "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
+    "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",
     "lint": "eslint --ext .ts,.js,.vue .",
     "lint:fix": "npm run lint -- --fix",
-    "watch": "webpack --mode development --watch",
-    "dev": "npm run watch",
     "test": "jest"
   },
   "devDependencies": {
@@ -750,11 +746,18 @@
     "eslint": "6.8.0",
     "ini": "^1.3.5",
     "jest": "^25.0.0",
+    "nodemon": "^2.0.3",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-inliner": "^1.0.14",
     "php-array-parser": "^1.0.1",
+    "pug": "^2.0.4",
     "rimraf": "3.0.2",
     "standard-version": "7.1.0",
+    "stylus": "^0.54.7",
     "ts-jest": "^25.0.0",
     "ts-loader": "6.2.2",
+    "vue": "^2.6.11",
+    "vuex": "^3.1.3",
     "webpack": "4.42.1",
     "webpack-cli": "3.3.11",
     "webpack-filter-warnings-plugin": "^1.2.1"
@@ -777,7 +780,6 @@
     "translation.js": "^0.7.8",
     "ts-node": "^8.3.0",
     "typescript": "3.8.3",
-    "vue": "^2.6.10",
     "vue-i18n-locale-message": "^0.16.0",
     "yaml": "^1.7.2"
   }

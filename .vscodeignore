@@ -5,6 +5,8 @@ node_modules
 out/**
 dist/test/**
 dist/**/*.map
+dist/editor/*.js
+dist/editor/*.css
 src/**
 screenshots/**
 examples/**
@@ -63,4 +65,7 @@ jest.config.js
 !node_modules/consolidate/*.json
 !node_modules/bluebird/**/*.js
 !node_modules/bluebird/*.json
+
+# vue
+!node_modules/vue/dist/vue.min.js
 

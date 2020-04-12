@@ -10,7 +10,6 @@
     "screenshots": true
   },
   "[json]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "cSpell.words": [

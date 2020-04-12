@@ -3,30 +3,12 @@ import { set } from 'lodash'
 import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '../core'
 import { KeyStyle } from '../core/types'
 import { ROOT_KEY } from './flat'
-import { Log } from '.'
+import { normalizeLocale, getFlagFilename } from './locale'
+
+export { normalizeLocale, getFlagFilename }
 
 export function caseInsensitiveMatch(a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
-}
-
-export function normalizeLocale(locale: string, fallback = 'en', strict = false): string {
-  if (!locale)
-    return fallback
-
-  try {
-    locale = locale.replace(/_/g, '-')
-    if (locale.split('-')[0].length !== 2)
-      return fallback
-    // @ts-ignore
-    const canonical = Intl.getCanonicalLocales(locale)[0]
-    if (strict)
-      return Intl.Collator.supportedLocalesOf(canonical, { localeMatcher: 'lookup' })[0]
-    return canonical
-  }
-  catch (e) {
-    Log.info(`Invalid locale code "${locale}"\n${e.toString()}`)
-    return fallback
-  }
 }
 
 export function getKeyname(keypath: string) {
@@ -38,12 +20,6 @@ export function getKeyname(keypath: string) {
 
 export function notEmpty<T>(value: T | null | undefined): value is T {
   return value !== null && value !== undefined
-}
-
-export function getFlagFilename(locale: string) {
-  const parts = locale.toLocaleLowerCase().split('-', 2)
-  const flag = parts[parts.length - 1]
-  return `${flag}.svg`
 }
 
 export function replaceLocalePath(filepath: string, targetLocale: string): string {

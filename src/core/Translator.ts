@@ -91,24 +91,26 @@ export class Translator {
     if (!nodes.length)
       return
 
+    const jobs = this.getTranslateJobs(loader, nodes, sourceLanguage, targetLocales)
+
+    if (jobs.length > 1) {
+      const Yes = i18n.t('prompt.button_yes')
+      const result = await window.showWarningMessage(
+        i18n.t('prompt.translate_multiple_confirm', jobs.length),
+        { modal: true },
+        Yes,
+      )
+      if (result !== Yes)
+        return
+    }
+
     window.withProgress({
       location: ProgressLocation.Notification,
       title: i18n.t('prompt.translate_in_progress'),
       cancellable: true,
     },
     async(progress, token) => {
-      const jobs = this.getTranslateJobs(loader, nodes, sourceLanguage, targetLocales, token)
-
-      if (jobs.length > 1) {
-        const Yes = i18n.t('prompt.button_yes')
-        const result = await window.showWarningMessage(
-          i18n.t('prompt.translate_multiple_confirm', jobs.length),
-          { modal: true },
-          Yes,
-        )
-        if (result !== Yes)
-          return
-      }
+      jobs.forEach(job => job.token = token)
 
       const successJobs: TranslateJob[] = []
       const failedJobs: [TranslateJob, Error][] = []
@@ -150,15 +152,17 @@ export class Translator {
       }
 
       if (successJobs.length === 1) {
-        const job = successJobs[0]
+        (async() => {
+          const job = successJobs[0]
 
-        const editButton = i18n.t('prompt.translate_edit_translated')
-        const result = await window.showInformationMessage(
-          i18n.t('prompt.translate_done_single', job.keypath),
-          editButton,
-        )
-        if (result === editButton)
-          commands.executeCommand(Commands.edit_key, { keypath: job.keypath, locale: job.locale })
+          const editButton = i18n.t('prompt.translate_edit_translated')
+          const result = await window.showInformationMessage(
+            i18n.t('prompt.translate_done_single', job.keypath),
+            editButton,
+          )
+          if (result === editButton)
+            commands.executeCommand(Commands.edit_key, { keypath: job.keypath, locale: job.locale })
+        })()
       }
       else if (successJobs.length > 0) {
         window.showInformationMessage(i18n.t('prompt.translate_done_multiple', successJobs.length))
