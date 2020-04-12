@@ -77,6 +77,15 @@ export class EditorPanel {
       this._disposables,
     )
 
+    Global.reviews?.onDidChange(
+      (keypath) => {
+        if (keypath === this._editing_key)
+          this.editKey(this._editing_key)
+      },
+      null,
+      this._disposables,
+    )
+
     this.init()
   }
 
@@ -99,6 +108,7 @@ export class EditorPanel {
         data: {
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
+          reviews: Global.reviews?.getReviews(keypath),
         },
       })
     }
@@ -121,7 +131,7 @@ export class EditorPanel {
     })
   }
 
-  private handleMessage(message: any) {
+  private async handleMessage(message: any) {
     console.log('i18n-ally-editor', message)
     switch (message.name) {
       case 'ready':
@@ -142,6 +152,15 @@ export class EditorPanel {
       case 'translate':
         TranslateKeys(message.data)
         break
+      case 'review':
+        if (message.field === 'description') {
+          const value = await window.showInputBox({
+            value: Global.reviews?.getDescription(message.keypath),
+            prompt: `Description for "${message.keypath}"`,
+          })
+          if (value !== undefined)
+            Global.reviews?.setDescription(message.keypath, value)
+        }
     }
   }
 

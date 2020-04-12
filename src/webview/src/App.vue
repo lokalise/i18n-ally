@@ -10,7 +10,7 @@
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
 
-    pre {{JSON.stringify(state, null, 2)}}
+    // pre {{JSON.stringify(state, null, 2)}}
   template(v-else)
     p Loading...
 </template>

@@ -8,6 +8,7 @@ import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
 import { Log, getExtOfLanguageId } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
+import { Reviews } from '../reviews'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
@@ -16,26 +17,20 @@ import { Analyst } from './Analyst'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
-
   private static _rootpath: string
-
   private static _enabled = false
 
   static context: ExtensionContext
-
   static enabledFrameworks: Framework[] = []
+  static reviews: Reviews | undefined
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
-
-  static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
-
   private static _onDidChangeEnabled: EventEmitter<boolean> = new EventEmitter()
-
-  static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
-
   private static _onDidChangeLoader: EventEmitter<LocaleLoader> = new EventEmitter()
 
+  static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
+  static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
   static readonly onDidChangeLoader: Event<LocaleLoader> = Global._onDidChangeLoader.event
 
   static async init(context: ExtensionContext) {
@@ -164,6 +159,9 @@ export class Global {
       Log.info(`💼 Workspace root changed to "${rootpath}"`)
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
+
+      this.reviews = new Reviews(rootpath)
+      this.reviews?.init()
     }
   }
 

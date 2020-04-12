@@ -5,6 +5,12 @@
     .key-name "{{data.keypath}}"
     .next
 
+  .reviews
+    template(v-if='!data.reviews.description')
+      .add-description(@click='editDescription') Add description...
+    template(v-else)
+      .description(@click='editDescription') {{data.reviews.description}}
+
   record-editor(
     v-for='r in records'
     :record='r'
@@ -16,6 +22,7 @@
 import Vue from 'vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
+import { vscode } from './api'
 
 export default Vue.extend({
   components: {
@@ -39,6 +46,16 @@ export default Vue.extend({
         .map(l => this.data.records[l])
     },
   },
+
+  methods: {
+    editDescription() {
+      vscode.postMessage({
+        name: 'review',
+        field: 'description',
+        keypath: this.data.keypath,
+      })
+    },
+  },
 })
 </script>
 
@@ -52,4 +69,18 @@ export default Vue.extend({
     .key-name
       text-align center
       font-family var(--vscode-editor-font-family)
+
+  .reviews
+    text-align center
+
+    .add-description
+      opacity 0.5
+      font-style italic
+      padding 2px
+      cursor pointer
+
+    .description
+      padding 2px
+      cursor pointer
+
 </style>
