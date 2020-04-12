@@ -22,7 +22,7 @@ export class Global {
 
   static context: ExtensionContext
   static enabledFrameworks: Framework[] = []
-  static reviews: Reviews | undefined
+  static reviews = new Reviews()
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
@@ -155,13 +155,13 @@ export class Global {
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
+
       Log.divider()
       Log.info(`💼 Workspace root changed to "${rootpath}"`)
+
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
-
-      this.reviews = new Reviews(rootpath)
-      this.reviews?.init()
+      this.reviews.init(rootpath)
     }
   }
 

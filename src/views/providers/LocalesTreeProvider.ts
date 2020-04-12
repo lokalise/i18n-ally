@@ -1,8 +1,9 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event } from 'vscode'
+import { sortBy } from 'lodash'
 import { resolveFlattenRootKeypath } from '../../utils'
 import { Node, Loader, CurrentFile, LocaleTree, LocaleNode } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
-import { sortBy } from 'lodash'
+import { EditorPanel } from '../../webview/panel'
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   protected loader: Loader
@@ -19,11 +20,8 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
     this._flatten = flatten
     this.loader = CurrentFile.loader
 
-    // let count = 0
-    this.loader.onDidChange((src) => {
-      // Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
-      this.refresh()
-    })
+    this.loader.onDidChange(() => this.refresh())
+    EditorPanel.onDidChange(() => this.refresh())
   }
 
   protected refresh(): void {

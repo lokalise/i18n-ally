@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace } from 'vscode'
+import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
 import { Config, CurrentFile, Global } from '../core'
@@ -14,6 +14,8 @@ export class EditorPanel {
    */
   public static currentPanel: EditorPanel | undefined
   public static readonly viewType = 'i18n-ally-editor'
+  private static _onDidChanged = new EventEmitter<boolean>()
+  public static onDidChange = EditorPanel._onDidChanged.event
 
   private readonly _panel: WebviewPanel
   private readonly _ctx: ExtensionContext
@@ -30,8 +32,10 @@ export class EditorPanel {
   }
 
   public static revive(ctx: ExtensionContext, options: EditorPanelOptions, panel?: WebviewPanel) {
-    if (!EditorPanel.currentPanel)
+    if (!EditorPanel.currentPanel) {
       EditorPanel.currentPanel = new EditorPanel(ctx, options, panel)
+      EditorPanel._onDidChanged.fire(true)
+    }
 
     return EditorPanel.currentPanel
   }
@@ -77,9 +81,9 @@ export class EditorPanel {
       this._disposables,
     )
 
-    Global.reviews?.onDidChange(
-      (keypath) => {
-        if (keypath === this._editing_key)
+    Global.reviews.onDidChange(
+      (keypath: string) => {
+        if (keypath && keypath === this._editing_key)
           this.editKey(this._editing_key)
       },
       null,
@@ -108,7 +112,7 @@ export class EditorPanel {
         data: {
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
-          reviews: Global.reviews?.getReviews(keypath),
+          reviews: Global.reviews.getReviews(keypath),
         },
       })
     }
@@ -121,7 +125,7 @@ export class EditorPanel {
     this.postMessage({
       name: 'config',
       data: {
-        locales: Global.loader.locales,
+        locales: Global.loader?.locales || [],
         sourceLanguage: Config.sourceLanguage,
         displayLanguage: Config.displayLanguage,
         enabledFrameworks: Config.enabledFrameworks,
@@ -155,11 +159,11 @@ export class EditorPanel {
       case 'review':
         if (message.field === 'description') {
           const value = await window.showInputBox({
-            value: Global.reviews?.getDescription(message.keypath),
+            value: Global.reviews.getDescription(message.keypath),
             prompt: `Description for "${message.keypath}"`,
           })
           if (value !== undefined)
-            Global.reviews?.setDescription(message.keypath, value)
+            Global.reviews.setDescription(message.keypath, value)
         }
     }
   }
@@ -181,6 +185,8 @@ export class EditorPanel {
     this._panel.dispose()
 
     Disposable.from(...this._disposables).dispose()
+
+    EditorPanel._onDidChanged.fire(false)
   }
 
   private init() {

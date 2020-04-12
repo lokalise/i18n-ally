@@ -26,6 +26,7 @@ export default Vue.extend({
 
   props: {
     record: { type: Object, default: () => ({ locale: '', value: '' }) },
+    keypath: { type: String, default: '' },
   },
 
   data() {
@@ -48,6 +49,11 @@ export default Vue.extend({
         this.value = this.record.value
         this.$nextTick(() => this.resize())
       },
+    },
+    keypath() {
+      this.changed = false
+      this.value = this.record.value
+      this.$nextTick(() => this.resize())
     },
   },
 

@@ -15,18 +15,14 @@ export interface ReviewData {
 }
 
 export class Reviews {
-  public readonly filepath: string
-  private data: ReviewData
+  private filepath = ''
+  private data: ReviewData = { reviews: {} }
 
   private _onDidChange: EventEmitter<string> = new EventEmitter()
   readonly onDidChange: Event<string> = this._onDidChange.event
 
-  constructor(public readonly rootpath: string) {
+  init(rootpath: string) {
     this.filepath = path.join(rootpath, '.vscode/i18n-ally-reviews.yml')
-    this.data = { reviews: {} }
-  }
-
-  init() {
     return this.load()
   }
 

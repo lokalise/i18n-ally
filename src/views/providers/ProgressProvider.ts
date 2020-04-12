@@ -3,6 +3,7 @@ import { Global, Loader, CurrentFile } from '../../core'
 import { notEmpty } from '../../utils/utils'
 import { BaseTreeItem } from '../items/Base'
 import { ProgressRootItem } from '../items/ProgressRootItem'
+import { EditorPanel } from '../../webview/panel'
 
 export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   protected name = 'ProgressProvider'
@@ -12,11 +13,9 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
 
   constructor(private ctx: ExtensionContext) {
     this.loader = CurrentFile.loader
-    // const count = 0
-    this.loader.onDidChange((src) => {
-      // Log.info(`♨ ${this.name} Updated (${count++}) ${src}`)
-      this.refresh()
-    })
+
+    this.loader.onDidChange(() => this.refresh())
+    EditorPanel.onDidChange(() => this.refresh())
   }
 
   refresh(): void {

@@ -13,6 +13,7 @@
 
   record-editor(
     v-for='r in records'
+    :keypath='data.keypath'
     :record='r'
     :key='r.locale'
   )
@@ -72,6 +73,7 @@ export default Vue.extend({
 
   .reviews
     text-align center
+    margin-bottom 5px
 
     .add-description
       opacity 0.5

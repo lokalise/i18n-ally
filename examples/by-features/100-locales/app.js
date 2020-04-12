@@ -1,1 +1,1 @@
-t('hello')
+i18n.t('hello')
