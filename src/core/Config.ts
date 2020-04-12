@@ -1,4 +1,5 @@
 import path from 'path'
+import { execSync } from 'child_process'
 import { window, workspace, extensions } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
@@ -298,6 +299,35 @@ export class Config {
 
   static get usageScanningIgnore() {
     return this.getConfig<string[]>('usage.scanningIgnore') || []
+  }
+
+  private static _reviewUserName: string | undefined
+  static get reviewUserName() {
+    const config = this.getConfig<string>('review.user.name')
+    if (config)
+      return config
+    if (!Config._reviewUserName)
+      Config._reviewUserName = execSync('git config user.name').toString().trim()
+
+    return Config._reviewUserName
+  }
+
+  private static _reviewUserEmail: string | undefined
+  static get reviewUserEmail() {
+    const config = this.getConfig<string>('review.user.email')
+    if (config)
+      return config
+    if (!Config._reviewUserEmail)
+      Config._reviewUserEmail = execSync('git config user.email').toString().trim()
+
+    return Config._reviewUserEmail
+  }
+
+  static get reviewUser() {
+    return {
+      name: Config.reviewUserName,
+      email: Config.reviewUserEmail,
+    }
   }
 
   // config

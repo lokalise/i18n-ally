@@ -23,8 +23,6 @@ export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
     if (!editor)
       return
 
-    console.log(editor)
-
     if (!Global.isLanguageIdSupported(editor.document.languageId))
       this.includePaths = []
     else

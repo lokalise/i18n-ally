@@ -3,14 +3,15 @@
   template(v-if='$store.state.ready')
     .nav-bar
       img.logo(:src='logo' width='40' height='40')
-      .title i18n Ally Editor
+      .nav-middle
+        .title i18n Ally Editor
+        span.button(@click='refresh') Refresh
       flag(:locale='state.config.sourceLanguage' size='20')
-      button(@click='refresh').pa-2 Refresh
 
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
 
-    // pre {{JSON.stringify(state, null, 2)}}
+    pre {{JSON.stringify(state.config, null, 2)}}
   template(v-else)
     p Loading...
 </template>
@@ -55,6 +56,8 @@ export default Vue.extend({
 
 <style lang="stylus">
 .container
+  padding-bottom 12px
+
   .nav-bar
     padding 12px 0
     display grid
@@ -63,9 +66,11 @@ export default Vue.extend({
     & *
       vertical-align middle
 
+  .nav-middle
+    margin auto 12px
+
   .title
     font-size 1.2em
-    margin auto 8px
 
   .logo
     margin auto
@@ -73,15 +78,34 @@ export default Vue.extend({
 .monospace
   font-family var(--vscode-editor-font-family)
 
-button
-  color var(--vscode-foreground)
-  background var(--vscode-background)
-  border-color var(--vscode-button-background)
-  border-radius 5px
+.button
   cursor pointer
+  position relative
+  padding 4px 8px
+  font-size 0.8em
+  display inline-block
 
-  &:hover
-    color var(--vscode-editor-background)
+  &::before
+    content ""
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    border-radius 3px
+    z-index -1
+    pointer-events none
     background var(--vscode-foreground)
+    opacity 0.1
 
+  &:hover::before
+    opacity 0.12
+
+  &[disabled]
+    opacity 0.4
+    pointer-events none
+
+.buttons
+  .button
+    margin 4px 8px 4px 0
 </style>

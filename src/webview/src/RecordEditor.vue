@@ -1,40 +1,96 @@
 <template lang="pug">
-.record-editor(:class='{active}')
-  flag(:locale='record.locale' size='18')
-  textarea(
-    ref='textarea'
-    placeholder='(empty)'
-    rows='1'
-    v-model='value'
-    @focus='onFocus'
-    @blur='onBlur'
-    @input='onInput'
-  )
-  .buttons(v-if='active')
-    .icon-button(@click='translate') Translate
+.record-editor
+  .edit-input.panel(:class='{active}')
+    flag(:locale='record.locale' size='18')
+    textarea(
+      ref='textarea1'
+      placeholder='(empty)'
+      rows='1'
+      v-model='value'
+      @focus='onFocus'
+      @blur='onBlur'
+      @input='onInput'
+    )
+    .buttons(v-if='active')
+      .button(@click='reviewing=!reviewing') Review
+      .button(@click='translate') Translate
+
+  .review-panel(v-if='comments.length || reviewing')
+    .comments
+      template(v-for='c in comments')
+        avatar(:user='c.user')
+        .panel.comment-content
+          div {{c.comment}}
+          div {{c.suggestion}}
+          div {{c.type}}
+
+          .button Resolve
+          .button Accept Suggestion
+
+      template(v-if='reviewing')
+        avatar(:user='$store.state.config.user')
+        .panel.comment-form
+          label Comment
+          .panel
+            textarea(
+              rows='1'
+              ref='textarea2'
+              placeholder='(Optional)'
+              v-model='reviewForm.comment'
+            )
+
+          label Suggestion
+          .panel
+            textarea(
+              rows='1'
+              ref='textarea3'
+              placeholder='(Optional)'
+              v-model='reviewForm.suggestion'
+            )
+
+          .buttons
+            .button(@click='postComment("accept")' :disabled='!!reviewForm.suggestion') Approve
+            .button(@click='postComment("request_change")') Request Change
+            .button(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment') Leave Comment
+            .button(@click='resetForm()') Cancel
 </template>
 
 <script lang="js">
 import Vue from 'vue'
 import Flag from './Flag.vue'
+import Avatar from './Avatar.vue'
 import { vscode } from './api'
 
 export default Vue.extend({
   components: {
     Flag,
+    Avatar,
   },
 
   props: {
     record: { type: Object, default: () => ({ locale: '', value: '' }) },
     keypath: { type: String, default: '' },
+    review: { type: Object, default: () => ({ comments: [] }) },
   },
 
   data() {
     return {
+      reviewing: false,
       active: false,
       changed: false,
       value: '',
+      reviewForm: {
+        comment: '',
+        suggestion: '',
+      },
     }
+  },
+
+  computed: {
+    comments() {
+      return (this.review.comments || [])
+        .filter(i => !i.resolved)
+    },
   },
 
   watch: {
@@ -45,33 +101,53 @@ export default Vue.extend({
         if (this.active && this.changed)
           return
 
-        this.changed = false
-        this.value = this.record.value
-        this.$nextTick(() => this.resize())
+        this.reset()
       },
     },
     keypath() {
-      this.changed = false
-      this.value = this.record.value
-      this.$nextTick(() => this.resize())
+      this.reset()
+      this.resetForm()
+    },
+    value() {
+      this.$nextTick(() => this.resize(this.$refs.textarea1))
+    },
+    reviewForm: {
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
+          this.resize(this.$refs.textarea2)
+          this.resize(this.$refs.textarea3)
+        })
+      },
     },
   },
 
   mounted() {
-    this.$nextTick(() => this.resize())
+    this.$nextTick(() => this.resize(this.$refs.textarea1))
   },
 
   methods: {
-    resize() {
-      const ta = this.$refs.textarea
+    reset() {
+      this.changed = false
+      this.value = this.record.value
+    },
+    resetForm() {
+      this.reviewing = false
+      this.reviewForm = {
+        comment: '',
+        suggestion: '',
+      }
+    },
+    resize(ta) {
+      if (!ta)
+        return
+
       ta.style.height = 'auto'
       ta.style.height = `${ta.scrollHeight - 3}px`
     },
     onInput() {
       if (this.value !== this.record.value)
         this.changed = true
-
-      this.resize()
     },
     onFocus() {
       this.value = this.record.value
@@ -107,17 +183,27 @@ export default Vue.extend({
         },
       })
     },
+    postComment(type) {
+      vscode.postMessage({
+        name: 'review.comment',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+        data: {
+          ...this.reviewForm,
+          type,
+        },
+      })
+      this.resetForm()
+    },
   },
 })
 </script>
 
 <style lang="stylus">
-.record-editor
+.panel
   padding 5px
   margin 5px 0
   position relative
-  display grid
-  grid-template-columns max-content auto max-content
 
   &::before, &::after
     content ""
@@ -141,6 +227,32 @@ export default Vue.extend({
     border-color var(--vscode-foreground)
     opacity 0.7
 
+  label
+    display block
+    font-size 0.8em
+    margin-top 4px
+
+  label:not(:first-child)
+    margin-top 8px
+
+.record-editor
+  .edit-input
+    display grid
+    grid-template-columns max-content auto max-content
+
+  .review-panel
+    padding-bottom 10px
+
+  .comment-form
+    padding 6px 12px
+
+  .comments
+    display grid
+    grid-template-columns max-content auto
+
+    .avatar
+      margin 6px 6px 0 0
+
   & > *
     vertical-align middle
 
@@ -163,24 +275,4 @@ export default Vue.extend({
   textarea:focus,
   button:focus
     outline none
-
-.icon-button
-  cursor pointer
-  position relative
-  padding 4px
-  font-size 0.8em
-  margin 4px
-
-  &::before
-    content ""
-    position absolute
-    top 0
-    left 0
-    right 0
-    bottom 0
-    border-radius 3px
-    z-index -1
-    pointer-events none
-    background var(--vscode-foreground)
-    opacity 0.07
 </style>

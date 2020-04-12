@@ -27,7 +27,7 @@ export class EditorPanel {
 
   public static createOrShow(ctx: ExtensionContext, options: EditorPanelOptions, column?: ViewColumn) {
     const panel = this.revive(ctx, options)
-    panel.reveal(column)
+    panel.reveal(column || panel._panel.viewColumn)
     return panel
   }
 
@@ -82,8 +82,8 @@ export class EditorPanel {
     )
 
     Global.reviews.onDidChange(
-      (keypath: string) => {
-        if (keypath && keypath === this._editing_key)
+      (keypath?: string) => {
+        if (this._editing_key && (!keypath || this._editing_key === keypath))
           this.editKey(this._editing_key)
       },
       null,
@@ -131,6 +131,7 @@ export class EditorPanel {
         enabledFrameworks: Config.enabledFrameworks,
         ignoredLocales: Config.ignoredLocales,
         extensionRoot: this._panel.webview.asWebviewUri(Uri.file(Config.extensionPath!)).toString(),
+        user: Config.reviewUser,
       },
     })
   }
@@ -156,15 +157,12 @@ export class EditorPanel {
       case 'translate':
         TranslateKeys(message.data)
         break
-      case 'review':
-        if (message.field === 'description') {
-          const value = await window.showInputBox({
-            value: Global.reviews.getDescription(message.keypath),
-            prompt: `Description for "${message.keypath}"`,
-          })
-          if (value !== undefined)
-            Global.reviews.setDescription(message.keypath, value)
-        }
+      case 'review.description':
+        Global.reviews.promptEditDescription(message.keypath)
+        break
+      case 'review.comment':
+        Global.reviews.addComment(message.keypath, message.locale, message.data)
+        break
     }
   }
 

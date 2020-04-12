@@ -7,14 +7,19 @@
 
   .reviews
     template(v-if='!data.reviews.description')
-      .add-description(@click='editDescription') Add description...
+      .description.add(@click='editDescription') Add description...
     template(v-else)
       .description(@click='editDescription') {{data.reviews.description}}
+
+  .buttons
+    .button Translate All Missing
+    .button Mark all as...
 
   record-editor(
     v-for='r in records'
     :keypath='data.keypath'
     :record='r'
+    :review='(data.reviews.locales || {})[r.locale]'
     :key='r.locale'
   )
 </template>
@@ -51,8 +56,7 @@ export default Vue.extend({
   methods: {
     editDescription() {
       vscode.postMessage({
-        name: 'review',
-        field: 'description',
+        name: 'review.description',
         keypath: this.data.keypath,
       })
     },
@@ -70,19 +74,32 @@ export default Vue.extend({
     .key-name
       text-align center
       font-family var(--vscode-editor-font-family)
+      opacity 0.8
 
   .reviews
     text-align center
-    margin-bottom 5px
-
-    .add-description
-      opacity 0.5
-      font-style italic
-      padding 2px
-      cursor pointer
+    padding-bottom 5px
 
     .description
-      padding 2px
       cursor pointer
+      min-width 100px
+      display inline-block
+      position relative
+      padding 4px 10px
+
+      &:hover::after
+        content ""
+        background var(--vscode-foreground)
+        opacity 0.1
+        top 0
+        left 0
+        right 0
+        bottom 0
+        position absolute
+        border-radius 4px
+
+      &.add
+        opacity 0.5
+        font-style italic
 
 </style>
