@@ -12,20 +12,25 @@
       @input='onInput'
     )
     .buttons(v-if='active')
-      .button(@click='reviewing=!reviewing') Review
-      .button(@click='translate') Translate
+      .button(@click='reviewing=!reviewing')
+        v-comment-edit-outline
+        | Review
+      .button(@click='translate')
+        v-translate
+        | Translate
 
   .review-panel(v-if='comments.length || reviewing')
     .comments
       template(v-for='c in comments')
-        avatar(:user='c.user')
+        avatar(:user='c.user' :state='c.type')
         .panel.comment-content
-          div {{c.comment}}
-          div {{c.suggestion}}
-          div {{c.type}}
+          .text {{c.comment}} | {{c.suggestion}}
 
-          .button Resolve
-          .button Accept Suggestion
+          .buttons
+            .button
+              v-checkbox-marked-outline
+              | Resolve
+            .button Accept Suggestion
 
       template(v-if='reviewing')
         avatar(:user='$store.state.config.user')
@@ -49,14 +54,26 @@
             )
 
           .buttons
-            .button(@click='postComment("accept")' :disabled='!!reviewForm.suggestion') Approve
-            .button(@click='postComment("request_change")') Request Change
-            .button(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment') Leave Comment
+            .button(@click='postComment("accept")' :disabled='!!reviewForm.suggestion')
+              v-check
+              | Approve
+            .button(@click='postComment("request_change")')
+              v-plus-minus
+              | Request Change
+            .button(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment')
+              v-comment-outline
+              | Leave Comment
             .button(@click='resetForm()') Cancel
 </template>
 
 <script lang="js">
 import Vue from 'vue'
+import VCheck from 'vue-material-design-icons/Check.vue'
+import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
+import VCommentOutline from 'vue-material-design-icons/CommentOutline.vue'
+import VTranslate from 'vue-material-design-icons/Translate.vue'
+import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
+import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
 import { vscode } from './api'
@@ -65,6 +82,12 @@ export default Vue.extend({
   components: {
     Flag,
     Avatar,
+    VCheck,
+    VPlusMinus,
+    VCommentOutline,
+    VTranslate,
+    VCommentEditOutline,
+    VCheckboxMarkedOutline,
   },
 
   props: {
@@ -202,7 +225,6 @@ export default Vue.extend({
 <style lang="stylus">
 .panel
   padding 5px
-  margin 5px 0
   position relative
 
   &::before, &::after
@@ -231,6 +253,7 @@ export default Vue.extend({
     display block
     font-size 0.8em
     margin-top 4px
+    margin-bottom 1px
 
   label:not(:first-child)
     margin-top 8px
@@ -239,19 +262,32 @@ export default Vue.extend({
   .edit-input
     display grid
     grid-template-columns max-content auto max-content
+    margin-top 8px
 
   .review-panel
-    padding-bottom 10px
+    padding-bottom 8px
 
   .comment-form
     padding 6px 12px
+    margin-top 4px
+
+    .buttons
+      margin-top 4px
+
+  .comment-content
+    display grid
+    grid-template-columns auto max-content
+    margin-top 4px
+
+    .text
+      margin auto 4px
 
   .comments
     display grid
     grid-template-columns max-content auto
 
     .avatar
-      margin 6px 6px 0 0
+      margin 8px 4px 0 2px
 
   & > *
     vertical-align middle

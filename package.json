@@ -11,7 +11,25 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "workspaceContains:package.json",
+    "workspaceContains:pubspec.yaml",
+    "workspaceContains:composer.json",
+    "workspaceContains:Gemfile",
+    "workspaceContains:.vscode/i18n-ally-custom-framework.yml",
+    "workspaceContains:.vscode/i18n-ally-reviews.yml",
+    "onWebviewPanel:i18n-ally-editor",
+    "onLanguage:vue",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:json",
+    "onLanguage:yaml",
+    "onLanguage:json5",
+    "onLanguage:dart",
+    "onLanguage:php",
+    "onLanguage:handlebars",
+    "onLanguage:ini"
   ],
   "keywords": [
     "vue",
@@ -766,6 +784,7 @@
     "ts-jest": "^25.0.0",
     "ts-loader": "6.2.2",
     "vue": "^2.6.11",
+    "vue-material-design-icons": "^4.5.0",
     "vuex": "^3.1.3",
     "webpack": "4.42.1",
     "webpack-cli": "3.3.11",

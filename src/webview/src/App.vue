@@ -85,6 +85,13 @@ export default Vue.extend({
   font-size 0.8em
   display inline-block
 
+  .material-design-icon
+    font-size 1.2em
+    margin-top -1px
+    margin-bottom -1px
+    margin-left -3px
+    margin-right 2px
+
   &::before
     content ""
     position absolute
@@ -99,7 +106,7 @@ export default Vue.extend({
     opacity 0.1
 
   &:hover::before
-    opacity 0.12
+    opacity 0.3
 
   &[disabled]
     opacity 0.4

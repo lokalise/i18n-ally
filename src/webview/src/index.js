@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import Vue from 'vue'
 import Vuex from 'vuex'
+import 'vue-material-design-icons/styles.css'
 import App from './App.vue'
 import { vscode } from './api'
 
