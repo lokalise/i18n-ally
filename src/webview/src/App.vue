@@ -7,17 +7,19 @@
         .title i18n Ally Editor
         span.button(@click='refresh') Refresh
       flag(:locale='state.config.sourceLanguage' size='20')
+      v-cog.setting-button
 
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
 
-    pre {{JSON.stringify(state.config, null, 2)}}
+    // pre {{JSON.stringify(state.config, null, 2)}}
   template(v-else)
     p Loading...
 </template>
 
 <script lang="js">
 import Vue from 'vue'
+import VCog from 'vue-material-design-icons/Cog.vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
 import { vscode } from './api'
@@ -26,6 +28,7 @@ export default Vue.extend({
   components: {
     Flag,
     KeyEditor,
+    VCog,
   },
 
   data() {
@@ -56,6 +59,11 @@ export default Vue.extend({
 
 <style lang="stylus">
 .container
+  --review-approve #768741
+  --review-request-change #d8583e
+  --review-comment #EFC73D
+  user-select none
+
   padding-bottom 12px
 
   .nav-bar
@@ -74,6 +82,15 @@ export default Vue.extend({
 
   .logo
     margin auto
+
+  .setting-button
+    font-size 1.8em
+    margin-bottom 10px
+    opacity 0.6
+    cursor pointer
+
+    &:hover
+      opacity 0.9
 
 .monospace
   font-family var(--vscode-editor-font-family)
@@ -111,6 +128,30 @@ export default Vue.extend({
   &[disabled]
     opacity 0.4
     pointer-events none
+
+  &.flat
+    opacity 0.5
+
+    &::before
+      opacity 0
+
+    &:hover
+      opacity 1
+
+      &::before
+        opacity 0.2
+
+  &.request-change
+    &:hover::before
+      background var(--review-request-change)
+
+  &.approve
+    &:hover::before
+      background var(--review-approve)
+
+  &.comment
+    &:hover::before
+      background var(--review-comment)
 
 .buttons
   .button

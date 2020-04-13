@@ -23,14 +23,14 @@
     .comments
       template(v-for='c in comments')
         avatar(:user='c.user' :state='c.type')
-        .panel.comment-content
-          .text {{c.comment}} | {{c.suggestion}}
+        .panel.shadow.comment-content
+          .text(:class='{placeholder: !c.comment}') {{c.comment || (c.type === "approve" ? "Approved" : "Change requested")}}
 
           .buttons
-            .button
+            .button.flat(v-if='c.suggestion') Accept Suggestion
+            .button.approve.flat(@click='resolveComment(c)')
               v-checkbox-marked-outline
               | Resolve
-            .button Accept Suggestion
 
       template(v-if='reviewing')
         avatar(:user='$store.state.config.user')
@@ -54,13 +54,13 @@
             )
 
           .buttons
-            .button(@click='postComment("accept")' :disabled='!!reviewForm.suggestion')
+            .button.approve(@click='postComment("approve")' :disabled='!!reviewForm.suggestion')
               v-check
               | Approve
-            .button(@click='postComment("request_change")')
+            .button.request-change(@click='postComment("request_change")')
               v-plus-minus
               | Request Change
-            .button(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment')
+            .button.comment(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment')
               v-comment-outline
               | Leave Comment
             .button(@click='resetForm()') Cancel
@@ -111,7 +111,7 @@ export default Vue.extend({
 
   computed: {
     comments() {
-      return (this.review.comments || [])
+      return (this.review?.comments || [])
         .filter(i => !i.resolved)
     },
   },
@@ -218,6 +218,17 @@ export default Vue.extend({
       })
       this.resetForm()
     },
+    resolveComment(comment) {
+      const index = (this.review?.comments || []).indexOf(comment)
+      if (index < 0)
+        return
+      vscode.postMessage({
+        name: 'review.resolve',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+        comment: index,
+      })
+    },
   },
 })
 </script>
@@ -248,6 +259,11 @@ export default Vue.extend({
   &.active::after
     border-color var(--vscode-foreground)
     opacity 0.7
+
+  &.shadow
+    &::before
+      background var(--vscode-foreground)
+      opacity 0.04
 
   label
     display block
@@ -280,14 +296,24 @@ export default Vue.extend({
     margin-top 4px
 
     .text
-      margin auto 4px
+      margin auto 6px
+      font-size 0.8em
+
+      &.placeholder
+        font-style italic
+        opacity 0.4
+
+    .buttons
+      .button
+        margin-top 0
+        margin-bottom 0
 
   .comments
     display grid
     grid-template-columns max-content auto
 
     .avatar
-      margin 8px 4px 0 2px
+      margin 8px 6px 0 6px
 
   & > *
     vertical-align middle

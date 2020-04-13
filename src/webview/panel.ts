@@ -52,6 +52,7 @@ export class EditorPanel {
         localResourceRoots: [
           Uri.file(path.join(this._ctx.extensionPath, 'res')),
         ],
+        retainContextWhenHidden: true,
       },
     )
 
@@ -162,6 +163,9 @@ export class EditorPanel {
         break
       case 'review.comment':
         Global.reviews.addComment(message.keypath, message.locale, message.data)
+        break
+      case 'review.resolve':
+        Global.reviews.resolveComment(message.keypath, message.locale, +message.comment)
         break
     }
   }

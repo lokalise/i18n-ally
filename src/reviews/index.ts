@@ -85,6 +85,14 @@ export class Reviews {
     return this.set(key, 'comments', comments, locale)
   }
 
+  async resolveComment(key: string, locale: string, commentIndex: number) {
+    const comments = this.get(key, 'comments', locale)
+    if (comments && comments[commentIndex]) {
+      comments[commentIndex].resolved = true
+      return this.set(key, 'comments', comments, locale)
+    }
+  }
+
   async promptEditDescription(keypath: string) {
     const value = await window.showInputBox({
       value: this.getDescription(keypath),
