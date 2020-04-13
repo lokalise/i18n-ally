@@ -139,6 +139,7 @@ export class Translator {
         return pending
       }
 
+      // do translating in batch
       const parallels = Config.translateParallels
       const slices = Math.ceil(jobs.length / parallels)
       for (let i = 0; i < slices; i++) {
@@ -151,6 +152,7 @@ export class Translator {
         loader.write(pendings.filter(i => i))
       }
 
+      // translating done
       if (successJobs.length === 1) {
         (async() => {
           const job = successJobs[0]
@@ -193,7 +195,20 @@ export class Translator {
     targetLocales?: string[],
     token?: CancellationToken,
   ): TranslateJob[] {
-    let jobs: TranslateJob[] = []
+    const jobs: TranslateJob[] = []
+
+    const pushRecord = (node: LocaleRecord) => {
+      if (Config.translateOverrideExisting || !node.value) {
+        jobs.push({
+          loader,
+          locale: node.locale,
+          keypath: node.keypath,
+          filepath: node.filepath,
+          source: sourceLanguage,
+          token,
+        })
+      }
+    }
 
     for (const node of nodes) {
       if (!node.type) {
@@ -206,28 +221,12 @@ export class Translator {
         })
       }
       else if (node.type === 'record') {
-        jobs.push({
-          loader,
-          locale: node.locale,
-          keypath: node.keypath,
-          filepath: node.filepath,
-          source: sourceLanguage,
-          token,
-        })
+        pushRecord(node)
       }
       else {
-        jobs = jobs.concat(
-          Object.values(loader.getShadowLocales(node, targetLocales))
-            .filter(record => record.locale !== sourceLanguage)
-            .map(record => ({
-              loader,
-              locale: record.locale,
-              keypath: record.keypath,
-              filepath: record.filepath,
-              source: sourceLanguage,
-              token,
-            })),
-        )
+        Object.values(loader.getShadowLocales(node, targetLocales))
+          .filter(record => record.locale !== sourceLanguage)
+          .forEach(record => pushRecord(record))
       }
     }
     return jobs

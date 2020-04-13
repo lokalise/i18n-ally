@@ -4,5 +4,8 @@
   "i18n-ally.sourceLanguage": "af",
   "i18n-ally.keystyle": "nested",
   "i18n-ally.translate.services": ["google"],
-  "i18n-ally.translate.parallels": 5
+  "i18n-ally.translate.parallels": 5,
+  "i18n-ally.editor.preferEditor": true,
+  "i18n-ally.review.removeCommentOnResolved": true,
+  "i18n-ally.review": true,
 }

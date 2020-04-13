@@ -1,5 +1,5 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { Node, Translator, CurrentFile, Commands } from '../../core'
+import { Node, Translator, CurrentFile, Commands, Config } from '../../core'
 import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '../../utils'
 import { EditorPanel } from '../../webview/panel'
 import i18n from '../../i18n'
@@ -89,7 +89,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   }
 
   get editorMode() {
-    return this.node.type === 'node' && !!EditorPanel.currentPanel
+    return this.node.type === 'node' && (Config.preferEditor || !!EditorPanel.currentPanel)
   }
 
   async getChildren(filter: (node: Node) => boolean = () => true) {

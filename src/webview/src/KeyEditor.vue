@@ -11,7 +11,7 @@
     template(v-else)
       .description(@click='editDescription') {{data.reviews.description}}
 
-  .buttons
+  // .buttons
     .button Translate All Missing
     .button Mark all as...
 

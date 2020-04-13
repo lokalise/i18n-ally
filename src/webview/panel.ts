@@ -126,19 +126,20 @@ export class EditorPanel {
     this.postMessage({
       name: 'config',
       data: {
+        review: Config.reviewEnabled,
         locales: Global.loader?.locales || [],
         sourceLanguage: Config.sourceLanguage,
         displayLanguage: Config.displayLanguage,
         enabledFrameworks: Config.enabledFrameworks,
         ignoredLocales: Config.ignoredLocales,
         extensionRoot: this._panel.webview.asWebviewUri(Uri.file(Config.extensionPath!)).toString(),
+        translateOverrideExisting: Config.translateOverrideExisting,
         user: Config.reviewUser,
       },
     })
   }
 
   private async handleMessage(message: any) {
-    console.log('i18n-ally-editor', message)
     switch (message.name) {
       case 'ready':
         this.ready = true

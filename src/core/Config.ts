@@ -301,6 +301,14 @@ export class Config {
     return this.getConfig<string[]>('usage.scanningIgnore') || []
   }
 
+  static get preferEditor() {
+    return this.getConfig<boolean>('editor.preferEditor') || false
+  }
+
+  static get reviewEnabled() {
+    return this.getConfig<boolean>('review') ?? true
+  }
+
   private static _reviewUserName: string | undefined
   static get reviewUserName() {
     const config = this.getConfig<string>('review.user.name')
@@ -328,6 +336,14 @@ export class Config {
       name: Config.reviewUserName,
       email: Config.reviewUserEmail,
     }
+  }
+
+  static get reviewRemoveCommentOnResolved() {
+    return this.getConfig<boolean>('review.removeCommentOnResolved') ?? false
+  }
+
+  static get translateOverrideExisting() {
+    return this.getConfig<boolean>('translate.overrideExisting') ?? false
   }
 
   // config

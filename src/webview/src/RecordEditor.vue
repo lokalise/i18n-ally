@@ -12,18 +12,28 @@
       @input='onInput'
     )
     .buttons(v-if='active')
-      .button(@click='reviewing=!reviewing')
+      .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
         v-comment-edit-outline
         | Review
       .button(@click='translate')
         v-translate
         | Translate
+    .review-brief(v-if='!active && $store.state.config.review')
+      v-check.state-icon(v-if='reviewBrief==="approve"')
+      v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
+      v-comment-question-outline.state-icon(v-else-if='reviewBrief==="mixed"')
+      v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
 
-  .review-panel(v-if='comments.length || reviewing')
+  .review-panel(v-if='active && $store.state.config.review && (comments.length || reviewing)')
     .comments
       template(v-for='c in comments')
-        avatar(:user='c.user' :state='c.type')
+        avatar(:user='c.user')
         .panel.shadow.comment-content
+          template
+            v-check.state-icon(v-if='c.type==="approve"')
+            v-plus-minus.state-icon(v-else-if='c.type==="request_change"')
+            v-comment-outline.state-icon(v-else)
+
           .text(:class='{placeholder: !c.comment}') {{c.comment || (c.type === "approve" ? "Approved" : "Change requested")}}
 
           .buttons
@@ -73,6 +83,7 @@ import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
 import VCommentOutline from 'vue-material-design-icons/CommentOutline.vue'
 import VTranslate from 'vue-material-design-icons/Translate.vue'
 import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
+import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
@@ -88,6 +99,7 @@ export default Vue.extend({
     VTranslate,
     VCommentEditOutline,
     VCheckboxMarkedOutline,
+    VCommentQuestionOutline,
   },
 
   props: {
@@ -113,6 +125,22 @@ export default Vue.extend({
     comments() {
       return (this.review?.comments || [])
         .filter(i => !i.resolved)
+    },
+    reviewBrief() {
+      const approve = this.comments.filter(i => i.type === 'approve').length
+      const request_change = this.comments.filter(i => i.type === 'request_change').length
+      // const comments = this.comment.filter(i => i.type !== 'approve' && i.type === 'request_change').length
+
+      if (!this.comments.length)
+        return undefined
+      else if (approve && !request_change)
+        return 'approve'
+      else if (!approve && request_change)
+        return 'request_change'
+      else if (approve && request_change)
+        return 'mixed'
+      else
+        return 'comment'
     },
   },
 
@@ -292,10 +320,33 @@ export default Vue.extend({
     .buttons
       margin-top 0.3em
 
+  .state-icon
+    padding-left 0.2em
+    font-size 1.1em
+    margin-top -0.1em
+
+    &.plus-minus-icon
+      color var(--review-request-change)
+
+    &.check-icon
+      color var(--review-approve)
+
+    &.comment-question-outline-icon
+      color var(--review-comment)
+
+    &.comment-outline-icon
+      opacity 0.3
+
+  .review-brief
+    .state-icon
+      font-size 1.4em
+      padding 0.1em
+      margin auto 0.2em auto 0
+
   .comment-content
     display grid
-    grid-template-columns auto max-content
-    margin-top 4px
+    grid-template-columns min-content auto max-content max-content
+    margin-top 0.4em
 
     .text
       margin auto 6px
@@ -315,7 +366,7 @@ export default Vue.extend({
     grid-template-columns max-content auto
 
     .avatar
-      margin 0.5em 0.6em 0 0.6em
+      margin 0.6em 0.4em 0 1.2em
 
   & > *
     vertical-align middle

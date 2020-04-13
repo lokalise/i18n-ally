@@ -3,7 +3,7 @@ import YAML from 'js-yaml'
 import fs from 'fs-extra'
 import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscode'
 import { get, set } from 'lodash'
-import { Config } from '../core'
+import { Config } from './Config'
 
 export interface ReviewComment {
   type?: 'approve' | 'request_change' | 'comment'
@@ -88,7 +88,10 @@ export class Reviews {
   async resolveComment(key: string, locale: string, commentIndex: number) {
     const comments = this.get(key, 'comments', locale)
     if (comments && comments[commentIndex]) {
-      comments[commentIndex].resolved = true
+      if (Config.reviewRemoveCommentOnResolved)
+        comments.splice(commentIndex, 1)
+      else
+        comments[commentIndex].resolved = true
       return this.set(key, 'comments', comments, locale)
     }
   }

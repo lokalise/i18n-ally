@@ -623,6 +623,11 @@
           "default": false,
           "description": "%config.prompt_translating_source%"
         },
+        "i18n-ally.translate.overrideExisting": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.translate_override_existing%"
+        },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
           "items": {
@@ -642,65 +647,82 @@
           "type": "object",
           "default": {}
         },
+        "i18n-ally.review": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.review_enabled%"
+        },
         "i18n-ally.review.user.name": {
-          "type": "string"
+          "type": "string",
+          "description": "%config.review_username%"
         },
         "i18n-ally.review.user.email": {
-          "type": "string"
+          "type": "string",
+          "description": "%config.review_email%"
+        },
+        "i18n-ally.review.removeCommentOnResolved": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.review_remove_on_resolved%"
+        },
+        "i18n-ally.editor.preferEditor": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.editor_prefer_editor%"
         },
         "i18n-ally.filenameMatchRegex": {
-          "description": "%config.deprecated_match_regex%"
+          "deprecationMessage": "%config.deprecated_match_regex%"
         },
         "i18n-ally.fileNamespace": {
-          "description": "%config.deprecated_file_namespace%"
+          "deprecationMessage": "%config.deprecated_file_namespace%"
         },
         "vue-i18n-ally.localesPaths": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.encoding": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.sourceLanguage": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.displayLanguage": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.ignoredLocales": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.keystyle": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.dirStructure": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.annotations": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.annotationMaxLength": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.annotationDelimiter": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.filenameMatchRegex": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.includeSubfolders": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.fullReloadOnChanged": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.sortKeys": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.preferredDelimiter": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         },
         "vue-i18n-ally.readonly": {
-          "description": "%config.deprecated%"
+          "deprecationMessage": "%config.deprecated%"
         }
       }
     }
