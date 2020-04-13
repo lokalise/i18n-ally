@@ -11,6 +11,7 @@
       @blur='onBlur'
       @input='onInput'
     )
+
     .buttons(v-if='active')
       .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
         v-comment-edit-outline
@@ -18,13 +19,14 @@
       .button(@click='translate')
         v-translate
         | Translate
-    .review-brief(v-if='!active && $store.state.config.review')
+
+    .review-brief(v-if='$store.state.config.review')
       v-check.state-icon(v-if='reviewBrief==="approve"')
       v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
       v-comment-question-outline.state-icon(v-else-if='reviewBrief==="mixed"')
       v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
 
-  .review-panel(v-if='active && $store.state.config.review && (comments.length || reviewing)')
+  .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
     .comments
       template(v-for='c in comments')
         avatar(:user='c.user')
@@ -244,6 +246,7 @@ export default Vue.extend({
         },
       })
       this.resetForm()
+      this.$refs.textarea1.focus()
     },
     resolveComment(comment) {
       const index = (this.review?.comments || []).indexOf(comment)
@@ -304,7 +307,7 @@ export default Vue.extend({
 .record-editor
   .edit-input
     display grid
-    grid-template-columns max-content auto max-content
+    grid-template-columns max-content auto max-content max-content
     margin-top 8px
 
     .buttons
@@ -341,7 +344,7 @@ export default Vue.extend({
     .state-icon
       font-size 1.4em
       padding 0.1em
-      margin auto 0.2em auto 0
+      margin auto 0.2em
 
   .comment-content
     display grid

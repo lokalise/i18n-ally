@@ -5,8 +5,9 @@ import i18n from '../../i18n'
 
 export interface CommandOptions {
   keypath: string
-  locale: string
+  locale?: string
   from?: string
+  locales?: string[]
 }
 
 export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleNode | LocaleRecord | undefined {
@@ -19,7 +20,10 @@ export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleN
       : undefined
   }
 
-  return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
+  if (item.locale)
+    return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
+  else
+    return CurrentFile.loader.getNodeByKey(item.keypath, true)
 }
 
 export function getNode(item?: LocaleTreeItem | CommandOptions | ProgressSubmenuItem) {

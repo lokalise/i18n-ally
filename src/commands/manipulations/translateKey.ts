@@ -49,6 +49,9 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
   else {
     if (item instanceof LocaleTreeItem)
       targetLocales = item.listedLocales
+    else
+      targetLocales = item?.locales
+
     const node = getNodeOrRecord(item)
     if (node)
       nodes.push(node)

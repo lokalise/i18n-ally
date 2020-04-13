@@ -146,9 +146,11 @@ export class EditorPanel {
         this.postMessage({ name: 'ready' })
         this.updateConfig()
         break
+
       case 'refresh':
         this.init()
         break
+
       case 'edit':
         CurrentFile.loader.write({
           keypath: message.data.keypath,
@@ -156,15 +158,19 @@ export class EditorPanel {
           value: message.data.value,
         })
         break
+
       case 'translate':
         TranslateKeys(message.data)
         break
+
       case 'review.description':
         Global.reviews.promptEditDescription(message.keypath)
         break
+
       case 'review.comment':
         Global.reviews.addComment(message.keypath, message.locale, message.data)
         break
+
       case 'review.resolve':
         Global.reviews.resolveComment(message.keypath, message.locale, +message.comment)
         break

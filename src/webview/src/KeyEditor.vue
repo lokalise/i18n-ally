@@ -11,8 +11,10 @@
     template(v-else)
       .description(@click='editDescription') {{data.reviews.description}}
 
-  // .buttons
-    .button Translate All Missing
+  .buttons
+    .button(@click='translateAll' v-if='emptyRecords.length')
+      v-translate
+      | Translate All Missing ({{emptyRecords.length}})
     .button Mark all as...
 
   record-editor(
@@ -26,6 +28,7 @@
 
 <script lang="js">
 import Vue from 'vue'
+import VTranslate from 'vue-material-design-icons/Translate.vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
 import { vscode } from './api'
@@ -34,6 +37,7 @@ export default Vue.extend({
   components: {
     Flag,
     RecordEditor,
+    VTranslate,
   },
 
   inheritAttrs: false,
@@ -51,6 +55,9 @@ export default Vue.extend({
         .filter(i => !(this.config.ignoredLocales || []).includes(i))
         .map(l => this.data.records[l])
     },
+    emptyRecords() {
+      return this.records.filter(i => !i.value)
+    },
   },
 
   methods: {
@@ -58,6 +65,15 @@ export default Vue.extend({
       vscode.postMessage({
         name: 'review.description',
         keypath: this.data.keypath,
+      })
+    },
+    translateAll() {
+      vscode.postMessage({
+        name: 'translate',
+        data: {
+          keypath: this.data.keypath,
+          locales: this.emptyRecords.map(i => i.locale),
+        },
       })
     },
   },
