@@ -2,12 +2,12 @@
 .container
   template(v-if='$store.state.ready')
     .nav-bar
-      img.logo(:src='logo' width='40' height='40')
+      img.logo(:src='logo')
       .nav-middle
         .title i18n Ally Editor
-        span.button(@click='refresh') Refresh
-      flag(:locale='state.config.sourceLanguage' size='20')
-      v-cog.setting-button
+      div
+        v-refresh.setting-button(@click='refresh') Refresh
+        v-cog.setting-button
 
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
@@ -20,6 +20,7 @@
 <script lang="js">
 import Vue from 'vue'
 import VCog from 'vue-material-design-icons/Cog.vue'
+import VRefresh from 'vue-material-design-icons/Refresh.vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
 import { vscode } from './api'
@@ -29,6 +30,7 @@ export default Vue.extend({
     Flag,
     KeyEditor,
     VCog,
+    VRefresh,
   },
 
   data() {
@@ -63,11 +65,11 @@ export default Vue.extend({
   --review-request-change #d8583e
   --review-comment #EFC73D
   user-select none
-
-  padding-bottom 12px
+  font-size 1.1em
+  padding-bottom 1.5em
 
   .nav-bar
-    padding 12px 0
+    padding 1.2em 0
     display grid
     grid-template-columns max-content auto max-content max-content
 
@@ -75,18 +77,20 @@ export default Vue.extend({
       vertical-align middle
 
   .nav-middle
-    margin auto 12px
+    margin auto 1em
 
   .title
-    font-size 1.2em
+    font-size 1.1em
 
   .logo
     margin auto
+    width 2.5em
+    height 2.5em
 
   .setting-button
-    font-size 1.8em
-    margin-bottom 10px
-    opacity 0.6
+    font-size 1.6em
+    margin-left 0.4em
+    opacity 0.4
     cursor pointer
 
     &:hover
@@ -98,16 +102,13 @@ export default Vue.extend({
 .button
   cursor pointer
   position relative
-  padding 4px 8px
+  padding 0.4em 0.8em
   font-size 0.8em
   display inline-block
 
   .material-design-icon
     font-size 1.2em
-    margin-top -1px
-    margin-bottom -1px
-    margin-left -3px
-    margin-right 2px
+    margin -0.1em 0.2em -0.1em -0.2em
 
   &::before
     content ""
@@ -155,5 +156,8 @@ export default Vue.extend({
 
 .buttons
   .button
-    margin 4px 8px 4px 0
+    margin 0.3em 0.6em 0.3em 0
+
+    &:last-child
+      margin 0.3em 0.3em 0.3em 0
 </style>

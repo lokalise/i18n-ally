@@ -177,7 +177,6 @@ export default Vue.extend({
       this.active = true
     },
     onBlur(e) {
-      console.log(e)
       if (!e.relatedTarget) {
         e.preventDefault()
         e.srcElement.focus()
@@ -235,7 +234,7 @@ export default Vue.extend({
 
 <style lang="stylus">
 .panel
-  padding 5px
+  padding 0.4em
   position relative
 
   &::before, &::after
@@ -268,11 +267,11 @@ export default Vue.extend({
   label
     display block
     font-size 0.8em
-    margin-top 4px
-    margin-bottom 1px
+    margin-top 0.4em
+    margin-bottom 0.1em
 
   label:not(:first-child)
-    margin-top 8px
+    margin-top 0.8em
 
 .record-editor
   .edit-input
@@ -280,15 +279,18 @@ export default Vue.extend({
     grid-template-columns max-content auto max-content
     margin-top 8px
 
+    .buttons
+      margin auto
+
   .review-panel
     padding-bottom 8px
 
   .comment-form
     padding 6px 12px
-    margin-top 4px
+    margin-top 0.3em
 
     .buttons
-      margin-top 4px
+      margin-top 0.3em
 
   .comment-content
     display grid
@@ -313,15 +315,15 @@ export default Vue.extend({
     grid-template-columns max-content auto
 
     .avatar
-      margin 8px 6px 0 6px
+      margin 0.5em 0.6em 0 0.6em
 
   & > *
     vertical-align middle
 
   .flag-icon
-    width 30px
-    height 25px
-    padding 2px 0
+    width 2em
+    height 1.8em
+    padding 0.2em 0
 
   textarea
     margin auto
@@ -331,6 +333,7 @@ export default Vue.extend({
     width calc(100% - 10px)
     resize none
     overflow-y hidden
+    font-size 0.8em
 
   input:focus,
   select:focus,

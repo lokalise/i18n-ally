@@ -37,24 +37,24 @@ export default Vue.extend({
   position relative
 
   .image
-    width 25px
-    height 25px
+    width 1.6em
+    height 1.6em
     border-radius 50%
     overflow hidden
     background var(--vscode-foreground)
 
   .state
     position absolute
-    right -1px
-    top 14px
-    height 12px
-    width 12px
+    left 1.2em
+    top 1.2em
+    height 1em
+    width 1em
     border-radius 50%
     color white
     font-size 0.8em
 
     & > svg
-      margin 1px 1px 2px 1px
+      margin 0.1em 0.1em 0.1em 0.0em
 
     &.plus-minus-icon
       background var(--review-request-change)
