@@ -12,18 +12,17 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/i/antfu.i18n-ally.svg?color=63ba83" alt="Visual Studio Marketplace Installs" /></a>
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://vsmarketplacebadge.apphb.com/trending-monthly/antfu.i18n-ally.svg?color=a1b858" alt="Marketplace Trending Monthly" /></a>
 <br/>
-<!--<a href="https://circleci.com/gh/antfu/i18n-ally/" target="__blank"><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/antfu/i18n-ally"></a>-->
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg?color=a38eed" alt="GitHub last commit" /></a>
 <a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg?color=c977be" alt="GitHub issues" /></a>
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/antfu/i18n-ally?style=social"></a>
 </p>
 
 <p align='center'>
-<img src="https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png"/>&nbsp;&nbsp;<b><a href="https://github.com/ngneat/transloco">Transloco</a></b> is now supported! 🎉
+<b>v2.0</b> is now released with new <a href='https://github.com/antfu/i18n-ally/wiki/Migration-v1.x'>Editor UI</a> and <a href='https://github.com/antfu/i18n-ally/wiki/Review-System'>Review System</a> 🎉
 </p>
 
 <p align='center'><i>
-<a href="https://github.com/antfu/i18n-ally/blob/master/docs/migration_v1.x.md">Migrate from Vue i18n Ally</a>
+<a href="https://github.com/antfu/i18n-ally/wiki/Migration-v1.x">Migrate from v1.x</a>
 </i></p>
 <br>
 
@@ -49,12 +48,12 @@ Supported frameworks are auto-detected when a matching dependency is found in th
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VSCode Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config with `"i18n-ally.enabledFrameworks": "chrome-ext"` |
 | ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
-| 🎎 **Custom**  | ✅ | **For almost any framework! [How to...](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)** |
+| 🎎 **Custom**  | ✅ | **For almost any framework! [How to...](https://github.com/antfu/i18n-ally/wiki/Custom-Framework)** |
 
 If you would like to make it work for frameworks not listed above, you can:
   - Open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D)
   - Fork and raise a Pull Request
-  - [Config your custom framework](https://github.com/antfu/i18n-ally/blob/master/docs/custom_framework.md)
+  - [Config your custom framework](https://github.com/antfu/i18n-ally/wiki/Custom-Framework)
 
 
 <h2 align="center"> ⚡ Features </h2>
@@ -127,12 +126,11 @@ If you would like to make it work for frameworks not listed above, you can:
 - Supports remote development
 - Supports numerous popular frameworks
 - Supports [linked locale messages](https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages)
-- Uses i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-help-translate-this-extension)
+- Uses i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-multilingual-support)
 
 <p align="center">
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
-
 
 ## 📜 Supported Locale Formats
 
@@ -149,7 +147,7 @@ If you would like to make it work for frameworks not listed above, you can:
 
 *\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on read-only mode by `i18n-ally.readonly` to prevent losing comments.*
 
-> 💡 From v1.16, only `JSON`, `YAML` and `JSON5` would be enabled by default. Other formats would be enabled by the activated frameworks or by manually configured (e.g. `"i18n-ally.enabledParsers": ["js", "ts"]`).
+> 💡 From v2.0, only `JSON`, `YAML` and `JSON5` would be enabled by default. Other formats would be enabled by the activated frameworks or by manually configured (e.g. `"i18n-ally.enabledParsers": ["js", "ts"]`).
 
 ## 📂 Directory Structure
 
@@ -184,52 +182,15 @@ or
       └── ...
 ```
 
+## 📖 Documentation
 
-## ⚙ Common Configurations
+Check out [the wiki](https://github.com/antfu/i18n-ally/wiki).
 
-All fields must be prefixed with "`i18n-ally.`" in settings.
+## 💭 FAQ
 
-| Field | Default | Description |
-| --- | --- | --- |
-| `sourceLanguage` | `en` | The primary locale for the project. It will also be the source language when translating |
-| `displayLanguage` | `en` | Display language in annotations and tree views |
-| `localesPaths` | auto | Locales directory path, relative to the root of your project. It can also be an array of paths. Glob patterns are acceptable |
-| `sortKeys` | `false` | Sort keys alphabetically when saving |
-| `keystyle` | auto | Key style in your locale files. Can be `flat`({"a.b.c": "..."}) or `nested`({"a": {"b": {"c": "..."}}}) |
-| `annotations` | `true` | Enable inline annotations |
-| `keepFulfilled` | `false` | Always keep all keys fulfilled with empty strings |
-| `enabledFrameworks` | auto | Specify the supported framework(s) to enable. If no value is set, the extension will detect frameworks automatically |
-| `enabledParsers` | auto | Locale file format parsers. By default, It will be handled by activated frameworks |
-| `indent` | 2 | Indentation size for your locale files |
-| `tabStyle` | `space` | Tab style for your locale files |
+Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
-### 🔩 Advanced Configurations
-
-| Field | Default | Description |
-| --- | --- | --- |
-| `namespace` | `false` | Enable namespacing of keys by filename/directory structure. [More details](./docs/namespace.md) |
-| `pathMatcher` | null | Allows you to map the custom filename/namespace. [More details](./docs/path_matcher.md). |
-| `keyMatchRegex` | `[\w\d\. \-\[\]]*?` | Regex for keypath matching. Set it to `.*?` to allow Unicode |
-| `promptTranslatingSource` | `false` | Prompt to select the source locale on translating every time. If set to false, the source language in the config will be used |
-| `disablePathParsing` | `false` | Enable this if you use natural languages as the key of your locale messages |
-| `encoding` | `utf-8` | File encoding for reading and writing locale files. Set to `auto` to let it decide for you. |
-| `readonly` | `false` | Work on read-only mode. Translating and editing will be disabled |
-
-## ✌ Recommended Setup
-
-To get the best experience from this extension (and other translation services as well), We recommend you use the following setup:
-
-- Use `JSON` or `YAML` as your locale files. (Although other formats are supported as well, JSON and YAML works best for statistical analysis)
-- The following configuration allows you to stay synced through all the locales.
-
-```jsonc
-{
-  "i18n-ally.sortKeys": true,
-  "i18n-ally.keepFulfilled": true,
-}
-```
-
-## 🌍 Help Translate This Extension
+## 🌍 Multilingual Support
 
 This extension itself supports i18n as well. It will be auto-matched to the display language you use in your VSCode editor. We currently support the following languages.
 
@@ -245,77 +206,11 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
 | Français |  | [@Nicoxx45](https://github.com/Nicoxx45) |
 
-If you would like to help translate this extension, you can do it by following steps.
-
-1. Fork this repo and clone it to you local machine
-2. Copy `package.nls.json` to `package.nls.<locale-code>.json` in the root of the repo
-3. Translate every single message in the new JSON file you created.
-4. You may also update the table above in README.md.
-5. Commit changes and make a PR to this repo
-
-We recommend you to use VSCode with `i18n-ally`. It supports i18n for VSCode extension development which can help you translate itself 😁.
+[**Help Translate**](https://github.com/antfu/i18n-ally/wiki/Contribute#working-on-translations)
 
 > 👨‍💻 If you would like to help a language's translation up to date, feel free to put your name in the **Maintainers** field. I will @mention you when needed. Much appreciated.
 
-
-## 🎯 Troubleshooting
-
-### The extension doesn't work/show up (There is no icon in Activity bar)
-
-This extension support numerous frameworks. Be sure the framework you are using is on [the list](https://github.com/antfu/i18n-ally#-supported-frameworks).
-
-Also, `package.json` is relied on to detect which framework you are using. It should be at the root of your project as well.
-
-
-### I can see the icon in Activity bar, but nothing shows up
-
-1. **Locales path config missing**. `locales` path will be detected automatically the first time you open a project. If nothing shows up, you may need to configure it manually. There are two ways to do that:
-   - Open **Command Palette** (`Ctrl-Shift-P` or `⌘⇧P`), type `i18n Ally: Manual configure locales path` then press enter and follow the guide.
-   - Go to the settings of VSCode and set `i18n-ally.localesPaths` manually.
-2. **The source / displaying locale**. The default locale is set to English(`en`). If you don't have English in your supporting locales, you may need to config it through command `i18n Ally: Change source language`
-3. Check your **Directory structure**
-
-
-### I am working on a monorepo and the extension can not detect my project
-
-Usually, `i18n ally` looks for your `package.json` file at the root of your project. If you don't have it at the root, you can always specify the framework(s) you are using by `i18n-ally.enabledFrameworks` config.
-
-
-### Advanced folder directory configurations
-
-In some cases, you may use modules, monorepo or other philosophies to organize your locale files.
-
-**For example**, you have the following directory structure need to be config.
-
-```
-  packages
-  ├── pkgA
-  |   └── i18n
-  |       ├── en.messages.json
-  |       ├── zh-CN.messages.json
-  |       └── ...
-  ├── pkgB
-  |   └── i18n
-  |       ├── en.messages.json
-  |       ├── zh-CN.messages.json
-  |       └── ...
-  └── ...
-```
-
-The following config would make it work,
-
-```json
-{
-  "i18n-ally.localesPaths": [
-    "packages/**/**/i18n"
-  ],
-  "i18n-ally.pathMatcher": "{locale}.messages.json",
-}
-```
-
-> Learn more about [`pathMatcher`](./docs/path-matcher.md)
-
-## 👨‍💻 Thanks
+## ❤️ Thanks
 
 This extension was inspired by [think2011/vscode-vue-i18n](https://github.com/think2011/vscode-vue-i18n), it wouldn't exist without [@think2011](https://github.com/think2011)'s great work.
 
