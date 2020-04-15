@@ -128,6 +128,7 @@
   "prompt.translate_in_progress": "Traduzir",
   "prompt.translate_missing_confirm": "Quer mesmo traduzir {0} chaves faltantes para a língua \"{1}\" do \"{2}\"\n\nEsta operação não poderá ser desfeita.",
   "prompt.translate_multiple_confirm": "",
+  "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Passar para arquivo js/ts não é suportado",
   "refactor.extract_text": "Extrair texto como mensagem i18n",
   "review.placeholder.approve": "",

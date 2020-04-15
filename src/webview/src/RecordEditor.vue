@@ -6,6 +6,7 @@
       ref='textarea1'
       placeholder='(empty)'
       rows='1'
+      :readonly='readonly'
       v-model='value'
       @focus='onFocus'
       @blur='onBlur'
@@ -13,12 +14,16 @@
     )
 
     .buttons(v-if='active')
+      .button(v-if='readonly' disabled)
+        v-pencil-off
+
+      .button(@click='translate' v-if='!readonly')
+        v-translate
+        span Translate
+
       .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
         v-comment-edit-outline
-        | Review
-      .button(@click='translate')
-        v-translate
-        | Translate
+        span Review
 
     .review-brief(v-if='$store.state.config.review')
       v-check.state-icon(v-if='reviewBrief==="approve"')
@@ -39,10 +44,10 @@
           .text(:class='{placeholder: !c.comment}') {{c.comment || (c.type === "approve" ? "Approved" : "Change requested")}}
 
           .buttons
-            .button.flat(v-if='c.suggestion') Accept Suggestion
+            .button.flat(v-if='!readonly && c.suggestion' ) Accept Suggestion
             .button.approve.flat(@click='resolveComment(c)')
               v-checkbox-marked-outline
-              | Resolve
+              span Resolve
 
       template(v-if='reviewing')
         avatar(:user='$store.state.config.user')
@@ -56,25 +61,26 @@
               v-model='reviewForm.comment'
             )
 
-          label Suggestion
-          .panel
-            textarea(
-              rows='1'
-              ref='textarea3'
-              placeholder='(Optional)'
-              v-model='reviewForm.suggestion'
-            )
+          template(v-if='!readonly')
+            label Suggestion
+            .panel
+              textarea(
+                rows='1'
+                ref='textarea3'
+                placeholder='(Optional)'
+                v-model='reviewForm.suggestion'
+              )
 
           .buttons
             .button.approve(@click='postComment("approve")' :disabled='!!reviewForm.suggestion')
               v-check
-              | Approve
+              span Approve
             .button.request-change(@click='postComment("request_change")')
               v-plus-minus
-              | Request Change
+              span Request Change
             .button.comment(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment')
               v-comment-outline
-              | Leave Comment
+              span Leave Comment
             .button(@click='resetForm()') Cancel
 </template>
 
@@ -87,6 +93,7 @@ import VTranslate from 'vue-material-design-icons/Translate.vue'
 import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
 import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
+import VPencilOff from 'vue-material-design-icons/PencilOff.vue'
 import { getCommentState } from '../../utils/shared'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
@@ -103,6 +110,7 @@ export default Vue.extend({
     VCommentEditOutline,
     VCheckboxMarkedOutline,
     VCommentQuestionOutline,
+    VPencilOff,
   },
 
   props: {
@@ -131,6 +139,9 @@ export default Vue.extend({
     },
     reviewBrief() {
       return getCommentState(this.comments)
+    },
+    readonly() {
+      return this.record.readonly
     },
   },
 
@@ -252,6 +263,7 @@ export default Vue.extend({
 .panel
   padding 0.4em
   position relative
+  display grid
 
   &::before, &::after
     content ""
@@ -283,8 +295,10 @@ export default Vue.extend({
   label
     display block
     font-size 0.8em
-    margin-top 0.4em
-    margin-bottom 0.1em
+    margin-left 0.1em
+    margin-top 0.3em
+    margin-bottom 0.3em
+    opacity 0.8
 
   label:not(:first-child)
     margin-top 0.8em
@@ -306,7 +320,7 @@ export default Vue.extend({
     margin-top 0.3em
 
     .buttons
-      margin-top 0.3em
+      margin-top 0.7em
 
   .state-icon
     padding-left 0.2em
@@ -369,7 +383,7 @@ export default Vue.extend({
     background transparent
     border none
     color var(--vscode-forground)
-    width calc(100% - 10px)
+    width 100%
     resize none
     overflow-y hidden
     font-size 0.8em

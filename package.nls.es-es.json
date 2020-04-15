@@ -128,6 +128,7 @@
   "prompt.translate_in_progress": "Traducir",
   "prompt.translate_missing_confirm": "Are you sure to translate {0} missing keys for language \"{1}\" from \"{2}\"?\n\nThis operation cannot be undone.",
   "prompt.translate_multiple_confirm": "",
+  "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Escribir archivos a js/ts no está soportado.",
   "refactor.extract_text": "Extraer texto en mensajes i18n",
   "review.placeholder.approve": "",

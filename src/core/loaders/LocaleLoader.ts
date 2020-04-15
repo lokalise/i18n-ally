@@ -371,7 +371,7 @@ export class LocaleLoader extends Loader {
         locale,
         value,
         namespace,
-        readonly: parser.readonly,
+        readonly: parser.readonly || Config.readonly,
       }
 
       return true

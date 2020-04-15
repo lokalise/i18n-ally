@@ -200,6 +200,9 @@ export class Translator {
     const jobs: TranslateJob[] = []
 
     const pushRecord = (node: LocaleRecord) => {
+      if (node.readonly)
+        return
+
       if (Config.translateOverrideExisting || !node.value) {
         jobs.push({
           loader,
@@ -226,6 +229,9 @@ export class Translator {
         pushRecord(node)
       }
       else {
+        if (node.readonly)
+          continue
+
         Object.values(loader.getShadowLocales(node, targetLocales))
           .filter(record => record.locale !== sourceLanguage)
           .forEach(record => pushRecord(record))

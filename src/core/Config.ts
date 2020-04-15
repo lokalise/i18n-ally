@@ -18,13 +18,13 @@ export class Config {
     'encoding',
     'namespace',
     'disablePathParsing',
+    'readonly',
   ]
 
   static readonly refreshConfigs = [
     'sourceLanguage',
     'ignoredLocales',
     'displayLanguage',
-    'readonly',
     'keyMathRegex',
   ]
 

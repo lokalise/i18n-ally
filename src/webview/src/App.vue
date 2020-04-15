@@ -110,6 +110,9 @@ export default Vue.extend({
     font-size 1.2em
     margin -0.1em 0.2em -0.1em -0.2em
 
+    &:last-child
+      margin -0.1em -0.2em -0.1em -0.2em
+
   &::before
     content ""
     position absolute

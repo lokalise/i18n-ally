@@ -128,6 +128,7 @@
   "prompt.translate_in_progress": "翻译中",
   "prompt.translate_missing_confirm": "您确定要使用 {2} 翻译到 {1} 缺失的 {0} 条文案吗？\n\n此操作将无法撤消。",
   "prompt.translate_multiple_confirm": "您确定要翻译 {0} 条文案吗？",
+  "prompt.translate_no_jobs": "",
   "prompt.writing_js": "不支持写入文案至 js/ts 文件",
   "refactor.extract_text": "提取文案到 i18n",
   "review.placeholder.approve": "",
