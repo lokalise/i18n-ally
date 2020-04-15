@@ -132,22 +132,11 @@ If you would like to make it work for frameworks not listed above, you can:
 <img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
 </p>
 
-## 📜 Supported Locale Formats
 
-| Format | Read | Write | Annotations | Note |
-| ---    | ---  | ---   | ---         | ---  |
-| **JSON**   | ✅ | ✅ | ✅ |  |
-| **YAML**   | ✅ | ✅ | ✅ | *Comments will NOT be preserved\** |
-| **JSON5**  | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
-| INI        | ✅ | ✅ | ❌ | *Comments will NOT be preserved\** |
-| POT        | ✅ | ✅ | ❌ |  |
-| JavaScript | ✅ | ❌ | ❌ | *Read-only* |
-| TypeScript | ✅ | ❌ | ❌ | *Read-only* |
-| PHP        | ✅ | ❌ | ❌ | *Read-only* |
+## 📖 Documentation
 
-*\* Due to the limitation of `yaml.dumps`([#196](https://github.com/nodeca/js-yaml/issues/196)) and `JSON5.stringify`([#177](https://github.com/json5/json5/issues/177)), **comments in YAML and JSON5 will be OMITTED** on any modification by this extension (editing, translating, etc). If you are using comments in your locale files, you can turn on read-only mode by `i18n-ally.readonly` to prevent losing comments.*
+Check out [the wiki](https://github.com/antfu/i18n-ally/wiki).
 
-> 💡 From v2.0, only `JSON`, `YAML` and `JSON5` would be enabled by default. Other formats would be enabled by the activated frameworks or by manually configured (e.g. `"i18n-ally.enabledParsers": ["js", "ts"]`).
 
 ## 📂 Directory Structure
 
@@ -182,13 +171,15 @@ or
       └── ...
 ```
 
-## 📖 Documentation
-
-Check out [the wiki](https://github.com/antfu/i18n-ally/wiki).
+For more complex structure, please check out [Path Matcher) and [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
 ## 💭 FAQ
 
 Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
+
+## 📜 Supported Locale Formats
+
+Check out [Supported Locale Formats](https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats).
 
 ## 🌍 Multilingual Support
 
