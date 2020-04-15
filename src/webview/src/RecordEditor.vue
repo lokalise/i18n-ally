@@ -23,7 +23,7 @@
     .review-brief(v-if='$store.state.config.review')
       v-check.state-icon(v-if='reviewBrief==="approve"')
       v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
-      v-comment-question-outline.state-icon(v-else-if='reviewBrief==="mixed"')
+      v-comment-question-outline.state-icon(v-else-if='reviewBrief==="conflict"')
       v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
 
   .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
@@ -130,7 +130,7 @@ export default Vue.extend({
         .filter(i => !i.resolved)
     },
     reviewBrief() {
-      return getCommentState()
+      return getCommentState(this.comments)
     },
   },
 

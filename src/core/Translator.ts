@@ -87,6 +87,13 @@ export class Translator {
 
     const jobs = this.getTranslateJobs(loader, nodes, sourceLanguage, targetLocales)
 
+    if (!jobs.length) {
+      window.showInformationMessage(
+        i18n.t('prompt.translate_no_jobs'),
+      )
+      return
+    }
+
     if (jobs.length > 1) {
       const Yes = i18n.t('prompt.button_yes')
       const result = await window.showWarningMessage(

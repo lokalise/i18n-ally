@@ -128,6 +128,7 @@
   "prompt.translate_in_progress": "Translating",
   "prompt.translate_missing_confirm": "Are you sure you want to translate {0} missing keys for language \"{1}\" from \"{2}\"?\n\nThis operation cannot be undone!",
   "prompt.translate_multiple_confirm": "Are you sure to translate {0} keys?",
+  "prompt.translate_no_jobs": "No translation needed.",
   "prompt.writing_js": "Writing to js/ts files is not supported.",
   "refactor.extract_text": "Extract text into i18n messages",
   "review.placeholder.approve": "Approved",

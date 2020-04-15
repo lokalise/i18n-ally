@@ -82,7 +82,7 @@
         "command": "extension.i18n-ally.copy-key",
         "category": "%extname%",
         "title": "%command.copy_key%",
-        "icon": "$(files)"
+        "icon": "$(symbol-file)"
       },
       {
         "command": "extension.i18n-ally.translate-key",
@@ -308,17 +308,17 @@
         },
         {
           "command": "extension.i18n-ally.rename-key",
-          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@1"
         },
         {
           "command": "extension.i18n-ally.duplicate-key",
-          "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/",
+          "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@2"
         },
         {
           "command": "extension.i18n-ally.delete-key",
-          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@3"
         },
         {

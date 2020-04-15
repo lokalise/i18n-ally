@@ -76,11 +76,17 @@ export class LocaleTreeItem extends BaseTreeItem {
   get contextValue() {
     const values: string[] = [this.node.type]
 
+    if (this.node.readonly)
+      values.push('readonly')
+    else
+      values.push('writable')
+
+    if (NodeHelper.isOpenable(this.node))
+      values.push('openable')
+
     if (!this.editorMode) {
       if (NodeHelper.isTranslatable(this.node))
         values.push('translatable')
-      if (NodeHelper.isOpenable(this.node))
-        values.push('openable')
       if (NodeHelper.isEditable(this.node))
         values.push('editable')
     }

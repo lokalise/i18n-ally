@@ -33,9 +33,17 @@ export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressR
     if (!node)
       return
 
-    let locale = Config.displayLanguage
-    if (item instanceof LocaleTreeItem && item.displayLocale)
-      locale = item.displayLocale
+    let locale: string | undefined = Config.displayLanguage
+
+    if (node.type === 'node') {
+      locale = await window.showQuickPick(
+        Global.visibleLocales,
+        { placeHolder: i18n.t('prompt.choice_locale') },
+      )
+    }
+
+    if (!locale)
+      return
 
     const record = await getRecordFromNode(node, locale)
 

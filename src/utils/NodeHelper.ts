@@ -35,7 +35,7 @@ export class NodeHelper {
   static isEditable(node: Node) {
     return !Config.readonly
       && !node.readonly
-      && node.type !== 'tree'
+      && node.type === 'record'
   }
 
   static splitKeypath(keypath: string): string[] {
