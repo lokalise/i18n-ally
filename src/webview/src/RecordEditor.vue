@@ -249,14 +249,11 @@ export default Vue.extend({
       this.$refs.textarea1.focus()
     },
     resolveComment(comment) {
-      const index = (this.review?.comments || []).indexOf(comment)
-      if (index < 0)
-        return
       vscode.postMessage({
         name: 'review.resolve',
         keypath: this.record.keypath,
         locale: this.record.locale,
-        comment: index,
+        comment: comment.id,
       })
     },
   },

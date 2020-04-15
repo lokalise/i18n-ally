@@ -4,6 +4,7 @@ import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, wo
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
 import { Config, CurrentFile, Global } from '../core'
+import { EXT_EDITOR_ID } from '../meta'
 
 interface EditorPanelOptions {
 }
@@ -13,7 +14,6 @@ export class EditorPanel {
    * Track the currently panel. Only allow a single panel to exist at a time.
    */
   public static currentPanel: EditorPanel | undefined
-  public static readonly viewType = 'i18n-ally-editor'
   private static _onDidChanged = new EventEmitter<boolean>()
   public static onDidChange = EditorPanel._onDidChanged.event
 
@@ -44,7 +44,7 @@ export class EditorPanel {
     this.options = options
     this._ctx = ctx
     this._panel = panel || window.createWebviewPanel(
-      EditorPanel.viewType,
+      EXT_EDITOR_ID,
       i18n.t('editor.title'),
       ViewColumn.Active,
       {
@@ -172,7 +172,7 @@ export class EditorPanel {
         break
 
       case 'review.resolve':
-        Global.reviews.resolveComment(message.keypath, message.locale, +message.comment)
+        Global.reviews.resolveComment(message.keypath, message.locale, message.comment)
         break
     }
   }

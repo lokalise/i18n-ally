@@ -3,9 +3,11 @@ import YAML from 'js-yaml'
 import fs from 'fs-extra'
 import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscode'
 import { get, set } from 'lodash'
+import { nanoid } from 'nanoid'
 import { Config } from './Config'
 
 export interface ReviewComment {
+  id: string
   type?: 'approve' | 'request_change' | 'comment'
   comment?: string
   suggestion?: string
@@ -75,23 +77,34 @@ export class Reviews {
     return this.data.reviews[key] || {}
   }
 
-  addComment(key: string, locale: string, comment: ReviewComment) {
+  addComment(key: string, locale: string, comment: Partial<ReviewComment>) {
     const comments = this.get(key, 'comments', locale) || []
     comments.push({
       user: Config.reviewUser,
+      id: nanoid(),
       ...comment,
       time: new Date().toISOString(),
     })
     return this.set(key, 'comments', comments, locale)
   }
 
-  async resolveComment(key: string, locale: string, commentIndex: number) {
-    const comments = this.get(key, 'comments', locale)
-    if (comments && comments[commentIndex]) {
+  getComments(key: string, locale: string, hideResolved = true) {
+    const comments: ReviewComment[] = this.get(key, 'comments', locale) || []
+    if (hideResolved)
+      return comments.filter(i => !i.resolved)
+    else
+      return comments
+  }
+
+  async resolveComment(key: string, locale: string, id: string) {
+    const comments = this.getComments(key, locale, false)
+    const comment = comments.find(i => i.id === id)
+
+    if (comment) {
       if (Config.reviewRemoveCommentOnResolved)
-        comments.splice(commentIndex, 1)
+        comments.splice(comments.indexOf(comment), 1)
       else
-        comments[commentIndex].resolved = true
+        comment.resolved = true
       return this.set(key, 'comments', comments, locale)
     }
   }

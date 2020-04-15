@@ -1,3 +1,4 @@
+import { flatten } from 'lodash'
 import { ExtensionModule } from '../modules'
 import annotation from './annotation'
 import localeAnnotation from './localeAnnotation'
@@ -8,7 +9,7 @@ import refactor from './refactor'
 import problems from './problems'
 import reference from './reference'
 import statusbar from './statusbar'
-import { flatten } from 'lodash'
+import reviewComments from './reviewComments'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -21,6 +22,7 @@ const m: ExtensionModule = (ctx) => {
     reference(ctx),
     statusbar(ctx),
     localeAnnotation(ctx),
+    reviewComments(ctx),
   ])
 }
 

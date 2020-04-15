@@ -1,7 +1,6 @@
 import { Config } from '../core'
 import { LanguageId, Log } from '../utils'
 import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../core/types'
-import { ParserExtRegEx } from '../meta'
 import i18n from '../i18n'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
@@ -45,11 +44,11 @@ export abstract class Framework {
    */
   pathMatcher(dirStructure?: DirStructure): RegExp | string {
     if (dirStructure === 'file')
-      return `{locale}.(${ParserExtRegEx})`
+      return '{locale}.{ext}'
     else if (Config.namespace)
-      return `{locale}/**/{namespace}.(${ParserExtRegEx})`
+      return '{locale}/**/{namespace}.{ext}'
     else
-      return `{locale}/**/*.(${ParserExtRegEx})`
+      return '{locale}/**/*.{ext}'
   }
 
   enableFeatures?: OptionalFeatures

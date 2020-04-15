@@ -7,9 +7,9 @@
 <script lang="js">
 /* eslint-disable vue/require-default-prop */
 import Vue from 'vue'
-import md5 from 'blueimp-md5'
 import VCheck from 'vue-material-design-icons/Check.vue'
 import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
+import { getAvatarFromEmail } from '../../utils/user'
 
 export default Vue.extend({
   components: {
@@ -23,7 +23,7 @@ export default Vue.extend({
 
   computed: {
     src() {
-      return `https://www.gravatar.com/avatar/${md5(this.user.email)}`
+      return getAvatarFromEmail(this.user.email)
     },
   },
 })

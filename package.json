@@ -1,7 +1,7 @@
 {
   "name": "i18n-ally",
   "displayName": "%extname%",
-  "description": "🌍 All in one i18n extension for VSCode",
+  "description": "🌍 All in one i18n extension for VS Code",
   "version": "1.15.5",
   "publisher": "antfu",
   "engines": {
@@ -193,57 +193,119 @@
         "command": "extension.i18n-ally.open-in-editor",
         "category": "%extname%",
         "title": "%command.open_in_editor%"
+      },
+      {
+        "command": "extension.i18n-ally.review.comment",
+        "title": "Leave Comment",
+        "enablement": "!commentIsEmpty"
+      },
+      {
+        "command": "extension.i18n-ally.review.approve",
+        "title": "Approve"
+      },
+      {
+        "command": "extension.i18n-ally.review.requestChange",
+        "title": "Request Change"
+      },
+      {
+        "command": "extension.i18n-ally.review.reply",
+        "title": "Reply",
+        "enablement": "!commentIsEmpty"
+      },
+      {
+        "command": "extension.i18n-ally.review.edit",
+        "title": "Edit",
+        "icon": {
+          "dark": "./res/dark/edit.svg",
+          "light": "./res/light/edit.svg"
+        }
+      },
+      {
+        "command": "extension.i18n-ally.review.resolve",
+        "title": "Resolve",
+        "icon": {
+          "dark": "./res/dark/close.svg",
+          "light": "./res/light/close.svg"
+        }
+      },
+      {
+        "command": "extension.i18n-ally.review.resolveThread",
+        "title": "Resolve",
+        "icon": {
+          "dark": "./res/dark/close.svg",
+          "light": "./res/light/close.svg"
+        }
       }
     ],
     "menus": {
       "commandPalette": [
         {
           "command": "extension.i18n-ally.set-display-language",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.set-source-language",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.copy-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.edit-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.delete-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.rename-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.translate-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.open-key",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.open-url",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-hide",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.locale-visibility-show",
-          "when": "config.no_exits"
+          "when": "false"
         },
         {
           "command": "extension.i18n-ally.mark-key-as-in-use",
-          "when": "config.no_exits"
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.comment",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.approve",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.requestChange",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.resolveThread",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.resolve",
+          "when": "false"
         }
       ],
       "view/item/context": [
@@ -332,6 +394,44 @@
           "group": "navigation",
           "when": "view =~ /i18n-ally-locales-tree/"
         }
+      ],
+      "comments/commentThread/title": [
+        {
+          "command": "extension.i18n-ally.review.resolveThread",
+          "group": "navigation",
+          "when": "commentController == i18n-ally-review && !commentThreadIsEmpty"
+        }
+      ],
+      "comments/commentThread/context": [
+        {
+          "command": "extension.i18n-ally.review.approve",
+          "group": "inline@1",
+          "when": "commentController == i18n-ally-review"
+        },
+        {
+          "command": "extension.i18n-ally.review.requestChange",
+          "group": "inline@2",
+          "when": "commentController == i18n-ally-review"
+        },
+        {
+          "command": "extension.i18n-ally.review.comment",
+          "group": "inline@3",
+          "when": "commentController == i18n-ally-review"
+        }
+      ],
+      "comments/comment/title": [
+        {
+          "command": "extension.i18n-ally.review.edit",
+          "group": "group@1",
+          "when": "commentController == i18n-ally-review && viewItem =~ /self/"
+        },
+        {
+          "command": "extension.i18n-ally.review.resolve",
+          "group": "group@2",
+          "when": "commentController == i18n-ally-review"
+        }
+      ],
+      "comments/comment/context": [
       ]
     },
     "viewsContainers": {
@@ -824,6 +924,7 @@
     "json5": "^2.1.0",
     "limax": "^2.0.0",
     "lodash": "^4.17.11",
+    "nanoid": "^3.1.3",
     "node-html-parser": "^1.1.16",
     "parse-gitignore": "^1.0.1",
     "po2json": "^1.0.0-alpha",

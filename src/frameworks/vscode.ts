@@ -4,7 +4,7 @@ import { Framework } from './base'
 
 class VSCodeFramework extends Framework {
   id = 'vscode'
-  display = 'VSCode'
+  display = 'VS Code'
 
   detection = {
     packageJSON: [
