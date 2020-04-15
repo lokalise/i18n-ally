@@ -277,8 +277,8 @@ export class Config {
     return this.getConfig<number>('translate.parallels') || 5
   }
 
-  static get translateServices() {
-    return this.getConfig<string[]>('translate.services') || ['google', 'baidu', 'youdao']
+  static get translateEngines() {
+    return this.getConfig<string[]>('translate.engines') || ['google']
   }
 
   static get disablePathParsing() {

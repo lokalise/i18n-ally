@@ -1,6 +1,6 @@
 import { EventEmitter, CancellationToken, window, ProgressLocation, commands } from 'vscode'
-import { TranslateResult, TranslateOptions } from 'translation.js/declaration/api/types'
-import { google, baidu, youdao } from 'translation.js'
+import { TranslateResult } from '../translators/engines/base'
+import Translate from '../translators'
 import i18n from '../i18n'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
@@ -27,17 +27,11 @@ export type AccaptableTranslateItem =
   | LocaleRecord
   | {locale: string; keypath: string; type: undefined}
 
-const Services: Record<string, (options: TranslateOptions) => Promise<TranslateResult>> = {
-  google: (options: TranslateOptions) => google.translate({ ...options, com: true }),
-  'google-cn': (options: TranslateOptions) => google.translate({ ...options, com: false }),
-  baidu: baidu.translate,
-  youdao: youdao.translate,
-}
-
 export class Translator {
   private static translatingKeys: {keypath: string; locale: string}[] = []
   private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
   static readonly onDidChange = Translator._onDidChange.event
+  private static _translator = new Translate()
 
   // #region utils
   private static start(keypath: string, locale: string, update = true) {
@@ -132,6 +126,7 @@ export class Translator {
             cancelledJobs.push(job)
         }
         catch (err) {
+          console.error(err)
           failedJobs.push([job, err])
         }
         finished += 1
@@ -269,20 +264,25 @@ export class Translator {
   }
 
   private static async translateText(text: string, from: string, to: string) {
-    const services = Config.translateServices.map(i => Services[i])
+    const engines = Config.translateEngines
     let trans_result: TranslateResult | undefined
 
     const errors: Error[] = []
 
-    for (const translate of services) {
+    for (const engine of engines) {
       try {
-        trans_result = await translate({ text, from, to })
+        trans_result = await this._translator.translate({ engine, text, from, to })
+        if (trans_result.error)
+          throw trans_result.error
+
         break
       }
       catch (e) {
         errors.push(e)
       }
     }
+
+    console.log(trans_result)
 
     const result = trans_result && (trans_result.result || []).join('\n')
 

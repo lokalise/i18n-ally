@@ -25,7 +25,7 @@ export class Log {
     Log.info(`⚠ WARN: ${message}`, intend)
   }
 
-  static async error(err: Error | string, prompt = true, intend = 0) {
+  static async error(err: Error | string | any = {}, prompt = true, intend = 0) {
     if (typeof err !== 'string')
       Log.info(`🐛 ERROR: ${err.name}: ${err.message}\n${err.stack}`, intend)
 
