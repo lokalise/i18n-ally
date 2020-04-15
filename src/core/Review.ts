@@ -6,6 +6,7 @@ import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { Config } from './Config'
 import { ReviewData, ReviewComment } from './types'
+import { CurrentFile } from './CurrentFile'
 
 export class Reviews {
   private filepath = ''
@@ -75,6 +76,12 @@ export class Reviews {
       return comments
   }
 
+  getCommentById(key: string, locale: string, id: string) {
+    const comments = this.getComments(key, locale, false)
+    const comment = comments.find(i => i.id === id)
+    return comment
+  }
+
   async resolveComment(key: string, locale: string, id: string) {
     const comments = this.getComments(key, locale, false)
     const comment = comments.find(i => i.id === id)
@@ -84,7 +91,20 @@ export class Reviews {
         comments.splice(comments.indexOf(comment), 1)
       else
         comment.resolved = true
-      return this.set(key, 'comments', comments, locale)
+      await this.set(key, 'comments', comments, locale)
+      return comment
+    }
+  }
+
+  async applySuggestion(key: string, locale: string, id: string) {
+    const comment = this.getCommentById(key, locale, id)
+    if (comment && comment.suggestion) {
+      await CurrentFile.loader.write({
+        keypath: key,
+        locale,
+        value: comment.suggestion,
+      })
+      await this.resolveComment(key, locale, id)
     }
   }
 

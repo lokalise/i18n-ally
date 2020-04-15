@@ -174,6 +174,10 @@ export class EditorPanel {
       case 'review.resolve':
         Global.reviews.resolveComment(message.keypath, message.locale, message.comment)
         break
+
+      case 'review.apply-suggestion':
+        Global.reviews.applySuggestion(message.keypath, message.locale, message.comment)
+        break
     }
   }
 

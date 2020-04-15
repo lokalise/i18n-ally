@@ -44,10 +44,17 @@
           .text(:class='{placeholder: !c.comment}') {{c.comment || (c.type === "approve" ? "Approved" : "Change requested")}}
 
           .buttons
-            .button.flat(v-if='!readonly && c.suggestion' ) Accept Suggestion
             .button.approve.flat(@click='resolveComment(c)')
               v-checkbox-marked-outline
               span Resolve
+
+        template(v-if='!readonly && c.suggestion')
+          div
+          .panel.shadow.comment-content
+            v-format-quote-open.state-icon
+            .text {{c.suggestion}}
+            .buttons
+              .button.flat(@click='acceptSuggestion(c)') Accept Suggestion
 
       template(v-if='reviewing')
         avatar(:user='$store.state.config.user')
@@ -78,7 +85,7 @@
             .button.request-change(@click='postComment("request_change")')
               v-plus-minus
               span Request Change
-            .button.comment(@click='postComment("comment")' :disabled='!reviewForm.suggestion && !reviewForm.comment')
+            .button.comment(@click='postComment("comment")' :disabled='!reviewForm.comment')
               v-comment-outline
               span Leave Comment
             .button(@click='resetForm()') Cancel
@@ -94,6 +101,7 @@ import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vu
 import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
 import VPencilOff from 'vue-material-design-icons/PencilOff.vue'
+import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
 import { getCommentState } from '../../utils/shared'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
@@ -111,6 +119,7 @@ export default Vue.extend({
     VCheckboxMarkedOutline,
     VCommentQuestionOutline,
     VPencilOff,
+    VFormatQuoteOpen,
   },
 
   props: {
@@ -255,6 +264,14 @@ export default Vue.extend({
         comment: comment.id,
       })
     },
+    acceptSuggestion(comment) {
+      vscode.postMessage({
+        name: 'review.apply-suggestion',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+        comment: comment.id,
+      })
+    },
   },
 })
 </script>
@@ -321,6 +338,7 @@ export default Vue.extend({
 
     .buttons
       margin-top 0.7em
+      margin-bottom 0.3em
 
   .state-icon
     padding-left 0.2em
@@ -338,6 +356,9 @@ export default Vue.extend({
 
     &.comment-outline-icon
       opacity 0.3
+
+    &.format-quote-open-icon
+      opacity 0.6
 
   .review-brief
     .state-icon

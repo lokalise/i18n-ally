@@ -199,11 +199,11 @@ export class Translator {
   ): TranslateJob[] {
     const jobs: TranslateJob[] = []
 
-    const pushRecord = (node: LocaleRecord) => {
+    const pushRecord = (node: LocaleRecord, force = false) => {
       if (node.readonly)
         return
 
-      if (Config.translateOverrideExisting || !node.value) {
+      if (force || Config.translateOverrideExisting || !node.value) {
         jobs.push({
           loader,
           locale: node.locale,
@@ -226,7 +226,7 @@ export class Translator {
         })
       }
       else if (node.type === 'record') {
-        pushRecord(node)
+        pushRecord(node, true)
       }
       else {
         if (node.readonly)
