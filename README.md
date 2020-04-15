@@ -171,7 +171,7 @@ or
       └── ...
 ```
 
-For more complex structure, please check out [Path Matcher) and [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
+For more complex structure, please check out [Path Matcher](https://github.com/antfu/i18n-ally/wiki/Path-Matcher) and [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
 ## 💭 FAQ
 
