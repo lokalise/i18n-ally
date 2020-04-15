@@ -1,13 +1,28 @@
 import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
 import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
+import { getCommentState } from '../utils/shared'
 import { createHover } from './hover'
 
 const localeAnnotation: ExtensionModule = (ctx) => {
-  const noneDecorationType = window.createTextEditorDecorationType({})
-  const missingDecorationType = window.createTextEditorDecorationType({
-    gutterIconPath: ctx.asAbsolutePath('res/dark/info.svg'),
-  })
+  const decorationTypes = {
+    none: window.createTextEditorDecorationType({}),
+    approve: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/checkmark.svg'),
+    }),
+    request_change: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/request-changes.svg'),
+    }),
+    comment: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/comment-discussion.svg'),
+    }),
+    conflict: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/report.svg'),
+    }),
+    missing: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/info.svg'),
+    }),
+  }
 
   const supportedParsers = Global.enabledParsers.filter(p => p.annotationSupported)
 
@@ -35,8 +50,6 @@ const localeAnnotation: ExtensionModule = (ctx) => {
       return
 
     const annotationDelimiter = Config.annotationDelimiter
-    const annotations: DecorationOptions[] = []
-    const annotationsMissing: DecorationOptions[] = []
 
     const color = 'rgba(153, 153, 153, .7)'
     let displayLanguage = Config.displayLanguage
@@ -53,6 +66,15 @@ const localeAnnotation: ExtensionModule = (ctx) => {
 
     if (Global.namespaceEnabled)
       namespace = loader.getNamespaceFromFilepath(filepath)
+
+    const annotations: Record<keyof typeof decorationTypes, DecorationOptions[]> = {
+      none: [],
+      approve: [],
+      request_change: [],
+      comment: [],
+      conflict: [],
+      missing: [],
+    }
 
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
@@ -94,20 +116,28 @@ const localeAnnotation: ExtensionModule = (ctx) => {
         hoverMessage: createHover(key, maxLength, file.locale),
       }
 
-      if (currentText)
-        annotations.push(annotation)
-      else
-        annotationsMissing.push(annotation)
+      let state: keyof typeof decorationTypes = 'none'
+      if (!currentText) {
+        state = 'missing'
+      }
+      else if (Config.reviewEnabled) {
+        const comments = Global.reviews.getComments(key, file.locale)
+        state = getCommentState(comments) || state
+      }
+      annotations[state].push(annotation)
     })
 
-    activeTextEditor.setDecorations(noneDecorationType, annotations)
-    activeTextEditor.setDecorations(missingDecorationType, annotationsMissing)
+    ;(Object.keys(decorationTypes) as (keyof typeof decorationTypes)[])
+      .forEach(k =>
+        activeTextEditor.setDecorations(decorationTypes[k], annotations[k]),
+      )
   }
 
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(() => update()))
   disposables.push(window.onDidChangeActiveTextEditor(() => update()))
   disposables.push(workspace.onDidChangeTextDocument(() => update()))
+  disposables.push(Global.reviews.onDidChange(() => update()))
 
   update()
 

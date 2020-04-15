@@ -57,7 +57,7 @@
   "config.sort_keys": "Sort keys when saving to JSON/YAML",
   "config.source_language": "Source language for machine translation",
   "config.tab_style": "Tab style for locale files",
-  "config.translate.engines": "Translation services. When multiple items are provided, it will try to use the next one when the current fails.",
+  "config.translate.engines": "Translation services.",
   "config.translate.fallbackToKey": "Use key itself to translate when there is no source translation for that key.",
   "config.translate.parallels": "Maximum amount of translating workers at same time.",
   "config.translate_override_existing": "Override existing messages on translating",

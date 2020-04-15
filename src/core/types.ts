@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
-import { Range } from 'vscode'
 
 export interface OptionalFeatures {
   VueSfc?: boolean
@@ -19,6 +18,28 @@ export interface FileInfo {
   locale: string
   readonly?: boolean
   namespace?: string
+}
+
+export interface ReviewComment {
+  id: string
+  type?: 'approve' | 'request_change' | 'comment'
+  comment?: string
+  suggestion?: string
+  user?: {
+    name?: string
+    email?: string
+  }
+  time?: string
+  resolved?: boolean
+}
+
+export interface ReviewData {
+  reviews: Record<string, {
+    description?: string
+    locales?: Record<string, {
+      comments?: ReviewComment[]
+    }>
+  }>
 }
 
 export interface ParsedFile extends FileInfo {
@@ -53,13 +74,6 @@ export interface PendingWrite {
   filepath?: string
   value?: string
   features?: OptionalFeatures
-}
-
-export interface ExtractTextOptions {
-  filepath: string
-  text: string
-  range: Range
-  languageId?: string
 }
 
 export interface PositionRange {

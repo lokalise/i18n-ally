@@ -2,10 +2,9 @@ import { comments, CommentController, TextDocument, CancellationToken, Range, Di
 import { EXT_REVIEW_ID } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
-import { getAvatarFromEmail } from '../utils/user'
-import { Commands, Config, Global, CurrentFile } from '../core'
+import { getAvatarFromEmail } from '../utils/shared'
+import { Commands, Config, Global, CurrentFile, ReviewComment } from '../core'
 import { Log } from '../utils'
-import { ReviewComment } from '../core/Review'
 
 const UNKNOWN_USER = i18n.t('review.unknown_user')
 

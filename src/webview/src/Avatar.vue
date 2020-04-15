@@ -9,7 +9,7 @@
 import Vue from 'vue'
 import VCheck from 'vue-material-design-icons/Check.vue'
 import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
-import { getAvatarFromEmail } from '../../utils/user'
+import { getAvatarFromEmail } from '../../utils/shared'
 
 export default Vue.extend({
   components: {

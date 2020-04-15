@@ -3,8 +3,9 @@ import { trim } from 'lodash'
 // @ts-ignore
 import * as limax from 'limax'
 import { ExtensionModule } from '../modules'
-import { ExtractTextOptions, Global, Commands, Config, CurrentFile } from '../core'
+import { Global, Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
+import { ExtractTextOptions } from '../editor/extract'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
 

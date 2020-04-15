@@ -5,28 +5,7 @@ import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscod
 import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { Config } from './Config'
-
-export interface ReviewComment {
-  id: string
-  type?: 'approve' | 'request_change' | 'comment'
-  comment?: string
-  suggestion?: string
-  user?: {
-    name?: string
-    email?: string
-  }
-  time?: string
-  resolved?: boolean
-}
-
-export interface ReviewData {
-  reviews: Record<string, {
-    description?: string
-    locales?: Record<string, {
-      comments?: ReviewComment[]
-    }>
-  }>
-}
+import { ReviewData, ReviewComment } from './types'
 
 export class Reviews {
   private filepath = ''

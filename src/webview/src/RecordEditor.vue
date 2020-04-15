@@ -87,6 +87,7 @@ import VTranslate from 'vue-material-design-icons/Translate.vue'
 import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
 import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
+import { getCommentState } from '../../utils/shared'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
 import { vscode } from './api'
@@ -129,20 +130,7 @@ export default Vue.extend({
         .filter(i => !i.resolved)
     },
     reviewBrief() {
-      const approve = this.comments.filter(i => i.type === 'approve').length
-      const request_change = this.comments.filter(i => i.type === 'request_change').length
-      // const comments = this.comment.filter(i => i.type !== 'approve' && i.type === 'request_change').length
-
-      if (!this.comments.length)
-        return undefined
-      else if (approve && !request_change)
-        return 'approve'
-      else if (!approve && request_change)
-        return 'request_change'
-      else if (approve && request_change)
-        return 'mixed'
-      else
-        return 'comment'
+      return getCommentState()
     },
   },
 

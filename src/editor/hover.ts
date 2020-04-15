@@ -22,7 +22,7 @@ function getAvaliableCommands(record?: LocaleRecord) {
     if (NodeHelper.isTranslatable(record)) {
       commands.push({
         text: i18n.t('command.translate_key'),
-        icon: '🌍',
+        icon: '🌐',
         command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
       })
     }
@@ -32,7 +32,7 @@ function getAvaliableCommands(record?: LocaleRecord) {
     if (NodeHelper.isEditable(record)) {
       commands.push({
         text: i18n.t('command.edit_key'),
-        icon: '📝',
+        icon: '✏️',
         command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
       })
     }
@@ -42,7 +42,7 @@ function getAvaliableCommands(record?: LocaleRecord) {
     if (NodeHelper.isOpenable(record)) {
       commands.push({
         text: i18n.t('command.open_key'),
-        icon: '💬',
+        icon: '↗️',
         command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
       })
     }
@@ -90,9 +90,8 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string)
   mainLocale = mainLocale || Config.displayLanguage
 
   const locales = Global.visibleLocales.filter(i => i !== mainLocale)
-  const table1 = createTable(locales, records, maxLength)
-  const table2 = createTable([mainLocale], records, maxLength)
-  const markdown = `${table1}\n\n-----\n\n${table2}`
+  const table1 = createTable([mainLocale, ...locales], records, maxLength)
+  const markdown = `${table1}`
 
   const markdownText = new MarkdownString(markdown)
   markdownText.isTrusted = true

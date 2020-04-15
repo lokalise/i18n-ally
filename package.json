@@ -82,37 +82,25 @@
         "command": "extension.i18n-ally.copy-key",
         "category": "%extname%",
         "title": "%command.copy_key%",
-        "icon": {
-          "light": "./res/light/file.svg",
-          "dark": "./res/dark/file.svg"
-        }
+        "icon": "$(files)"
       },
       {
         "command": "extension.i18n-ally.translate-key",
         "category": "%extname%",
         "title": "%command.translate_key%",
-        "icon": {
-          "light": "./res/light/translate.svg",
-          "dark": "./res/dark/translate.svg"
-        }
+        "icon": "$(globe)"
       },
       {
         "command": "extension.i18n-ally.edit-key",
         "category": "%extname%",
         "title": "%command.edit_key%",
-        "icon": {
-          "light": "./res/light/edit.svg",
-          "dark": "./res/dark/edit.svg"
-        }
+        "icon": "$(edit)"
       },
       {
         "command": "extension.i18n-ally.open-key",
         "category": "%extname%",
         "title": "%command.open_key%",
-        "icon": {
-          "light": "./res/light/open-file.svg",
-          "dark": "./res/dark/open-file.svg"
-        }
+        "icon": "$(file-symlink-file)"
       },
       {
         "command": "extension.i18n-ally.delete-key",
@@ -133,19 +121,13 @@
         "command": "extension.i18n-ally.fulfill-keys",
         "category": "%extname%",
         "title": "%command.fulfill_keys%",
-        "icon": {
-          "light": "./res/light/fulfill.svg",
-          "dark": "./res/dark/fulfill.svg"
-        }
+        "icon": "$(selection)"
       },
       {
         "command": "extension.i18n-ally.refresh-usage",
         "category": "%extname%",
         "title": "%command.refresh_usage%",
-        "icon": {
-          "light": "./res/light/refresh.svg",
-          "dark": "./res/dark/refresh.svg"
-        }
+        "icon": "$(refresh)"
       },
       {
         "command": "extension.i18n-ally.support",
@@ -156,28 +138,19 @@
         "command": "extension.i18n-ally.locale-visibility-show",
         "category": "%extname%",
         "title": "%command.locale_visibility_show%",
-        "icon": {
-          "light": "./res/light/eye.svg",
-          "dark": "./res/dark/eye.svg"
-        }
+        "icon": "$(eye)"
       },
       {
         "command": "extension.i18n-ally.locale-visibility-hide",
         "category": "%extname%",
         "title": "%command.locale_visibility_hide%",
-        "icon": {
-          "light": "./res/light/eye-off.svg",
-          "dark": "./res/dark/eye-off.svg"
-        }
+        "icon": "$(eye-closed)"
       },
       {
         "command": "extension.i18n-ally.new-key",
         "category": "%extname%",
         "title": "%command.new_key%",
-        "icon": {
-          "light": "./res/light/plus.svg",
-          "dark": "./res/dark/plus.svg"
-        }
+        "icon": "$(plus)"
       },
       {
         "command": "extension.i18n-ally.duplicate-key",
@@ -215,26 +188,17 @@
       {
         "command": "extension.i18n-ally.review.edit",
         "title": "Edit",
-        "icon": {
-          "dark": "./res/dark/edit.svg",
-          "light": "./res/light/edit.svg"
-        }
+        "icon": "$(edit)"
       },
       {
         "command": "extension.i18n-ally.review.resolve",
         "title": "Resolve",
-        "icon": {
-          "dark": "./res/dark/close.svg",
-          "light": "./res/light/close.svg"
-        }
+        "icon": "$(issue-closed)"
       },
       {
         "command": "extension.i18n-ally.review.resolveThread",
         "title": "Resolve",
-        "icon": {
-          "dark": "./res/dark/close.svg",
-          "light": "./res/light/close.svg"
-        }
+        "icon": "$(checklist)"
       }
     ],
     "menus": {
