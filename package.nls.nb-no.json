@@ -53,6 +53,7 @@
   "config.readonly": "Skrivebeskyttet modus",
   "config.regex_key": "",
   "config.regex_usage_match": "",
+  "config.regex_usage_match_append": "",
   "config.review_email": "",
   "config.review_enabled": "",
   "config.review_remove_on_resolved": "",

@@ -53,6 +53,7 @@
   "config.readonly": "只读模式",
   "config.regex_key": "正则表达式字符串以匹配路径",
   "config.regex_usage_match": "",
+  "config.regex_usage_match_append": "",
   "config.review_email": "",
   "config.review_enabled": "",
   "config.review_remove_on_resolved": "",
