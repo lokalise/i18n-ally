@@ -13,6 +13,8 @@ examples/**
 test/**
 docs/**
 .cache/**
+locales/**
+scripts/**
 
 .gitignore
 .gitattributes

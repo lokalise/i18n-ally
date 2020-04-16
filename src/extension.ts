@@ -7,9 +7,12 @@ import editorModules from './editor'
 import viewsModules from './views'
 import { Log } from './utils'
 import { CurrentFile } from './core/CurrentFile'
+import i18n from './i18n'
 
 export async function activate(ctx: ExtensionContext) {
   Log.info(`🈶 Activated, v${version}`)
+
+  i18n.init(ctx.extensionPath)
 
   // activate the extension
   await Global.init(ctx)
@@ -20,6 +23,7 @@ export async function activate(ctx: ExtensionContext) {
     editorModules,
     viewsModules,
   ]
+
   const disposables = flatten(modules.map(m => m(ctx)))
   disposables.forEach(d => ctx.subscriptions.push(d))
 }

@@ -8,3 +8,4 @@ node_modules
 .cache
 
 examples/**/package-lock.json
+package.nls.*

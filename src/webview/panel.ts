@@ -125,7 +125,7 @@ export class EditorPanel {
   private updateI18nMessages() {
     this.postMessage({
       name: 'i18n',
-      data: i18n.current,
+      data: i18n.messages,
     })
   }
 
