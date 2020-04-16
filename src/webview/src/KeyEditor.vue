@@ -7,14 +7,14 @@
 
   .reviews
     template(v-if='!data.reviews.description')
-      .description.add(@click='editDescription') Add description...
+      .description.add(@click='editDescription') {{ $t('editor.add_description') }}
     template(v-else)
       .description(@click='editDescription') {{data.reviews.description}}
 
   .buttons
     .button(@click='translateAll' v-if='emptyRecords.length')
       v-translate
-      span Translate All Missing ({{emptyRecords.length}})
+      span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
     .button Mark all as...
 
   record-editor(

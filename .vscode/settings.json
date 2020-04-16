@@ -41,4 +41,8 @@
   "i18n-ally.regex.usageMatchAppend": [
     "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"
   ],
+  "i18n-ally.enabledFrameworks": [
+    "vscode",
+    "vue"
+  ]
 }

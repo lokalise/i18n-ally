@@ -21,16 +21,16 @@ export default class i18n {
     'pt-br': ptbr,
   }
 
-  static get language() {
-    return env.language.toLocaleLowerCase()
-  }
+  static language = env.language.toLocaleLowerCase()
+  static fallbackMessages = i18n.messages.en
+  static currentMessages = i18n.messages[i18n.language]
+  static current: Record<string, string> = {}
 
-  static get fallbackMessages() {
-    return this.messages.en
-  }
-
-  static get currentMessages() {
-    return this.messages[this.language] || this.fallbackMessages
+  static _init() {
+    Object.keys(this.fallbackMessages)
+      .forEach((key) => {
+        this.current[key] = this.currentMessages[key] || this.fallbackMessages[key]
+      })
   }
 
   static format(str: string, args: any[]) {
@@ -42,7 +42,7 @@ export default class i18n {
   }
 
   static t(key: string, ...args: any[]) {
-    let text = this.currentMessages[key] || this.fallbackMessages[key]
+    let text = this.current[key]
 
     if (args && args.length)
       text = this.format(text, args)
@@ -50,3 +50,5 @@ export default class i18n {
     return text
   }
 }
+
+i18n._init()

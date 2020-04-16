@@ -19,11 +19,11 @@
 
       .button(@click='translate' v-if='!readonly')
         v-translate
-        span Translate
+        span {{ $t('editor.translate') }}
 
       .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
         v-comment-edit-outline
-        span Review
+        span {{ $t('review.review') }}
 
     .review-brief(v-if='$store.state.config.review')
       v-check.state-icon(v-if='reviewBrief==="approve"')
@@ -41,12 +41,12 @@
             v-plus-minus.state-icon(v-else-if='c.type==="request_change"')
             v-comment-outline.state-icon(v-else)
 
-          .text(:class='{placeholder: !c.comment}') {{c.comment || (c.type === "approve" ? "Approved" : "Change requested")}}
+          .text(:class='{placeholder: !c.comment}') {{c.comment || placeholders[c.type]}}
 
           .buttons
             .button.approve.flat(@click='resolveComment(c)')
               v-checkbox-marked-outline
-              span Resolve
+              span {{ $t('review.resolve') }}
 
         template(v-if='!readonly && c.suggestion')
           div
@@ -54,7 +54,7 @@
             v-format-quote-open.state-icon
             .text {{c.suggestion}}
             .buttons
-              .button.flat(@click='acceptSuggestion(c)') Accept Suggestion
+              .button.flat(@click='acceptSuggestion(c)') {{$t('review.accept_suggestion')}}
 
       template(v-if='reviewing')
         avatar(:user='$store.state.config.user')
@@ -69,7 +69,7 @@
             )
 
           template(v-if='!readonly')
-            label Suggestion
+            label {{$t('review.suggestion')}}
             .panel
               textarea(
                 rows='1'
@@ -81,14 +81,14 @@
           .buttons
             .button.approve(@click='postComment("approve")' :disabled='!!reviewForm.suggestion')
               v-check
-              span Approve
+              span {{$t('review.approve')}}
             .button.request-change(@click='postComment("request_change")')
               v-plus-minus
-              span Request Change
+              span {{$t('review.request_change')}}
             .button.comment(@click='postComment("comment")' :disabled='!reviewForm.comment')
               v-comment-outline
-              span Leave Comment
-            .button(@click='resetForm()') Cancel
+              span {{$t('review.leave_comment')}}
+            .button(@click='resetForm()') {{ $t('prompt.button_cancel') }}
 </template>
 
 <script lang="js">
@@ -151,6 +151,13 @@ export default Vue.extend({
     },
     readonly() {
       return this.record.readonly
+    },
+    placeholders() {
+      return {
+        approve: this.$t('review.placeholder.approve'),
+        request_change: this.$t('review.placeholder.request_change'),
+        comment: this.$t('review.placeholder.comment'),
+      }
     },
   },
 

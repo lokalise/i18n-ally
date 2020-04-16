@@ -122,6 +122,13 @@ export class EditorPanel {
     }
   }
 
+  private updateI18nMessages() {
+    this.postMessage({
+      name: 'i18n',
+      data: i18n.current,
+    })
+  }
+
   private updateConfig() {
     this.postMessage({
       name: 'config',
@@ -203,6 +210,7 @@ export class EditorPanel {
   }
 
   private init() {
+    this.ready = false
     this._panel.iconPath = Uri.file(
       path.join(this._ctx.extensionPath, 'res/logo.svg'),
     )
@@ -210,6 +218,7 @@ export class EditorPanel {
       path.join(this._ctx.extensionPath, 'dist/editor/index.html'),
       'utf-8',
     )
+    this.updateI18nMessages()
   }
 
   get visible() {

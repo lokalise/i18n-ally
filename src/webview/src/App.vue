@@ -4,7 +4,7 @@
     .nav-bar
       img.logo(:src='logo')
       .nav-middle
-        .title i18n Ally Editor
+        .title {{ $t('editor.title') }}
       div
         v-refresh.setting-button(@click='refresh') Refresh
         v-cog.setting-button
@@ -12,7 +12,7 @@
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
 
-    // pre {{JSON.stringify(state.config, null, 2)}}
+    // pre {{JSON.stringify(state.i18n, null, 2)}}
   template(v-else)
     p Loading...
 </template>
