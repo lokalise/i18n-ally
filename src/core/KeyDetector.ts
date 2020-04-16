@@ -8,7 +8,7 @@ import { Config } from './Config'
 export class KeyDetector {
   static getKeyByContent(text: string) {
     const keys = new Set<string>()
-    const regs = Global.getKeyMatchReg()
+    const regs = Global.getUsageMatchRegex()
 
     for (const reg of regs) {
       (text.match(reg) || [])
@@ -24,7 +24,7 @@ export class KeyDetector {
     if (Config.disablePathParsing)
       dotEnding = true
 
-    const regs = Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+    const regs = Global.getUsageMatchRegex(document.languageId, document.uri.fsPath)
     for (const regex of regs) {
       const range = document.getWordRangeAtPosition(position, regex)
       if (range) {
@@ -63,14 +63,14 @@ export class KeyDetector {
     let text = ''
     let rewriteContext: RewriteKeyContext| undefined
     if (typeof document !== 'string') {
-      regs = regs ?? Global.getKeyMatchReg(document.languageId, document.uri.fsPath)
+      regs = regs ?? Global.getUsageMatchRegex(document.languageId, document.uri.fsPath)
       text = document.getText()
       rewriteContext = {
         targetFile: document.uri.fsPath,
       }
     }
     else {
-      regs = Global.getKeyMatchReg()
+      regs = Global.getUsageMatchRegex()
       text = document
     }
 

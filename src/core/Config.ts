@@ -25,7 +25,8 @@ export class Config {
     'sourceLanguage',
     'ignoredLocales',
     'displayLanguage',
-    'keyMathRegex',
+    'regex.key',
+    'regex.usageMatch',
   ]
 
   static readonly usageRefreshConfigs = [
@@ -150,9 +151,14 @@ export class Config {
     return this.getConfig('pathMatcher')
   }
 
-  static get keyMatchRegex(): string {
-    return this.getConfig('keyMatchRegex')
-     || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+  static get regexKey(): string {
+    return this.getConfig('regex.key')
+      ?? this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      ?? (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+  }
+
+  static get regexUsageMatch(): string[] | undefined {
+    return this.getConfig<string[]>('regex.usageMatch')
   }
 
   static get keepFulfilled(): boolean {
@@ -293,8 +299,10 @@ export class Config {
     this.setConfig('keysInUse', value)
   }
 
-  static get derivedKeyRules() {
-    return this.getConfig<string[]>('derivedKeyRules') ?? undefined
+  static get usageDerivedKeyRules() {
+    return this.getConfig<string[]>('usage.derivedKeyRules')
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? undefined
   }
 
   static get usageScanningIgnore() {

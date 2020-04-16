@@ -17,7 +17,7 @@ export default class TranslocoFramework extends Framework {
     'html',
   ]
 
-  keyMatchReg= [
+  usageMatchRegex= [
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/pipe
     '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*transloco',
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/structural-directive

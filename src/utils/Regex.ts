@@ -1,5 +1,7 @@
 import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
+import i18n from '../i18n'
+import { Log } from '.'
 
 export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, rewriteContext?: RewriteKeyContext): KeyInDocument[] {
   if (Config.disablePathParsing)
@@ -25,4 +27,27 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
     }
   }
   return keys
+}
+
+export function normalizeUsageMatchRegex(reg: string | RegExp | (string | RegExp)[] | undefined): RegExp[] {
+  if (!reg)
+    return []
+
+  if (!Array.isArray(reg))
+    reg = [reg]
+
+  return reg.map((i) => {
+    if (typeof i === 'string') {
+      try {
+        return new RegExp(i.replace(/{key}/g, Config.regexKey), 'gm')
+      }
+      catch (e) {
+        Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)
+        Log.error(e, false)
+        return undefined
+      }
+    }
+    return i
+  })
+    .filter(i => i) as RegExp[]
 }

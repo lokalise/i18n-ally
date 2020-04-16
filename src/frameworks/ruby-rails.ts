@@ -20,7 +20,7 @@ class RubyRailsFramework extends Framework {
     'erb',
   ]
 
-  keyMatchReg = [
+  usageMatchRegex = [
     '[^\\w\\d]t(?:\\(| )[\'"`]({key})[\'"`]',
   ]
 

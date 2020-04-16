@@ -18,7 +18,7 @@ class NgxTranslateFramework extends Framework {
   ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg= [
+  usageMatchRegex= [
     '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*translate',
     'translate\\.get\\([\\s\\n]*[\'"`]({key})[\'"`]',
   ]

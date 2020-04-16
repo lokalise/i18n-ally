@@ -595,14 +595,6 @@
           },
           "description": "%config.keys_in_use%"
         },
-        "i18n-ally.derivedKeyRules": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": null,
-          "description": "%config.derived_keys%"
-        },
         "i18n-ally.sortKeys": {
           "type": "boolean",
           "default": false,
@@ -633,10 +625,6 @@
           "default": false,
           "description": "%config.disable_path_parsing%"
         },
-        "i18n-ally.keyMatchRegex": {
-          "type": "string",
-          "description": "%config.key_match_regex%"
-        },
         "i18n-ally.tabStyle": {
           "type": "string",
           "default": "space",
@@ -653,6 +641,17 @@
         "i18n-ally.pathMatcher": {
           "type": "string",
           "description": "%config.path_matcher%"
+        },
+        "i18n-ally.regex.key": {
+          "type": "string",
+          "description": "%config.regex_key%"
+        },
+        "i18n-ally.regex.usageMatch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.regex_usage_match%"
         },
         "i18n-ally.translate.fallbackToKey": {
           "type": "boolean",
@@ -695,6 +694,14 @@
           },
           "description": "%config.usage.scanning_ignore%"
         },
+        "i18n-ally.usage.derivedKeyRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": null,
+          "description": "%config.derived_keys%"
+        },
         "i18n-ally.frameworks.ruby-rails.scopeRoot": {
           "type": "string",
           "default": "app/views"
@@ -730,11 +737,17 @@
           "default": false,
           "description": "%config.editor_prefer_editor%"
         },
+        "i18n-ally.derivedKeyRules": {
+          "deprecationMessage": "%config.deprecated_derived_key_rules%"
+        },
         "i18n-ally.filenameMatchRegex": {
           "deprecationMessage": "%config.deprecated_match_regex%"
         },
         "i18n-ally.fileNamespace": {
           "deprecationMessage": "%config.deprecated_file_namespace%"
+        },
+        "i18n-ally.keyMatchRegex": {
+          "deprecationMessage": "%config.deprecated_key_match_regex%"
         },
         "vue-i18n-ally.localesPaths": {
           "deprecationMessage": "%config.deprecated%"

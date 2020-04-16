@@ -1,7 +1,6 @@
 import { Config } from '../core'
-import { LanguageId, Log } from '../utils'
+import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../core/types'
-import i18n from '../i18n'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -32,7 +31,7 @@ export abstract class Framework {
   /**
    * Array of regex for detect keys in document
    */
-  abstract keyMatchReg: string | RegExp | (string | RegExp)[] | ((languageId?: string, filepath?: string) => string | RegExp | (string | RegExp)[])
+  abstract usageMatchRegex: string | RegExp | (string | RegExp)[] | ((languageId?: string, filepath?: string) => string | RegExp | (string | RegExp)[])
 
   /**
    * Return possible choices of replacement for messages extracted from code
@@ -53,30 +52,13 @@ export abstract class Framework {
 
   enableFeatures?: OptionalFeatures
 
-  getKeyMatchReg(languageId = '*', filepath?: string): RegExp[] {
+  getUsageMatchRegex(languageId = '*', filepath?: string) {
     let reg: string | RegExp | (string | RegExp)[] | undefined
-    if (typeof this.keyMatchReg === 'function')
-      reg = this.keyMatchReg(languageId, filepath)
+    if (typeof this.usageMatchRegex === 'function')
+      reg = this.usageMatchRegex(languageId, filepath)
     else
-      reg = this.keyMatchReg
-
-    if (!Array.isArray(reg))
-      reg = [reg]
-
-    return reg.map((i) => {
-      if (typeof i === 'string') {
-        try {
-          return new RegExp(i.replace(/{key}/g, Config.keyMatchRegex), 'gm')
-        }
-        catch (e) {
-          Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)
-          Log.error(e, false)
-          return undefined
-        }
-      }
-      return i
-    })
-      .filter(i => i) as RegExp[]
+      reg = this.usageMatchRegex
+    return reg
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {

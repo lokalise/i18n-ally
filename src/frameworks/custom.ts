@@ -9,10 +9,12 @@ import { Framework } from './base'
 const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 
 interface CustomFrameworkConfig {
-  monopoly?: boolean
   languageIds?: LanguageId[] | LanguageId
-  keyMatchReg?: string[] | string
+  usageMatchRegex?: string[] | string
   refactorTemplates?: string[]
+  monopoly?: boolean
+
+  keyMatchReg?: string[] | string // depreacted. use "usageMatchRegex" instead
 }
 
 class CustomFramework extends Framework {
@@ -41,7 +43,7 @@ class CustomFramework extends Framework {
     try {
       const raw = File.readSync(filename)
       this.data = YAML.safeLoad(raw)
-      Log.info(`🍱 Custom framework setting loaded. \n\tLanguage Ids:\n\t\t${this.languageIds.join('\n\t\t')}\n\tKey Match Regex:\n\t\t${this.getKeyMatchReg().map(r => r.source).join('\n\t\t')}`)
+      Log.info(`🍱 Custom framework setting loaded. \n${JSON.stringify(this.data, null, 2)}\n`)
       return true
     }
     catch (e) {
@@ -59,8 +61,8 @@ class CustomFramework extends Framework {
     return id
   }
 
-  get keyMatchReg(): string[] {
-    let id = this.data?.keyMatchReg || []
+  get usageMatchRegex(): string[] {
+    let id = this.data?.usageMatchRegex ?? this.data?.keyMatchReg ?? []
     if (typeof id === 'string')
       id = [id]
 

@@ -14,7 +14,7 @@ class ChromeExtensionFramework extends Framework {
     'html',
   ]
 
-  keyMatchReg = [
+  usageMatchRegex = [
     'i18n\\.getMessage\\(\\s*[\'"`]({key})[\'"`]',
   ]
 

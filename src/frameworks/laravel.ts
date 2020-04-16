@@ -20,7 +20,7 @@ class LaravelFramework extends Framework {
   enabledParsers = ['php']
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = [
+  usageMatchRegex = [
     '[^\\w\\d](?:__|trans|@lang|trans_choice)\\([\'"`]({key})[\'"`]',
   ]
 

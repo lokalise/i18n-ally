@@ -5,7 +5,7 @@ import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocales'
 import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
-import { Log, getExtOfLanguageId } from '../utils'
+import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { Reviews } from './Review'
@@ -44,9 +44,9 @@ export class Global {
     await this.updateRootPath()
   }
 
-  static getKeyMatchReg(languageId?: string, filepath?: string) {
-    return this.enabledFrameworks
-      .flatMap(f => f.getKeyMatchReg(languageId, filepath))
+  static getUsageMatchRegex(languageId?: string, filepath?: string) {
+    const regex = Config.regexUsageMatch ?? this.enabledFrameworks.flatMap(f => f.getUsageMatchRegex(languageId, filepath))
+    return normalizeUsageMatchRegex(regex)
   }
 
   static refactorTemplates(keypath: string, languageId?: string) {
@@ -68,8 +68,8 @@ export class Global {
   }
 
   static get derivedKeyRules() {
-    const rules = Config.derivedKeyRules
-      ? Config.derivedKeyRules
+    const rules = Config.usageDerivedKeyRules
+      ? Config.usageDerivedKeyRules
       : this.enabledFrameworks
         .flatMap(f => f.derivedKeyRules || [])
 

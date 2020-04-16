@@ -27,7 +27,7 @@ class I18nextFramework extends Framework {
   ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = [
+  usageMatchRegex = [
     '(?:i18next|i18n|req)\\.t\\(\\s*[\'"`]({key})[\'"`]',
   ]
 

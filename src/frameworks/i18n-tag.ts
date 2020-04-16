@@ -20,7 +20,7 @@ class I18nTagFramework extends Framework {
     'ejs',
   ]
 
-  keyMatchReg = [
+  usageMatchRegex = [
     'i18n`({key})`',
   ]
 
