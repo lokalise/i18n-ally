@@ -27,6 +27,7 @@ export class Config {
     'displayLanguage',
     'regex.key',
     'regex.usageMatch',
+    'regex.usageMatchAppend',
   ]
 
   static readonly usageRefreshConfigs = [
@@ -153,12 +154,18 @@ export class Config {
 
   static get regexKey(): string {
     return this.getConfig('regex.key')
-      ?? this.getConfig('keyMatchRegex') // back compatible, depreacted.
-      ?? (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+      || this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
   static get regexUsageMatch(): string[] | undefined {
-    return this.getConfig<string[]>('regex.usageMatch')
+    const config = this.getConfig<string[]>('regex.usageMatch')
+    if (config && config.length)
+      return config
+  }
+
+  static get regexUsageMatchAppend(): string[] {
+    return this.getConfig<string[]>('regex.usageMatchAppend') || []
   }
 
   static get keepFulfilled(): boolean {

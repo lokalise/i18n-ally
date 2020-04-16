@@ -1,5 +1,0 @@
-languageIds:
-  - typescript
-
-keyMatchReg:
-  - "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"

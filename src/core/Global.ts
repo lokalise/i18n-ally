@@ -44,9 +44,28 @@ export class Global {
     await this.updateRootPath()
   }
 
-  static getUsageMatchRegex(languageId?: string, filepath?: string) {
-    const regex = Config.regexUsageMatch ?? this.enabledFrameworks.flatMap(f => f.getUsageMatchRegex(languageId, filepath))
-    return normalizeUsageMatchRegex(regex)
+  static resetCache() {
+    this._cacheUsageMatchRegex = {}
+  }
+
+  private static _cacheUsageMatchRegex: Record<string, RegExp[]> = {}
+
+  static getUsageMatchRegex(languageId?: string, filepath?: string): RegExp[] {
+    if (Config.regexUsageMatch) {
+      if (!this._cacheUsageMatchRegex.custom)
+        this._cacheUsageMatchRegex.custom = normalizeUsageMatchRegex([...Config.regexUsageMatch, ...Config.regexUsageMatchAppend])
+      return this._cacheUsageMatchRegex.custom
+    }
+    else {
+      const key = `${languageId}_${filepath}`
+      if (!this._cacheUsageMatchRegex[key]) {
+        this._cacheUsageMatchRegex[key] = normalizeUsageMatchRegex([
+          ...this.enabledFrameworks.flatMap(f => f.getUsageMatchRegex(languageId, filepath)),
+          ...Config.regexUsageMatchAppend,
+        ])
+      }
+      return this._cacheUsageMatchRegex[key]
+    }
   }
 
   static refactorTemplates(keypath: string, languageId?: string) {
@@ -166,6 +185,8 @@ export class Global {
   }
 
   static async update(e?: ConfigurationChangeEvent) {
+    this.resetCache()
+
     let reload = false
     if (e) {
       let affected = false

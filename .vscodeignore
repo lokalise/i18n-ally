@@ -12,6 +12,7 @@ screenshots/**
 examples/**
 test/**
 docs/**
+.cache/**
 
 .gitignore
 .gitattributes

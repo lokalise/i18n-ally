@@ -29,17 +29,12 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
   return keys
 }
 
-export function normalizeUsageMatchRegex(reg: string | RegExp | (string | RegExp)[] | undefined): RegExp[] {
-  if (!reg)
-    return []
-
-  if (!Array.isArray(reg))
-    reg = [reg]
-
+export function normalizeUsageMatchRegex(reg: (string | RegExp)[]): RegExp[] {
   return reg.map((i) => {
     if (typeof i === 'string') {
       try {
-        return new RegExp(i.replace(/{key}/g, Config.regexKey), 'gm')
+        const interpated = i.replace(/{key}/g, Config.regexKey)
+        return new RegExp(interpated, 'gm')
       }
       catch (e) {
         Log.error(i18n.t('prompt.error_on_parse_custom_regex', i), true)

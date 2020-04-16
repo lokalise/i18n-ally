@@ -37,5 +37,8 @@
   ],
   "i18n-ally.usage.scanningIgnore": [
     "examples",
-  ]
+  ],
+  "i18n-ally.regex.usageMatchAppend": [
+    "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"
+  ],
 }

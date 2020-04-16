@@ -653,6 +653,13 @@
           },
           "description": "%config.regex_usage_match%"
         },
+        "i18n-ally.regex.usageMatchAppend": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.regex_usage_match_append%"
+        },
         "i18n-ally.translate.fallbackToKey": {
           "type": "boolean",
           "default": false,
