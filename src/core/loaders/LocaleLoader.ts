@@ -108,6 +108,7 @@ export class LocaleLoader extends Loader {
   // #endregion
 
   private getFilepathsOfLocale(locale: string) {
+    // TODO: maybe shadow options
     return Object.values(this._files)
       .filter(f => f.locale === locale)
       .map(f => f.filepath)
@@ -147,8 +148,30 @@ export class LocaleLoader extends Loader {
 
   async requestMissingFilepath(locale: string, keypath: string) {
     const paths = this.getFilepathsOfLocale(locale)
+
+    // try to match namespaces
+    if (Config.namespace) {
+      // to find max match
+      let maxMatchFile: ParsedFile | undefined
+      for (const path of paths) {
+        const file = this._files[path]
+        if (!file?.namespace)
+          continue
+
+        if (keypath.startsWith(`${file.namespace}.`)) {
+          if ((maxMatchFile?.namespace?.length || 0) < file.namespace.length)
+            maxMatchFile = file
+        }
+      }
+
+      // return if found
+      if (maxMatchFile)
+        return maxMatchFile.filepath
+    }
+
     if (paths.length === 1)
       return paths[0]
+
     if (paths.length === 0) {
       return await window.showInputBox({
         prompt: i18n.t('prompt.enter_file_path_to_store_key'),
@@ -156,10 +179,12 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
-    return await window.showQuickPick(paths, {
-      placeHolder: i18n.t('prompt.select_file_to_store_key'),
-      ignoreFocusOut: true,
-    })
+    else {
+      return await window.showQuickPick(paths, {
+        placeHolder: i18n.t('prompt.select_file_to_store_key'),
+        ignoreFocusOut: true,
+      })
+    }
   }
 
   getShadowFilePath(key: string, locale: string) {
@@ -184,23 +209,28 @@ export class LocaleLoader extends Loader {
 
     pendings = pendings.filter(i => i)
 
-    const distrubtedPendings: Record<string, PendingWrite[]> = {}
+    const distributed: Record<string, PendingWrite[]> = {}
 
+    // distribute pendings writes by files
     for (const pending of pendings) {
-      let filepath = pending.filepath
-      if (!filepath)
-        filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
+      const filepath = pending.filepath || await this.requestMissingFilepath(pending.locale, pending.keypath)
       if (!filepath) {
-        Log.info(`💥 Unable to file path for writing ${JSON.stringify(pending)}`)
+        Log.info(`💥 Unable to find path for writing ${JSON.stringify(pending)}`)
         continue
       }
-      if (!distrubtedPendings[filepath])
-        distrubtedPendings[filepath] = []
-      distrubtedPendings[filepath].push(pending)
+
+      if (Config.namespace)
+        pending.namespace = pending.namespace || this._files[filepath]?.namespace
+
+      console.log(pending)
+
+      if (!distributed[filepath])
+        distributed[filepath] = []
+      distributed[filepath].push(pending)
     }
 
     try {
-      for (const [filepath, pendings] of Object.entries(distrubtedPendings)) {
+      for (const [filepath, pendings] of Object.entries(distributed)) {
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
@@ -225,8 +255,8 @@ export class LocaleLoader extends Loader {
 
           if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
-            if (node)
-              keypath = NodeHelper.getPathWithoutNamespace(node)
+            console.log(node)
+            keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace)
           }
 
           modified = applyPendingToObject(

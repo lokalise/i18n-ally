@@ -90,6 +90,7 @@ export interface PendingWrite {
   keypath: string
   filepath?: string
   value?: string
+  namespace?: string
   features?: OptionalFeatures
 }
 

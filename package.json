@@ -204,7 +204,7 @@
         "category": "%extname%",
         "title": "Resolve",
         "icon": "$(checklist)"
-      }, 
+      },
       {
         "command": "extension.i18n-ally.review.apply-translation",
         "title": "%review.apply_translation_candidate%"
