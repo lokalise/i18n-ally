@@ -40,7 +40,7 @@ export class ProgressRootItem extends ProgressBaseItem {
 
   get iconPath() {
     if (!this.visible)
-      return this.getIcon('eye-off-fade')
+      return this.getIcon('hidden', false)
     return this.getFlagIcon(this.locale)
   }
 
@@ -67,13 +67,11 @@ export class ProgressRootItem extends ProgressBaseItem {
     if (Config.reviewEnabled) {
       const comments = Global.reviews.getCommentsByLocale(this.locale)
       const translations = Global.reviews.getTranslationCandidatesLocale(this.locale)
-      if (comments.length) {
-        const change_requested = comments.filter(c => c.type === 'request_change')
-        if (change_requested)
-          items.push(new ReviewRequestChangesRoot(this.ctx, change_requested))
-        // TODO:
-      }
-      items.push(new ReviewTranslationCandidates(this.ctx, translations))
+      const change_requested = comments.filter(c => c.type === 'request_change')
+      if (change_requested.length)
+        items.push(new ReviewRequestChangesRoot(this.ctx, change_requested))
+      if (translations.length)
+        items.push(new ReviewTranslationCandidates(this.ctx, translations))
     }
     return items
   }

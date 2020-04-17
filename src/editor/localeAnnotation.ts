@@ -11,16 +11,16 @@ const localeAnnotation: ExtensionModule = (ctx) => {
       gutterIconPath: ctx.asAbsolutePath('res/dark/checkmark.svg'),
     }),
     request_change: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/request-changes.svg'),
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-request-change.svg'),
     }),
     comment: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/comment-discussion.svg'),
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-comment.svg'),
     }),
     conflict: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/report.svg'),
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-conflict.svg'),
     }),
     missing: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/info.svg'),
+      gutterIconPath: ctx.asAbsolutePath('res/dark/empty.svg'),
     }),
   }
 

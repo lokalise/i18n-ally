@@ -82,7 +82,7 @@
         "command": "extension.i18n-ally.copy-key",
         "category": "%extname%",
         "title": "%command.copy_key%",
-        "icon": "$(symbol-file)"
+        "icon": "$(chrome-restore)"
       },
       {
         "command": "extension.i18n-ally.translate-key",

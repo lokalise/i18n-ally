@@ -14,7 +14,7 @@ export class ReviewRequestChangesRoot extends BaseTreeItem {
   }
 
   get iconPath() {
-    return this.getIcon('request-changes', false)
+    return this.getIcon('review-request-change', false)
   }
 
   getLabel() {
