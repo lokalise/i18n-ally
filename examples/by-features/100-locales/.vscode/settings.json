@@ -7,7 +7,7 @@
   "i18n-ally.translate.parallels": 5,
   "i18n-ally.editor.preferEditor": false,
   "i18n-ally.review.removeCommentOnResolved": true,
-  "i18n-ally.review": true,
   "i18n-ally.readonly": false,
-  "i18n-ally.enabledFrameworks": "vue"
+  "i18n-ally.enabledFrameworks": "vue",
+  "i18n-ally.translate.saveAsCandidates": true
 }
