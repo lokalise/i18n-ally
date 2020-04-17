@@ -1,12 +1,14 @@
-<h1>✨ BREAKING NEWS!</h1>
-
-Vue i18n Ally is coming to support React, Angular and numbers of other frameworks! [**Update now!**](https://github.com/antfu/i18n-ally)
+## DEPREACTED. Please use [**i18n Ally**](https://github.com/antfu/i18n-ally) instead. 
+[Migration Guide](https://github.com/antfu/i18n-ally/wiki/Migration-v0.x)
 
 <p align="center">
 <img src="https://github.com/antfu/i18n-ally/blob/master/screenshots/migration.v1.png?raw=true" alt="logo" width="600"/>
 </p>
 
 <hr>
+
+<details>
+<summary><b>Legacy README</b></summary>
 
 <p align="center">
 <img src="https://github.com/antfu/i18n-ally/blob/v0.x/res/logo.png?raw=true" alt="logo" width="100"/>
@@ -271,7 +273,9 @@ This extension is original forked from [think2011/vscode-vue-i18n](https://githu
 
 And thanks for all [the awesome contributors](https://github.com/antfu/vue-i18n-ally/graphs/contributors).
 
-## License
+</details>
+
+<hr>
 
 [MIT License](https://github.com/antfu/i18n-ally/blob/v0.x/LICENSE) © 2019 [Anthony Fu](https://github.com/antfu)
 
