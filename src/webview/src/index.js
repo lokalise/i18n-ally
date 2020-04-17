@@ -20,6 +20,7 @@ const store = new Vuex.Store({
     return Object.assign({
       ready: false,
       config: {
+        debug: false,
         sourceLanguage: 'en',
         displayLanguage: 'en',
         enabledFrameworks: [],

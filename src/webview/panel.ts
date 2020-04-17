@@ -3,7 +3,7 @@ import fs from 'fs'
 import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
-import { Config, CurrentFile, Global } from '../core'
+import { Config, CurrentFile, Global, Commands } from '../core'
 import { EXT_EDITOR_ID, EXT_ID } from '../meta'
 
 interface EditorPanelOptions {
@@ -133,6 +133,7 @@ export class EditorPanel {
     this.postMessage({
       name: 'config',
       data: {
+        debug: Config.debug,
         review: Config.reviewEnabled,
         locales: Global.loader?.locales || [],
         sourceLanguage: Config.sourceLanguage,
@@ -188,6 +189,10 @@ export class EditorPanel {
 
       case 'open-builtin-settings':
         commands.executeCommand('workbench.extensions.action.configure', EXT_ID)
+        break
+
+      case 'open-search':
+        commands.executeCommand(Commands.open_editor)
         break
     }
   }

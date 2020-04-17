@@ -168,7 +168,7 @@
         "title": "%command.open_in_editor%"
       },
       {
-        "command": "extension.i18n-ally.open-in-editor",
+        "command": "extension.i18n-ally.open-editor",
         "category": "%extname%",
         "title": "%command.open_editor%"
       },

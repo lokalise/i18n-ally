@@ -1,8 +1,9 @@
-import { commands } from 'vscode'
+import { commands, window } from 'vscode'
 import { EditorPanel } from '../webview/panel'
-import { Commands } from '../core'
+import { Commands, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
+import i18n from '../i18n'
 
 const m: ExtensionModule = (ctx) => {
   /*
@@ -12,20 +13,37 @@ const m: ExtensionModule = (ctx) => {
     },
   })
   */
+  const openEditor = async(item?: string | LocaleTreeItem) => {
+    let key: string | undefined
+
+    if (!item) {
+      const result = await window.showQuickPick(CurrentFile.loader.keys.map(key => ({
+        label: key,
+      })), {
+        ignoreFocusOut: true,
+        placeHolder: i18n.t('prompt.choice_key_to_open'),
+      })
+      if (!result)
+        return
+      key = result.label
+    }
+    else if (item instanceof LocaleTreeItem) {
+      key = item.node.keypath
+    }
+    else if (typeof item === 'string') {
+      key = item
+    }
+
+    if (!key)
+      return
+
+    const panel = EditorPanel.createOrShow(ctx, {})
+    panel.editKey(key)
+  }
 
   return [
-    commands.registerCommand(Commands.open_in_editor,
-      async(item?: string | LocaleTreeItem) => {
-        const panel = EditorPanel.createOrShow(ctx, {})
-
-        if (!item)
-          return
-
-        if (item instanceof LocaleTreeItem)
-          item = item.node.keypath
-
-        panel.editKey(item)
-      }),
+    commands.registerCommand(Commands.open_in_editor, openEditor),
+    commands.registerCommand(Commands.open_editor, openEditor),
   ]
 }
 

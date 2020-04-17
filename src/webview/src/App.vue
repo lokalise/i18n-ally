@@ -6,7 +6,8 @@
       .nav-middle
         .title {{ $t('editor.title') }}
       div
-        v-refresh.setting-button(@click='refresh') Refresh
+        v-magnify.setting-button(@click='openSearch')
+        v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
         v-cog.setting-button(@click='openSettings')
 
     .content
@@ -21,6 +22,7 @@
 import Vue from 'vue'
 import VCog from 'vue-material-design-icons/Cog.vue'
 import VRefresh from 'vue-material-design-icons/Refresh.vue'
+import VMagnify from 'vue-material-design-icons/Magnify.vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
 import { vscode } from './api'
@@ -31,6 +33,7 @@ export default Vue.extend({
     KeyEditor,
     VCog,
     VRefresh,
+    VMagnify,
   },
 
   data() {
@@ -57,6 +60,9 @@ export default Vue.extend({
     },
     openSettings() {
       this.postMessage({ name: 'open-builtin-settings' })
+    },
+    openSearch() {
+      this.postMessage({ name: 'open-search' })
     },
   },
 })

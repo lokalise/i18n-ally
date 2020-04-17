@@ -24,6 +24,7 @@ export const enum Commands {
   refresh_usage = 'extension.i18n-ally.refresh-usage',
   mark_key_as_in_use = 'extension.i18n-ally.mark-key-as-in-use',
   open_in_editor = 'extension.i18n-ally.open-in-editor',
+  open_editor = 'extension.i18n-ally.open-editor',
   review_comment = 'extension.i18n-ally.review.comment',
   review_approve = 'extension.i18n-ally.review.approve',
   review_request_change = 'extension.i18n-ally.review.request-change',
