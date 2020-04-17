@@ -168,20 +168,29 @@
         "title": "%command.open_in_editor%"
       },
       {
+        "command": "extension.i18n-ally.open-in-editor",
+        "category": "%extname%",
+        "title": "%command.open_editor%"
+      },
+      {
         "command": "extension.i18n-ally.review.comment",
+        "category": "%extname%",
         "title": "Leave Comment",
         "enablement": "!commentIsEmpty"
       },
       {
         "command": "extension.i18n-ally.review.approve",
+        "category": "%extname%",
         "title": "%review.approve%"
       },
       {
         "command": "extension.i18n-ally.review.request-change",
+        "category": "%extname%",
         "title": "%review.request_change%"
       },
       {
         "command": "extension.i18n-ally.review.edit",
+        "category": "%extname%",
         "title": "Edit",
         "icon": "$(edit)"
       },
@@ -192,6 +201,7 @@
       },
       {
         "command": "extension.i18n-ally.review.resolve-thread",
+        "category": "%extname%",
         "title": "Resolve",
         "icon": "$(checklist)"
       }, 
@@ -272,6 +282,10 @@
         },
         {
           "command": "extension.i18n-ally.review.apply-translation",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.open-in-editor",
           "when": "false"
         }
       ],
@@ -853,8 +867,8 @@
     "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
     "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
     "dev": "concurrently -n w: npm:*:dev",
-    "main:build": "webpack --mode development",
-    "main:dev": "webpack --mode development --watch",
+    "main:build": "webpack --mode production",
+    "main:dev": "webpack --mode development --watch --info-verbosity verbose",
     "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",
     "i18n:build": "ts-node -P ./tsconfig.commonjs.json ./scripts/build-i18n.ts",

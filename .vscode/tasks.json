@@ -4,7 +4,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Dev Build",
       "type": "npm",
       "script": "dev",
       "isBackground": true,
@@ -16,8 +15,8 @@
           "base": "$tsc-watch", // <-- extends the TypeScript watcher
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "webpack is watching the files...",
-            "endsPattern": "hidden modules$"
+            "beginsPattern": "Compilation  starting...",
+            "endsPattern": "Compilation  finished"
           }
         }
       ],

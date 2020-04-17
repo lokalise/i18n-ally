@@ -12,6 +12,7 @@
   "command.locale_visibility_show": "Show locale",
   "command.mark_key_as_in_use": "Mark this key as \"in use\"",
   "command.new_key": "Create a new key",
+  "command.open_editor": "Open Editor",
   "command.open_in_editor": "Open in editor",
   "command.open_key": "Go to definition",
   "command.open_url": "Open url",
