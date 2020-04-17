@@ -2,7 +2,7 @@
   "name": "vue-i18n-ally",
   "displayName": "%extname%",
   "description": "DEPREACTED. Use i18n Ally instead.",
-  "version": "0.36.7",
+  "version": "0.36.8",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.29.0"
