@@ -1,6 +1,6 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { window, workspace, extensions } from 'vscode'
+import { window, workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { normalizeLocale } from '../utils'
 import i18n from '../i18n'
@@ -35,13 +35,15 @@ export class Config {
     'derivedKeyRules',
   ]
 
+  static ctx: ExtensionContext
+
   // languages
   static get displayLanguage(): string {
     return normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
   }
 
   static set displayLanguage(value) {
-    this.setConfig('displayLanguage', normalizeLocale(value), true)
+    this.setConfig('displayLanguage', value, true)
   }
 
   static get sourceLanguage(): string {
@@ -265,9 +267,7 @@ export class Config {
   }
 
   static get extensionPath() {
-    if (this.extension)
-      return this.extension.extensionPath
-    return undefined
+    return this.ctx.extensionPath
   }
 
   static get encoding() {
@@ -321,7 +321,7 @@ export class Config {
   }
 
   static get reviewEnabled() {
-    return this.getConfig<boolean>('review') ?? true
+    return this.getConfig<boolean>('review.enabled') ?? true
   }
 
   private static _reviewUserName: string | undefined

@@ -7,7 +7,7 @@
         .title {{ $t('editor.title') }}
       div
         v-refresh.setting-button(@click='refresh') Refresh
-        v-cog.setting-button
+        v-cog.setting-button(@click='openSettings')
 
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
@@ -54,6 +54,9 @@ export default Vue.extend({
     },
     refresh() {
       this.postMessage({ name: 'refresh' })
+    },
+    openSettings() {
+      this.postMessage({ name: 'open-builtin-settings' })
     },
   },
 })

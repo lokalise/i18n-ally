@@ -5,7 +5,7 @@ import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscod
 import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { Config } from './Config'
-import { ReviewData, ReviewComment } from './types'
+import { ReviewData, ReviewComment, ReviewCommentWithMeta, TranslationCandidate } from './types'
 import { CurrentFile } from './CurrentFile'
 
 export class Reviews {
@@ -49,8 +49,16 @@ export class Reviews {
     return this.set(key, 'description', description)
   }
 
-  getDescription(key: string) {
-    return this.data.reviews[key]?.description
+  getDescription(key: string): string |undefined {
+    return this.get(key, 'description')
+  }
+
+  setTranslationCandidate(key: string, locale: string, trans?: TranslationCandidate) {
+    return this.set(key, 'translation_candidate', trans, locale)
+  }
+
+  getTranslationCandidate(key: string, locale: string): TranslationCandidate | undefined {
+    return this.get(key, 'translation_candidate', locale)
   }
 
   getReviews(key: string) {
@@ -80,6 +88,21 @@ export class Reviews {
     const comments = this.getComments(key, locale, false)
     const comment = comments.find(i => i.id === id)
     return comment
+  }
+
+  getCommentsByLocale(locale: string, hideResolved = true): ReviewCommentWithMeta[] {
+    return Object.keys(this.data.reviews)
+      .flatMap(keypath => this.getComments(keypath, locale, hideResolved)
+        .map((i) => {
+          return { ...i, locale, keypath } as ReviewCommentWithMeta
+        }),
+      )
+  }
+
+  getTranslationCandidatesLocale(locale: string) {
+    return Object.keys(this.data.reviews)
+      .map(keypath => this.getTranslationCandidate(keypath, locale)!)
+      .filter(i => i)
   }
 
   async resolveComment(key: string, locale: string, id: string) {

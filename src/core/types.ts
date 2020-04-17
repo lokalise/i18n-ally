@@ -33,10 +33,22 @@ export interface ReviewComment {
   resolved?: boolean
 }
 
+export interface ReviewCommentWithMeta extends ReviewComment {
+  keypath: string
+  locale: string
+}
+
+export interface TranslationCandidate {
+  source: string
+  text: string
+  time: string
+}
+
 export interface ReviewData {
   reviews: Record<string, {
     description?: string
     locales?: Record<string, {
+      translation_candidate?: TranslationCandidate
       comments?: ReviewComment[]
     }>
   }>

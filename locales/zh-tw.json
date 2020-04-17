@@ -145,6 +145,7 @@
   "review.placeholder.comment": "",
   "review.placeholder.request_change": "",
   "review.request_change": "請求修改",
+  "review.request_change_messages": "",
   "review.resolve": "已處理",
   "review.review": "評論",
   "review.suggestion": "修改建議",

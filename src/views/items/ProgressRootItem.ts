@@ -1,9 +1,12 @@
-import { Config } from '../../core'
+import { Config, Global } from '../../core'
 import { unicodeProgressBar, unicodeDecorate } from '../../utils'
 import { ProgressMissingListItem } from './ProgressMissingListItem'
 import { ProgressEmptyListItem } from './ProgressEmptyListItem'
 import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressTranslatedListItem } from './ProgressTranslatedListItem'
+import { ReviewRequestChangesRoot } from './ReviewRequestChangesRoot'
+import { BaseTreeItem } from './Base'
+import { ReviewTranslationCandidates } from './ReviewTranslationCandidates'
 
 export class ProgressRootItem extends ProgressBaseItem {
   get description(): string {
@@ -56,10 +59,22 @@ export class ProgressRootItem extends ProgressBaseItem {
   }
 
   async getChildren() {
-    return [
+    const items: BaseTreeItem[] = [
       new ProgressTranslatedListItem(this),
       new ProgressEmptyListItem(this),
       new ProgressMissingListItem(this),
     ]
+    if (Config.reviewEnabled) {
+      const comments = Global.reviews.getCommentsByLocale(this.locale)
+      const translations = Global.reviews.getTranslationCandidatesLocale(this.locale)
+      if (comments.length) {
+        const change_requested = comments.filter(c => c.type === 'request_change')
+        if (change_requested)
+          items.push(new ReviewRequestChangesRoot(this.ctx, change_requested))
+        // TODO:
+      }
+      items.push(new ReviewTranslationCandidates(this.ctx, translations))
+    }
+    return items
   }
 }

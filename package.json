@@ -721,7 +721,7 @@
           "type": "object",
           "default": {}
         },
-        "i18n-ally.review": {
+        "i18n-ally.review.enabled": {
           "type": "boolean",
           "default": true,
           "description": "%config.review_enabled%"

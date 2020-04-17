@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
-import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter } from 'vscode'
+import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
 import { Config, CurrentFile, Global } from '../core'
-import { EXT_EDITOR_ID } from '../meta'
+import { EXT_EDITOR_ID, EXT_ID } from '../meta'
 
 interface EditorPanelOptions {
 }
@@ -184,6 +184,10 @@ export class EditorPanel {
 
       case 'review.apply-suggestion':
         Global.reviews.applySuggestion(message.keypath, message.locale, message.comment)
+        break
+
+      case 'open-builtin-settings':
+        commands.executeCommand('workbench.extensions.action.configure', EXT_ID)
         break
     }
   }
