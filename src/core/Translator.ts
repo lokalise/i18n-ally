@@ -5,6 +5,7 @@ import i18n from '../i18n'
 import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
 import { PendingWrite } from './types'
+import { Global } from './Global'
 import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, Commands } from '.'
 
 interface TranslatorChangeEvent {
@@ -122,12 +123,12 @@ export class Translator {
       const increment = 1 / total * 100
 
       const doJob = async(job: TranslateJob) => {
-        let pending: PendingWrite | undefined
+        let result: PendingWrite | undefined
         const message = `"${job.keypath}" (${job.source}->${job.locale}) ${finished + 1}/${total}`
         progress.report({ increment: 0, message })
         try {
-          pending = await this.translateJob(job)
-          if (pending)
+          result = await this.translateJob(job)
+          if (result)
             successJobs.push(job)
           else
             cancelledJobs.push(job)
@@ -138,20 +139,19 @@ export class Translator {
         }
         finished += 1
         progress.report({ increment, message })
-        return pending
+        return { result, job }
       }
 
       // do translating in batch
       const parallels = Config.translateParallels
       const slices = Math.ceil(jobs.length / parallels)
       for (let i = 0; i < slices; i++) {
-        const pendings = await Promise.all(
+        const results = await Promise.all(
           jobs
             .slice(i * parallels, (i + 1) * parallels)
             .map(job => doJob(job)),
         )
-        // @ts-ignore
-        loader.write(pendings.filter(i => i))
+        this.saveTranslations(loader, results)
       }
 
       // translating done
@@ -241,9 +241,9 @@ export class Translator {
   }
 
   static async translateJob(
-    request: TranslateJob,
+    job: TranslateJob,
   ) {
-    const { loader, locale, keypath, filepath, token, source } = request
+    const { loader, locale, keypath, filepath, token, source } = job
     if (token?.isCancellationRequested)
       return
 
@@ -276,6 +276,29 @@ export class Translator {
     }
   }
 
+  private static async saveTranslations(
+    loader: Loader,
+    results: ({result: PendingWrite | undefined; job: TranslateJob})[],
+  ) {
+    const now = new Date().toISOString()
+    const r = results.filter(i => i.result && i.result.value) as ({result: PendingWrite; job: TranslateJob})[]
+
+    if (Config.translateSaveAsCandidates) {
+      await Global.reviews.setTranslationCandidates(r.map(i => ({
+        key: i.job.keypath,
+        locale: i.job.locale,
+        translation: {
+          source: i.job.source,
+          text: i.result.value || '',
+          time: now,
+        },
+      })))
+    }
+    else {
+      await loader.write(r.map(i => i.result))
+    }
+  }
+
   private static async translateText(text: string, from: string, to: string) {
     const engines = Config.translateEngines
     let trans_result: TranslateResult | undefined
@@ -294,8 +317,6 @@ export class Translator {
         errors.push(e)
       }
     }
-
-    console.log(trans_result)
 
     const result = trans_result && (trans_result.result || []).join('\n')
 

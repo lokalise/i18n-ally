@@ -10,6 +10,7 @@ export class ReviewRequestChangesItem extends BaseTreeItem {
     public readonly comment: ReviewCommentWithMeta,
   ) {
     super(ctx)
+    this.id = comment.id
   }
 
   get iconPath() {
@@ -24,7 +25,7 @@ export class ReviewRequestChangesItem extends BaseTreeItem {
     let comment = this.comment.comment
     if (comment)
       comment += '  '
-    return `► ${this.comment.keypath}`
+    return `▸ "${this.comment.keypath}"`
   }
 
   set description(_) {}

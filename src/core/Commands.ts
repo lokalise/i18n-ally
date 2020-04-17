@@ -26,9 +26,10 @@ export const enum Commands {
   open_in_editor = 'extension.i18n-ally.open-in-editor',
   review_comment = 'extension.i18n-ally.review.comment',
   review_approve = 'extension.i18n-ally.review.approve',
-  review_request_change = 'extension.i18n-ally.review.requestChange',
+  review_request_change = 'extension.i18n-ally.review.request-change',
   review_edit = 'extension.i18n-ally.review.edit',
   review_resolve = 'extension.i18n-ally.review.resolve',
-  review_resolve_thread = 'extension.i18n-ally.review.resolve_thread',
-  review_refresh_thread = 'extension.i18n-ally.review.refresh_thread',
+  review_resolve_thread = 'extension.i18n-ally.review.resolve-thread',
+  review_refresh_thread = 'extension.i18n-ally.review.refresh-thread',
+  review_apply_translation = 'extension.i18n-ally.review.apply-translation',
 }

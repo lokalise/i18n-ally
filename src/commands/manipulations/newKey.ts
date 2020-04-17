@@ -10,6 +10,7 @@ export async function NewKey(keypath?: string) {
     keypath = await window.showInputBox({
       value: keypath || '',
       prompt: i18n.t('prompt.new_key_path'),
+      ignoreFocusOut: true,
     })
 
     if (!keypath)
@@ -37,6 +38,7 @@ export async function NewKey(keypath?: string) {
     const value = await window.showInputBox({
       value: '',
       prompt: i18n.t('prompt.new_key_value', keypath, sourceLocale),
+      ignoreFocusOut: true,
     })
 
     if (value === undefined)

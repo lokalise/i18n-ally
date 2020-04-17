@@ -178,6 +178,10 @@ export class Config {
     return this.getConfig<boolean>('translate.fallbackToKey') || false
   }
 
+  static get translateSaveAsCandidates(): boolean {
+    return this.getConfig<boolean>('translate.saveAsCandidates') || false
+  }
+
   static get frameworksRubyRailsScopeRoot(): string {
     return this.getConfig<string>('frameworks.ruby-rails.scopeRoot') || ''
   }

@@ -25,6 +25,7 @@ export async function DuplicateKey(item?: LocaleTreeItem | string) {
     const newkeypath = await window.showInputBox({
       value: oldkeypath,
       prompt: i18n.t('prompt.enter_new_keypath'),
+      ignoreFocusOut: true,
     })
 
     if (!newkeypath)

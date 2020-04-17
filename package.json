@@ -174,16 +174,11 @@
       },
       {
         "command": "extension.i18n-ally.review.approve",
-        "title": "Approve"
+        "title": "%review.approve%"
       },
       {
-        "command": "extension.i18n-ally.review.requestChange",
-        "title": "Request Change"
-      },
-      {
-        "command": "extension.i18n-ally.review.reply",
-        "title": "Reply",
-        "enablement": "!commentIsEmpty"
+        "command": "extension.i18n-ally.review.request-change",
+        "title": "%review.request_change%"
       },
       {
         "command": "extension.i18n-ally.review.edit",
@@ -196,9 +191,13 @@
         "icon": "$(issue-closed)"
       },
       {
-        "command": "extension.i18n-ally.review.resolveThread",
+        "command": "extension.i18n-ally.review.resolve-thread",
         "title": "Resolve",
         "icon": "$(checklist)"
+      }, 
+      {
+        "command": "extension.i18n-ally.review.apply-translation",
+        "title": "%review.apply_translation_candidate%"
       }
     ],
     "menus": {
@@ -260,15 +259,19 @@
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.requestChange",
+          "command": "extension.i18n-ally.review.request-change",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.resolveThread",
+          "command": "extension.i18n-ally.review.resolve-thread",
           "when": "false"
         },
         {
           "command": "extension.i18n-ally.review.resolve",
+          "when": "false"
+        },
+        {
+          "command": "extension.i18n-ally.review.apply-translation",
           "when": "false"
         }
       ],
@@ -361,7 +364,7 @@
       ],
       "comments/commentThread/title": [
         {
-          "command": "extension.i18n-ally.review.resolveThread",
+          "command": "extension.i18n-ally.review.resolve-thread",
           "group": "navigation",
           "when": "commentController == i18n-ally-review && !commentThreadIsEmpty"
         }
@@ -373,7 +376,7 @@
           "when": "commentController == i18n-ally-review"
         },
         {
-          "command": "extension.i18n-ally.review.requestChange",
+          "command": "extension.i18n-ally.review.request-change",
           "group": "inline@2",
           "when": "commentController == i18n-ally-review"
         },
@@ -659,6 +662,11 @@
             "type": "string"
           },
           "description": "%config.regex_usage_match_append%"
+        },
+        "i18n-ally.translate.saveAsCandidates": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.translate_save_as_candidates%"
         },
         "i18n-ally.translate.fallbackToKey": {
           "type": "boolean",

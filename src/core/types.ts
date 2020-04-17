@@ -44,6 +44,11 @@ export interface TranslationCandidate {
   time: string
 }
 
+export interface TranslationCandidateWithMeta extends TranslationCandidate {
+  keypath: string
+  locale: string
+}
+
 export interface ReviewData {
   reviews: Record<string, {
     description?: string

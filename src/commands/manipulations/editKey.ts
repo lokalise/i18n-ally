@@ -31,6 +31,7 @@ export async function EditKey(item?: LocaleTreeItem | CommandOptions) {
     const newvalue = await window.showInputBox({
       value: placeholder,
       prompt: i18n.t('prompt.edit_key_in_locale', node.keypath, decorateLocale(node.locale)),
+      ignoreFocusOut: true,
     })
 
     if (newvalue !== undefined && newvalue !== node.value) {

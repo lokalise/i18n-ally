@@ -30,6 +30,8 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.keepFulfilled": true,
   "i18n-ally.translate.promptSource": true,
+  "i18n-ally.pathMatcher": "{locale}.json",
+  "i18n-ally.translate.saveAsCandidates": true,
   "i18n-ally.keysInUse": [
     "view.progress_submenu.translated_keys",
     "view.progress_submenu.missing_keys",
@@ -45,5 +47,4 @@
     "vscode",
     "vue"
   ],
-  "i18n-ally.pathMatcher": "{locale}.json"
 }

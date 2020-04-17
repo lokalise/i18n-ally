@@ -7,6 +7,7 @@ import extractText from './extractText'
 import help from './help'
 import refreshUsageReport from './refreshUsageReport'
 import editor from './editor'
+import review from './review'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -17,6 +18,7 @@ const m: ExtensionModule = (ctx) => {
     help(ctx),
     refreshUsageReport(ctx),
     editor(ctx),
+    review(ctx),
   ])
 }
 

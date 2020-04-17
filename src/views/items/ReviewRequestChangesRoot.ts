@@ -10,6 +10,7 @@ export class ReviewRequestChangesRoot extends BaseTreeItem {
     public readonly comments: ReviewCommentWithMeta[],
   ) {
     super(ctx)
+    this.id = 'review_request_changes'
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
   }
 

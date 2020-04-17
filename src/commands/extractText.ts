@@ -20,6 +20,7 @@ const m: ExtensionModule = () => {
       const keypath = await window.showInputBox({
         prompt: i18n.t('prompt.enter_i18n_key'),
         value: default_keypath,
+        ignoreFocusOut: true,
       })
 
       if (!keypath) {
