@@ -49,365 +49,365 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.i18n-ally.config-locales",
+        "command": "i18n-ally.config-locales",
         "title": "%command.config_locales%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.config-locales-auto",
+        "command": "i18n-ally.config-locales-auto",
         "title": "%command.config_locales_auto%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.config-display-language",
+        "command": "i18n-ally.config-display-language",
         "title": "%command.config_display_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.config-source-language",
+        "command": "i18n-ally.config-source-language",
         "title": "%command.config_source_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.set-display-language",
+        "command": "i18n-ally.set-display-language",
         "title": "%command.set_display_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.set-source-language",
+        "command": "i18n-ally.set-source-language",
         "title": "%command.set_source_language%",
         "category": "%extname%"
       },
       {
-        "command": "extension.i18n-ally.copy-key",
+        "command": "i18n-ally.copy-key",
         "category": "%extname%",
         "title": "%command.copy_key%",
         "icon": "$(chrome-restore)"
       },
       {
-        "command": "extension.i18n-ally.translate-key",
+        "command": "i18n-ally.translate-key",
         "category": "%extname%",
         "title": "%command.translate_key%",
         "icon": "$(globe)"
       },
       {
-        "command": "extension.i18n-ally.edit-key",
+        "command": "i18n-ally.edit-key",
         "category": "%extname%",
         "title": "%command.edit_key%",
         "icon": "$(edit)"
       },
       {
-        "command": "extension.i18n-ally.open-key",
+        "command": "i18n-ally.open-key",
         "category": "%extname%",
         "title": "%command.open_key%",
         "icon": "$(file-symlink-file)"
       },
       {
-        "command": "extension.i18n-ally.delete-key",
+        "command": "i18n-ally.delete-key",
         "category": "%extname%",
         "title": "%command.delete_key%"
       },
       {
-        "command": "extension.i18n-ally.rename-key",
+        "command": "i18n-ally.rename-key",
         "category": "%extname%",
         "title": "%command.rename_key%"
       },
       {
-        "command": "extension.i18n-ally.open-url",
+        "command": "i18n-ally.open-url",
         "category": "%extname%",
         "title": "%command.open_url%"
       },
       {
-        "command": "extension.i18n-ally.fulfill-keys",
+        "command": "i18n-ally.fulfill-keys",
         "category": "%extname%",
         "title": "%command.fulfill_keys%",
         "icon": "$(selection)"
       },
       {
-        "command": "extension.i18n-ally.refresh-usage",
+        "command": "i18n-ally.refresh-usage",
         "category": "%extname%",
         "title": "%command.refresh_usage%",
         "icon": "$(refresh)"
       },
       {
-        "command": "extension.i18n-ally.support",
+        "command": "i18n-ally.support",
         "category": "%extname%",
         "title": "%feedback.support%"
       },
       {
-        "command": "extension.i18n-ally.locale-visibility-show",
+        "command": "i18n-ally.locale-visibility-show",
         "category": "%extname%",
         "title": "%command.locale_visibility_show%",
         "icon": "$(eye)"
       },
       {
-        "command": "extension.i18n-ally.locale-visibility-hide",
+        "command": "i18n-ally.locale-visibility-hide",
         "category": "%extname%",
         "title": "%command.locale_visibility_hide%",
         "icon": "$(eye-closed)"
       },
       {
-        "command": "extension.i18n-ally.new-key",
+        "command": "i18n-ally.new-key",
         "category": "%extname%",
         "title": "%command.new_key%",
         "icon": "$(plus)"
       },
       {
-        "command": "extension.i18n-ally.duplicate-key",
+        "command": "i18n-ally.duplicate-key",
         "category": "%extname%",
         "title": "%command.duplicate_key%"
       },
       {
-        "command": "extension.i18n-ally.mark-key-as-in-use",
+        "command": "i18n-ally.mark-key-as-in-use",
         "category": "%extname%",
         "title": "%command.mark_key_as_in_use%"
       },
       {
-        "command": "extension.i18n-ally.open-in-editor",
+        "command": "i18n-ally.open-in-editor",
         "category": "%extname%",
         "title": "%command.open_in_editor%"
       },
       {
-        "command": "extension.i18n-ally.open-editor",
+        "command": "i18n-ally.open-editor",
         "category": "%extname%",
         "title": "%command.open_editor%"
       },
       {
-        "command": "extension.i18n-ally.review.comment",
+        "command": "i18n-ally.review.comment",
         "category": "%extname%",
         "title": "Leave Comment",
         "enablement": "!commentIsEmpty"
       },
       {
-        "command": "extension.i18n-ally.review.approve",
+        "command": "i18n-ally.review.approve",
         "category": "%extname%",
         "title": "%review.approve%"
       },
       {
-        "command": "extension.i18n-ally.review.request-change",
+        "command": "i18n-ally.review.request-change",
         "category": "%extname%",
         "title": "%review.request_change%"
       },
       {
-        "command": "extension.i18n-ally.review.edit",
+        "command": "i18n-ally.review.edit",
         "category": "%extname%",
         "title": "Edit",
         "icon": "$(edit)"
       },
       {
-        "command": "extension.i18n-ally.review.resolve",
+        "command": "i18n-ally.review.resolve",
         "title": "Resolve",
         "icon": "$(issue-closed)"
       },
       {
-        "command": "extension.i18n-ally.review.resolve-thread",
+        "command": "i18n-ally.review.resolve-thread",
         "category": "%extname%",
         "title": "Resolve",
         "icon": "$(checklist)"
       },
       {
-        "command": "extension.i18n-ally.review.apply-translation",
+        "command": "i18n-ally.review.apply-translation",
         "title": "%review.apply_translation_candidate%"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "extension.i18n-ally.set-display-language",
+          "command": "i18n-ally.set-display-language",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.set-source-language",
+          "command": "i18n-ally.set-source-language",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.copy-key",
+          "command": "i18n-ally.copy-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.edit-key",
+          "command": "i18n-ally.edit-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.delete-key",
+          "command": "i18n-ally.delete-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.rename-key",
+          "command": "i18n-ally.rename-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.translate-key",
+          "command": "i18n-ally.translate-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.open-key",
+          "command": "i18n-ally.open-key",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.open-url",
+          "command": "i18n-ally.open-url",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.locale-visibility-hide",
+          "command": "i18n-ally.locale-visibility-hide",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.locale-visibility-show",
+          "command": "i18n-ally.locale-visibility-show",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.mark-key-as-in-use",
+          "command": "i18n-ally.mark-key-as-in-use",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.comment",
+          "command": "i18n-ally.review.comment",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.approve",
+          "command": "i18n-ally.review.approve",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.request-change",
+          "command": "i18n-ally.review.request-change",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.resolve-thread",
+          "command": "i18n-ally.review.resolve-thread",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.resolve",
+          "command": "i18n-ally.review.resolve",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.review.apply-translation",
+          "command": "i18n-ally.review.apply-translation",
           "when": "false"
         },
         {
-          "command": "extension.i18n-ally.open-in-editor",
+          "command": "i18n-ally.open-in-editor",
           "when": "false"
         }
       ],
       "view/item/context": [
         {
-          "command": "extension.i18n-ally.open-key",
+          "command": "i18n-ally.open-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /openable/",
           "group": "inline@1"
         },
         {
-          "command": "extension.i18n-ally.copy-key",
+          "command": "i18n-ally.copy-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
           "group": "inline@2"
         },
         {
-          "command": "extension.i18n-ally.translate-key",
+          "command": "i18n-ally.translate-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /translatable/",
           "group": "inline@3"
         },
         {
-          "command": "extension.i18n-ally.edit-key",
+          "command": "i18n-ally.edit-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /editable/",
           "group": "inline@4"
         },
         {
-          "command": "extension.i18n-ally.fulfill-keys",
+          "command": "i18n-ally.fulfill-keys",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /fulfillable/",
           "group": "inline@3"
         },
         {
-          "command": "extension.i18n-ally.set-display-language",
+          "command": "i18n-ally.set-display-language",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /notdisply/"
         },
         {
-          "command": "extension.i18n-ally.set-source-language",
+          "command": "i18n-ally.set-source-language",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /notsource/"
         },
         {
-          "command": "extension.i18n-ally.rename-key",
+          "command": "i18n-ally.rename-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@1"
         },
         {
-          "command": "extension.i18n-ally.duplicate-key",
+          "command": "i18n-ally.duplicate-key",
           "when": "view =~ /i18n-ally-locales-tree/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@2"
         },
         {
-          "command": "extension.i18n-ally.delete-key",
+          "command": "i18n-ally.delete-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@3"
         },
         {
-          "command": "extension.i18n-ally.open-in-editor",
+          "command": "i18n-ally.open-in-editor",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
           "group": "i18nally@4"
         },
         {
-          "command": "extension.i18n-ally.locale-visibility-show",
+          "command": "i18n-ally.locale-visibility-show",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /show/",
           "group": "inline@4"
         },
         {
-          "command": "extension.i18n-ally.locale-visibility-hide",
+          "command": "i18n-ally.locale-visibility-hide",
           "when": "view =~ /i18n-ally-locales-progress/ && viewItem =~ /hide/",
           "group": "inline@4"
         },
         {
-          "command": "extension.i18n-ally.delete-key",
+          "command": "i18n-ally.delete-key",
           "when": "view =~ /i18n-ally-locales-usage/ && viewItem =~ /usage_idle/",
           "group": "i18nally@1"
         },
         {
-          "command": "extension.i18n-ally.mark-key-as-in-use",
+          "command": "i18n-ally.mark-key-as-in-use",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /key_idle/",
           "group": "i18nally@1"
         }
       ],
       "view/title": [
         {
-          "command": "extension.i18n-ally.refresh-usage",
+          "command": "i18n-ally.refresh-usage",
           "group": "navigation",
           "when": "view =~ /i18n-ally-locales-usage/"
         },
         {
-          "command": "extension.i18n-ally.new-key",
+          "command": "i18n-ally.new-key",
           "group": "navigation",
           "when": "view =~ /i18n-ally-locales-tree/"
         }
       ],
       "comments/commentThread/title": [
         {
-          "command": "extension.i18n-ally.review.resolve-thread",
+          "command": "i18n-ally.review.resolve-thread",
           "group": "navigation",
           "when": "commentController == i18n-ally-review && !commentThreadIsEmpty"
         }
       ],
       "comments/commentThread/context": [
         {
-          "command": "extension.i18n-ally.review.approve",
+          "command": "i18n-ally.review.approve",
           "group": "inline@1",
           "when": "commentController == i18n-ally-review"
         },
         {
-          "command": "extension.i18n-ally.review.request-change",
+          "command": "i18n-ally.review.request-change",
           "group": "inline@2",
           "when": "commentController == i18n-ally-review"
         },
         {
-          "command": "extension.i18n-ally.review.comment",
+          "command": "i18n-ally.review.comment",
           "group": "inline@3",
           "when": "commentController == i18n-ally-review"
         }
       ],
       "comments/comment/title": [
         {
-          "command": "extension.i18n-ally.review.edit",
+          "command": "i18n-ally.review.edit",
           "group": "group@1",
           "when": "commentController == i18n-ally-review && viewItem =~ /self/"
         },
         {
-          "command": "extension.i18n-ally.review.resolve",
+          "command": "i18n-ally.review.resolve",
           "group": "group@2",
           "when": "commentController == i18n-ally-review"
         }
@@ -767,16 +767,16 @@
           "description": "%config.editor_prefer_editor%"
         },
         "i18n-ally.derivedKeyRules": {
-          "deprecationMessage": "%config.deprecated_derived_key_rules%"
+          "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },
         "i18n-ally.filenameMatchRegex": {
-          "deprecationMessage": "%config.deprecated_match_regex%"
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.pathMatcher\" instead."
         },
         "i18n-ally.fileNamespace": {
-          "deprecationMessage": "%config.deprecated_file_namespace%"
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.namespace\" instead."
         },
         "i18n-ally.keyMatchRegex": {
-          "deprecationMessage": "%config.deprecated_key_match_regex%"
+          "deprecationMessage": "Depreacted. Use \"i18n-ally.regex.key\" instead."
         },
         "vue-i18n-ally.localesPaths": {
           "deprecationMessage": "%config.deprecated%"

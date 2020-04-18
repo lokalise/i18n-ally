@@ -222,8 +222,6 @@ export class LocaleLoader extends Loader {
       if (Config.namespace)
         pending.namespace = pending.namespace || this._files[filepath]?.namespace
 
-      console.log(pending)
-
       if (!distributed[filepath])
         distributed[filepath] = []
       distributed[filepath].push(pending)
@@ -255,7 +253,6 @@ export class LocaleLoader extends Loader {
 
           if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
-            console.log(node)
             keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace)
           }
 
