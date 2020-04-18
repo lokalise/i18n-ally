@@ -30,17 +30,20 @@ export class KeyDetector {
       if (range) {
         const key = document.getText(range).replace(regex, '$1')
 
-        if (key && (dotEnding || !key.endsWith('.')))
+        if (dotEnding) {
+          if (!key || key.endsWith('.'))
+            return { range, key }
+        }
+        else {
           return { range, key }
+        }
       }
     }
   }
 
   static getKey(document: TextDocument, position: Position, dotEnding?: boolean) {
     const keyRange = KeyDetector.getKeyRange(document, position, dotEnding)
-    if (!keyRange)
-      return
-    return keyRange.key
+    return keyRange?.key
   }
 
   static getKeyAndRange(document: TextDocument, position: Position, dotEnding?: boolean) {

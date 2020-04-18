@@ -13,8 +13,14 @@ class CompletionProvider implements CompletionItemProvider {
     const loader: Loader = CurrentFile.loader
     const key = KeyDetector.getKey(document, position, true)
 
-    if (key == null)
+    if (key === undefined)
       return
+
+    if (!key) {
+      return Object
+        .values(CurrentFile.loader.keys)
+        .map(key => new CompletionItem(key, CompletionItemKind.Text))
+    }
 
     let parent = ''
 
@@ -37,14 +43,16 @@ class CompletionProvider implements CompletionItemProvider {
     if (!node || node.type !== 'tree')
       return
 
-    return Object.values(node.children).map((child) => {
-      return new CompletionItem(
-        child.keyname,
-        child.type === 'tree'
-          ? CompletionItemKind.Field
-          : CompletionItemKind.Text,
+    return Object
+      .values(node.children)
+      .map(child =>
+        new CompletionItem(
+          child.keyname,
+          child.type === 'tree'
+            ? CompletionItemKind.Field
+            : CompletionItemKind.Text,
+        ),
       )
-    })
   }
 }
 
