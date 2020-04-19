@@ -194,6 +194,18 @@ export class EditorPanel {
       case 'open-search':
         commands.executeCommand(Commands.open_editor)
         break
+
+      case 'translation.apply':
+        Global.reviews.applyTranslationCandidate(message.keypath, message.locale)
+        break
+
+      case 'translation.edit':
+        Global.reviews.promptEditTranslation(message.keypath, message.locale)
+        break
+
+      case 'translation.discard':
+        Global.reviews.discardTranslationCandidate(message.keypath, message.locale)
+        break
     }
   }
 

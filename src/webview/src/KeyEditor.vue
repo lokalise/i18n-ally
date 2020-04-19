@@ -1,29 +1,30 @@
 <template lang="pug">
 .key-editor
-  .paginate
-    .prev
+  .header
     .key-name "{{data.keypath}}"
-    .next
 
-  .reviews
-    template(v-if='!data.reviews.description')
-      .description.add(@click='editDescription') {{ $t('editor.add_description') }}
-    template(v-else)
-      .description(@click='editDescription') {{data.reviews.description}}
+    .reviews
+      template(v-if='!data.reviews.description')
+        .description.add(@click='editDescription') {{ $t('editor.add_description') }}
+      template(v-else)
+        .description(@click='editDescription') {{data.reviews.description}}
 
-  .buttons
-    .button(@click='translateAll' v-if='emptyRecords.length')
-      v-translate
-      span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
-    .button Mark all as...
+    .buttons.actions
+      .button(@click='translateAll' v-if='emptyRecords.length')
+        v-translate
+        span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
+      .button Mark all as...
 
-  record-editor(
-    v-for='r in records'
-    :keypath='data.keypath'
-    :record='r'
-    :review='(data.reviews.locales || {})[r.locale]'
-    :key='r.locale'
-  )
+  .records
+    record-editor(
+      v-for='r in records'
+      :keypath='data.keypath'
+      :record='r'
+      :review='(data.reviews.locales || {})[r.locale]'
+      :key='r.locale'
+      :active='actived === r.locale'
+      @update:active='actived = r.locale'
+    )
 </template>
 
 <script lang="js">
@@ -44,6 +45,12 @@ export default Vue.extend({
 
   props: {
     data: { type: Object, default: () => ({ records: {} }) },
+  },
+
+  data() {
+    return {
+      actived: '',
+    }
   },
 
   computed: {
@@ -82,26 +89,22 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .key-editor
-  .paginate
-    padding 4px
-    display grid
-    grid-template-columns max-content auto max-content
+  .header
+    padding var(--i18n-ally-margin)
 
-    .key-name
-      text-align center
-      font-family var(--vscode-editor-font-family)
-      opacity 0.8
+  .key-name
+    font-family var(--vscode-editor-font-family)
+    opacity 0.8
 
   .reviews
-    text-align center
-    padding-bottom 5px
+    padding-bottom 0.5em
 
     .description
       cursor pointer
       min-width 100px
       display inline-block
       position relative
-      padding 4px 10px
+      padding 0.4em
 
       &:hover::after
         content ""
@@ -117,5 +120,4 @@ export default Vue.extend({
       &.add
         opacity 0.5
         font-style italic
-
 </style>

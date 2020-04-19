@@ -12,7 +12,7 @@
       },
       "problemMatcher": [
         {
-          "base": "$tsc-watch", // <-- extends the TypeScript watcher
+          "base": "$ts-webpack-watch",
           "background": {
             "activeOnStart": true,
             "beginsPattern": "Compilation  starting...",

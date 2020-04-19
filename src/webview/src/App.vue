@@ -2,8 +2,9 @@
 .container
   template(v-if='$store.state.ready')
     .nav-bar
-      img.logo(:src='logo')
-      .nav-middle
+      div
+      //img.logo(:src='logo')
+      //.nav-middle
         .title {{ $t('editor.title') }}
       div
         v-magnify.setting-button(@click='openSearch')
@@ -15,7 +16,7 @@
 
     // pre {{JSON.stringify(state.i18n, null, 2)}}
   template(v-else)
-    p Loading...
+    p.loading Loading...
 </template>
 
 <script lang="js">
@@ -69,6 +70,12 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
+:root
+  --i18n-ally-margin 0.8rem
+
+body
+  padding 0
+
 .container
   --review-approve #768741
   --review-request-change #d8583e
@@ -78,9 +85,11 @@ export default Vue.extend({
   padding-bottom 1.5em
 
   .nav-bar
-    padding 1.2em 0
+    padding 1.2em
+    margin-bottom -2.8em
     display grid
-    grid-template-columns max-content auto max-content max-content
+    z-index 10
+    grid-template-columns auto max-content
 
     & *
       vertical-align middle
@@ -98,7 +107,7 @@ export default Vue.extend({
 
   .setting-button
     font-size 1.6em
-    margin-left 0.4em
+    margin-left 0.6em
     opacity 0.4
     cursor pointer
 
@@ -172,4 +181,7 @@ export default Vue.extend({
 
     &:last-child
       margin 0.3em 0.3em 0.3em 0
+
+p.loading
+  padding var(--i18n-ally-margin)
 </style>

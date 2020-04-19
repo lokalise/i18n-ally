@@ -2,7 +2,6 @@ import { commands, window } from 'vscode'
 import { Commands, Global, TranslationCandidateWithMeta } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
-import { decorateLocale } from '../utils'
 
 const m: ExtensionModule = (ctx) => {
   return [
@@ -20,20 +19,10 @@ const m: ExtensionModule = (ctx) => {
           Discard,
         )
 
-        let value: string | undefined = candidate.text
-
-        if (result === EditApply) {
-          value = await window.showInputBox({
-            value,
-            prompt: i18n.t('prompt.edit_key_in_locale', candidate.keypath, decorateLocale(candidate.locale)),
-            ignoreFocusOut: true,
-          })
-          if (!value)
-            return
-        }
-
-        if (result === Apply || result === EditApply)
-          await Global.reviews.applyTranslationCandidate(candidate.keypath, candidate.locale, value)
+        if (result === EditApply)
+          await Global.reviews.promptEditTranslation(candidate.keypath, candidate.locale)
+        else if (result === Apply || result === EditApply)
+          await Global.reviews.applyTranslationCandidate(candidate.keypath, candidate.locale)
         else if (result === Discard)
           await Global.reviews.discardTranslationCandidate(candidate.keypath, candidate.locale)
       }),

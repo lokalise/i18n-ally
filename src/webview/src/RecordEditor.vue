@@ -1,6 +1,6 @@
 <template lang="pug">
-.record-editor
-  .edit-input.panel(:class='{active}')
+.record-editor(:class='{active}')
+  .edit-input.panel(:class='{"top-stacked": active && review.translation_candidate }')
     flag(:locale='record.locale' size='18')
     textarea(
       ref='textarea1'
@@ -17,7 +17,7 @@
       .button(v-if='readonly' disabled)
         v-pencil-off
 
-      .button(@click='translate' v-if='!readonly')
+      .button(@click='translate' v-if='!readonly && !review.translation_candidate && record.locale !== $store.state.config.sourceLanguage')
         v-translate
         span {{ $t('editor.translate') }}
 
@@ -30,6 +30,18 @@
       v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
       v-comment-question-outline.state-icon(v-else-if='reviewBrief==="conflict"')
       v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
+
+  .translation-candidate.panel.shadow.bottom-stacked(v-if='active && review.translation_candidate')
+    v-translate
+    .text {{review.translation_candidate.text}}
+    .buttons
+      .button.flat(@click='transDiscard()') {{$t('prompt.button_discard')}}
+      .button(@click='transEdit()')
+        v-pencil
+        span {{$t('prompt.button_edit_end_apply')}}
+      .button(@click='transApply()')
+        v-check-all
+        span {{$t('prompt.button_apply')}}
 
   .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
     .comments
@@ -101,6 +113,9 @@ import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vu
 import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
 import VPencilOff from 'vue-material-design-icons/PencilOff.vue'
+import VPencil from 'vue-material-design-icons/Pencil.vue'
+import VCheckAll from 'vue-material-design-icons/CheckAll.vue'
+import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
 import { getCommentState } from '../../utils/shared'
 import Flag from './Flag.vue'
@@ -118,7 +133,10 @@ export default Vue.extend({
     VCommentEditOutline,
     VCheckboxMarkedOutline,
     VCommentQuestionOutline,
+    VDeleteEmptyOutline,
     VPencilOff,
+    VPencil,
+    VCheckAll,
     VFormatQuoteOpen,
   },
 
@@ -126,13 +144,13 @@ export default Vue.extend({
     record: { type: Object, default: () => ({ locale: '', value: '' }) },
     keypath: { type: String, default: '' },
     review: { type: Object, default: () => ({ comments: [] }) },
+    active: { type: Boolean, default: false },
   },
 
   data() {
     return {
+      focused: false,
       reviewing: false,
-      active: false,
-      changed: false,
       value: '',
       reviewForm: {
         comment: '',
@@ -159,6 +177,9 @@ export default Vue.extend({
         comment: this.$t('review.placeholder.comment'),
       }
     },
+    changed() {
+      return this.value !== this.record.value
+    },
   },
 
   watch: {
@@ -166,9 +187,6 @@ export default Vue.extend({
       deep: true,
       immediate: true,
       handler() {
-        if (this.active && this.changed)
-          return
-
         this.reset()
       },
     },
@@ -188,6 +206,10 @@ export default Vue.extend({
         })
       },
     },
+    active(value) {
+      if (!value && this.changed)
+        this.save()
+    },
   },
 
   mounted() {
@@ -196,7 +218,8 @@ export default Vue.extend({
 
   methods: {
     reset() {
-      this.changed = false
+      if (this.focused && this.changed)
+        return
       this.value = this.record.value
     },
     resetForm() {
@@ -218,28 +241,24 @@ export default Vue.extend({
         this.changed = true
     },
     onFocus() {
+      this.focused = true
       this.value = this.record.value
-      this.active = true
+      this.$emit('update:active', true)
     },
-    onBlur(e) {
-      if (!e.relatedTarget) {
-        e.preventDefault()
-        e.srcElement.focus()
-      }
-      else {
-        this.active = false
-      }
-
-      if (this.value !== this.record.value) {
-        vscode.postMessage({
-          name: 'edit',
-          data: {
-            keypath: this.record.keypath,
-            locale: this.record.locale,
-            value: this.value,
-          },
-        })
-      }
+    onBlur() {
+      this.focused = false
+      if (this.changed)
+        this.save()
+    },
+    save() {
+      vscode.postMessage({
+        name: 'edit',
+        data: {
+          keypath: this.record.keypath,
+          locale: this.record.locale,
+          value: this.value,
+        },
+      })
     },
     translate() {
       vscode.postMessage({
@@ -279,6 +298,27 @@ export default Vue.extend({
         comment: comment.id,
       })
     },
+    transDiscard() {
+      vscode.postMessage({
+        name: 'translation.discard',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+      })
+    },
+    transApply() {
+      vscode.postMessage({
+        name: 'translation.apply',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+      })
+    },
+    transEdit() {
+      vscode.postMessage({
+        name: 'translation.edit',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+      })
+    },
   },
 })
 </script>
@@ -296,7 +336,7 @@ export default Vue.extend({
     left 0
     right 0
     bottom 0
-    border-radius 3px
+    border-radius 4px
     z-index -1
     pointer-events none
 
@@ -316,6 +356,16 @@ export default Vue.extend({
       background var(--vscode-foreground)
       opacity 0.04
 
+  &.top-stacked
+    &::before, &::after
+      border-bottom-right-radius 0
+      border-bottom-left-radius 0
+
+  &.bottom-stacked
+    &::before, &::after
+      border-top-right-radius 0
+      border-top-left-radius 0
+
   label
     display block
     font-size 0.8em
@@ -328,10 +378,22 @@ export default Vue.extend({
     margin-top 0.8em
 
 .record-editor
+  border-left 2px solid transparent
+  padding-right var(--i18n-ally-margin)
+  padding-left calc(var(--i18n-ally-margin) - 2px)
+
+  &.active
+    border-left 2px solid var(--vscode-foreground)
+
   .edit-input
     display grid
     grid-template-columns max-content auto max-content max-content
     margin-top 8px
+
+    .flag-icon
+      width 2em
+      height 1.8em
+      padding 0.2em 0.2em 0.2em 0
 
     .buttons
       margin auto
@@ -401,11 +463,6 @@ export default Vue.extend({
   & > *
     vertical-align middle
 
-  .flag-icon
-    width 2em
-    height 1.8em
-    padding 0.2em 0
-
   textarea
     margin auto
     background transparent
@@ -421,4 +478,19 @@ export default Vue.extend({
   textarea:focus,
   button:focus
     outline none
+
+.translation-candidate.panel
+  display grid
+  grid-template-columns max-content auto max-content
+
+  .translate-icon
+    margin auto 0.5em auto 0.7em
+    font-size 1.2em
+    height 0.8em
+    opacity 0.6
+
+  .text
+    margin auto 0.4em
+    font-size 0.8em
+    font-style italic
 </style>
