@@ -24,7 +24,7 @@ class VueFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '(?:i18n[ (]path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.)(?:(?:d|n)\\(.*?,|(?:t|tc|te)\\()\\s*)[\'"`]({key})[\'"`]',
+    '(?:i18n[ (]path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.)(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string, languageId: string) {
