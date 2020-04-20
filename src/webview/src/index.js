@@ -26,6 +26,8 @@ const store = new Vuex.Store({
         enabledFrameworks: [],
         ignoredLocales: [],
         extensionRoot: '',
+        flags: [],
+        locales: [],
       },
       i18n: {},
       route: 'welcome',

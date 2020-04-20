@@ -11,7 +11,7 @@
 
     .buttons.actions
       .button(@click='translateAll' v-if='emptyRecords.length')
-        v-translate
+        v-earth
         span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
       .button Mark all as...
 
@@ -29,7 +29,7 @@
 
 <script lang="js">
 import Vue from 'vue'
-import VTranslate from 'vue-material-design-icons/Translate.vue'
+import VEarth from 'vue-material-design-icons/Earth.vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
 import { vscode } from './api'
@@ -38,7 +38,7 @@ export default Vue.extend({
   components: {
     Flag,
     RecordEditor,
-    VTranslate,
+    VEarth,
   },
 
   inheritAttrs: false,

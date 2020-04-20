@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getFlagFilename } from '../../utils/locale'
 
 export default Vue.extend({
   inheritAttrs: false,
@@ -20,7 +19,13 @@ export default Vue.extend({
   computed: {
     src() {
       // @ts-ignore
-      return `${this.$store.state.config.extensionRoot}/res/flags/${getFlagFilename(this.locale)}`
+      const idx = this.$store.state.config.locales.indexOf(this.locale)
+      // @ts-ignore
+      const flag = this.$store.state.config.flags[idx]
+      if (!flag)
+        return ''
+      // @ts-ignore
+      return `${this.$store.state.config.extensionRoot}/res/flags/${flag}.svg`
     },
     style() {
       if (this.label) {
@@ -47,4 +52,6 @@ export default Vue.extend({
     font-size 0.7em
     opacity 0.6
     line-height 1em
+    text-overflow ellipsis
+    overflow hidden
 </style>

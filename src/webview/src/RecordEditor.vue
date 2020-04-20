@@ -18,7 +18,7 @@
         v-pencil-off
 
       .button(@click='translate' v-if='!readonly && !review.translation_candidate && record.locale !== $store.state.config.sourceLanguage')
-        v-translate
+        v-earth
         span {{ $t('editor.translate') }}
 
       .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
@@ -32,7 +32,7 @@
       v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
 
   .translation-candidate.panel.shadow.bottom-stacked(v-if='active && review.translation_candidate')
-    v-translate
+    v-earth
     .text {{review.translation_candidate.text}}
     .buttons
       .button.flat(@click='transDiscard()') {{$t('prompt.button_discard')}}
@@ -108,7 +108,8 @@ import Vue from 'vue'
 import VCheck from 'vue-material-design-icons/Check.vue'
 import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
 import VCommentOutline from 'vue-material-design-icons/CommentOutline.vue'
-import VTranslate from 'vue-material-design-icons/Translate.vue'
+import VEarth from 'vue-material-design-icons/Earth.vue'
+// import VEarthPlus from 'vue-material-design-icons/EarthPlus.vue'
 import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
 import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
 import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
@@ -129,7 +130,8 @@ export default Vue.extend({
     VCheck,
     VPlusMinus,
     VCommentOutline,
-    VTranslate,
+    VEarth,
+    // VEarthPlus,
     VCommentEditOutline,
     VCheckboxMarkedOutline,
     VCommentQuestionOutline,
@@ -483,7 +485,7 @@ export default Vue.extend({
   display grid
   grid-template-columns max-content auto max-content
 
-  .translate-icon
+  .earth-icon
     margin auto 0.5em auto 0.7em
     font-size 1.2em
     height 0.8em
