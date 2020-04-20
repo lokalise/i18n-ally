@@ -8,7 +8,6 @@ import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
-import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
 
@@ -50,17 +49,22 @@ export class LocaleLoader extends Loader {
   }
 
   get locales() {
+    // sort by source, display and others by alpha
     const source = Config.sourceLanguage
-    return _(this._files)
+    const display = Config.displayLanguage
+    const locales = _(this._files)
       .values()
       .map(f => f.locale)
       .uniq()
-      .sort((x, y) => x === source
-        ? -1
-        : y === source
-          ? 1
-          : 0)
+      .sort()
+      .filter(l => l !== source && l !== display)
       .value()
+
+    locales.unshift(display)
+    if (display !== source)
+      locales.unshift(source)
+
+    return locales
   }
 
   // #region throttled functions
@@ -75,19 +79,6 @@ export class LocaleLoader extends Loader {
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFileWaitingList: [string, string][] = []
-  private _fileWatcherOnHold = false
-
-  private get fileWatcherOnHold() {
-    return this._fileWatcherOnHold
-  }
-
-  private set fileWatcherOnHold(v) {
-    if (this._fileWatcherOnHold !== v) {
-      this._fileWatcherOnHold = v
-      if (!v)
-        this.throttledLoadFileExecutor()
-    }
-  }
 
   private throttledLoadFileExecutor = throttle(async() => {
     const list = this.throttledLoadFileWaitingList
@@ -105,8 +96,7 @@ export class LocaleLoader extends Loader {
   private throttledLoadFile = (d: string, r: string) => {
     if (!this.throttledLoadFileWaitingList.find(([a, b]) => a === d && b === r))
       this.throttledLoadFileWaitingList.push([d, r])
-    if (!this.fileWatcherOnHold)
-      this.throttledLoadFileExecutor()
+    this.throttledLoadFileExecutor()
   }
   // #endregion
 
@@ -206,7 +196,6 @@ export class LocaleLoader extends Loader {
   }
 
   async write(pendings: PendingWrite|PendingWrite[]) {
-    this.fileWatcherOnHold = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
@@ -277,17 +266,15 @@ export class LocaleLoader extends Loader {
         await parser.save(filepath, modified, Config.sortKeys)
 
         if (this._files[filepath]) {
-          const { mtimeMs: mtime } = fs.statSync(filepath)
           this._files[filepath].value = modified
-          this._files[filepath].mtime = mtime
+          this._files[filepath].mtime = this.getMtime(filepath)
         }
       }
     }
     catch (e) {
-      this.fileWatcherOnHold = false
+      this.update()
       throw e
     }
-    this.fileWatcherOnHold = false
 
     this.update()
   }
@@ -357,7 +344,7 @@ export class LocaleLoader extends Loader {
       if (match && match.length > 0)
         break
     }
-    // Log.info(`\nMatching filename: ${filename} ${dirStructure} ${JSON.stringify(match)}`)
+
     if (!match || match.length < 1)
       return
 
@@ -396,12 +383,7 @@ export class LocaleLoader extends Loader {
       if (!locale)
         return
 
-      const { mtimeMs: mtime } = fs.statSync(filepath)
-
-      if (this._files[filepath]?.mtime === mtime) {
-        Log.info(`📑 Skipped loading ${relativePath}, same mtime`, 1)
-        return
-      }
+      const mtime = this.getMtime(filepath)
 
       Log.info(`📑 Loading (${locale}) ${relativePath}`, 1)
 
@@ -450,62 +432,73 @@ export class LocaleLoader extends Loader {
       await this.loadFile(searchingPath, relative)
   }
 
+  private getMtime(filepath: string) {
+    const { mtimeMs: mtime } = fs.statSync(filepath)
+    return mtime
+  }
+
+  private getRelativePath(filepath: string) {
+    let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
+    if (!dirpath)
+      return
+
+    let relative = path.relative(dirpath, filepath)
+
+    if (process.platform === 'win32') {
+      relative = relative.replace(/\\/g, '/')
+      dirpath = dirpath.replace(/\\/g, '/')
+    }
+
+    return { dirpath, relative }
+  }
+
+  private async onFileChanged(type: string, { fsPath: filepath }: { fsPath: string }) {
+    filepath = path.resolve(filepath)
+
+    // not tracking
+    if (type !== 'create' && !this._files[filepath])
+      return
+
+    // already up-to-date
+    if (this._files[filepath]?.mtime === this.getMtime(filepath)) {
+      Log.info(`🔄 Skipped on loading "${filepath}" (same mtime)`)
+      return
+    }
+
+    const { dirpath, relative } = this.getRelativePath(filepath) || {}
+    if (!dirpath || !relative)
+      return
+
+    Log.info(`🔄 File changed (${type}) ${relative}`)
+
+    // full reload if configured
+    if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
+      this.throttledFullReload()
+      return
+    }
+
+    switch (type) {
+      case 'del':
+        delete this._files[filepath]
+        this.throttledUpdate()
+        break
+
+      case 'create':
+      case 'change':
+        this.throttledLoadFile(dirpath, relative)
+        break
+    }
+  }
+
   private async watchOn(rootPath: string) {
     Log.info(`\n👀 Watching change on ${rootPath}`)
     const watcher = workspace.createFileSystemWatcher(
-      new RelativePattern(
-        rootPath,
-        '**/*',
-      ),
+      new RelativePattern(rootPath, '**/*'),
     )
 
-    const updateFile = async(type: string, { fsPath: filepath }: { fsPath: string }) => {
-      filepath = path.resolve(filepath)
-
-      if (type !== 'create' && !this._files[filepath])
-        return
-
-      const { ext } = path.parse(filepath)
-
-      if (!Global.getMatchedParser(ext))
-        return
-
-      let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
-      if (!dirpath)
-        return
-
-      let relative = path.relative(dirpath, filepath)
-
-      if (process.platform === 'win32') {
-        relative = relative.replace(/\\/g, '/')
-        dirpath = dirpath.replace(/\\/g, '/')
-      }
-
-      Log.info(`🔄 File changed (${type}) ${relative}`)
-
-      if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
-        this.throttledFullReload()
-        return
-      }
-
-      switch (type) {
-        case 'del':
-          delete this._files[filepath]
-          this.throttledUpdate()
-          break
-
-        case 'create':
-        case 'change':
-          this.throttledLoadFile(dirpath, relative)
-          break
-      }
-
-      if (type === 'create' && Config.keepFulfilled)
-        FulfillAllMissingKeysDelay()
-    }
-    watcher.onDidChange(updateFile.bind(this, 'change'))
-    watcher.onDidCreate(updateFile.bind(this, 'create'))
-    watcher.onDidDelete(updateFile.bind(this, 'del'))
+    watcher.onDidChange(this.onFileChanged.bind(this, 'change'), this, this._disposables)
+    watcher.onDidCreate(this.onFileChanged.bind(this, 'create'), this, this._disposables)
+    watcher.onDidDelete(this.onFileChanged.bind(this, 'del'), this, this._disposables)
 
     this._disposables.push(watcher)
   }

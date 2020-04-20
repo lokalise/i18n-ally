@@ -1,5 +1,5 @@
-import { PackageParser } from './base'
 import YAML from 'js-yaml'
+import { PackageParser } from './base'
 
 export class PubspecYAMLParser extends PackageParser {
   static filename = 'pubspec.yaml'

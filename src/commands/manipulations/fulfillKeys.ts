@@ -2,7 +2,6 @@ import { window } from 'vscode'
 import { ProgressSubmenuItem, LocaleTreeItem } from '../../views'
 import { Global, PendingWrite, CurrentFile } from '../../core'
 import i18n from '../../i18n'
-import { KEEP_FULFILL_DELAY } from '../../meta'
 import { CommandOptions } from './common'
 
 const FULFILL_VALUE = ''
@@ -71,10 +70,4 @@ export async function FulfillKeys(item?: LocaleTreeItem | ProgressSubmenuItem | 
 
   if (pendings?.length)
     await CurrentFile.loader.write(pendings, false)
-}
-
-export function FulfillAllMissingKeysDelay() {
-  setTimeout(async() => {
-    await CurrentFile.loader.write([])
-  }, KEEP_FULFILL_DELAY)
 }
