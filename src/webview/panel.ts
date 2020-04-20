@@ -130,12 +130,14 @@ export class EditorPanel {
   }
 
   private updateConfig() {
+    const locales = Global.loader?.locales || []
     this.postMessage({
       name: 'config',
       data: {
         debug: Config.debug,
         review: Config.reviewEnabled,
-        locales: Global.loader?.locales || [],
+        locales,
+        flags: locales.map(i => Config.tagSystem.getFlagName(i)),
         sourceLanguage: Config.sourceLanguage,
         displayLanguage: Config.displayLanguage,
         enabledFrameworks: Config.enabledFrameworks,

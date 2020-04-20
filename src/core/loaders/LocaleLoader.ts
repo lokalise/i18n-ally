@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq, throttle } from 'lodash'
 import * as fg from 'fast-glob'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
+import { replaceLocalePath, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
@@ -125,7 +125,7 @@ export class LocaleLoader extends Loader {
         return 'file'
 
       const positive = dirnames
-        .map(d => normalizeLocale(d, ''))
+        .map(d => Config.normalizeLocale(d, ''))
         .filter(d => d)
         .length
 
@@ -354,7 +354,7 @@ export class LocaleLoader extends Loader {
 
     let locale = match.groups?.locale
     if (locale)
-      locale = normalizeLocale(locale, '')
+      locale = Config.normalizeLocale(locale, '')
     else
       locale = Config.sourceLanguage
 
@@ -383,8 +383,6 @@ export class LocaleLoader extends Loader {
       if (!locale)
         return
 
-      const mtime = this.getMtime(filepath)
-
       Log.info(`📑 Loading (${locale}) ${relativePath}`, 1)
 
       let data = await parser.load(filepath)
@@ -400,7 +398,7 @@ export class LocaleLoader extends Loader {
         dirpath,
         locale,
         value,
-        mtime,
+        mtime: this.getMtime(filepath),
         namespace,
         readonly: parser.readonly || Config.readonly,
       }
@@ -433,8 +431,13 @@ export class LocaleLoader extends Loader {
   }
 
   private getMtime(filepath: string) {
-    const { mtimeMs: mtime } = fs.statSync(filepath)
-    return mtime
+    try {
+      const { mtimeMs: mtime } = fs.statSync(filepath)
+      return mtime
+    }
+    catch {
+      return 0
+    }
   }
 
   private getRelativePath(filepath: string) {
@@ -460,7 +463,7 @@ export class LocaleLoader extends Loader {
       return
 
     // already up-to-date
-    if (this._files[filepath]?.mtime === this.getMtime(filepath)) {
+    if (type !== 'change' && this._files[filepath]?.mtime === this.getMtime(filepath)) {
       Log.info(`🔄 Skipped on loading "${filepath}" (same mtime)`)
       return
     }
@@ -472,13 +475,13 @@ export class LocaleLoader extends Loader {
     Log.info(`🔄 File changed (${type}) ${relative}`)
 
     // full reload if configured
-    if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
+    if (Config.fullReloadOnChanged && ['delete', 'change', 'create'].includes(type)) {
       this.throttledFullReload()
       return
     }
 
     switch (type) {
-      case 'del':
+      case 'delete':
         delete this._files[filepath]
         this.throttledUpdate()
         break
@@ -498,7 +501,7 @@ export class LocaleLoader extends Loader {
 
     watcher.onDidChange(this.onFileChanged.bind(this, 'change'), this, this._disposables)
     watcher.onDidCreate(this.onFileChanged.bind(this, 'create'), this, this._disposables)
-    watcher.onDidDelete(this.onFileChanged.bind(this, 'del'), this, this._disposables)
+    watcher.onDidDelete(this.onFileChanged.bind(this, 'delete'), this, this._disposables)
 
     this._disposables.push(watcher)
   }

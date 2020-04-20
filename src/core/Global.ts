@@ -3,7 +3,7 @@ import { workspace, commands, window, EventEmitter, Event, ExtensionContext, Con
 import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
-import { ConfigLocalesGuide } from '../commands/configLocales'
+import { ConfigLocalesGuide } from '../commands/configLocalePaths'
 import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'

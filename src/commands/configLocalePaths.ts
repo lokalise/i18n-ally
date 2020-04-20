@@ -1,9 +1,9 @@
 import * as path from 'path'
 import { Uri, workspace, window, commands } from 'vscode'
+import * as fg from 'fast-glob'
 import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
-import * as fg from 'fast-glob'
 
 export class ConfigLocalesGuide {
   static async prompt() {

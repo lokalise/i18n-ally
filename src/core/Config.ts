@@ -2,7 +2,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import { window, workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
-import { normalizeLocale } from '../utils'
+import { TagSystems } from '../tagSystems'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
@@ -19,6 +19,7 @@ export class Config {
     'namespace',
     'disablePathParsing',
     'readonly',
+    'languageTagSystem',
   ]
 
   static readonly refreshConfigs = [
@@ -40,7 +41,7 @@ export class Config {
 
   // languages
   static get displayLanguage(): string {
-    return normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
+    return this.normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
   }
 
   static set displayLanguage(value) {
@@ -48,11 +49,24 @@ export class Config {
   }
 
   static get sourceLanguage(): string {
-    return normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
+    return this.normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
   }
 
   static set sourceLanguage(value) {
-    this.setConfig('sourceLanguage', normalizeLocale(value))
+    this.setConfig('sourceLanguage', this.normalizeLocale(value))
+  }
+
+  static get tagSystem() {
+    const tag = this.getConfig('languageTagSystem') || 'ecma402'
+    return TagSystems[tag]
+  }
+
+  static normalizeLocale(locale: string, fallback?: string) {
+    return this.tagSystem.normalize(locale, fallback)
+  }
+
+  static getBCP47(locale: string) {
+    return this.tagSystem.toBCP47(this.tagSystem.normalize(locale))
   }
 
   static get ignoredLocales(): string[] {

@@ -41,6 +41,7 @@
   "config.keep_fulfill": "Always keep all keys fulfilled with empty strings",
   "config.keys_in_use": "Keys to mark as in use despite not appearing in the code",
   "config.keystyle": "Locale key style",
+  "config.language_tag_system": "Language tag system use are using.",
   "config.locales_paths": "Path to locales directory (relative to project root). Glob pattern is also acceptable.",
   "config.namespace": "Enable namespaces. Check out the docs for more details.",
   "config.path_matcher": "Match path for custom locale/namespace. Check out the docs for more details.",

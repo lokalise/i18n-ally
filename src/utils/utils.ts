@@ -3,9 +3,6 @@ import { set } from 'lodash'
 import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '../core'
 import { KeyStyle } from '../core/types'
 import { ROOT_KEY } from './flat'
-import { normalizeLocale, getFlagFilename } from './locale'
-
-export { normalizeLocale, getFlagFilename }
 
 export function caseInsensitiveMatch(a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()
@@ -25,10 +22,10 @@ export function notEmpty<T>(value: T | null | undefined): value is T {
 export function replaceLocalePath(filepath: string, targetLocale: string): string {
   const info = path.parse(filepath)
 
-  if (normalizeLocale(info.name, ''))
+  if (Config.normalizeLocale(info.name, ''))
     return path.resolve(info.dir, `${targetLocale}${info.ext}`)
 
-  if (normalizeLocale(path.basename(info.dir), ''))
+  if (Config.normalizeLocale(path.basename(info.dir), ''))
     return path.resolve(path.dirname(info.dir), targetLocale, `${info.name}${info.ext}`)
 
   return ''

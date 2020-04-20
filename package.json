@@ -659,6 +659,15 @@
           "type": "string",
           "description": "%config.path_matcher%"
         },
+        "i18n-ally.languageTagSystem": {
+          "type": "string",
+          "enum": [
+            "ecma402",
+            "bcp47",
+            "none"
+          ],
+          "description": "%config.language_tag_system%"
+        },
         "i18n-ally.regex.key": {
           "type": "string",
           "description": "%config.regex_key%"
@@ -920,6 +929,7 @@
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "dependencies": {
+    "bcp-47-normalize": "^1.0.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
     "glob-gitignore": "^1.0.14",
