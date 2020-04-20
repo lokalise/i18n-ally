@@ -4,6 +4,7 @@ import { Commands, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
 import i18n from '../i18n'
+import { CommandOptions } from './manipulations/common'
 
 const m: ExtensionModule = (ctx) => {
   /*
@@ -13,7 +14,7 @@ const m: ExtensionModule = (ctx) => {
     },
   })
   */
-  const openEditor = async(item?: string | LocaleTreeItem) => {
+  const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
     let key: string | undefined
 
     if (!item) {
@@ -32,6 +33,9 @@ const m: ExtensionModule = (ctx) => {
     }
     else if (typeof item === 'string') {
       key = item
+    }
+    else if (item.keypath) {
+      key = item.keypath
     }
 
     if (!key)

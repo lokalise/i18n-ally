@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "Konfigurer nå",
   "prompt.config_locales_info": "Konfigurer oversettelsesmappe for ditt project",
   "prompt.config_locales_success": "Oversettelsesmappe ble konfigurert.",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "",
   "prompt.donate": "",
   "prompt.edit_key_in_locale": "{1} | Redigerer nøkkel \"{0}\"",

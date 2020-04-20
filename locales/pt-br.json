@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "Configurar agora",
   "prompt.config_locales_info": "Configurar o diretório dos arquivos de localização (locales) para o projeto ",
   "prompt.config_locales_success": "Caminho das localizações (locales) configurado com sucesso",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "",
   "prompt.donate": "",
   "prompt.edit_key_in_locale": "{1} | Editando chave \"{0}\"",

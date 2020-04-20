@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "Configureer nu",
   "prompt.config_locales_info": "Configureer de locale folder voor uw project",
   "prompt.config_locales_success": "Locale pad is succesvol geconfigureerd.",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "Weet je het zeker dat je {0} ongebruikte sleutels wilt verwijderen?",
   "prompt.donate": "donatie",
   "prompt.edit_key_in_locale": "{1} | Bewerken van sleutel \"{0}\"",

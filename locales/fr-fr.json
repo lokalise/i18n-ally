@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "Configurer maintenant",
   "prompt.config_locales_info": "Configurer le répertoire de la locale pour votre projet.",
   "prompt.config_locales_success": "Chemin de la locale configurer avec succès.",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "Souhaitez-vous réèllement supprimer {0} Clé(s) n'étant pas utilisée(s) ?",
   "prompt.donate": "",
   "prompt.edit_key_in_locale": "{1} | Edition de la Clé \"{0}\"",

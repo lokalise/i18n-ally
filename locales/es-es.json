@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "Configurar ahora",
   "prompt.config_locales_info": "configurar la ruta de configuración regional para el proyecto",
   "prompt.config_locales_success": "Ruta de configuración regional guardada correctamente.",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "",
   "prompt.donate": "",
   "prompt.edit_key_in_locale": "{1} | Editando clave \"{0}\"",

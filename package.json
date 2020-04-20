@@ -341,7 +341,7 @@
         {
           "command": "i18n-ally.open-in-editor",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
-          "group": "i18nally@4"
+          "group": "i18nally@0"
         },
         {
           "command": "i18n-ally.locale-visibility-show",

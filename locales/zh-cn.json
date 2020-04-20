@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "配置",
   "prompt.config_locales_info": "配置当前项目的翻译文件夹",
   "prompt.config_locales_success": "翻译文件夹配置成功",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "确定要删除未被使用的{0}条文案吗？",
   "prompt.donate": "打赏",
   "prompt.edit_key_in_locale": "{1} | 编辑 \"{0}\" 的文案",

@@ -96,6 +96,7 @@
   "prompt.config_locales_button": "設定中",
   "prompt.config_locales_info": "プロジェクトのためのロケールファイルを設定します",
   "prompt.config_locales_success": "ロケールパスの設定は成功しました。",
+  "prompt.delete_key": "",
   "prompt.delete_keys_not_in_use": "",
   "prompt.donate": "",
   "prompt.edit_key_in_locale": "{1} | キーを編集する \"{0}\"",
