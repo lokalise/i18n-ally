@@ -1,5 +1,5 @@
-import { existsSync } from 'fs'
 import * as path from 'path'
+import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq, throttle } from 'lodash'
 import * as fg from 'fast-glob'
@@ -93,9 +93,12 @@ export class LocaleLoader extends Loader {
     const list = this.throttledLoadFileWaitingList
     this.throttledLoadFileWaitingList = []
     if (list.length) {
+      let changed = false
       for (const [d, r] of list)
-        await this.loadFile(d, r)
-      this.update()
+        changed = await this.loadFile(d, r) || changed
+
+      if (changed)
+        this.update()
     }
   }, THROTTLE_DELAY, { leading: true })
 
@@ -239,7 +242,7 @@ export class LocaleLoader extends Loader {
         Log.info(`💾 Writing ${filepath}`)
 
         let original: any = {}
-        if (existsSync(filepath)) {
+        if (fs.existsSync(filepath)) {
           original = await parser.load(filepath)
           original = this.preprocessData(original, {
             locale: pendings[0].locale,
@@ -264,12 +267,20 @@ export class LocaleLoader extends Loader {
           )
         }
 
+        const locale = pendings[0].locale
+
         modified = this.deprocessData(modified, {
-          locale: pendings[0].locale,
+          locale,
           targetFile: filepath,
         })
 
         await parser.save(filepath, modified, Config.sortKeys)
+
+        if (this._files[filepath]) {
+          const { mtimeMs: mtime } = fs.statSync(filepath)
+          this._files[filepath].value = modified
+          this._files[filepath].mtime = mtime
+        }
       }
     }
     catch (e) {
@@ -277,6 +288,8 @@ export class LocaleLoader extends Loader {
       throw e
     }
     this.fileWatcherOnHold = false
+
+    this.update()
   }
 
   canHandleWrites(pending: PendingWrite) {
@@ -383,6 +396,13 @@ export class LocaleLoader extends Loader {
       if (!locale)
         return
 
+      const { mtimeMs: mtime } = fs.statSync(filepath)
+
+      if (this._files[filepath]?.mtime === mtime) {
+        Log.info(`📑 Skipped loading ${relativePath}, same mtime`, 1)
+        return
+      }
+
       Log.info(`📑 Loading (${locale}) ${relativePath}`, 1)
 
       let data = await parser.load(filepath)
@@ -398,6 +418,7 @@ export class LocaleLoader extends Loader {
         dirpath,
         locale,
         value,
+        mtime,
         namespace,
         readonly: parser.readonly || Config.readonly,
       }

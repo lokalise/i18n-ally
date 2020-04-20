@@ -70,6 +70,9 @@ export abstract class Loader extends Disposable {
     })
     tree.values[options.locale] = data
     for (const [key, value] of Object.entries(data)) {
+      if (value == null)
+        continue
+
       const newKeyPath = keypath
         ? (isCollection
           ? `${keypath}[${key}]`

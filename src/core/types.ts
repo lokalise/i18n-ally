@@ -16,6 +16,7 @@ export interface FileInfo {
   filepath: string
   dirpath: string
   locale: string
+  mtime: number
   readonly?: boolean
   namespace?: string
 }
