@@ -8,13 +8,21 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
     dotEnding = true
 
   const keys = []
+  const starts: number[] = []
+
   for (const reg of regs) {
     let match = null
+    reg.lastIndex = 0
     while (match = reg.exec(text)) {
       const matchString = match[0]
       let key = match[1]
       const start = match.index + matchString.lastIndexOf(key)
       const end = start + key.length
+
+      // prevent duplicated detection when multiple frameworks enables at the same time.
+      if (starts.includes(start))
+        continue
+      starts.push(start)
 
       if (key && (dotEnding || !key.endsWith('.'))) {
         key = CurrentFile.loader.rewriteKeys(key, 'reference', rewriteContext)
