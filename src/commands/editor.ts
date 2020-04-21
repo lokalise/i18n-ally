@@ -14,7 +14,7 @@ const m: ExtensionModule = (ctx) => {
     },
   })
   */
-  const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
+  const openEditor = async(item?: string | LocaleTreeItem | CommandOptions, options?: any) => {
     let key: string | undefined
 
     if (!item) {
@@ -42,7 +42,7 @@ const m: ExtensionModule = (ctx) => {
       return
 
     const panel = EditorPanel.createOrShow(ctx, {})
-    panel.editKey(key)
+    panel.editKey(key, options)
   }
 
   return [

@@ -13,8 +13,8 @@ export class ReviewSuggestionsItem extends BaseTreeItem {
     this.id = `suggestion_${comment.id}`
     this.command = {
       title: i18n.t('command.open_in_editor'),
-      command: Commands.open_editor,
-      arguments: [comment.keypath, { comment: comment.id }],
+      command: Commands.review_apply_suggestion,
+      arguments: [comment],
     }
   }
 

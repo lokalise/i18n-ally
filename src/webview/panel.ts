@@ -103,7 +103,7 @@ export class EditorPanel {
     this._panel.reveal(column)
   }
 
-  public editKey(keypath: string) {
+  public editKey(keypath: string, options?: any) {
     const node = CurrentFile.loader.getNodeByKey(keypath)
     if (node) {
       this._editing_key = keypath
@@ -111,6 +111,7 @@ export class EditorPanel {
         name: 'route',
         route: 'edit-key',
         data: {
+          options,
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
           reviews: Global.reviews.getReviews(keypath),

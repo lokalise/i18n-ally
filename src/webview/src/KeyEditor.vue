@@ -22,8 +22,8 @@
       :record='r'
       :review='(data.reviews.locales || {})[r.locale]'
       :key='r.locale'
-      :active='actived === r.locale'
-      @update:active='actived = r.locale'
+      :active='current === r.locale'
+      @update:active='current = r.locale'
     )
 </template>
 
@@ -49,7 +49,7 @@ export default Vue.extend({
 
   data() {
     return {
-      actived: '',
+      current: '',
     }
   },
 
@@ -64,6 +64,16 @@ export default Vue.extend({
     },
     emptyRecords() {
       return this.records.filter(i => !i.readonly && !i.value)
+    },
+  },
+
+  watch: {
+    data: {
+      immiediate: true,
+      handler() {
+        if (this.data?.options?.locale)
+          this.current = this.data.options.locale || ''
+      },
     },
   },
 

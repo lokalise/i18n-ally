@@ -13,8 +13,8 @@ export class ReviewRequestChangesItem extends BaseTreeItem {
     this.id = `request_change_${comment.id}`
     this.command = {
       title: i18n.t('command.open_in_editor'),
-      command: Commands.open_editor,
-      arguments: [comment.keypath, { comment: comment.id }],
+      command: Commands.open_in_editor,
+      arguments: [comment.keypath, { locale: comment.locale, comment: comment.id }],
     }
   }
 
