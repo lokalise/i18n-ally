@@ -1,6 +1,4 @@
 // @ts-ignore
-import normalize from 'bcp-47-normalize'
-// @ts-ignore
 import bcp47 from 'bcp-47'
 import { BaseTagSystem } from './base'
 
@@ -10,10 +8,10 @@ export class BCP47 extends BaseTagSystem {
     if (!locale)
       return fallback
 
-    return normalize(locale, { forgiving: !strict }) || fallback
+    return bcp47.stringify(bcp47.parse(locale, { normalize: true, forgiving: !strict })) || fallback
   }
 
-  getFlagName(locale: string) {
+  toFlagname(locale: string) {
     const { region, language } = bcp47.parse(locale)
     return (region || language || '').toLowerCase()
   }

@@ -52,16 +52,20 @@ export class LocaleLoader extends Loader {
     // sort by source, display and others by alpha
     const source = Config.sourceLanguage
     const display = Config.displayLanguage
-    const locales = _(this._files)
+    const allLocales = _(this._files)
       .values()
       .map(f => f.locale)
       .uniq()
       .sort()
-      .filter(l => l !== source && l !== display)
       .value()
 
-    locales.unshift(display)
-    if (display !== source)
+    const locales = allLocales
+      .filter(i => i !== source && i !== display)
+
+    if (allLocales.includes(display))
+      locales.unshift(display)
+
+    if (display !== source && allLocales.includes(source))
       locales.unshift(source)
 
     return locales

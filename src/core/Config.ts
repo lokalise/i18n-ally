@@ -57,7 +57,7 @@ export class Config {
   }
 
   static get tagSystem() {
-    const tag = this.getConfig('languageTagSystem') || 'ecma402'
+    const tag = this.getConfig('languageTagSystem') || 'bcp47'
     return TagSystems[tag]
   }
 

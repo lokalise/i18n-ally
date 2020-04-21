@@ -1,8 +1,8 @@
 import { BaseTagSystem } from './base'
 
 // https://tc39.es/ecma402/#sec-intl.getcanonicallocales
-// https://www.unicode.org/reports/tr35/#Identifiers
-export class ECMA402 extends BaseTagSystem {
+// LegacyTagSystem used before v2.x
+export class LegacyTagSystem extends BaseTagSystem {
   normalize(locale?: string, fallback = 'en', strict = false) {
     if (!locale)
       return fallback
@@ -22,7 +22,7 @@ export class ECMA402 extends BaseTagSystem {
     }
   }
 
-  getFlagName(locale: string) {
+  toFlagname(locale: string) {
     return locale.toLocaleLowerCase().split('-', 2).slice(-1)[0]
   }
 }

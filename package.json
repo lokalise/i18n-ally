@@ -662,8 +662,8 @@
         "i18n-ally.languageTagSystem": {
           "type": "string",
           "enum": [
-            "ecma402",
             "bcp47",
+            "legacy",
             "none"
           ],
           "description": "%config.language_tag_system%"
@@ -882,6 +882,7 @@
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",
     "i18n:build": "ts-node -P ./tsconfig.commonjs.json ./scripts/build-i18n.ts",
     "i18n:dev": "nodemon -w ./locales -e json --exec \"npm run i18n:build\"",
+    "flags:build": "ts-node -P ./tsconfig.commonjs.json ./scripts/build-flags.ts",
     "lint": "eslint --ext .ts,.js,.vue .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest"
