@@ -67,7 +67,6 @@ export default [
   'ee',
   'eg',
   'eh',
-  'en',
   'er',
   'es',
   'et',
