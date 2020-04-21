@@ -146,6 +146,7 @@
   "review.approve": "同意",
   "review.comment": "",
   "review.leave_comment": "评论",
+  "review.optional": "",
   "review.placeholder.approve": "已批准",
   "review.placeholder.comment": "",
   "review.placeholder.request_change": "请求修改",

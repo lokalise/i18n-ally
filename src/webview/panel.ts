@@ -181,6 +181,10 @@ export class EditorPanel {
         Global.reviews.addComment(message.keypath, message.locale, message.data)
         break
 
+      case 'review.edit':
+        Global.reviews.editComment(message.keypath, message.locale, message.data)
+        break
+
       case 'review.resolve':
         Global.reviews.resolveComment(message.keypath, message.locale, message.comment)
         break

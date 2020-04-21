@@ -11,6 +11,10 @@
       .text(:class='{placeholder: !comment.comment}') {{comment.comment || placeholders[comment.type]}}
 
       .buttons
+        .button.flat(@click='editing = true' v-if='isEditable')
+          v-pencil
+          span {{ $t('review.edit') }}
+
         .button.approve.flat(@click='resolveComment(comment)')
           v-checkbox-marked-outline
           span {{ $t('review.resolve') }}
@@ -130,14 +134,15 @@ export default Vue.extend({
     },
     postComment(type) {
       vscode.postMessage({
-        name: 'review.comment',
+        name: this.mode === 'create' ? 'review.comment' : 'review.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,
         data: {
-          ...this.reviewForm,
+          ...this.form,
           type,
         },
       })
+      this.editing = false
       this.$emit('done')
     },
     resolveComment(comment) {
