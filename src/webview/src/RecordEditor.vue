@@ -44,81 +44,17 @@
         span {{$t('prompt.button_apply')}}
 
   .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
-    .comments
-      template(v-for='c in comments')
-        avatar(:user='c.user')
-        .panel.shadow.comment-content
-          template
-            v-check.state-icon(v-if='c.type==="approve"')
-            v-plus-minus.state-icon(v-else-if='c.type==="request_change"')
-            v-comment-outline.state-icon(v-else)
+    template(v-for='c in comments')
+      review-comment(:record='record' :comment='c')
 
-          .text(:class='{placeholder: !c.comment}') {{c.comment || placeholders[c.type]}}
-
-          .buttons
-            .button.approve.flat(@click='resolveComment(c)')
-              v-checkbox-marked-outline
-              span {{ $t('review.resolve') }}
-
-        template(v-if='!readonly && c.suggestion')
-          div
-          .panel.shadow.comment-content
-            v-format-quote-open.state-icon
-            .text {{c.suggestion}}
-            .buttons
-              .button.flat(@click='acceptSuggestion(c)') {{$t('review.accept_suggestion')}}
-
-      template(v-if='reviewing')
-        avatar(:user='$store.state.config.user')
-        .panel.comment-form
-          label Comment
-          .panel
-            textarea(
-              rows='1'
-              ref='textarea2'
-              placeholder='(Optional)'
-              v-model='reviewForm.comment'
-            )
-
-          template(v-if='!readonly')
-            label {{$t('review.suggestion')}}
-            .panel
-              textarea(
-                rows='1'
-                ref='textarea3'
-                placeholder='(Optional)'
-                v-model='reviewForm.suggestion'
-              )
-
-          .buttons
-            .button.approve(@click='postComment("approve")' :disabled='!!reviewForm.suggestion')
-              v-check
-              span {{$t('review.approve')}}
-            .button.request-change(@click='postComment("request_change")')
-              v-plus-minus
-              span {{$t('review.request_change')}}
-            .button.comment(@click='postComment("comment")' :disabled='!reviewForm.comment')
-              v-comment-outline
-              span {{$t('review.leave_comment')}}
-            .button(@click='resetForm()') {{ $t('prompt.button_cancel') }}
+    template(v-if='reviewing')
+      review-comment(:record='record' :editing='true' mode='create' @done='reviewing=false')
 </template>
 
 <script lang="js">
 import Vue from 'vue'
-import VCheck from 'vue-material-design-icons/Check.vue'
-import VPlusMinus from 'vue-material-design-icons/PlusMinus.vue'
-import VCommentOutline from 'vue-material-design-icons/CommentOutline.vue'
-import VEarth from 'vue-material-design-icons/Earth.vue'
-// import VEarthPlus from 'vue-material-design-icons/EarthPlus.vue'
-import VCommentEditOutline from 'vue-material-design-icons/CommentEditOutline.vue'
-import VCommentQuestionOutline from 'vue-material-design-icons/CommentQuestionOutline.vue'
-import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutline.vue'
-import VPencilOff from 'vue-material-design-icons/PencilOff.vue'
-import VPencil from 'vue-material-design-icons/Pencil.vue'
-import VCheckAll from 'vue-material-design-icons/CheckAll.vue'
-import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
-import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
 import { getCommentState } from '../../utils/shared'
+import ReviewComment from './ReviewComment.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
 import { vscode } from './api'
@@ -127,19 +63,7 @@ export default Vue.extend({
   components: {
     Flag,
     Avatar,
-    VCheck,
-    VPlusMinus,
-    VCommentOutline,
-    VEarth,
-    // VEarthPlus,
-    VCommentEditOutline,
-    VCheckboxMarkedOutline,
-    VCommentQuestionOutline,
-    VDeleteEmptyOutline,
-    VPencilOff,
-    VPencil,
-    VCheckAll,
-    VFormatQuoteOpen,
+    ReviewComment,
   },
 
   props: {
@@ -154,10 +78,6 @@ export default Vue.extend({
       focused: false,
       reviewing: false,
       value: '',
-      reviewForm: {
-        comment: '',
-        suggestion: '',
-      },
     }
   },
 
@@ -171,13 +91,6 @@ export default Vue.extend({
     },
     readonly() {
       return this.record.readonly
-    },
-    placeholders() {
-      return {
-        approve: this.$t('review.placeholder.approve'),
-        request_change: this.$t('review.placeholder.request_change'),
-        comment: this.$t('review.placeholder.comment'),
-      }
     },
     changed() {
       return this.value !== this.record.value
@@ -194,19 +107,9 @@ export default Vue.extend({
     },
     keypath() {
       this.reset()
-      this.resetForm()
     },
     value() {
       this.$nextTick(() => this.resize(this.$refs.textarea1))
-    },
-    reviewForm: {
-      deep: true,
-      handler() {
-        this.$nextTick(() => {
-          this.resize(this.$refs.textarea2)
-          this.resize(this.$refs.textarea3)
-        })
-      },
     },
     active(value) {
       if (!value && this.changed)
@@ -223,13 +126,6 @@ export default Vue.extend({
       if (this.focused && this.changed)
         return
       this.value = this.record.value
-    },
-    resetForm() {
-      this.reviewing = false
-      this.reviewForm = {
-        comment: '',
-        suggestion: '',
-      }
     },
     resize(ta) {
       if (!ta)
@@ -269,35 +165,6 @@ export default Vue.extend({
           keypath: this.record.keypath,
           locale: this.record.locale,
         },
-      })
-    },
-    postComment(type) {
-      vscode.postMessage({
-        name: 'review.comment',
-        keypath: this.record.keypath,
-        locale: this.record.locale,
-        data: {
-          ...this.reviewForm,
-          type,
-        },
-      })
-      this.resetForm()
-      this.$refs.textarea1.focus()
-    },
-    resolveComment(comment) {
-      vscode.postMessage({
-        name: 'review.resolve',
-        keypath: this.record.keypath,
-        locale: this.record.locale,
-        comment: comment.id,
-      })
-    },
-    acceptSuggestion(comment) {
-      vscode.postMessage({
-        name: 'review.apply-suggestion',
-        keypath: this.record.keypath,
-        locale: this.record.locale,
-        comment: comment.id,
       })
     },
     transDiscard() {
@@ -436,31 +303,6 @@ export default Vue.extend({
       font-size 1.4em
       padding 0.1em
       margin auto 0.2em
-
-  .comment-content
-    display grid
-    grid-template-columns min-content auto max-content max-content
-    margin-top 0.4em
-
-    .text
-      margin auto 6px
-      font-size 0.8em
-
-      &.placeholder
-        font-style italic
-        opacity 0.4
-
-    .buttons
-      .button
-        margin-top 0
-        margin-bottom 0
-
-  .comments
-    display grid
-    grid-template-columns max-content auto
-
-    .avatar
-      margin 0.6em 0.4em 0 1.2em
 
   & > *
     vertical-align middle

@@ -2,14 +2,10 @@
 .container
   template(v-if='$store.state.ready')
     .nav-bar
-      div
-      //img.logo(:src='logo')
-      //.nav-middle
-        .title {{ $t('editor.title') }}
-      div
-        v-magnify.setting-button(@click='openSearch')
-        v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
-        v-cog.setting-button(@click='openSettings')
+    .actions-bar
+      v-magnify.setting-button(@click='openSearch')
+      v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
+      v-cog.setting-button(@click='openSettings')
 
     .content
       key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
@@ -85,14 +81,19 @@ body
   padding-bottom 1.5em
 
   .nav-bar
-    padding 1.2em
-    margin-bottom -2.8em
+    padding 0.6em
     display grid
-    z-index 10
     grid-template-columns auto max-content
 
     & *
       vertical-align middle
+
+  .actions-bar
+    position absolute
+    padding 1.2em
+    top 0
+    right 0
+    z-index 10
 
   .nav-middle
     margin auto 1em
