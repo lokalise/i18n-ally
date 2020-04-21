@@ -1,3 +1,4 @@
+import { TextDocument } from 'vscode'
 import { Config } from '../core'
 import { LanguageId } from '../utils'
 import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../core/types'
@@ -10,6 +11,12 @@ export type PackageFileType
 | 'composerJSON'
 | 'gemfile'
 | 'none'
+
+export interface ScopeRange {
+  start: number
+  end: number
+  scope: string
+}
 
 export abstract class Framework {
   abstract id: string
@@ -37,6 +44,13 @@ export abstract class Framework {
    * Return possible choices of replacement for messages extracted from code
    */
   abstract refactorTemplates (keypath: string, languageId?: string): string[]
+
+  /**
+   * Tell the key dector how to add prefix scopes
+   */
+  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+    return undefined
+  }
 
   /**
    * Locale file's name match

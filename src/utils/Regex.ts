@@ -1,9 +1,10 @@
 import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
 import i18n from '../i18n'
+import { ScopeRange } from '../frameworks/base'
 import { Log } from '.'
 
-export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, rewriteContext?: RewriteKeyContext): KeyInDocument[] {
+export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, rewriteContext?: RewriteKeyContext, scopes: ScopeRange[] = []): KeyInDocument[] {
   if (Config.disablePathParsing)
     dotEnding = true
 
@@ -18,11 +19,15 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
       let key = match[1]
       const start = match.index + matchString.lastIndexOf(key)
       const end = start + key.length
+      const scope = scopes.find(s => s.start <= start && s.end >= end)
 
       // prevent duplicated detection when multiple frameworks enables at the same time.
       if (starts.includes(start))
         continue
       starts.push(start)
+
+      if (scope?.scope)
+        key = `${scope.scope}.${key}`
 
       if (key && (dotEnding || !key.endsWith('.'))) {
         key = CurrentFile.loader.rewriteKeys(key, 'reference', rewriteContext)
