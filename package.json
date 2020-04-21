@@ -208,6 +208,10 @@
       {
         "command": "i18n-ally.review.apply-translation",
         "title": "%review.apply_translation_candidate%"
+      },
+      {
+        "command": "i18n-ally.review.apply-suggestion",
+        "title": "%review.apply_suggestion%"
       }
     ],
     "menus": {
@@ -282,6 +286,10 @@
         },
         {
           "command": "i18n-ally.review.apply-translation",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.review.apply-suggestion",
           "when": "false"
         },
         {

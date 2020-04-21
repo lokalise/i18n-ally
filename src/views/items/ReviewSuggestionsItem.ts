@@ -10,7 +10,7 @@ export class ReviewSuggestionsItem extends BaseTreeItem {
     public readonly comment: ReviewCommentWithMeta,
   ) {
     super(ctx)
-    this.id = comment.id
+    this.id = `suggestion_${comment.id}`
     this.command = {
       title: i18n.t('command.open_in_editor'),
       command: Commands.open_editor,
@@ -27,10 +27,10 @@ export class ReviewSuggestionsItem extends BaseTreeItem {
   }
 
   get description() {
-    let comment = this.comment.comment
-    if (comment)
-      comment += '  '
-    return `▸ "${this.comment.keypath}"`
+    let suggestion = this.comment.suggestion
+    if (suggestion)
+      suggestion += '  '
+    return `${suggestion}・ "${this.comment.keypath}"`
   }
 
   set description(_) {}

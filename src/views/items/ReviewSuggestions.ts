@@ -15,7 +15,7 @@ export class ReviewSuggestions extends BaseTreeItem {
   }
 
   get iconPath() {
-    return this.getIcon('review-comment', false)
+    return this.getIcon('review-suggestions', false)
   }
 
   getLabel() {

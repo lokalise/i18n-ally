@@ -1,5 +1,5 @@
 import { commands, window } from 'vscode'
-import { Commands, Global, TranslationCandidateWithMeta } from '../core'
+import { Commands, Global, TranslationCandidateWithMeta, ReviewCommentWithMeta } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -21,10 +21,23 @@ const m: ExtensionModule = (ctx) => {
 
         if (result === EditApply)
           await Global.reviews.promptEditTranslation(candidate.keypath, candidate.locale)
-        else if (result === Apply || result === EditApply)
+        else if (result === Apply)
           await Global.reviews.applyTranslationCandidate(candidate.keypath, candidate.locale)
         else if (result === Discard)
           await Global.reviews.discardTranslationCandidate(candidate.keypath, candidate.locale)
+      }),
+    commands.registerCommand(Commands.review_apply_suggestion,
+      async(comment: ReviewCommentWithMeta) => {
+        const Apply = i18n.t('prompt.button_apply')
+
+        const result = await window.showInformationMessage(
+          i18n.t('prompt.applying_suggestion', comment.keypath, comment.suggestion),
+          { modal: true },
+          Apply,
+        )
+
+        if (result === Apply)
+          await Global.reviews.applySuggestion(comment.keypath, comment.locale, comment.id)
       }),
   ]
 }
