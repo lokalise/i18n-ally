@@ -4,7 +4,7 @@ import { getAvatarFromEmail } from '../../utils/shared'
 import i18n from '../../i18n'
 import { BaseTreeItem } from '.'
 
-export class ReviewRequestChangesItem extends BaseTreeItem {
+export class ReviewSuggestionsItem extends BaseTreeItem {
   constructor(
     ctx: ExtensionContext,
     public readonly comment: ReviewCommentWithMeta,

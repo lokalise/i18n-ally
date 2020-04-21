@@ -4,9 +4,10 @@ import { ProgressMissingListItem } from './ProgressMissingListItem'
 import { ProgressEmptyListItem } from './ProgressEmptyListItem'
 import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressTranslatedListItem } from './ProgressTranslatedListItem'
-import { ReviewRequestChangesRoot } from './ReviewRequestChangesRoot'
+import { ReviewRequestChangesRoot } from './ReviewRequestChanges'
 import { BaseTreeItem } from './Base'
 import { ReviewTranslationCandidates } from './ReviewTranslationCandidates'
+import { ReviewSuggestions } from './ReviewSuggestions'
 
 export class ProgressRootItem extends ProgressBaseItem {
   get description(): string {
@@ -68,8 +69,11 @@ export class ProgressRootItem extends ProgressBaseItem {
       const comments = Global.reviews.getCommentsByLocale(this.locale)
       const translations = Global.reviews.getTranslationCandidatesLocale(this.locale)
       const change_requested = comments.filter(c => c.type === 'request_change')
+      const suggestions = comments.filter(c => c.suggestion)
       if (change_requested.length)
         items.push(new ReviewRequestChangesRoot(this.ctx, change_requested))
+      if (suggestions.length)
+        items.push(new ReviewSuggestions(this.ctx, suggestions))
       if (translations.length)
         items.push(new ReviewTranslationCandidates(this.ctx, translations))
     }

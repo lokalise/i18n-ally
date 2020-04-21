@@ -23,7 +23,7 @@
       div
       .panel.shadow.comment-content
         v-format-quote-open.state-icon
-        .text {{c.suggestion}}
+        .text {{comment.suggestion}}
         .buttons
           .button.flat(@click='acceptSuggestion(comment)') {{$t('review.accept_suggestion')}}
 
@@ -59,7 +59,7 @@
         .button.comment(@click='postComment("comment")' :disabled='!form.comment')
           v-comment-outline
           span {{$t('review.leave_comment')}}
-        .button(@click='resetForm()') {{ $t('prompt.button_cancel') }}
+        .button(@click='cancel()') {{ $t('prompt.button_cancel') }}
 </template>
 
 <script lang="js">
@@ -131,6 +131,10 @@ export default Vue.extend({
 
       ta.style.height = 'auto'
       ta.style.height = `${ta.scrollHeight - 3}px`
+    },
+    cancel() {
+      this.editing = false
+      this.$emit('done')
     },
     postComment(type) {
       vscode.postMessage({

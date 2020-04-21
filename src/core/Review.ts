@@ -33,9 +33,9 @@ export class Reviews {
 
   private set(key: string, field: string, value?: any, locale?: string, save = true) {
     if (locale)
-      set(this.data.reviews, [key, 'locales', locale, field], value)
+      set(this.data, ['reviews', key, 'locales', locale, field], value)
     else
-      set(this.data.reviews, [key, field], value)
+      set(this.data, ['reviews', key, field], value)
 
     this._onDidChange.fire(key)
     if (save)
@@ -44,9 +44,9 @@ export class Reviews {
 
   private get(key: string, field: string, locale?: string) {
     if (locale)
-      return get(this.data.reviews, [key, 'locales', locale, field])
+      return get(this.data, ['reviews', key, 'locales', locale, field])
     else
-      return get(this.data.reviews, [key, field])
+      return get(this.data, ['reviews', key, field])
   }
 
   setDescription(key: string, description?: string) {
@@ -138,7 +138,7 @@ export class Reviews {
   }
 
   getCommentsByLocale(locale: string, hideResolved = true): ReviewCommentWithMeta[] {
-    return Object.keys(this.data.reviews)
+    return Object.keys(this.data?.reviews || {})
       .flatMap(keypath => this.getComments(keypath, locale, hideResolved)
         .map((i) => {
           return { ...i, locale, keypath } as ReviewCommentWithMeta
@@ -147,7 +147,7 @@ export class Reviews {
   }
 
   getTranslationCandidatesLocale(locale: string) {
-    return Object.keys(this.data.reviews)
+    return Object.keys(this.data?.reviews || {})
       .map((keypath) => {
         const i = this.getTranslationCandidate(keypath, locale)
         if (!i)

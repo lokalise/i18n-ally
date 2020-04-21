@@ -4,10 +4,10 @@
     flag(:locale='record.locale' size='18')
     textarea(
       ref='textarea1'
-      placeholder='(empty)'
       rows='1'
-      :readonly='readonly'
       v-model='value'
+      :placeholder='$t("editor.empty")'
+      :readonly='readonly'
       @focus='onFocus'
       @blur='onBlur'
       @input='onInput'
@@ -26,6 +26,7 @@
         span {{ $t('review.review') }}
 
     .review-brief(v-if='$store.state.config.review')
+      v-earth.state-icon(v-if='!active && review.translation_candidate')
       v-check.state-icon(v-if='reviewBrief==="approve"')
       v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
       v-comment-question-outline.state-icon(v-else-if='reviewBrief==="conflict"')
@@ -45,7 +46,7 @@
 
   .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
     template(v-for='c in comments')
-      review-comment(:record='record' :comment='c')
+      review-comment(:record='record' :comment='c' :key='c.locale')
 
     template(v-if='reviewing')
       review-comment(:record='record' :editing='true' mode='create' @done='reviewing=false')
@@ -283,6 +284,9 @@ export default Vue.extend({
     font-size 1.1em
     margin-top -0.1em
 
+    &.earth-icon
+      opacity 0.3
+
     &.plus-minus-icon
       color var(--review-request-change)
 
@@ -328,7 +332,7 @@ export default Vue.extend({
   grid-template-columns max-content auto max-content
 
   .earth-icon
-    margin auto 0.5em auto 0.7em
+    margin auto 0.6em auto 0.7em
     font-size 1.2em
     height 0.8em
     opacity 0.6
