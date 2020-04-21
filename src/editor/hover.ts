@@ -22,27 +22,29 @@ function getAvaliableCommands(record?: LocaleRecord) {
     if (NodeHelper.isTranslatable(record)) {
       commands.push({
         text: i18n.t('command.translate_key'),
-        icon: '🌐',
+        icon: '🌐', // '$(globe)' // AWAIT_VSCODE_FIX
         command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
       })
     }
     else {
       commands.push(EmptyButton)
     }
+
     if (NodeHelper.isEditable(record)) {
       commands.push({
         text: i18n.t('command.edit_key'),
-        icon: '✏️',
+        icon: '✏️', // '$(edit)' // AWAIT_VSCODE_FIX
         command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
       })
     }
     else {
       commands.push(EmptyButton)
     }
+
     if (NodeHelper.isOpenable(record)) {
       commands.push({
         text: i18n.t('command.open_key'),
-        icon: '↗️',
+        icon: '↗️', // '$(file-symlink-file)' // AWAIT_VSCODE_FIX
         command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
       })
     }
@@ -68,7 +70,7 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
       }
       const commands = getAvaliableCommands(record)
       row.commands = commands
-        .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
+        .map(c => typeof c === 'string' ? c : `[\`${c.icon}\`](${c.command} "${c.text}")`)
         .join(' ')
       return [row]
     })
@@ -94,7 +96,7 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string)
   const table1 = createTable([mainLocale, ...locales], records, maxLength)
   const markdown = `${table1}\n\n------\n\n${buttons}`
 
-  const markdownText = new MarkdownString(markdown)
+  const markdownText = new MarkdownString(`${markdown}`, true)
   markdownText.isTrusted = true
 
   return markdownText

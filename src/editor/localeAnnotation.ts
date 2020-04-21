@@ -1,29 +1,11 @@
-import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
+import { window, Range, Disposable, workspace } from 'vscode'
 import { Global, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
 import { createHover } from './hover'
+import { setDecorationsWithGutter, DecorationOptionsWithGutter } from './annotation'
 
 const localeAnnotation: ExtensionModule = (ctx) => {
-  const decorationTypes = {
-    none: window.createTextEditorDecorationType({}),
-    approve: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/checkmark.svg'),
-    }),
-    request_change: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/review-request-change.svg'),
-    }),
-    comment: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/review-comment.svg'),
-    }),
-    conflict: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/review-conflict.svg'),
-    }),
-    missing: window.createTextEditorDecorationType({
-      gutterIconPath: ctx.asAbsolutePath('res/dark/empty.svg'),
-    }),
-  }
-
   const supportedParsers = Global.enabledParsers.filter(p => p.annotationSupported)
 
   function update() {
@@ -67,14 +49,7 @@ const localeAnnotation: ExtensionModule = (ctx) => {
     if (Global.namespaceEnabled)
       namespace = loader.getNamespaceFromFilepath(filepath)
 
-    const annotations: Record<keyof typeof decorationTypes, DecorationOptions[]> = {
-      none: [],
-      approve: [],
-      request_change: [],
-      comment: [],
-      conflict: [],
-      missing: [],
-    }
+    const annotations: DecorationOptionsWithGutter[] = []
 
     // get all keys of current file
     keys.forEach(({ key, start, end }) => {
@@ -100,7 +75,16 @@ const localeAnnotation: ExtensionModule = (ctx) => {
         sourceText = `${annotationDelimiter}${sourceText}`
       }
 
-      const annotation: DecorationOptions = {
+      let gutterType = 'none'
+      if (!currentText) {
+        gutterType = 'missing'
+      }
+      else if (Config.reviewEnabled) {
+        const comments = Global.reviews.getComments(key, file.locale)
+        gutterType = getCommentState(comments) || gutterType
+      }
+
+      annotations.push({
         range: new Range(
           document.positionAt(start),
           document.positionAt(end),
@@ -114,23 +98,11 @@ const localeAnnotation: ExtensionModule = (ctx) => {
           },
         },
         hoverMessage: createHover(key, maxLength, file.locale),
-      }
-
-      let state: keyof typeof decorationTypes = 'none'
-      if (!currentText) {
-        state = 'missing'
-      }
-      else if (Config.reviewEnabled) {
-        const comments = Global.reviews.getComments(key, file.locale)
-        state = getCommentState(comments) || state
-      }
-      annotations[state].push(annotation)
+        gutterType,
+      })
     })
 
-    ;(Object.keys(decorationTypes) as (keyof typeof decorationTypes)[])
-      .forEach(k =>
-        activeTextEditor.setDecorations(decorationTypes[k], annotations[k]),
-      )
+    setDecorationsWithGutter(ctx, annotations, activeTextEditor)
   }
 
   const disposables: Disposable[] = []

@@ -3,20 +3,18 @@ import { EXT_REVIEW_ID } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 import { getAvatarFromEmail } from '../utils/shared'
-import { Commands, Config, Global, CurrentFile, ReviewComment } from '../core'
+import { Commands, Config, Global, CurrentFile, ReviewComment, KeyInDocument, KeyDetector } from '../core'
 import { Log } from '../utils'
-
-const UNKNOWN_USER = i18n.t('review.unknown_user')
 
 function userToAuthorInfo(user?: {name?: string; email?: string}): CommentAuthorInformation {
   if (!user) {
     return {
-      name: UNKNOWN_USER,
+      name: i18n.t('review.unknown_user'),
     }
   }
   else {
     return {
-      name: user.name || UNKNOWN_USER,
+      name: user.name || i18n.t('review.unknown_user'),
       iconPath: Uri.parse(getAvatarFromEmail(user.email)),
     }
   }
@@ -152,20 +150,32 @@ class ReviewCommentProvider implements Disposable {
     if (!Config.reviewEnabled)
       return []
 
-    const file = loader.files.find(f => f.filepath === filepath)
-    if (!file)
-      return []
-
-    const parser = this.parsers.find(p => p.annotationLanguageIds.includes(document.languageId))
-    if (!parser)
-      return []
-
+    let keys: KeyInDocument[] = []
+    let locale = Config.displayLanguage
     let namespace: string | undefined
-    if (Global.namespaceEnabled)
-      namespace = loader.getNamespaceFromFilepath(filepath)
+    let lazy = true // not to show the gutter if there is no comments
 
-    const locale = file.locale
-    const keys = parser.annotationGetKeys(document)
+    // locale file
+    const localeFile = loader.files.find(f => f.filepath === filepath)
+    if (localeFile) {
+      const parser = this.parsers.find(p => p.annotationLanguageIds.includes(document.languageId))
+      if (!parser)
+        return []
+
+      if (Global.namespaceEnabled)
+        namespace = loader.getNamespaceFromFilepath(filepath)
+
+      locale = localeFile.locale
+      keys = parser.annotationGetKeys(document)
+      lazy = false
+    }
+    // code
+    else if (Global.isLanguageIdSupported(document.languageId)) {
+      keys = KeyDetector.getKeys(document)
+    }
+    else {
+      return []
+    }
 
     this._cache[filepath] = []
     const cache = this._cache[filepath]
@@ -173,7 +183,7 @@ class ReviewCommentProvider implements Disposable {
     this._threads[filepath] = []
     const threads = this._threads[filepath]
 
-    const ranges: Range[] = keys.map(({ start, key, end }) => {
+    const ranges: Range[] = keys.flatMap(({ start, key, end }) => {
       const range = new Range(
         document.positionAt(start),
         document.positionAt(end),
@@ -188,7 +198,10 @@ class ReviewCommentProvider implements Disposable {
         threads.push(thread)
       }
 
-      return range
+      if (lazy && !comments.length)
+        return []
+
+      return [range]
     })
 
     return ranges

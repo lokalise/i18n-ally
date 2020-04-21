@@ -1,13 +1,56 @@
-import { window, DecorationOptions, Range, Disposable, workspace } from 'vscode'
+import { window, DecorationOptions, Range, Disposable, workspace, ExtensionContext, TextEditorDecorationType, TextEditor } from 'vscode'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
+import { getCommentState } from '../utils/shared'
 import { createHover } from './hover'
-
-const noneDecorationType = window.createTextEditorDecorationType({})
 
 const underlineDecorationType = window.createTextEditorDecorationType({
   textDecoration: 'underline',
 })
+
+export type DecorationOptionsWithGutter = DecorationOptions & {gutterType: string}
+
+export function setDecorationsWithGutter(
+  ctx: ExtensionContext,
+  annotations: DecorationOptionsWithGutter[],
+  editor: TextEditor,
+) {
+  const gutterTypes: Record<string, TextEditorDecorationType> = {
+    none: window.createTextEditorDecorationType({}),
+    approve: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/checkmark.svg'),
+    }),
+    request_change: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-request-change.svg'),
+    }),
+    comment: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-comment.svg'),
+    }),
+    conflict: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/review-conflict.svg'),
+    }),
+    missing: window.createTextEditorDecorationType({
+      gutterIconPath: ctx.asAbsolutePath('res/dark/empty.svg'),
+    }),
+  }
+
+  const dict: Record<string, DecorationOptions[]> = {
+    none: [],
+    approve: [],
+    request_change: [],
+    comment: [],
+    conflict: [],
+    missing: [],
+  }
+
+  for (const annotation of annotations)
+    dict[annotation.gutterType].push(annotation)
+
+    ;(Object.keys(gutterTypes))
+    .forEach(k =>
+      editor.setDecorations(gutterTypes[k], dict[k]),
+    )
+}
 
 const annotation: ExtensionModule = (ctx) => {
   function update() {
@@ -25,7 +68,7 @@ const annotation: ExtensionModule = (ctx) => {
     const annotationDelimiter = Config.annotationDelimiter
 
     const loader: Loader = CurrentFile.loader
-    const annotations: DecorationOptions[] = []
+    const annotations: DecorationOptionsWithGutter[] = []
     const underlines: DecorationOptions[] = []
     const maxLength = Config.annotationMaxLength
 
@@ -55,6 +98,12 @@ const annotation: ExtensionModule = (ctx) => {
         ? 'rgba(153, 153, 153, .3)'
         : 'rgba(153, 153, 153, .7)'
 
+      let gutterType = 'none'
+      if (Config.reviewEnabled) {
+        const comments = Global.reviews.getComments(key, Config.displayLanguage)
+        gutterType = getCommentState(comments) || gutterType
+      }
+
       annotations.push({
         range: new Range(
           document.positionAt(start - 1),
@@ -69,10 +118,12 @@ const annotation: ExtensionModule = (ctx) => {
           },
         },
         hoverMessage: createHover(key, maxLength),
+        gutterType,
       })
     })
 
-    activeTextEditor.setDecorations(noneDecorationType, annotations)
+    setDecorationsWithGutter(ctx, annotations, activeTextEditor)
+
     activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
