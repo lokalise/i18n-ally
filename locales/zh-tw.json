@@ -95,6 +95,7 @@
   "prompt.button_reenter": "重新輸入",
   "prompt.button_skip": "繼續但不要覆蓋",
   "prompt.button_yes": "確定",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "選擇語言",
   "prompt.config_locales_auto_success": "自動檢測到翻譯資料夾 \"{0}\"",

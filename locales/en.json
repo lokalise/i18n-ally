@@ -55,6 +55,7 @@
   "config.regex_usage_match_append": "Array of RegEx strings to match key usages in code. Unlike \"regex.usageMatch\", it will append to the Regex list instead of replacing it.",
   "config.review_email": "Email for reviewing, also used as Gravatar for profile avatar.",
   "config.review_enabled": "Enable reviewing system",
+  "config.review_gutters": "Show review panel on gutters",
   "config.review_remove_on_resolved": "Remove the comment instead of marking it as resolved.",
   "config.review_username": "Username for reviewing",
   "config.sort_keys": "Sort keys when saving to JSON/YAML",

@@ -95,6 +95,7 @@
   "prompt.button_reenter": "Re-enter",
   "prompt.button_skip": "Continuar sin sobrescribir",
   "prompt.button_yes": "Si",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "Seleccione una configuración regional",
   "prompt.config_locales_auto_success": "Ruta de configuración regional auto establecida para \"{0}\".",

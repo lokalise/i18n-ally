@@ -146,7 +146,7 @@ class ReviewCommentProvider implements Disposable {
       delete this._threads[filepath]
     }
 
-    if (!Config.reviewEnabled)
+    if (!Config.reviewEnabled || !Config.reviewGutters)
       return []
 
     const usages = KeyDetector.getUsages(document)

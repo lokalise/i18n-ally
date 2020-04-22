@@ -781,6 +781,11 @@
           "default": true,
           "description": "%config.review_enabled%"
         },
+        "i18n-ally.review.gutters": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.review_gutters%"
+        },
         "i18n-ally.review.user.name": {
           "type": "string",
           "description": "%config.review_username%"

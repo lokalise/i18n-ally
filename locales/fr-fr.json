@@ -95,6 +95,7 @@
   "prompt.button_reenter": "Ré-entrer",
   "prompt.button_skip": "Continuer sans contourner",
   "prompt.button_yes": "Ok",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "Choisir une locale",
   "prompt.config_locales_auto_success": "Chemin de la locale défini automatiquement sur \"{0}\".",

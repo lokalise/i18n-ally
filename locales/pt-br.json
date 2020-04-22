@@ -95,6 +95,7 @@
   "prompt.button_reenter": "Re-enter",
   "prompt.button_skip": "Continuar sem sobrescrever",
   "prompt.button_yes": "Sim",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "Escolher localização",
   "prompt.config_locales_auto_success": "Caminho das localizações (locales) definido automaticamente para \"{0}\"",

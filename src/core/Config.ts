@@ -343,6 +343,10 @@ export class Config {
     return this.getConfig<boolean>('review.enabled') ?? true
   }
 
+  static get reviewGutters() {
+    return this.getConfig<boolean>('review.gutters') ?? true
+  }
+
   private static _reviewUserName: string | undefined
   static get reviewUserName() {
     const config = this.getConfig<string>('review.user.name')

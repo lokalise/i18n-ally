@@ -95,6 +95,7 @@
   "prompt.button_reenter": "Angi på nytt",
   "prompt.button_skip": "Fortsett uten overstyring",
   "prompt.button_yes": "",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "Velg en oversettelse",
   "prompt.config_locales_auto_success": "Oversettelsesbane automatisk satt til \"{0}\".",

@@ -95,6 +95,7 @@
   "prompt.button_reenter": "Re-enter",
   "prompt.button_skip": "オーバーライドせずに続ける",
   "prompt.button_yes": "はい",
+  "prompt.choice_key_to_insert": "",
   "prompt.choice_key_to_open": "",
   "prompt.choice_locale": "ロケールを選択する",
   "prompt.config_locales_auto_success": "ロケールパスは自動的に \"{0}\"に設定されます。",
