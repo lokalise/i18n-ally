@@ -17,11 +17,15 @@ export class BCP47 extends BaseTagSystem {
     if (!locale)
       return fallback
 
-    return bcp47.stringify(bcp47.parse(locale, { normalize: true, forgiving: !strict })) || fallback
+    return bcp47.stringify(bcp47.parse(locale, { forgiving: !strict })) || fallback
+  }
+
+  toBCP47(locale: string) {
+    return bcp47.stringify(bcp47.parse(locale, { normalize: true, forgiving: false })) || undefined
   }
 
   toFlagname(locale: string) {
-    const { region, language } = bcp47.parse(locale)
+    const { region, language } = bcp47.parse(locale, { normalize: true, forgiving: true })
     const flag = (region || language || '').toLowerCase()
     return this.flagMapping[flag] || flag
   }

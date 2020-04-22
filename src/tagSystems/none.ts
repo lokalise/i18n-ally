@@ -1,5 +1,10 @@
-import { BaseTagSystem } from './base'
+import { BCP47 } from './bcp47'
 
-export class TagSystemNone extends BaseTagSystem {
+// extending BCP47 to try to get flag from BCP47 format if possible
+// but do nothing on normalization
+export class NoneTagSystem extends BCP47 {
   // no convertsion
+  normalize(locale?: string, fallback = 'en', strict = false) {
+    return locale || fallback
+  }
 }
