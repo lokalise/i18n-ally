@@ -176,7 +176,7 @@
       {
         "command": "i18n-ally.review.comment",
         "category": "%extname%",
-        "title": "Leave Comment",
+        "title": "%review.leave_comment%",
         "enablement": "!commentIsEmpty"
       },
       {
@@ -192,27 +192,34 @@
       {
         "command": "i18n-ally.review.edit",
         "category": "%extname%",
-        "title": "Edit",
+        "title": "%review.edit%",
         "icon": "$(edit)"
       },
       {
         "command": "i18n-ally.review.resolve",
-        "title": "Resolve",
+        "title": "%review.resolve%",
         "icon": "$(issue-closed)"
       },
       {
         "command": "i18n-ally.review.resolve-thread",
         "category": "%extname%",
-        "title": "Resolve",
+        "title": "%review.resolve_all%",
         "icon": "$(checklist)"
       },
       {
         "command": "i18n-ally.review.apply-translation",
+        "category": "%extname%",
         "title": "%review.apply_translation_candidate%"
       },
       {
         "command": "i18n-ally.review.apply-suggestion",
+        "category": "%extname%",
         "title": "%review.apply_suggestion%"
+      },
+      {
+        "command": "i18n-ally.insert-key",
+        "category": "%extname%",
+        "title": "%command.insert_key%"
       }
     ],
     "menus": {
@@ -295,6 +302,14 @@
         },
         {
           "command": "i18n-ally.open-in-editor",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.edit-key",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.duplicate-key",
           "when": "false"
         }
       ],
@@ -885,7 +900,7 @@
     "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
     "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
     "dev": "concurrently -n w: npm:*:dev",
-    "main:build": "webpack --mode production",
+    "main:build": "webpack --mode development",
     "main:dev": "webpack --mode development --watch --info-verbosity verbose",
     "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",

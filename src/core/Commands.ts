@@ -14,6 +14,7 @@ export const enum Commands {
   delete_key = 'i18n-ally.delete-key',
   rename_key = 'i18n-ally.rename-key',
   new_key = 'i18n-ally.new-key',
+  insert_key = 'i18n-ally.insert-key',
   duplicate_key = 'i18n-ally.duplicate-key',
   fulfill_keys = 'i18n-ally.fulfill-keys',
   locale_visibility_toggle = 'i18n-ally.locale-visibility-toggle',
