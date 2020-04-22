@@ -55,6 +55,7 @@
   "config.regex_usage_match_append": "",
   "config.review_email": "使用者电子邮件",
   "config.review_enabled": "启用审核系统",
+  "config.review_gutters": "",
   "config.review_remove_on_resolved": "删除已处理的审批留言，而不是只将其标记为已处理。",
   "config.review_username": "使用者名称",
   "config.sort_keys": "保存排序后的JSON/YAML",

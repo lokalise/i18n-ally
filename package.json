@@ -537,6 +537,11 @@
           "default": true,
           "description": "%config.annotations%"
         },
+        "i18n-ally.annotationInPlace": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.annotation_in_place%"
+        },
         "i18n-ally.annotationMaxLength": {
           "type": "number",
           "default": 40,

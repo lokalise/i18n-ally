@@ -115,6 +115,10 @@ export class Config {
     return this.getConfig<string>('annotationDelimiter') || ''
   }
 
+  static get annotationInPlace(): boolean {
+    return this.getConfig<boolean>('annotationInPlace') ?? true
+  }
+
   static get namespace(): boolean | undefined {
     return this.getConfig<boolean>('namespace')
   }

@@ -9,6 +9,10 @@ const underlineDecorationType = window.createTextEditorDecorationType({
   textDecoration: 'underline',
 })
 
+const disappearDecorationType = window.createTextEditorDecorationType({
+  textDecoration: 'none; display: none;',
+})
+
 export type DecorationOptionsWithGutter = DecorationOptions & {gutterType: string}
 
 const annotation: ExtensionModule = (ctx) => {
@@ -57,21 +61,23 @@ const annotation: ExtensionModule = (ctx) => {
     if (!Global.enabled)
       return
 
-    const activeTextEditor = window.activeTextEditor
-    if (!activeTextEditor)
+    const editor = window.activeTextEditor
+    if (!editor)
       return
 
     const loader: Loader = CurrentFile.loader
-    const document = activeTextEditor.document
+    const document = editor.document
     const usages = KeyDetector.getUsages(document, loader)
     if (!usages)
       return
 
+    const selection = editor.selection
     const { keys, locale, namespace, type: usageType } = usages
 
     const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptionsWithGutter[] = []
     const underlines: DecorationOptions[] = []
+    const inplaces: DecorationOptions[] = []
     const maxLength = Config.annotationMaxLength
     const showAnnonations = Config.annotations && locale
 
@@ -82,8 +88,19 @@ const annotation: ExtensionModule = (ctx) => {
 
       let text: string | undefined
       let missing = false
+      let inplace = Config.annotationInPlace
+      let editing = false
+      const range = new Range(
+        document.positionAt(start),
+        document.positionAt(end),
+      )
+      const rangeWithQuotes = new Range(
+        document.positionAt(start - 1),
+        document.positionAt(end + 1),
+      )
 
       if (usageType === 'locale') {
+        inplace = false
         if (locale !== Config.sourceLanguage) {
           text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
           // has source message but not current
@@ -92,6 +109,11 @@ const annotation: ExtensionModule = (ctx) => {
         }
       }
       else {
+        if (selection.start.line >= range.start.line && selection.end.line <= range.end.line) {
+          editing = true
+          inplace = false
+        }
+
         text = loader.getValueByKey(key, locale, maxLength)
         // fallback to source
         if (!text && locale !== Config.sourceLanguage) {
@@ -100,12 +122,15 @@ const annotation: ExtensionModule = (ctx) => {
         }
       }
 
-      if (text)
+      if (text && !inplace)
         text = `${annotationDelimiter}${text}`
+
+      if (editing)
+        text = ''
 
       const color = missing
         ? 'rgba(153, 153, 153, .3)'
-        : 'rgba(153, 153, 153, .7)'
+        : 'rgba(153, 153, 153, .8)'
 
       let gutterType = 'none'
       if (missing)
@@ -115,20 +140,19 @@ const annotation: ExtensionModule = (ctx) => {
         gutterType = getCommentState(comments) || gutterType
       }
 
-      if (usageType === 'code') {
+      if (inplace) {
+        inplaces.push({
+          range: rangeWithQuotes,
+        })
+      }
+      else if (usageType === 'code') {
         underlines.push({
-          range: new Range(
-            document.positionAt(start),
-            document.positionAt(end),
-          ),
+          range,
         })
       }
 
       annotations.push({
-        range: new Range(
-          document.positionAt(start - 1),
-          document.positionAt(end + 1),
-        ),
+        range: rangeWithQuotes,
         renderOptions: {
           after: {
             color,
@@ -142,9 +166,10 @@ const annotation: ExtensionModule = (ctx) => {
       })
     })
 
-    setDecorationsWithGutter(annotations, activeTextEditor)
+    setDecorationsWithGutter(annotations, editor)
 
-    activeTextEditor.setDecorations(underlineDecorationType, underlines)
+    editor.setDecorations(underlineDecorationType, underlines)
+    editor.setDecorations(disappearDecorationType, inplaces)
   }
 
   const throttledUpdate = throttle(() => update(), 500)
@@ -152,6 +177,7 @@ const annotation: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(throttledUpdate))
   disposables.push(window.onDidChangeActiveTextEditor(throttledUpdate))
+  disposables.push(window.onDidChangeTextEditorSelection(throttledUpdate))
   disposables.push(workspace.onDidChangeTextDocument(throttledUpdate))
   disposables.push(Global.reviews.onDidChange(throttledUpdate))
 

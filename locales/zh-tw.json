@@ -55,6 +55,7 @@
   "config.regex_usage_match_append": "",
   "config.review_email": "",
   "config.review_enabled": "",
+  "config.review_gutters": "",
   "config.review_remove_on_resolved": "",
   "config.review_username": "",
   "config.sort_keys": "儲存已排序的JSON/YAML",

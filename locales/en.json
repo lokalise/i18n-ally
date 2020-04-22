@@ -25,6 +25,7 @@
   "command.translate_key": "Translate",
   "command.translate_key_from": "Translate from \"{0}\"",
   "config.annotation_delimiter": "The delimiter for annotations",
+  "config.annotation_in_place": "Show annotation in place instead of appending to the tail",
   "config.annotation_max_length": "Max number of characters shown in the inline annotations. Excess characters will display as an ellipses (...)",
   "config.annotations": "Enable the inline annotations.",
   "config.deprecated": "Deprecated. Use \"i18n-ally.\" prefix instead.",

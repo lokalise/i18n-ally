@@ -1,6 +1,6 @@
 import { commands, window, ViewColumn } from 'vscode'
 import { EditorPanel, EditorContext } from '../webview/panel'
-import { Commands, CurrentFile, Global, KeyDetector } from '../core'
+import { Commands, CurrentFile, Global, KeyDetector, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
 import i18n from '../i18n'
@@ -41,11 +41,13 @@ const m: ExtensionModule = (ctx) => {
 
     if (!item) {
       if (!getContext()) {
+        const display = Config.displayLanguage
         const result = await window.showQuickPick(CurrentFile.loader.keys.map(key => ({
           label: key,
+          description: CurrentFile.loader.getValueByKey(key, display, 30),
         })), {
-          ignoreFocusOut: true,
-          placeHolder: i18n.t('prompt.choice_key_to_open'),
+          matchOnDescription: true,
+          placeHolder: i18n.t('prompt.choice_key_to_insert'),
         })
         if (!result)
           return
