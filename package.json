@@ -82,7 +82,7 @@
         "command": "i18n-ally.copy-key",
         "category": "%extname%",
         "title": "%command.copy_key%",
-        "icon": "$(chrome-restore)"
+        "icon": "$(clippy)"
       },
       {
         "command": "i18n-ally.translate-key",
@@ -100,7 +100,7 @@
         "command": "i18n-ally.open-key",
         "category": "%extname%",
         "title": "%command.open_key%",
-        "icon": "$(file-symlink-file)"
+        "icon": "$(link-external)"
       },
       {
         "command": "i18n-ally.delete-key",
@@ -165,7 +165,8 @@
       {
         "command": "i18n-ally.open-in-editor",
         "category": "%extname%",
-        "title": "%command.open_in_editor%"
+        "title": "%command.open_in_editor%",
+        "icon": "$(file-symlink-file)"
       },
       {
         "command": "i18n-ally.open-editor",
@@ -299,24 +300,29 @@
       ],
       "view/item/context": [
         {
+          "command": "i18n-ally.open-in-editor",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /open-in-editor/",
+          "group": "inline@1"
+        },
+        {
           "command": "i18n-ally.open-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /openable/",
-          "group": "inline@1"
+          "group": "inline@2"
         },
         {
           "command": "i18n-ally.copy-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
-          "group": "inline@2"
+          "group": "inline@3"
         },
         {
           "command": "i18n-ally.translate-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /translatable/",
-          "group": "inline@3"
+          "group": "inline@4"
         },
         {
           "command": "i18n-ally.edit-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /editable/",
-          "group": "inline@4"
+          "group": "inline@5"
         },
         {
           "command": "i18n-ally.fulfill-keys",
@@ -345,11 +351,6 @@
           "command": "i18n-ally.delete-key",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/ && viewItem =~ /writable/",
           "group": "i18nally@3"
-        },
-        {
-          "command": "i18n-ally.open-in-editor",
-          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /node/",
-          "group": "i18nally@0"
         },
         {
           "command": "i18n-ally.locale-visibility-show",

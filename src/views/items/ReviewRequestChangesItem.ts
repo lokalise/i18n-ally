@@ -14,7 +14,7 @@ export class ReviewRequestChangesItem extends BaseTreeItem {
     this.command = {
       title: i18n.t('command.open_in_editor'),
       command: Commands.open_in_editor,
-      arguments: [comment.keypath, { locale: comment.locale, comment: comment.id }],
+      arguments: [{ keypath: comment.keypath, locale: comment.locale, comment: comment.id }],
     }
   }
 

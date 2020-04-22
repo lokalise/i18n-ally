@@ -49,8 +49,8 @@ export class YamlParser extends Parser {
           const key = [...path, node.key.toString()].join('.')
 
           return [{
-            start: origStart || start,
-            end: origEnd || end,
+            start: (origStart || start) + 1,
+            end: (origEnd || end) - 1,
             key,
           }]
         }

@@ -15,6 +15,7 @@
   "command.open_editor": "Open Editor",
   "command.open_in_editor": "Open in editor",
   "command.open_key": "Go to definition",
+  "command.open_review": "Open review",
   "command.open_url": "Open url",
   "command.refresh_usage": "Refresh usage report",
   "command.rename_key": "Rename key",

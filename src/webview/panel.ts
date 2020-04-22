@@ -6,10 +6,6 @@ import i18n from '../i18n'
 import { Config, CurrentFile, Global, Commands, KeyInDocument } from '../core'
 import { EXT_EDITOR_ID, EXT_ID } from '../meta'
 
-export class OpenKeyOptions {
-  current?: string
-}
-
 export class EditorContext {
   filepath?: string
   keys?: KeyInDocument[]
@@ -114,7 +110,7 @@ export class EditorPanel {
     })
   }
 
-  public openKey(keypath: string, options?: OpenKeyOptions) {
+  public openKey(keypath: string, locale?: string) {
     const node = CurrentFile.loader.getNodeByKey(keypath)
     if (node) {
       this._editing_key = keypath
@@ -122,7 +118,7 @@ export class EditorPanel {
         name: 'route',
         route: 'open-key',
         data: {
-          options,
+          locale,
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
           reviews: Global.reviews.getReviews(keypath),

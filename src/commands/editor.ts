@@ -1,5 +1,5 @@
 import { commands, window, ViewColumn } from 'vscode'
-import { EditorPanel, OpenKeyOptions, EditorContext } from '../webview/panel'
+import { EditorPanel, EditorContext } from '../webview/panel'
 import { Commands, CurrentFile, Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
@@ -14,10 +14,11 @@ const m: ExtensionModule = (ctx) => {
     },
   })
   */
-  const openEditor = async(item?: string | LocaleTreeItem | CommandOptions, options?: OpenKeyOptions) => {
+  const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
     let key: string | undefined
     let context: EditorContext | undefined
     let column: ViewColumn | undefined
+    let locale: string | undefined
 
     const getContext = (keyIndex = 0) => {
       const doc = window.activeTextEditor?.document
@@ -53,12 +54,14 @@ const m: ExtensionModule = (ctx) => {
     }
     else if (item instanceof LocaleTreeItem) {
       key = item.node.keypath
+      locale = item.node.type === 'record' ? item.node.locale : undefined
     }
     else if (typeof item === 'string') {
       key = item
     }
     else if (item.keypath) {
       key = item.keypath
+      locale = item.locale
       if (item.keyIndex != null)
         getContext(item.keyIndex)
     }
@@ -67,7 +70,7 @@ const m: ExtensionModule = (ctx) => {
       return
 
     const panel = EditorPanel.createOrShow(ctx, column)
-    panel.openKey(key, options)
+    panel.openKey(key, locale)
     panel.setContext(context)
   }
 

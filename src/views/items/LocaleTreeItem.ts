@@ -89,6 +89,8 @@ export class LocaleTreeItem extends BaseTreeItem {
         values.push('translatable')
       if (NodeHelper.isEditable(this.node))
         values.push('editable')
+      if (this.node.type !== 'tree')
+        values.push('open-in-editor')
     }
 
     return values.join('-')

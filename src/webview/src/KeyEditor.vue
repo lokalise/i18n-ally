@@ -83,11 +83,11 @@ export default Vue.extend({
   },
 
   watch: {
-    data: {
+    'data.locale': {
       immiediate: true,
-      handler() {
-        if (this.data?.options?.locale)
-          this.current = this.data.options.locale || ''
+      handler(v) {
+        if (v)
+          this.current = v || ''
       },
     },
     context: {
