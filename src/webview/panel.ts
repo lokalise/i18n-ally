@@ -1,12 +1,18 @@
 import path from 'path'
 import fs from 'fs'
-import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands } from 'vscode'
+import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands, Selection, TextEditorRevealType } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
-import { Config, CurrentFile, Global, Commands } from '../core'
+import { Config, CurrentFile, Global, Commands, KeyInDocument } from '../core'
 import { EXT_EDITOR_ID, EXT_ID } from '../meta'
 
-interface EditorPanelOptions {
+export class OpenKeyOptions {
+  current?: string
+}
+
+export class EditorContext {
+  filepath?: string
+  keys?: KeyInDocument[]
 }
 
 export class EditorPanel {
@@ -22,31 +28,29 @@ export class EditorPanel {
   private _disposables: Disposable[] = []
   private _pendingMessages: any[] = []
   private _editing_key: string | undefined
-  public options: EditorPanelOptions
   public ready = false
 
-  public static createOrShow(ctx: ExtensionContext, options: EditorPanelOptions, column?: ViewColumn) {
-    const panel = this.revive(ctx, options)
+  public static createOrShow(ctx: ExtensionContext, column?: ViewColumn) {
+    const panel = this.revive(ctx, undefined, column)
     panel.reveal(column || panel._panel.viewColumn)
     return panel
   }
 
-  public static revive(ctx: ExtensionContext, options: EditorPanelOptions, panel?: WebviewPanel) {
+  public static revive(ctx: ExtensionContext, panel?: WebviewPanel, column?: ViewColumn) {
     if (!EditorPanel.currentPanel) {
-      EditorPanel.currentPanel = new EditorPanel(ctx, options, panel)
+      EditorPanel.currentPanel = new EditorPanel(ctx, panel, column)
       EditorPanel._onDidChanged.fire(true)
     }
 
     return EditorPanel.currentPanel
   }
 
-  private constructor(ctx: ExtensionContext, options: EditorPanelOptions, panel?: WebviewPanel) {
-    this.options = options
+  private constructor(ctx: ExtensionContext, panel?: WebviewPanel, column?: ViewColumn) {
     this._ctx = ctx
     this._panel = panel || window.createWebviewPanel(
       EXT_EDITOR_ID,
       i18n.t('editor.title'),
-      ViewColumn.Active,
+      column || ViewColumn.Active,
       {
         enableScripts: true,
         localResourceRoots: [
@@ -70,7 +74,7 @@ export class EditorPanel {
     CurrentFile.loader.onDidChange(
       () => {
         if (this._editing_key)
-          this.editKey(this._editing_key)
+          this.openKey(this._editing_key)
       },
       null,
       this._disposables,
@@ -85,7 +89,7 @@ export class EditorPanel {
     Global.reviews.onDidChange(
       (keypath?: string) => {
         if (this._editing_key && (!keypath || this._editing_key === keypath))
-          this.editKey(this._editing_key)
+          this.openKey(this._editing_key)
       },
       null,
       this._disposables,
@@ -103,13 +107,20 @@ export class EditorPanel {
     this._panel.reveal(column)
   }
 
-  public editKey(keypath: string, options?: any) {
+  public setContext(context: EditorContext = {}) {
+    this.postMessage({
+      name: 'context',
+      data: context,
+    })
+  }
+
+  public openKey(keypath: string, options?: OpenKeyOptions) {
     const node = CurrentFile.loader.getNodeByKey(keypath)
     if (node) {
       this._editing_key = keypath
       this.postMessage({
         name: 'route',
-        route: 'edit-key',
+        route: 'open-key',
         data: {
           options,
           keypath,
@@ -170,6 +181,10 @@ export class EditorPanel {
         })
         break
 
+      case 'navigate-key':
+        this.navigateKey(message.data)
+        break
+
       case 'translate':
         TranslateKeys(message.data)
         break
@@ -214,6 +229,20 @@ export class EditorPanel {
         Global.reviews.discardTranslationCandidate(message.keypath, message.locale)
         break
     }
+  }
+
+  private async navigateKey(data: KeyInDocument & {filepath: string}) {
+    if (!data.filepath)
+      return
+
+    this.openKey(data.key)
+    const doc = await workspace.openTextDocument(Uri.file(data.filepath))
+    const editor = await window.showTextDocument(doc, ViewColumn.One)
+    editor.selection = new Selection(
+      doc.positionAt(data.end),
+      doc.positionAt(data.start),
+    )
+    editor.revealRange(editor.selection, TextEditorRevealType.InCenter)
   }
 
   private postMessage(message?: any) {

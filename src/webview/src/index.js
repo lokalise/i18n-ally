@@ -54,6 +54,7 @@ const store = new Vuex.Store({
         flags: [],
         locales: [],
       },
+      context: {},
       i18n: {},
       route: 'welcome',
       routeData: {},
@@ -72,6 +73,9 @@ const store = new Vuex.Store({
     route(state, { route, data }) {
       state.routeData = data
       state.route = route
+    },
+    context(state, context) {
+      state.context = context
     },
     ready(state) {
       state.ready = true
@@ -94,6 +98,8 @@ window.addEventListener('message', (event) => {
     case 'i18n':
       store.commit('i18n', message.data)
       break
+    case 'context':
+      store.commit('context', message.data)
   }
 })
 

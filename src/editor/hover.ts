@@ -83,7 +83,7 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
   return `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 }
 
-export function createHover(keypath: string, maxLength = 0, mainLocale?: string) {
+export function createHover(keypath: string, maxLength = 0, mainLocale?: string, keyIndex?: number) {
   const loader = CurrentFile.loader
   const records = loader.getTranslationsByKey(keypath, undefined)
   if (!Object.keys(records).length)
@@ -92,7 +92,7 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string)
   mainLocale = mainLocale || Config.displayLanguage
 
   const locales = Global.visibleLocales.filter(i => i !== mainLocale)
-  const buttons = `[\`Editor\`](${makeMarkdownCommand(Commands.open_in_editor, { keypath })})`
+  const buttons = `[\`Editor\`](${makeMarkdownCommand(Commands.open_in_editor, { keypath, keyIndex })})`
   const table1 = createTable([mainLocale, ...locales], records, maxLength)
   const markdown = `${table1}\n\n------\n\n${buttons}`
 

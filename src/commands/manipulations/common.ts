@@ -8,6 +8,7 @@ export interface CommandOptions {
   locale?: string
   from?: string
   locales?: string[]
+  keyIndex?: number
 }
 
 export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleNode | LocaleRecord | undefined {

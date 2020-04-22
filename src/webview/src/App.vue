@@ -8,9 +8,8 @@
       v-cog.setting-button(@click='openSettings')
 
     .content
-      key-editor(v-if='state.route === "edit-key"' :data='state.routeData')
+      key-editor(v-if='state.route === "open-key"' :data='state.routeData')
 
-    // pre {{JSON.stringify(state.i18n, null, 2)}}
   template(v-else)
     p.loading Loading...
 </template>

@@ -1,7 +1,15 @@
 <template lang="pug">
 .key-editor
   .header
+    template(v-if='contextKeys.length')
+      .buttons
+        .button(@click='nextKey(-1)' :disabled='keyIndex <= 0') Previous
+        .button(@click='nextKey(1)' :disabled='keyIndex >= contextKeys.length - 1') Next
+      br
+
     .key-name "{{data.keypath}}"
+
+    // pre {{$store.state.context}} {{keyIndex}}
 
     .reviews
       template(v-if='!data.reviews.description')
@@ -50,10 +58,17 @@ export default Vue.extend({
   data() {
     return {
       current: '',
+      keyIndex: 0,
     }
   },
 
   computed: {
+    context() {
+      return this.$store.state.context
+    },
+    contextKeys() {
+      return this.context.keys || []
+    },
     config() {
       return this.$store.state.config
     },
@@ -75,6 +90,12 @@ export default Vue.extend({
           this.current = this.data.options.locale || ''
       },
     },
+    context: {
+      immiediate: true,
+      handler() {
+        this.keyIndex = this.contextKeys.indexOf(this.data.keypath) || 0
+      },
+    },
   },
 
   methods: {
@@ -90,6 +111,16 @@ export default Vue.extend({
         data: {
           keypath: this.data.keypath,
           locales: this.emptyRecords.map(i => i.locale),
+        },
+      })
+    },
+    nextKey(offset) {
+      this.keyIndex += offset
+      vscode.postMessage({
+        name: 'navigate-key',
+        data: {
+          filepath: this.context.filepath,
+          ...this.contextKeys[this.keyIndex],
         },
       })
     },

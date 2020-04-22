@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash'
 import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
 import i18n from '../i18n'
@@ -39,7 +40,8 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
       }
     }
   }
-  return keys
+
+  return sortBy(keys, i => i.start)
 }
 
 export function normalizeUsageMatchRegex(reg: (string | RegExp)[]): RegExp[] {

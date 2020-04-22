@@ -74,7 +74,7 @@ const annotation: ExtensionModule = (ctx) => {
 
     const keys = KeyDetector.getKeys(document)
     // get all keys of current file
-    keys.forEach(({ key, start, end }) => {
+    keys.forEach(({ key, start, end }, i) => {
       underlines.push({
         range: new Range(
           document.positionAt(start),
@@ -117,7 +117,7 @@ const annotation: ExtensionModule = (ctx) => {
             fontStyle: 'normal',
           },
         },
-        hoverMessage: createHover(key, maxLength),
+        hoverMessage: createHover(key, maxLength, undefined, i),
         gutterType,
       })
     })
