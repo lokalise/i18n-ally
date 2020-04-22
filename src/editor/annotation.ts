@@ -1,4 +1,5 @@
-import { window, DecorationOptions, Range, Disposable, workspace, ExtensionContext, TextEditorDecorationType, TextEditor } from 'vscode'
+import { window, DecorationOptions, Range, Disposable, workspace, TextEditorDecorationType, TextEditor } from 'vscode'
+import throttle from 'lodash/throttle'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
@@ -10,11 +11,7 @@ const underlineDecorationType = window.createTextEditorDecorationType({
 
 export type DecorationOptionsWithGutter = DecorationOptions & {gutterType: string}
 
-export function setDecorationsWithGutter(
-  ctx: ExtensionContext,
-  annotations: DecorationOptionsWithGutter[],
-  editor: TextEditor,
-) {
+const annotation: ExtensionModule = (ctx) => {
   const gutterTypes: Record<string, TextEditorDecorationType> = {
     none: window.createTextEditorDecorationType({}),
     approve: window.createTextEditorDecorationType({
@@ -34,25 +31,28 @@ export function setDecorationsWithGutter(
     }),
   }
 
-  const dict: Record<string, DecorationOptions[]> = {
-    none: [],
-    approve: [],
-    request_change: [],
-    comment: [],
-    conflict: [],
-    missing: [],
+  const setDecorationsWithGutter = (
+    annotations: DecorationOptionsWithGutter[],
+    editor: TextEditor,
+  ) => {
+    const dict: Record<string, DecorationOptions[]> = {
+      none: [],
+      approve: [],
+      request_change: [],
+      comment: [],
+      conflict: [],
+      missing: [],
+    }
+
+    for (const annotation of annotations)
+      dict[annotation.gutterType].push(annotation)
+
+      ;(Object.keys(gutterTypes))
+      .forEach(k =>
+        editor.setDecorations(gutterTypes[k], dict[k]),
+      )
   }
 
-  for (const annotation of annotations)
-    dict[annotation.gutterType].push(annotation)
-
-    ;(Object.keys(gutterTypes))
-    .forEach(k =>
-      editor.setDecorations(gutterTypes[k], dict[k]),
-    )
-}
-
-const annotation: ExtensionModule = (ctx) => {
   function update() {
     if (!Global.enabled)
       return
@@ -61,34 +61,43 @@ const annotation: ExtensionModule = (ctx) => {
     if (!activeTextEditor)
       return
 
+    const loader: Loader = CurrentFile.loader
     const document = activeTextEditor.document
-    if (!Global.isLanguageIdSupported(document.languageId))
+    const usages = KeyDetector.getUsages(document, loader)
+    if (!usages)
       return
 
-    const annotationDelimiter = Config.annotationDelimiter
+    const { keys, locale, namespace, type: usageType } = usages
 
-    const loader: Loader = CurrentFile.loader
+    const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptionsWithGutter[] = []
     const underlines: DecorationOptions[] = []
     const maxLength = Config.annotationMaxLength
+    const showAnnonations = Config.annotations && locale
 
-    const keys = KeyDetector.getKeys(document)
     // get all keys of current file
     keys.forEach(({ key, start, end }, i) => {
-      underlines.push({
-        range: new Range(
-          document.positionAt(start),
-          document.positionAt(end),
-        ),
-      })
+      if (namespace)
+        key = `${namespace}.${key}`
 
+      let text: string | undefined
       let missing = false
 
-      let text = loader.getValueByKey(key, undefined, maxLength)
-      // fallback to source
-      if (!text && Config.displayLanguage !== Config.sourceLanguage) {
-        text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
-        missing = true
+      if (usageType === 'locale') {
+        if (locale !== Config.sourceLanguage) {
+          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
+          // has source message but not current
+          if (!loader.getValueByKey(key, locale))
+            missing = true
+        }
+      }
+      else {
+        text = loader.getValueByKey(key, locale, maxLength)
+        // fallback to source
+        if (!text && locale !== Config.sourceLanguage) {
+          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
+          missing = true
+        }
       }
 
       if (text)
@@ -99,9 +108,20 @@ const annotation: ExtensionModule = (ctx) => {
         : 'rgba(153, 153, 153, .7)'
 
       let gutterType = 'none'
+      if (missing)
+        gutterType = 'missing'
       if (Config.reviewEnabled) {
-        const comments = Global.reviews.getComments(key, Config.displayLanguage)
+        const comments = Global.reviews.getComments(key, locale)
         gutterType = getCommentState(comments) || gutterType
+      }
+
+      if (usageType === 'code') {
+        underlines.push({
+          range: new Range(
+            document.positionAt(start),
+            document.positionAt(end),
+          ),
+        })
       }
 
       annotations.push({
@@ -112,7 +132,7 @@ const annotation: ExtensionModule = (ctx) => {
         renderOptions: {
           after: {
             color,
-            contentText: Config.annotations ? text : '',
+            contentText: showAnnonations ? text : '',
             fontWeight: 'normal',
             fontStyle: 'normal',
           },
@@ -122,15 +142,18 @@ const annotation: ExtensionModule = (ctx) => {
       })
     })
 
-    setDecorationsWithGutter(ctx, annotations, activeTextEditor)
+    setDecorationsWithGutter(annotations, activeTextEditor)
 
     activeTextEditor.setDecorations(underlineDecorationType, underlines)
   }
 
+  const throttledUpdate = throttle(() => update(), 500)
+
   const disposables: Disposable[] = []
-  disposables.push(CurrentFile.loader.onDidChange(() => update()))
-  disposables.push(window.onDidChangeActiveTextEditor(() => update()))
-  disposables.push(workspace.onDidChangeTextDocument(() => update()))
+  disposables.push(CurrentFile.loader.onDidChange(throttledUpdate))
+  disposables.push(window.onDidChangeActiveTextEditor(throttledUpdate))
+  disposables.push(workspace.onDidChangeTextDocument(throttledUpdate))
+  disposables.push(Global.reviews.onDidChange(throttledUpdate))
 
   update()
 

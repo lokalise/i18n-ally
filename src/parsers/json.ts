@@ -34,8 +34,8 @@ export class JsonParser extends Parser {
     const pairs = Object.entries<any>(map)
       .filter(([k, v]) => k)
       .map(([k, v]) => ({
-        start: v.value.pos,
-        end: v.valueEnd.pos,
+        start: v.value.pos + 1,
+        end: v.valueEnd.pos - 1,
         // https://tools.ietf.org/html/rfc6901
         key: k.slice(1)
           .replace(/\//g, '.')

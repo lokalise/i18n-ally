@@ -3,7 +3,7 @@ import { EXT_REVIEW_ID } from '../meta'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 import { getAvatarFromEmail } from '../utils/shared'
-import { Commands, Config, Global, CurrentFile, ReviewComment, KeyInDocument, KeyDetector } from '../core'
+import { Commands, Config, Global, ReviewComment, KeyDetector } from '../core'
 import { Log } from '../utils'
 
 function userToAuthorInfo(user?: {name?: string; email?: string}): CommentAuthorInformation {
@@ -139,7 +139,6 @@ class ReviewCommentProvider implements Disposable {
   }
 
   async provideCommentingRanges(document: TextDocument, token: CancellationToken): Promise<Range[]> {
-    const loader = CurrentFile.loader
     const filepath = document.uri.fsPath
 
     if (this._threads[filepath]) {
@@ -150,32 +149,11 @@ class ReviewCommentProvider implements Disposable {
     if (!Config.reviewEnabled)
       return []
 
-    let keys: KeyInDocument[] = []
-    let locale = Config.displayLanguage
-    let namespace: string | undefined
-    let lazy = true // not to show the gutter if there is no comments
-
-    // locale file
-    const localeFile = loader.files.find(f => f.filepath === filepath)
-    if (localeFile) {
-      const parser = this.parsers.find(p => p.annotationLanguageIds.includes(document.languageId))
-      if (!parser)
-        return []
-
-      if (Global.namespaceEnabled)
-        namespace = loader.getNamespaceFromFilepath(filepath)
-
-      locale = localeFile.locale
-      keys = parser.annotationGetKeys(document)
-      lazy = false
-    }
-    // code
-    else if (Global.isLanguageIdSupported(document.languageId)) {
-      keys = KeyDetector.getKeys(document)
-    }
-    else {
+    const usages = KeyDetector.getUsages(document)
+    if (!usages)
       return []
-    }
+
+    const { keys, locale, namespace, type } = usages
 
     this._cache[filepath] = []
     const cache = this._cache[filepath]
@@ -198,7 +176,7 @@ class ReviewCommentProvider implements Disposable {
         threads.push(thread)
       }
 
-      if (lazy && !comments.length)
+      if (type === 'code' && !comments.length)
         return []
 
       return [range]
