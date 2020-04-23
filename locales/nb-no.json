@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "Hvilken stil brukes for å organisere oversettelsene?",
   "prompt.locales_dir_not_found": "Oversettelsesmappe ikke funnet. i18n Ally er deaktivert.",
   "prompt.new_key_path": "",
-  "prompt.new_key_value": "",
   "prompt.replace_text_as": "Erstatt tekst som:",
   "prompt.select_display_locale": "",
   "prompt.select_file_to_open": "",

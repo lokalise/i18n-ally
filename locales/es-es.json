@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "¿Qué tipo de estilo desea utilizar para guardar las configuraciones regionales?",
   "prompt.locales_dir_not_found": "Directorio de configuración regional no encontrado. i18n Ally está deshabilitado.",
   "prompt.new_key_path": "",
-  "prompt.new_key_value": "",
   "prompt.replace_text_as": "Reemplazar texto como:",
   "prompt.select_display_locale": "Seleccionar idioma de visualización ({0})",
   "prompt.select_file_to_open": "Seleccionar archivo para abrir",

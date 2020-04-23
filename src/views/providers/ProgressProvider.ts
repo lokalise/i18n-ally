@@ -1,9 +1,11 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event } from 'vscode'
+import throttle from 'lodash/throttle'
 import { Global, Loader, CurrentFile } from '../../core'
 import { notEmpty } from '../../utils/utils'
 import { BaseTreeItem } from '../items/Base'
 import { ProgressRootItem } from '../items/ProgressRootItem'
 import { EditorPanel } from '../../webview/panel'
+import { THROTTLE_DELAY } from '../../meta'
 
 export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   protected name = 'ProgressProvider'
@@ -14,8 +16,9 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   constructor(private ctx: ExtensionContext) {
     this.loader = CurrentFile.loader
 
-    this.loader.onDidChange(() => this.refresh())
-    EditorPanel.onDidChange(() => this.refresh())
+    const throttledRefresh = throttle(() => this.refresh(), THROTTLE_DELAY)
+    this.loader.onDidChange(throttledRefresh)
+    EditorPanel.onDidChange(throttledRefresh)
   }
 
   refresh(): void {

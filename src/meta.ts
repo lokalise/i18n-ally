@@ -10,6 +10,8 @@ export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\:]*?'
 export const KEY_REG_ALL = '.*?'
 
+export const THROTTLE_DELAY = 500
+
 export const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 export const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 export const bracketsMatcher = /[()]/g

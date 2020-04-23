@@ -12,7 +12,7 @@ export async function promptEdit(keypath: string, locale: string, value?: string
   return result?.replace(/\\n/g, '\n')
 }
 
-export async function promptKeys(locale = Config.displayLanguage) {
+export async function promptKeys(text: string, locale = Config.displayLanguage) {
   const result = await window.showQuickPick(
     CurrentFile.loader.keys.map(key => ({
       label: key,
@@ -20,7 +20,7 @@ export async function promptKeys(locale = Config.displayLanguage) {
     })),
     {
       matchOnDescription: true,
-      placeHolder: i18n.t('prompt.choice_key_to_insert'),
+      placeHolder: text,
     })
   return result?.label
 }

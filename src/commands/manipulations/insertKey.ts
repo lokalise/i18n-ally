@@ -1,5 +1,6 @@
 import { window } from 'vscode'
 import { promptKeys, promptTemplates } from '../../utils'
+import i18n from '../../i18n'
 
 export async function InsertKey() {
   const editor = window.activeTextEditor
@@ -8,7 +9,7 @@ export async function InsertKey() {
   if (!editor || !document)
     return
 
-  const keypath = await promptKeys()
+  const keypath = await promptKeys(i18n.t('prompt.choice_key_to_insert'))
 
   if (!keypath)
     return

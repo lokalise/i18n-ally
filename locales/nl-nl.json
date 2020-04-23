@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "Welke soort sleutel style wilt u gebruiken om de locale waardes te organiseren??",
   "prompt.locales_dir_not_found": "Locale directory kan niet worden gevonden. i18n Ally is uitgeschakeld.",
   "prompt.new_key_path": "Voer een sleutel pad in voor de nieuwe sleutel",
-  "prompt.new_key_value": "Voer de vertalling in voor \"{1}\" van het nieuwe sleutel pad \"{0}\"",
   "prompt.replace_text_as": "Vervang de tekst met:",
   "prompt.select_display_locale": "Selecteer weergavetaal ({0})",
   "prompt.select_file_to_open": "Selecteer het te openen bestand",

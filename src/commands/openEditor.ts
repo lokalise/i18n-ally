@@ -4,6 +4,7 @@ import { EditorPanel, EditorContext } from '../webview/panel'
 import { Commands, Global, KeyDetector } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
+import i18n from '../i18n'
 import { CommandOptions } from './manipulations/common'
 
 const m: ExtensionModule = (ctx) => {
@@ -41,7 +42,7 @@ const m: ExtensionModule = (ctx) => {
 
     if (!item) {
       if (!getContext()) {
-        key = await promptKeys()
+        key = await promptKeys(i18n.t('prompt.choice_key_to_open'))
         if (!key)
           return
       }

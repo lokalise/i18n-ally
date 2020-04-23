@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "どの種類のキースタイルをロケールをオーガナイズするために使用しますか？",
   "prompt.locales_dir_not_found": "ロケールディレクトリが見つかりません。i18n Allyは使用できません。.",
   "prompt.new_key_path": "",
-  "prompt.new_key_value": "",
   "prompt.replace_text_as": "文字列は置換されます:",
   "prompt.select_display_locale": "({0}) 表示する言語を選択してください",
   "prompt.select_file_to_open": "ファイルを選択する",

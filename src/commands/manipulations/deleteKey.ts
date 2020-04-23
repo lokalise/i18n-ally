@@ -26,31 +26,26 @@ export async function DeleteRecords(records: LocaleRecord[]) {
 
 export async function DeleteKey(item: LocaleTreeItem | UsageReportRootItem) {
   const Yes = i18n.t('prompt.button_yes')
+  let records: LocaleRecord[] = []
 
   if (item instanceof LocaleTreeItem) {
-    let records: LocaleRecord[] = []
     const { node } = item
     if (node.type === 'tree')
       return
-
     if (node.type === 'record')
       return
 
     records = Object.values(node.locales)
 
-    if (Yes !== await window.showWarningMessage(
+    if (Yes !== await window.showInformationMessage(
       i18n.t('prompt.delete_key', node.keypath),
       { modal: true },
       Yes,
     ))
       return
-
-    await DeleteRecords(records)
   }
   else if (item instanceof UsageReportRootItem && item.key === 'idle') {
-    const records: LocaleRecord[] = []
-
-    if (Yes !== await window.showWarningMessage(
+    if (Yes !== await window.showInformationMessage(
       i18n.t('prompt.delete_keys_not_in_use', item.keys.length),
       { modal: true },
       Yes,
@@ -61,13 +56,18 @@ export async function DeleteKey(item: LocaleTreeItem | UsageReportRootItem) {
       const node = CurrentFile.loader.getNodeByKey(usage.keypath)
       records.push(...Object.values(node?.locales || {}))
     }
-
-    await DeleteRecords(records)
   }
+  else {
+    return
+  }
+
+  await DeleteRecords(records)
 
   if (Analyst.hasCache()) {
     setTimeout(() => {
       Analyst.analyzeUsage(false)
     }, 500)
   }
+
+  window.showInformationMessage(i18n.t('prompt.keys_removed', records.length))
 }

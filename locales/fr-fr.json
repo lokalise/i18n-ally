@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "Quel modèle souhaitez-vous utiliser pour organiser vos fichiers de la locale ?",
   "prompt.locales_dir_not_found": "Répertoire de la locale introuvé. i18n Ally est désactivé.",
   "prompt.new_key_path": "Entrez le chemin de la nouvelle Clé.",
-  "prompt.new_key_value": "Entrez la traduction pour \"{1}\" pour la nouvelle Clé \"{0}\"",
   "prompt.replace_text_as": "Remplacer le texte par :",
   "prompt.select_display_locale": "Choisir la langue d'affichage. ({0})",
   "prompt.select_file_to_open": "Choisissez le fichier à ouvrir",

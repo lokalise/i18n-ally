@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "選擇項目所使用的翻譯路徑格式",
   "prompt.locales_dir_not_found": "沒有找到翻譯資料夾，插件已停用",
   "prompt.new_key_path": "輸入新的文案路徑",
-  "prompt.new_key_value": "輸入新路徑  \"{0}\"  的  \"{1}\"  翻譯",
   "prompt.replace_text_as": "將文案替換為:",
   "prompt.select_display_locale": "選擇顯示語言（{0}）",
   "prompt.select_file_to_open": "選擇要打開的檔案",

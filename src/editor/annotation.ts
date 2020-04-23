@@ -3,6 +3,7 @@ import throttle from 'lodash/throttle'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
+import { THROTTLE_DELAY } from '../meta'
 import { createHover } from './hover'
 
 const underlineDecorationType = window.createTextEditorDecorationType({
@@ -109,7 +110,11 @@ const annotation: ExtensionModule = (ctx) => {
         }
       }
       else {
-        if (selection.start.line >= range.start.line && selection.end.line <= range.end.line) {
+        // have insection to cursor
+        if (
+          (selection.start.line <= range.start.line && range.start.line <= selection.end.line)
+          || (selection.start.line <= range.end.line && range.end.line <= selection.end.line)
+        ) {
           editing = true
           inplace = false
         }
@@ -120,6 +125,10 @@ const annotation: ExtensionModule = (ctx) => {
           text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
           missing = true
         }
+
+        // the key might not exist, disabled inplace
+        if (!text)
+          inplace = false
       }
 
       if (text && !inplace)
@@ -131,6 +140,8 @@ const annotation: ExtensionModule = (ctx) => {
       const color = missing
         ? 'rgba(153, 153, 153, .3)'
         : 'rgba(153, 153, 153, .8)'
+
+      const borderColor = 'rgba(153, 153, 153, .2)'
 
       let gutterType = 'none'
       if (missing)
@@ -159,6 +170,7 @@ const annotation: ExtensionModule = (ctx) => {
             contentText: showAnnonations ? text : '',
             fontWeight: 'normal',
             fontStyle: 'normal',
+            border: inplace ? `0.5px solid ${borderColor}; border-radius: 2px;` : '',
           },
         },
         hoverMessage: createHover(key, maxLength, undefined, i),
@@ -172,7 +184,7 @@ const annotation: ExtensionModule = (ctx) => {
     editor.setDecorations(disappearDecorationType, inplaces)
   }
 
-  const throttledUpdate = throttle(() => update(), 500)
+  const throttledUpdate = throttle(() => update(), THROTTLE_DELAY)
 
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(throttledUpdate))

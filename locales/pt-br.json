@@ -127,7 +127,6 @@
   "prompt.keystyle_select": "Qual estilo de chaveamento gostaria de utilizar para orgnaizar suas localizaçãos (locales)?",
   "prompt.locales_dir_not_found": "Diretório de localização (locales) não encontrado. i18n Ally está desabilitado.",
   "prompt.new_key_path": "Inserir o caminho da nova chave",
-  "prompt.new_key_value": "Insira a tradução para \"{1}\" da nova chave \"{0}\"",
   "prompt.replace_text_as": "Trocar texto para:",
   "prompt.select_display_locale": "Selecionar idioma de exibição ({0})",
   "prompt.select_file_to_open": "Selecionar arquivo a abrir",
