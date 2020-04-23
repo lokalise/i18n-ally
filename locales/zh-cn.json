@@ -120,6 +120,7 @@
   "prompt.invalid_keypath": "无效的密钥路径！",
   "prompt.key_already_exists": "路径已存在。覆盖当前路径或是重新输入路径?",
   "prompt.key_copied": "路径已复制",
+  "prompt.keys_removed": "删除了{0}条文案",
   "prompt.keystyle_flat": "扁平式(Flat)",
   "prompt.keystyle_flat_example": "例如: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "嵌套式(Nested)",

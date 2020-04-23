@@ -120,6 +120,7 @@
   "prompt.invalid_keypath": "",
   "prompt.key_already_exists": "Nøkkelen eksisterer allerede. Vil du overstyre den eksisterende verdien eller oppgi banen på nytt?",
   "prompt.key_copied": "Nøkkel kopiert.",
+  "prompt.keys_removed": "",
   "prompt.keystyle_flat": "Flat stil",
   "prompt.keystyle_flat_example": "for eksempel: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "Nøstet stil",

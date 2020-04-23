@@ -7,6 +7,13 @@ import { RewriteKeyContext } from './types'
 import { Config } from './Config'
 import { Loader } from './loaders/Loader'
 
+export interface KeyUsages {
+  type: 'code'| 'locale'
+  keys: KeyInDocument[]
+  locale: string
+  namespace?: string
+}
+
 export class KeyDetector {
   static getKeyByContent(text: string) {
     const keys = new Set<string>()
@@ -83,7 +90,7 @@ export class KeyDetector {
     return regexFindKeys(text, regs, dotEnding, rewriteContext, scopes)
   }
 
-  static getUsages(document: TextDocument, loader: Loader = CurrentFile.loader) {
+  static getUsages(document: TextDocument, loader: Loader = CurrentFile.loader): KeyUsages | undefined {
     let keys: KeyInDocument[] = []
     let locale = Config.displayLanguage
     let namespace: string | undefined

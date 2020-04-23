@@ -120,6 +120,7 @@
   "prompt.invalid_keypath": "",
   "prompt.key_already_exists": "キーが既に存在しています。既存のキーを上書きしますか？それともパスを再入力しますか？",
   "prompt.key_copied": "キーをコピーしました。",
+  "prompt.keys_removed": "",
   "prompt.keystyle_flat": "フラット",
   "prompt.keystyle_flat_example": "例: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "ネストしている",

@@ -120,6 +120,7 @@
   "prompt.invalid_keypath": "",
   "prompt.key_already_exists": "La clave ya existe. ¿Desea sobrescribir los valores existentes o volver a introducir la ruta?",
   "prompt.key_copied": "Clave copiada.",
+  "prompt.keys_removed": "",
   "prompt.keystyle_flat": "Estilo plano",
   "prompt.keystyle_flat_example": "Por ejemplo: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "Estilo anidado",

@@ -120,6 +120,7 @@
   "prompt.invalid_keypath": "Ongeldige sleutel pad!",
   "prompt.key_already_exists": "De sleutel bestaat reeds. Wilt u deze de huidige waarde overschrijven of een ander pad opgeven?",
   "prompt.key_copied": "Sleutel gekopie�rd.",
+  "prompt.keys_removed": "",
   "prompt.keystyle_flat": "Platte vorm",
   "prompt.keystyle_flat_example": "voorbeeld: { \"a.b.c\": \"...\" }",
   "prompt.keystyle_nested": "Genestelde vorm",

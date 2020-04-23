@@ -99,9 +99,8 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string,
   mainLocale = mainLocale || Config.displayLanguage
 
   const locales = Global.visibleLocales.filter(i => i !== mainLocale)
-  const buttons = `[\`Editor\`](${makeMarkdownCommand(Commands.open_in_editor, { keypath, keyIndex })})`
   const table1 = createTable([mainLocale, ...locales], records, maxLength, keyIndex)
-  const markdown = `${table1}\n\n------\n\n${buttons}`
+  const markdown = `${table1}`
 
   const markdownText = new MarkdownString(`${markdown}`, true)
   markdownText.isTrusted = true

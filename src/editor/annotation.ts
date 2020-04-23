@@ -1,6 +1,6 @@
 import { window, DecorationOptions, Range, Disposable, workspace, TextEditorDecorationType, TextEditor } from 'vscode'
 import throttle from 'lodash/throttle'
-import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
+import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '../core'
 import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
 import { THROTTLE_DELAY } from '../meta'
@@ -58,18 +58,14 @@ const annotation: ExtensionModule = (ctx) => {
       )
   }
 
-  function update() {
-    if (!Global.enabled)
-      return
+  let usages: KeyUsages | undefined
 
+  function refresh() {
     const editor = window.activeTextEditor
-    if (!editor)
-      return
-
     const loader: Loader = CurrentFile.loader
-    const document = editor.document
-    const usages = KeyDetector.getUsages(document, loader)
-    if (!usages)
+    const document = editor?.document
+
+    if (!editor || !document || !usages)
       return
 
     const selection = editor.selection
@@ -184,14 +180,28 @@ const annotation: ExtensionModule = (ctx) => {
     editor.setDecorations(disappearDecorationType, inplaces)
   }
 
+  function update() {
+    if (!Global.enabled)
+      return
+
+    const editor = window.activeTextEditor
+    if (!editor)
+      return
+
+    const loader: Loader = CurrentFile.loader
+    const document = editor.document
+    usages = KeyDetector.getUsages(document, loader)
+    refresh()
+  }
+
   const throttledUpdate = throttle(() => update(), THROTTLE_DELAY)
 
   const disposables: Disposable[] = []
   disposables.push(CurrentFile.loader.onDidChange(throttledUpdate))
   disposables.push(window.onDidChangeActiveTextEditor(throttledUpdate))
-  disposables.push(window.onDidChangeTextEditorSelection(throttledUpdate))
   disposables.push(workspace.onDidChangeTextDocument(throttledUpdate))
   disposables.push(Global.reviews.onDidChange(throttledUpdate))
+  disposables.push(window.onDidChangeTextEditorSelection(refresh))
 
   update()
 
