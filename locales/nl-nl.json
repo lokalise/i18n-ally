@@ -25,6 +25,7 @@
   "command.translate_key": "Vertalen",
   "command.translate_key_from": "Vertaal van \"{0}\"",
   "config.annotation_delimiter": "Scheidingsteken van annotaties",
+  "config.annotation_in_place": "",
   "config.annotation_max_length": "Max. aantal karakters zichtbaar binnen inline annotaties. Overschreden delen worden getoond als ellipses (...)",
   "config.annotations": "Inline annotaties inschakelen.",
   "config.deprecated": "Verouderd. Gebruik de \"i18n-ally.\" prefix als vervanging.",

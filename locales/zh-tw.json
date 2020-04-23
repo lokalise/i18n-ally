@@ -25,6 +25,7 @@
   "command.translate_key": "翻譯文案",
   "command.translate_key_from": "从 \"{0}\" 翻譯",
   "config.annotation_delimiter": "內聯註釋的分隔符",
+  "config.annotation_in_place": "",
   "config.annotation_max_length": "內聯註釋顯示的最大字符數。超出的部分將顯示為省略號（...）",
   "config.annotations": "啟用內聯註釋",
   "config.deprecated": "不推薦使用。\n請使用 \"i18n-ally\" 前綴",

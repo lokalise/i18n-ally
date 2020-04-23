@@ -5,8 +5,7 @@ import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscod
 import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { cleanObject } from '../utils/cleanObject'
-import { decorateLocale } from '../utils'
-import i18n from '../i18n'
+import { promptEdit } from '../utils/prompts'
 import { Config } from './Config'
 import { ReviewData, ReviewComment, ReviewCommentWithMeta, TranslationCandidate, TranslationCandidateWithMeta } from './types'
 import { CurrentFile } from './CurrentFile'
@@ -90,13 +89,9 @@ export class Reviews {
     if (!tc)
       throw new ReferenceError(`No translation candidate found for ${key} on ${locale}`)
     let value: string | undefined = tc?.text
-    value = await window.showInputBox({
-      value,
-      prompt: i18n.t('prompt.edit_key_in_locale', key, decorateLocale(locale)),
-      ignoreFocusOut: true,
-    })
+    value = await promptEdit(key, locale, value)
     if (value)
-      await this.applyTranslationCandidate(key, locale, value)
+      await this.applyTranslationCandidate(key, locale, value.replace(/\\n/g, '\n'))
   }
 
   getReviews(key: string) {

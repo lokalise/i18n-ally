@@ -3,9 +3,10 @@ import { trim } from 'lodash'
 // @ts-ignore
 import * as limax from 'limax'
 import { ExtensionModule } from '../modules'
-import { Global, Commands, Config, CurrentFile } from '../core'
+import { Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
 import { ExtractTextOptions } from '../editor/extract'
+import { promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
 
@@ -45,11 +46,7 @@ const m: ExtensionModule = () => {
       const value = trim(text, '\'"')
 
       // prompt for template
-      const replacer = await window.showQuickPick(
-        Global.refactorTemplates(keypath, languageId),
-        {
-          placeHolder: i18n.t('prompt.replace_text_as'),
-        })
+      const replacer = await promptTemplates(keypath, languageId)
 
       if (!replacer) {
         window.showWarningMessage(i18n.t('prompt.extraction_canceled'))

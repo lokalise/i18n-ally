@@ -1,7 +1,7 @@
 import { window } from 'vscode'
 import { CurrentFile, Config, Global, PendingWrite } from '../../core'
 import i18n from '../../i18n'
-import { Log } from '../../utils'
+import { Log, promptEdit } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
 
@@ -35,11 +35,7 @@ export async function NewKey(keypath?: string) {
       return
 
     const sourceLocale = Config.sourceLanguage
-    const value = await window.showInputBox({
-      value: '',
-      prompt: i18n.t('prompt.new_key_value', keypath, sourceLocale),
-      ignoreFocusOut: true,
-    })
+    const value = await promptEdit(keypath, sourceLocale, '')
 
     if (value === undefined)
       return

@@ -1,6 +1,5 @@
 import { window } from 'vscode'
-import i18n from '../../i18n'
-import { CurrentFile, Global, Config } from '../../core'
+import { promptKeys, promptTemplates } from '../../utils'
 
 export async function InsertKey() {
   const editor = window.activeTextEditor
@@ -9,24 +8,12 @@ export async function InsertKey() {
   if (!editor || !document)
     return
 
-  const display = Config.displayLanguage
-
-  const keypath = await window.showQuickPick(CurrentFile.loader.keys.map(key => ({
-    label: key,
-    description: CurrentFile.loader.getValueByKey(key, display, 30),
-  })), {
-    matchOnDescription: true,
-    placeHolder: i18n.t('prompt.choice_key_to_insert'),
-  })
+  const keypath = await promptKeys()
 
   if (!keypath)
     return
 
-  const replacer = await window.showQuickPick(
-    Global.refactorTemplates(keypath.label, document.languageId),
-    {
-      placeHolder: i18n.t('prompt.replace_text_as'),
-    })
+  const replacer = await promptTemplates(keypath, document.languageId)
 
   if (!replacer)
     return

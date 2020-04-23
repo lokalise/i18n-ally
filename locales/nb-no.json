@@ -25,6 +25,7 @@
   "command.translate_key": "Oversett",
   "command.translate_key_from": "Oversett fra \"{0}\"",
   "config.annotation_delimiter": "",
+  "config.annotation_in_place": "",
   "config.annotation_max_length": "Maksimalt antall tegn vist i hjelpevindu. Resterende del vil bli vist som (...)",
   "config.annotations": "Slå på hjelpevindu",
   "config.deprecated": "",
