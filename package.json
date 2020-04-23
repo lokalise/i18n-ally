@@ -717,7 +717,7 @@
     "rimraf": "3.0.2",
     "standard-version": "7.1.0",
     "ts-jest": "^25.0.0",
-    "ts-loader": "6.2.2",
+    "ts-loader": "7.0.1",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.11",
     "webpack-filter-warnings-plugin": "^1.2.1"
