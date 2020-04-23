@@ -1,13 +1,10 @@
 // @ts-ignore
 import md5 from 'blueimp-md5'
-import { nanoid } from 'nanoid'
 import { ReviewComment } from '../core/types'
 
 export function getAvatarFromEmail(email?: string) {
-  if (email)
-    return `https://www.gravatar.com/avatar/${md5(email)}`
-  else
-    return `https://i.pravatar.cc/150?u=${nanoid()}`
+  const hash = md5(email || 'noname')
+  return `https://www.gravatar.com/avatar/${hash}?s=64&d=${encodeURI(`https://api.adorable.io/avatars/64/${hash}.png`)}`
 }
 
 export function getCommentState(comments: ReviewComment[]) {
