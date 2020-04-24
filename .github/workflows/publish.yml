@@ -12,8 +12,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: mv README.vsce.md README.md
-      - run: rm README.zh-CN.md
       - run: npm ci
       - run: npm run build
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}

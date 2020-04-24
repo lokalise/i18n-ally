@@ -120,7 +120,7 @@ export class Reviews {
   }
 
   getReviews(key: string) {
-    return this.data.reviews[key] || {}
+    return (this.data?.reviews || {})[key] || {}
   }
 
   addComment(key: string, locale: string, comment: Partial<ReviewComment>) {
@@ -225,6 +225,7 @@ export class Reviews {
     else {
       this.data = { reviews: {} }
     }
+    this.data.reviews = this.data.reviews || {}
     this._onDidChange.fire()
   }
 

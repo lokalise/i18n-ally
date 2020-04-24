@@ -31,138 +31,6 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 -----
 
 <details>
-<summary align='center'><b>🧱 Supported Frameworks</b></summary>
-
-Supported frameworks are auto-detected when a matching dependency is found in the project.
-
-<table>
-<thead><tr><th>Framework</th><th>Trigger Packages</th></tr></thead>
-<tbody>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vue.svg" height="20" alt="">
-<a href="https://vuejs.org/">Vue</a>
-</td><td>
-<a href="https://github.com/kazupon/vue-i18n"><code>vue-i18n</code></a>,
-<a href="https://github.com/dkfbasel/vuex-i18n"><code>vuex-i18n</code></a>,
-<a href="https://github.com/panter/vue-i18next"><code>vue-i18next</code></a>,
-<a href="https://github.com/nuxt-community/nuxt-i18n"><code>nuxt-i18n</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vue.svg" height="20" alt="">
-<a href="https://kazupon.github.io/vue-i18n/guide/sfc.html">Vue SFC i18n</a>
-</td><td>
-<a href="https://www.npmjs.com/package/@kazupon/vue-i18n-loader"><code>@kazupon/vue-i18n-loader</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/react.svg" height="20" alt="">
-<a href="https://reactjs.org/">React</a>
-</td><td>
-<a href="https://github.com/i18next/react-i18next"><code>react-i18next</code></a>,
-<a href="https://github.com/formatjs/react-intl"><code>react-intl</code></a>,
-<a href="https://github.com/isaachinman/next-i18next"><code>next-i18next</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/angular.svg" height="20" alt="">
-Angular(<a href="http://www.ngx-translate.com/">ngx-translate</a>)
-</td><td>
-<a href="https://github.com/ngx-translate/core"><code>@ngx-translate/core</code></a></td>
-</tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/angular.svg" height="20" alt="">
-Angular(<a href="https://github.com/ngneat/transloco">transloco</a>)
-</td><td>
-<a href="https://github.com/ngneat/transloco"><code>@ngneat/transloco</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/flutter.svg" height="20" alt="">
-Flutter(<a href="https://github.com/ilteoood/flutter_i18n">flutter_i18n</a>)
-</td><td>
-<a href="https://github.com/ilteoood/flutter_i18n"><code>flutter_i18n</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/laravel.svg" height="20" alt="">
-<a href="https://laravel.com/docs/localization">Laravel</a>
-</td><td>
-<a href="https://laravel.com/"><code>laravel/framework</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/rails.svg" height="20" alt="">
-<a href="https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module">Rails</a>
-</td><td>
-<a href="https://github.com/svenfuchs/rails-i18n"><code>rails-i18n</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/ember.svg" height="20" alt="">
-<a href="https://emberjs.com/">Ember.js</a>
-</td><td>
-<a href="https://github.com/ember-intl/ember-intl"><code>ember-intl</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/i18next.svg" height="20" alt="">
-<a href="https://www.i18next.com/">i18next</a>
-</td><td>
-<a href="https://www.npmjs.com/package/i18next"><code>i18next</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/i18n-tag.svg" height="20" alt="">
-<a href="http://i18n-tag.kolmer.net/">i18nTag</a>
-</td><td>
-<a href="https://www.npmjs.com/package/es2015-i18n-tag"><code>es2015-i18n-tag</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/joomla.svg" height="20" alt="">
-<a href="https://www.joomla.org/">Joomla</a>
-</td><td>
-<a href="https://docs.joomla.org/Application"><code>joomla/application</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vscode.svg" height="20" alt="">
-<a href="https://code.visualstudio.com/api">VS Code Extension</a>
-</td><td>
-<a href="https://www.npmjs.com/package/@types/vscode"><code>@types/vscode</code></a>,
-<a href="https://www.npmjs.com/package/vscode"><code>vscode</code></a>
-</td></tr>
-
-<tr><td>
-<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/chrome.svg" height="20" alt="">
-<a href="https://developer.chrome.com/extensions/i18n">Chrome Extension</a>
-</td><td>
-<sub>manual config with <code>&quot;i18n-ally.enabledFrameworks&quot;: &quot;chrome-ext&quot;</code></sub>
-</td></tr>
-
-<tr><td>
-🎎 <strong>Custom</strong>
-</td><td>
-<strong>For almost any framework! <a href="https://github.com/antfu/i18n-ally/wiki/Custom-Framework">How to...</a></strong></td>
-</tr>
-
-</tbody>
-</table>
-
-
-If you would like to make it work for frameworks not listed above, you can:
-  - Open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D)
-  - Fork and raise a Pull Request
-  - [Config your custom framework](https://github.com/antfu/i18n-ally/wiki/Custom-Framework)
-
-</details>
-
------
-
-<details>
 <summary align='center'><b>⚡️ Screenshots & Features</b></summary>
 
 <h3 align='center'>Inline Annotations</h3>
@@ -208,6 +76,11 @@ If you would like to make it work for frameworks not listed above, you can:
 </details>
 
 -----
+
+## 🧱 Supported Frameworks
+
+Check out [the full list](https://github.com/antfu/i18n-ally/wiki/Supported-Frameworks)
+
 
 ## 📖 Documentation
 
