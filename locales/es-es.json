@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "Comparte tus comentarios",
   "misc.missing_key": "",
   "misc.missing_translation": "{0}: La traducción de \"{1}\" no se encuentra",
+  "notification.migrate": "",
+  "notification.v2-update": "",
   "prompt.applying_suggestion": "",
   "prompt.applying_translation_candidate": "",
   "prompt.applying_translation_candidate_multiple": "",

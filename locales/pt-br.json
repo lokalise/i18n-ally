@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "Fornecer Feedback",
   "misc.missing_key": "{0}: chave i18n \"{1}\" não existe",
   "misc.missing_translation": "{0}: A tradução de \"{1}\" está faltando",
+  "notification.migrate": "",
+  "notification.v2-update": "",
   "prompt.applying_suggestion": "",
   "prompt.applying_translation_candidate": "",
   "prompt.applying_translation_candidate_multiple": "",

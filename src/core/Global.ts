@@ -8,6 +8,7 @@ import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
+import { checkNotification, clearNotificationState } from '../update-notification'
 import { Reviews } from './Review'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
@@ -142,6 +143,10 @@ export class Global {
   private static async initLoader(rootpath: string, reload = false) {
     if (!rootpath)
       return
+
+    if (Config.debug)
+      clearNotificationState(this.context)
+    checkNotification(this.context)
 
     if (this._loaders[rootpath] && !reload)
       return this._loaders[rootpath]

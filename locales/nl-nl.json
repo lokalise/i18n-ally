@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "Geef Feedback",
   "misc.missing_key": "{0}: i18n key \"{1}\" not exists",
   "misc.missing_translation": "{0}: Vertaling van \"{1}\" ontbreekt",
+  "notification.migrate": "",
+  "notification.v2-update": "",
   "prompt.applying_suggestion": "",
   "prompt.applying_translation_candidate": "",
   "prompt.applying_translation_candidate_multiple": "",

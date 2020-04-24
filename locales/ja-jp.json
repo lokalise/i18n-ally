@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "Feedbackする",
   "misc.missing_key": "{0}: \"{1}\"は存在しません",
   "misc.missing_translation": "{0}: \"{1}\"の翻訳がありません",
+  "notification.migrate": "",
+  "notification.v2-update": "",
   "prompt.applying_suggestion": "",
   "prompt.applying_translation_candidate": "",
   "prompt.applying_translation_candidate_multiple": "",

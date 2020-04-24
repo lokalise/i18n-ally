@@ -85,7 +85,7 @@ const annotation: ExtensionModule = (ctx) => {
 
       let text: string | undefined
       let missing = false
-      let inplace = Config.annotationInPlace
+      let inplace = Config.annotations ? Config.annotationInPlace : false
       let editing = false
       const range = new Range(
         document.positionAt(start),

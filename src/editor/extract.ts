@@ -15,6 +15,9 @@ class ExtractProvider implements CodeActionProvider {
     if (!Global.enabled)
       return []
 
+    if (!Global.isLanguageIdSupported(document.languageId))
+      return []
+
     if (!(selection instanceof Selection))
       return []
 
@@ -40,7 +43,7 @@ class ExtractProvider implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      Global.getDocumentSelectors(),
+      '*',
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],

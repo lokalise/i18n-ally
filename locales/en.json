@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "Provide Feedback",
   "misc.missing_key": "{0}: i18n key \"{1}\" does not exist",
   "misc.missing_translation": "{0}: Translation of \"{1}\" is missing",
+  "notification.migrate": "Migrate",
+  "notification.v2-update": "i18n Ally is updated to v2.0!\nPlease check out the migration guide.",
   "prompt.applying_suggestion": "Applying following suggestion to key \"{0}\"?\n\n{1}",
   "prompt.applying_translation_candidate": "Applying following translation to key \"{0}\"?\n\n{1}",
   "prompt.applying_translation_candidate_multiple": "Are you sure to apply all {0} translations?",

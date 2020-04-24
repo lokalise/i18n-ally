@@ -87,6 +87,8 @@
   "feedback.twitter_feedback": "提供意见反馈",
   "misc.missing_key": "{0}: 文案路径 \"{1}\" 不存在",
   "misc.missing_translation": "{0}: 缺少 \"{1}\" 的翻译",
+  "notification.migrate": "",
+  "notification.v2-update": "",
   "prompt.applying_suggestion": "确认将以下建议应用于 \"{0}\" 吗？\n\n{1}",
   "prompt.applying_translation_candidate": "确认将以下翻译应用于键 \"{0}\" 吗？\n\n{1}",
   "prompt.applying_translation_candidate_multiple": "您确定要应用全部{0}条翻译吗？",
