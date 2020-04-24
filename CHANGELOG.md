@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/antfu/i18n-ally/compare/v2.0.0...v2.0.1) (2020-04-24)
+
+
+### 🐞 Bug Fixes
+
+* annotaion clear ([1d05926](https://github.com/antfu/i18n-ally/commit/1d05926eb0c4d725c4653fd9753090a21c7e1a26))
+* review error ([b5ed449](https://github.com/antfu/i18n-ally/commit/b5ed449124364b5461e655c9ed232541fe03eeaf))
+
 ## [2.0.0](https://github.com/antfu/i18n-ally/compare/v1.15.5...v2.0.0) (2020-04-24)
 
 [**Migration Guide**](https://github.com/antfu/i18n-ally/wiki/Migration-v1.x)
