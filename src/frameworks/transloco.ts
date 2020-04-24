@@ -82,8 +82,6 @@ export default class TranslocoFramework extends Framework {
     parser.write(document.getText())
     parser.end()
 
-    console.log(ranges)
-
     return ranges
   }
 }

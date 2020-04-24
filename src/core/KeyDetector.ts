@@ -91,6 +91,7 @@ export class KeyDetector {
       filepath = document.uri.fsPath
       if (this._get_keys_cache[filepath])
         return this._get_keys_cache[filepath]
+
       regs = regs ?? Global.getUsageMatchRegex(document.languageId, filepath)
       text = document.getText()
       rewriteContext = {
