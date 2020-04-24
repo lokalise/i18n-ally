@@ -12,13 +12,14 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/i/antfu.i18n-ally.svg?color=63ba83" alt="Visual Studio Marketplace Installs" /></a>
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="__blank"><img src="https://vsmarketplacebadge.apphb.com/trending-monthly/antfu.i18n-ally.svg?color=a1b858" alt="Marketplace Trending Monthly" /></a>
 <br/>
-<a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg?color=a38eed" alt="GitHub last commit" /></a>
-<a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg?color=c977be" alt="GitHub issues" /></a>
+<a href="https://github.com/antfu/i18n-ally/wiki" target="__blank"><img alt="Wiki" src="https://img.shields.io/static/v1?label=docs&message=wiki&color=ed9b8e"></a>
+<a href="https://github.com/antfu/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/antfu/i18n-ally.svg?color=c977be" alt="GitHub last commit" /></a>
+<a href="https://github.com/antfu/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/antfu/i18n-ally.svg?color=a38eed" alt="GitHub issues" /></a>
 <a href="https://github.com/antfu/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/antfu/i18n-ally?style=social"></a>
 </p>
 
 <p align='center'>
-<b>v2.0</b> is now released with new <a href='https://github.com/antfu/i18n-ally/wiki/Migration-v1.x'>Editor UI</a> and <a href='https://github.com/antfu/i18n-ally/wiki/Review-System'>Review System</a> 🎉
+<b>v2.0</b> is released with new <a href='https://github.com/antfu/i18n-ally/wiki/Migration-v1.x'>Editor UI</a> and <a href='https://github.com/antfu/i18n-ally/wiki/Review-System'>Review System</a> 🎉
 </p>
 
 <p align='center'><i>
@@ -27,98 +28,174 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <br>
 
 
-## 🧱 Supported Frameworks
+-----
+
+<details>
+<summary align='center'><b>🧱 Supported Frameworks</b></summary>
 
 Supported frameworks are auto-detected when a matching dependency is found in the project.
 
-| Framework | Status | Trigger Packages |
-| --- | --- | --- |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue](https://vuejs.org/) | ✅ | [`vue-i18n`](https://github.com/kazupon/vue-i18n), [`vuex-i18n`](https://github.com/dkfbasel/vuex-i18n), [`vue-i18next`](https://github.com/panter/vue-i18next), [`nuxt-i18n`](https://github.com/nuxt-community/nuxt-i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vue.png) [Vue SFC i18n](https://kazupon.github.io/vue-i18n/guide/sfc.html) | ✅ | [`@kazupon/vue-i18n-loader`](https://www.npmjs.com/package/@kazupon/vue-i18n-loader) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/react.png) [React](https://reactjs.org/) | ✅ | [`react-i18next`](https://github.com/i18next/react-i18next), [`react-intl`](https://github.com/formatjs/react-intl), [`next-i18next`](https://github.com/isaachinman/next-i18next) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([ngx-translate](http://www.ngx-translate.com/)) | ✅ | [`@ngx-translate/core`](https://github.com/ngx-translate/core) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) Angular([transloco](https://github.com/ngneat/transloco)) | ✅ | [`@ngneat/transloco`](https://github.com/ngneat/transloco) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/flutter.png) Flutter([flutter_i18n](https://github.com/ilteoood/flutter_i18n)) | ✅ | [`flutter_i18n`](https://github.com/ilteoood/flutter_i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/laravel.png) [Laravel](https://laravel.com/docs/localization) | ✅ | [`laravel/framework`](https://laravel.com/) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/rails.png) [Rails](https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module) | ✅ | [`rails-i18n`](https://github.com/svenfuchs/rails-i18n) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/ember.png) [Ember.js](https://emberjs.com/) | ✅ | [`ember-intl`](https://github.com/ember-intl/ember-intl) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18next.png) [i18next](https://www.i18next.com/) | ✅ | [`i18next`](https://www.npmjs.com/package/i18next) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/i18ntag.png) [i18nTag](http://i18n-tag.kolmer.net/) | ✅ | [`es2015-i18n-tag`](https://www.npmjs.com/package/es2015-i18n-tag) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/joomla.png) [Joomla](https://www.joomla.org/) | ✅ | [`joomla/application`](https://docs.joomla.org/Application) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/vscode.png) [VS Code Extension](https://code.visualstudio.com/api) | ✅ | [`@types/vscode`](https://www.npmjs.com/package/@types/vscode), [`vscode`](https://www.npmjs.com/package/vscode) |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/chrome.png) [Chrome Extension](https://developer.chrome.com/extensions/i18n) | ✅ | manual config with `"i18n-ally.enabledFrameworks": "chrome-ext"` |
-| ![](https://raw.github.com/antfu/i18n-ally/master/screenshots/frameworks/angular.png) [Angular](https://angular.io/)(native) | [Vote Here](https://github.com/antfu/i18n-ally/issues/114) |  |
-| 🎎 **Custom**  | ✅ | **For almost any framework! [How to...](https://github.com/antfu/i18n-ally/wiki/Custom-Framework)** |
+<table>
+<thead><tr><th>Framework</th><th>Trigger Packages</th></tr></thead>
+<tbody>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vue.svg" height="20" alt="">
+<a href="https://vuejs.org/">Vue</a>
+</td><td>
+<a href="https://github.com/kazupon/vue-i18n"><code>vue-i18n</code></a>,
+<a href="https://github.com/dkfbasel/vuex-i18n"><code>vuex-i18n</code></a>,
+<a href="https://github.com/panter/vue-i18next"><code>vue-i18next</code></a>,
+<a href="https://github.com/nuxt-community/nuxt-i18n"><code>nuxt-i18n</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vue.svg" height="20" alt="">
+<a href="https://kazupon.github.io/vue-i18n/guide/sfc.html">Vue SFC i18n</a>
+</td><td>
+<a href="https://www.npmjs.com/package/@kazupon/vue-i18n-loader"><code>@kazupon/vue-i18n-loader</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/react.svg" height="20" alt="">
+<a href="https://reactjs.org/">React</a>
+</td><td>
+<a href="https://github.com/i18next/react-i18next"><code>react-i18next</code></a>,
+<a href="https://github.com/formatjs/react-intl"><code>react-intl</code></a>,
+<a href="https://github.com/isaachinman/next-i18next"><code>next-i18next</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/angular.svg" height="20" alt="">
+Angular(<a href="http://www.ngx-translate.com/">ngx-translate</a>)
+</td><td>
+<a href="https://github.com/ngx-translate/core"><code>@ngx-translate/core</code></a></td>
+</tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/angular.svg" height="20" alt="">
+Angular(<a href="https://github.com/ngneat/transloco">transloco</a>)
+</td><td>
+<a href="https://github.com/ngneat/transloco"><code>@ngneat/transloco</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/flutter.svg" height="20" alt="">
+Flutter(<a href="https://github.com/ilteoood/flutter_i18n">flutter_i18n</a>)
+</td><td>
+<a href="https://github.com/ilteoood/flutter_i18n"><code>flutter_i18n</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/laravel.svg" height="20" alt="">
+<a href="https://laravel.com/docs/localization">Laravel</a>
+</td><td>
+<a href="https://laravel.com/"><code>laravel/framework</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/rails.svg" height="20" alt="">
+<a href="https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module">Rails</a>
+</td><td>
+<a href="https://github.com/svenfuchs/rails-i18n"><code>rails-i18n</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/ember.svg" height="20" alt="">
+<a href="https://emberjs.com/">Ember.js</a>
+</td><td>
+<a href="https://github.com/ember-intl/ember-intl"><code>ember-intl</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/i18next.svg" height="20" alt="">
+<a href="https://www.i18next.com/">i18next</a>
+</td><td>
+<a href="https://www.npmjs.com/package/i18next"><code>i18next</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/i18n-tag.svg" height="20" alt="">
+<a href="http://i18n-tag.kolmer.net/">i18nTag</a>
+</td><td>
+<a href="https://www.npmjs.com/package/es2015-i18n-tag"><code>es2015-i18n-tag</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/joomla.svg" height="20" alt="">
+<a href="https://www.joomla.org/">Joomla</a>
+</td><td>
+<a href="https://docs.joomla.org/Application"><code>joomla/application</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/vscode.svg" height="20" alt="">
+<a href="https://code.visualstudio.com/api">VS Code Extension</a>
+</td><td>
+<a href="https://www.npmjs.com/package/@types/vscode"><code>@types/vscode</code></a>,
+<a href="https://www.npmjs.com/package/vscode"><code>vscode</code></a>
+</td></tr>
+
+<tr><td>
+<img src="https://raw.github.com/antfu/i18n-ally/screenshots/frameworks/chrome.svg" height="20" alt="">
+<a href="https://developer.chrome.com/extensions/i18n">Chrome Extension</a>
+</td><td>
+<sub>manual config with <code>&quot;i18n-ally.enabledFrameworks&quot;: &quot;chrome-ext&quot;</code></sub>
+</td></tr>
+
+<tr><td>
+🎎 <strong>Custom</strong>
+</td><td>
+<strong>For almost any framework! <a href="https://github.com/antfu/i18n-ally/wiki/Custom-Framework">How to...</a></strong></td>
+</tr>
+
+</tbody>
+</table>
+
 
 If you would like to make it work for frameworks not listed above, you can:
   - Open a [Framework Support Request](https://github.com/antfu/i18n-ally/issues/new?assignees=&labels=framework+request&template=framework-support-request.md&title=%5BFramework+Request%5D)
   - Fork and raise a Pull Request
   - [Config your custom framework](https://github.com/antfu/i18n-ally/wiki/Custom-Framework)
 
+</details>
 
-<h2 align="center"> ⚡ Features </h2>
+-----
 
-<h3 align="center"> Inline Annotations </h3>
+<details>
+<summary align='center'><b>⚡️ Screenshots & Features</b></summary>
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/annotation.png?raw=true' width='700px'/>
-</p>
+<h3 align='center'>Inline Annotations</h3>
 
-<h3 align="center"> Hover and Direct Actions </h3>
+![](https://github.com/antfu/i18n-ally/blob/screenshots/annotation-animated.gif?raw=true)
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/hover.png?raw=true' width='600px'/>
-</p>
+<h3 align='center'>Hover and Direct Actions</h3>
 
+![](https://github.com/antfu/i18n-ally/blob/screenshots/hover.png?raw=true)
 
-<h3 align="center"> Manage All Translations in One Place </h3>
+<h3 align='center'>Manage All Translations in One Place</h3>
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/progress_report.png?raw=true' width='600px'/>
-</p>
+![](https://github.com/antfu/i18n-ally/blob/screenshots/review-sidebar.png?raw=true)
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/manage.png?raw=true' width='600px'/>
-</p>
+<h3 align='center'><a href='https://github.com/antfu/i18n-ally/wiki/Editor-UI'>Editor UI</a> & <a href='https://github.com/antfu/i18n-ally/wiki/Review-&-Collaboration-System'>Review System</a></h3>
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/missing_keys.png?raw=true' width='600px'/>
-</p>
+![](https://github.com/antfu/i18n-ally/blob/screenshots/review-editor.png?raw=true)
 
+<h3 align='center'>Extract Translations from Code</h3>
 
-<h3 align="center"> Report Missing Translations </h3>
+![](https://github.com/antfu/i18n-ally/blob/screenshots/extract.png?raw=true)
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/problems.png?raw=true' width='600px'/>
-</p>
+<h3 align='center'>Report Missing Translations</h3>
 
+![](https://github.com/antfu/i18n-ally/blob/screenshots/problems.png?raw=true)
 
-<h3 align="center"> Multiple Formats Supported </h3>
+<h3 align='center'>Machine Translation</h3>
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/yaml_support.png?raw=true' width='500px'/>
-</p>
+![](https://github.com/antfu/i18n-ally/blob/screenshots/quick-actions.png?raw=true)
 
+<h3 align='center'>Annotations for JSON and YAML</h3>
 
-<h3 align="center"> Refactor and Auto-translate </h3>
-
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/refactor_translate.png?raw=true' width='500px'/>
-</p>
-
-
-<h3 align="center"> Extract Translations from Code </h3>
-
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/extract.png?raw=true' width='500px'/>
-</p>
-
-<h3 align="center"> Annotations for JSON and YAML </h3>
-
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/locale-annotation.png?raw=true' width='700px'/>
-</p>
-
+![](https://github.com/antfu/i18n-ally/blob/screenshots/annotation-locale.png?raw=true)
 
 <h3 align="center"> General </h3>
 
@@ -128,14 +205,18 @@ If you would like to make it work for frameworks not listed above, you can:
 - Supports [linked locale messages](https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages)
 - Uses i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-multilingual-support)
 
-<p align="center">
-<img src='https://github.com/antfu/i18n-ally/blob/master/screenshots/overview.png?raw=true' width='700px'/>
-</p>
+</details>
 
+-----
 
 ## 📖 Documentation
 
-Check out [the wiki](https://github.com/antfu/i18n-ally/wiki).
+Check out [our wiki](https://github.com/antfu/i18n-ally/wiki)!
+
+
+## 💭 FAQ
+
+Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
 
 ## 📂 Directory Structure
@@ -172,10 +253,6 @@ or
 ```
 
 For more complex structure, please check out [Path Matcher](https://github.com/antfu/i18n-ally/wiki/Path-Matcher) and [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
-
-## 💭 FAQ
-
-Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
 ## 📜 Supported Locale Formats
 
@@ -248,9 +325,11 @@ Support this project with your organization. Your logo will show up here with a 
 
 Lastly, I want to have a **special thanks to my partner [@iiiiiiines](https://github.com/iiiiiiines)** who has encouraged and supported me working on this project.
 
-And also YOU for read this! 🙇‍♂️
+And thank you for read this! 🙇‍♂️
 
 
 ## 📄 License
 
 [MIT License](https://github.com/antfu/i18n-ally/blob/master/LICENSE) © 2019-2020 [Anthony Fu](https://github.com/antfu)
+
+MIT License © 2018-2019 [think2011](https://github.com/think2011)
