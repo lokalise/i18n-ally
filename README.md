@@ -28,6 +28,12 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 <br>
 
 
+<p align="center">
+<a href='https://github.com/antfu/i18n-ally/wiki/Supported-Frameworks' target="__blank">
+<img src="https://github.com/antfu/i18n-ally/blob/screenshots/supported-frameworks.png?raw=true" alt="Supported Frameworks" width="500"/>
+</a>
+</p>
+
 -----
 
 <details>
@@ -77,10 +83,6 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 -----
 
-## 🧱 Supported Frameworks
-
-Check out [the full list](https://github.com/antfu/i18n-ally/wiki/Supported-Frameworks)
-
 
 ## 📖 Documentation
 
@@ -91,41 +93,6 @@ Check out [our wiki](https://github.com/antfu/i18n-ally/wiki)!
 
 Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
-
-## 📂 Directory Structure
-
-Your locales directory can be structured like this with zero-configuration
-
-```
-  locales         # i18n, langs, locale are also acceptable
-  ├── en.json
-  ├── de-DE.json
-  ├── zh-CN.yml   # YAML
-  ├── zh-TW.ts    # You can mix different formats
-  ├── ...
-  └── <country-code>.json
-```
-
-or
-
-```
-  locales
-  ├── en
-  |   ├── common.json
-  |   ├── buttons.json
-  |   ├── ...
-  |   └── <filenames>.json
-  ├── de-DE
-  |   ├── common.json
-  |   ├── buttons.json
-  |   └── ...
-  └── <country-code>
-      ├── common.json
-      ├── buttons.json
-      └── ...
-```
-
-For more complex structure, please check out [Path Matcher](https://github.com/antfu/i18n-ally/wiki/Path-Matcher) and [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
 
 ## 📜 Supported Locale Formats
 
