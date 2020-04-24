@@ -1,5 +1,6 @@
 import { OutputChannel, window } from 'vscode'
 import { EXT_NAME } from '../meta'
+import i18n from '../i18n'
 
 export class Log {
   private static _channel: OutputChannel
@@ -24,18 +25,24 @@ export class Log {
     Log.info(`⚠ WARN: ${message}`, intend)
   }
 
-  static error(err: Error | string, prompt = true, intend = 0) {
-    if (prompt) {
-      if (typeof err === 'string')
-        window.showErrorMessage(err)
-      else
-        window.showErrorMessage(`${EXT_NAME} Error: ${err.toString()}`)
-    }
-
-    if (typeof err === 'string')
-      Log.info(`🐛 ERROR: ${err}`, intend)
-    else
+  static async error(err: Error | string | any = {}, prompt = true, intend = 0) {
+    if (typeof err !== 'string')
       Log.info(`🐛 ERROR: ${err.name}: ${err.message}\n${err.stack}`, intend)
+
+    if (prompt) {
+      const openOutputButton = i18n.t('prompt.show_error_log')
+      const message = typeof err === 'string'
+        ? err
+        : `${EXT_NAME} Error: ${err.toString()}`
+
+      const result = await window.showErrorMessage(message, openOutputButton)
+      if (result === openOutputButton)
+        this.show()
+    }
+  }
+
+  static show() {
+    this._channel.show()
   }
 
   static divider() {

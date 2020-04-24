@@ -4,7 +4,7 @@ import { Framework } from './base'
 
 class VSCodeFramework extends Framework {
   id = 'vscode'
-  display = 'VSCode'
+  display = 'VS Code'
 
   detection = {
     packageJSON: [
@@ -23,7 +23,7 @@ class VSCodeFramework extends Framework {
 
   pathMatcher = () => 'package.nls.?{locale?}.json'
 
-  keyMatchReg = (languageIds?: string, filename?: string) => {
+  usageMatchRegex = (languageIds?: string, filename?: string) => {
     if (filename && basename(filename) === 'package.json')
       return '"%({key})%"'
     // for visualize the regex, you can use https://regexper.com/

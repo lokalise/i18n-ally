@@ -1,6 +1,8 @@
-import { window, workspace, extensions } from 'vscode'
+import path from 'path'
+import { execSync } from 'child_process'
+import { window, workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
-import { normalizeLocale } from '../utils'
+import { TagSystems } from '../tagSystems'
 import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
@@ -16,14 +18,17 @@ export class Config {
     'encoding',
     'namespace',
     'disablePathParsing',
+    'readonly',
+    'languageTagSystem',
   ]
 
   static readonly refreshConfigs = [
     'sourceLanguage',
     'ignoredLocales',
     'displayLanguage',
-    'readonly',
-    'keyMathRegex',
+    'regex.key',
+    'regex.usageMatch',
+    'regex.usageMatchAppend',
   ]
 
   static readonly usageRefreshConfigs = [
@@ -31,21 +36,37 @@ export class Config {
     'derivedKeyRules',
   ]
 
+  static ctx: ExtensionContext
+  static readonly debug = process.env.NODE_ENV === 'development'
+
   // languages
   static get displayLanguage(): string {
-    return normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
+    return this.normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
   }
 
   static set displayLanguage(value) {
-    this.setConfig('displayLanguage', normalizeLocale(value), true)
+    this.setConfig('displayLanguage', value, true)
   }
 
   static get sourceLanguage(): string {
-    return normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
+    return this.normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
   }
 
   static set sourceLanguage(value) {
-    this.setConfig('sourceLanguage', normalizeLocale(value))
+    this.setConfig('sourceLanguage', this.normalizeLocale(value))
+  }
+
+  static get tagSystem() {
+    const tag = this.getConfig('languageTagSystem') || 'bcp47'
+    return TagSystems[tag]
+  }
+
+  static normalizeLocale(locale: string, fallback?: string) {
+    return this.tagSystem.normalize(locale, fallback)
+  }
+
+  static getBCP47(locale: string) {
+    return this.tagSystem.toBCP47(this.tagSystem.normalize(locale))
   }
 
   static get ignoredLocales(): string[] {
@@ -92,6 +113,10 @@ export class Config {
 
   static get annotationDelimiter(): string {
     return this.getConfig<string>('annotationDelimiter') || ''
+  }
+
+  static get annotationInPlace(): boolean {
+    return this.getConfig<boolean>('annotationInPlace') ?? true
   }
 
   static get namespace(): boolean | undefined {
@@ -148,9 +173,20 @@ export class Config {
     return this.getConfig('pathMatcher')
   }
 
-  static get keyMatchRegex(): string {
-    return this.getConfig('keyMatchRegex')
-     || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+  static get regexKey(): string {
+    return this.getConfig('regex.key')
+      || this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+  }
+
+  static get regexUsageMatch(): string[] | undefined {
+    const config = this.getConfig<string[]>('regex.usageMatch')
+    if (config && config.length)
+      return config
+  }
+
+  static get regexUsageMatchAppend(): string[] {
+    return this.getConfig<string[]>('regex.usageMatchAppend') || []
   }
 
   static get keepFulfilled(): boolean {
@@ -161,8 +197,24 @@ export class Config {
     return this.getConfig<boolean>('translate.fallbackToKey') || false
   }
 
+  static get translateSaveAsCandidates(): boolean {
+    return this.getConfig<boolean>('translate.saveAsCandidates') || false
+  }
+
   static get frameworksRubyRailsScopeRoot(): string {
     return this.getConfig<string>('frameworks.ruby-rails.scopeRoot') || ''
+  }
+
+  static get parsersTypescriptTsNodePath(): string {
+    const config = this.getConfig<string>('parsers.typescript.tsNodePath')!
+    if (config === 'ts-node')
+      return config
+
+    return `node "${path.resolve(this.extensionPath!, config)}"`
+  }
+
+  static get parsersTypescriptCompilerOption(): object {
+    return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
   }
 
   static async requestKeyStyle(): Promise<KeyStyle | undefined> {
@@ -238,9 +290,7 @@ export class Config {
   }
 
   static get extensionPath() {
-    if (this.extension)
-      return this.extension.extensionPath
-    return undefined
+    return this.ctx.extensionPath
   }
 
   static get encoding() {
@@ -255,8 +305,16 @@ export class Config {
     return this.getConfig<string>('tabStyle') === 'tab' ? '\t' : ' '
   }
 
-  static get promptTranslatingSource() {
-    return this.getConfig<boolean>('promptTranslatingSource') ?? false
+  static get translatePromptSource() {
+    return this.getConfig<boolean>('translate.promptSource') ?? false
+  }
+
+  static get translateParallels() {
+    return this.getConfig<number>('translate.parallels') || 5
+  }
+
+  static get translateEngines() {
+    return this.getConfig<string[]>('translate.engines') || ['google']
   }
 
   static get disablePathParsing() {
@@ -271,8 +329,63 @@ export class Config {
     this.setConfig('keysInUse', value)
   }
 
-  static get derivedKeyRules() {
-    return this.getConfig<string[]>('derivedKeyRules') ?? undefined
+  static get usageDerivedKeyRules() {
+    return this.getConfig<string[]>('usage.derivedKeyRules')
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? undefined
+  }
+
+  static get usageScanningIgnore() {
+    return this.getConfig<string[]>('usage.scanningIgnore') || []
+  }
+
+  static get preferEditor() {
+    return this.getConfig<boolean>('editor.preferEditor') || false
+  }
+
+  static get reviewEnabled() {
+    return this.getConfig<boolean>('review.enabled') ?? true
+  }
+
+  static get reviewGutters() {
+    return this.getConfig<boolean>('review.gutters') ?? true
+  }
+
+  private static _reviewUserName: string | undefined
+  static get reviewUserName() {
+    const config = this.getConfig<string>('review.user.name')
+    if (config)
+      return config
+    if (!Config._reviewUserName)
+      Config._reviewUserName = execSync('git config user.name').toString().trim()
+
+    return Config._reviewUserName
+  }
+
+  private static _reviewUserEmail: string | undefined
+  static get reviewUserEmail() {
+    const config = this.getConfig<string>('review.user.email')
+    if (config)
+      return config
+    if (!Config._reviewUserEmail)
+      Config._reviewUserEmail = execSync('git config user.email').toString().trim()
+
+    return Config._reviewUserEmail
+  }
+
+  static get reviewUser() {
+    return {
+      name: Config.reviewUserName,
+      email: Config.reviewUserEmail,
+    }
+  }
+
+  static get reviewRemoveCommentOnResolved() {
+    return this.getConfig<boolean>('review.removeCommentOnResolved') ?? false
+  }
+
+  static get translateOverrideExisting() {
+    return this.getConfig<boolean>('translate.overrideExisting') ?? false
   }
 
   // config

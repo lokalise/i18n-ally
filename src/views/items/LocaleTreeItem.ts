@@ -1,6 +1,8 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { Node, Translator, CurrentFile } from '../../core'
+import { Node, Translator, CurrentFile, Commands, Config } from '../../core'
 import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '../../utils'
+import { EditorPanel } from '../../webview/panel'
+import i18n from '../../i18n'
 import { BaseTreeItem } from './Base'
 
 export class LocaleTreeItem extends BaseTreeItem {
@@ -32,7 +34,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   }
 
   get collapsibleState() {
-    if (this.node.type === 'record')
+    if (this.node.type === 'record' || this.editorMode)
       return TreeItemCollapsibleState.None
     else
       return TreeItemCollapsibleState.Collapsed
@@ -73,16 +75,35 @@ export class LocaleTreeItem extends BaseTreeItem {
 
   get contextValue() {
     const values: string[] = [this.node.type]
-    if (NodeHelper.isTranslatable(this.node))
-      values.push('translatable')
+
+    if (this.node.readonly)
+      values.push('readonly')
+    else
+      values.push('writable')
+
     if (NodeHelper.isOpenable(this.node))
       values.push('openable')
-    if (NodeHelper.isEditable(this.node))
-      values.push('editable')
+
+    if (!this.editorMode) {
+      if (NodeHelper.isTranslatable(this.node))
+        values.push('translatable')
+      if (NodeHelper.isEditable(this.node))
+        values.push('editable')
+      if (this.node.type !== 'tree')
+        values.push('open-in-editor')
+    }
+
     return values.join('-')
   }
 
+  get editorMode() {
+    return this.node.type === 'node' && (Config.preferEditor || !!EditorPanel.currentPanel)
+  }
+
   async getChildren(filter: (node: Node) => boolean = () => true) {
+    if (this.editorMode)
+      return []
+
     let nodes: Node[] = []
     if (this.node.type === 'tree')
       nodes = Object.values(this.node.children)
@@ -92,5 +113,16 @@ export class LocaleTreeItem extends BaseTreeItem {
       .filter(filter)
       .map(node => new LocaleTreeItem(this.ctx, node, false))
     return items
+  }
+
+  get command() {
+    if (this.editorMode) {
+      return {
+        command: Commands.open_in_editor,
+        title: i18n.t('command.open_in_editor'),
+        arguments: [this],
+      }
+    }
+    return undefined
   }
 }

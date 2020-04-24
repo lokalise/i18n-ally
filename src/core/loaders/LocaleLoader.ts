@@ -1,15 +1,15 @@
-import { existsSync } from 'fs'
 import * as path from 'path'
+import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import { replaceLocalePath, normalizeLocale, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
+import _, { uniq, throttle } from 'lodash'
+import * as fg from 'fast-glob'
+import { FILEWATCHER_TIMEOUT } from '../../meta'
+import { replaceLocalePath, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
-import { FulfillAllMissingKeysDelay } from '../../commands/manipulations'
 import { Loader } from './Loader'
-import _, { uniq, throttle } from 'lodash'
-import * as fg from 'fast-glob'
 import { Analyst, Global, Config } from '..'
 
 const THROTTLE_DELAY = 1500
@@ -50,17 +50,26 @@ export class LocaleLoader extends Loader {
   }
 
   get locales() {
+    // sort by source, display and others by alpha
     const source = Config.sourceLanguage
-    return _(this._files)
+    const display = Config.displayLanguage
+    const allLocales = _(this._files)
       .values()
       .map(f => f.locale)
       .uniq()
-      .sort((x, y) => x === source
-        ? -1
-        : y === source
-          ? 1
-          : 0)
+      .sort()
       .value()
+
+    const locales = allLocales
+      .filter(i => i !== source && i !== display)
+
+    if (allLocales.includes(display))
+      locales.unshift(display)
+
+    if (display !== source && allLocales.includes(source))
+      locales.unshift(source)
+
+    return locales
   }
 
   // #region throttled functions
@@ -79,9 +88,14 @@ export class LocaleLoader extends Loader {
   private throttledLoadFileExecutor = throttle(async() => {
     const list = this.throttledLoadFileWaitingList
     this.throttledLoadFileWaitingList = []
-    for (const [d, r] of list)
-      await this.loadFile(d, r)
-    this.update()
+    if (list.length) {
+      let changed = false
+      for (const [d, r] of list)
+        changed = await this.loadFile(d, r) || changed
+
+      if (changed)
+        this.update()
+    }
   }, THROTTLE_DELAY, { leading: true })
 
   private throttledLoadFile = (d: string, r: string) => {
@@ -92,6 +106,7 @@ export class LocaleLoader extends Loader {
   // #endregion
 
   private getFilepathsOfLocale(locale: string) {
+    // TODO: maybe shadow options
     return Object.values(this._files)
       .filter(f => f.locale === locale)
       .map(f => f.filepath)
@@ -115,7 +130,7 @@ export class LocaleLoader extends Loader {
         return 'file'
 
       const positive = dirnames
-        .map(d => normalizeLocale(d, ''))
+        .map(d => Config.normalizeLocale(d, ''))
         .filter(d => d)
         .length
 
@@ -131,18 +146,43 @@ export class LocaleLoader extends Loader {
 
   async requestMissingFilepath(locale: string, keypath: string) {
     const paths = this.getFilepathsOfLocale(locale)
+
+    // try to match namespaces
+    if (Config.namespace) {
+      // to find max match
+      let maxMatchFile: ParsedFile | undefined
+      for (const path of paths) {
+        const file = this._files[path]
+        if (!file?.namespace)
+          continue
+
+        if (keypath.startsWith(`${file.namespace}.`)) {
+          if ((maxMatchFile?.namespace?.length || 0) < file.namespace.length)
+            maxMatchFile = file
+        }
+      }
+
+      // return if found
+      if (maxMatchFile)
+        return maxMatchFile.filepath
+    }
+
     if (paths.length === 1)
       return paths[0]
+
     if (paths.length === 0) {
       return await window.showInputBox({
         prompt: i18n.t('prompt.enter_file_path_to_store_key'),
         placeHolder: `path/to/${locale}.json`,
+        ignoreFocusOut: true,
       })
     }
-    return await window.showQuickPick(paths, {
-      placeHolder: i18n.t('prompt.select_file_to_store_key'),
-      ignoreFocusOut: true,
-    })
+    else {
+      return await window.showQuickPick(paths, {
+        placeHolder: i18n.t('prompt.select_file_to_store_key'),
+        ignoreFocusOut: true,
+      })
+    }
   }
 
   getShadowFilePath(key: string, locale: string) {
@@ -160,43 +200,43 @@ export class LocaleLoader extends Loader {
     return undefined
   }
 
-  private _ignoreChanges = false
-
   async write(pendings: PendingWrite|PendingWrite[]) {
-    this._ignoreChanges = true
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
     pendings = pendings.filter(i => i)
 
-    const distrubtedPendings: Record<string, PendingWrite[]> = {}
+    const distributed: Record<string, PendingWrite[]> = {}
 
+    // distribute pendings writes by files
     for (const pending of pendings) {
-      let filepath = pending.filepath
-      if (!filepath)
-        filepath = await this.requestMissingFilepath(pending.locale, pending.keypath)
+      const filepath = pending.filepath || await this.requestMissingFilepath(pending.locale, pending.keypath)
       if (!filepath) {
-        Log.info(`💥 Unable to file path for writing ${JSON.stringify(pending)}`)
+        Log.info(`💥 Unable to find path for writing ${JSON.stringify(pending)}`)
         continue
       }
-      if (!distrubtedPendings[filepath])
-        distrubtedPendings[filepath] = []
-      distrubtedPendings[filepath].push(pending)
+
+      if (Config.namespace)
+        pending.namespace = pending.namespace || this._files[filepath]?.namespace
+
+      if (!distributed[filepath])
+        distributed[filepath] = []
+      distributed[filepath].push(pending)
     }
 
     try {
-      for (const [filepath, pendings] of Object.entries(distrubtedPendings)) {
+      for (const [filepath, pendings] of Object.entries(distributed)) {
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
         if (!parser)
-          throw new AllyError(ErrorType.unsupported_file_type, ext)
+          throw new AllyError(ErrorType.unsupported_file_type, undefined, ext)
         if (parser.readonly)
           throw new AllyError(ErrorType.write_in_readonly_mode)
 
         Log.info(`💾 Writing ${filepath}`)
 
         let original: any = {}
-        if (existsSync(filepath)) {
+        if (fs.existsSync(filepath)) {
           original = await parser.load(filepath)
           original = this.preprocessData(original, {
             locale: pendings[0].locale,
@@ -210,8 +250,7 @@ export class LocaleLoader extends Loader {
 
           if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
-            if (node)
-              keypath = NodeHelper.getPathWithoutNamespace(node)
+            keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace)
           }
 
           modified = applyPendingToObject(
@@ -222,19 +261,25 @@ export class LocaleLoader extends Loader {
           )
         }
 
-        modified = this.deprocessData(modified, {
-          locale: pendings[0].locale,
-          targetFile: filepath,
-        })
+        const locale = pendings[0].locale
 
-        await parser.save(filepath, modified, Config.sortKeys)
+        const processingContext = { locale, targetFile: filepath }
+        const processed = this.deprocessData(modified, processingContext)
+
+        await parser.save(filepath, processed, Config.sortKeys)
+
+        if (this._files[filepath]) {
+          this._files[filepath].value = modified
+          this._files[filepath].mtime = this.getMtime(filepath)
+        }
       }
     }
     catch (e) {
-      this._ignoreChanges = false
+      this.update()
       throw e
     }
-    this._ignoreChanges = false
+
+    this.update()
   }
 
   canHandleWrites(pending: PendingWrite) {
@@ -302,7 +347,7 @@ export class LocaleLoader extends Loader {
       if (match && match.length > 0)
         break
     }
-    // Log.info(`\nMatching filename: ${filename} ${dirStructure} ${JSON.stringify(match)}`)
+
     if (!match || match.length < 1)
       return
 
@@ -312,7 +357,7 @@ export class LocaleLoader extends Loader {
 
     let locale = match.groups?.locale
     if (locale)
-      locale = normalizeLocale(locale, '')
+      locale = Config.normalizeLocale(locale, '')
     else
       locale = Config.sourceLanguage
 
@@ -341,7 +386,9 @@ export class LocaleLoader extends Loader {
       if (!locale)
         return
 
-      Log.info(`📑 Loading (${locale}) ${relativePath}`, 1)
+      const mtime = this.getMtime(filepath)
+
+      Log.info(`📑 Loading (${locale}) ${relativePath} [${mtime}]`, 1)
 
       let data = await parser.load(filepath)
 
@@ -356,8 +403,9 @@ export class LocaleLoader extends Loader {
         dirpath,
         locale,
         value,
+        mtime,
         namespace,
-        readonly: parser.readonly,
+        readonly: parser.readonly || Config.readonly,
       }
 
       return true
@@ -387,65 +435,77 @@ export class LocaleLoader extends Loader {
       await this.loadFile(searchingPath, relative)
   }
 
+  private getMtime(filepath: string) {
+    try {
+      return fs.statSync(filepath).mtimeMs
+    }
+    catch {
+      return 0
+    }
+  }
+
+  private getRelativePath(filepath: string) {
+    let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
+    if (!dirpath)
+      return
+
+    let relative = path.relative(dirpath, filepath)
+
+    if (process.platform === 'win32') {
+      relative = relative.replace(/\\/g, '/')
+      dirpath = dirpath.replace(/\\/g, '/')
+    }
+
+    return { dirpath, relative }
+  }
+
+  private async onFileChanged(type: string, { fsPath: filepath }: { fsPath: string }) {
+    filepath = path.resolve(filepath)
+
+    // not tracking
+    if (type !== 'create' && !this._files[filepath])
+      return
+
+    // already up-to-date
+    if (type !== 'change' && this._files[filepath]?.mtime === this.getMtime(filepath)) {
+      Log.info(`🔄 Skipped on loading "${filepath}" (same mtime)`)
+      return
+    }
+
+    const { dirpath, relative } = this.getRelativePath(filepath) || {}
+    if (!dirpath || !relative)
+      return
+
+    Log.info(`🔄 File changed (${type}) ${relative}`)
+
+    // full reload if configured
+    if (Config.fullReloadOnChanged && ['delete', 'change', 'create'].includes(type)) {
+      this.throttledFullReload()
+      return
+    }
+
+    switch (type) {
+      case 'delete':
+        delete this._files[filepath]
+        this.throttledUpdate()
+        break
+
+      case 'create':
+      case 'change':
+        this.throttledLoadFile(dirpath, relative)
+        break
+    }
+  }
+
   private async watchOn(rootPath: string) {
     Log.info(`\n👀 Watching change on ${rootPath}`)
     const watcher = workspace.createFileSystemWatcher(
-      new RelativePattern(
-        rootPath,
-        '**/*',
-      ),
+      new RelativePattern(rootPath, '**/*'),
     )
 
-    const updateFile = async(type: string, { fsPath: filepath }: { fsPath: string }) => {
-      if (this._ignoreChanges)
-        return
-
-      filepath = path.resolve(filepath)
-
-      if (type !== 'create' && !this._files[filepath])
-        return
-
-      const { ext } = path.parse(filepath)
-
-      if (!Global.getMatchedParser(ext))
-        return
-
-      let dirpath = this._locale_dirs.find(dir => filepath.startsWith(dir))
-      if (!dirpath)
-        return
-
-      let relative = path.relative(dirpath, filepath)
-
-      if (process.platform === 'win32') {
-        relative = relative.replace(/\\/g, '/')
-        dirpath = dirpath.replace(/\\/g, '/')
-      }
-
-      Log.info(`🔄 File changed (${type}) ${relative}`)
-
-      if (Config.fullReloadOnChanged && ['del', 'change', 'create'].includes(type)) {
-        this.throttledFullReload()
-        return
-      }
-
-      switch (type) {
-        case 'del':
-          delete this._files[filepath]
-          this.throttledUpdate()
-          break
-
-        case 'create':
-        case 'change':
-          this.throttledLoadFile(dirpath, relative)
-          break
-      }
-
-      if (type === 'create' && Config.keepFulfilled)
-        FulfillAllMissingKeysDelay()
-    }
-    watcher.onDidChange(updateFile.bind(this, 'change'))
-    watcher.onDidCreate(updateFile.bind(this, 'create'))
-    watcher.onDidDelete(updateFile.bind(this, 'del'))
+    watcher.onDidChange((e: any) => setTimeout(() => this.onFileChanged('change', e), FILEWATCHER_TIMEOUT), this, this._disposables)
+    watcher.onDidCreate((e: any) => setTimeout(() => this.onFileChanged('create', e), FILEWATCHER_TIMEOUT), this, this._disposables)
+    watcher.onDidDelete((e: any) => setTimeout(() => this.onFileChanged('delete', e), FILEWATCHER_TIMEOUT), this, this._disposables)
 
     this._disposables.push(watcher)
   }

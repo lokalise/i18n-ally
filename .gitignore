@@ -5,5 +5,10 @@ node_modules
 *.vsix
 *.zip
 .DS_Store
+.cache
 
 examples/**/package-lock.json
+examples/**/i18n-ally-reviews.yml
+package.nls.*
+stats.json
+

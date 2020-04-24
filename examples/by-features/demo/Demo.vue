@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <p>{{ $t('hello') }}</p>
-    <p v-t="'some.deep.nested.key'" />
     <p>{{ $t('intro') }}</p>
-    <p>This is a demo app.</p>
+    <p>{{ $t('hello') }}</p> 
   </div>
 </template>
 

@@ -1,14 +1,17 @@
 export const EXT_NAMESPACE = 'i18n-ally'
-export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 export const EXT_ID = 'antfu.i18n-ally'
-export const EXT_LEGACY_ID = 'antfu.vue-i18n-ally'
 export const EXT_NAME = 'i18n Ally'
+export const EXT_EDITOR_ID = 'i18n-ally-editor'
+export const EXT_REVIEW_ID = 'i18n-ally-review'
 
-export const KEEP_FULFILL_DELAY = 1000
-export const ParserExtRegEx = 'json5?|ya?ml|jsx?|tsx?|mjs|ini|pot|php?'
+export const EXT_LEGACY_ID = 'antfu.vue-i18n-ally'
+export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 
 export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\:]*?'
 export const KEY_REG_ALL = '.*?'
+
+export const THROTTLE_DELAY = 500
+export const FILEWATCHER_TIMEOUT = 100
 
 export const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 export const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/

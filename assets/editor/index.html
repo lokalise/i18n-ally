@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Editor</title>
+  <script>{vue}</script>
+</head>
+<body>
+
+<div id="app">
+  <p>{{hello}}</p>
+
+  <input v-model='hello'/>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      hello: 'Good morning'
+    }
+  })
+</script>
+
+</body>
+</html>

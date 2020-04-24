@@ -22,10 +22,15 @@ export class UsageReportTreeItem extends LocaleTreeItem {
   get contextValue() {
     if (!this.length) {
       const values: string[] = [this.node.type]
+
+      if (!this.node.readonly) {
+        values.push('writable')
+        if (NodeHelper.isEditable(this.node))
+          values.push('editable')
+      }
+
       if (NodeHelper.isOpenable(this.node))
         values.push('openable')
-      if (NodeHelper.isEditable(this.node))
-        values.push('editable')
 
       values.push(`key_${this.type}`)
 

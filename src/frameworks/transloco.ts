@@ -1,5 +1,7 @@
+import { TextDocument } from 'vscode'
+import { Parser } from 'htmlparser2'
 import { LanguageId } from '../utils'
-import { Framework } from './base'
+import { Framework, ScopeRange } from './base'
 
 export default class TranslocoFramework extends Framework {
   id = 'transloco'
@@ -17,7 +19,7 @@ export default class TranslocoFramework extends Framework {
     'html',
   ]
 
-  keyMatchReg= [
+  usageMatchRegex = [
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/pipe
     '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*transloco',
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/structural-directive
@@ -32,5 +34,54 @@ export default class TranslocoFramework extends Framework {
       `t('${keypath}')`,
       keypath,
     ]
+  }
+
+  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+    if (document.languageId !== 'html')
+      return
+
+    const ranges: ScopeRange[] = []
+
+    const regex = /^.*read:\s*['"](.+?)['"].*$/
+    const tagStack: string[] = []
+    let stackDepth = -1
+    let scope = ''
+    let start = 0
+
+    const parser = new Parser(
+      {
+        onopentag(name, attribs) {
+          tagStack.push(name)
+          const attr = attribs['*transloco']
+          if (attr && parser.endIndex != null) {
+            if (!regex.test(attr))
+              return
+            scope = attr.replace(regex, '$1')
+            start = parser.startIndex
+            stackDepth = tagStack.length
+          }
+        },
+        onclosetag() {
+          if (tagStack.length === stackDepth) {
+            if (scope) {
+              ranges.push({
+                scope,
+                start,
+                end: parser.endIndex ?? parser.startIndex,
+              })
+            }
+            stackDepth = -1
+            scope = ''
+            start = 0
+          }
+          tagStack.pop()
+        },
+      },
+      { decodeEntities: true },
+    )
+    parser.write(document.getText())
+    parser.end()
+
+    return ranges
   }
 }

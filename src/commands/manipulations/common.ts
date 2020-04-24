@@ -1,22 +1,30 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { CurrentFile, Global, Node } from '../../core'
+import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '../../core'
 import i18n from '../../i18n'
 
 export interface CommandOptions {
   keypath: string
-  locale: string
+  locale?: string
   from?: string
+  locales?: string[]
+  keyIndex?: number
 }
 
-export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions) {
+export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleNode | LocaleRecord | undefined {
   if (!item)
     return
 
-  if (item instanceof LocaleTreeItem)
-    return item.node
+  if (item instanceof LocaleTreeItem) {
+    return item.node.type !== 'tree'
+      ? item.node
+      : undefined
+  }
 
-  return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
+  if (item.locale)
+    return CurrentFile.loader.getRecordByKey(item.keypath, item.locale, true)
+  else
+    return CurrentFile.loader.getNodeByKey(item.keypath, true)
 }
 
 export function getNode(item?: LocaleTreeItem | CommandOptions | ProgressSubmenuItem) {

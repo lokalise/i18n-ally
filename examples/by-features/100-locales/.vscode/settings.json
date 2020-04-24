@@ -1,0 +1,13 @@
+{
+  "i18n-ally.localesPaths": "locales",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.sourceLanguage": "ja",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.translate.engines": ["google-cn"],
+  "i18n-ally.translate.parallels": 5,
+  "i18n-ally.editor.preferEditor": false,
+  "i18n-ally.review.removeCommentOnResolved": true,
+  "i18n-ally.readonly": false,
+  "i18n-ally.enabledFrameworks": "vue",
+  "i18n-ally.translate.saveAsCandidates": true
+}

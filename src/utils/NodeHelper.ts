@@ -21,7 +21,7 @@ export class NodeHelper {
     if (Config.readonly || node.readonly || node.type === 'tree' || !this.notShadowOrHasFilepath(node))
       return false
 
-    if (Config.promptTranslatingSource)
+    if (Config.translatePromptSource)
       return true
 
     return !this.isSource(node)
@@ -45,10 +45,13 @@ export class NodeHelper {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 
-  static getPathWithoutNamespace(node: Node) {
-    if (Global.namespaceEnabled && node.meta?.namespace != null)
-      return node.keypath.slice(node.meta?.namespace.length + 1)
+  static getPathWithoutNamespace(keypath: string, node?: Node, namespace?: string) {
+    if (Global.namespaceEnabled) {
+      namespace = node?.meta?.namespace || namespace
+      if (namespace != null)
+        return keypath.slice(namespace.length + 1)
+    }
 
-    return node.keypath
+    return keypath
   }
 }

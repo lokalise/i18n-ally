@@ -4,5 +4,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "antfu.i18n-ally",
+    "eamodio.tsl-problem-matcher",
   ]
 }

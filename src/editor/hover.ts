@@ -13,36 +13,45 @@ function formatValue(text: string) {
   return escapeMarkdown(text.replace(/[\s]+/g, ' '))
 }
 
-function getAvaliableCommands(record?: LocaleRecord) {
+function getAvaliableCommands(record?: LocaleRecord, keyIndex?: number) {
   const commands = []
 
   if (record) {
     const { keypath, locale } = record
 
+    if (Config.reviewEnabled) {
+      commands.push({
+        text: i18n.t('command.open_review'),
+        icon: '💬', // '$(comment-discussion)' // AWAIT_VSCODE_FIX
+        command: makeMarkdownCommand(Commands.open_in_editor, { keypath, locale, keyIndex }),
+      })
+    }
+
     if (NodeHelper.isTranslatable(record)) {
       commands.push({
         text: i18n.t('command.translate_key'),
-        icon: '🌍',
+        icon: '🌏', // '$(globe)' // AWAIT_VSCODE_FIX
         command: makeMarkdownCommand(Commands.translate_key, { keypath, locale }),
       })
     }
-    else {
-      commands.push(EmptyButton)
-    }
+
     if (NodeHelper.isEditable(record)) {
       commands.push({
         text: i18n.t('command.edit_key'),
-        icon: '📝',
-        command: makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
+        icon: '✏️', // '$(edit)' // AWAIT_VSCODE_FIX
+        command: Config.preferEditor
+          ? makeMarkdownCommand(Commands.open_in_editor, { keypath, locale, keyIndex })
+          : makeMarkdownCommand(Commands.edit_key, { keypath, locale }),
       })
     }
     else {
       commands.push(EmptyButton)
     }
+
     if (NodeHelper.isOpenable(record)) {
       commands.push({
         text: i18n.t('command.open_key'),
-        icon: '💬',
+        icon: '↗️', // '$(link-external)' // AWAIT_VSCODE_FIX
         command: makeMarkdownCommand(Commands.open_key, { keypath, locale }),
       })
     }
@@ -54,7 +63,7 @@ function getAvaliableCommands(record?: LocaleRecord) {
   return commands
 }
 
-export function createTable(visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0) {
+export function createTable(visibleLocales: string[], records: Record<string, LocaleRecord>, maxLength = 0, keyIndex?: number) {
   const transTable = visibleLocales
     .flatMap((locale) => {
       const record = records[locale]
@@ -66,7 +75,7 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
         value: formatValue(CurrentFile.loader.getValueByKey(record.keypath, locale, maxLength) || '-'),
         commands: '',
       }
-      const commands = getAvaliableCommands(record)
+      const commands = getAvaliableCommands(record, keyIndex)
       row.commands = commands
         .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
         .join(' ')
@@ -81,7 +90,7 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
   return `| | | | | |\n|---|---:|---|---|---:|\n${transTable}\n| | | | | |`
 }
 
-export function createHover(keypath: string, maxLength = 0, mainLocale?: string) {
+export function createHover(keypath: string, maxLength = 0, mainLocale?: string, keyIndex?: number) {
   const loader = CurrentFile.loader
   const records = loader.getTranslationsByKey(keypath, undefined)
   if (!Object.keys(records).length)
@@ -90,11 +99,10 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string)
   mainLocale = mainLocale || Config.displayLanguage
 
   const locales = Global.visibleLocales.filter(i => i !== mainLocale)
-  const table1 = createTable(locales, records, maxLength)
-  const table2 = createTable([mainLocale], records, maxLength)
-  const markdown = `${table1}\n\n-----\n\n${table2}`
+  const table1 = createTable([mainLocale, ...locales], records, maxLength, keyIndex)
+  const markdown = `${table1}`
 
-  const markdownText = new MarkdownString(markdown)
+  const markdownText = new MarkdownString(`${markdown}`, true)
   markdownText.isTrusted = true
 
   return markdownText

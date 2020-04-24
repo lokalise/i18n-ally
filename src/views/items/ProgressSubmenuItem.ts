@@ -1,12 +1,12 @@
 import { TreeItemCollapsibleState } from 'vscode'
 import { Config, CurrentFile } from '../../core'
-import i18n, { i18nKeys } from '../../i18n'
+import i18n from '../../i18n'
 import { LocaleTreeItem } from './LocaleTreeItem'
 import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressRootItem } from './ProgressRootItem'
 
 export abstract class ProgressSubmenuItem extends ProgressBaseItem {
-  constructor(protected root: ProgressRootItem, public readonly labelKey: i18nKeys, public readonly icon?: string) {
+  constructor(protected root: ProgressRootItem, public readonly labelKey: string, public readonly icon?: string) {
     super(root.ctx, root.node)
     this.id = `progress-${this.node.locale}-${labelKey}`
   }

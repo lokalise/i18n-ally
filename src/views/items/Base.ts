@@ -1,5 +1,5 @@
 import { ExtensionContext, TreeItem } from 'vscode'
-import { getFlagFilename } from '../../utils/utils'
+import { Config } from '../../core'
 
 export abstract class BaseTreeItem extends TreeItem {
   constructor(
@@ -26,14 +26,21 @@ export abstract class BaseTreeItem extends TreeItem {
     this.setLabel(v)
   }
 
-  getIcon(name: string) {
-    return {
-      light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
-      dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
+  getIcon(name: string, themed = true) {
+    if (themed) {
+      return {
+        light: this.ctx.asAbsolutePath(`res/light/${name}.svg`),
+        dark: this.ctx.asAbsolutePath(`res/dark/${name}.svg`),
+      }
+    }
+    else {
+      return this.ctx.asAbsolutePath(`res/dark/${name}.svg`)
     }
   }
 
   getFlagIcon(locale: string) {
-    return this.ctx.asAbsolutePath(`res/flags/${getFlagFilename(locale)}`)
+    const flag = Config.tagSystem.getFlagName(locale)
+    if (flag)
+      return this.ctx.asAbsolutePath(`res/flags/${flag}.svg`)
   }
 }

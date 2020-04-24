@@ -25,7 +25,7 @@ Steps to reproduce the behavior:
 **Device Infomation**
  - OS:
  - Version:
- - VSCode Version:
+ - VS Code Version:
 
 **Extension Log**
 Go to `View` -> `Output` -> `i18n Ally`, and paste the content below. **You should mask any sensitive information**

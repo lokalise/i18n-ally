@@ -12,7 +12,7 @@ class VueSFCFramework extends Framework {
 
   languageIds = []
 
-  keyMatchReg = []
+  usageMatchRegex = []
 
   refactorTemplates() {
     return []

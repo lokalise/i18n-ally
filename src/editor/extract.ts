@@ -1,11 +1,21 @@
 import { Command, CodeActionProvider, CodeActionKind, languages, TextDocument, Range, Selection } from 'vscode'
-import { Global, Commands, ExtractTextOptions } from '../core'
+import { Global, Commands } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
+
+export interface ExtractTextOptions {
+  filepath: string
+  text: string
+  range: Range
+  languageId?: string
+}
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions(document: TextDocument, selection: Range | Selection): Promise<Command[]> {
     if (!Global.enabled)
+      return []
+
+    if (!Global.isLanguageIdSupported(document.languageId))
       return []
 
     if (!(selection instanceof Selection))
@@ -33,7 +43,7 @@ class ExtractProvider implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      Global.getDocumentSelectors(),
+      '*',
       new ExtractProvider(),
       {
         providedCodeActionKinds: [CodeActionKind.Refactor],

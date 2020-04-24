@@ -1,9 +1,14 @@
-import { Config } from '../../core'
+import { Config, Global } from '../../core'
 import { unicodeProgressBar, unicodeDecorate } from '../../utils'
 import { ProgressMissingListItem } from './ProgressMissingListItem'
 import { ProgressEmptyListItem } from './ProgressEmptyListItem'
 import { ProgressBaseItem } from './ProgressBaseItem'
 import { ProgressTranslatedListItem } from './ProgressTranslatedListItem'
+import { ReviewRequestChangesRoot } from './ReviewRequestChanges'
+import { BaseTreeItem } from './Base'
+import { ReviewTranslationCandidates } from './ReviewTranslationCandidates'
+import { ReviewSuggestions } from './ReviewSuggestions'
+import { Seperator } from './Seperator'
 
 export class ProgressRootItem extends ProgressBaseItem {
   get description(): string {
@@ -37,7 +42,7 @@ export class ProgressRootItem extends ProgressBaseItem {
 
   get iconPath() {
     if (!this.visible)
-      return this.getIcon('eye-off-fade')
+      return this.getIcon('hidden', false)
     return this.getFlagIcon(this.locale)
   }
 
@@ -56,10 +61,29 @@ export class ProgressRootItem extends ProgressBaseItem {
   }
 
   async getChildren() {
-    return [
+    const items: BaseTreeItem[] = [
       new ProgressTranslatedListItem(this),
       new ProgressEmptyListItem(this),
       new ProgressMissingListItem(this),
     ]
+    const reviewItems: BaseTreeItem[] = []
+
+    if (Config.reviewEnabled) {
+      const comments = Global.reviews.getCommentsByLocale(this.locale)
+      const translations = Global.reviews.getTranslationCandidatesLocale(this.locale)
+      const change_requested = comments.filter(c => c.type === 'request_change')
+      const suggestions = comments.filter(c => c.suggestion)
+      if (change_requested.length)
+        reviewItems.push(new ReviewRequestChangesRoot(this.ctx, change_requested))
+      if (suggestions.length)
+        reviewItems.push(new ReviewSuggestions(this.ctx, suggestions))
+      if (translations.length)
+        reviewItems.push(new ReviewTranslationCandidates(this.ctx, translations))
+
+      if (reviewItems.length)
+        reviewItems.unshift(new Seperator(this.ctx))
+    }
+
+    return [...items, ...reviewItems]
   }
 }

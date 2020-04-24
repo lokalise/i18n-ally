@@ -1,41 +1,37 @@
 import { extname } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
-import { ConfigLocalesGuide } from '../commands/configLocales'
-import { PARSERS } from '../parsers'
-import { Log, getExtOfLanguageId } from '../utils'
+import { ConfigLocalesGuide } from '../commands/configLocalePaths'
+import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
+import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
+import { checkNotification, clearNotificationState } from '../update-notification'
+import { Reviews } from './Review'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
 import { DirStructure, OptionalFeatures } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
-import { uniq } from 'lodash'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
-
   private static _rootpath: string
-
   private static _enabled = false
 
   static context: ExtensionContext
-
   static enabledFrameworks: Framework[] = []
+  static reviews = new Reviews()
 
   // events
   private static _onDidChangeRootPath: EventEmitter<string> = new EventEmitter()
-
-  static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
-
   private static _onDidChangeEnabled: EventEmitter<boolean> = new EventEmitter()
-
-  static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
-
   private static _onDidChangeLoader: EventEmitter<LocaleLoader> = new EventEmitter()
 
+  static readonly onDidChangeRootPath: Event<string> = Global._onDidChangeRootPath.event
+  static readonly onDidChangeEnabled: Event<boolean> = Global._onDidChangeEnabled.event
   static readonly onDidChangeLoader: Event<LocaleLoader> = Global._onDidChangeLoader.event
 
   static async init(context: ExtensionContext) {
@@ -49,9 +45,32 @@ export class Global {
     await this.updateRootPath()
   }
 
-  static getKeyMatchReg(languageId?: string, filepath?: string) {
-    return this.enabledFrameworks
-      .flatMap(f => f.getKeyMatchReg(languageId, filepath))
+  static resetCache() {
+    this._cacheUsageMatchRegex = {}
+  }
+
+  private static _cacheUsageMatchRegex: Record<string, RegExp[]> = {}
+
+  static getUsageMatchRegex(languageId?: string, filepath?: string): RegExp[] {
+    if (Config.regexUsageMatch) {
+      if (!this._cacheUsageMatchRegex.custom) {
+        this._cacheUsageMatchRegex.custom = normalizeUsageMatchRegex([
+          ...Config.regexUsageMatch,
+          ...Config.regexUsageMatchAppend,
+        ])
+      }
+      return this._cacheUsageMatchRegex.custom
+    }
+    else {
+      const key = `${languageId}_${filepath}`
+      if (!this._cacheUsageMatchRegex[key]) {
+        this._cacheUsageMatchRegex[key] = normalizeUsageMatchRegex([
+          ...this.enabledFrameworks.flatMap(f => f.getUsageMatchRegex(languageId, filepath)),
+          ...Config.regexUsageMatchAppend,
+        ])
+      }
+      return this._cacheUsageMatchRegex[key]
+    }
   }
 
   static refactorTemplates(keypath: string, languageId?: string) {
@@ -73,8 +92,8 @@ export class Global {
   }
 
   static get derivedKeyRules() {
-    const rules = Config.derivedKeyRules
-      ? Config.derivedKeyRules
+    const rules = Config.usageDerivedKeyRules
+      ? Config.usageDerivedKeyRules
       : this.enabledFrameworks
         .flatMap(f => f.derivedKeyRules || [])
 
@@ -129,6 +148,10 @@ export class Global {
     if (!rootpath)
       return
 
+    if (Config.debug)
+      clearNotificationState(this.context)
+    checkNotification(this.context)
+
     if (this._loaders[rootpath] && !reload)
       return this._loaders[rootpath]
 
@@ -160,14 +183,19 @@ export class Global {
 
     if (rootpath && rootpath !== this._rootpath) {
       this._rootpath = rootpath
+
       Log.divider()
       Log.info(`💼 Workspace root changed to "${rootpath}"`)
+
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
+      this.reviews.init(rootpath)
     }
   }
 
   static async update(e?: ConfigurationChangeEvent) {
+    this.resetCache()
+
     let reload = false
     if (e) {
       let affected = false
@@ -222,8 +250,9 @@ export class Global {
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
-      Log.info(`✅ ${this.enabledFrameworks.map(i => `"${i.display}"`).join(', ')} framework(s) detected, extension enabled.`)
-      Log.info(`🧬 Parsers ${this.enabledParsers.map(i => `"${i.id}"`).join(', ')} enabled.\n`)
+      Log.info(`🧩 Enabled frameworks: ${this.enabledFrameworks.map(i => i.display).join(', ')}`)
+      Log.info(`🧬 Enabled parsers: ${this.enabledParsers.map(i => i.id).join(', ')}`)
+      Log.info('')
       await this.initLoader(this._rootpath, reload)
     }
     else {
@@ -257,9 +286,9 @@ export class Global {
         .flatMap(f => f.enabledParsers || [])
 
     if (!ids.length)
-      ids = PARSERS.map(i => i.id)
+      ids = DefaultEnabledParsers
 
-    return PARSERS.filter(i => ids.includes(i.id))
+    return AvaliablePasers.filter(i => ids.includes(i.id))
   }
 
   static getMatchedParser(ext: string) {

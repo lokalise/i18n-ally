@@ -20,7 +20,7 @@ class EmberFramework extends Framework {
   ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = [
+  usageMatchRegex = [
     '(?:{{\\s*t\\s+|[^\\w\\d]intl\\.t\\(\\s*)[\'"`]({key})[\'"`]',
   ]
 

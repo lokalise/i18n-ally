@@ -16,7 +16,7 @@ class FlutterFramework extends Framework {
   ]
 
   // for visualize the regex, you can use https://regexper.com/
-  keyMatchReg = [
+  usageMatchRegex = [
     '[^\\w\\d]FlutterI18n\\.(?:plural|translate)\\([\\w\\d]+,\\s?[\'"`]({key})[\'"`]',
   ]
 

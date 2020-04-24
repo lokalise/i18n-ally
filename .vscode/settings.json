@@ -9,19 +9,44 @@
     "res": true,
     "screenshots": true
   },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "cSpell.words": [
+    "Exts",
     "Unflatten",
+    "enablement",
     "exts",
+    "inplace",
+    "inplaces",
     "joomla",
-    "regs"
+    "regs",
+    "youdao"
   ],
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": false,
-  "i18n-ally.localesPaths": ".",
+  "i18n-ally.localesPaths": "./locales",
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "flat",
   "i18n-ally.preferredDelimiter": "_",
   "i18n-ally.sortKeys": true,
   "i18n-ally.keepFulfilled": true,
-  "i18n-ally.promptTranslatingSource": true,
+  "i18n-ally.translate.promptSource": true,
+  "i18n-ally.pathMatcher": "{locale}.json",
+  "i18n-ally.translate.saveAsCandidates": true,
+  "i18n-ally.keysInUse": [
+    "view.progress_submenu.translated_keys",
+    "view.progress_submenu.missing_keys",
+    "view.progress_submenu.empty_keys"
+  ],
+  "i18n-ally.usage.scanningIgnore": [
+    "examples",
+  ],
+  "i18n-ally.regex.usageMatchAppend": [
+    "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"
+  ],
+  "i18n-ally.enabledFrameworks": [
+    "vscode",
+    "vue"
+  ],
 }

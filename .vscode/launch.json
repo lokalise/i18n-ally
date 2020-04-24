@@ -16,23 +16,7 @@
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"
       ],
-      "stopOnEntry": false,
-      "sourceMaps": true,
-      // "preLaunchTask": "npm: watch"
+      "preLaunchTask": "npm: dev"
     },
-    {
-      "name": "Extension Tests",
-      "type": "extensionHost",
-      "request": "launch",
-      "runtimeExecutable": "${execPath}",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/dist/test"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/dist/test/**/*.js"
-      ],
-      // "preLaunchTask": "npm: watch"
-    }
   ]
 }
