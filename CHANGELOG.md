@@ -2,8 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.15.5](https://github.com/antfu/i18n-ally/compare/v1.15.4...v1.15.5) (2020-04-10)
+## [2.0.0](https://github.com/antfu/i18n-ally/compare/v1.15.5...v2.0.0) (2020-04-24)
 
+[**Migration Guide**](https://github.com/antfu/i18n-ally/wiki/Migration-v1.x)
+
+### ⚠ BREAKING CHANGES
+
+- Javascript, Typescript, INI, POT locale parsers are now disabled by default. You can enabled them by `"i18n-ally.enabledParsers": ["js", "ts", "ini"]`
+- Config `i18n-ally.promptTranslatingSource` renamed to `i18n-ally.translate.promptSource`
+- Config `i18n-ally.keyMatchRegex` renamed to `i18n-ally.regex.key`
+- Config `i18n-ally.derivedKeyRules` renamed to `i18n-ally.usage.derivedKeyRules`
+- `keyMatchReg` field in custom framework renamed to `usageMatchRegex`
+
+### 🐞 Bug Fixes
+
+* duplicated detection when multiple framworks enable ([f23d2ac](https://github.com/antfu/i18n-ally/commit/f23d2ac2ba76f6bd78f7ac3a9354b95f54c4f465))
+* editing for multilines ([5322aa6](https://github.com/antfu/i18n-ally/commit/5322aa6d661c6506156500466a97707277b600ae))
+* editor scale ([411ca79](https://github.com/antfu/i18n-ally/commit/411ca79f3aa7a94a72f5e3e4ce9b765cdf6aa79b))
+* file reloading on batch writing ([0ce40a4](https://github.com/antfu/i18n-ally/commit/0ce40a4ffe7cf50344e51d3d1b113091aa7a4319))
+* gravatar ([8982e38](https://github.com/antfu/i18n-ally/commit/8982e3882b1eb5b58714d96148b4a3c122db3e3e))
+* improve bcp47 and add unknown flag icon ([efd97f5](https://github.com/antfu/i18n-ally/commit/efd97f557af49a8214987206a28e560243436619))
+* improve perfermance in writing, [#230](https://github.com/antfu/i18n-ally/issues/230) ([698aa0c](https://github.com/antfu/i18n-ally/commit/698aa0ce3917a41e3234a692544962c5e1f5cdaf))
+* loading empty locale files ([c6b388d](https://github.com/antfu/i18n-ally/commit/c6b388d26dbe0df2b358fda4b574dba935ddf687))
+* minor bugs in editor ([6ebfada](https://github.com/antfu/i18n-ally/commit/6ebfadab6e5cfe1cc29b510990075a41f3e5b924))
+* namespace on adding missing translations, resolves [#252](https://github.com/antfu/i18n-ally/issues/252) ([e80fa7f](https://github.com/antfu/i18n-ally/commit/e80fa7f7977ac5d5fe249e881855c7f5818e8430))
+* open key on node will prompt for locale now ([14a3adc](https://github.com/antfu/i18n-ally/commit/14a3adc4abc77f5d1309d4d315ad5c73dcd95e02))
+* prompt before deleting keys ([7b2940d](https://github.com/antfu/i18n-ally/commit/7b2940de803b5aa273e07144829cf760596a586a))
+* speed up in place annotation ([ab7a863](https://github.com/antfu/i18n-ally/commit/ab7a863fd32985b2ddef98555781011893df9875))
+* remove keys in usage report ([c127e2b](https://github.com/antfu/i18n-ally/commit/c127e2bf0d0f89c0bcedc56b58f72f7bd0fb71ed))
+* support flag mapping ([7b1a2b4](https://github.com/antfu/i18n-ally/commit/7b1a2b4374d1967498b53030edc699c03db70193))
+* **es-parser:** arguments parsing on windows ([c001b9b](https://github.com/antfu/i18n-ally/commit/c001b9bbc310dfdbdf7a68ac78e3fdb4148742d3))
+* **vue:** remove $d and $n support, resolves [#254](https://github.com/antfu/i18n-ally/issues/254) ([267ca5a](https://github.com/antfu/i18n-ally/commit/267ca5acdc16010ca09d024c52ac55980de1d07e))
+
+
+### ⚡ Features
+
+* translation candiates batch apply ([1ebd689](https://github.com/antfu/i18n-ally/commit/1ebd6898df98eb5d0e30d75ff724367a4c1a7837))
+* **transloco:** add html parser ([6c9577c](https://github.com/antfu/i18n-ally/commit/6c9577cd43cc39d82c954a00eb43e208b755887d))
+* annotation in place ([1447649](https://github.com/antfu/i18n-ally/commit/144764973e999a34c4e364a9fd0f8cbbace07677))
+* **command:** new command "insert key" ([bc5ce41](https://github.com/antfu/i18n-ally/commit/bc5ce41140615c6a177c80299a25c8b360c5db3b))
+* **config:** new config to turn of review in gutters ([8e75030](https://github.com/antfu/i18n-ally/commit/8e75030234a4cbce4678cfcfafb95d39f7cffee1))
+* auto-completion now listing all keys when starting empty ([149f959](https://github.com/antfu/i18n-ally/commit/149f9593ddd27ffeff8afa769ebf4a283517f356))
+* edit review comments ([1a77138](https://github.com/antfu/i18n-ally/commit/1a771381dcceb55c07d6e739eac855624c3e313d))
+* improve translating experience ([29e79e8](https://github.com/antfu/i18n-ally/commit/29e79e86dc9e1c2c66479bd37fd7a78348169f80))
+* locale parsers will now be enabled base on framworks ([a1e9213](https://github.com/antfu/i18n-ally/commit/a1e92134005c672ac8d5108b7801c89ceb02ce9e))
+* new config "i18n-ally.translate.parallels" ([98ad9ee](https://github.com/antfu/i18n-ally/commit/98ad9ee7307ce320d51d0db31e783847019c7fb8))
+* open editor keypath selecting ([f5f86e5](https://github.com/antfu/i18n-ally/commit/f5f86e51b22b6955df279d2fc7940af7ebde2a50))
+* open review in hover ([a1e4a55](https://github.com/antfu/i18n-ally/commit/a1e4a5598cdf8f438cf007776bab5a09e793d7a9))
+* **editor:** batch translating ([a0fc8c7](https://github.com/antfu/i18n-ally/commit/a0fc8c7b5d6fbb1dfcecb60e0e944ddf53195189))
+* **editor:** navigating ([ebc9dde](https://github.com/antfu/i18n-ally/commit/ebc9dde3b10b2016732936044d87d722b773122e))
+* **tagSystem:** `none` will try to parse bcp47 for flag icons now ([7cef0ed](https://github.com/antfu/i18n-ally/commit/7cef0ed5f01fcf001b63da216519045eb9123aa5))
+* add icons ([7e86682](https://github.com/antfu/i18n-ally/commit/7e8668231714ea5ac5bc54f8b36a0f1ba6040c9e))
+* new config "i18n-ally.usage.scanningIgnore" ([32ec1b5](https://github.com/antfu/i18n-ally/commit/32ec1b58f701acf924ca5e702ca671e2e5a88dd5))
+* new configs ([1ab0b01](https://github.com/antfu/i18n-ally/commit/1ab0b01ddd0f69061c4f14acd70504cec4fd15e8))
+* new configs for es paser ([00c1ec8](https://github.com/antfu/i18n-ally/commit/00c1ec8bf6bdb6a553b40c12e58d1874accfc7ea))
+* new configs for translating ([55d3c27](https://github.com/antfu/i18n-ally/commit/55d3c2762dad0c38dc166e11d5f4be11ef6afc4a))
+* New javascript/typescript locale parser ([#243](https://github.com/antfu/i18n-ally/issues/243)) ([c63e404](https://github.com/antfu/i18n-ally/commit/c63e40431b5cc73adf7261acd045194942ea1221))
+* new js/ts loader, resolve [#97](https://github.com/antfu/i18n-ally/issues/97) ([f363111](https://github.com/antfu/i18n-ally/commit/f36311139b95206365da060a978867a459edabdf))
+* new option "languageTagSystem", resolves [#256](https://github.com/antfu/i18n-ally/issues/256) ([f0231d2](https://github.com/antfu/i18n-ally/commit/f0231d280274d27c322a16aef0c3a94855a1d1a9))
+* open key in editor from tree view ([46804b3](https://github.com/antfu/i18n-ally/commit/46804b36541092c6075f118006f04b6630bd6278))
+* prompt on multiple translating ([447b391](https://github.com/antfu/i18n-ally/commit/447b391d8bca2be1e7e2c1d40a39cd78c4b5ad7b))
+* review comments in code ([6a401d9](https://github.com/antfu/i18n-ally/commit/6a401d95e0dfa099135546bf6c8cea7943f49a36))
+* scope range for frameworks, resolves [#246](https://github.com/antfu/i18n-ally/issues/246) ([5ad98f1](https://github.com/antfu/i18n-ally/commit/5ad98f1f06bbe53fd2b95436b0477b3c9228ffdb))
+* **editor:** support for translation candidates ([03f54e8](https://github.com/antfu/i18n-ally/commit/03f54e8dbac5140f9f01966339b215fbc36b8224))
+* review on sidebar ([3761dbc](https://github.com/antfu/i18n-ally/commit/3761dbc74e169a98913c8f1a1d2399d857078bc9))
+* translation candidate system ([8c44c3f](https://github.com/antfu/i18n-ally/commit/8c44c3f849505a2baf6ed917878361341968c4d7))
+* **review:** apply suggestions ([cdae3d7](https://github.com/antfu/i18n-ally/commit/cdae3d7af0b251d5e61ce5a22ad443bc31366c80))
+* **review:** comment api support ([ab3ab7d](https://github.com/antfu/i18n-ally/commit/ab3ab7d79afafc11ab7e0d7d36db281e1e443c93))
+* **review:** gutters display ([2428798](https://github.com/antfu/i18n-ally/commit/2428798066042968df9183110c7c58426e9bc391))
+* basic webview editor ([836f604](https://github.com/antfu/i18n-ally/commit/836f604b63040d238d747d05c242c4846d9226e1))
+* new config "i18n-ally.translate.services" ([d87a4ba](https://github.com/antfu/i18n-ally/commit/d87a4babeb145c322569355771a3b9e86f33bca6))
+* progress report for translating ([f0c4908](https://github.com/antfu/i18n-ally/commit/f0c49083441608cb882ddb46a373ac427d20f9c2))
+* ui improves ([423d269](https://github.com/antfu/i18n-ally/commit/423d269692127e35855f7aafab3f0f727d54f0a0))
+
+
+### [1.15.5](https://github.com/antfu/i18n-ally/compare/v1.15.4...v1.15.5) (2020-04-10)
 
 ### 🐞 Bug Fixes
 
