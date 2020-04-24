@@ -26,6 +26,7 @@ const config = {
     less: '_',
     sass: '_',
     stylus: '_',
+    prettier: 'prettier',
     '@microsoft/typescript-etw': '_',
   },
   resolve: {

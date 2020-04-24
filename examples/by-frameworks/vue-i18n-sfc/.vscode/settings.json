@@ -1,6 +1,5 @@
 {
-  "vue-i18n-ally.keystyle": "nested",
-  "vue-i18n-ally.experimental.sfc": true,
-  "vue-i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "en",
   "i18n-ally.localesPaths": "locales",
 }

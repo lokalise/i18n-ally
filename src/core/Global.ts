@@ -53,8 +53,12 @@ export class Global {
 
   static getUsageMatchRegex(languageId?: string, filepath?: string): RegExp[] {
     if (Config.regexUsageMatch) {
-      if (!this._cacheUsageMatchRegex.custom)
-        this._cacheUsageMatchRegex.custom = normalizeUsageMatchRegex([...Config.regexUsageMatch, ...Config.regexUsageMatchAppend])
+      if (!this._cacheUsageMatchRegex.custom) {
+        this._cacheUsageMatchRegex.custom = normalizeUsageMatchRegex([
+          ...Config.regexUsageMatch,
+          ...Config.regexUsageMatchAppend,
+        ])
+      }
       return this._cacheUsageMatchRegex.custom
     }
     else {

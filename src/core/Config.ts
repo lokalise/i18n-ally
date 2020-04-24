@@ -37,7 +37,7 @@ export class Config {
   ]
 
   static ctx: ExtensionContext
-  static readonly debug = false
+  static readonly debug = process.env.NODE_ENV === 'development'
 
   // languages
   static get displayLanguage(): string {

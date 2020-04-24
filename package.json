@@ -916,7 +916,7 @@
     "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
     "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
     "dev": "concurrently -n w: npm:*:dev",
-    "main:build": "webpack --mode development",
+    "main:build": "webpack --mode production",
     "main:dev": "webpack --mode development --watch --info-verbosity verbose",
     "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",

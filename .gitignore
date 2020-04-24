@@ -10,3 +10,5 @@ node_modules
 examples/**/package-lock.json
 examples/**/i18n-ally-reviews.yml
 package.nls.*
+stats.json
+

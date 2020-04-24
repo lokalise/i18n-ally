@@ -16,6 +16,7 @@ docs/**
 locales/**
 scripts/**
 
+stats.json
 .gitignore
 .gitattributes
 .editorconfig
@@ -36,10 +37,6 @@ jest.config.js
 !node_modules/nodejieba/dict/**
 !node_modules/nodejieba/*.js
 !node_modules/nodejieba/*.json
-
-# esm
-!node_modules/esm/**/*.js
-!node_modules/esm/**/*.json
 
 # ts-node
 !node_modules/ts-node/**/*.js
