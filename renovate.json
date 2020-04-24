@@ -12,7 +12,7 @@
     ],
     "commitMessageAction": "Update"
   },
-  "ignore": [
+  "ignoreDeps": [
     "vue-i18n"
   ]
 }
