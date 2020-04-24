@@ -50,9 +50,9 @@ const annotation: ExtensionModule = (ctx) => {
     }
 
     for (const annotation of annotations)
-      dict[annotation.gutterType].push(annotation)
+      dict[annotation.gutterType].push(annotation);
 
-      ;(Object.keys(gutterTypes))
+    (Object.keys(gutterTypes))
       .forEach(k =>
         editor.setDecorations(gutterTypes[k], dict[k]),
       )
@@ -60,13 +60,22 @@ const annotation: ExtensionModule = (ctx) => {
 
   let usages: KeyUsages | undefined
 
+  function clear(editor: TextEditor) {
+    setDecorationsWithGutter([], editor)
+    editor.setDecorations(underlineDecorationType, [])
+    editor.setDecorations(disappearDecorationType, [])
+  }
+
   function refresh() {
     const editor = window.activeTextEditor
     const loader: Loader = CurrentFile.loader
     const document = editor?.document
 
-    if (!editor || !document || !usages)
+    if (!editor || !document)
       return
+
+    if (!usages)
+      return clear(editor)
 
     const selection = editor.selection
     const { keys, locale, namespace, type: usageType } = usages
