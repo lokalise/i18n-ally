@@ -89,6 +89,7 @@
   "misc.missing_translation": "{0}: \"{1}\"の翻訳がありません",
   "prompt.applying_suggestion": "",
   "prompt.applying_translation_candidate": "",
+  "prompt.applying_translation_candidate_multiple": "",
   "prompt.button_apply": "",
   "prompt.button_cancel": "キャンセル",
   "prompt.button_discard": "",

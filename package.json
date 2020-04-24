@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-beta.2",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
@@ -100,7 +100,7 @@
         "command": "i18n-ally.open-key",
         "category": "%extname%",
         "title": "%command.open_key%",
-        "icon": "$(link-external)"
+        "icon": "$(go-to-file)"
       },
       {
         "command": "i18n-ally.delete-key",
@@ -209,7 +209,8 @@
       {
         "command": "i18n-ally.review.apply-translation",
         "category": "%extname%",
-        "title": "%review.apply_translation_candidate%"
+        "title": "%review.apply_translation_candidate%",
+        "icon": "$(check)"
       },
       {
         "command": "i18n-ally.review.apply-suggestion",
@@ -343,6 +344,11 @@
           "command": "i18n-ally.fulfill-keys",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /fulfillable/",
           "group": "inline@3"
+        },
+        {
+          "command": "i18n-ally.review.apply-translation",
+          "when": "view =~ /i18n-ally-locales/ && viewItem =~ /translation-candidate/",
+          "group": "inline@1"
         },
         {
           "command": "i18n-ally.set-display-language",

@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq, throttle } from 'lodash'
 import * as fg from 'fast-glob'
+import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { replaceLocalePath, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
@@ -262,12 +263,10 @@ export class LocaleLoader extends Loader {
 
         const locale = pendings[0].locale
 
-        modified = this.deprocessData(modified, {
-          locale,
-          targetFile: filepath,
-        })
+        const processingContext = { locale, targetFile: filepath }
+        const processed = this.deprocessData(modified, processingContext)
 
-        await parser.save(filepath, modified, Config.sortKeys)
+        await parser.save(filepath, processed, Config.sortKeys)
 
         if (this._files[filepath]) {
           this._files[filepath].value = modified
@@ -387,7 +386,9 @@ export class LocaleLoader extends Loader {
       if (!locale)
         return
 
-      Log.info(`📑 Loading (${locale}) ${relativePath}`, 1)
+      const mtime = this.getMtime(filepath)
+
+      Log.info(`📑 Loading (${locale}) ${relativePath} [${mtime}]`, 1)
 
       let data = await parser.load(filepath)
 
@@ -402,7 +403,7 @@ export class LocaleLoader extends Loader {
         dirpath,
         locale,
         value,
-        mtime: this.getMtime(filepath),
+        mtime,
         namespace,
         readonly: parser.readonly || Config.readonly,
       }
@@ -436,8 +437,7 @@ export class LocaleLoader extends Loader {
 
   private getMtime(filepath: string) {
     try {
-      const { mtimeMs: mtime } = fs.statSync(filepath)
-      return mtime
+      return fs.statSync(filepath).mtimeMs
     }
     catch {
       return 0
@@ -503,9 +503,9 @@ export class LocaleLoader extends Loader {
       new RelativePattern(rootPath, '**/*'),
     )
 
-    watcher.onDidChange(this.onFileChanged.bind(this, 'change'), this, this._disposables)
-    watcher.onDidCreate(this.onFileChanged.bind(this, 'create'), this, this._disposables)
-    watcher.onDidDelete(this.onFileChanged.bind(this, 'delete'), this, this._disposables)
+    watcher.onDidChange((e: any) => setTimeout(() => this.onFileChanged('change', e), FILEWATCHER_TIMEOUT), this, this._disposables)
+    watcher.onDidCreate((e: any) => setTimeout(() => this.onFileChanged('create', e), FILEWATCHER_TIMEOUT), this, this._disposables)
+    watcher.onDidDelete((e: any) => setTimeout(() => this.onFileChanged('delete', e), FILEWATCHER_TIMEOUT), this, this._disposables)
 
     this._disposables.push(watcher)
   }

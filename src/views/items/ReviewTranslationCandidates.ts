@@ -12,6 +12,7 @@ export class ReviewTranslationCandidates extends BaseTreeItem {
     super(ctx)
     this.id = 'review-translation-candidates'
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
+    this.contextValue = 'translation-candidate'
   }
 
   get iconPath() {

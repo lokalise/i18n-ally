@@ -89,6 +89,7 @@
   "misc.missing_translation": "{0}: 缺少 \"{1}\" 的翻译",
   "prompt.applying_suggestion": "确认将以下建议应用于 \"{0}\" 吗？\n\n{1}",
   "prompt.applying_translation_candidate": "确认将以下翻译应用于键 \"{0}\" 吗？\n\n{1}",
+  "prompt.applying_translation_candidate_multiple": "您确定要应用全部{0}条翻译吗？",
   "prompt.button_apply": "应用",
   "prompt.button_cancel": "取消",
   "prompt.button_discard": "丢弃",

@@ -46,7 +46,7 @@ export class Analyst {
       return
 
     const filepath = doc.uri.fsPath
-    Log.info(`Update cache of ${filepath}`)
+    Log.info(`🔄 Update usage cache of ${filepath}`)
     this.invalidateCacheOf(filepath)
     const occurrences = await this.getOccurrencesOfText(doc, filepath)
     this._cache.push(...occurrences)
@@ -80,14 +80,14 @@ export class Analyst {
       ignore,
     }) as string[]
 
-    // TODO: configs for custom ignore
-
     return files.map(f => resolve(root, f))
       .filter(f => !fs.lstatSync(f).isDirectory())
   }
 
   private static async getOccurrencesOfFile(filepath: string) {
-    const doc = await workspace.openTextDocument(Uri.file(filepath))
+    let doc = workspace.textDocuments.find(doc => doc.uri.fsPath === filepath)
+    if (!doc)
+      doc = await workspace.openTextDocument(Uri.file(filepath))
     return await this.getOccurrencesOfText(doc, filepath)
   }
 

@@ -11,6 +11,7 @@ export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\:]*?'
 export const KEY_REG_ALL = '.*?'
 
 export const THROTTLE_DELAY = 500
+export const FILEWATCHER_TIMEOUT = 100
 
 export const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 export const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
