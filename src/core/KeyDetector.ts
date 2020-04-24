@@ -1,4 +1,4 @@
-import { TextDocument, Position, Range } from 'vscode'
+import { TextDocument, Position, Range, ExtensionContext, workspace } from 'vscode'
 import { ScopeRange } from '../frameworks/base'
 import { KeyInDocument, CurrentFile } from '../core'
 import { regexFindKeys } from '../utils'
@@ -71,14 +71,30 @@ export class KeyDetector {
     }
   }
 
+  static init(ctx: ExtensionContext) {
+    workspace.onDidChangeTextDocument(
+      (e) => {
+        delete this._get_keys_cache[e.document.uri.fsPath]
+      },
+      null,
+      ctx.subscriptions,
+    )
+  }
+
+  private static _get_keys_cache: Record<string, KeyInDocument[]> = {}
+
   static getKeys(document: TextDocument | string, regs?: RegExp[], dotEnding?: boolean, scopes?: ScopeRange[]): KeyInDocument[] {
     let text = ''
     let rewriteContext: RewriteKeyContext| undefined
+    let filepath = ''
     if (typeof document !== 'string') {
-      regs = regs ?? Global.getUsageMatchRegex(document.languageId, document.uri.fsPath)
+      filepath = document.uri.fsPath
+      if (this._get_keys_cache[filepath])
+        return this._get_keys_cache[filepath]
+      regs = regs ?? Global.getUsageMatchRegex(document.languageId, filepath)
       text = document.getText()
       rewriteContext = {
-        targetFile: document.uri.fsPath,
+        targetFile: filepath,
       }
       scopes = scopes || Global.enabledFrameworks.flatMap(f => f.getScopeRange(document) || [])
     }
@@ -87,7 +103,10 @@ export class KeyDetector {
       text = document
     }
 
-    return regexFindKeys(text, regs, dotEnding, rewriteContext, scopes)
+    const keys = regexFindKeys(text, regs, dotEnding, rewriteContext, scopes)
+    if (filepath)
+      this._get_keys_cache[filepath] = keys
+    return keys
   }
 
   static getUsages(document: TextDocument, loader: Loader = CurrentFile.loader): KeyUsages | undefined {

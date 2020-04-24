@@ -1,7 +1,7 @@
 import { ExtensionContext } from 'vscode'
 import { flatten } from 'lodash'
 import { version } from '../package.json'
-import { Global, Config } from './core'
+import { Global, Config, KeyDetector } from './core'
 import commandsModules from './commands'
 import editorModules from './editor'
 import viewsModules from './views'
@@ -15,6 +15,7 @@ export async function activate(ctx: ExtensionContext) {
   Config.ctx = ctx
 
   i18n.init(ctx.extensionPath)
+  KeyDetector.init(ctx)
 
   // activate the extension
   await Global.init(ctx)
