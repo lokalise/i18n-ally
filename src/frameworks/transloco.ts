@@ -1,4 +1,5 @@
 import { TextDocument } from 'vscode'
+import { Parser } from 'htmlparser2'
 import { LanguageId } from '../utils'
 import { Framework, ScopeRange } from './base'
 
@@ -39,21 +40,49 @@ export default class TranslocoFramework extends Framework {
     if (document.languageId !== 'html')
       return
 
-    const text = document.getText()
-
-    // TODO: change to a real html parser, to match with correct end tag
-    const regex = /<ng-container \*transloco=".*read:\s*'(.+).*'">[\s\S]*<\/ng-container>/gm
-
     const ranges: ScopeRange[] = []
 
-    let match = null
-    while (match = regex.exec(text)) {
-      ranges.push({
-        scope: match[1],
-        start: match.index,
-        end: match.index + match[0].length,
-      })
-    }
+    const regex = /^.*read:\s*['"](.+?)['"].*$/
+    const tagStack: string[] = []
+    let stackDepth = -1
+    let scope = ''
+    let start = 0
+
+    const parser = new Parser(
+      {
+        onopentag(name, attribs) {
+          tagStack.push(name)
+          const attr = attribs['*transloco']
+          if (attr && parser.endIndex != null) {
+            if (!regex.test(attr))
+              return
+            scope = attr.replace(regex, '$1')
+            start = parser.startIndex
+            stackDepth = tagStack.length
+          }
+        },
+        onclosetag() {
+          if (tagStack.length === stackDepth) {
+            if (scope) {
+              ranges.push({
+                scope,
+                start,
+                end: parser.endIndex ?? parser.startIndex,
+              })
+            }
+            stackDepth = -1
+            scope = ''
+            start = 0
+          }
+          tagStack.pop()
+        },
+      },
+      { decodeEntities: true },
+    )
+    parser.write(document.getText())
+    parser.end()
+
+    console.log(ranges)
 
     return ranges
   }

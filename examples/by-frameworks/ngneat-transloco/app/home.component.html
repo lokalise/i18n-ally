@@ -1,3 +1,5 @@
+<document>
+
 <ng-container *transloco="let t">
   <h1>{{ t('hello') }}</h1>
   <p>{{ t('some.nested.key') }}</p>
@@ -8,3 +10,8 @@
 <ng-container *transloco="let t; read: 'some.nested'">
   <p>{{ t('key') }}</p>
 </ng-container>
+
+<div *transloco="let t; read: 'some.nested'">
+  <p>{{ t('key') }}</p>
+</div>
+</document>

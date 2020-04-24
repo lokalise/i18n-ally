@@ -968,6 +968,7 @@
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
     "glob-gitignore": "^1.0.14",
+    "htmlparser2": "^4.1.0",
     "iconv-lite": "^0.5.0",
     "js-yaml": "^3.13.1",
     "jschardet": "^2.1.1",

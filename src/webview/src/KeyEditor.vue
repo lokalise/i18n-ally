@@ -21,7 +21,7 @@
       .button(@click='translateAll' v-if='emptyRecords.length')
         v-earth
         span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
-      .button Mark all as...
+      // .button Mark all as...
 
   .records
     record-editor(
@@ -78,7 +78,11 @@ export default Vue.extend({
         .map(l => this.data.records[l])
     },
     emptyRecords() {
-      return this.records.filter(i => !i.readonly && !i.value)
+      return this.records.filter(i =>
+        !i.readonly
+        && !i.value
+        && !this.data?.reviews?.locales[i.locale]?.translation_candidate,
+      )
     },
   },
 
