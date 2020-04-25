@@ -57,7 +57,7 @@ export class ConfigLocalesGuide {
     if (!rootPath)
       return
 
-    const pattern = ['**/**/(locales|locale|i18n|lang|langs|language|languages)']
+    const pattern = ['**/**/(locales|locale|i18n|lang|langs|language|languages|messages)']
     const result: string[] = await fg(pattern, {
       cwd: rootPath,
       ignore: [

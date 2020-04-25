@@ -29,7 +29,8 @@
     "onLanguage:dart",
     "onLanguage:php",
     "onLanguage:handlebars",
-    "onLanguage:ini"
+    "onLanguage:ini",
+    "onLangugae:svelte"
   ],
   "keywords": [
     "vue",

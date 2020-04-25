@@ -16,6 +16,7 @@ export const LanguageIdExtMap = {
   haml: 'haml',
   handlebars: 'hbs',
   blade: 'php',
+  svelte: 'svelte',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap

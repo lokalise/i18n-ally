@@ -1,0 +1,22 @@
+{
+  "title": {
+    "index": "Sapper project template!"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "blog": "اتصل بنا"
+  },
+  "messages": {
+    "success": "عظيم",
+    "high_five": "خمسة",
+    "try_editing": "حاول تحرير هذا الملف (src/routes/index.svelte) لاختبار إعادة التحميل المباشر."
+  },
+  "languages": {
+    "en": "English",
+    "pt_BR": "Português",
+    "es_ES": "Espanol",
+    "ar": "عربى"
+  },
+  "direction": "rtl"
+}

@@ -1,0 +1,22 @@
+{
+  "title": {
+    "index": "Modelo de projeto em Sapper!"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Sobre",
+    "blog": "Blog"
+  },
+  "messages": {
+    "success": "Suuuucesso!",
+    "high_five": "Toca aqui",
+    "try_editing": "Tente editar este arquivo (src/routes/index.svelte) para testar o recarregamento ao vivo."
+  },
+  "languages": {
+    "en": "English",
+    "pt_BR": "Português",
+    "es_ES": "Espanol",
+    "ar": "عربى"
+  },
+  "direction": "ltr"
+}

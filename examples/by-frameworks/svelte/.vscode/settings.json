@@ -1,0 +1,6 @@
+{
+  "i18n-ally.localesPaths": [
+    "messages",
+    "src/routes/about/_locales"
+  ],
+}

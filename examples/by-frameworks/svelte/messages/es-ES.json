@@ -1,0 +1,22 @@
+{
+  "title": {
+    "index": " Plantilla de proyecto Sapper!"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca",
+    "blog": "Blog"
+  },
+  "messages": {
+    "success": "Gran éxito!",
+    "high_five": "Cinco altos",
+    "try_editing": " Intente editar este archivo (src/routes/index.svelte) para probar la recarga en vivo."
+  },
+  "languages": {
+    "en": "English",
+    "pt_BR": "Português",
+    "es_ES": "Espanol",
+    "ar": "عربى"
+  },
+  "direction": "ltr"
+}

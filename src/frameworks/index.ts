@@ -18,6 +18,7 @@ import ChromeExtensionFramework from './chrome-ext'
 import RubyRailsFramework from './ruby-rails'
 import LaravelFramework from './laravel'
 import TranslocoFramework from './transloco'
+import SvelteFramework from './svelte'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -36,6 +37,7 @@ export const frameworks: Framework[] = [
   new ChromeExtensionFramework(),
   new RubyRailsFramework(),
   new TranslocoFramework(),
+  new SvelteFramework(),
   new VueSFCFramework(),
 ]
 
