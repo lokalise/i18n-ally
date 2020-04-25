@@ -81,7 +81,7 @@ export default Vue.extend({
       return this.records.filter(i =>
         !i.readonly
         && !i.value
-        && !this.data?.reviews?.locales[i.locale]?.translation_candidate,
+        && !((this.data?.reviews?.locales || {})[i.locale]?.translation_candidate),
       )
     },
   },
