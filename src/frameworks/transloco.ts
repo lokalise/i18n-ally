@@ -36,6 +36,8 @@ export default class TranslocoFramework extends Framework {
     ]
   }
 
+  // support for `read` syntax
+  // https://ngneat.github.io/transloco/docs/translation-in-the-template#utilizing-the-read-input
   getScopeRange(document: TextDocument): ScopeRange[] | undefined {
     if (document.languageId !== 'html')
       return

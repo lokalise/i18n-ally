@@ -20,6 +20,7 @@ import LaravelFramework from './laravel'
 import TranslocoFramework from './transloco'
 import SvelteFramework from './svelte'
 import PolyglotFramework from './polyglot'
+import GlobalizeFramework from './globalize'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -40,6 +41,7 @@ export const frameworks: Framework[] = [
   new TranslocoFramework(),
   new SvelteFramework(),
   new PolyglotFramework(),
+  new GlobalizeFramework(),
   new VueSFCFramework(),
 ]
 
