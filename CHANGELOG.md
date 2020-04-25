@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/antfu/i18n-ally/compare/v2.0.2...v2.0.3) (2020-04-25)
+
+
+### ⚡ Features
+
+* **svelte:** new framework svelte ([926e83d](https://github.com/antfu/i18n-ally/commit/926e83d783a37906c783859e6e9dcc00827f7915))
+
+
+### 🐞 Bug Fixes
+
+* editor ([9a5aab6](https://github.com/antfu/i18n-ally/commit/9a5aab677aaa56919f6e2b0e7b5ed858fcfea62d))
+
 ### [2.0.2](https://github.com/antfu/i18n-ally/compare/v2.0.1...v2.0.2) (2020-04-24)
 
 
