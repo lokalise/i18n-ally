@@ -71,7 +71,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 ![](https://github.com/antfu/i18n-ally/blob/screenshots/annotation-locale.png?raw=true)
 
-<h3 align="center"> General </h3>
+<h3 align="center">General</h3>
 
 - Supports multi-root workspaces
 - Supports remote development
@@ -81,22 +81,21 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 </details>
 
+
 -----
 
 
-## 📖 Documentation
+<h4 align="center">
+<a href="https://github.com/antfu/i18n-ally/wiki">📖 Documentation</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/FAQ">💭 FAQ</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configurations</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Locale Formats</a>
+</h4>
 
-Check out [our wiki](https://github.com/antfu/i18n-ally/wiki)!
-
-
-## 💭 FAQ
-
-Check out [the FAQ](https://github.com/antfu/i18n-ally/wiki/FAQ).
-
-
-## 📜 Supported Locale Formats
-
-Check out [Supported Locale Formats](https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats).
+<br>
 
 ## 🌍 Multilingual Support
 
