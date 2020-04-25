@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/antfu/i18n-ally/blob/screenshots/full-logo.png?raw=true" alt="logo" width="500"/>
+<img src="https://github.com/antfu/i18n-ally/blob/screenshots/full-logo.png?raw=true" alt="logo" width="450"/>
 </p>
 
 <p align='center'>
@@ -30,7 +30,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 <p align="center">
 <a href='https://github.com/antfu/i18n-ally/wiki/Supported-Frameworks' target="__blank">
-<img src="https://github.com/antfu/i18n-ally/blob/screenshots/supported-frameworks.png?raw=true" alt="Supported Frameworks" width="500"/>
+<img src="https://github.com/antfu/i18n-ally/blob/screenshots/supported-frameworks.png?raw=true" alt="Supported Frameworks" width="550"/>
 </a>
 </p>
 
