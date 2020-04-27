@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.7](https://github.com/antfu/i18n-ally/compare/v2.0.6...v2.0.7) (2020-04-27)
+
+
+### ⚡ Features
+
+* **pathMatcher:** new macther `{namespace?}` and `{namespaces?}` ([22c346e](https://github.com/antfu/i18n-ally/commit/22c346ed1c85ef5683ffdc0af44788d522ca1c60))
+
 ### [2.0.6](https://github.com/antfu/i18n-ally/compare/v2.0.5...v2.0.6) (2020-04-27)
 
 
