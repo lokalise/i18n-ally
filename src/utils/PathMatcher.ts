@@ -9,9 +9,11 @@ export function ParsePathMatcher(mapping: string, exts = '') {
     .replace('*\\.', '.*\\.')
     .replace(/\/?\*\*\//g, '(?:.*/|^)')
     .replace('{locale}', '(?<locale>[\\w-_]+)')
-    .replace('{locale?}', '(?<locale>[\\w-_]*)')
+    .replace('{locale?}', '(?<locale>[\\w-_]*?)')
     .replace('{namespace}', '(?<namespace>[^/\\\\]+)')
+    .replace('{namespace?}', '(?<namespace>[^/\\\\]*?)')
     .replace('{namespaces}', '(?<namespace>.+)')
+    .replace('{namespaces?}', '(?<namespace>.*?)')
     .replace('{ext}', `(?<ext>${exts})`)
 
   regstr = `^${regstr}$`

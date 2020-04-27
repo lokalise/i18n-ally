@@ -7,6 +7,8 @@ describe('PathMatching', () => {
     ['{namespaces}/{locale}.json', 'modules/nested/en.js', null],
     ['{namespaces}/{locale}.(json|yml)', 'modules/nested/en.yml', 'modules/nested', 'en'],
     ['{namespace}/{locale}.*', 'nested/en.whatever', 'nested', 'en'],
+    ['{namespaces?}/{locale}.*', 'nested/en.whatever', 'nested', 'en'],
+    ['{namespaces?}/?{locale}.*', 'en.whatever', '', 'en'],
     ['{locale}/{namespaces}.*', 'zh-cn/hello/world/messages.json', 'hello/world/messages', 'zh-cn'],
     ['{locale}/modules/{namespaces}.*', 'jp/modules/hello/world.json', 'hello/world', 'jp'],
     ['{locale}/modules/*.*', 'jp/modules/a.json', undefined, 'jp'],
