@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.6](https://github.com/antfu/i18n-ally/compare/v2.0.5...v2.0.6) (2020-04-27)
+
+
+### ⚡ Features
+
+* allow to change annotation color via settings ([ee5efda](https://github.com/antfu/i18n-ally/commit/ee5efdadf09507c15fac0b313aa4adc1a4a363f4))
+
+
+### 📚 Documentations
+
+* update readme ([3dc6fe4](https://github.com/antfu/i18n-ally/commit/3dc6fe411e48998d8e3b99207dc3edba1d962854))
+
+
+### 🐞 Bug Fixes
+
+* **i18n:** fallback to english if locale not supported ([7b27c42](https://github.com/antfu/i18n-ally/commit/7b27c42ec96b16cc992fa2bae8df4afeda7dfac7))
+
 ### [2.0.5](https://github.com/antfu/i18n-ally/compare/v2.0.4...v2.0.5) (2020-04-27)
 
 
