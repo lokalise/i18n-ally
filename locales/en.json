@@ -132,6 +132,7 @@
   "prompt.keystyle_select": "Which kind of key style do you use to organize your locales?",
   "prompt.locales_dir_not_found": "Locales directory not found. i18n Ally is disabled.",
   "prompt.new_key_path": "Enter the keypath for the new key",
+  "prompt.no_locale_loaded": "No locale files loaded. Probably there is something wrong with your project config.",
   "prompt.replace_text_as": "Replace text as:",
   "prompt.select_display_locale": "Select display language ({0})",
   "prompt.select_file_to_open": "Select file to open",

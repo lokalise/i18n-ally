@@ -38,6 +38,7 @@
   "config.enabled_parsers": "指定启用文件格式",
   "config.encoding": "文件编码",
   "config.full_reload_on_changed": "当语言文件被修改时执行完整的重载。（用于.js/.ts动态导入）",
+  "config.ignore_files": "",
   "config.ignored_locales": "隐藏的语言",
   "config.include_subfolders": "搜索子目录",
   "config.indent": "文案文件的缩进大小",

@@ -38,6 +38,7 @@
   "config.enabled_parsers": "",
   "config.encoding": "Encoding de arquivos de tradução (locales)",
   "config.full_reload_on_changed": "Recarregar totalmente arquivos de tradução alterados (em arquivos .js/.ts com imports dinâmicos)",
+  "config.ignore_files": "",
   "config.ignored_locales": "Códigos de linguagem a serem ignorados",
   "config.include_subfolders": "Pesquisar recursivamente em diretórios de tradução (locales)",
   "config.indent": "Tamanho do espaço de identação dos arquivos de tradução (locales)",

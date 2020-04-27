@@ -38,6 +38,7 @@
   "config.enabled_parsers": "",
   "config.encoding": "",
   "config.full_reload_on_changed": "",
+  "config.ignore_files": "",
   "config.ignored_locales": "Oversettelseskoder å ignorere",
   "config.include_subfolders": "",
   "config.indent": "",

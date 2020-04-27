@@ -596,6 +596,8 @@ export class LocaleLoader extends Loader {
         await this.loadDirectory(pathname)
         if (watch)
           this.watchOn(pathname)
+        if (!this.files.length)
+          window.showWarningMessage(i18n.t('prompt.no_locale_loaded'))
       }
       catch (e) {
         Log.error(e)

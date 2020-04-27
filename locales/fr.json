@@ -38,6 +38,7 @@
   "config.enabled_parsers": "",
   "config.encoding": "Encodage des fichiers de la locale.",
   "config.full_reload_on_changed": "Effectuer un rechargement complet du fichier de la locale modifié. (Pour l'importation dynamique .js/.ts)",
+  "config.ignore_files": "",
   "config.ignored_locales": "Scripts de lalocale à ignorer.",
   "config.include_subfolders": "Recherche récursive dans les répertoires locaux.",
   "config.indent": "Taille de l'espace d'indentation pour les fichiers locaux.",

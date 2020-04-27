@@ -38,6 +38,7 @@
   "config.enabled_parsers": "",
   "config.encoding": "Locale bestanden encodering.",
   "config.full_reload_on_changed": "Herlaad volledig bij locale bestand wijzigingen. (voor .js/.ts dynamische import)",
+  "config.ignore_files": "",
   "config.ignored_locales": "Locale codes uitsluiten",
   "config.include_subfolders": "Recursief zoeken binnen locale folders",
   "config.indent": "Spatie inspringing grootte voor locale bestanden",

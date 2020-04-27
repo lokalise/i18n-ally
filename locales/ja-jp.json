@@ -38,6 +38,7 @@
   "config.enabled_parsers": "",
   "config.encoding": "ロケールファイルをエンコードします。",
   "config.full_reload_on_changed": "ロケールファイルが変更されたらリロードします。 (.js/.tsファイルのための動的import)",
+  "config.ignore_files": "",
   "config.ignored_locales": "ロケールコードは無視されます",
   "config.include_subfolders": "ロケールディレクトリを再帰的に検索します",
   "config.indent": "",
