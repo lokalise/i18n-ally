@@ -62,8 +62,8 @@ export class Config {
     return TagSystems[tag]
   }
 
-  static normalizeLocale(locale: string, fallback?: string) {
-    return this.tagSystem.normalize(locale, fallback)
+  static normalizeLocale(locale: string, fallback?: string, strict?: boolean) {
+    return this.tagSystem.normalize(locale, fallback, strict)
   }
 
   static getBCP47(locale: string) {
@@ -126,7 +126,7 @@ export class Config {
 
   static get enabledFrameworks(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledFrameworks')
-    if (!ids)
+    if (!ids || !ids.length)
       return undefined
     if (typeof ids === 'string')
       ids = [ids]
@@ -135,7 +135,7 @@ export class Config {
 
   static get enabledParsers(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledParsers')
-    if (!ids)
+    if (!ids || !ids.length)
       return undefined
     if (typeof ids === 'string')
       ids = [ids]

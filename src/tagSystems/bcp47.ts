@@ -17,7 +17,7 @@ export class BCP47 extends BaseTagSystem {
     if (!locale)
       return fallback
 
-    return bcp47.stringify(bcp47.parse(locale, { forgiving: !strict })) || fallback
+    return bcp47.stringify(bcp47.parse(locale, { normalize: strict, forgiving: !strict })) || fallback
   }
 
   toBCP47(locale: string) {
@@ -28,5 +28,12 @@ export class BCP47 extends BaseTagSystem {
     const { region, language } = bcp47.parse(locale, { normalize: true, forgiving: true })
     const flag = (region || language || '').toLowerCase()
     return this.flagMapping[flag] || flag
+  }
+
+  lookup(locale: string) {
+    locale = this.normalize(locale)
+    // @ts-ignore
+    const canonical = Intl.getCanonicalLocales(locale)[0]
+    return Intl.Collator.supportedLocalesOf(canonical, { localeMatcher: 'lookup' })[0]
   }
 }

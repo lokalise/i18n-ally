@@ -130,8 +130,10 @@ export class LocaleLoader extends Loader {
       if (total === 0)
         return 'file'
 
-      const positive = dirnames
-        .map(d => Config.normalizeLocale(d, ''))
+      const positives = dirnames
+        .map(d => Config.tagSystem.lookup(d))
+
+      const positive = positives
         .filter(d => d)
         .length
 
