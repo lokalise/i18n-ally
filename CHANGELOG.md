@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/antfu/i18n-ally/compare/v2.0.3...v2.0.4) (2020-04-27)
+
+
+### ⚡ Features
+
+* new config "i18n-ally.ignoreFiles" ([674618b](https://github.com/antfu/i18n-ally/commit/674618b2c113362e363eb5d22482ad9633744c85))
+* **polyglot:** new framework polyglot ([040b671](https://github.com/antfu/i18n-ally/commit/040b6718b0a71eb4812bb261cd039badda6a497c))
+
+
+### 🐞 Bug Fixes
+
+* **ts-parser:** override compilerOptions "importHelpers" to false, [#268](https://github.com/antfu/i18n-ally/issues/268) ([6138fb3](https://github.com/antfu/i18n-ally/commit/6138fb3bcd07972a58dfc8e1e82def9e8f350d42))
+* array enum warning in config, [#267](https://github.com/antfu/i18n-ally/issues/267) ([e219b32](https://github.com/antfu/i18n-ally/commit/e219b325acac1b176c0f49e2500e3db4043a5bae))
+
 ### [2.0.3](https://github.com/antfu/i18n-ally/compare/v2.0.2...v2.0.3) (2020-04-25)
 
 

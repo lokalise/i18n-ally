@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
@@ -570,7 +570,7 @@
           "description": "%config.full_reload_on_changed%"
         },
         "i18n-ally.enabledFrameworks": {
-          "type":  "array",
+          "type": "array",
           "items": {
             "type": "string",
             "enum": [
@@ -674,7 +674,7 @@
           ],
           "description": "%config.language_tag_system%"
         },
-        "i18n-ally.ignoreFiles":{
+        "i18n-ally.ignoreFiles": {
           "type": "array",
           "item": {
             "type": "string"
