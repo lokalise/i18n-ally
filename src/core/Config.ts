@@ -282,6 +282,22 @@ export class Config {
     this.localesPaths = uniq(this.localesPaths.concat(paths))
   }
 
+  static get themeAnnotation(): string {
+    return this.getConfig<string>('theme.annotation')!
+  }
+
+  static get themeAnnotationMissing(): string {
+    return this.getConfig<string>('theme.annotationMissing')!
+  }
+
+  static get themeAnnotationBorder(): string {
+    return this.getConfig<string>('theme.annotationBorder')!
+  }
+
+  static get themeAnnotationMissingBorder(): string {
+    return this.getConfig<string>('theme.annotationMissingBorder')!
+  }
+
   static get hasLocalesConfigured() {
     return !!this.localesPaths.length
   }

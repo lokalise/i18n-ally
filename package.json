@@ -681,6 +681,22 @@
           },
           "description": "%config.ignore_files%"
         },
+        "i18n-ally.theme.annotation": {
+          "type": "string",
+          "default": "rgba(153, 153, 153, .8)"
+        },
+        "i18n-ally.theme.annotationMissing": {
+          "type": "string",
+          "default": "rgba(153, 153, 153, .3)"
+        },
+        "i18n-ally.theme.annotationBorder": {
+          "type": "string",
+          "defult": "rgba(153, 153, 153, .2)"
+        },
+        "i18n-ally.theme.annotationMissingBorder": {
+          "type": "string",
+          "defult": "rgba(153, 153, 153, .2)"
+        },
         "i18n-ally.regex.key": {
           "type": "string",
           "description": "%config.regex_key%"

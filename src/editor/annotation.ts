@@ -85,7 +85,14 @@ const annotation: ExtensionModule = (ctx) => {
     const underlines: DecorationOptions[] = []
     const inplaces: DecorationOptions[] = []
     const maxLength = Config.annotationMaxLength
-    const showAnnonations = Config.annotations && locale
+
+    const sourceLanguage = Config.sourceLanguage
+    const showAnnotations = Config.annotations
+    const annotationInPlace = Config.annotationInPlace
+    const themeAnnotationMissing = Config.themeAnnotationMissing
+    const themeAnnotation = Config.themeAnnotation
+    const themeAnnotationBorder = Config.themeAnnotationBorder
+    const themeAnnotationMissingBorder = Config.themeAnnotationMissingBorder
 
     // get all keys of current file
     keys.forEach(({ key, start, end }, i) => {
@@ -94,7 +101,7 @@ const annotation: ExtensionModule = (ctx) => {
 
       let text: string | undefined
       let missing = false
-      let inplace = Config.annotations ? Config.annotationInPlace : false
+      let inplace = showAnnotations ? annotationInPlace : false
       let editing = false
       const range = new Range(
         document.positionAt(start),
@@ -107,8 +114,8 @@ const annotation: ExtensionModule = (ctx) => {
 
       if (usageType === 'locale') {
         inplace = false
-        if (locale !== Config.sourceLanguage) {
-          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
+        if (locale !== sourceLanguage) {
+          text = loader.getValueByKey(key, sourceLanguage, maxLength)
           // has source message but not current
           if (!loader.getValueByKey(key, locale))
             missing = true
@@ -126,8 +133,8 @@ const annotation: ExtensionModule = (ctx) => {
 
         text = loader.getValueByKey(key, locale, maxLength)
         // fallback to source
-        if (!text && locale !== Config.sourceLanguage) {
-          text = loader.getValueByKey(key, Config.sourceLanguage, maxLength)
+        if (!text && locale !== sourceLanguage) {
+          text = loader.getValueByKey(key, sourceLanguage, maxLength)
           missing = true
         }
 
@@ -143,14 +150,17 @@ const annotation: ExtensionModule = (ctx) => {
         text = ''
 
       const color = missing
-        ? 'rgba(153, 153, 153, .3)'
-        : 'rgba(153, 153, 153, .8)'
+        ? themeAnnotationMissing
+        : themeAnnotation
 
-      const borderColor = 'rgba(153, 153, 153, .2)'
+      const borderColor = missing
+        ? themeAnnotationMissingBorder
+        : themeAnnotationBorder
 
       let gutterType = 'none'
       if (missing)
         gutterType = 'missing'
+
       if (Config.reviewEnabled) {
         const comments = Global.reviews.getComments(key, locale)
         gutterType = getCommentState(comments) || gutterType
@@ -172,7 +182,7 @@ const annotation: ExtensionModule = (ctx) => {
         renderOptions: {
           after: {
             color,
-            contentText: showAnnonations ? text : '',
+            contentText: (showAnnotations && locale) ? text : '',
             fontWeight: 'normal',
             fontStyle: 'normal',
             border: inplace ? `0.5px solid ${borderColor}; border-radius: 2px;` : '',
