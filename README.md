@@ -86,13 +86,15 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 
 <h4 align="center">
-<a href="https://github.com/antfu/i18n-ally/wiki">📖 Documentation</a>
+<a href="https://github.com/antfu/i18n-ally/wiki">📖 Docs</a>
 　|　
 <a href="https://github.com/antfu/i18n-ally/wiki/FAQ">💭 FAQ</a>
 　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configurations</a>
+<a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configs</a>
 　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Locale Formats</a>
+<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Formats</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Contribute">🧱 Contribute</a>
 </h4>
 
 <br>
