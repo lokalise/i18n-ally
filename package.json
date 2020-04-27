@@ -570,26 +570,7 @@
           "description": "%config.full_reload_on_changed%"
         },
         "i18n-ally.enabledFrameworks": {
-          "type": [
-            "string",
-            "array"
-          ],
-          "enum": [
-            "vue",
-            "react",
-            "vscode",
-            "ngx-translate",
-            "i18next",
-            "i18n-tag",
-            "flutter",
-            "vue-sfc",
-            "ember",
-            "chrome-ext",
-            "ruby-rails",
-            "custom",
-            "laravel",
-            "transloco"
-          ],
+          "type":  "array",
           "items": {
             "type": "string",
             "enum": [
@@ -606,26 +587,15 @@
               "ruby-rails",
               "custom",
               "laravel",
-              "transloco"
+              "transloco",
+              "svelte",
+              "globalize"
             ]
           },
           "description": "%config.enabled_frameworks%"
         },
         "i18n-ally.enabledParsers": {
-          "type": [
-            "array",
-            "string"
-          ],
-          "enum": [
-            "js",
-            "ts",
-            "json",
-            "json5",
-            "yaml",
-            "ini",
-            "pot",
-            "php"
-          ],
+          "type": "array",
           "items": {
             "type": "string",
             "enum": [
