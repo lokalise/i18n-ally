@@ -35,8 +35,9 @@ export class EcmascriptParser extends Parser {
     const tsNode = Config.parsersTypescriptTsNodePath
     const dir = Global.rootpath
     const compilerOptions = {
-      ...Config.parsersTypescriptCompilerOption,
+      importHelpers: false,
       allowJs: true,
+      ...Config.parsersTypescriptCompilerOption,
     }
     const options = JSON.stringify(compilerOptions).replace(/"/g, '\\"')
 
