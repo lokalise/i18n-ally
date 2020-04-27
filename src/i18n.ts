@@ -8,7 +8,10 @@ export default class i18n {
   static messages: Record<string, string> = {}
 
   static init(extensionPath: string) {
-    const name = this.language === 'en' ? 'package.nls.json' : `package.nls.${this.language}.json`
+    let name = this.language === 'en' ? 'package.nls.json' : `package.nls.${this.language}.json`
+    if (!fs.existsSync(path.join(extensionPath, name)))
+      name = 'package.nls.json' // locale not exist, fallback to English
+
     this.messages = JSON.parse(fs.readFileSync(path.join(extensionPath, name), 'utf-8'))
   }
 
