@@ -704,6 +704,13 @@
           ],
           "description": "%config.language_tag_system%"
         },
+        "i18n-ally.ignoreFiles":{
+          "type": "array",
+          "item": {
+            "type": "string"
+          },
+          "description": "%config.ignore_files%"
+        },
         "i18n-ally.regex.key": {
           "type": "string",
           "description": "%config.regex_key%"

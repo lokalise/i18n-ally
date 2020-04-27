@@ -1,0 +1,5 @@
+{
+  "i18n-ally.localesPaths": "locales",
+  "i18n-ally.enabledParsers": ["ts", "js"],
+  "i18n-ally.ignoreFiles": ["**/index.ts"]
+}

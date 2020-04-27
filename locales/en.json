@@ -38,6 +38,7 @@
   "config.enabled_parsers": "Locale file format parsers. By default, It will be handled by activated frameworks",
   "config.encoding": "File encoding for reading and writing locale files",
   "config.full_reload_on_changed": "Perform a full reload on locale file changes. (for .js/.ts dynamic import)",
+  "config.ignore_files": "Locale files to ignore on loading. Accepting an array of glob.",
   "config.ignored_locales": "Locale codes to ignore",
   "config.include_subfolders": "Search recursively inside locale directories",
   "config.indent": "Indent space size for locale files",

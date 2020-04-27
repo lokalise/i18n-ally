@@ -20,6 +20,7 @@ export class Config {
     'disablePathParsing',
     'readonly',
     'languageTagSystem',
+    'ignoreFiles',
   ]
 
   static readonly refreshConfigs = [
@@ -319,6 +320,10 @@ export class Config {
 
   static get disablePathParsing() {
     return this.getConfig<boolean>('disablePathParsing') ?? false
+  }
+
+  static get ignoreFiles() {
+    return this.getConfig<string[]>('ignoreFiles') ?? []
   }
 
   static get keysInUse() {

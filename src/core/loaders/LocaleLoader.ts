@@ -123,6 +123,7 @@ export class LocaleLoader extends Loader {
         onlyDirectories: true,
         cwd: dir,
         deep: 1,
+        ignore: Config.ignoreFiles,
       })
 
       const total = dirnames.length
@@ -427,6 +428,7 @@ export class LocaleLoader extends Loader {
       ignore: [
         'node_modules/**',
         'vendors/**',
+        ...Config.ignoreFiles,
       ],
       deep: Config.includeSubfolders ? undefined : 2,
     })
