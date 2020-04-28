@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.8](https://github.com/antfu/i18n-ally/compare/v2.0.7...v2.0.8) (2020-04-28)
+
+
+### 🐞 Bug Fixes
+
+* ecmascript err catch, [#266](https://github.com/antfu/i18n-ally/issues/266) ([93fd1e7](https://github.com/antfu/i18n-ally/commit/93fd1e788d8eb71f3e58f5c1c1ff892689d869e8))
+* namespace loader ([edf6f99](https://github.com/antfu/i18n-ally/commit/edf6f99cb3d25562d527d3b3e5ba59f8a5dabaf4))
+* namespace over slice ([f808d75](https://github.com/antfu/i18n-ally/commit/f808d750108dce5c0765c9057f5de0c3db7d6539))
+* translate all missing keys, [#273](https://github.com/antfu/i18n-ally/issues/273) ([7f395d5](https://github.com/antfu/i18n-ally/commit/7f395d51f249545ec4a993987d6d02b5ad1fe41f))
+* warning for no locale file loaded ([768a4d2](https://github.com/antfu/i18n-ally/commit/768a4d27d912003b08a8bff4cf01622ef2f1610e))
+
 ### [2.0.7](https://github.com/antfu/i18n-ally/compare/v2.0.6...v2.0.7) (2020-04-27)
 
 
