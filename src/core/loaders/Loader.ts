@@ -69,6 +69,7 @@ export abstract class Loader extends Disposable {
       meta: options.meta,
     })
     tree.values[options.locale] = data
+
     for (const [key, value] of Object.entries(data)) {
       if (value == null)
         continue

@@ -36,7 +36,7 @@ export abstract class ProgressSubmenuItem extends ProgressBaseItem {
   async getChildren() {
     const locales = Array.from(new Set([this.node.locale, Config.sourceLanguage]))
     return this.getKeys()
-      .map(key => CurrentFile.loader.getNodeByKey(key))
+      .map(key => CurrentFile.loader.getTreeNodeByKey(key))
       .map(node => node && new LocaleTreeItem(this.ctx, node, true, this.node.locale, locales))
       .filter(item => item) as LocaleTreeItem[]
   }

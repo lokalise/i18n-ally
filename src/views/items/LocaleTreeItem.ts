@@ -10,7 +10,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   constructor(ctx: ExtensionContext, node: Node, public flatten = false, public readonly displayLocale?: string, public readonly listedLocales?: string[]) {
     super(ctx)
 
-    if (this.flatten && node.type !== 'record')
+    if (node.type !== 'record')
       this.node = resolveFlattenRoot(node)
     else
       this.node = node

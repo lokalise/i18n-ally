@@ -1,7 +1,7 @@
 import * as path from 'path'
 import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import _, { uniq, throttle } from 'lodash'
+import _, { uniq, throttle, set } from 'lodash'
 import * as fg from 'fast-glob'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { replaceLocalePath, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
@@ -516,40 +516,24 @@ export class LocaleLoader extends Loader {
 
   private updateLocalesTree() {
     this._flattenLocaleTree = {}
+    const root = new LocaleTree({ keypath: '' })
 
     if (Global.namespaceEnabled) {
       const namespaces = uniq(this.files.map(f => f.namespace)) as string[]
-      const root = new LocaleTree({ keypath: '' })
       for (const ns of namespaces) {
         const files = this.files.filter(f => f.namespace === ns)
 
-        const tree = ns
-          ? new LocaleTree({ keypath: ns })
-          : root // no namespace, put it in the root
-
-        for (const file of files)
-          this.updateTree(tree, file.value, ns || '', ns || '', { ...file, meta: { namespace: file.namespace } })
-
-        if ((tree !== root) && ns) {
-          const parts = ns.split('.')
-          let parent = root
-          for (const n of parts.slice(0, -1)) {
-            if (!parent.children[n])
-              parent.children[n] = new LocaleTree({ keypath: ns, keyname: n })
-            parent = parent.children[n] as LocaleTree
-          }
-          parent.children[parts[parts.length - 1]] = tree
+        for (const file of files) {
+          const value = ns ? set({}, ns, file.value) : file.value
+          this.updateTree(root, value, '', '', { ...file, meta: { namespace: file.namespace } })
         }
       }
-      this._localeTree = root
     }
     else {
-      const tree = new LocaleTree({ keypath: '' })
       for (const file of Object.values(this._files))
-        this.updateTree(tree, file.value, '', '', file)
-
-      this._localeTree = tree
+        this.updateTree(root, file.value, '', '', file)
     }
+    this._localeTree = root
   }
 
   private update() {
