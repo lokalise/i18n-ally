@@ -44,7 +44,9 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
 
   if (item instanceof ProgressSubmenuItem) {
     const to = item.node.locale
-    nodes = item.getKeys().map(key => ({ locale: to, keypath: key, type: undefined }))
+    nodes = item.getKeys()
+      .map(key => CurrentFile.loader.getRecordByKey(key, to, true)!)
+      .filter(i => i)
   }
   else {
     if (item instanceof LocaleTreeItem)

@@ -175,14 +175,14 @@ export class LocaleLoader extends Loader {
 
     if (paths.length === 0) {
       return await window.showInputBox({
-        prompt: i18n.t('prompt.enter_file_path_to_store_key'),
+        prompt: i18n.t('prompt.enter_file_path_to_store_key', keypath),
         placeHolder: `path/to/${locale}.json`,
         ignoreFocusOut: true,
       })
     }
     else {
       return await window.showQuickPick(paths, {
-        placeHolder: i18n.t('prompt.select_file_to_store_key'),
+        placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
         ignoreFocusOut: true,
       })
     }

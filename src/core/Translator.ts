@@ -26,7 +26,7 @@ export interface TranslateJob {
 export type AccaptableTranslateItem =
   | LocaleNode
   | LocaleRecord
-  | {locale: string; keypath: string; type: undefined}
+  | {locale: string; keypath: string; type: undefined }
 
 export class Translator {
   private static translatingKeys: {keypath: string; locale: string}[] = []
