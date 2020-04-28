@@ -43,12 +43,16 @@ export class EcmascriptParser extends Parser {
 
     return new Promise<any>((resolve, reject) => {
       const cmd = `${tsNode} --dir "${dir}" --compiler-options "${options}" "${loader}" "${filepath}"`
+      console.log(`[i18n-ally] spawn: ${cmd}`)
       child_process.exec(cmd, (err, stdout) => {
         if (err)
           return reject(err)
-
-        console.log(`[i18n-ally] spawn: ${cmd}`)
-        resolve(JSON.parse(stdout.trim()))
+        try {
+          resolve(JSON.parse(stdout.trim()))
+        }
+        catch (e) {
+          reject(e)
+        }
       })
     })
   }
