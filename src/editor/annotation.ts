@@ -1,4 +1,4 @@
-import { window, DecorationOptions, Range, Disposable, workspace, TextEditorDecorationType, TextEditor } from 'vscode'
+import { window, DecorationOptions, Range, Disposable, TextEditorDecorationType, TextEditor, workspace, TextDocument } from 'vscode'
 import throttle from 'lodash/throttle'
 import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '../core'
 import { ExtensionModule } from '../modules'
@@ -11,7 +11,7 @@ const underlineDecorationType = window.createTextEditorDecorationType({
 })
 
 const disappearDecorationType = window.createTextEditorDecorationType({
-  textDecoration: 'none; display: none;',
+  textDecoration: 'none; display: none;', // a hack to inject custom style
 })
 
 export type DecorationOptionsWithGutter = DecorationOptions & {gutterType: string}
@@ -58,27 +58,31 @@ const annotation: ExtensionModule = (ctx) => {
       )
   }
 
-  let usages: KeyUsages | undefined
+  let _current_usages: KeyUsages | undefined
+  let _current_doc: TextDocument | undefined
 
-  function clear(editor: TextEditor) {
-    setDecorationsWithGutter([], editor)
-    editor.setDecorations(underlineDecorationType, [])
-    editor.setDecorations(disappearDecorationType, [])
+  function clear() {
+    const editor = window.activeTextEditor
+    if (editor) {
+      setDecorationsWithGutter([], editor)
+      editor.setDecorations(underlineDecorationType, [])
+      editor.setDecorations(disappearDecorationType, [])
+    }
   }
 
   function refresh() {
     const editor = window.activeTextEditor
-    const loader: Loader = CurrentFile.loader
     const document = editor?.document
 
-    if (!editor || !document)
+    if (!editor || !document || _current_doc !== document)
       return
 
-    if (!usages)
-      return clear(editor)
+    if (!_current_usages)
+      return clear()
 
+    const loader: Loader = CurrentFile.loader
     const selection = editor.selection
-    const { keys, locale, namespace, type: usageType } = usages
+    const { keys, locale, namespace, type: usageType, ranges } = _current_usages
 
     const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptionsWithGutter[] = []
@@ -94,23 +98,22 @@ const annotation: ExtensionModule = (ctx) => {
     const themeAnnotationBorder = Config.themeAnnotationBorder
     const themeAnnotationMissingBorder = Config.themeAnnotationMissingBorder
 
-    // get all keys of current file
-    keys.forEach(({ key, start, end }, i) => {
-      if (namespace)
-        key = `${namespace}.${key}`
+    const total = keys.length
+    for (let i = 0; i < total; i++) {
+      const key = namespace
+        ? `${namespace}.${keys[i].key}`
+        : keys[i].key
+
+      const range = ranges[i]
+      const rangeWithQuotes = new Range(
+        range.start.with(undefined, range.start.character - 1),
+        range.end.with(undefined, range.end.character + 1),
+      )
 
       let text: string | undefined
       let missing = false
       let inplace = showAnnotations ? annotationInPlace : false
       let editing = false
-      const range = new Range(
-        document.positionAt(start),
-        document.positionAt(end),
-      )
-      const rangeWithQuotes = new Range(
-        document.positionAt(start - 1),
-        document.positionAt(end + 1),
-      )
 
       if (usageType === 'locale') {
         inplace = false
@@ -191,7 +194,7 @@ const annotation: ExtensionModule = (ctx) => {
         hoverMessage: createHover(key, maxLength, undefined, i),
         gutterType,
       })
-    })
+    }
 
     setDecorationsWithGutter(annotations, editor)
 
@@ -200,27 +203,42 @@ const annotation: ExtensionModule = (ctx) => {
   }
 
   function update() {
+    _current_usages = undefined
+    _current_doc = undefined
+
     if (!Global.enabled)
       return
 
-    const editor = window.activeTextEditor
-    if (!editor)
+    const document = window.activeTextEditor?.document
+
+    if (!document)
       return
 
-    const loader: Loader = CurrentFile.loader
-    const document = editor.document
-    usages = KeyDetector.getUsages(document, loader)
+    if (!Global.isLanguageIdSupported(document.languageId))
+      return
+
+    _current_doc = document
+    _current_usages = KeyDetector.getUsages(document, CurrentFile.loader)
     refresh()
   }
 
   const throttledUpdate = throttle(() => update(), THROTTLE_DELAY)
 
   const disposables: Disposable[] = []
-  disposables.push(CurrentFile.loader.onDidChange(throttledUpdate))
-  disposables.push(window.onDidChangeActiveTextEditor(throttledUpdate))
-  disposables.push(workspace.onDidChangeTextDocument(throttledUpdate))
-  disposables.push(Global.reviews.onDidChange(throttledUpdate))
-  disposables.push(window.onDidChangeTextEditorSelection(refresh))
+  CurrentFile.loader.onDidChange(throttledUpdate, null, disposables)
+  window.onDidChangeActiveTextEditor(throttledUpdate, null, disposables)
+  Global.reviews.onDidChange(throttledUpdate, null, disposables)
+  window.onDidChangeTextEditorSelection(refresh, null, disposables)
+  workspace.onDidChangeTextDocument(
+    (e) => {
+      if (e.document === window.activeTextEditor?.document) {
+        _current_doc = undefined
+        throttledUpdate()
+      }
+    },
+    null,
+    disposables,
+  )
 
   update()
 
