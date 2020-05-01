@@ -1,6 +1,11 @@
 import http from 'http'
+import path from 'path'
 import WebSocket from 'ws'
 import Koa from 'koa'
+import KoaStatic from 'koa-static'
+// @ts-ignore
+import mount from 'koa-mount'
+import { Config } from '../core'
 import { ServerLog } from './log'
 import { Attendant } from './attendant'
 
@@ -18,7 +23,6 @@ export class Server {
   private launched = false
   private server!: http.Server
   private wss!: WebSocket.Server
-  private koa!: Koa
 
   private attendantID = 0
   private attendants: Attendant[] = []
@@ -28,13 +32,10 @@ export class Server {
       return
     ServerLog.log('Server starting...')
     const app = new Koa()
-    this.koa = app
     this.server = http.createServer(app.callback())
     this.wss = new WebSocket.Server({ server: this.server })
 
-    app.use((ctx) => {
-      ctx.body = 'Hello Koa'
-    })
+    app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'))))
 
     this.wss.on('connection', (socket, request) => {
       this.attendants.push(new Attendant(this, this.attendantID++, socket, request))

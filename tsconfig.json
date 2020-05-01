@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/*"] },
     "target": "es2019",
     "lib": ["es2019"],
     "module": "esnext",

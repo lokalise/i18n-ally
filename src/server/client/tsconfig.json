@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["es2019", "dom"],
+    "module": "umd",
+    "outDir": "../../../dist/server",
+    "types": []
+  }
+}

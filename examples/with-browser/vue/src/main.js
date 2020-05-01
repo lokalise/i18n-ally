@@ -22,4 +22,9 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-window.$i18n = i18n
+window.addEventListener('load', () => {
+  window.$i18nAlly.register({
+    name: 'vue-i18n',
+    getCurrentLocale: () => i18n.locale,
+  })
+})
