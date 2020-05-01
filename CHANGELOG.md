@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.10](https://github.com/antfu/i18n-ally/compare/v2.0.9...v2.0.10) (2020-05-01)
+
+
+### 🐞 Bug Fixes
+
+* new local file creation, [#279](https://github.com/antfu/i18n-ally/issues/279) ([e2e6d92](https://github.com/antfu/i18n-ally/commit/e2e6d9219a9ac0c48cf2b575952adf091c2847f7))
+* replace locale via path matcher ([a4c8b58](https://github.com/antfu/i18n-ally/commit/a4c8b58d049d766addd9f346e8ce8f6f83fb3654))
+
 ### [2.0.9](https://github.com/antfu/i18n-ally/compare/v2.0.8...v2.0.9) (2020-04-29)
 
 
