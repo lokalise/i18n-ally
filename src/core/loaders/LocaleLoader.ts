@@ -578,6 +578,5 @@ export class LocaleLoader extends Loader {
         Log.error(e)
       }
     }
-    console.log(this._files)
   }
 }
