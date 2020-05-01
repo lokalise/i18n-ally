@@ -55,7 +55,7 @@ export abstract class Framework {
   /**
    * Locale file's name match
    */
-  pathMatcher(dirStructure?: DirStructure): RegExp | string {
+  pathMatcher(dirStructure?: DirStructure): string {
     if (dirStructure === 'file')
       return '{locale}.{ext}'
     else if (Config.namespace)

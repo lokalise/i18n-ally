@@ -126,7 +126,10 @@ export class Global {
         .flatMap(f => f.pathMatcher(dirStructure))
 
     return uniq(rules)
-      .map(reg => reg instanceof RegExp ? reg : ParsePathMatcher(reg, this.enabledParserExts))
+      .map(matcher => ({
+        regex: ParsePathMatcher(matcher, this.enabledParserExts),
+        matcher,
+      }))
   }
 
   static hasFeatureEnabled(name: keyof OptionalFeatures) {

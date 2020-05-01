@@ -1,4 +1,4 @@
-import { ParsePathMatcher } from './PathMatcher'
+import { ParsePathMatcher, ReplaceLocale } from './PathMatcher'
 
 describe('PathMatching', () => {
   const cases = [
@@ -30,6 +30,22 @@ describe('PathMatching', () => {
         expect(result.groups?.namespace).toEqual(expectedNamespace)
         expect(result.groups?.locale).toEqual(expectedLocale)
       }
+    })
+  }
+})
+
+describe('ReplaceLocale', () => {
+  const cases = [
+    ['en/nested/en.json', '{namespaces}/{locale}.json', 'zh', 'en/nested/zh.json'],
+    ['en/zh/fr/en.json', 'en/zh/{locale}/{namespace}.json', 'fr', 'en/zh/fr/en.json'],
+  ] as const
+
+  for (const c of cases) {
+    it(c[0], () => {
+      const args = c.slice(0, -1)
+      const result = c[c.length - 1]
+      // @ts-ignore
+      expect(ReplaceLocale(...args)).toBe(result)
     })
   }
 })

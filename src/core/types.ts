@@ -19,6 +19,7 @@ export interface FileInfo {
   mtime: number
   readonly?: boolean
   namespace?: string
+  matcher?: string
 }
 
 export interface ReviewComment {

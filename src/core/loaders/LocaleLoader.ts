@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq, throttle, set } from 'lodash'
 import * as fg from 'fast-glob'
+import { ReplaceLocale } from '../../utils/PathMatcher'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
@@ -16,7 +17,7 @@ const THROTTLE_DELAY = 1500
 
 export class LocaleLoader extends Loader {
   private _files: Record<string, ParsedFile> = {}
-  private _path_matchers: RegExp[] = []
+  private _path_matchers: {regex: RegExp; matcher: string}[] = []
   private _dir_structure: DirStructure = 'file'
   private _locale_dirs: string[] = []
 
@@ -34,7 +35,7 @@ export class LocaleLoader extends Loader {
         Log.info(`🗃 Custom Path Matcher: ${Config.pathMatcher}`)
 
       this._path_matchers = Global.getPathMatchers(this._dir_structure)
-      Log.info(`🗃 Path Matcher Regex: ${this._path_matchers}`)
+      Log.info(`🗃 Path Matcher Regex: ${this._path_matchers.map(i => i.regex)}`)
       await this.loadAll()
     }
     this.update()
@@ -160,9 +161,10 @@ export class LocaleLoader extends Loader {
         return filesSameLocale.filepath
 
       const fileSource = this.files.find(f => f.namespace === namespace && f.locale === Config.sourceLanguage)
-      if (fileSource) {
+      if (fileSource && fileSource.matcher) {
         const relative = path.relative(fileSource.dirpath, fileSource.filepath)
-        return path.join(fileSource.dirpath, relative.replace(Config.sourceLanguage, locale))
+        const newFilepath = ReplaceLocale(relative, fileSource.matcher, locale, Global.enabledParserExts)
+        return path.join(fileSource.dirpath, newFilepath)
       }
     }
 
@@ -327,11 +329,14 @@ export class LocaleLoader extends Loader {
     const ext = path.extname(relativePath)
 
     let match: RegExpExecArray | null = null
+    let matcher: string | undefined
 
-    for (const reg of this._path_matchers) {
-      match = reg.exec(relativePath)
-      if (match && match.length > 0)
+    for (const r of this._path_matchers) {
+      match = r.regex.exec(relativePath)
+      if (match && match.length > 0) {
+        matcher = r.matcher
         break
+      }
     }
 
     if (!match || match.length < 1)
@@ -358,6 +363,7 @@ export class LocaleLoader extends Loader {
       ext,
       namespace,
       fullpath,
+      matcher,
     }
   }
 
@@ -366,7 +372,7 @@ export class LocaleLoader extends Loader {
       const result = this.getFileInfo(dirpath, relativePath)
       if (!result)
         return
-      const { locale, parser, namespace, fullpath: filepath } = result
+      const { locale, parser, namespace, fullpath: filepath, matcher } = result
       if (!parser)
         return
       if (!locale)
@@ -392,6 +398,7 @@ export class LocaleLoader extends Loader {
         mtime,
         namespace,
         readonly: parser.readonly || Config.readonly,
+        matcher,
       }
 
       return true
@@ -571,5 +578,6 @@ export class LocaleLoader extends Loader {
         Log.error(e)
       }
     }
+    console.log(this._files)
   }
 }
