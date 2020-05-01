@@ -7,6 +7,7 @@ class VueSFCFramework extends Framework {
   detection = {
     packageJSON: [
       '@kazupon/vue-i18n-loader',
+      '@intlify/vue-i18n-loader'
     ],
   }
 
