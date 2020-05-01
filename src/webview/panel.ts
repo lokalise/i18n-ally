@@ -111,7 +111,7 @@ export class EditorPanel {
   }
 
   public openKey(keypath: string, locale?: string) {
-    const node = CurrentFile.loader.getNodeByKey(keypath)
+    const node = CurrentFile.loader.getNodeByKey(keypath, true)
     if (node) {
       this._editing_key = keypath
       this.postMessage({
