@@ -1,6 +1,7 @@
 export const EXT_NAMESPACE = 'i18n-ally'
 export const EXT_ID = 'antfu.i18n-ally'
 export const EXT_NAME = 'i18n Ally'
+export const EXT_NAME_SERVER = 'i18n Ally Server'
 export const EXT_EDITOR_ID = 'i18n-ally-editor'
 export const EXT_REVIEW_ID = 'i18n-ally-review'
 

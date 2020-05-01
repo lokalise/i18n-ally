@@ -35,4 +35,5 @@ export const enum Commands {
   review_refresh_thread = 'i18n-ally.review.refresh-thread',
   review_apply_translation = 'i18n-ally.review.apply-translation',
   review_apply_suggestion = 'i18n-ally.review.apply-suggestion',
+  server_start = 'i18n-ally.server.start',
 }

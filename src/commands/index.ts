@@ -1,5 +1,6 @@
 import { flatten } from 'lodash'
 import { ExtensionModule } from '../modules'
+import serverCommands from '../server/command'
 import configLocales from './configLocalePaths'
 import configLanguages from './configLanguages'
 import keyManipulations from './keyManipulations'
@@ -19,6 +20,7 @@ const m: ExtensionModule = (ctx) => {
     refreshUsageReport(ctx),
     editor(ctx),
     review(ctx),
+    serverCommands(ctx),
   ])
 }
 
