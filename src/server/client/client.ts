@@ -2,6 +2,7 @@
   interface I18nAllyAdaptor {
     name: string
     getCurrentLocale: () => string
+    getKeys: () => string[]
   }
 
   class I18nAlly {
@@ -11,6 +12,7 @@
     _adaptor: I18nAllyAdaptor = {
       name: 'none',
       getCurrentLocale() { throw new Error('NOT REGISTED') },
+      getKeys: () => [],
     }
 
     ws: WebSocket
@@ -71,7 +73,7 @@
 
     private editOn() {
       document.querySelectorAll('[data-i18n-ally-key]').forEach((e) => {
-        const original = e.textContent
+        const original = e.textContent.toString()
         const keypath = e.getAttribute('data-i18n-ally-key')
         if (keypath) {
           e.setAttribute('contenteditable', 'true')
@@ -80,8 +82,9 @@
             e.addEventListener('blur', () => {
               if (!this._edit)
                 return
-              if (e.textContent && e.textContent !== original)
-                this.setRecord(keypath, this.currentLocale, e.textContent)
+              const value = e.textContent.toString()
+              if (value && value !== original)
+                this.setRecord(keypath, this.currentLocale, value)
             })
           }
         }
@@ -95,12 +98,14 @@
     }
   }
 
+  const i18nAlly = new I18nAlly()
   // @ts-ignore
-  window.$i18nAlly = new I18nAlly()
+  window.$i18nAlly = i18nAlly
 
-  // FIXME: TESTING
   window.addEventListener('load', () => {
+    window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
     // @ts-ignore
-    window.$i18nAlly.edit = true
+    // FIXME: TESTING
+    i18nAlly.edit = true
   })
 })()
