@@ -82,10 +82,6 @@ export class VueSfcLoader extends Loader {
     return Array.from(this._locales)
   }
 
-  getShadowFilePath(keypath: string, locale: string) {
-    return this.uri.fsPath
-  }
-
   async write(pendings: PendingWrite | PendingWrite[]) {
     if (!Array.isArray(pendings))
       pendings = [pendings]

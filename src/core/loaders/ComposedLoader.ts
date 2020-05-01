@@ -74,14 +74,6 @@ export class ComposedLoader extends Loader {
       .value()
   }
 
-  getShadowFilePath(keypath: string, locale: string) {
-    for (const loader of this.loadersReversed) {
-      const value = loader.getShadowFilePath(keypath, locale)
-      if (value)
-        return value
-    }
-  }
-
   getNamespaceFromFilepath(filepath: string) {
     for (const loader of this.loadersReversed) {
       const value = loader.getNamespaceFromFilepath(filepath)

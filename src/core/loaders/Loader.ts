@@ -21,8 +21,6 @@ export abstract class Loader extends Disposable {
 
   abstract get locales(): string[]
 
-  abstract getShadowFilePath(keypath: string, locale: string): string | undefined
-
   get root() {
     return this._localeTree
   }
@@ -278,7 +276,7 @@ export abstract class Loader extends Disposable {
           keyname: node.keyname,
           keypath: node.keypath,
           meta: node.meta,
-          filepath: this.getShadowFilePath(node.keypath, locale),
+          filepath: undefined,
           readonly: node.readonly,
         })
       }

@@ -1,4 +1,3 @@
-import * as path from 'path'
 import { set } from 'lodash'
 import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '../core'
 import { KeyStyle } from '../core/types'
@@ -17,18 +16,6 @@ export function getKeyname(keypath: string) {
 
 export function notEmpty<T>(value: T | null | undefined): value is T {
   return value !== null && value !== undefined
-}
-
-export function replaceLocalePath(filepath: string, targetLocale: string): string {
-  const info = path.parse(filepath)
-
-  if (Config.normalizeLocale(info.name, ''))
-    return path.resolve(info.dir, `${targetLocale}${info.ext}`)
-
-  if (Config.normalizeLocale(path.basename(info.dir), ''))
-    return path.resolve(path.dirname(info.dir), targetLocale, `${info.name}${info.ext}`)
-
-  return ''
 }
 
 export function escapeMarkdown(text: string) {

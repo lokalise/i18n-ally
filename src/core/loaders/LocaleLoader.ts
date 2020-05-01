@@ -4,7 +4,7 @@ import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
 import _, { uniq, throttle, set } from 'lodash'
 import * as fg from 'fast-glob'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
-import { replaceLocalePath, Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
+import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
@@ -147,28 +147,26 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  async requestMissingFilepath(locale: string, keypath: string) {
-    const paths = this.getFilepathsOfLocale(locale)
+  async requestMissingFilepath(pending: PendingWrite) {
+    const { locale, keypath } = pending
 
     // try to match namespaces
     if (Config.namespace) {
-      // to find max match
-      let maxMatchFile: ParsedFile | undefined
-      for (const path of paths) {
-        const file = this._files[path]
-        if (!file?.namespace)
-          continue
+      const namespace = pending.namespace || this.getNodeByKey(keypath)?.meta?.namespace
 
-        if (keypath.startsWith(`${file.namespace}.`)) {
-          if ((maxMatchFile?.namespace?.length || 0) < file.namespace.length)
-            maxMatchFile = file
-        }
+      const filesSameLocale = this.files.find(f => f.namespace === namespace && f.locale === locale)
+
+      if (filesSameLocale)
+        return filesSameLocale.filepath
+
+      const fileSource = this.files.find(f => f.namespace === namespace && f.locale === Config.sourceLanguage)
+      if (fileSource) {
+        const relative = path.relative(fileSource.dirpath, fileSource.filepath)
+        return path.join(fileSource.dirpath, relative.replace(Config.sourceLanguage, locale))
       }
-
-      // return if found
-      if (maxMatchFile)
-        return maxMatchFile.filepath
     }
+
+    const paths = this.getFilepathsOfLocale(locale)
 
     if (paths.length === 1)
       return paths[0]
@@ -188,21 +186,6 @@ export class LocaleLoader extends Loader {
     }
   }
 
-  getShadowFilePath(key: string, locale: string) {
-    key = this.rewriteKeys(key, 'reference', { locale })
-    const paths = this.getFilepathsOfLocale(locale)
-    if (paths.length === 1)
-      return paths[0]
-
-    const node = this.getNodeByKey(key)
-    if (node) {
-      const sourceRecord = node.locales[Config.sourceLanguage] || Object.values(node.locales)[0]
-      if (sourceRecord && sourceRecord.filepath)
-        return replaceLocalePath(sourceRecord.filepath, locale)
-    }
-    return undefined
-  }
-
   async write(pendings: PendingWrite|PendingWrite[]) {
     if (!Array.isArray(pendings))
       pendings = [pendings]
@@ -213,7 +196,7 @@ export class LocaleLoader extends Loader {
 
     // distribute pendings writes by files
     for (const pending of pendings) {
-      const filepath = pending.filepath || await this.requestMissingFilepath(pending.locale, pending.keypath)
+      const filepath = pending.filepath || await this.requestMissingFilepath(pending)
       if (!filepath) {
         Log.info(`💥 Unable to find path for writing ${JSON.stringify(pending)}`)
         continue
