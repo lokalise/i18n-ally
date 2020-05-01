@@ -1,4 +1,3 @@
-import * as SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import parser from 'php-array-parser'
 import { Parser } from './base'
@@ -20,9 +19,6 @@ export class PhpParser extends Parser {
   }
 
   async dump(object: object, sort: boolean) {
-    if (sort)
-      return SortedStringify(object, { space: this.options.indent })
-    else
-      return JSON.stringify(object, null, this.options.indent)
+    return ''
   }
 }
