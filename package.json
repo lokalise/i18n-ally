@@ -979,6 +979,7 @@
     "ws": "^7.2.5"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "bcp-47-normalize": "^1.0.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",

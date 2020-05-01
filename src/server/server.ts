@@ -5,7 +5,10 @@ import Koa from 'koa'
 import KoaStatic from 'koa-static'
 // @ts-ignore
 import mount from 'koa-mount'
+// @ts-ignore
+import cors from '@koa/cors'
 import { Config } from '../core'
+import { version } from '../../package.json'
 import { ServerLog } from './log'
 import { Attendant } from './attendant'
 
@@ -35,7 +38,16 @@ export class Server {
     this.server = http.createServer(app.callback())
     this.wss = new WebSocket.Server({ server: this.server })
 
-    app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'))))
+    app.use(cors())
+    app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'), { extensions: ['js'] })))
+    app.use((ctx) => {
+      if (ctx.path === '/') {
+        ctx.body = {
+          name: 'i18n-ally-server',
+          version,
+        }
+      }
+    })
 
     this.wss.on('connection', (socket, request) => {
       this.attendants.push(new Attendant(this, this.attendantID++, socket, request))
