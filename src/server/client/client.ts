@@ -1,3 +1,5 @@
+// @ts-ignore
+import { observe } from 'selector-observer'
 import adaptors from './adaptors/index'
 
 interface I18nAllyAdaptor {
@@ -10,6 +12,7 @@ class I18nAlly {
   _listeners: Record<number, Function> = {}
   _id_count = 0
   _edit = false
+  _started = false
   _adaptor: I18nAllyAdaptor = {
     name: 'none',
     getCurrentLocale() { throw new Error('NOT REGISTED') },
@@ -18,14 +21,57 @@ class I18nAlly {
 
   ws: WebSocket
 
-  constructor(url = 'localhost:1897') {
-    this.ws = new WebSocket(`ws://${url}`)
+  constructor(
+    public readonly url = 'localhost:1897',
+  ) {
+
+  }
+
+  start() {
+    if (this._started)
+      return
+
+    this._started = true
+    this.ws = new WebSocket(`ws://${this.url}`)
     this.ws.onmessage = (e) => {
       const data = JSON.parse(e.data)
       console.log(data)
       if (data._id && this._listeners[data._id])
         this._listeners[data._id](data)
     }
+    this.injectStyle()
+    observe('[data-i18n-ally-key]', {
+      add: (e: Element) => {
+        const original = e.textContent.toString()
+        const keypath = e.getAttribute('data-i18n-ally-key')
+        if (!keypath)
+          return
+
+        if (this._edit)
+          e.setAttribute('contenteditable', 'true')
+        else
+          e.removeAttribute('contenteditable')
+
+        // already bind
+        if (e.getAttribute('data-i18n-ally-binding'))
+          return
+
+        e.setAttribute('data-i18n-ally-binding', 'true')
+        e.addEventListener('mousedown', (e) => {
+          if (!this._edit)
+            return
+          e.stopPropagation()
+          e.stopImmediatePropagation()
+        })
+        e.addEventListener('blur', () => {
+          if (!this._edit)
+            return
+          const value = e.textContent.toString()
+          if (value && value !== original)
+            this.setRecord(keypath, this.currentLocale, value)
+        })
+      },
+    })
   }
 
   register(adaptor: Partial<I18nAllyAdaptor>) {
@@ -36,9 +82,12 @@ class I18nAlly {
       'background:transparent',
     )
     this._adaptor = Object.assign(this._adaptor, adaptor)
+    this.start()
   }
 
   send(data: any) {
+    if (!this._started)
+      throw new Error('i18n Ally client is not runing')
     this.ws.send(JSON.stringify(data))
   }
 
@@ -61,6 +110,14 @@ class I18nAlly {
     return this.call({ type: 'set_record', keypath, locale, value })
   }
 
+  injectStyle() {
+    const style = document.createElement('style')
+    style.textContent = `
+      [data-i18n-ally-binding][contenteditable]{background: yellow;}
+    `
+    document.head.appendChild(style)
+  }
+
   get currentLocale() {
     return this._adaptor.getCurrentLocale()
   }
@@ -79,21 +136,9 @@ class I18nAlly {
 
   private editOn() {
     document.querySelectorAll('[data-i18n-ally-key]').forEach((e) => {
-      const original = e.textContent.toString()
       const keypath = e.getAttribute('data-i18n-ally-key')
-      if (keypath) {
+      if (keypath)
         e.setAttribute('contenteditable', 'true')
-        if (!e.getAttribute('data-i18n-ally-binding')) {
-          e.setAttribute('data-i18n-ally-binding', 'true')
-          e.addEventListener('blur', () => {
-            if (!this._edit)
-              return
-            const value = e.textContent.toString()
-            if (value && value !== original)
-              this.setRecord(keypath, this.currentLocale, value)
-          })
-        }
-      }
     })
   }
 
@@ -109,18 +154,36 @@ class I18nAlly {
   // @ts-ignore
   window.$i18nAlly = i18nAlly
 
-  window.addEventListener('load', () => {
-    window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
-    i18nAlly.edit = true
-  })
-
-  window.addEventListener('i18n-ally-register', (e: any) => {
-    const { name, instance } = e.detail as { name: string; instance: any }
+  function register({ name, instance }: {name: string; instance: any}) {
     const adaptor = adaptors[name]
     if (!adaptor) {
       console.warn(`[i18n Ally] Unknown adaptor ${name}`)
       return
     }
     adaptor(i18nAlly, instance)
+  }
+
+  window.addEventListener('i18n-ally-register', (e: any) => {
+    register(e.detail)
+  })
+
+  window.addEventListener('load', () => {
+    window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
+    i18nAlly.edit = true
+
+    // @ts-ignore
+    let _v = window.$i18nAllyConfig
+    if (_v)
+      register(_v)
+
+    Object.defineProperty(window, '$i18nAllyConfig', {
+      set(v) {
+        register(v)
+        _v = v
+      },
+      get() {
+        return _v
+      },
+    })
   })
 })()

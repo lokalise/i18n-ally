@@ -19,7 +19,8 @@ export class Attendant {
       this.log(`Data: ${raw}`)
 
       const loader = CurrentFile.loader
-      const { _id, type, keypath, locale, value } = JSON.parse(raw.toString())
+      const data = JSON.parse(raw.toString())
+      const { _id, type, keypath, locale, items } = data
 
       const reply = (data: any) => {
         this.send({ ...data, _id })
@@ -30,8 +31,14 @@ export class Attendant {
           reply(loader.getRecordByKey(keypath, locale, true))
           break
         case 'set_record':
-          const record = loader.getRecordByKey(keypath, locale, true)
-          await loader.write({ keypath, locale, value, filepath: record?.filepath, namespace: record?.meta?.namespace })
+          await this.setRecords(data)
+          reply({ type: 'ack' })
+          break
+        case 'get_records':
+          reply(items.map((i: any) => loader.getRecordByKey(i.keypath, i.locale, true)))
+          break
+        case 'set_records':
+          await this.setRecords(items)
           reply({ type: 'ack' })
           break
       }
@@ -40,6 +47,15 @@ export class Attendant {
     ws.on('close', () => {
       this.log('Closed')
     })
+  }
+
+  async setRecords(items: any[]) {
+    const loader = CurrentFile.loader
+    const pendings = items.map(({ keypath, locale, value }) => {
+      const record = loader.getRecordByKey(keypath, locale, true)
+      return { keypath, locale, value, filepath: record?.filepath, namespace: record?.meta?.namespace }
+    })
+    await loader.write(pendings)
   }
 
   log(msg: string) {

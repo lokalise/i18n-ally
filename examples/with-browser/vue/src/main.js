@@ -16,13 +16,7 @@ const i18n = new VueI18n({
   },
 })
 
-const script = document.createElement('script')
-script.setAttribute('src', 'http://127.0.0.1:1897/static/client.js')
-script.setAttribute('type', 'module')
-document.head.appendChild(script)
-window.addEventListener('i18n-ally-ready', () => {
-  window.dispatchEvent(new CustomEvent('i18n-ally-register', { detail: { name: 'vue-i18n', instance: i18n } }))
-})
+window.$i18nAllyConfig = { name: 'vue-i18n', instance: i18n }
 
 new Vue({
   i18n,
