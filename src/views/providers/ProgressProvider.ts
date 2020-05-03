@@ -4,7 +4,7 @@ import { Global, Loader, CurrentFile } from '../../core'
 import { notEmpty } from '../../utils/utils'
 import { BaseTreeItem } from '../items/Base'
 import { ProgressRootItem } from '../items/ProgressRootItem'
-import { EditorPanel } from '../../webview/panel'
+import { EditorAttendant } from '../../webview/attendant'
 import { THROTTLE_DELAY } from '../../meta'
 
 export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
@@ -18,7 +18,7 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
 
     const throttledRefresh = throttle(() => this.refresh(), THROTTLE_DELAY)
     this.loader.onDidChange(throttledRefresh)
-    EditorPanel.onDidChange(throttledRefresh)
+    EditorAttendant.onDidChange(throttledRefresh)
   }
 
   refresh(): void {

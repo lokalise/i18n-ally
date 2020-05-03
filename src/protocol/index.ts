@@ -15,6 +15,7 @@ export interface Message {
   route?: string
   data?: any
   commentId?: string
+  items?: any[]
 }
 
 export class Protocol {
@@ -73,10 +74,25 @@ export class Protocol {
     })
   }
 
+  async setRecords(items: any[]) {
+    const loader = CurrentFile.loader
+    const pendings = items.map(({ keypath, locale, value }) => {
+      const record = loader.getRecordByKey(keypath, locale, true)
+      return { keypath, locale, value, filepath: record?.filepath, namespace: record?.meta?.namespace }
+    })
+    await loader.write(pendings)
+  }
+
   async handleMessages(message: Message) {
     const handled = this.extendHandler ? await Promise.resolve(this.extendHandler(message)) : undefined
     if (handled)
       return
+
+    const reply = (data: any) => {
+      this.postMessage({ ...data, _id: message._id })
+    }
+
+    const loader = CurrentFile.loader
 
     switch (message.type) {
       case 'ready':
@@ -89,12 +105,20 @@ export class Protocol {
         this.updateI18nMessages()
         break
 
-      case 'edit':
-        CurrentFile.loader.write({
-          keypath: message.data.keypath,
-          locale: message.data.locale,
-          value: message.data.value,
-        })
+      case 'get_record':
+        reply(loader.getRecordByKey(message.keypath!, message.locale!, true))
+        break
+
+      case 'set_record':
+        await this.setRecords([message])
+        break
+
+      case 'get_records':
+        reply(message.items!.map((i: any) => loader.getRecordByKey(i.keypath, i.locale, true)))
+        break
+
+      case 'set_records':
+        await this.setRecords(message.items!)
         break
 
       case 'translate':

@@ -11,13 +11,13 @@ export class EditorContext {
   keys?: KeyInDocument[]
 }
 
-export class EditorPanel {
+export class EditorAttendant {
   /**
    * Track the currently panel. Only allow a single panel to exist at a time.
    */
-  public static currentPanel: EditorPanel | undefined
+  public static currentPanel: EditorAttendant | undefined
   private static _onDidChanged = new EventEmitter<boolean>()
-  public static onDidChange = EditorPanel._onDidChanged.event
+  public static onDidChange = EditorAttendant._onDidChanged.event
 
   private readonly _panel: WebviewPanel
   private readonly _protocol: Protocol
@@ -42,12 +42,12 @@ export class EditorPanel {
   }
 
   public static revive(ctx: ExtensionContext, panel?: WebviewPanel, column?: ViewColumn) {
-    if (!EditorPanel.currentPanel) {
-      EditorPanel.currentPanel = new EditorPanel(ctx, panel, column)
-      EditorPanel._onDidChanged.fire(true)
+    if (!EditorAttendant.currentPanel) {
+      EditorAttendant.currentPanel = new EditorAttendant(ctx, panel, column)
+      EditorAttendant._onDidChanged.fire(true)
     }
 
-    return EditorPanel.currentPanel
+    return EditorAttendant.currentPanel
   }
 
   private constructor(ctx: ExtensionContext, panel?: WebviewPanel, column?: ViewColumn) {
@@ -209,13 +209,13 @@ export class EditorPanel {
   }
 
   public dispose() {
-    EditorPanel.currentPanel = undefined
+    EditorAttendant.currentPanel = undefined
 
     this._panel.dispose()
 
     Disposable.from(...this._disposables).dispose()
 
-    EditorPanel._onDidChanged.fire(false)
+    EditorAttendant._onDidChanged.fire(false)
   }
 
   init() {

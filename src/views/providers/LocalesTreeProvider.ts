@@ -3,7 +3,7 @@ import { sortBy, throttle } from 'lodash'
 import { resolveFlattenRootKeypath } from '../../utils'
 import { Node, Loader, CurrentFile, LocaleTree, LocaleNode } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
-import { EditorPanel } from '../../webview/panel'
+import { EditorAttendant } from '../../webview/attendant'
 import { THROTTLE_DELAY } from '../../meta'
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
@@ -23,7 +23,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
 
     const throttledRefresh = throttle(() => this.refresh(), THROTTLE_DELAY)
     this.loader.onDidChange(throttledRefresh)
-    EditorPanel.onDidChange(throttledRefresh)
+    EditorAttendant.onDidChange(throttledRefresh)
   }
 
   protected refresh(): void {

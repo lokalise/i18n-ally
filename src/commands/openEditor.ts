@@ -1,6 +1,6 @@
 import { commands, window, ViewColumn, workspace, TextDocument } from 'vscode'
 import { promptKeys } from '../utils'
-import { EditorPanel } from '../webview/panel'
+import { EditorAttendant } from '../webview/attendant'
 import { Commands, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
@@ -30,7 +30,7 @@ const m: ExtensionModule = (ctx) => {
   const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
     let key: string | undefined
     let locale: string | undefined
-    let mode: EditorPanel['mode'] = 'standalone'
+    let mode: EditorAttendant['mode'] = 'standalone'
     let index: number | undefined
 
     // from code pattele
@@ -66,7 +66,7 @@ const m: ExtensionModule = (ctx) => {
     if (!key)
       return
 
-    const panel = EditorPanel.createOrShow(ctx, mode === 'currentFile' ? ViewColumn.Two : undefined)
+    const panel = EditorAttendant.createOrShow(ctx, mode === 'currentFile' ? ViewColumn.Two : undefined)
     panel.mode = mode
     panel.openKey(key, locale, index)
   }
@@ -76,10 +76,10 @@ const m: ExtensionModule = (ctx) => {
       Global.enabled
       && doc
       && window.activeTextEditor?.document === doc
-      && EditorPanel.currentPanel?.visible
+      && EditorAttendant.currentPanel?.visible
       && supportedFileOpen()
     )
-      EditorPanel.currentPanel.sendCurrentFileContext()
+      EditorAttendant.currentPanel.sendCurrentFileContext()
   }
 
   return [

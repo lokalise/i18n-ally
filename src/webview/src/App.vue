@@ -19,7 +19,7 @@ import VRefresh from 'vue-material-design-icons/Refresh.vue'
 import VMagnify from 'vue-material-design-icons/Magnify.vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
-import { vscode } from './api'
+import { api } from './api'
 
 export default Vue.extend({
   components: {
@@ -47,7 +47,7 @@ export default Vue.extend({
 
   methods: {
     postMessage(message) {
-      vscode.postMessage(message)
+      api.postMessage(message)
     },
     refresh() {
       this.postMessage({ type: 'webview.refresh' })

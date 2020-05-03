@@ -58,7 +58,7 @@ import { getCommentState } from '../../utils/shared'
 import ReviewComment from './ReviewComment.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
-import { vscode } from './api'
+import { api } from './api'
 
 export default Vue.extend({
   components: {
@@ -150,17 +150,15 @@ export default Vue.extend({
         this.save()
     },
     save() {
-      vscode.postMessage({
-        type: 'edit',
-        data: {
-          keypath: this.record.keypath,
-          locale: this.record.locale,
-          value: this.value,
-        },
+      api.postMessage({
+        type: 'set_record',
+        keypath: this.record.keypath,
+        locale: this.record.locale,
+        value: this.value,
       })
     },
     translate() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'translate',
         data: {
           keypath: this.record.keypath,
@@ -169,21 +167,21 @@ export default Vue.extend({
       })
     },
     transDiscard() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'translation.discard',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transApply() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'translation.apply',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transEdit() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'translation.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,

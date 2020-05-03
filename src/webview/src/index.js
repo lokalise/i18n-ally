@@ -18,7 +18,7 @@ import VChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import VChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
-import { vscode } from './api'
+import { api } from './api'
 import App from './App.vue'
 
 Vue.component('VCheck', VCheck)
@@ -65,7 +65,6 @@ const store = new Vuex.Store({
       route: 'welcome',
       routeData: {},
     },
-    vscode.getState(),
     { ready: false })
   },
   mutations: {
@@ -113,15 +112,7 @@ window.addEventListener('message', (event) => {
 window.app = new Vue({
   store,
   i18n,
-  watch: {
-    '$store.state': {
-      deep: true,
-      handler() {
-        vscode.setState(this.$store.state)
-      },
-    },
-  },
   render: createElement => createElement(App),
 }).$mount('#app')
 
-vscode.postMessage({ type: 'ready' })
+api.postMessage({ type: 'ready' })

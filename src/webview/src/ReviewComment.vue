@@ -66,7 +66,7 @@
 import Vue from 'vue'
 import cloneDeep from 'lodash/cloneDeep'
 import Avatar from './Avatar.vue'
-import { vscode } from './api'
+import { api } from './api'
 
 export default Vue.extend({
   components: {
@@ -137,7 +137,7 @@ export default Vue.extend({
       this.$emit('done')
     },
     postComment(type) {
-      vscode.postMessage({
+      api.postMessage({
         type: this.mode === 'create' ? 'review.comment' : 'review.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,
@@ -150,7 +150,7 @@ export default Vue.extend({
       this.$emit('done')
     },
     resolveComment(comment) {
-      vscode.postMessage({
+      api.postMessage({
         type: 'review.resolve',
         keypath: this.record.keypath,
         locale: this.record.locale,
@@ -158,7 +158,7 @@ export default Vue.extend({
       })
     },
     acceptSuggestion(comment) {
-      vscode.postMessage({
+      api.postMessage({
         type: 'review.apply-suggestion',
         keypath: this.record.keypath,
         locale: this.record.locale,

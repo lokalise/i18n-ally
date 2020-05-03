@@ -39,7 +39,8 @@ export class Server {
     this.wss = new WebSocket.Server({ server: this.server })
 
     app.use(cors())
-    app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'), { extensions: ['js'] })))
+    app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'))))
+    app.use(mount('/editor', KoaStatic(path.join(Config.extensionPath, 'dist/editor'))))
     app.use((ctx) => {
       if (ctx.path === '/') {
         ctx.body = {

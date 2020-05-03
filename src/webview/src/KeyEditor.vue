@@ -62,7 +62,7 @@
 import Vue from 'vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
-import { vscode } from './api'
+import { api } from './api'
 
 export default Vue.extend({
   components: {
@@ -125,7 +125,7 @@ export default Vue.extend({
       },
     },
     keyIndex() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'navigate-key',
         data: {
           filepath: this.context.filepath,
@@ -142,13 +142,13 @@ export default Vue.extend({
 
   methods: {
     editDescription() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'review.description',
         keypath: this.data.keypath,
       })
     },
     translateAll() {
-      vscode.postMessage({
+      api.postMessage({
         type: 'translate',
         data: {
           keypath: this.data.keypath,
