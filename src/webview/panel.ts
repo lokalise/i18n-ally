@@ -3,7 +3,7 @@ import fs from 'fs'
 import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands, Selection, TextEditorRevealType } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import i18n from '../i18n'
-import { Config, CurrentFile, Global, Commands, KeyInDocument } from '../core'
+import { Config, CurrentFile, Global, Commands, KeyInDocument, KeyDetector } from '../core'
 import { EXT_EDITOR_ID, EXT_ID } from '../meta'
 
 export class EditorContext {
@@ -24,7 +24,17 @@ export class EditorPanel {
   private _disposables: Disposable[] = []
   private _pendingMessages: any[] = []
   private _editing_key: string | undefined
+  private _mode: 'standalone' | 'currentFile' = 'standalone'
   public ready = false
+
+  get mode() {
+    return this._mode
+  }
+
+  set mode(v) {
+    if (this._mode !== v)
+      this._mode = v
+  }
 
   public static createOrShow(ctx: ExtensionContext, column?: ViewColumn) {
     const panel = this.revive(ctx, undefined, column)
@@ -110,7 +120,34 @@ export class EditorPanel {
     })
   }
 
-  public openKey(keypath: string, locale?: string) {
+  public sendCurrentFileContext() {
+    if (this.mode === 'standalone')
+      this.setContext({})
+
+    const doc = window.activeTextEditor?.document
+
+    if (!doc || !Global.isLanguageIdSupported(doc.languageId))
+      return false
+
+    let keys = KeyDetector.getKeys(doc) || []
+    if (!keys.length)
+      return false
+
+    keys = keys.map(k => ({
+      ...k,
+      value: CurrentFile.loader.getValueByKey(k.key),
+    }))
+
+    const context = {
+      filepath: doc.uri.fsPath,
+      keys,
+    }
+
+    this.setContext(context)
+    return true
+  }
+
+  public openKey(keypath: string, locale?: string, index?: number) {
     const node = CurrentFile.loader.getNodeByKey(keypath, true)
     if (node) {
       this._editing_key = keypath
@@ -122,8 +159,10 @@ export class EditorPanel {
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
           reviews: Global.reviews.getReviews(keypath),
+          keyIndex: index,
         },
       })
+      this.sendCurrentFileContext()
     }
     else {
       // TODO: Error
@@ -227,11 +266,11 @@ export class EditorPanel {
     }
   }
 
-  private async navigateKey(data: KeyInDocument & {filepath: string}) {
+  private async navigateKey(data: KeyInDocument & {filepath: string; keyIndex: number}) {
     if (!data.filepath)
       return
 
-    this.openKey(data.key)
+    this.openKey(data.key, undefined, data.keyIndex)
     const doc = await workspace.openTextDocument(Uri.file(data.filepath))
     const editor = await window.showTextDocument(doc, ViewColumn.One)
     editor.selection = new Selection(

@@ -13,6 +13,9 @@ import VCheckboxMarkedOutline from 'vue-material-design-icons/CheckboxMarkedOutl
 import VPencilOff from 'vue-material-design-icons/PencilOff.vue'
 import VPencil from 'vue-material-design-icons/Pencil.vue'
 import VCheckAll from 'vue-material-design-icons/CheckAll.vue'
+import VMenu from 'vue-material-design-icons/Menu.vue'
+import VChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
+import VChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
 import { vscode } from './api'
@@ -30,6 +33,9 @@ Vue.component('VPencil', VPencil)
 Vue.component('VCheckAll', VCheckAll)
 Vue.component('VDeleteEmptyOutline', VDeleteEmptyOutline)
 Vue.component('VFormatQuoteOpen', VFormatQuoteOpen)
+Vue.component('VMenu', VMenu)
+Vue.component('VChevronLeft', VChevronLeft)
+Vue.component('VChevronRight', VChevronRight)
 
 Vue.use(Vuex)
 Vue.use(VueI18n)

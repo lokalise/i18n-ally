@@ -1,25 +1,33 @@
 <template lang="pug">
 .key-editor(
+  :class='{"with-sidebar": sidebar}'
   @mousedown='onMousedown'
   @mouseup='dragging=false'
   @mousemove='onMove'
 )
-  .sidebar(:style='{width: sidebarWidth +"px"}')
+  .sidebar(:style='{width: sidebarWidth +"px"}' v-if='sidebar')
     .keys
-      .key.panel(
+      .item.panel(
         v-for='(key, idx) in contextKeys'
         @click='gotoKey(idx)'
         :class='{active: idx === keyIndex}'
-      ) {{key.key}}
+      )
+        .key {{key.key}}
+        .value(:class='{empty: !key.value}') {{key.value || $t('editor.empty')}}
+
     .resize-handler
       .inner
+
   .content
     .header
       template(v-if='contextKeys.length')
         .buttons
-          .button(@click='sidebar = !sidebar' v-if='contextKeys.length') Sidebar
-          .button(@click='nextKey(-1)' :disabled='keyIndex <= 0') Previous
-          .button(@click='nextKey(1)' :disabled='keyIndex >= contextKeys.length - 1') Next
+          .button(@click='sidebar = !sidebar' v-if='contextKeys.length')
+            v-menu
+          .button(@click='nextKey(-1)' :disabled='keyIndex <= 0')
+            v-chevron-left
+          .button(@click='nextKey(1)' :disabled='keyIndex >= contextKeys.length - 1')
+            v-chevron-right
         br
 
       .key-name "{{data.keypath}}"
@@ -52,7 +60,6 @@
 
 <script lang="js">
 import Vue from 'vue'
-import VEarth from 'vue-material-design-icons/Earth.vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
 import { vscode } from './api'
@@ -61,7 +68,6 @@ export default Vue.extend({
   components: {
     Flag,
     RecordEditor,
-    VEarth,
   },
 
   inheritAttrs: false,
@@ -74,6 +80,7 @@ export default Vue.extend({
     return {
       dragging: false,
       sidebarWidth: 150,
+      sidebar: false,
       current: '',
       keyIndex: 0,
     }
@@ -114,8 +121,18 @@ export default Vue.extend({
     context: {
       immiediate: true,
       handler() {
-        this.keyIndex = this.contextKeys.indexOf(this.data.keypath) || 0
+        this.keyIndex = this.data.keyIndex ?? this.contextKeys.indexOf(this.data.keypath) ?? 0
       },
+    },
+    keyIndex() {
+      vscode.postMessage({
+        name: 'navigate-key',
+        data: {
+          filepath: this.context.filepath,
+          keyIndex: this.keyIndex,
+          ...this.contextKeys[this.keyIndex],
+        },
+      })
     },
   },
 
@@ -137,13 +154,6 @@ export default Vue.extend({
     },
     gotoKey(v) {
       this.keyIndex = v
-      vscode.postMessage({
-        name: 'navigate-key',
-        data: {
-          filepath: this.context.filepath,
-          ...this.contextKeys[this.keyIndex],
-        },
-      })
     },
     nextKey(offset) {
       this.gotoKey(this.keyIndex + offset)
@@ -163,7 +173,8 @@ export default Vue.extend({
 <style lang="stylus" scoped>
 .key-editor
   display grid
-  grid-template-columns max-content auto
+  &.with-sidebar
+    grid-template-columns max-content auto
 
   .sidebar
     overflow-y auto
@@ -196,22 +207,30 @@ export default Vue.extend({
       grid-gap 0.4em
       overflow-x auto
 
-      .key
+      .item
         font-size 0.8em
-        font-family var(--vscode-editor-font-family)
         opacity 0.5
+        cursor pointer
 
         &::before
           opacity 0.08
 
         &.active
           opacity 1
+          cursor default
 
         &.active::before
           opacity 0.1
 
         &::after
           opacity 0 !important
+
+        .key
+          font-family var(--vscode-editor-font-family)
+
+        .value
+          &.empty
+            opacity 0.5
 
   .header
     padding var(--i18n-ally-margin)
