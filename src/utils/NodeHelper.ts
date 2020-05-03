@@ -18,7 +18,7 @@ export class NodeHelper {
   }
 
   static isTranslatable(node: Node) {
-    if (Config.readonly || node.readonly || node.type === 'tree' || !this.notShadowOrHasFilepath(node))
+    if (Config.readonly || node.readonly || node.type === 'tree')
       return false
 
     if (Config.translatePromptSource)
