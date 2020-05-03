@@ -1,14 +1,12 @@
 <template lang="pug">
 .container
   template(v-if='$store.state.ready')
-    .nav-bar
     .actions-bar
       v-magnify.setting-button(@click='openSearch')
       v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
       v-cog.setting-button(@click='openSettings')
 
-    .content
-      key-editor(v-if='state.route === "open-key"' :data='state.routeData')
+    key-editor(v-if='state.route === "open-key"' :data='state.routeData')
 
   template(v-else)
     p.loading Loading...

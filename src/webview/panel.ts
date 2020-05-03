@@ -142,7 +142,7 @@ export class EditorPanel {
     this.postMessage({
       name: 'config',
       data: {
-        // debug: Config.debug,
+        debug: Config.debug,
         review: Config.reviewEnabled,
         locales,
         flags: locales.map(i => Config.tagSystem.getFlagName(i)),

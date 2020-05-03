@@ -1,38 +1,53 @@
 <template lang="pug">
-.key-editor
-  .header
-    template(v-if='contextKeys.length')
-      .buttons
-        .button(@click='nextKey(-1)' :disabled='keyIndex <= 0') Previous
-        .button(@click='nextKey(1)' :disabled='keyIndex >= contextKeys.length - 1') Next
-      br
+.key-editor(
+  @mousedown='onMousedown'
+  @mouseup='dragging=false'
+  @mousemove='onMove'
+)
+  .sidebar(:style='{width: sidebarWidth +"px"}')
+    .keys
+      .key.panel(
+        v-for='(key, idx) in contextKeys'
+        @click='gotoKey(idx)'
+        :class='{active: idx === keyIndex}'
+      ) {{key.key}}
+    .resize-handler
+      .inner
+  .content
+    .header
+      template(v-if='contextKeys.length')
+        .buttons
+          .button(@click='sidebar = !sidebar' v-if='contextKeys.length') Sidebar
+          .button(@click='nextKey(-1)' :disabled='keyIndex <= 0') Previous
+          .button(@click='nextKey(1)' :disabled='keyIndex >= contextKeys.length - 1') Next
+        br
 
-    .key-name "{{data.keypath}}"
+      .key-name "{{data.keypath}}"
 
-    // pre {{$store.state.context}} {{keyIndex}}
+      // pre {{$store.state.context}} {{keyIndex}}
 
-    .reviews
-      template(v-if='!data.reviews.description')
-        .description.add(@click='editDescription') {{ $t('editor.add_description') }}
-      template(v-else)
-        .description(@click='editDescription') {{data.reviews.description}}
+      .reviews
+        template(v-if='!data.reviews.description')
+          .description.add(@click='editDescription') {{ $t('editor.add_description') }}
+        template(v-else)
+          .description(@click='editDescription') {{data.reviews.description}}
 
-    .buttons.actions
-      .button(@click='translateAll' v-if='emptyRecords.length')
-        v-earth
-        span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
-      // .button Mark all as...
+      .buttons.actions
+        .button(@click='translateAll' v-if='emptyRecords.length')
+          v-earth
+          span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
+        // .button Mark all as...
 
-  .records
-    record-editor(
-      v-for='r in records'
-      :keypath='data.keypath'
-      :record='r'
-      :review='(data.reviews.locales || {})[r.locale]'
-      :key='r.locale'
-      :active='current === r.locale'
-      @update:active='current = r.locale'
-    )
+    .records
+      record-editor(
+        v-for='r in records'
+        :keypath='data.keypath'
+        :record='r'
+        :review='(data.reviews.locales || {})[r.locale]'
+        :key='r.locale'
+        :active='current === r.locale'
+        @update:active='current = r.locale'
+      )
 </template>
 
 <script lang="js">
@@ -57,6 +72,8 @@ export default Vue.extend({
 
   data() {
     return {
+      dragging: false,
+      sidebarWidth: 150,
       current: '',
       keyIndex: 0,
     }
@@ -118,8 +135,8 @@ export default Vue.extend({
         },
       })
     },
-    nextKey(offset) {
-      this.keyIndex += offset
+    gotoKey(v) {
+      this.keyIndex = v
       vscode.postMessage({
         name: 'navigate-key',
         data: {
@@ -128,12 +145,74 @@ export default Vue.extend({
         },
       })
     },
+    nextKey(offset) {
+      this.gotoKey(this.keyIndex + offset)
+    },
+    onMousedown(e) {
+      if (e.target.className === 'resize-handler')
+        this.dragging = true
+    },
+    onMove(e) {
+      if (this.dragging)
+        this.sidebarWidth = Math.min(Math.max(100, e.clientX - 20), window.innerWidth * 0.6)
+    },
   },
 })
 </script>
 
 <style lang="stylus" scoped>
 .key-editor
+  display grid
+  grid-template-columns max-content auto
+
+  .sidebar
+    overflow-y auto
+    overflow-x hidden
+    position relative
+    padding 0.8em
+
+    .resize-handler
+      position absolute
+      top 0
+      right -6px
+      bottom 0
+      padding 0 6px
+      cursor ew-resize
+
+      .inner
+        height 100%
+        width 1px
+        background var(--vscode-foreground)
+        pointer-events none
+        opacity 0
+        transition .2s ease-in-out
+
+      &:hover .inner
+        opacity 0.5
+
+    .keys
+      display grid
+      grid-template-rows auto
+      grid-gap 0.4em
+      overflow-x auto
+
+      .key
+        font-size 0.8em
+        font-family var(--vscode-editor-font-family)
+        opacity 0.5
+
+        &::before
+          opacity 0.08
+
+        &.active
+          opacity 1
+
+        &.active::before
+          opacity 0.1
+
+        &::after
+          opacity 0 !important
+
   .header
     padding var(--i18n-ally-margin)
 
