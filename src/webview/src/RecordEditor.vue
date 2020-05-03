@@ -151,7 +151,7 @@ export default Vue.extend({
     },
     save() {
       vscode.postMessage({
-        name: 'edit',
+        type: 'edit',
         data: {
           keypath: this.record.keypath,
           locale: this.record.locale,
@@ -161,7 +161,7 @@ export default Vue.extend({
     },
     translate() {
       vscode.postMessage({
-        name: 'translate',
+        type: 'translate',
         data: {
           keypath: this.record.keypath,
           locale: this.record.locale,
@@ -170,21 +170,21 @@ export default Vue.extend({
     },
     transDiscard() {
       vscode.postMessage({
-        name: 'translation.discard',
+        type: 'translation.discard',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transApply() {
       vscode.postMessage({
-        name: 'translation.apply',
+        type: 'translation.apply',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transEdit() {
       vscode.postMessage({
-        name: 'translation.edit',
+        type: 'translation.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })

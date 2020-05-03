@@ -138,7 +138,7 @@ export default Vue.extend({
     },
     postComment(type) {
       vscode.postMessage({
-        name: this.mode === 'create' ? 'review.comment' : 'review.edit',
+        type: this.mode === 'create' ? 'review.comment' : 'review.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,
         data: {
@@ -151,18 +151,18 @@ export default Vue.extend({
     },
     resolveComment(comment) {
       vscode.postMessage({
-        name: 'review.resolve',
+        type: 'review.resolve',
         keypath: this.record.keypath,
         locale: this.record.locale,
-        comment: comment.id,
+        commentId: comment.id,
       })
     },
     acceptSuggestion(comment) {
       vscode.postMessage({
-        name: 'review.apply-suggestion',
+        type: 'review.apply-suggestion',
         keypath: this.record.keypath,
         locale: this.record.locale,
-        comment: comment.id,
+        commentId: comment.id,
       })
     },
   },
