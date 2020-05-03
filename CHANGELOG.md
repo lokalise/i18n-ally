@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/antfu/i18n-ally/compare/v2.0.11...v2.1.0) (2020-05-03)
+
+
+### 🐞 Bug Fixes
+
+* translate globe missing, resolve [#282](https://github.com/antfu/i18n-ally/issues/282) ([87eb042](https://github.com/antfu/i18n-ally/commit/87eb04216a5aa1f946f1f4d3aa6b65a57b3b0f69))
+
+
+### ⚡ Features
+
+* sidebar for editor ([6b5bd72](https://github.com/antfu/i18n-ally/commit/6b5bd728c9cab4a3b3e3b738cfa3f5b9cbb9a7d9))
+
 ### [2.0.11](https://github.com/antfu/i18n-ally/compare/v2.0.10...v2.0.11) (2020-05-01)
 
 
