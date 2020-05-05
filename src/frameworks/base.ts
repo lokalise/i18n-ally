@@ -1,7 +1,7 @@
 import { TextDocument } from 'vscode'
 import { Config } from '../core'
 import { LanguageId } from '../utils'
-import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../core/types'
+import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle } from '../core/types'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -63,6 +63,12 @@ export abstract class Framework {
     else
       return '{locale}/**/*.{ext}'
   }
+
+  perferredLocalePaths?: string[]
+
+  perferredKeystyle?: KeyStyle
+
+  perferredDirStructure?: DirStructure
 
   enableFeatures?: OptionalFeatures
 

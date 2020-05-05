@@ -105,7 +105,7 @@ export class VueSfcLoader extends Loader {
         section.messages[locale] || {},
         pending.keypath,
         pending.value,
-        await Config.requestKeyStyle(),
+        await Global.requestKeyStyle(),
       )
     }
 

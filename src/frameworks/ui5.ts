@@ -50,6 +50,12 @@ class UI5Framework extends Framework {
   enableFeatures = {
     LinkedMessages: true,
   }
+
+  perferredLocalePaths = [
+    'webapp/i18n',
+  ]
+
+  perferredKeystyle = 'flat' as const
 }
 
 export default UI5Framework
