@@ -589,7 +589,8 @@
               "laravel",
               "transloco",
               "svelte",
-              "globalize"
+              "globalize",
+              "ui5"
             ]
           },
           "description": "%config.enabled_frameworks%"

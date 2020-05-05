@@ -26,7 +26,9 @@ import UI5Framework from './ui5'
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
 export const frameworks: Framework[] = [
+  // Custom should be the first one
   new CustomFramework(),
+
   new VueFramework(),
   new ReactFramework(),
   new NgxTranslateFramework(),
@@ -43,8 +45,10 @@ export const frameworks: Framework[] = [
   new SvelteFramework(),
   new PolyglotFramework(),
   new GlobalizeFramework(),
-  new VueSFCFramework(),
   new UI5Framework(),
+
+  // Vue SFC should be the last one
+  new VueSFCFramework(),
 ]
 
 export function getFramework(id: string): Framework | undefined {

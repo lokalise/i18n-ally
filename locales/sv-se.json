@@ -1,10 +1,4 @@
 {
-  "button.label.clickMe": "",
-  "button.label.language": "",
-  "button.toastMessage": "",
-  "clicked.times-0": "",
-  "clicked.times-1": "",
-  "clicked.times-2": "",
   "command.config_display_language": "Ändra visningsspråk",
   "command.config_locales": "Ändra sökväg för översättningsvägar manuellt",
   "command.config_locales_auto": "Hitta översättningsvägars sökväg automatiskt",
