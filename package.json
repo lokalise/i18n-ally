@@ -606,7 +606,8 @@
               "yaml",
               "ini",
               "pot",
-              "php"
+              "php",
+              "properties"
             ]
           },
           "description": "%config.enabled_parsers%"
@@ -976,6 +977,7 @@
     "json-source-map": "^0.6.1",
     "json-stable-stringify": "^1.0.1",
     "json5": "^2.1.0",
+    "properties": "^1.2.1",
     "limax": "^2.0.0",
     "lodash": "^4.17.11",
     "nanoid": "^3.1.3",

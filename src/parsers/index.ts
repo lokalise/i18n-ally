@@ -5,6 +5,7 @@ import { EcmascriptParser } from './ecmascript'
 import { IniParser } from './ini'
 import { PoParser } from './po'
 import { PhpParser } from './php'
+import { Properties } from './properties'
 import { Parser } from './base'
 
 export const DefaultEnabledParsers = ['json', 'yaml', 'json5']
@@ -19,4 +20,5 @@ export const AvaliablePasers: Parser[] = [
   new IniParser(),
   new PoParser(),
   new PhpParser(),
+  new Properties(),
 ]
