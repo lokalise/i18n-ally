@@ -50,8 +50,6 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 <br>
 
------
-
 
 <h2 align='center'><b>⚡️ Screenshots & Features</b></h2>
 
@@ -94,9 +92,6 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 - Supports numerous popular frameworks
 - Supports [linked locale messages](https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages)
 - Uses i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-multilingual-support)
-
-
------
 
 
 ## 🌍 Multilingual Support
