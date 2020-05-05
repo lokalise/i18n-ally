@@ -1,0 +1,15 @@
+<mvc:View
+	controllerName="Quickstart.App"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<App>
+		<Page title="{i18n>title}">
+			<Button
+				text="{i18n>steady}"
+				press=".onPress"
+				type="Emphasized"
+				class="sapUiSmallMargin"/>
+		</Page>
+	</App>
+</mvc:View>
