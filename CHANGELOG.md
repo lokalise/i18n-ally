@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/antfu/i18n-ally/compare/v2.1.1...v2.1.2) (2020-05-05)
+
+
+### ⚡ Features
+
+* allow frameworks to set preferred settings ([31e3d2e](https://github.com/antfu/i18n-ally/commit/31e3d2e0e6b885ac092ec7d15bd95f5938b7d760))
+
 ### [2.1.1](https://github.com/antfu/i18n-ally/compare/v2.1.0...v2.1.1) (2020-05-05)
 
 
