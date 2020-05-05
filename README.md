@@ -34,7 +34,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </a>
 </p>
 
-
+<br>
 
 <h4 align="center">
 <a href="https://github.com/antfu/i18n-ally/wiki">📖 Docs</a>
@@ -49,9 +49,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </h4>
 
 <br>
-
-
-<h2 align='center'><b>⚡️ Screenshots & Features</b></h2>
+<br>
 
 <h3 align='center'>Inline Annotations</h3>
 
@@ -85,7 +83,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 
 ![](https://github.com/antfu/i18n-ally/blob/screenshots/annotation-locale.png?raw=true)
 
-<h3 align="center">General</h3>
+<h3 align="center">General Features</h3>
 
 - Supports multi-root workspaces
 - Supports remote development
@@ -108,7 +106,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
 | Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm), [@Excalibaard](https://github.com/Excalibaard) |
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
-| Français |  | [@Nicoxx45](https://github.com/Nicoxx45) |
+| French (Français) |  | [@Nicoxx45](https://github.com/Nicoxx45) |
 | Swedish (Svenska) |  | [@vladdeSV](https://github.com/vladdeSV) |
 
 [**Help Translate**](https://github.com/antfu/i18n-ally/wiki/Contribute#working-on-translations)
