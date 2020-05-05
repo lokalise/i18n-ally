@@ -21,6 +21,7 @@ import TranslocoFramework from './transloco'
 import SvelteFramework from './svelte'
 import PolyglotFramework from './polyglot'
 import GlobalizeFramework from './globalize'
+import UI5Framework from './ui5'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -43,6 +44,7 @@ export const frameworks: Framework[] = [
   new PolyglotFramework(),
   new GlobalizeFramework(),
   new VueSFCFramework(),
+  new UI5Framework(),
 ]
 
 export function getFramework(id: string): Framework | undefined {
