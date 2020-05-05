@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/antfu/i18n-ally/compare/v2.1.0...v2.1.1) (2020-05-05)
+
+
+### 🔮 Refactor
+
+* extract message protocol ([0944ec8](https://github.com/antfu/i18n-ally/commit/0944ec802c79616ce9caafcc9213d7ed9b53400b))
+
+
+### ⚡ Features
+
+* SAP UI5 Framework support ([#288](https://github.com/antfu/i18n-ally/issues/288)), thanks [@mahesh0431](https://github.com/mahesh0431) ([98faaf5](https://github.com/antfu/i18n-ally/commit/98faaf543a7c0d62074d9fac2eab0cb750992c2a))
+
+
+### 🐞 Bug Fixes
+
+* **react:** simplify the key regex, [#286](https://github.com/antfu/i18n-ally/issues/286) ([66d58e6](https://github.com/antfu/i18n-ally/commit/66d58e643887d550d2aed83a26569662dd03fe99))
+
 ## [2.1.0](https://github.com/antfu/i18n-ally/compare/v2.0.11...v2.1.0) (2020-05-03)
 
 
