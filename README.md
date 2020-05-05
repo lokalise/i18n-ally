@@ -34,10 +34,26 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </a>
 </p>
 
+
+
+<h4 align="center">
+<a href="https://github.com/antfu/i18n-ally/wiki">📖 Docs</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/FAQ">💭 FAQ</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configs</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Formats</a>
+　|　
+<a href="https://github.com/antfu/i18n-ally/wiki/Contribute">🧱 Contribute</a>
+</h4>
+
+<br>
+
 -----
 
-<details>
-<summary align='center'><b>⚡️ Screenshots & Features</b></summary>
+
+<h2 align='center'><b>⚡️ Screenshots & Features</b></h2>
 
 <h3 align='center'>Inline Annotations</h3>
 
@@ -79,25 +95,9 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 - Supports [linked locale messages](https://kazupon.github.io/vue-i18n/guide/messages.html#linked-locale-messages)
 - Uses i18n for the extension itself, of course. [Translation List](https://github.com/antfu/i18n-ally#-multilingual-support)
 
-</details>
-
 
 -----
 
-
-<h4 align="center">
-<a href="https://github.com/antfu/i18n-ally/wiki">📖 Docs</a>
-　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/FAQ">💭 FAQ</a>
-　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configs</a>
-　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Formats</a>
-　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Contribute">🧱 Contribute</a>
-</h4>
-
-<br>
 
 ## 🌍 Multilingual Support
 
