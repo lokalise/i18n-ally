@@ -91,7 +91,7 @@ const store = new Vuex.Store({
 
 window.addEventListener('message', (event) => {
   const message = event.data
-  switch (message.name) {
+  switch (message.type) {
     case 'ready':
       store.commit('ready')
       break
@@ -124,4 +124,4 @@ window.app = new Vue({
   render: createElement => createElement(App),
 }).$mount('#app')
 
-vscode.postMessage({ name: 'ready' })
+vscode.postMessage({ type: 'ready' })

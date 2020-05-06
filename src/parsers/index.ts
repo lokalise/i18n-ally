@@ -11,10 +11,12 @@ import { Parser } from './base'
 export const DefaultEnabledParsers = ['json', 'yaml', 'json5']
 
 export const AvaliablePasers: Parser[] = [
+  // enabled parsers
   new JsonParser(),
   new YamlParser(),
   new Json5Parser(),
 
+  // avaliable parsers
   new EcmascriptParser('js'),
   new EcmascriptParser('ts'),
   new IniParser(),

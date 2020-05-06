@@ -50,13 +50,13 @@ export default Vue.extend({
       vscode.postMessage(message)
     },
     refresh() {
-      this.postMessage({ name: 'refresh' })
+      this.postMessage({ type: 'webview.refresh' })
     },
     openSettings() {
-      this.postMessage({ name: 'open-builtin-settings' })
+      this.postMessage({ type: 'open-builtin-settings' })
     },
     openSearch() {
-      this.postMessage({ name: 'open-search' })
+      this.postMessage({ type: 'open-search' })
     },
   },
 })

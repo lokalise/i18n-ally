@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
-import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, commands, Selection, TextEditorRevealType } from 'vscode'
-import { TranslateKeys } from '../commands/manipulations'
+import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, Selection, TextEditorRevealType } from 'vscode'
 import i18n from '../i18n'
-import { Config, CurrentFile, Global, Commands, KeyInDocument, KeyDetector } from '../core'
-import { EXT_EDITOR_ID, EXT_ID } from '../meta'
+import { CurrentFile, Global, KeyInDocument, KeyDetector, Config } from '../core'
+import { EXT_EDITOR_ID } from '../meta'
+import { Protocol } from '../protocol'
 
 export class EditorContext {
   filepath?: string
@@ -20,12 +20,11 @@ export class EditorPanel {
   public static onDidChange = EditorPanel._onDidChanged.event
 
   private readonly _panel: WebviewPanel
+  private readonly _protocol: Protocol
   private readonly _ctx: ExtensionContext
   private _disposables: Disposable[] = []
-  private _pendingMessages: any[] = []
   private _editing_key: string | undefined
   private _mode: 'standalone' | 'currentFile' = 'standalone'
-  public ready = false
 
   get mode() {
     return this._mode
@@ -66,13 +65,39 @@ export class EditorPanel {
       },
     )
 
+    const webview = this._panel.webview
+
+    this._protocol = new Protocol(
+      async(message) => {
+        this._panel.webview.postMessage(message)
+      },
+      async(message) => {
+        switch (message.type) {
+          case 'webview.refresh':
+            this.init()
+            break
+          case 'navigate-key':
+            this.navigateKey(message.data)
+            break
+        }
+        return undefined
+      },
+      {
+        get extendConfig() {
+          return {
+            extensionRoot: webview.asWebviewUri(Uri.file(Config.extensionPath!)).toString(),
+          }
+        },
+      },
+    )
+
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programatically
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables)
 
     // Handle messages from the webview
     this._panel.webview.onDidReceiveMessage(
-      this.handleMessage.bind(this),
+      msg => this._protocol.handleMessages(msg),
       null,
       this._disposables,
     )
@@ -87,7 +112,7 @@ export class EditorPanel {
     )
 
     workspace.onDidChangeConfiguration(
-      () => this.updateConfig(),
+      () => this._protocol.updateConfig(),
       null,
       this._disposables,
     )
@@ -114,8 +139,8 @@ export class EditorPanel {
   }
 
   public setContext(context: EditorContext = {}) {
-    this.postMessage({
-      name: 'context',
+    this._protocol.postMessage({
+      type: 'context',
       data: context,
     })
   }
@@ -151,8 +176,8 @@ export class EditorPanel {
     const node = CurrentFile.loader.getNodeByKey(keypath, true)
     if (node) {
       this._editing_key = keypath
-      this.postMessage({
-        name: 'route',
+      this._protocol.postMessage({
+        type: 'route',
         route: 'open-key',
         data: {
           locale,
@@ -169,104 +194,7 @@ export class EditorPanel {
     }
   }
 
-  private updateI18nMessages() {
-    this.postMessage({
-      name: 'i18n',
-      data: i18n.messages,
-    })
-  }
-
-  private updateConfig() {
-    const locales = Global.loader?.locales || []
-    this.postMessage({
-      name: 'config',
-      data: {
-        debug: Config.debug,
-        review: Config.reviewEnabled,
-        locales,
-        flags: locales.map(i => Config.tagSystem.getFlagName(i)),
-        sourceLanguage: Config.sourceLanguage,
-        displayLanguage: Config.displayLanguage,
-        enabledFrameworks: Config.enabledFrameworks,
-        ignoredLocales: Config.ignoredLocales,
-        extensionRoot: this._panel.webview.asWebviewUri(Uri.file(Config.extensionPath!)).toString(),
-        translateOverrideExisting: Config.translateOverrideExisting,
-        user: Config.reviewUser,
-      },
-    })
-  }
-
-  private async handleMessage(message: any) {
-    switch (message.name) {
-      case 'ready':
-        this.ready = true
-        this.postMessage({ name: 'ready' })
-        this.updateConfig()
-        break
-
-      case 'refresh':
-        this.init()
-        break
-
-      case 'edit':
-        CurrentFile.loader.write({
-          keypath: message.data.keypath,
-          locale: message.data.locale,
-          value: message.data.value,
-        })
-        break
-
-      case 'navigate-key':
-        this.navigateKey(message.data)
-        break
-
-      case 'translate':
-        TranslateKeys(message.data)
-        break
-
-      case 'review.description':
-        Global.reviews.promptEditDescription(message.keypath)
-        break
-
-      case 'review.comment':
-        Global.reviews.addComment(message.keypath, message.locale, message.data)
-        break
-
-      case 'review.edit':
-        Global.reviews.editComment(message.keypath, message.locale, message.data)
-        break
-
-      case 'review.resolve':
-        Global.reviews.resolveComment(message.keypath, message.locale, message.comment)
-        break
-
-      case 'review.apply-suggestion':
-        Global.reviews.applySuggestion(message.keypath, message.locale, message.comment)
-        break
-
-      case 'open-builtin-settings':
-        commands.executeCommand('workbench.extensions.action.configure', EXT_ID)
-        break
-
-      case 'open-search':
-        commands.executeCommand(Commands.open_editor)
-        break
-
-      case 'translation.apply':
-        Global.reviews.applyTranslationCandidate(message.keypath, message.locale)
-        break
-
-      case 'translation.edit':
-        Global.reviews.promptEditTranslation(message.keypath, message.locale)
-        break
-
-      case 'translation.discard':
-        Global.reviews.discardTranslationCandidate(message.keypath, message.locale)
-        break
-    }
-  }
-
-  private async navigateKey(data: KeyInDocument & {filepath: string; keyIndex: number}) {
+  async navigateKey(data: KeyInDocument & {filepath: string; keyIndex: number}) {
     if (!data.filepath)
       return
 
@@ -280,17 +208,6 @@ export class EditorPanel {
     editor.revealRange(editor.selection, TextEditorRevealType.InCenter)
   }
 
-  private postMessage(message?: any) {
-    if (message)
-      this._pendingMessages.push(message)
-
-    if (this.ready && this._pendingMessages.length) {
-      for (const m of this._pendingMessages)
-        this._panel.webview.postMessage(m)
-      this._pendingMessages = []
-    }
-  }
-
   public dispose() {
     EditorPanel.currentPanel = undefined
 
@@ -301,8 +218,7 @@ export class EditorPanel {
     EditorPanel._onDidChanged.fire(false)
   }
 
-  private init() {
-    this.ready = false
+  init() {
     this._panel.iconPath = Uri.file(
       path.join(this._ctx.extensionPath, 'res/logo.svg'),
     )
@@ -310,7 +226,7 @@ export class EditorPanel {
       path.join(this._ctx.extensionPath, 'dist/editor/index.html'),
       'utf-8',
     )
-    this.updateI18nMessages()
+    this._protocol.updateI18nMessages()
   }
 
   get visible() {

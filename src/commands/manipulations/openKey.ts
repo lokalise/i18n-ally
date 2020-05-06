@@ -62,7 +62,7 @@ export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressR
       return
 
     const text = editor.document.getText()
-    const range = parser.navigateToKey(text, NodeHelper.getPathWithoutNamespace(keypath, node), Config.keyStyle)
+    const range = parser.navigateToKey(text, NodeHelper.getPathWithoutNamespace(keypath, node), await Global.requestKeyStyle())
 
     if (range) {
       editor.selection = new Selection(

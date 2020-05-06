@@ -31,8 +31,8 @@ export class LocaleLoader extends Loader {
       this._dir_structure = await this.guessDirStructure()
       Log.info(`📂 Directory structure: ${this._dir_structure}`)
 
-      if (Config.pathMatcher)
-        Log.info(`🗃 Custom Path Matcher: ${Config.pathMatcher}`)
+      if (Config._pathMatcher)
+        Log.info(`🗃 Custom Path Matcher: ${Config._pathMatcher}`)
 
       this._path_matchers = Global.getPathMatchers(this._dir_structure)
       Log.info(`🗃 Path Matcher Regex: ${this._path_matchers.map(i => i.regex)}`)
@@ -43,7 +43,7 @@ export class LocaleLoader extends Loader {
   }
 
   get localesPaths() {
-    return Config.localesPaths
+    return Global.localesPaths
   }
 
   get files() {
@@ -116,36 +116,34 @@ export class LocaleLoader extends Loader {
   async guessDirStructure(): Promise<DirStructure> {
     const POSITIVE_RATE = 0.6
 
-    const config = Config.dirStructure
-    if (config === 'auto') {
-      const dir = this._locale_dirs[0]
-
-      const dirnames = await fg('*', {
-        onlyDirectories: true,
-        cwd: dir,
-        deep: 1,
-        ignore: Config.ignoreFiles,
-      })
-
-      const total = dirnames.length
-      if (total === 0)
-        return 'file'
-
-      const positives = dirnames
-        .map(d => Config.tagSystem.lookup(d))
-
-      const positive = positives
-        .filter(d => d)
-        .length
-
-      // if there are some dirs are named as locale code, guess it's dir mode
-      return (positive / total) >= POSITIVE_RATE
-        ? 'dir'
-        : 'file'
-    }
-    else {
+    const config = Global.dirStructure
+    if (config !== 'auto')
       return config
-    }
+
+    const dir = this._locale_dirs[0]
+
+    const dirnames = await fg('*', {
+      onlyDirectories: true,
+      cwd: dir,
+      deep: 1,
+      ignore: Config.ignoreFiles,
+    })
+
+    const total = dirnames.length
+    if (total === 0)
+      return 'file'
+
+    const positives = dirnames
+      .map(d => Config.tagSystem.lookup(d))
+
+    const positive = positives
+      .filter(d => d)
+      .length
+
+    // if there are some dirs are named as locale code, guess it's dir mode
+    return (positive / total) >= POSITIVE_RATE
+      ? 'dir'
+      : 'file'
   }
 
   async requestMissingFilepath(pending: PendingWrite) {
@@ -245,7 +243,7 @@ export class LocaleLoader extends Loader {
             modified,
             keypath,
             pending.value,
-            await Config.requestKeyStyle(),
+            await Global.requestKeyStyle(),
           )
         }
 

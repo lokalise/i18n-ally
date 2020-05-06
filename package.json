@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "publisher": "antfu",
   "engines": {
     "vscode": "^1.40.0"
@@ -589,7 +589,8 @@
               "laravel",
               "transloco",
               "svelte",
-              "globalize"
+              "globalize",
+              "ui5"
             ]
           },
           "description": "%config.enabled_frameworks%"
@@ -906,8 +907,8 @@
     ]
   },
   "scripts": {
-    "release:minor": "npm i && standard-version --release-as minor && npm run publish:gh",
-    "release:patch": "npm i && standard-version --release-as patch && npm run publish:gh",
+    "release:minor": "standard-version --release-as minor && npm run publish:gh",
+    "release:patch": "standard-version --release-as patch && npm run publish:gh",
     "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
     "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
     "dev": "concurrently -n w: npm:*:dev",
@@ -937,8 +938,8 @@
     "@types/semver": "^7.1.0",
     "@types/vscode": "^1.40.0",
     "@types/yaml": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "2.29.0",
-    "@typescript-eslint/parser": "2.29.0",
+    "@typescript-eslint/eslint-plugin": "2.31.0",
+    "@typescript-eslint/parser": "2.31.0",
     "axios": "^0.19.2",
     "blueimp-md5": "^2.13.0",
     "concurrently": "^5.1.0",
@@ -956,7 +957,7 @@
     "standard-version": "7.1.0",
     "stylus": "^0.54.7",
     "ts-jest": "^25.0.0",
-    "ts-loader": "7.0.1",
+    "ts-loader": "7.0.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.16.0",
     "vue-material-design-icons": "^4.5.0",

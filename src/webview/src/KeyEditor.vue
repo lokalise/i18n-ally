@@ -126,7 +126,7 @@ export default Vue.extend({
     },
     keyIndex() {
       vscode.postMessage({
-        name: 'navigate-key',
+        type: 'navigate-key',
         data: {
           filepath: this.context.filepath,
           keyIndex: this.keyIndex,
@@ -134,18 +134,22 @@ export default Vue.extend({
         },
       })
     },
+    contextKeys() {
+      if (!this.contextKeys?.length)
+        this.sidebar = false
+    },
   },
 
   methods: {
     editDescription() {
       vscode.postMessage({
-        name: 'review.description',
+        type: 'review.description',
         keypath: this.data.keypath,
       })
     },
     translateAll() {
       vscode.postMessage({
-        name: 'translate',
+        type: 'translate',
         data: {
           keypath: this.data.keypath,
           locales: this.emptyRecords.map(i => i.locale),
