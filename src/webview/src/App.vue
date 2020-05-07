@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   template(v-if='$store.state.ready')
-    .actions-bar
+    .actions-bar(v-if='$store.state.mode === "webview"')
       v-magnify.setting-button(@click='openSearch')
       v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
       v-cog.setting-button(@click='openSettings')

@@ -18,7 +18,7 @@ import VChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import VChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
-import { api } from './api'
+import { api, mode } from './api'
 import App from './App.vue'
 
 Vue.component('VCheck', VCheck)
@@ -49,6 +49,7 @@ const i18n = new VueI18n({
 const store = new Vuex.Store({
   state: () => {
     return Object.assign({
+      mode,
       ready: false,
       config: {
         debug: false,
@@ -88,8 +89,7 @@ const store = new Vuex.Store({
   },
 })
 
-window.addEventListener('message', (event) => {
-  const message = event.data
+api.registerListener((message) => {
   switch (message.type) {
     case 'ready':
       store.commit('ready')

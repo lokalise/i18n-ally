@@ -226,7 +226,7 @@
       {
         "command": "i18n-ally.server.start",
         "category": "%extname%",
-        "title": "[WIP!] Start i18n Ally server."
+        "title": "[WIP!] Start server"
       }
     ],
     "menus": {

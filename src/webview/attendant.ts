@@ -2,14 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, Selection, TextEditorRevealType } from 'vscode'
 import i18n from '../i18n'
-import { CurrentFile, Global, KeyInDocument, KeyDetector, Config } from '../core'
+import { KeyInDocument, Config } from '../core'
 import { EXT_EDITOR_ID } from '../meta'
 import { Protocol } from '../protocol'
-
-export class EditorContext {
-  filepath?: string
-  keys?: KeyInDocument[]
-}
 
 export class EditorAttendant {
   /**
@@ -23,16 +18,21 @@ export class EditorAttendant {
   private readonly _protocol: Protocol
   private readonly _ctx: ExtensionContext
   private _disposables: Disposable[] = []
-  private _editing_key: string | undefined
-  private _mode: 'standalone' | 'currentFile' = 'standalone'
 
   get mode() {
-    return this._mode
+    return this._protocol.mode
   }
 
   set mode(v) {
-    if (this._mode !== v)
-      this._mode = v
+    this._protocol.mode = v
+  }
+
+  public openKey(keypath: string, locale?: string, index?: number) {
+    this._protocol.openKey(keypath, locale, index)
+  }
+
+  public sendCurrentFileContext() {
+    this._protocol.sendCurrentFileContext()
   }
 
   public static createOrShow(ctx: ExtensionContext, column?: ViewColumn) {
@@ -102,29 +102,7 @@ export class EditorAttendant {
       this._disposables,
     )
 
-    CurrentFile.loader.onDidChange(
-      () => {
-        if (this._editing_key)
-          this.openKey(this._editing_key)
-      },
-      null,
-      this._disposables,
-    )
-
-    workspace.onDidChangeConfiguration(
-      () => this._protocol.updateConfig(),
-      null,
-      this._disposables,
-    )
-
-    Global.reviews.onDidChange(
-      (keypath?: string) => {
-        if (this._editing_key && (!keypath || this._editing_key === keypath))
-          this.openKey(this._editing_key)
-      },
-      null,
-      this._disposables,
-    )
+    this._disposables.push(this._protocol)
 
     this.init()
   }
@@ -136,62 +114,6 @@ export class EditorAttendant {
         : undefined
     )
     this._panel.reveal(column)
-  }
-
-  public setContext(context: EditorContext = {}) {
-    this._protocol.postMessage({
-      type: 'context',
-      data: context,
-    })
-  }
-
-  public sendCurrentFileContext() {
-    if (this.mode === 'standalone')
-      this.setContext({})
-
-    const doc = window.activeTextEditor?.document
-
-    if (!doc || !Global.isLanguageIdSupported(doc.languageId))
-      return false
-
-    let keys = KeyDetector.getKeys(doc) || []
-    if (!keys.length)
-      return false
-
-    keys = keys.map(k => ({
-      ...k,
-      value: CurrentFile.loader.getValueByKey(k.key),
-    }))
-
-    const context = {
-      filepath: doc.uri.fsPath,
-      keys,
-    }
-
-    this.setContext(context)
-    return true
-  }
-
-  public openKey(keypath: string, locale?: string, index?: number) {
-    const node = CurrentFile.loader.getNodeByKey(keypath, true)
-    if (node) {
-      this._editing_key = keypath
-      this._protocol.postMessage({
-        type: 'route',
-        route: 'open-key',
-        data: {
-          locale,
-          keypath,
-          records: CurrentFile.loader.getShadowLocales(node),
-          reviews: Global.reviews.getReviews(keypath),
-          keyIndex: index,
-        },
-      })
-      this.sendCurrentFileContext()
-    }
-    else {
-      // TODO: Error
-    }
   }
 
   async navigateKey(data: KeyInDocument & {filepath: string; keyIndex: number}) {
@@ -226,7 +148,6 @@ export class EditorAttendant {
       path.join(this._ctx.extensionPath, 'dist/editor/index.html'),
       'utf-8',
     )
-    this._protocol.updateI18nMessages()
   }
 
   get visible() {

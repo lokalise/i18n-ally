@@ -19,8 +19,18 @@ export class Attendant {
         this.ws.send(JSON.stringify(message))
       },
       async(message) => {
+        switch (message.type) {
+          case 'ready':
+            // FIXME: DEBUG
+            this.protocol.openKey('hello', 'en')
+        }
         // Specific commands
         return undefined
+      },
+      {
+        extendConfig: {
+          extensionRoot: 'http://127.0.0.1:1897',
+        },
       },
     )
     this.log(`Incoming connection from ${request.connection.remoteAddress}`)
@@ -32,6 +42,7 @@ export class Attendant {
 
     ws.on('close', () => {
       this.log('Closed')
+      this.protocol.dispose()
     })
 
     this.protocol.handleMessages({ type: 'ready' })

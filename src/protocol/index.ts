@@ -1,10 +1,15 @@
 // Protocol for exchanging data between webview/client/devtools
 
-import { commands } from 'vscode'
+import { commands, window, Disposable, workspace } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import { EXT_ID } from '../meta'
-import { CurrentFile, Global, Commands, Config } from '../core'
+import { CurrentFile, Global, Commands, Config, KeyDetector, KeyInDocument } from '../core'
 import i18n from '../i18n'
+
+export class EditorContext {
+  filepath?: string
+  keys?: KeyInDocument[]
+}
 
 export interface Message {
   type: string
@@ -18,9 +23,21 @@ export interface Message {
   items?: any[]
 }
 
-export class Protocol {
+export class Protocol implements Disposable {
   ready = false
   pendingMessages: Message[] = []
+  private _disposables: Disposable[] = []
+  private _editing_key: string |undefined
+  private _mode: 'standalone' | 'currentFile' = 'standalone'
+
+  get mode() {
+    return this._mode
+  }
+
+  set mode(v) {
+    if (this._mode !== v)
+      this._mode = v
+  }
 
   constructor(
     private readonly _postMessage: (message: Message) => Promise<void>,
@@ -29,7 +46,33 @@ export class Protocol {
       extendConfig?: any
     },
   ) {
+    CurrentFile.loader.onDidChange(
+      () => {
+        if (this._editing_key)
+          this.openKey(this._editing_key)
+      },
+      null,
+      this._disposables,
+    )
 
+    workspace.onDidChangeConfiguration(
+      () => this.updateConfig(),
+      null,
+      this._disposables,
+    )
+
+    Global.reviews.onDidChange(
+      (keypath?: string) => {
+        if (this._editing_key && (!keypath || this._editing_key === keypath))
+          this.openKey(this._editing_key)
+      },
+      null,
+      this._disposables,
+    )
+  }
+
+  dispose() {
+    Disposable.from(...this._disposables).dispose()
   }
 
   get config() {
@@ -83,6 +126,62 @@ export class Protocol {
     await loader.write(pendings)
   }
 
+  public openKey(keypath: string, locale?: string, index?: number) {
+    const node = CurrentFile.loader.getNodeByKey(keypath, true)
+    if (node) {
+      this._editing_key = keypath
+      this.postMessage({
+        type: 'route',
+        route: 'open-key',
+        data: {
+          locale,
+          keypath,
+          records: CurrentFile.loader.getShadowLocales(node),
+          reviews: Global.reviews.getReviews(keypath),
+          keyIndex: index,
+        },
+      })
+      this.sendCurrentFileContext()
+    }
+    else {
+      // TODO: Error
+    }
+  }
+
+  public setContext(context: EditorContext = {}) {
+    this.postMessage({
+      type: 'context',
+      data: context,
+    })
+  }
+
+  public sendCurrentFileContext() {
+    if (this.mode === 'standalone')
+      this.setContext({})
+
+    const doc = window.activeTextEditor?.document
+
+    if (!doc || !Global.isLanguageIdSupported(doc.languageId))
+      return false
+
+    let keys = KeyDetector.getKeys(doc) || []
+    if (!keys.length)
+      return false
+
+    keys = keys.map(k => ({
+      ...k,
+      value: CurrentFile.loader.getValueByKey(k.key),
+    }))
+
+    const context = {
+      filepath: doc.uri.fsPath,
+      keys,
+    }
+
+    this.setContext(context)
+    return true
+  }
+
   async handleMessages(message: Message) {
     const handled = this.extendHandler ? await Promise.resolve(this.extendHandler(message)) : undefined
     if (handled)
@@ -99,6 +198,7 @@ export class Protocol {
         this.ready = true
         this.postMessage({ type: 'ready' })
         this.updateConfig()
+        this.updateI18nMessages()
         break
 
       case 'init':

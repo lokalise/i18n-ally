@@ -41,6 +41,7 @@ export class Server {
     app.use(cors())
     app.use(mount('/static', KoaStatic(path.join(Config.extensionPath, 'dist/server'))))
     app.use(mount('/editor', KoaStatic(path.join(Config.extensionPath, 'dist/editor'))))
+    app.use(mount('/res', KoaStatic(path.join(Config.extensionPath, 'res'))))
     app.use((ctx) => {
       if (ctx.path === '/') {
         ctx.body = {

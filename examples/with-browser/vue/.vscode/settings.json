@@ -1,0 +1,7 @@
+{
+  "i18n-ally.localesPaths": "src/locales",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.regex.usageMatchAppend": [
+    "i18n-ally\\(path=[\"']({key})[\"']"
+  ]
+}
