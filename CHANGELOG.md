@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/antfu/i18n-ally/compare/v2.1.2...v2.1.3) (2020-05-08)
+
+
+### ⚡ Features
+
+* new config `i18n-ally.refactor.templates`, resolve [#291](https://github.com/antfu/i18n-ally/issues/291) ([1310ca0](https://github.com/antfu/i18n-ally/commit/1310ca00b2c1e6f2f93eedb3e5ea23fc22022611))
+
 ### [2.1.2](https://github.com/antfu/i18n-ally/compare/v2.1.1...v2.1.2) (2020-05-05)
 
 
