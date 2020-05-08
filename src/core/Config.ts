@@ -298,6 +298,10 @@ export class Config {
     return this.getConfig<string>('theme.annotationMissingBorder')!
   }
 
+  static get serverStartWithVSCode() {
+    return this.getConfig<boolean>('server.startWithVSCode') || false
+  }
+
   static get hasLocalesConfigured() {
     return !!this.localesPaths.length
   }

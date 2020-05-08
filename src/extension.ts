@@ -8,8 +8,6 @@ import viewsModules from './views'
 import { Log } from './utils'
 import { CurrentFile } from './core/CurrentFile'
 import i18n from './i18n'
-import { Server } from './server/server'
-import { ServerLog } from './server/log'
 
 export async function activate(ctx: ExtensionContext) {
   Log.info(`🈶 Activated, v${version}`)
@@ -28,9 +26,6 @@ export async function activate(ctx: ExtensionContext) {
     editorModules,
     viewsModules,
   ]
-
-  Server.instance.start()
-  ServerLog.show()
 
   const disposables = flatten(modules.map(m => m(ctx)))
   disposables.forEach(d => ctx.subscriptions.push(d))

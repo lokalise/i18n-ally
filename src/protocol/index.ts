@@ -1,9 +1,9 @@
 // Protocol for exchanging data between webview/client/devtools
 
-import { commands, window, Disposable, workspace } from 'vscode'
+import { commands, Disposable, workspace } from 'vscode'
 import { TranslateKeys } from '../commands/manipulations'
 import { EXT_ID } from '../meta'
-import { CurrentFile, Global, Commands, Config, KeyDetector, KeyInDocument } from '../core'
+import { CurrentFile, Global, Commands, Config, KeyInDocument } from '../core'
 import i18n from '../i18n'
 
 export class EditorContext {
@@ -28,28 +28,19 @@ export class Protocol implements Disposable {
   pendingMessages: Message[] = []
   private _disposables: Disposable[] = []
   private _editing_key: string |undefined
-  private _mode: 'standalone' | 'currentFile' = 'standalone'
-
-  get mode() {
-    return this._mode
-  }
-
-  set mode(v) {
-    if (this._mode !== v)
-      this._mode = v
-  }
 
   constructor(
     private readonly _postMessage: (message: Message) => Promise<void>,
     public extendHandler?: (message: Message) => Thenable<boolean | undefined>,
     public options?: {
       extendConfig?: any
+      afterEditKey?: (keypath: string, locale?: string) => any
     },
   ) {
     CurrentFile.loader.onDidChange(
       () => {
         if (this._editing_key)
-          this.openKey(this._editing_key)
+          this.editKey(this._editing_key)
       },
       null,
       this._disposables,
@@ -64,7 +55,7 @@ export class Protocol implements Disposable {
     Global.reviews.onDidChange(
       (keypath?: string) => {
         if (this._editing_key && (!keypath || this._editing_key === keypath))
-          this.openKey(this._editing_key)
+          this.editKey(this._editing_key)
       },
       null,
       this._disposables,
@@ -126,7 +117,7 @@ export class Protocol implements Disposable {
     await loader.write(pendings)
   }
 
-  public openKey(keypath: string, locale?: string, index?: number) {
+  public editKey(keypath: string, locale?: string, index?: number) {
     const node = CurrentFile.loader.getNodeByKey(keypath, true)
     if (node) {
       this._editing_key = keypath
@@ -141,7 +132,8 @@ export class Protocol implements Disposable {
           keyIndex: index,
         },
       })
-      this.sendCurrentFileContext()
+      if (this.options?.afterEditKey)
+        this.options.afterEditKey(keypath, locale)
     }
     else {
       // TODO: Error
@@ -153,33 +145,6 @@ export class Protocol implements Disposable {
       type: 'context',
       data: context,
     })
-  }
-
-  public sendCurrentFileContext() {
-    if (this.mode === 'standalone')
-      this.setContext({})
-
-    const doc = window.activeTextEditor?.document
-
-    if (!doc || !Global.isLanguageIdSupported(doc.languageId))
-      return false
-
-    let keys = KeyDetector.getKeys(doc) || []
-    if (!keys.length)
-      return false
-
-    keys = keys.map(k => ({
-      ...k,
-      value: CurrentFile.loader.getValueByKey(k.key),
-    }))
-
-    const context = {
-      filepath: doc.uri.fsPath,
-      keys,
-    }
-
-    this.setContext(context)
-    return true
   }
 
   async handleMessages(message: Message) {
@@ -251,6 +216,10 @@ export class Protocol implements Disposable {
 
       case 'open-search':
         commands.executeCommand(Commands.open_editor)
+        break
+
+      case 'edit-key':
+        this.editKey(message.keypath!, message.locale!)
         break
 
       case 'translation.apply':

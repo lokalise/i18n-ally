@@ -68,7 +68,7 @@ const m: ExtensionModule = (ctx) => {
 
     const panel = EditorAttendant.createOrShow(ctx, mode === 'currentFile' ? ViewColumn.Two : undefined)
     panel.mode = mode
-    panel.openKey(key, locale, index)
+    panel.editKey(key, locale, index)
   }
 
   function updateContext(doc?: TextDocument) {

@@ -41,7 +41,7 @@
           .description(@click='editDescription') {{data.reviews.description}}
 
       .buttons.actions
-        .button(@click='translateAll' v-if='emptyRecords.length')
+        .button(@click='translateAll' v-if='emptyRecords.length && hasSourceMessage')
           v-earth
           span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
         // .button Mark all as...
@@ -108,6 +108,10 @@ export default Vue.extend({
         && !((this.data?.reviews?.locales || {})[i.locale]?.translation_candidate),
       )
     },
+    hasSourceMessage() {
+      const source = this.records.find(i => i.locale === this.$store.state.config.sourceLanguage)
+      return !!source?.value
+    },
   },
 
   watch: {
@@ -125,14 +129,22 @@ export default Vue.extend({
       },
     },
     keyIndex() {
-      api.postMessage({
-        type: 'navigate-key',
-        data: {
-          filepath: this.context.filepath,
-          keyIndex: this.keyIndex,
-          ...this.contextKeys[this.keyIndex],
-        },
-      })
+      if (this.$store.state.mode === 'webview') {
+        api.postMessage({
+          type: 'navigate-key',
+          data: {
+            filepath: this.context.filepath,
+            keyIndex: this.keyIndex,
+            ...this.contextKeys[this.keyIndex],
+          },
+        })
+      }
+      else {
+        api.postMessage({
+          type: 'edit-key',
+          keypath: this.contextKeys[this.keyIndex].key,
+        })
+      }
     },
     contextKeys() {
       if (!this.contextKeys?.length)

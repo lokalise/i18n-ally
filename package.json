@@ -814,6 +814,11 @@
           "default": false,
           "description": "%config.editor_prefer_editor%"
         },
+        "i18n-ally.server.startWithVSCode": {
+          "type": "boolean",
+          "default": false,
+          "description": "WIP: Start i18n Ally server with VS Code"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },

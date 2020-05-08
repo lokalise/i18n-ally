@@ -9,6 +9,7 @@ import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { checkNotification } from '../update-notification'
+import { Server } from '../server/server'
 import { Reviews } from './Review'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
@@ -193,6 +194,9 @@ export class Global {
       await this.update()
       this._onDidChangeRootPath.fire(rootpath)
       this.reviews.init(rootpath)
+
+      if (Config.serverStartWithVSCode)
+        Server.instance.start()
     }
   }
 

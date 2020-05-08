@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, Selection, TextEditorRevealType } from 'vscode'
 import i18n from '../i18n'
-import { KeyInDocument, Config } from '../core'
+import { KeyInDocument, Config, Global, KeyDetector, CurrentFile } from '../core'
 import { EXT_EDITOR_ID } from '../meta'
 import { Protocol } from '../protocol'
 
@@ -18,21 +18,19 @@ export class EditorAttendant {
   private readonly _protocol: Protocol
   private readonly _ctx: ExtensionContext
   private _disposables: Disposable[] = []
+  private _mode: 'standalone' | 'currentFile' = 'standalone'
 
   get mode() {
-    return this._protocol.mode
+    return this._mode
   }
 
   set mode(v) {
-    this._protocol.mode = v
+    if (this._mode !== v)
+      this._mode = v
   }
 
-  public openKey(keypath: string, locale?: string, index?: number) {
-    this._protocol.openKey(keypath, locale, index)
-  }
-
-  public sendCurrentFileContext() {
-    this._protocol.sendCurrentFileContext()
+  public editKey(keypath: string, locale?: string, index?: number) {
+    this._protocol.editKey(keypath, locale, index)
   }
 
   public static createOrShow(ctx: ExtensionContext, column?: ViewColumn) {
@@ -88,6 +86,9 @@ export class EditorAttendant {
             extensionRoot: webview.asWebviewUri(Uri.file(Config.extensionPath!)).toString(),
           }
         },
+        afterEditKey: () => {
+          this.sendCurrentFileContext()
+        },
       },
     )
 
@@ -107,6 +108,33 @@ export class EditorAttendant {
     this.init()
   }
 
+  public sendCurrentFileContext() {
+    if (this.mode === 'standalone')
+      return this._protocol.setContext({})
+
+    const doc = window.activeTextEditor?.document
+
+    if (!doc || !Global.isLanguageIdSupported(doc.languageId))
+      return false
+
+    let keys = KeyDetector.getKeys(doc) || []
+    if (!keys.length)
+      return false
+
+    keys = keys.map(k => ({
+      ...k,
+      value: CurrentFile.loader.getValueByKey(k.key),
+    }))
+
+    const context = {
+      filepath: doc.uri.fsPath,
+      keys,
+    }
+
+    this._protocol.setContext(context)
+    return true
+  }
+
   private reveal(column?: ViewColumn) {
     column = column || (
       window.activeTextEditor
@@ -120,7 +148,7 @@ export class EditorAttendant {
     if (!data.filepath)
       return
 
-    this.openKey(data.key, undefined, data.keyIndex)
+    this.editKey(data.key, undefined, data.keyIndex)
     const doc = await workspace.openTextDocument(Uri.file(data.filepath))
     const editor = await window.showTextDocument(doc, ViewColumn.One)
     editor.selection = new Selection(
