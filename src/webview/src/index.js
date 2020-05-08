@@ -46,6 +46,28 @@ const i18n = new VueI18n({
   messages: {},
 })
 
+function initTheme() {
+  if (mode === 'webview')
+    return
+  const theme = {
+    foreground: 'white',
+    'editor-foreground': 'white',
+    background: '#222',
+    'editor-background': '#222',
+    'font-family': '-apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif',
+    'editor-font-family': 'monospace',
+  }
+  const css = []
+  for (const key of Object.keys(theme))
+    css.push(`--vscode-${key}:${theme[key]}`)
+
+  const style = document.createElement('style')
+  style.innerHTML = `:root{${css.join(';')}}`
+  document.head.appendChild(style)
+}
+
+initTheme()
+
 const store = new Vuex.Store({
   state: () => {
     return Object.assign({
