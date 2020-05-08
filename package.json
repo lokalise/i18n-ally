@@ -717,6 +717,13 @@
           },
           "description": "%config.regex_usage_match_append%"
         },
+        "i18n-ally.refactor.templates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.refactor_templates%"
+        },
         "i18n-ally.translate.saveAsCandidates": {
           "type": "boolean",
           "default": false,

@@ -302,6 +302,10 @@ export class Config {
     return this.getConfig<string[]>('translate.engines') || ['google']
   }
 
+  static get refactorTemplates() {
+    return this.getConfig<string[]>('refactor.templates') || []
+  }
+
   static get disablePathParsing() {
     return this.getConfig<boolean>('disablePathParsing') ?? false
   }

@@ -108,7 +108,10 @@ export class Global {
   }
 
   static refactorTemplates(keypath: string, languageId?: string) {
-    return uniq(this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)))
+    return uniq([
+      ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
+      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)),
+    ])
   }
 
   static isLanguageIdSupported(languageId: string) {
