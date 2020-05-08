@@ -49,6 +49,7 @@ export const frameworks: Framework[] = [
 
   // Vue SFC should be the last one
   new VueSFCFramework(),
+  new UI5Framework(),
 ]
 
 export function getFramework(id: string): Framework | undefined {
