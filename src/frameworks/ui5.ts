@@ -14,6 +14,7 @@ class UI5Framework extends Framework {
   }
 
   languageIds: LanguageId[] = [
+    'json',
     'xml',
     'javascript',
     'typescript',
@@ -23,12 +24,14 @@ class UI5Framework extends Framework {
   usageMatchRegex = [
     '\\{(i18n>{key})\\}',
     'getResourceBundle\\(\\)\\.getText\\([\'"`]({key})[\'"`]',
+    '\\{\\{({key})\\}\\}',
   ]
 
   refactorTemplates(keypath: string, languageId: string) {
     return [
       `{i18n>${keypath}}`,
       `this.getResourceBundle().getText("${keypath}")`,
+      `{{${keypath}}}`,
       keypath,
     ]
   }
