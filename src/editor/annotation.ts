@@ -125,10 +125,11 @@ const annotation: ExtensionModule = (ctx) => {
         }
       }
       else {
-        // have insection to cursor
+        // using inplace annotation and have insection to the cursor, disabled annotation
         if (
-          (selection.start.line <= range.start.line && range.start.line <= selection.end.line)
-          || (selection.start.line <= range.end.line && range.end.line <= selection.end.line)
+          Config.annotationInPlace && (
+            (selection.start.line <= range.start.line && range.start.line <= selection.end.line)
+          || (selection.start.line <= range.end.line && range.end.line <= selection.end.line))
         ) {
           editing = true
           inplace = false
