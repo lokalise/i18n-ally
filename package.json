@@ -961,7 +961,7 @@
     "php-array-parser": "^1.0.1",
     "pug": "^2.0.4",
     "rimraf": "3.0.2",
-    "standard-version": "7.1.0",
+    "standard-version": "8.0.0",
     "stylus": "^0.54.7",
     "ts-jest": "^25.0.0",
     "ts-loader": "7.0.2",
