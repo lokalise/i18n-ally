@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.6](https://github.com/antfu/i18n-ally/compare/v2.1.5...v2.1.6) (2020-05-12)
+
+
+### 🐞 Bug Fixes
+
+* **react:** resolve [#294](https://github.com/antfu/i18n-ally/issues/294) ([26e594b](https://github.com/antfu/i18n-ally/commit/26e594bdb72ad9d5a1d0fc447a1f28ad67d02998))
+
+
+### ⚡ Features
+
+* improve auto completion, thanks [@erickhcs](https://github.com/erickhcs) ([47895f9](https://github.com/antfu/i18n-ally/commit/47895f96b39083aff1bc371e2c1e8c3bbce61612))
+* **next-translate:** support next-translate, resolve [#295](https://github.com/antfu/i18n-ally/issues/295) ([59a8c15](https://github.com/antfu/i18n-ally/commit/59a8c1576b6e096f11d8bc64953cabc6b411d88d))
+
 ### [2.1.5](https://github.com/antfu/i18n-ally/compare/v2.1.4...v2.1.5) (2020-05-09)
 
 
