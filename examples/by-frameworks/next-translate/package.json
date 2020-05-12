@@ -1,0 +1,21 @@
+{
+  "name": "-",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn i18n && next dev",
+    "i18n": "node ../../cli/builder.js"
+  },
+  "dependencies": {
+    "next": "9.3.5",
+    "next-translate": "link:../../",
+    "react": "link:../../node_modules/react",
+    "react-dom": "link:../../node_modules/react-dom"
+  },
+  "devDependencies": {
+    "@types/node": "13.11.1",
+    "@types/react": "16.9.34",
+    "typescript": "3.8.3"
+  }
+}

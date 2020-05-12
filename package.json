@@ -590,7 +590,8 @@
               "transloco",
               "svelte",
               "globalize",
-              "ui5"
+              "ui5",
+              "next-translate"
             ]
           },
           "description": "%config.enabled_frameworks%"

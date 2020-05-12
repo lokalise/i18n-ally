@@ -22,6 +22,7 @@ import SvelteFramework from './svelte'
 import PolyglotFramework from './polyglot'
 import GlobalizeFramework from './globalize'
 import UI5Framework from './ui5'
+import NextTranslateFramework from './next-translate'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -46,6 +47,7 @@ export const frameworks: Framework[] = [
   new PolyglotFramework(),
   new GlobalizeFramework(),
   new UI5Framework(),
+  new NextTranslateFramework(),
 
   // Vue SFC should be the last one
   new VueSFCFramework(),
