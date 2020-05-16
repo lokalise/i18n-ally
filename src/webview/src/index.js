@@ -53,6 +53,7 @@ function initTheme() {
     foreground: 'white',
     'editor-foreground': 'white',
     background: '#222',
+    'font-size': '14px',
     'editor-background': '#222',
     'font-family': '-apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif',
     'editor-font-family': 'monospace',

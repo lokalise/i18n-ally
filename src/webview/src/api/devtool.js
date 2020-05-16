@@ -8,6 +8,7 @@ export function initDevtool() {
   let _listener = () => {}
   let pendings = []
   let ready = false
+  const insideIframe = window.parent && window.parent !== window
 
   const API = {
 
@@ -26,7 +27,7 @@ export function initDevtool() {
           ws.send(payload)
 
           // Also send to parent when inside of an iframe
-          if (window.parent && window.parent !== window)
+          if (insideIframe)
             window.parent.postMessage(payload, '*')
         }
         pendings = []
@@ -53,6 +54,12 @@ export function initDevtool() {
       ready = true
       API.postMessage()
     }
+  }
+
+  if (insideIframe) {
+    window.addEventListener('message', (e) => {
+      _listener(e.data)
+    })
   }
 
   initWs()

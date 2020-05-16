@@ -39,4 +39,7 @@ export default Vue.extend({
     border-radius 50%
     overflow hidden
     background var(--vscode-foreground)
+
+  img
+    width 100%
 </style>

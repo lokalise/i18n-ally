@@ -175,10 +175,10 @@ body
 
 .buttons
   .button
-    margin 0.3em 0.6em 0.3em 0
+    margin 0 0.6em 0 0
 
     &:last-child
-      margin 0.3em 0.3em 0.3em 0
+      margin 0 0.3em 0 0
 
 p.loading
   padding var(--i18n-ally-margin)

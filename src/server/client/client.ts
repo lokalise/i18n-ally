@@ -4,11 +4,13 @@ import adaptors from './adaptors/index'
 
 export interface I18nAllyAdaptor {
   name: string
+  instance?: any
   locale: string
   keys: string[]
   on: (event: string, listener: Function) => void
   off: (event: string, listener: Function) => void
   updateMessages?: (locale: string, key: string, value: string) => void
+  getMessage?: (locale: string, key: string) => string
 }
 
 export class I18nAlly {
@@ -40,7 +42,6 @@ export class I18nAlly {
     this.ws = new WebSocket(`ws://${this.url}`)
     this.ws.onmessage = (e) => {
       const data = JSON.parse(e.data)
-      // console.log(data)
       if (data._id && this._listeners[data._id])
         this._listeners[data._id](data)
     }
@@ -87,9 +88,8 @@ export class I18nAlly {
       'background:transparent',
     )
     this._adaptor = adaptor
-    this._adaptor.on('keys', () => {
-      this.sendBackground({ type: 'keys', keys: adaptor.keys })
-    })
+    this._adaptor.on('keys', () => this.updateUsingKeys())
+    this.updateUsingKeys()
     this.start()
   }
 
@@ -116,6 +116,18 @@ export class I18nAlly {
 
   setRecord(keypath: string, locale: string, value: string) {
     return this.call({ type: 'set_record', keypath, locale, value })
+  }
+
+  updateUsingKeys() {
+    this.sendBackground({
+      type: 'context',
+      data: {
+        keys: this._adaptor.keys.map(key => ({
+          key,
+          value: this._adaptor.getMessage(this._adaptor.locale, key),
+        })),
+      },
+    })
   }
 
   injectStyle() {

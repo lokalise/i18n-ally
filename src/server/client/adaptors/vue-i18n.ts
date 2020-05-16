@@ -16,6 +16,7 @@ export default function(ally: I18nAlly, i18n) {
 
   ally.register({
     name: 'vue-i18n',
+    instance: i18n,
     get locale() {
       return i18n.locale
     },
@@ -32,6 +33,9 @@ export default function(ally: I18nAlly, i18n) {
     off: _listener.off.bind(_listener),
     updateMessages: (locale, key, value) => {
       i18n.mergeLocaleMessage(locale, { [key]: value })
+    },
+    getMessage: (locale, key) => {
+      return i18n.messages[locale][key]
     },
   })
 }

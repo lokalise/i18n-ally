@@ -8,6 +8,7 @@
   .sidebar(:style='{width: sidebarWidth +"px"}' v-if='sidebar')
     .keys
       .item.panel(
+        v-if='contextKeys'
         v-for='(key, idx) in contextKeys'
         @click='gotoKey(idx)'
         :class='{active: idx === keyIndex}'
@@ -20,9 +21,9 @@
 
   .content
     .header
-      template(v-if='contextKeys.length')
+      template(v-if='contextKeys')
         .buttons
-          .button(@click='sidebar = !sidebar' v-if='contextKeys.length')
+          .button(@click='sidebar = !sidebar')
             v-menu
           .button(@click='nextKey(-1)' :disabled='keyIndex <= 0')
             v-chevron-left
@@ -91,7 +92,7 @@ export default Vue.extend({
       return this.$store.state.context
     },
     contextKeys() {
-      return this.context.keys || []
+      return this.context.keys
     },
     config() {
       return this.$store.state.config
@@ -202,7 +203,7 @@ export default Vue.extend({
     overflow-y auto
     overflow-x hidden
     position relative
-    padding 0.8em
+    padding var(--i18n-ally-margin)
 
     .resize-handler
       position absolute
@@ -230,8 +231,6 @@ export default Vue.extend({
       overflow-x auto
 
       .item
-        font-size 0.8em
-        opacity 0.5
         cursor pointer
 
         &::before
@@ -248,11 +247,21 @@ export default Vue.extend({
           opacity 0 !important
 
         .key
+          font-size 0.9em
           font-family var(--vscode-editor-font-family)
+          opacity 0.7
 
         .value
+          font-size 0.7em
+          text-overflow ellipsis
+          opacity .5
+          width 100%
+          white-space nowrap
+          overflow hidden
+          opacity 0.5
+
           &.empty
-            opacity 0.5
+            opacity 0.2
 
   .header
     padding var(--i18n-ally-margin)
@@ -270,6 +279,7 @@ export default Vue.extend({
       display inline-block
       position relative
       padding 0.4em
+      font-size 0.9em
 
       &:hover::after
         content ""
