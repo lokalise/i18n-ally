@@ -58,7 +58,7 @@ import { getCommentState } from '../../utils/shared'
 import ReviewComment from './ReviewComment.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
-import { api } from './api'
+import { api } from './api/index'
 
 export default Vue.extend({
   components: {
@@ -111,6 +111,12 @@ export default Vue.extend({
     },
     value() {
       this.$nextTick(() => this.resize(this.$refs.textarea1))
+      api.postMessage({
+        type: 'devtools.text-update',
+        locale: this.record.locale,
+        keypath: this.record.keypath,
+        value: this.value,
+      })
     },
     active(value) {
       if (!value && this.changed)

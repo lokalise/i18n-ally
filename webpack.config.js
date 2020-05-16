@@ -23,27 +23,25 @@ const config = {
     esm: 'esm',
     'ts-node': 'ts-node',
     consolidate: 'consolidate',
+    prettier: 'prettier',
     less: '_',
     sass: '_',
     stylus: '_',
-    prettier: 'prettier',
+    bufferutil: '_',
+    'utf-8-validate': '_',
     '@microsoft/typescript-etw': '_',
   },
   resolve: {
     extensions: ['.ts', '.js'],
   },
   module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-          },
-        ],
-      },
-    ],
+    rules: [{
+      test: /\.ts$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'ts-loader',
+      }],
+    }],
   },
   plugins: [
     // @ts-ignore

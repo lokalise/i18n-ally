@@ -2,13 +2,15 @@
 import { observe } from 'selector-observer'
 import adaptors from './adaptors/index'
 
-interface I18nAllyAdaptor {
+export interface I18nAllyAdaptor {
   name: string
   getCurrentLocale: () => string
   getKeys: () => string[]
+  setLocale?: (locale: string) => void
+  updateMessages?: (locale: string, key: string, value: string) => void
 }
 
-class I18nAlly {
+export class I18nAlly {
   _listeners: Record<number, Function> = {}
   _id_count = 0
   _edit = false
@@ -35,7 +37,7 @@ class I18nAlly {
     this.ws = new WebSocket(`ws://${this.url}`)
     this.ws.onmessage = (e) => {
       const data = JSON.parse(e.data)
-      console.log(data)
+      // console.log(data)
       if (data._id && this._listeners[data._id])
         this._listeners[data._id](data)
     }
@@ -147,9 +149,26 @@ class I18nAlly {
       e.removeAttribute('contenteditable')
     })
   }
+
+  emit(raw) {
+    const message = JSON.parse(raw) || {}
+    console.log(message)
+    switch (message.type) {
+      case 'devtools.text-update':
+        this._adaptor?.updateMessages(message.locale, message.keypath, message.value)
+        break
+      case 'devtools.locale-change':
+        this._adaptor?.setLocale(message.locale)
+        break
+    }
+  }
 }
 
 ;(() => {
+  // @ts-ignore
+  if (window.$i18nAlly)
+    return
+
   const i18nAlly = new I18nAlly()
   // @ts-ignore
   window.$i18nAlly = i18nAlly
@@ -163,19 +182,14 @@ class I18nAlly {
     adaptor(i18nAlly, instance)
   }
 
-  window.addEventListener('i18n-ally-register', (e: any) => {
-    register(e.detail)
-  })
-
-  window.addEventListener('load', () => {
-    window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
-    i18nAlly.edit = true
-
+  function loadConfig() {
     // @ts-ignore
     let _v = window.$i18nAllyConfig
+    // config already set, register now
     if (_v)
       register(_v)
 
+    // make $i18nAllyConfig reactive
     Object.defineProperty(window, '$i18nAllyConfig', {
       set(v) {
         register(v)
@@ -185,5 +199,14 @@ class I18nAlly {
         return _v
       },
     })
+
+    window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
+    i18nAlly.edit = true
+  }
+
+  window.addEventListener('i18n-ally-register', (e: any) => {
+    register(e.detail)
   })
+
+  loadConfig()
 })()

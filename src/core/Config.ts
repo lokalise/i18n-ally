@@ -274,10 +274,6 @@ export class Config {
     return this.getConfig<boolean>('server.startWithVSCode') || false
   }
 
-  static get hasLocalesConfigured() {
-    return !!this.localesPaths.length
-  }
-
   static get extension() {
     return extensions.getExtension(EXT_ID)
   }

@@ -18,7 +18,7 @@ import VChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import VChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
-import { api, mode } from './api'
+import { api, mode } from './api/index'
 import App from './App.vue'
 
 Vue.component('VCheck', VCheck)

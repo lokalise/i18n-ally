@@ -19,7 +19,7 @@ import VRefresh from 'vue-material-design-icons/Refresh.vue'
 import VMagnify from 'vue-material-design-icons/Magnify.vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
-import { api } from './api'
+import { api } from './api/index'
 
 export default Vue.extend({
   components: {

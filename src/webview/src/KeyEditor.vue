@@ -53,8 +53,8 @@
         :record='r'
         :review='(data.reviews.locales || {})[r.locale]'
         :key='r.locale'
-        :active='current === r.locale'
-        @update:active='current = r.locale'
+        :active='currentLocale === r.locale'
+        @update:active='currentLocale = r.locale'
       )
 </template>
 
@@ -62,7 +62,7 @@
 import Vue from 'vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
-import { api } from './api'
+import { api } from './api/index'
 
 export default Vue.extend({
   components: {
@@ -81,7 +81,7 @@ export default Vue.extend({
       dragging: false,
       sidebarWidth: 150,
       sidebar: false,
-      current: '',
+      currentLocale: '',
       keyIndex: 0,
     }
   },
@@ -119,8 +119,14 @@ export default Vue.extend({
       immiediate: true,
       handler(v) {
         if (v)
-          this.current = v || ''
+          this.currentLocale = v || ''
       },
+    },
+    currentLocale() {
+      api.postMessage({
+        type: 'devtools.locale-change',
+        locale: this.currentLocale,
+      })
     },
     context: {
       immiediate: true,

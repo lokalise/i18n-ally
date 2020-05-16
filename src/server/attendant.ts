@@ -22,7 +22,7 @@ export class Attendant {
         switch (message.type) {
           case 'ready':
             // FIXME: DEBUG
-            this.protocol.editKey('hello', 'en')
+            this.protocol.editKey('title', 'en')
         }
         // Specific commands
         return undefined
