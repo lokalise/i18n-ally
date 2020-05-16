@@ -4,9 +4,10 @@ import adaptors from './adaptors/index'
 
 export interface I18nAllyAdaptor {
   name: string
-  getCurrentLocale: () => string
-  getKeys: () => string[]
-  setLocale?: (locale: string) => void
+  locale: string
+  keys: string[]
+  on: (event: string, listener: Function) => void
+  off: (event: string, listener: Function) => void
   updateMessages?: (locale: string, key: string, value: string) => void
 }
 
@@ -17,8 +18,10 @@ export class I18nAlly {
   _started = false
   _adaptor: I18nAllyAdaptor = {
     name: 'none',
-    getCurrentLocale() { throw new Error('NOT REGISTED') },
-    getKeys: () => [],
+    keys: [],
+    locale: '',
+    on: () => {},
+    off: () => {},
   }
 
   ws: WebSocket
@@ -76,18 +79,21 @@ export class I18nAlly {
     })
   }
 
-  register(adaptor: Partial<I18nAllyAdaptor>) {
+  register(adaptor: I18nAllyAdaptor) {
     console.log(
       `%c i18n Ally %c Adaptor "${adaptor.name}" Registered %c`,
       'background:#70C9C7 ; padding: 1px; border-radius: 3px 0 0 3px;  color: #334A5D',
       'background:#334A5D ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fffd',
       'background:transparent',
     )
-    this._adaptor = Object.assign(this._adaptor, adaptor)
+    this._adaptor = adaptor
+    this._adaptor.on('keys', () => {
+      this.sendBackground({ type: 'keys', keys: adaptor.keys })
+    })
     this.start()
   }
 
-  send(data: any) {
+  sendWS(data: any) {
     if (!this._started)
       throw new Error('i18n Ally client is not runing')
     this.ws.send(JSON.stringify(data))
@@ -100,7 +106,7 @@ export class I18nAlly {
         delete this._listeners[id]
         resolve(data)
       }
-      this.send({ ...data, _id: id })
+      this.sendWS({ ...data, _id: id })
     })
   }
 
@@ -121,7 +127,7 @@ export class I18nAlly {
   }
 
   get currentLocale() {
-    return this._adaptor.getCurrentLocale()
+    return this._adaptor.locale
   }
 
   get edit() {
@@ -150,6 +156,13 @@ export class I18nAlly {
     })
   }
 
+  sendBackground(message: any) {
+    window.postMessage({
+      source: 'i18n-ally-client',
+      message,
+    }, '*')
+  }
+
   emit(raw) {
     const message = JSON.parse(raw) || {}
     console.log(message)
@@ -158,7 +171,10 @@ export class I18nAlly {
         this._adaptor?.updateMessages(message.locale, message.keypath, message.value)
         break
       case 'devtools.locale-change':
-        this._adaptor?.setLocale(message.locale)
+        this._adaptor.locale = message.locale
+        break
+      case 'devtools.clear-keys':
+        this._adaptor.keys = []
         break
     }
   }
