@@ -10,10 +10,11 @@ import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { checkNotification } from '../update-notification'
 import { Server } from '../server/server'
+import i18n from '../i18n'
 import { Reviews } from './Review'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
-import { DirStructure, OptionalFeatures } from './types'
+import { DirStructure, OptionalFeatures, KeyStyle } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
 
@@ -46,6 +47,7 @@ export class Global {
     await this.updateRootPath()
   }
 
+  // #region framework settings
   static resetCache() {
     this._cacheUsageMatchRegex = {}
   }
@@ -53,11 +55,11 @@ export class Global {
   private static _cacheUsageMatchRegex: Record<string, RegExp[]> = {}
 
   static getUsageMatchRegex(languageId?: string, filepath?: string): RegExp[] {
-    if (Config.regexUsageMatch) {
+    if (Config._regexUsageMatch) {
       if (!this._cacheUsageMatchRegex.custom) {
         this._cacheUsageMatchRegex.custom = normalizeUsageMatchRegex([
-          ...Config.regexUsageMatch,
-          ...Config.regexUsageMatchAppend,
+          ...Config._regexUsageMatch,
+          ...Config._regexUsageMatchAppend,
         ])
       }
       return this._cacheUsageMatchRegex.custom
@@ -67,15 +69,50 @@ export class Global {
       if (!this._cacheUsageMatchRegex[key]) {
         this._cacheUsageMatchRegex[key] = normalizeUsageMatchRegex([
           ...this.enabledFrameworks.flatMap(f => f.getUsageMatchRegex(languageId, filepath)),
-          ...Config.regexUsageMatchAppend,
+          ...Config._regexUsageMatchAppend,
         ])
       }
       return this._cacheUsageMatchRegex[key]
     }
   }
 
+  static async requestKeyStyle(): Promise<KeyStyle> {
+    // user setting
+    if (Config._keyStyle !== 'auto')
+      return Config._keyStyle
+
+    // try to use frameworks preference
+    for (const f of this.enabledFrameworks) {
+      if (f.perferredKeystyle && f.perferredKeystyle !== 'auto')
+        return f.perferredKeystyle
+    }
+
+    // prompt to select
+    const result = await window.showQuickPick([{
+      value: 'nested',
+      label: i18n.t('prompt.keystyle_nested'),
+      description: i18n.t('prompt.keystyle_nested_example'),
+    }, {
+      value: 'flat',
+      label: i18n.t('prompt.keystyle_flat'),
+      description: i18n.t('prompt.keystyle_flat_example'),
+    }], {
+      placeHolder: i18n.t('prompt.keystyle_select'),
+    })
+
+    if (!result) {
+      Config._keyStyle = 'nested'
+      return 'nested'
+    }
+    Config._keyStyle = result.value as KeyStyle
+    return result.value as KeyStyle
+  }
+
   static refactorTemplates(keypath: string, languageId?: string) {
-    return uniq(this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)))
+    return uniq([
+      ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
+      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)),
+    ])
   }
 
   static isLanguageIdSupported(languageId: string) {
@@ -120,9 +157,20 @@ export class Global {
       .join('|')
   }
 
+  static get dirStructure() {
+    let config = Config._dirStructure
+    if (!config || config === 'auto') {
+      for (const f of this.enabledFrameworks) {
+        if (f.perferredDirStructure)
+          config = f.perferredDirStructure
+      }
+    }
+    return config
+  }
+
   static getPathMatchers(dirStructure: DirStructure) {
-    const rules = Config.pathMatcher
-      ? [Config.pathMatcher]
+    const rules = Config._pathMatcher
+      ? [Config._pathMatcher]
       : this.enabledFrameworks
         .flatMap(f => f.pathMatcher(dirStructure))
 
@@ -143,6 +191,15 @@ export class Global {
   static get namespaceEnabled() {
     return Config.namespace || this.hasFeatureEnabled('namespace')
   }
+
+  static get localesPaths() {
+    let config = Config._localesPaths
+    if (!config.length)
+      config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
+    return config
+  }
+
+  // #endregion
 
   static get rootpath() {
     return this._rootpath
@@ -252,7 +309,7 @@ export class Global {
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
     const isValidProject = this.enabledFrameworks.length > 0
-    const hasLocalesSet = Config.localesPaths.length > 0
+    const hasLocalesSet = Global.localesPaths.length > 0
     const shouldEnabled = isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 

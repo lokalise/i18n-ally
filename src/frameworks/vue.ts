@@ -31,7 +31,7 @@ class VueFramework extends Framework {
     return [
       `{{$t('${keypath}')}}`,
       `this.$t('${keypath}')`,
-      `$t("${keypath}")`,
+      `$t('${keypath}')`,
       `i18n.t('${keypath}')`,
       keypath,
     ]

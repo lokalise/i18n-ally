@@ -19,7 +19,11 @@ class CompletionProvider implements CompletionItemProvider {
     if (!key) {
       return Object
         .values(CurrentFile.loader.keys)
-        .map(key => new CompletionItem(key, CompletionItemKind.Text))
+        .map((key) => {
+          const item = new CompletionItem(key, CompletionItemKind.Text)
+          item.detail = loader.getValueByKey(key)
+          return item
+        })
     }
 
     let parent = ''
@@ -45,14 +49,17 @@ class CompletionProvider implements CompletionItemProvider {
 
     return Object
       .values(node.children)
-      .map(child =>
-        new CompletionItem(
+      .map((child) => {
+        const item = new CompletionItem(
           child.keyname,
           child.type === 'tree'
             ? CompletionItemKind.Field
             : CompletionItemKind.Text,
-        ),
-      )
+        )
+        item.commitCharacters = ['.']
+        item.detail = child.type === 'node' ? child.getValue() : undefined
+        return item
+      })
   }
 }
 

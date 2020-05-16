@@ -21,11 +21,15 @@ import TranslocoFramework from './transloco'
 import SvelteFramework from './svelte'
 import PolyglotFramework from './polyglot'
 import GlobalizeFramework from './globalize'
+import UI5Framework from './ui5'
+import NextTranslateFramework from './next-translate'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
 export const frameworks: Framework[] = [
+  // Custom should be the first one
   new CustomFramework(),
+
   new VueFramework(),
   new ReactFramework(),
   new NgxTranslateFramework(),
@@ -42,6 +46,10 @@ export const frameworks: Framework[] = [
   new SvelteFramework(),
   new PolyglotFramework(),
   new GlobalizeFramework(),
+  new UI5Framework(),
+  new NextTranslateFramework(),
+
+  // Vue SFC should be the last one
   new VueSFCFramework(),
 ]
 

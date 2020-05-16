@@ -71,7 +71,7 @@ export class Analyst {
       'node_modules',
       'dist',
       ...gitignore,
-      ...Config.localesPaths,
+      ...Global.localesPaths,
       ...Config.usageScanningIgnore,
     ]
 

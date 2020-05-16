@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.6](https://github.com/antfu/i18n-ally/compare/v2.1.5...v2.1.6) (2020-05-12)
+
+
+### 🐞 Bug Fixes
+
+* **react:** resolve [#294](https://github.com/antfu/i18n-ally/issues/294) ([26e594b](https://github.com/antfu/i18n-ally/commit/26e594bdb72ad9d5a1d0fc447a1f28ad67d02998))
+
+
+### ⚡ Features
+
+* improve auto completion, thanks [@erickhcs](https://github.com/erickhcs) ([47895f9](https://github.com/antfu/i18n-ally/commit/47895f96b39083aff1bc371e2c1e8c3bbce61612))
+* **next-translate:** support next-translate, resolve [#295](https://github.com/antfu/i18n-ally/issues/295) ([59a8c15](https://github.com/antfu/i18n-ally/commit/59a8c1576b6e096f11d8bc64953cabc6b411d88d))
+
+### [2.1.5](https://github.com/antfu/i18n-ally/compare/v2.1.4...v2.1.5) (2020-05-09)
+
+
+### 🐞 Bug Fixes
+
+* ignore cursor when inplace annotation turned off, resolve [#293](https://github.com/antfu/i18n-ally/issues/293) ([ddac27d](https://github.com/antfu/i18n-ally/commit/ddac27d79227847aa189da084223743033311d04))
+
+### [2.1.4](https://github.com/antfu/i18n-ally/compare/v2.1.3...v2.1.4) (2020-05-09)
+
+### [2.1.3](https://github.com/antfu/i18n-ally/compare/v2.1.2...v2.1.3) (2020-05-08)
+
+
+### ⚡ Features
+
+* new config `i18n-ally.refactor.templates`, resolve [#291](https://github.com/antfu/i18n-ally/issues/291) ([1310ca0](https://github.com/antfu/i18n-ally/commit/1310ca00b2c1e6f2f93eedb3e5ea23fc22022611))
+
+### [2.1.2](https://github.com/antfu/i18n-ally/compare/v2.1.1...v2.1.2) (2020-05-05)
+
+
+### ⚡ Features
+
+* allow frameworks to set preferred settings ([31e3d2e](https://github.com/antfu/i18n-ally/commit/31e3d2e0e6b885ac092ec7d15bd95f5938b7d760))
+
+### [2.1.1](https://github.com/antfu/i18n-ally/compare/v2.1.0...v2.1.1) (2020-05-05)
+
+
+### 🔮 Refactor
+
+* extract message protocol ([0944ec8](https://github.com/antfu/i18n-ally/commit/0944ec802c79616ce9caafcc9213d7ed9b53400b))
+
+
+### ⚡ Features
+
+* SAP UI5 Framework support ([#288](https://github.com/antfu/i18n-ally/issues/288)), thanks [@mahesh0431](https://github.com/mahesh0431) ([98faaf5](https://github.com/antfu/i18n-ally/commit/98faaf543a7c0d62074d9fac2eab0cb750992c2a))
+
+
+### 🐞 Bug Fixes
+
+* **react:** simplify the key regex, [#286](https://github.com/antfu/i18n-ally/issues/286) ([66d58e6](https://github.com/antfu/i18n-ally/commit/66d58e643887d550d2aed83a26569662dd03fe99))
+
 ## [2.1.0](https://github.com/antfu/i18n-ally/compare/v2.0.11...v2.1.0) (2020-05-03)
 
 

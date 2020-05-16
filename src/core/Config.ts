@@ -1,9 +1,8 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { window, workspace, extensions, ExtensionContext } from 'vscode'
+import { workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
-import i18n from '../i18n'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
 
@@ -85,14 +84,14 @@ export class Config {
     this.setConfig('ignoredLocales', value, true)
   }
 
-  static get keyStyle(): KeyStyle {
+  static get _keyStyle(): KeyStyle {
     const style = this.getConfig<KeyStyle>('keystyle') || 'auto'
     if (style === 'auto' && this.disablePathParsing)
       return 'flat'
     return style
   }
 
-  static set keyStyle(value: KeyStyle) {
+  static set _keyStyle(value: KeyStyle) {
     this.setConfig('keystyle', value, false)
   }
 
@@ -142,11 +141,11 @@ export class Config {
     return ids
   }
 
-  static get dirStructure(): DirStructureAuto {
+  static get _dirStructure(): DirStructureAuto {
     return (this.getConfig('dirStructure')) as (DirStructureAuto) || 'auto'
   }
 
-  static set dirStructure(value: DirStructureAuto) {
+  static set _dirStructure(value: DirStructureAuto) {
     this.setConfig('dirStructure', value, true)
   }
 
@@ -170,7 +169,7 @@ export class Config {
     return this.getConfig<string>('preferredDelimiter') || '-'
   }
 
-  static get pathMatcher(): string | undefined {
+  static get _pathMatcher(): string | undefined {
     return this.getConfig('pathMatcher')
   }
 
@@ -180,13 +179,13 @@ export class Config {
       || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
-  static get regexUsageMatch(): string[] | undefined {
+  static get _regexUsageMatch(): string[] | undefined {
     const config = this.getConfig<string[]>('regex.usageMatch')
     if (config && config.length)
       return config
   }
 
-  static get regexUsageMatchAppend(): string[] {
+  static get _regexUsageMatchAppend(): string[] {
     return this.getConfig<string[]>('regex.usageMatchAppend') || []
   }
 
@@ -218,33 +217,6 @@ export class Config {
     return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
   }
 
-  static async requestKeyStyle(): Promise<KeyStyle | undefined> {
-    if (this.disablePathParsing)
-      return 'flat'
-
-    if (this.keyStyle !== 'auto')
-      return this.keyStyle
-
-    const result = await window.showQuickPick([{
-      value: 'nested',
-      label: i18n.t('prompt.keystyle_nested'),
-      description: i18n.t('prompt.keystyle_nested_example'),
-    }, {
-      value: 'flat',
-      label: i18n.t('prompt.keystyle_flat'),
-      description: i18n.t('prompt.keystyle_flat_example'),
-    }], {
-      placeHolder: i18n.t('prompt.keystyle_select'),
-    })
-
-    if (!result) {
-      this.keyStyle = 'nested'
-      return 'nested'
-    }
-    this.keyStyle = result.value as KeyStyle
-    return result.value as KeyStyle
-  }
-
   static toggleLocaleVisibility(locale: string, visible?: boolean) {
     const ignored = this.ignoredLocales
     if (visible == null)
@@ -259,7 +231,7 @@ export class Config {
   }
 
   // locales
-  static get localesPaths(): string[] {
+  static get _localesPaths(): string[] {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
     if (!paths)
@@ -271,7 +243,7 @@ export class Config {
     return localesPaths.map(i => trimEnd(i, '/\\'))
   }
 
-  static set localesPaths(paths: string[]) {
+  static set _localesPaths(paths: string[]) {
     if (paths.length === 1)
       this.setConfig('localesPaths', paths[0])
     else
@@ -279,7 +251,7 @@ export class Config {
   }
 
   static updateLocalesPaths(paths: string[]) {
-    this.localesPaths = uniq(this.localesPaths.concat(paths))
+    this._localesPaths = uniq(this._localesPaths.concat(paths))
   }
 
   static get themeAnnotation(): string {
@@ -336,6 +308,10 @@ export class Config {
 
   static get translateEngines() {
     return this.getConfig<string[]>('translate.engines') || ['google']
+  }
+
+  static get refactorTemplates() {
+    return this.getConfig<string[]>('refactor.templates') || []
   }
 
   static get disablePathParsing() {

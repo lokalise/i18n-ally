@@ -1,0 +1,15 @@
+{
+  "example-with-variable": "Aquest és un exemple amb variable {{count}}",
+  "plural-example": "És en singular perquè el valor és {{count}}",
+  "plural-example_0": "És cero perquè el valor és {{count}}",
+  "plural-example_2": "És dos perquè el valor és {{count}}",
+  "plural-example_plural": "És en plural perquè el valor és {{count}}",
+  "example-with-html": "<0>Aquest és un exempre <1>utilitzant HTML</1> dintre de la traducció</0>",
+  "no-functional-example": "Traducció feta des d'un component no funcional",
+  "dynamic-namespaces-link": "Veure un exemple de càrrega dinàmica",
+  "nested-example": {
+    "very-nested": {
+      "nested": "Exemple anidat!"
+    }
+  }
+}
