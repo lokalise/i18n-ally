@@ -1,6 +1,12 @@
 {
-  "title": "i18n Ally in Browser!!!",
-  "intro": "Translate your app in your app!",
-  "tos": "Term of Service",
-  "term": "I accept the {0}."
+  "shop": "Shop",
+  "about": "About",
+  "brand": "NORDICS",
+  "product": {
+    "stripy-zig-zag-jigsaw-pillow-and-duvet-set": "Stripy Zig Zag Jigsaw Pillow and Duvet Set"
+  },
+  "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.",
+  "view-product": "view product",
+  "name": "English",
+  "current_language": "Current Language: {0}"
 }

@@ -1,6 +1,10 @@
 {
-  "title": "i18n Ally 浏览器范例",
-  "tos": "服务期限",
-  "term": "我接受{0}。",
-  "intro": "在浏览器中翻译你的应用！"
+  "about_description": "天地玄黃，宇宙洪荒，日月盈昃，辰宿列張，寒來暑往，秋收冬藏， 閏餘成歲，律呂調陽，雲騰致雨，露結為霜，金生麗水，玉出昆岡",
+  "product": {
+    "stripy-zig-zag-jigsaw-pillow-and-duvet-set": "条纹之字形拼图枕头和羽绒被套装"
+  },
+  "name": "简体中文",
+  "current_language": "正在以 {0} 显示中",
+  "about": "关于",
+  "view-product": "查看产品"
 }

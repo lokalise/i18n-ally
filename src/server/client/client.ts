@@ -137,7 +137,7 @@ export class I18nAlly {
   injectStyle() {
     const style = document.createElement('style')
     style.textContent = `
-      [data-i18n-ally-binding].i18n-ally-active{background: #92ffec;}
+      [data-i18n-ally-binding].i18n-ally-active{background: #fffa00ee;}
     `
     document.head.appendChild(style)
   }
@@ -246,7 +246,7 @@ export class I18nAlly {
     })
 
     window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
-    // i18nAlly.edit = true
+    i18nAlly.edit = true
   }
 
   window.addEventListener('i18n-ally-register', (e: any) => {

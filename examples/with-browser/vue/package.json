@@ -17,6 +17,7 @@
     "@vue/cli-service": "~4.3.0",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "vue-cli-plugin-tailwind": "~1.4.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

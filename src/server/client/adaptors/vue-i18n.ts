@@ -32,7 +32,8 @@ export default function(ally: I18nAlly, i18n) {
     on: _listener.on.bind(_listener),
     off: _listener.off.bind(_listener),
     updateMessages: (locale, key, value) => {
-      i18n.mergeLocaleMessage(locale, { [key]: value })
+      if (value)
+        i18n.mergeLocaleMessage(locale, { [key]: value })
     },
     getMessage: (locale, key) => {
       return i18n.messages[locale][key]
