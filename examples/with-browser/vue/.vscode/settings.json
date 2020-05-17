@@ -4,5 +4,6 @@
   "i18n-ally.regex.usageMatchAppend": [
     "i18n-ally\\(path=[\"']({key})[\"']"
   ],
-  "i18n-ally.server.startWithVSCode": true
+  "i18n-ally.server.startWithVSCode": true,
+  "i18n-ally.sourceLanguage": "en"
 }

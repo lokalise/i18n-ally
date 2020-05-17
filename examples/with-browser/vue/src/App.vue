@@ -9,6 +9,9 @@
   br
 
   i18n-ally(path='intro' tag='p')
+
+  i18n(path="term" data-i18n-ally-key='term' tag="label" for="tos")
+    i18n-ally(path='tos' tag='button')
 </template>
 
 <script>

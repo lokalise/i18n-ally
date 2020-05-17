@@ -1,4 +1,6 @@
 {
   "title": "i18n Ally in Browser!!!",
-  "intro": "Translate your app in your app!"
+  "intro": "Translate your app in your app!",
+  "tos": "Term of Service",
+  "term": "I accept the {0}."
 }

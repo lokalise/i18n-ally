@@ -234,7 +234,7 @@ export default Vue.extend({
         cursor pointer
 
         &::before
-          opacity 0.08
+          opacity 0.03
 
         &.active
           opacity 1

@@ -14,11 +14,12 @@ export interface I18nAllyAdaptor {
 }
 
 export class I18nAlly {
-  _listeners: Record<number, Function> = {}
-  _id_count = 0
-  _edit = false
-  _started = false
-  _adaptor: I18nAllyAdaptor = {
+  private _listeners: Record<number, Function> = {}
+  private _id_count = 0
+  private _edit = false
+  private _started = false
+  private _editingKey =''
+  private _adaptor: I18nAllyAdaptor = {
     name: 'none',
     keys: [],
     locale: '',
@@ -119,13 +120,16 @@ export class I18nAlly {
   }
 
   updateUsingKeys() {
+    const keys = this._adaptor.keys
+
     this.sendBackground({
       type: 'context',
       data: {
-        keys: this._adaptor.keys.map(key => ({
+        keys: keys.map(key => ({
           key,
           value: this._adaptor.getMessage(this._adaptor.locale, key),
         })),
+        index: keys.indexOf(this._editingKey),
       },
     })
   }
@@ -133,9 +137,18 @@ export class I18nAlly {
   injectStyle() {
     const style = document.createElement('style')
     style.textContent = `
-      [data-i18n-ally-binding][contenteditable]{background: yellow;}
+      [data-i18n-ally-binding].i18n-ally-active{background: #92ffec;}
     `
     document.head.appendChild(style)
+  }
+
+  private setActive(key: string) {
+    document
+      .querySelectorAll('[data-i18n-ally-key]')
+      .forEach((e) => {
+        // @ts-ignore
+        e.classList.toggle('i18n-ally-active', e.dataset?.i18nAllyKey === key)
+      })
   }
 
   get currentLocale() {
@@ -188,6 +201,10 @@ export class I18nAlly {
       case 'devtools.clear-keys':
         this._adaptor.keys = []
         break
+      case 'edit-key':
+        this._editingKey = message.keypath
+        this.setActive(message.keypath)
+        break
     }
   }
 }
@@ -229,7 +246,7 @@ export class I18nAlly {
     })
 
     window.dispatchEvent(new CustomEvent<any>('i18n-ally-ready', { detail: { i18nAlly } }))
-    i18nAlly.edit = true
+    // i18nAlly.edit = true
   }
 
   window.addEventListener('i18n-ally-register', (e: any) => {
