@@ -30,7 +30,7 @@
     "onLanguage:php",
     "onLanguage:handlebars",
     "onLanguage:ini",
-    "onLangugae:svelte"
+    "onLanguage:svelte"
   ],
   "keywords": [
     "vue",
@@ -934,7 +934,7 @@
     "client:dev": "npx rollup -c ./src/server/client/rollup.config.js -w",
     "main:build": "webpack --mode development",
     "main:dev": "webpack --mode development --watch --info-verbosity verbose",
-    "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
+    "editor:build": "cd src/webview/src && parcel build index.html --out-dir ../../../dist/editor",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",
     "i18n:build": "ts-node -P ./tsconfig.commonjs.json ./scripts/build-i18n.ts",
     "i18n:dev": "nodemon -w ./locales -e json --exec \"npm run i18n:build\"",

@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   template(v-if='$store.state.ready')
-    .actions-bar(v-if='$store.state.mode === "webview"')
+    .actions-bar(v-if='$store.state.mode === "vscode"')
       v-magnify.setting-button(@click='openSearch')
       v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
       v-cog.setting-button(@click='openSettings')
@@ -47,7 +47,7 @@ export default Vue.extend({
 
   methods: {
     postMessage(message) {
-      api.postMessage(message)
+      api.server.postMessage(message)
     },
     refresh() {
       this.postMessage({ type: 'webview.refresh' })

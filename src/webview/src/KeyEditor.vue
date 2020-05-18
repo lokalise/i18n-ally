@@ -10,11 +10,12 @@
       .item.panel(
         v-if='contextKeys'
         v-for='(key, idx) in contextKeys'
+        :key='key'
         @click='gotoKey(idx)'
-        :class='{active: idx === keyIndex}'
+        :class='{active: idx === keyIndex, empty: !key.value}'
       )
         .key {{key.key}}
-        .value(:class='{empty: !key.value}') {{key.value || $t('editor.empty')}}
+        .value {{key.value || $t('editor.empty')}}
 
     .resize-handler
       .inner
@@ -124,7 +125,7 @@ export default Vue.extend({
       },
     },
     currentLocale() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'devtools.locale-change',
         locale: this.currentLocale,
       })
@@ -136,8 +137,8 @@ export default Vue.extend({
       },
     },
     keyIndex() {
-      if (this.$store.state.mode === 'webview') {
-        api.postMessage({
+      if (api.mode === 'vscode') {
+        api.server.postMessage({
           type: 'navigate-key',
           data: {
             filepath: this.context.filepath,
@@ -147,7 +148,7 @@ export default Vue.extend({
         })
       }
       else {
-        api.postMessage({
+        api.server.postMessage({
           type: 'edit-key',
           keypath: this.contextKeys[this.keyIndex].key,
         })
@@ -161,13 +162,13 @@ export default Vue.extend({
 
   methods: {
     editDescription() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'review.description',
         keypath: this.data.keypath,
       })
     },
     translateAll() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'translate',
         data: {
           keypath: this.data.keypath,
@@ -250,6 +251,10 @@ export default Vue.extend({
           font-size 0.9em
           font-family var(--vscode-editor-font-family)
           opacity 0.7
+          white-space nowrap
+          overflow hidden
+          text-overflow ellipsis
+          width 100%
 
         .value
           font-size 0.7em
@@ -260,7 +265,10 @@ export default Vue.extend({
           overflow hidden
           opacity 0.5
 
-          &.empty
+        &.empty
+          .key
+            color orange
+          .value
             opacity 0.2
 
   .header

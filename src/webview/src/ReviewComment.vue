@@ -137,7 +137,7 @@ export default Vue.extend({
       this.$emit('done')
     },
     postComment(type) {
-      api.postMessage({
+      api.server.postMessage({
         type: this.mode === 'create' ? 'review.comment' : 'review.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,
@@ -150,7 +150,7 @@ export default Vue.extend({
       this.$emit('done')
     },
     resolveComment(comment) {
-      api.postMessage({
+      api.server.postMessage({
         type: 'review.resolve',
         keypath: this.record.keypath,
         locale: this.record.locale,
@@ -158,7 +158,7 @@ export default Vue.extend({
       })
     },
     acceptSuggestion(comment) {
-      api.postMessage({
+      api.server.postMessage({
         type: 'review.apply-suggestion',
         keypath: this.record.keypath,
         locale: this.record.locale,

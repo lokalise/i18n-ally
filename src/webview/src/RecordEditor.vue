@@ -111,7 +111,7 @@ export default Vue.extend({
     },
     value() {
       this.$nextTick(() => this.resize(this.$refs.textarea1))
-      api.postMessage({
+      api.server.postMessage({
         type: 'devtools.text-update',
         locale: this.record.locale,
         keypath: this.record.keypath,
@@ -156,7 +156,7 @@ export default Vue.extend({
         this.save()
     },
     save() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'set_record',
         keypath: this.record.keypath,
         locale: this.record.locale,
@@ -164,7 +164,7 @@ export default Vue.extend({
       })
     },
     translate() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'translate',
         data: {
           keypath: this.record.keypath,
@@ -173,21 +173,21 @@ export default Vue.extend({
       })
     },
     transDiscard() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'translation.discard',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transApply() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'translation.apply',
         keypath: this.record.keypath,
         locale: this.record.locale,
       })
     },
     transEdit() {
-      api.postMessage({
+      api.server.postMessage({
         type: 'translation.edit',
         keypath: this.record.keypath,
         locale: this.record.locale,

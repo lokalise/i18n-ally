@@ -20,6 +20,7 @@
     "./node_modules/vscode/lib/*",
   ],
   "exclude": [
-    "./src/server/client"
+    "./src/server/client",
+    "./src/webview/src"
   ]
 }

@@ -27,8 +27,6 @@ export class I18nAlly {
     off: () => {},
   }
 
-  ws: WebSocket
-
   constructor(
     public readonly url = 'localhost:1897',
   ) {
@@ -40,12 +38,6 @@ export class I18nAlly {
       return
 
     this._started = true
-    this.ws = new WebSocket(`ws://${this.url}`)
-    this.ws.onmessage = (e) => {
-      const data = JSON.parse(e.data)
-      if (data._id && this._listeners[data._id])
-        this._listeners[data._id](data)
-    }
     this.injectStyle()
     observe('[data-i18n-ally-key]', {
       add: (e: Element) => {
@@ -91,13 +83,8 @@ export class I18nAlly {
     this._adaptor = adaptor
     this._adaptor.on('keys', () => this.updateUsingKeys())
     this.updateUsingKeys()
+    this.send({ type: 'content-script.ready' })
     this.start()
-  }
-
-  sendWS(data: any) {
-    if (!this._started)
-      throw new Error('i18n Ally client is not runing')
-    this.ws.send(JSON.stringify(data))
   }
 
   async call(data: any) {
@@ -107,7 +94,7 @@ export class I18nAlly {
         delete this._listeners[id]
         resolve(data)
       }
-      this.sendWS({ ...data, _id: id })
+      this.send({ ...data, _id: id })
     })
   }
 
@@ -122,7 +109,7 @@ export class I18nAlly {
   updateUsingKeys() {
     const keys = this._adaptor.keys
 
-    this.sendBackground({
+    this.send({
       type: 'context',
       data: {
         keys: keys.map(key => ({
@@ -181,7 +168,7 @@ export class I18nAlly {
     })
   }
 
-  sendBackground(message: any) {
+  send(message: any) {
     window.postMessage({
       source: 'i18n-ally-client',
       message,
