@@ -65,8 +65,8 @@
 <script lang="js">
 import Vue from 'vue'
 import cloneDeep from 'lodash/cloneDeep'
+import { api } from '../api/index'
 import Avatar from './Avatar.vue'
-import { api } from './api/index'
 
 export default Vue.extend({
   components: {

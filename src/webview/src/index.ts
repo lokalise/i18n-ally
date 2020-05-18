@@ -9,7 +9,7 @@ import './icons'
 import { api } from './api/index'
 import 'vue-material-design-icons/styles.css'
 // @ts-ignore
-import App from './App.vue'
+import App from './components/App.vue'
 
 Vue.use(Vuex)
 Vue.use(VueI18n)
@@ -37,10 +37,17 @@ const store = new Vuex.Store({
     client: {
       ready: false,
     },
-    context: {},
+    sidebar: false,
+    context: {
+      standalone: false,
+      keys: [],
+      filepath: '',
+    },
     i18n: {},
     route: 'welcome',
-    routeData: {},
+    routeData: {
+      index: 0,
+    },
     pendingChanges: [],
   },
   mutations: {
@@ -63,6 +70,9 @@ const store = new Vuex.Store({
     },
     clientReady(state, v) {
       state.client.ready = v
+    },
+    set(state, { key, value }) {
+      Vue.set(state, key.split('.'), value)
     },
   },
 })

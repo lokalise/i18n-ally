@@ -1,12 +1,16 @@
 <template lang="pug">
 .container
   template(v-if='$store.state.ready')
-    .actions-bar(v-if='$store.state.mode === "vscode"')
-      v-magnify.setting-button(@click='openSearch')
-      v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
-      v-cog.setting-button(@click='openSettings')
+    navbar
 
-    key-editor(v-if='state.route === "open-key"' :data='state.routeData')
+    .layout(
+      :class='{"with-sidebar": sidebar}'
+      @mousedown='onMousedown'
+      @mouseup='dragging=false'
+      @mousemove='onMove'
+    )
+      sidebar(:style='{width: sidebarWidth +"px"}' v-if='sidebar')
+      key-editor(v-if='state.route === "open-key"' :data='state.routeData')
 
   template(v-else)
     p.loading Loading...
@@ -14,49 +18,32 @@
 
 <script lang="js">
 import Vue from 'vue'
-import VCog from 'vue-material-design-icons/Cog.vue'
-import VRefresh from 'vue-material-design-icons/Refresh.vue'
-import VMagnify from 'vue-material-design-icons/Magnify.vue'
-import Flag from './Flag.vue'
+import common from '../mixins/common'
 import KeyEditor from './KeyEditor.vue'
-import { api } from './api/index'
+import Navbar from './Navbar.vue'
+import Sidebar from './Sidebar.vue'
 
 export default Vue.extend({
   components: {
-    Flag,
     KeyEditor,
-    VCog,
-    VRefresh,
-    VMagnify,
+    Navbar,
+    Sidebar,
   },
-
+  mixins: [common],
   data() {
     return {
-      alive: false,
+      dragging: false,
+      sidebarWidth: 150,
     }
   },
-
-  computed: {
-    logo() {
-      return `${this.state.config.extensionRoot}/res/logo.svg`
-    },
-    state() {
-      return this.$store.state
-    },
-  },
-
   methods: {
-    postMessage(message) {
-      api.server.postMessage(message)
+    onMousedown(e) {
+      if (e.target.className === 'resize-handler')
+        this.dragging = true
     },
-    refresh() {
-      this.postMessage({ type: 'webview.refresh' })
-    },
-    openSettings() {
-      this.postMessage({ type: 'open-builtin-settings' })
-    },
-    openSearch() {
-      this.postMessage({ type: 'open-search' })
+    onMove(e) {
+      if (this.dragging)
+        this.sidebarWidth = Math.min(Math.max(100, e.clientX - 20), window.innerWidth * 0.6)
     },
   },
 })
@@ -77,24 +64,6 @@ body
   font-size 1.1em
   padding-bottom 1.5em
 
-  .nav-bar
-    padding 0.6em
-    display grid
-    grid-template-columns auto max-content
-
-    & *
-      vertical-align middle
-
-  .actions-bar
-    position absolute
-    padding 1.2em
-    top 0
-    right 0
-    z-index 10
-
-  .nav-middle
-    margin auto 1em
-
   .title
     font-size 1.1em
 
@@ -111,6 +80,11 @@ body
 
     &:hover
       opacity 0.9
+
+.layout
+  display grid
+  &.with-sidebar
+    grid-template-columns max-content auto
 
 .monospace
   font-family var(--vscode-editor-font-family)

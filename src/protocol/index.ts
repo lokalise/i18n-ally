@@ -129,7 +129,7 @@ export class Protocol implements Disposable {
           keypath,
           records: CurrentFile.loader.getShadowLocales(node),
           reviews: Global.reviews.getReviews(keypath),
-          keyIndex: index,
+          index,
         },
       })
       if (this.options?.afterEditKey)

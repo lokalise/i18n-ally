@@ -6,7 +6,7 @@ export function initVSCode(): ProvideAPI {
   // @ts-ignore
   const vscode = acquireVsCodeApi()
 
-  console.info('VSCode Webview Mode')
+  console.info('VS Code Webview Mode')
 
   return {
     mode: 'vscode',
@@ -15,6 +15,7 @@ export function initVSCode(): ProvideAPI {
         window.addEventListener('message', (e: any) => fn(e.data))
       },
       postMessage: (...args) => {
+        console.log(args)
         vscode.postMessage(...args)
       },
     },

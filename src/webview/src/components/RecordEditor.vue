@@ -54,11 +54,11 @@
 
 <script lang="js">
 import Vue from 'vue'
-import { getCommentState } from '../../utils/shared'
+import { getCommentState } from '../../../utils/shared'
+import { api } from '../api/index'
 import ReviewComment from './ReviewComment.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
-import { api } from './api/index'
 
 export default Vue.extend({
   components: {

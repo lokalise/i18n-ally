@@ -14,7 +14,13 @@ import VChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import VChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import VDeleteEmptyOutline from 'vue-material-design-icons/DeleteEmptyOutline.vue'
 import VFormatQuoteOpen from 'vue-material-design-icons/FormatQuoteOpen.vue'
+import VCog from 'vue-material-design-icons/Cog.vue'
+import VRefresh from 'vue-material-design-icons/Refresh.vue'
+import VMagnify from 'vue-material-design-icons/Magnify.vue'
 
+Vue.component('VCog', VCog)
+Vue.component('VRefresh', VRefresh)
+Vue.component('VMagnify', VMagnify)
 Vue.component('VCheck', VCheck)
 Vue.component('VPlusMinus', VPlusMinus)
 Vue.component('VCommentOutline', VCommentOutline)
