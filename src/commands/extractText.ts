@@ -1,7 +1,5 @@
 import { commands, window, workspace } from 'vscode'
-import { trim } from 'lodash'
 // @ts-ignore
-import * as limax from 'limax'
 import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
@@ -9,12 +7,21 @@ import { ExtractTextOptions } from '../editor/extract'
 import { promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
+import * as limax from 'limax'
+import { trim } from 'lodash'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
     async(options: ExtractTextOptions) => {
       const { filepath, text, range, languageId } = options
-      const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+      let default_keypath: string
+      const keygenStrategy = Config.keygenStrategy
+      const keyPrefix = Config.keyPrefix
+      if (keygenStrategy === 'random')
+        default_keypath = `${keyPrefix}t${Date.now()}`
+      else
+        default_keypath = keyPrefix + limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+
       const locale = Config.sourceLanguage
 
       // prompt for keypath
@@ -68,6 +75,7 @@ const m: ExtensionModule = () => {
 
       // save key
       await CurrentFile.loader.write({
+        textFromPath: filepath,
         filepath: undefined,
         keypath: writeKeypath,
         value,
