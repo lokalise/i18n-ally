@@ -114,6 +114,11 @@
         "title": "%command.rename_key%"
       },
       {
+        "command": "i18n-ally.extract-text",
+        "category": "%extname%",
+        "title": "%refactor.extract_text%"
+      },
+      {
         "command": "i18n-ally.open-url",
         "category": "%extname%",
         "title": "%command.open_url%"
