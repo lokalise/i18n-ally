@@ -136,6 +136,7 @@ export type KeyStyle = 'auto' | 'nested' | 'flat'
 export interface RewriteKeyContext {
   locale?: string
   targetFile?: string
+  namespace?: string
 }
 
 export interface DataProcessContext {

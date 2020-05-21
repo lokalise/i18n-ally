@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { Component, Suspense } from 'react'
+import React, { Component } from 'react'
 import { useTranslation, withTranslation, Trans } from 'react-i18next'
 import './App.css'
 
@@ -51,18 +54,23 @@ function Page() {
   )
 }
 
-// loading component for suspense fallback
-const Loader = () => (
-  <div className="App">
-    <div>loading...</div>
-  </div>
-)
+// hook with scope
+function Page2() {
+  const { t } = useTranslation('foo')
 
-// here app catches the suspense from page in case translations are not yet loaded
-export default function App() {
-  return (
-    <Suspense fallback={<Loader />}>
-      <Page />
-    </Suspense>
-  )
+  // inside default namespace ("foo.bar")
+  t('bar')
+
+  // explicit namespace
+  t('description:part1')
+}
+
+// hook with another scope
+function Page3() {
+  const { t } = useTranslation('description')
+
+  t('part1')
+
+  // explicit namespace
+  t('foo:bar')
 }

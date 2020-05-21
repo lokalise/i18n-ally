@@ -1,6 +1,7 @@
+import { TextDocument } from 'vscode'
 import { RewriteKeySource, RewriteKeyContext } from '../core'
 import { LanguageId } from '../utils'
-import { Framework } from './base'
+import { Framework, ScopeRange } from './base'
 
 class I18nextFramework extends Framework {
   id ='i18next'
@@ -52,7 +53,48 @@ class I18nextFramework extends Framework {
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+    // when explicitly set the namespace, ignore current namespace scope
+    if (key.includes(':') && context.namespace && key.startsWith(context.namespace))
+      key = key.slice(context.namespace.length + 1) // with an extra `.`
+
+    // replace colons
     return key.replace(/:/g, '.')
+  }
+
+  // useTranslation
+  // https://react.i18next.com/latest/usetranslation-hook#loading-namespaces
+  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+    if (![
+      'javascript',
+      'typescript',
+      'javascriptreact',
+      'typescriptreact',
+    ].includes(document.languageId))
+      return
+
+    const ranges: ScopeRange[] = []
+    const text = document.getText()
+    const reg = /useTranslation\((?:['"`](.*)['"`]|)\)/g
+
+    for (const match of text.matchAll(reg)) {
+      if (match?.index == null)
+        continue
+
+      // end previous scope
+      if (ranges.length)
+        ranges[ranges.length - 1].end = match.index
+
+      // start new scope if namespace provides
+      if (match[1]) {
+        ranges.push({
+          start: match.index,
+          end: text.length,
+          namespace: match[1] as string,
+        })
+      }
+    }
+
+    return ranges
   }
 }
 

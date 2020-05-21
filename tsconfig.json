@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": { "*": ["types/*"] },
     "target": "es2019",
-    "lib": ["es2019"],
+    "lib": [ "ESNext", "ESNext.AsyncIterable", "ESNext.Array"],
     "module": "esnext",
     "outDir": "dist",
     "sourceMap": true,

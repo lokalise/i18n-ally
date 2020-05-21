@@ -27,11 +27,15 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
         continue
       starts.push(start)
 
-      if (scope?.scope)
-        key = `${scope.scope}.${key}`
+      // prefix the namespace
+      if (key && scope?.namespace)
+        key = `${scope.namespace}.${key}`
 
       if (key && (dotEnding || !key.endsWith('.'))) {
-        key = CurrentFile.loader.rewriteKeys(key, 'reference', rewriteContext)
+        key = CurrentFile.loader.rewriteKeys(key, 'reference', {
+          ...rewriteContext,
+          namespace: scope?.namespace,
+        })
         keys.push({
           key,
           start,

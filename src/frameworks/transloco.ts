@@ -47,7 +47,7 @@ export default class TranslocoFramework extends Framework {
     const regex = /^.*read:\s*['"](.+?)['"].*$/
     const tagStack: string[] = []
     let stackDepth = -1
-    let scope = ''
+    let namespace = ''
     let start = 0
 
     const parser = new Parser(
@@ -58,22 +58,22 @@ export default class TranslocoFramework extends Framework {
           if (attr && parser.endIndex != null) {
             if (!regex.test(attr))
               return
-            scope = attr.replace(regex, '$1')
+            namespace = attr.replace(regex, '$1')
             start = parser.startIndex
             stackDepth = tagStack.length
           }
         },
         onclosetag() {
           if (tagStack.length === stackDepth) {
-            if (scope) {
+            if (namespace) {
               ranges.push({
-                scope,
+                namespace,
                 start,
                 end: parser.endIndex ?? parser.startIndex,
               })
             }
             stackDepth = -1
-            scope = ''
+            namespace = ''
             start = 0
           }
           tagStack.pop()
