@@ -6,6 +6,7 @@ import { Framework, ScopeRange } from './base'
 class I18nextFramework extends Framework {
   id ='i18next'
   display = 'i18next'
+  namespaceDelimiter = ':'
 
   detection = {
     packageJSON: {
@@ -54,22 +55,22 @@ class I18nextFramework extends Framework {
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
     // when explicitly set the namespace, ignore current namespace scope
-    if (key.includes(':') && context.namespace && key.startsWith(context.namespace))
-      key = key.slice(context.namespace.length + 1) // with an extra `.`
+    if (
+      key.includes(this.namespaceDelimiter)
+      && context.namespace
+      && key.startsWith(context.namespace)
+    )
+      // +1 for the an extra `.`
+      key = key.slice(context.namespace.length + 1)
 
     // replace colons
-    return key.replace(/:/g, '.')
+    return key.replace(this.namespaceDelimiter, '.')
   }
 
   // useTranslation
   // https://react.i18next.com/latest/usetranslation-hook#loading-namespaces
   getScopeRange(document: TextDocument): ScopeRange[] | undefined {
-    if (![
-      'javascript',
-      'typescript',
-      'javascriptreact',
-      'typescriptreact',
-    ].includes(document.languageId))
+    if (!this.languageIds.includes(document.languageId as any))
       return
 
     const ranges: ScopeRange[] = []

@@ -67,7 +67,7 @@ const m: ExtensionModule = (ctx: ExtensionContext) => {
   return languages.registerCompletionItemProvider(
     Global.getDocumentSelectors(),
     new CompletionProvider(),
-    '.', '\'', '"', '`',
+    '.', '\'', '"', '`', ':',
   )
 }
 
