@@ -37,12 +37,13 @@ export class EcmascriptParser extends Parser {
     const compilerOptions = {
       importHelpers: false,
       allowJs: true,
+      module: 'commonjs',
       ...Config.parsersTypescriptCompilerOption,
     }
     const options = JSON.stringify(compilerOptions).replace(/"/g, '\\"')
 
     return new Promise<any>((resolve, reject) => {
-      const cmd = `${tsNode} --dir "${dir}" --compiler-options "${options}" "${loader}" "${filepath}"`
+      const cmd = `${tsNode} --dir "${dir}" --transpile-only --compiler-options "${options}" "${loader}" "${filepath}"`
       console.log(`[i18n-ally] spawn: ${cmd}`)
       child_process.exec(cmd, (err, stdout) => {
         if (err)
