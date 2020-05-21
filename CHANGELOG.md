@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/antfu/i18n-ally/compare/v2.1.6...v2.2.0) (2020-05-21)
+
+
+### 🐞 Bug Fixes
+
+* **es-parser:** tsconfig override, fix [#301](https://github.com/antfu/i18n-ally/issues/301) ([8a4da03](https://github.com/antfu/i18n-ally/commit/8a4da0357cd01dd5b89c4311bcd1021798243c17))
+
+
+### ⚡ Features
+
+* extract text from command palette, fix [#309](https://github.com/antfu/i18n-ally/issues/309) ([8b78127](https://github.com/antfu/i18n-ally/commit/8b7812785cd9e335e86d45fafb3295577aa24113))
+* support namespace scope for i18next, resolve [#307](https://github.com/antfu/i18n-ally/issues/307) ([e89557c](https://github.com/antfu/i18n-ally/commit/e89557c638b0115de043b63bcce58f2ea1d4b4c0))
+
+
+### 🔮 Refactor
+
+* prepare for namespace delimiter ([16d4bd1](https://github.com/antfu/i18n-ally/commit/16d4bd10fae4a3262d4b63c5da05b6d8ca6db6bd))
+
 ### [2.1.6](https://github.com/antfu/i18n-ally/compare/v2.1.5...v2.1.6) (2020-05-12)
 
 
