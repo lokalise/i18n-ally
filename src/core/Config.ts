@@ -382,15 +382,15 @@ export class Config {
   }
 
   static get keygenStrategy() {
-    return this.getConfig<string>('keygenStrategy') ?? 'default'
+    return this.getConfig<string>('extract.keygenStrategy') ?? 'default'
   }
 
   static get keyPrefix() {
-    return this.getConfig<string>('keyPrefix') ?? ''
+    return this.getConfig<string>('extract.keyPrefix') ?? ''
   }
 
-  static get useBestMatchFile() {
-    return this.getConfig<boolean>('useBestMatchFile') ?? false
+  static get autoExtractToBestMatchedFile() {
+    return this.getConfig<boolean>('extract.autoExtractToBestMatchedFile') ?? false
   }
 
   // config

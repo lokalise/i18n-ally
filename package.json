@@ -819,24 +819,24 @@
           "default": false,
           "description": "%config.editor_prefer_editor%"
         },
-        "i18n-ally.keygenStrategy": {
+        "i18n-ally.extract.keygenStrategy": {
           "type": "string",
-          "default": "default",
+          "default": "slug",
           "enum": [
-            "default",
+            "slug",
             "random"
           ],
           "description": "%config.keygen_strategy%"
         },
-        "i18n-ally.keyPrefix": {
+        "i18n-ally.extract.keyPrefix": {
           "type": "string",
           "default": "",
           "description": "%config.key_prefix%"
         },
-        "i18n-ally.useBestMatchFile": {
+        "i18n-ally.extract.autoExtractToBestMatchedFile": {
           "type": "boolean",
           "default": false,
-          "description": "%config.use_best_match_file%"
+          "description": "%config.auto_extract_to_best_matched_file%"
         },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."

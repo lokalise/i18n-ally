@@ -72,7 +72,7 @@
   "config.translate_override_existing": "Override existing messages on translating",
   "config.translate_save_as_candidates": "Save translations result to \"Translation Candidates\" instead of writting to the locale files.",
   "config.usage.scanning_ignore": "Ignore glob patterns for scanning key usage",
-  "config.use_best_match_file": "If more than one locale files found, extract text to the file which path most matches to current file's path.",
+  "config.auto_extract_to_best_matched_file": "If more than one locale files found, automatically extract text to the file which path most matches to current file's path.",
   "editor.add_description": "Add description...",
   "editor.empty": "(empty)",
   "editor.title": "i18n Ally Editor",

@@ -72,7 +72,7 @@
   "config.translate_override_existing": "在翻译时覆盖现有文案",
   "config.translate_save_as_candidates": "将翻译结果保存到 \"候选翻译\"，而不是直接写入文件",
   "config.usage.scanning_ignore": "忽略全局模式以扫描密钥用法",
-  "config.use_best_match_file": "如果找到多个语言文件, 将抽取的文案填入与当前文件路径最匹配的语言文件中",
+  "config.auto_extract_to_best_matched_file": "如果找到多个语言文件, 自动将抽取的文案填入与当前文件路径最匹配的语言文件中",
   "editor.add_description": "添加说明...",
   "editor.empty": "（空）",
   "editor.title": "i18n Ally 编辑器",

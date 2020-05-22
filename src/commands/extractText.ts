@@ -9,6 +9,7 @@ import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
 import * as limax from 'limax'
 import { trim } from 'lodash'
+import { nanoid } from 'nanoid'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
@@ -18,7 +19,7 @@ const m: ExtensionModule = () => {
       const keygenStrategy = Config.keygenStrategy
       const keyPrefix = Config.keyPrefix
       if (keygenStrategy === 'random')
-        default_keypath = `${keyPrefix}t${Date.now()}`
+        default_keypath = `${keyPrefix}${nanoid()}`
       else
         default_keypath = keyPrefix + limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
 

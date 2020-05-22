@@ -72,7 +72,7 @@
   "config.translate_override_existing": "Överskrid existerande meddelande vid översättning",
   "config.translate_save_as_candidates": "Spara översättningsresultat till \"Översättningskandidater\" istället för att skriva dem till översättningsvägsfilerna.",
   "config.usage.scanning_ignore": "Ignorera `glob`-mönster skanning av nyckelanvändande",
-  "config.use_best_match_file": "",
+  "config.auto_extract_to_best_matched_file": "",
   "editor.add_description": "Lägg till beskrivning...",
   "editor.empty": "(tom)",
   "editor.title": "i18n Ally Redigerare",

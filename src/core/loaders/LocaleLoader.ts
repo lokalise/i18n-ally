@@ -179,7 +179,7 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
-    if (Config.useBestMatchFile && pending.textFromPath) {
+    if (Config.autoExtractToBestMatchedFile && pending.textFromPath) {
       return this.findBestMatchFile(pending.textFromPath, paths)
     }
 
