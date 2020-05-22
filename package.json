@@ -833,10 +833,14 @@
           "default": "",
           "description": "%config.key_prefix%"
         },
-        "i18n-ally.extract.autoExtractToBestMatchedFile": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.auto_extract_to_best_matched_file%"
+        "i18n-ally.extract.targetPickingStrategy": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "most-similar"
+          ],
+          "description": "%config.target_picking_strategy%"
         },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."

@@ -389,8 +389,8 @@ export class Config {
     return this.getConfig<string>('extract.keyPrefix') ?? ''
   }
 
-  static get autoExtractToBestMatchedFile() {
-    return this.getConfig<boolean>('extract.autoExtractToBestMatchedFile') ?? false
+  static get targetPickingStrategy() {
+    return this.getConfig<string>('extract.targetPickingStrategy') ?? 'none'
   }
 
   // config
