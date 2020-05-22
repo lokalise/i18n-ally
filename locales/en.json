@@ -44,7 +44,7 @@
   "config.indent": "Indent space size for locale files",
   "config.keep_fulfill": "Always keep all keys fulfilled with empty strings",
   "config.keygen_strategy": "Stragety of generating key.",
-  "config.key_prefix": "String prepend to the key.",
+  "config.key_prefix": "String prepend to the extracting key.",
   "config.keys_in_use": "Keys to mark as in use despite not appearing in the code",
   "config.keystyle": "Locale key style",
   "config.language_tag_system": "Language tag system use are using.",

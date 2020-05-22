@@ -382,7 +382,7 @@ export class Config {
   }
 
   static get keygenStrategy() {
-    return this.getConfig<string>('extract.keygenStrategy') ?? 'default'
+    return this.getConfig<string>('extract.keygenStrategy') ?? 'slug'
   }
 
   static get keyPrefix() {
