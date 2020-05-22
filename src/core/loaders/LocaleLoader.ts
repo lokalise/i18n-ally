@@ -1,8 +1,5 @@
 import * as path from 'path'
-import fs from 'fs-extra'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import _, { uniq, throttle, set } from 'lodash'
-import * as fg from 'fast-glob'
 import { ReplaceLocale } from '../../utils/PathMatcher'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
@@ -11,7 +8,11 @@ import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { Loader } from './Loader'
+import * as fg from 'fast-glob'
+import _, { uniq, throttle, set } from 'lodash'
+import fs from 'fs-extra'
 import { Analyst, Global, Config } from '..'
+import { findBestMatch } from 'string-similarity'
 
 const THROTTLE_DELAY = 1500
 
@@ -178,12 +179,20 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
+    if (Config.targetPickingStrategy === 'most-similar' && pending.textFromPath) {
+      return this.findBestMatchFile(pending.textFromPath, paths)
+    }
+
     else {
       return await window.showQuickPick(paths, {
         placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
         ignoreFocusOut: true,
       })
     }
+  }
+
+  findBestMatchFile(fromPath: string, paths: string[]): string {
+    return findBestMatch(fromPath, paths).bestMatch.target
   }
 
   async write(pendings: PendingWrite|PendingWrite[]) {

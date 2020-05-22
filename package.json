@@ -824,6 +824,29 @@
           "default": false,
           "description": "%config.editor_prefer_editor%"
         },
+        "i18n-ally.extract.keygenStrategy": {
+          "type": "string",
+          "default": "slug",
+          "enum": [
+            "slug",
+            "random"
+          ],
+          "description": "%config.keygen_strategy%"
+        },
+        "i18n-ally.extract.keyPrefix": {
+          "type": "string",
+          "default": "",
+          "description": "%config.key_prefix%"
+        },
+        "i18n-ally.extract.targetPickingStrategy": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "most-similar"
+          ],
+          "description": "%config.target_picking_strategy%"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },
@@ -980,6 +1003,7 @@
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "dependencies": {
+    "@types/string-similarity": "^3.0.0",
     "bcp-47-normalize": "^1.0.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.0.0",
@@ -991,14 +1015,15 @@
     "json-source-map": "^0.6.1",
     "json-stable-stringify": "^1.0.1",
     "json5": "^2.1.0",
-    "properties": "^1.2.1",
     "limax": "^2.0.0",
     "lodash": "^4.17.11",
     "nanoid": "^3.1.3",
     "node-html-parser": "^1.1.16",
     "parse-gitignore": "^1.0.1",
     "po2json": "^1.0.0-alpha",
+    "properties": "^1.2.1",
     "semver": "^7.3.2",
+    "string-similarity": "^4.0.1",
     "ts-node": "^8.3.0",
     "typescript": "3.9.3",
     "vue-i18n-locale-message": "^0.16.0",

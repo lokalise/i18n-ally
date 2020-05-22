@@ -88,6 +88,7 @@ export interface Coverage {
 }
 
 export interface PendingWrite {
+  textFromPath?: string
   locale: string
   keypath: string
   filepath?: string

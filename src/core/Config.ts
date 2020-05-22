@@ -1,10 +1,10 @@
 import path from 'path'
 import { execSync } from 'child_process'
 import { workspace, extensions, ExtensionContext } from 'vscode'
-import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
+import { trimEnd, uniq } from 'lodash'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -379,6 +379,18 @@ export class Config {
 
   static get translateOverrideExisting() {
     return this.getConfig<boolean>('translate.overrideExisting') ?? false
+  }
+
+  static get keygenStrategy() {
+    return this.getConfig<string>('extract.keygenStrategy') ?? 'slug'
+  }
+
+  static get keyPrefix() {
+    return this.getConfig<string>('extract.keyPrefix') ?? ''
+  }
+
+  static get targetPickingStrategy() {
+    return this.getConfig<string>('extract.targetPickingStrategy') ?? 'none'
   }
 
   // config
