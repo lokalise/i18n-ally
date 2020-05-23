@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/antfu/i18n-ally/compare/v2.2.0...v2.2.1) (2020-05-23)
+
+
+### ⚡ Features
+
+* Add 2 new options to targetPickingStrategy ([#312](https://github.com/antfu/i18n-ally/issues/312)) ([641c637](https://github.com/antfu/i18n-ally/commit/641c6377dc81940324b1a7c9b1751a3b2424adee))
+
+
+### 🔮 Refactor
+
+* fix typo ([d2c1d5d](https://github.com/antfu/i18n-ally/commit/d2c1d5d92f46ba7904d89d12cae6ebd038fe7a76))
+
 ## [2.2.0](https://github.com/antfu/i18n-ally/compare/v2.1.6...v2.2.0) (2020-05-21)
 
 
