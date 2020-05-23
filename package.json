@@ -843,7 +843,15 @@
           "default": "none",
           "enum": [
             "none",
-            "most-similar"
+            "most-similar",
+            "file-previous",
+            "global-previous"
+          ],
+          "enumDescriptions": [
+            "%config.target_picking_strategy.none%",
+            "%config.target_picking_strategy.most-similar%",
+            "%config.target_picking_strategy.file-previous%",
+            "%config.target_picking_strategy.global-previous%"
           ],
           "description": "%config.target_picking_strategy%"
         },

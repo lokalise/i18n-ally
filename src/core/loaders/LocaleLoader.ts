@@ -1,5 +1,9 @@
 import * as path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
+import * as fg from 'fast-glob'
+import _, { uniq, throttle, set } from 'lodash'
+import fs from 'fs-extra'
+import { findBestMatch } from 'string-similarity'
 import { ReplaceLocale } from '../../utils/PathMatcher'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
@@ -7,12 +11,9 @@ import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
+import { hasCache, getCache, setCache } from '../../utils/cache'
 import { Loader } from './Loader'
-import * as fg from 'fast-glob'
-import _, { uniq, throttle, set } from 'lodash'
-import fs from 'fs-extra'
 import { Analyst, Global, Config } from '..'
-import { findBestMatch } from 'string-similarity'
 
 const THROTTLE_DELAY = 1500
 
@@ -179,8 +180,15 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
-    if (Config.targetPickingStrategy === 'most-similar' && pending.textFromPath) {
+    const { mostSimilar, filePrevious, globalPrevious } = Config.TargetPickingStrategies
+    if (Config.targetPickingStrategy === mostSimilar && pending.textFromPath)
       return this.findBestMatchFile(pending.textFromPath, paths)
+
+    if (Config.targetPickingStrategy === filePrevious && pending.textFromPath)
+      return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)
+
+    if (Config.targetPickingStrategy === globalPrevious) {
+      return this.handleExtractToGlobalPrevious(paths, keypath)
     }
 
     else {
@@ -189,6 +197,49 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
+  }
+
+  /**
+   * Extract text to current file's previous selected locale file
+   * @param fromPath: path of current extracting file
+   * @param paths: paths of locale files
+   * @param keypath
+   */
+  async handleExtractToFilePrevious(fromPath: string, paths: any, keypath: string): Promise<string | void> {
+    const cacheKey = 'perFilePickingTargets'
+    const pickingTargets: any = hasCache(cacheKey) ? getCache(cacheKey) : setCache(cacheKey, {})
+    const cachedPath = pickingTargets[fromPath]
+
+    if (cachedPath) return cachedPath
+
+    const newPath = await window.showQuickPick(paths, {
+      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
+      ignoreFocusOut: true,
+    })
+    pickingTargets[fromPath] = newPath
+    setCache(cacheKey, pickingTargets)
+
+    return newPath
+  }
+
+  /**
+   * Extract text to previous selected locale file (includes selection made in other files)
+   * @param paths: paths of locale files
+   * @param keypath
+   */
+  async handleExtractToGlobalPrevious(paths: any, keypath: string): Promise<string | void> {
+    const cacheKey = 'globalPickingTargets'
+    const pickingTarget: any = getCache(cacheKey)
+
+    if (pickingTarget) return pickingTarget
+
+    const newPath = await window.showQuickPick(paths, {
+      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
+      ignoreFocusOut: true,
+    })
+    setCache(cacheKey, newPath)
+
+    return newPath
   }
 
   findBestMatchFile(fromPath: string, paths: string[]): string {
