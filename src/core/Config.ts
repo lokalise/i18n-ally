@@ -1,10 +1,10 @@
 import path from 'path'
 import { execSync } from 'child_process'
 import { workspace, extensions, ExtensionContext } from 'vscode'
+import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
 import { KeyStyle, DirStructureAuto } from '.'
-import { trimEnd, uniq } from 'lodash'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -35,6 +35,13 @@ export class Config {
     'keysInUse',
     'derivedKeyRules',
   ]
+
+  static readonly TargetPickingStrategies = {
+    none: 'none',
+    mostSimilar: 'most-similar',
+    filePrevious: 'file-previous',
+    globalPrevious: 'global-previous',
+  }
 
   static ctx: ExtensionContext
   static readonly debug = process.env.NODE_ENV === 'development'
