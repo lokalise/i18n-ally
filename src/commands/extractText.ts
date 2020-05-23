@@ -1,5 +1,8 @@
 import { commands, window, workspace } from 'vscode'
 // @ts-ignore
+import * as limax from 'limax'
+import { trim } from 'lodash'
+import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
@@ -7,9 +10,6 @@ import { ExtractTextOptions } from '../editor/extract'
 import { promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
-import * as limax from 'limax'
-import { trim } from 'lodash'
-import { nanoid } from 'nanoid'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
@@ -32,10 +32,14 @@ const m: ExtensionModule = () => {
       let default_keypath: string
       const keygenStrategy = Config.keygenStrategy
       const keyPrefix = Config.keyPrefix
+
       if (keygenStrategy === 'random')
-        default_keypath = `${keyPrefix}${nanoid()}`
+        default_keypath = nanoid()
       else
-        default_keypath = keyPrefix + limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+        default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+
+      if (keyPrefix)
+        default_keypath = keyPrefix + default_keypath
 
       const locale = Config.sourceLanguage
 

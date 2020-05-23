@@ -187,16 +187,13 @@ export class LocaleLoader extends Loader {
     if (Config.targetPickingStrategy === filePrevious && pending.textFromPath)
       return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)
 
-    if (Config.targetPickingStrategy === globalPrevious) {
+    if (Config.targetPickingStrategy === globalPrevious)
       return this.handleExtractToGlobalPrevious(paths, keypath)
-    }
 
-    else {
-      return await window.showQuickPick(paths, {
-        placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
-        ignoreFocusOut: true,
-      })
-    }
+    return await window.showQuickPick(paths, {
+      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
+      ignoreFocusOut: true,
+    })
   }
 
   /**

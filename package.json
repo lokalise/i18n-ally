@@ -30,7 +30,7 @@
     "onLanguage:php",
     "onLanguage:handlebars",
     "onLanguage:ini",
-    "onLangugae:svelte"
+    "onLanguage:svelte"
   ],
   "keywords": [
     "vue",
