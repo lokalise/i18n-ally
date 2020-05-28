@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/antfu/i18n-ally/compare/v2.2.1...v2.2.2) (2020-05-28)
+
+
+### ⚡ Features
+
+* new config to disable flags, [#313](https://github.com/antfu/i18n-ally/issues/313) ([5b5c181](https://github.com/antfu/i18n-ally/commit/5b5c181dbe9c57d273f5970d5898816a4aa7b7fe))
+
+
+### 🐞 Bug Fixes
+
+* **ruby-rails:** partials starting underscore, fix [#317](https://github.com/antfu/i18n-ally/issues/317) ([a3d6dbb](https://github.com/antfu/i18n-ally/commit/a3d6dbb8b3d3edc3205074b53924f88dc3422cb5))
+
 ### [2.2.1](https://github.com/antfu/i18n-ally/compare/v2.2.0...v2.2.1) (2020-05-23)
 
 
