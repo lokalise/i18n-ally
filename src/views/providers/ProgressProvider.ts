@@ -22,7 +22,7 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   }
 
   refresh(): void {
-    this._onDidChangeTreeData.fire()
+    this._onDidChangeTreeData.fire(undefined)
   }
 
   getTreeItem(element: BaseTreeItem): TreeItem {

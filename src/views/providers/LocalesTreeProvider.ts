@@ -27,7 +27,7 @@ export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {
   }
 
   protected refresh(): void {
-    this._onDidChangeTreeData.fire()
+    this._onDidChangeTreeData.fire(undefined)
   }
 
   getTreeItem(element: LocaleTreeItem): TreeItem {

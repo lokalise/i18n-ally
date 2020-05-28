@@ -31,7 +31,7 @@ export class YamlParser extends Parser {
     cst.setOrigRanges() // Workaround for CRLF eol, https://github.com/eemeli/yaml/issues/127
     const doc = new YAML.Document({ keepCstNodes: true }).parse(cst[0])
 
-    const findPairs = (node: YAML.ast.AstNode | YAML.ast.Pair | null, path: string[] = []): KeyInDocument[] => {
+    const findPairs = (node: any, path: string[] = []): KeyInDocument[] => {
       if (!node)
         return []
       if (node.type === 'MAP' || node.type === 'SEQ')

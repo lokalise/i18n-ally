@@ -376,7 +376,7 @@ export class Global {
       Log.info(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
       commands.executeCommand('setContext', `${EXT_NAMESPACE}-enabled`, value)
-      this._onDidChangeEnabled.fire()
+      this._onDidChangeEnabled.fire(this._enabled)
     }
   }
 
