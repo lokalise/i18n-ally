@@ -45,9 +45,14 @@ class RubyRailsFramework extends Framework {
     if (source === 'reference' && key.startsWith('.') && context.targetFile) {
       const root = path.resolve(Global.rootpath, Config.frameworksRubyRailsScopeRoot)
       let scope = path.relative(root, context.targetFile)
+
       if (scope.endsWith('.html.erb'))
         scope = scope.slice(0, -9)
-      scope = scope.replace(/(?:\/|\\)/g, '.')
+
+      scope = scope
+        .replace(/(?:\/|\\)/g, '.') // map path delimiter to dots
+        .replace(/\._/g, '.') // remove the starting underline if we have
+
       return scope + key
     }
     return key
