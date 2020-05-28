@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.3](https://github.com/antfu/i18n-ally/compare/v2.2.2...v2.2.3) (2020-05-28)
+
+
+### 🐞 Bug Fixes
+
+* **ruby-rails:** support more extensions ([9b334a2](https://github.com/antfu/i18n-ally/commit/9b334a22435a4a86f4fb6cf6a07b4069ef87c5fc))
+* typing ([5d22655](https://github.com/antfu/i18n-ally/commit/5d226552713b907cf06ffaf5b0352d9917d8773e))
+* **ruby-rails:** improve partials ([c263ba2](https://github.com/antfu/i18n-ally/commit/c263ba2bdc4483f437e6e5c4fe62ede4e38214c3))
+
 ### [2.2.2](https://github.com/antfu/i18n-ally/compare/v2.2.1...v2.2.2) (2020-05-28)
 
 
