@@ -144,3 +144,10 @@ export interface DataProcessContext {
   locale?: string
   targetFile?: string
 }
+
+export enum TargetPickingStrategy {
+  None = 'none',
+  MostSimilar = 'most-similar',
+  FilePrevious ='file-previous',
+  GlobalPrevious = 'global-previous',
+}

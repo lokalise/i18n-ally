@@ -8,7 +8,7 @@ import { ReplaceLocale } from '../../utils/PathMatcher'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
 import i18n from '../../i18n'
-import { ParsedFile, PendingWrite, DirStructure } from '../types'
+import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { hasCache, getCache, setCache } from '../../utils/cache'
@@ -180,14 +180,13 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
-    const { mostSimilar, filePrevious, globalPrevious } = Config.TargetPickingStrategies
-    if (Config.targetPickingStrategy === mostSimilar && pending.textFromPath)
+    if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilar && pending.textFromPath)
       return this.findBestMatchFile(pending.textFromPath, paths)
 
-    if (Config.targetPickingStrategy === filePrevious && pending.textFromPath)
+    if (Config.targetPickingStrategy === TargetPickingStrategy.FilePrevious && pending.textFromPath)
       return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)
 
-    if (Config.targetPickingStrategy === globalPrevious)
+    if (Config.targetPickingStrategy === TargetPickingStrategy.GlobalPrevious)
       return this.handleExtractToGlobalPrevious(paths, keypath)
 
     return await window.showQuickPick(paths, {

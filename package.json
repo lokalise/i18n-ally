@@ -574,6 +574,11 @@
           "default": false,
           "description": "%config.full_reload_on_changed%"
         },
+        "i18n-ally.showFlags": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.show_flags%"
+        },
         "i18n-ally.enabledFrameworks": {
           "type": "array",
           "items": {

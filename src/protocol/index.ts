@@ -38,6 +38,7 @@ export class Protocol {
       review: Config.reviewEnabled,
       locales,
       flags: locales.map(i => Config.tagSystem.getFlagName(i)),
+      showFlags: Config.showFlags,
       sourceLanguage: Config.sourceLanguage,
       displayLanguage: Config.displayLanguage,
       enabledFrameworks: Config.enabledFrameworks,

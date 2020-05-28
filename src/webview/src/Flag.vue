@@ -1,6 +1,12 @@
 <template lang="pug">
 .flag-icon(:style='style')
-  img(:src='src' v-bind='$attrs' :width='size || "20"' :height='size || "20"')
+  img(
+    v-if='$store.state.config.showFlags'
+    v-bind='$attrs' 
+    :src='src' 
+    :width='size || "20"' 
+    :height='size || "20"' 
+  )
   .locale-label.monospace(v-if='label') {{locale}}
 </template>
 
@@ -43,6 +49,7 @@ export default Vue.extend({
 .flag-icon
   padding 3px
   text-align center
+  margin auto
 
   img
     margin auto
