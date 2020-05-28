@@ -51,7 +51,8 @@ class RubyRailsFramework extends Framework {
 
       scope = scope
         .replace(/(?:\/|\\)/g, '.') // map path delimiter to dots
-        .replace(/\._/g, '.') // remove the starting underline if we have
+        .replace(/\._/g, '.') // omit the starting underscore on each file
+        .replace(/^_/g, '') // remove the very starting underscore
 
       return scope + key
     }
