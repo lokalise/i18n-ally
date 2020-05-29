@@ -3,7 +3,7 @@ import { execSync } from 'child_process'
 import { workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
-import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL } from '../meta'
+import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 
 export class Config {
@@ -213,7 +213,7 @@ export class Config {
     return `node "${path.resolve(this.extensionPath!, config)}"`
   }
 
-  static get parsersTypescriptCompilerOption(): object {
+  static get parsersTypescriptCompilerOption(): any {
     return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
   }
 
@@ -393,8 +393,16 @@ export class Config {
     return this.getConfig<boolean>('showFlags') ?? true
   }
 
+  static get localeCountryMap() {
+    return Object.assign(
+      DEFAULT_LOCALE_COUNTRY_MAP,
+      this.getConfig<Record<string, string>>('localeCountryMap'),
+    )
+  }
+
   static get targetPickingStrategy(): TargetPickingStrategy {
-    return this.getConfig<TargetPickingStrategy | undefined>('extract.targetPickingStrategy') ?? TargetPickingStrategy.None
+    return this.getConfig<TargetPickingStrategy | undefined>('extract.targetPickingStrategy')
+      ?? TargetPickingStrategy.None
   }
 
   // config

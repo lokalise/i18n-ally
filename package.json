@@ -651,6 +651,11 @@
           "default": false,
           "description": "%config.keep_fulfill%"
         },
+        "i18n-ally.localeCountryMap": {
+          "type": "object",
+          "default": {},
+          "description": "%config.locale_country_map%"
+        },
         "i18n-ally.indent": {
           "type": "number",
           "default": 2,
