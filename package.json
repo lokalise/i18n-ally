@@ -617,7 +617,7 @@
               "json5",
               "yaml",
               "ini",
-              "pot",
+              "po",
               "php",
               "properties"
             ]
