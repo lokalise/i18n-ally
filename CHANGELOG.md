@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.4](https://github.com/antfu/i18n-ally/compare/v2.2.3...v2.2.4) (2020-05-29)
+
+
+### 🐞 Bug Fixes
+
+* handle flags more properly, [#313](https://github.com/antfu/i18n-ally/issues/313) ([141a561](https://github.com/antfu/i18n-ally/commit/141a56145f5e48d7b10d2dd791dee017d9df701c))
+
+### [2.2.3](https://github.com/antfu/i18n-ally/compare/v2.2.2...v2.2.3) (2020-05-28)
+
+
+### 🐞 Bug Fixes
+
+* **ruby-rails:** support more extensions ([9b334a2](https://github.com/antfu/i18n-ally/commit/9b334a22435a4a86f4fb6cf6a07b4069ef87c5fc))
+* typing ([5d22655](https://github.com/antfu/i18n-ally/commit/5d226552713b907cf06ffaf5b0352d9917d8773e))
+* **ruby-rails:** improve partials ([c263ba2](https://github.com/antfu/i18n-ally/commit/c263ba2bdc4483f437e6e5c4fe62ede4e38214c3))
+
+### [2.2.2](https://github.com/antfu/i18n-ally/compare/v2.2.1...v2.2.2) (2020-05-28)
+
+
+### ⚡ Features
+
+* new config to disable flags, [#313](https://github.com/antfu/i18n-ally/issues/313) ([5b5c181](https://github.com/antfu/i18n-ally/commit/5b5c181dbe9c57d273f5970d5898816a4aa7b7fe))
+
+
+### 🐞 Bug Fixes
+
+* **ruby-rails:** partials starting underscore, fix [#317](https://github.com/antfu/i18n-ally/issues/317) ([a3d6dbb](https://github.com/antfu/i18n-ally/commit/a3d6dbb8b3d3edc3205074b53924f88dc3422cb5))
+
+### [2.2.1](https://github.com/antfu/i18n-ally/compare/v2.2.0...v2.2.1) (2020-05-23)
+
+
+### ⚡ Features
+
+* Add 2 new options to targetPickingStrategy ([#312](https://github.com/antfu/i18n-ally/issues/312)) ([641c637](https://github.com/antfu/i18n-ally/commit/641c6377dc81940324b1a7c9b1751a3b2424adee))
+
+
+### 🔮 Refactor
+
+* fix typo ([d2c1d5d](https://github.com/antfu/i18n-ally/commit/d2c1d5d92f46ba7904d89d12cae6ebd038fe7a76))
+
+## [2.2.0](https://github.com/antfu/i18n-ally/compare/v2.1.6...v2.2.0) (2020-05-21)
+
+
+### 🐞 Bug Fixes
+
+* **es-parser:** tsconfig override, fix [#301](https://github.com/antfu/i18n-ally/issues/301) ([8a4da03](https://github.com/antfu/i18n-ally/commit/8a4da0357cd01dd5b89c4311bcd1021798243c17))
+
+
+### ⚡ Features
+
+* extract text from command palette, fix [#309](https://github.com/antfu/i18n-ally/issues/309) ([8b78127](https://github.com/antfu/i18n-ally/commit/8b7812785cd9e335e86d45fafb3295577aa24113))
+* support namespace scope for i18next, resolve [#307](https://github.com/antfu/i18n-ally/issues/307) ([e89557c](https://github.com/antfu/i18n-ally/commit/e89557c638b0115de043b63bcce58f2ea1d4b4c0))
+
+
+### 🔮 Refactor
+
+* prepare for namespace delimiter ([16d4bd1](https://github.com/antfu/i18n-ally/commit/16d4bd10fae4a3262d4b63c5da05b6d8ca6db6bd))
+
 ### [2.1.6](https://github.com/antfu/i18n-ally/compare/v2.1.5...v2.1.6) (2020-05-12)
 
 

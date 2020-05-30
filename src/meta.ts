@@ -21,3 +21,11 @@ export const linkedKeyModifiers = {
   upper: (str: string) => str.toLocaleUpperCase(),
   lower: (str: string) => str.toLocaleLowerCase(),
 } as Record<string, (str: string) => string>
+
+export const DEFAULT_LOCALE_COUNTRY_MAP = {
+  en: 'us',
+  zh: 'cn',
+  de: 'de',
+  fr: 'fr',
+  ja: 'ja',
+}

@@ -129,6 +129,15 @@ export class Global {
     return `**/*.{${exts.join(',')}}`
   }
 
+  static getNamespaceDelimiter() {
+    for (const f of this.enabledFrameworks) {
+      if (f.namespaceDelimiter)
+        return f.namespaceDelimiter
+    }
+
+    return '.'
+  }
+
   static get derivedKeyRules() {
     const rules = Config.usageDerivedKeyRules
       ? Config.usageDerivedKeyRules
@@ -371,7 +380,7 @@ export class Global {
       Log.info(value ? '🌞 Enabled' : '🌚 Disabled')
       this._enabled = value
       commands.executeCommand('setContext', `${EXT_NAMESPACE}-enabled`, value)
-      this._onDidChangeEnabled.fire()
+      this._onDidChangeEnabled.fire(this._enabled)
     }
   }
 

@@ -29,7 +29,7 @@ export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   }
 
   refresh(): void {
-    this._onDidChangeTreeData.fire()
+    this._onDidChangeTreeData.fire(undefined)
   }
 
   getTreeItem(element: TreeItem): TreeItem {

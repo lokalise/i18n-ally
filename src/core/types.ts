@@ -88,6 +88,7 @@ export interface Coverage {
 }
 
 export interface PendingWrite {
+  textFromPath?: string
   locale: string
   keypath: string
   filepath?: string
@@ -136,9 +137,17 @@ export type KeyStyle = 'auto' | 'nested' | 'flat'
 export interface RewriteKeyContext {
   locale?: string
   targetFile?: string
+  namespace?: string
 }
 
 export interface DataProcessContext {
   locale?: string
   targetFile?: string
+}
+
+export enum TargetPickingStrategy {
+  None = 'none',
+  MostSimilar = 'most-similar',
+  FilePrevious ='file-previous',
+  GlobalPrevious = 'global-previous',
 }

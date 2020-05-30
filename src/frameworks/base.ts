@@ -15,7 +15,7 @@ export type PackageFileType
 export interface ScopeRange {
   start: number
   end: number
-  scope: string
+  namespace: string
 }
 
 export abstract class Framework {
@@ -24,6 +24,7 @@ export abstract class Framework {
   monopoly?: boolean
   enabledParsers?: string[]
   derivedKeyRules?: string[]
+  namespaceDelimiter?: string
 
   /**
    * Packages names determine whether a frameworks should enable or not

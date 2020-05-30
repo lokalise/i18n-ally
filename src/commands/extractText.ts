@@ -1,7 +1,8 @@
 import { commands, window, workspace } from 'vscode'
-import { trim } from 'lodash'
 // @ts-ignore
 import * as limax from 'limax'
+import { trim } from 'lodash'
+import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
@@ -12,9 +13,34 @@ import { keypathValidate } from './keypathValidate'
 
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
-    async(options: ExtractTextOptions) => {
+    async(options?: ExtractTextOptions) => {
+      if (!options) {
+        // execute from command palette, get from active document
+        const editor = window.activeTextEditor
+        const document = editor?.document
+        if (!editor || !document || editor.selection.start.isEqual(editor.selection.end))
+          return
+        options = {
+          filepath: document.uri.fsPath,
+          text: document.getText(editor.selection),
+          range: editor.selection,
+          languageId: document.languageId,
+        }
+      }
+
       const { filepath, text, range, languageId } = options
-      const default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+      let default_keypath: string
+      const keygenStrategy = Config.keygenStrategy
+      const keyPrefix = Config.keyPrefix
+
+      if (keygenStrategy === 'random')
+        default_keypath = nanoid()
+      else
+        default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+
+      if (keyPrefix)
+        default_keypath = keyPrefix + default_keypath
+
       const locale = Config.sourceLanguage
 
       // prompt for keypath
@@ -68,6 +94,7 @@ const m: ExtensionModule = () => {
 
       // save key
       await CurrentFile.loader.write({
+        textFromPath: filepath,
         filepath: undefined,
         keypath: writeKeypath,
         value,

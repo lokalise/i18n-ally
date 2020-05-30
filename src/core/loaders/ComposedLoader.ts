@@ -12,7 +12,7 @@ export class ComposedLoader extends Loader {
   constructor() {
     super('[Composed]')
     this._disposables.push(
-      Translator.onDidChange(() => this._onDidChange.fire()),
+      Translator.onDidChange(() => this._onDidChange.fire('')),
     )
   }
 

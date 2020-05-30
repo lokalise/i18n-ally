@@ -1,7 +1,7 @@
 import path from 'path'
 import YAML from 'js-yaml'
 import fs from 'fs-extra'
-import { EventEmitter, Event, window, workspace, FileSystemWatcher } from 'vscode'
+import { EventEmitter, window, workspace, FileSystemWatcher } from 'vscode'
 import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { cleanObject } from '../utils/cleanObject'
@@ -18,8 +18,8 @@ export class Reviews {
   private _fileWatcher: FileSystemWatcher | undefined
   private mtime = 0
 
-  private _onDidChange: EventEmitter<string> = new EventEmitter()
-  readonly onDidChange: Event<string> = this._onDidChange.event
+  private _onDidChange: EventEmitter<string | undefined> = new EventEmitter()
+  readonly onDidChange = this._onDidChange.event
 
   init(rootpath: string) {
     this._fileWatcher?.dispose()
@@ -226,7 +226,7 @@ export class Reviews {
       this.data = { reviews: {} }
     }
     this.data.reviews = this.data.reviews || {}
-    this._onDidChange.fire()
+    this._onDidChange.fire(undefined)
   }
 
   private async save() {

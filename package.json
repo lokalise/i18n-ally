@@ -2,10 +2,10 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.1.6",
+  "version": "2.2.4",
   "publisher": "antfu",
   "engines": {
-    "vscode": "^1.40.0"
+    "vscode": "1.40.0"
   },
   "categories": [
     "Other"
@@ -112,6 +112,11 @@
         "command": "i18n-ally.rename-key",
         "category": "%extname%",
         "title": "%command.rename_key%"
+      },
+      {
+        "command": "i18n-ally.extract-text",
+        "category": "%extname%",
+        "title": "%refactor.extract_text%"
       },
       {
         "command": "i18n-ally.open-url",
@@ -574,6 +579,11 @@
           "default": false,
           "description": "%config.full_reload_on_changed%"
         },
+        "i18n-ally.showFlags": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.show_flags%"
+        },
         "i18n-ally.enabledFrameworks": {
           "type": "array",
           "items": {
@@ -612,7 +622,7 @@
               "json5",
               "yaml",
               "ini",
-              "pot",
+              "po",
               "php",
               "properties"
             ]
@@ -645,6 +655,11 @@
           "type": "boolean",
           "default": false,
           "description": "%config.keep_fulfill%"
+        },
+        "i18n-ally.localeCountryMap": {
+          "type": "object",
+          "default": {},
+          "description": "%config.locale_country_map%"
         },
         "i18n-ally.indent": {
           "type": "number",
@@ -829,6 +844,37 @@
           "default": false,
           "description": "WIP: Start i18n Ally server with VS Code"
         },
+        "i18n-ally.extract.keygenStrategy": {
+          "type": "string",
+          "default": "slug",
+          "enum": [
+            "slug",
+            "random"
+          ],
+          "description": "%config.keygen_strategy%"
+        },
+        "i18n-ally.extract.keyPrefix": {
+          "type": "string",
+          "default": "",
+          "description": "%config.key_prefix%"
+        },
+        "i18n-ally.extract.targetPickingStrategy": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "most-similar",
+            "file-previous",
+            "global-previous"
+          ],
+          "enumDescriptions": [
+            "%config.target_picking_strategy.none%",
+            "%config.target_picking_strategy.most-similar%",
+            "%config.target_picking_strategy.file-previous%",
+            "%config.target_picking_strategy.global-previous%"
+          ],
+          "description": "%config.target_picking_strategy%"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },
@@ -944,85 +990,84 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "0.2.11",
     "@antfu/eslint-config-vue": "0.2.11",
-    "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-node-resolve": "^7.1.3",
-    "@types/fs-extra": "^8.1.0",
-    "@types/ini": "^1.3.30",
-    "@types/jest": "^25.0.0",
-    "@types/js-yaml": "3.12.3",
+    "@rollup/plugin-commonjs": "12.0.0",
+    "@rollup/plugin-node-resolve": "8.0.0",
+    "@types/fs-extra": "9.0.1",
+    "@types/ini": "1.3.30",
+    "@types/jest": "25.2.3",
+    "@types/js-yaml": "3.12.4",
     "@types/json-stable-stringify": "1.0.32",
     "@types/json5": "0.0.30",
-    "@types/koa": "^2.11.3",
-    "@types/koa-mount": "^4.0.0",
-    "@types/koa-static": "^4.0.1",
-    "@types/lodash": "4.14.150",
-    "@types/mocha": "7.0.2",
-    "@types/node": "12.12.37",
-    "@types/semver": "^7.1.0",
-    "@types/vscode": "^1.40.0",
-    "@types/ws": "^7.2.4",
-    "@types/yaml": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "2.31.0",
-    "@typescript-eslint/parser": "2.31.0",
-    "axios": "^0.19.2",
-    "blueimp-md5": "^2.13.0",
-    "concurrently": "^5.1.0",
+    "@types/koa-mount": "4.0.0",
+    "@types/koa-static": "4.0.1",
+    "@types/koa": "2.11.3",
+    "@types/lodash": "4.14.154",
+    "@types/node": "14.0.6",
+    "@types/semver": "7.2.0",
+    "@types/string-similarity": "3.0.0",
+    "@types/vscode": "1.45.1",
+    "@types/ws": "7.2.4",
+    "@types/yaml": "1.9.7",
+    "@typescript-eslint/eslint-plugin": "3.0.2",
+    "@typescript-eslint/parser": "3.0.2",
+    "axios": "0.19.2",
+    "blueimp-md5": "2.16.0",
+    "concurrently": "5.2.0",
     "conventional-github-releaser": "3.1.3",
-    "eslint": "7.0.0",
-    "fs-extra": "^9.0.0",
-    "ini": "^1.3.5",
-    "jest": "^26.0.0",
-    "koa": "^2.11.0",
-    "koa-mount": "^4.0.0",
-    "nodemon": "^2.0.3",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-inliner": "^1.0.14",
-    "php-array-parser": "^1.0.1",
-    "pug": "^2.0.4",
+    "eslint": "7.1.0",
+    "fs-extra": "9.0.0",
+    "ini": "1.3.5",
+    "jest": "26.0.1",
+    "koa-mount": "4.0.0",
+    "koa": "2.12.0",
+    "nodemon": "2.0.4",
+    "parcel-bundler": "1.12.4",
+    "parcel-plugin-inliner": "1.0.14",
+    "php-array-parser": "1.0.1",
+    "pug": "3.0.0",
     "rimraf": "3.0.2",
+    "rollup-plugin-typescript2": "0.27.1",
+    "rollup": "2.11.2",
+    "selector-observer": "2.1.6",
     "standard-version": "8.0.0",
-    "rollup": "^2.7.6",
-    "selector-observer": "^2.1.6",
-    "stylus": "^0.54.7",
-    "ts-jest": "^25.0.0",
-    "ts-loader": "7.0.2",
-    "vue": "^2.6.11",
-    "vue-i18n": "^8.16.0",
-    "vue-material-design-icons": "^4.5.0",
-    "vuex": "^3.1.3",
-    "webpack": "4.43.0",
+    "stylus": "0.54.7",
+    "ts-jest": "26.0.0",
+    "ts-loader": "7.0.5",
+    "vue-i18n": "8.18.1",
+    "vue-material-design-icons": "4.7.1",
+    "vue": "2.6.11",
+    "vuex": "3.4.0",
     "webpack-cli": "3.3.11",
-    "webpack-filter-warnings-plugin": "^1.2.1",
-    "ws": "^7.2.5"
+    "webpack-filter-warnings-plugin": "1.2.1",
+    "webpack": "4.43.0",
+    "ws": "7.3.0"
   },
   "dependencies": {
-    "@koa/cors": "^2.2.3",
-    "bcp-47-normalize": "^1.0.0",
-    "esm": "^3.2.25",
-    "fast-glob": "^3.0.0",
-    "glob-gitignore": "^1.0.14",
-    "htmlparser2": "^4.1.0",
-    "iconv-lite": "^0.5.0",
-    "js-yaml": "^3.13.1",
-    "jschardet": "^2.1.1",
-    "json-source-map": "^0.6.1",
-    "json-stable-stringify": "^1.0.1",
-    "json5": "^2.1.0",
-    "koa-static": "^5.0.0",
-    "properties": "^1.2.1",
-    "limax": "^2.0.0",
-    "lodash": "^4.17.11",
-    "nanoid": "^3.1.3",
-    "node-html-parser": "^1.1.16",
-    "parse-gitignore": "^1.0.1",
-    "po2json": "^1.0.0-alpha",
-    "rollup-plugin-typescript2": "^0.27.0",
-    "semver": "^7.3.2",
-    "ts-node": "^8.3.0",
-    "typescript": "3.8.3",
-    "vue-i18n-locale-message": "^0.16.0",
-    "yaml": "^1.7.2"
+    "@koa/cors": "3.1.0",
+    "bcp-47-normalize": "1.0.0",
+    "fast-glob": "3.2.2",
+    "glob-gitignore": "1.0.14",
+    "htmlparser2": "4.1.0",
+    "iconv-lite": "0.5.1",
+    "js-yaml": "3.14.0",
+    "jschardet": "2.1.1",
+    "json-source-map": "0.6.1",
+    "json-stable-stringify": "1.0.1",
+    "json5": "2.1.3",
+    "koa-static": "5.0.0",
+    "properties": "1.2.1",
+    "limax": "2.0.0",
+    "lodash": "4.17.15",
+    "nanoid": "3.1.9",
+    "node-html-parser": "1.2.18",
+    "parse-gitignore": "1.0.1",
+    "po2json": "1.0.0-alpha",
+    "semver": "7.3.2",
+    "string-similarity": "4.0.1",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.3",
+    "vue-i18n-locale-message": "0.16.2",
+    "yaml": "1.10.0"
   }
 }

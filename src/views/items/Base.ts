@@ -39,6 +39,9 @@ export abstract class BaseTreeItem extends TreeItem {
   }
 
   getFlagIcon(locale: string) {
+    if (!Config.showFlags)
+      return undefined
+
     const flag = Config.tagSystem.getFlagName(locale)
     if (flag)
       return this.ctx.asAbsolutePath(`res/flags/${flag}.svg`)
