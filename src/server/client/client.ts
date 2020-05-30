@@ -83,7 +83,7 @@ export class I18nAlly {
     this._adaptor = adaptor
     this._adaptor.on('keys', () => this.updateUsingKeys())
     this.updateUsingKeys()
-    this.send({ type: 'content-script.ready' })
+    this.send({ type: 'devtools.ready' })
     this.start()
   }
 
@@ -177,7 +177,6 @@ export class I18nAlly {
 
   emit(raw) {
     const message = JSON.parse(raw) || {}
-    console.log(message)
     switch (message.type) {
       case 'devtools.text-update':
         this._adaptor?.updateMessages(message.locale, message.keypath, message.value)
@@ -196,7 +195,7 @@ export class I18nAlly {
   }
 }
 
-;(() => {
+(() => {
   // @ts-ignore
   if (window.$i18nAlly)
     return

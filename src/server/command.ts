@@ -10,6 +10,9 @@ const m: ExtensionModule = () => {
       Server.instance.start()
       ServerLog.show()
     }),
+    commands.registerCommand(Commands.server_stop, () => {
+      Server.instance.stop()
+    }),
   ]
 }
 

@@ -96,15 +96,17 @@ api.server.registerListener((message) => {
   }
 })
 
-if (api.client) {
-  api.client.registerListener((message) => {
+if (api.devtools) {
+  api.devtools.registerListener((message) => {
     switch (message.type) {
-      case 'ready':
+      case 'devtools.ready':
         store.commit('clientReady', true)
         break
-      case 'close':
+      case 'devtools.close':
         store.commit('clientReady', false)
         break
+      case 'context':
+        store.commit('context', message.data)
     }
   })
 }

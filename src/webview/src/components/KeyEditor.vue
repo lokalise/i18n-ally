@@ -84,7 +84,7 @@ export default Vue.extend({
       },
     },
     currentLocale() {
-      api.server.postMessage({
+      api.devtools.postMessage({
         type: 'devtools.locale-change',
         locale: this.currentLocale,
       })

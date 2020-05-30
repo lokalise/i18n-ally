@@ -6,6 +6,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'no-useless-escape': 'off',
     'no-cond-assign': 'off',
     'no-unused-expressions': 'off',

@@ -11,7 +11,6 @@ export function initDevtool() {
   let _serverPendings: any[] = []
   let _clientPendings: any[] = []
   let _serverReady = false
-  let _clientReady = false
 
   const API: ProvideAPI = {
     mode: 'devtools',
@@ -34,14 +33,14 @@ export function initDevtool() {
         }
       },
     },
-    client: {
+    devtools: {
       registerListener(fn: Function) {
         _clientListener = fn
       },
       postMessage(data) {
         if (data)
           _clientPendings.push(data)
-        if (_clientReady && _clientPendings.length) {
+        if (_clientPendings.length) {
           for (const msg of _clientPendings) {
             const payload = JSON.stringify(msg)
             window.parent.postMessage(payload, '*')
@@ -57,6 +56,7 @@ export function initDevtool() {
 
     ws.onclose = () => {
       setTimeout(() => {
+        API.devtools.postMessage({ type: 'devtools.disconnected' })
         console.log('Reconnecting i18n Ally Server')
         initWs()
       }, RECONNECT_TIMEOUT)
@@ -68,8 +68,9 @@ export function initDevtool() {
 
     ws.onopen = (e) => {
       console.log('i18n Ally Server connected')
+      API.devtools.postMessage({ type: 'devtools.ready' })
       _serverReady = true
-      API.server.postMessage(undefined)
+      API.server.postMessage()
     }
   }
 
@@ -94,15 +95,8 @@ export function initDevtool() {
 
   initTheme()
 
+  // messages from devtools
   window.addEventListener('message', (e) => {
-    switch (e.data.type) {
-      case 'ready':
-        _clientReady = true
-        return
-      case 'close':
-        _clientReady = false
-        return
-    }
     _clientListener(e.data)
   })
 

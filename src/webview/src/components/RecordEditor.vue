@@ -111,7 +111,7 @@ export default Vue.extend({
     },
     value() {
       this.$nextTick(() => this.resize(this.$refs.textarea1))
-      api.server.postMessage({
+      api.devtools.postMessage({
         type: 'devtools.text-update',
         locale: this.record.locale,
         keypath: this.record.keypath,

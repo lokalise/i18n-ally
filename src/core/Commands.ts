@@ -5,8 +5,8 @@ export const enum Commands {
   config_source_language = 'i18n-ally.config-source-language',
   config_locales = 'i18n-ally.config-locales',
   set_display_language = 'i18n-ally.set-display-language',
-  set_source_language = 'i18n-ally.set-source-language',
-  extract_text = 'i18n-ally.extract-text',
+  set_source_language = 'i18n-allyextract-text.set-source-language',
+  extract_text = 'i18n-ally.',
   copy_key = 'i18n-ally.copy-key',
   translate_key = 'i18n-ally.translate-key',
   edit_key = 'i18n-ally.edit-key',
@@ -36,4 +36,5 @@ export const enum Commands {
   review_apply_translation = 'i18n-ally.review.apply-translation',
   review_apply_suggestion = 'i18n-ally.review.apply-suggestion',
   server_start = 'i18n-ally.server.start',
+  server_stop = 'i18n-ally.server.stop'
 }

@@ -5,7 +5,7 @@
   "version": "2.2.4",
   "publisher": "antfu",
   "engines": {
-    "vscode": "1.40.0"
+    "vscode": "^1.40.0"
   },
   "categories": [
     "Other"
@@ -231,7 +231,12 @@
       {
         "command": "i18n-ally.server.start",
         "category": "%extname%",
-        "title": "[WIP!] Start server"
+        "title": "(Experimental) Start server"
+      },
+      {
+        "command": "i18n-ally.server.stop",
+        "category": "%extname%",
+        "title": "(Experimental) Stop the server"
       }
     ],
     "menus": {

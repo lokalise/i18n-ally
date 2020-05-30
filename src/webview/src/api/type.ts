@@ -2,10 +2,10 @@ export interface ProvideAPI {
   mode: 'devtools'|'vscode'
   server: {
     registerListener: (fn: Function) => void
-    postMessage: (data: any) => void
+    postMessage: (data?: any) => void
   }
-  client?: {
+  devtools?: {
     registerListener: (fn: Function) => void
-    postMessage: (data: any) => void
+    postMessage: (data?: any) => void
   }
 }

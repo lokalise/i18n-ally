@@ -43,7 +43,7 @@ export class Server {
     app.use(mount('/editor', KoaStatic(path.join(Config.extensionPath, 'dist/editor'))))
     app.use(mount('/res', KoaStatic(path.join(Config.extensionPath, 'res'))))
     app.use((ctx) => {
-      if (ctx.path === '/') {
+      if (ctx.path === '/' || ctx.path === '/i18n-ally-ping') {
         ctx.body = {
           name: 'i18n-ally-server',
           version,
