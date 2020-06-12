@@ -1,7 +1,7 @@
 import * as yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
-import { KeyInDocument } from '../core'
+import { KeyInDocument, Config } from '../core'
 import { Parser } from './base'
 
 export class YamlParser extends Parser {
@@ -12,7 +12,7 @@ export class YamlParser extends Parser {
   }
 
   async parse(text: string) {
-    return yaml.safeLoad(text)
+    return yaml.safeLoad(text, Config.parserOptions?.yaml?.load)
   }
 
   async dump(object: object, sort: boolean) {
@@ -20,6 +20,7 @@ export class YamlParser extends Parser {
     return yaml.safeDump(object, {
       indent: this.options.indent,
       sortKeys: sort,
+      ...Config.parserOptions?.yaml?.dump,
     })
   }
 

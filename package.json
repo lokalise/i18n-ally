@@ -865,6 +865,9 @@
           ],
           "description": "%config.target_picking_strategy%"
         },
+        "i18n-ally.parserOptions": {
+          "type": "object"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },

@@ -20,6 +20,7 @@ export class Config {
     'readonly',
     'languageTagSystem',
     'ignoreFiles',
+    'parserOptions',
   ]
 
   static readonly refreshConfigs = [
@@ -391,6 +392,10 @@ export class Config {
 
   static get showFlags() {
     return this.getConfig<boolean>('showFlags') ?? true
+  }
+
+  static get parserOptions() {
+    return this.getConfig<any>('parserOptions') ?? {}
   }
 
   static get localeCountryMap() {
