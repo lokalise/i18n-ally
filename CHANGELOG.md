@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.5](https://github.com/antfu/i18n-ally/compare/v2.2.4...v2.2.5) (2020-06-12)
+
+
+### 🐞 Bug Fixes
+
+* po-parser ([#319](https://github.com/antfu/i18n-ally/issues/319)) ([7b0c902](https://github.com/antfu/i18n-ally/commit/7b0c902957b7ec365c88151b18cd6d80def32c54))
+
+
+### 🔮 Refactor
+
+* improve hover performance ([25730cb](https://github.com/antfu/i18n-ally/commit/25730cbf39778281653754e259891ba99ea1140b))
+
+
+### ⚡ Features
+
+* new config parserOptions ([7a1adb9](https://github.com/antfu/i18n-ally/commit/7a1adb976babfa0f5f20574a6086f1ac061399ec))
+
 ### [2.2.4](https://github.com/antfu/i18n-ally/compare/v2.2.3...v2.2.4) (2020-05-29)
 
 
