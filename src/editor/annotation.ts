@@ -1,4 +1,4 @@
-import { window, DecorationOptions, Range, Disposable, TextEditorDecorationType, TextEditor, workspace, TextDocument } from 'vscode'
+import { window, DecorationOptions, Range, Disposable, TextEditorDecorationType, TextEditor, workspace, TextDocument, languages, Hover } from 'vscode'
 import throttle from 'lodash/throttle'
 import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '../core'
 import { ExtensionModule } from '../modules'
@@ -192,7 +192,6 @@ const annotation: ExtensionModule = (ctx) => {
             border: inplace ? `0.5px solid ${borderColor}; border-radius: 2px;` : '',
           },
         },
-        hoverMessage: createHover(key, maxLength, undefined, i),
         gutterType,
       })
     }
@@ -230,6 +229,28 @@ const annotation: ExtensionModule = (ctx) => {
   window.onDidChangeActiveTextEditor(throttledUpdate, null, disposables)
   Global.reviews.onDidChange(throttledUpdate, null, disposables)
   window.onDidChangeTextEditorSelection(refresh, null, disposables)
+  languages.registerHoverProvider('*', {
+    provideHover(document, position, token) {
+      if (document !== _current_doc || !_current_usages)
+        return
+
+      const offset = document.offsetAt(position)
+      const key = _current_usages.keys.find(k => k.start <= offset && k.end >= offset)
+      if (!key)
+        return
+
+      const markdown = createHover(key.key, Config.annotationMaxLength, undefined, _current_usages.keys.indexOf(key))
+      if (!markdown)
+        return
+
+      return new Hover(
+        markdown,
+        new Range(
+          document.positionAt(key.start),
+          document.positionAt(key.end),
+        ))
+    },
+  })
   workspace.onDidChangeTextDocument(
     (e) => {
       if (e.document === window.activeTextEditor?.document) {

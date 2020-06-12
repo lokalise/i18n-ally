@@ -5,7 +5,7 @@ import i18n from '../i18n'
 
 const EmptyButton = '⠀⠀'
 
-function makeMarkdownCommand(command: Commands, args: object): string {
+function makeMarkdownCommand(command: Commands, args: any): string {
   return `command:${command}?${encodeURIComponent(JSON.stringify(args))}`
 }
 
@@ -107,3 +107,18 @@ export function createHover(keypath: string, maxLength = 0, mainLocale?: string,
 
   return markdownText
 }
+
+/**
+ * There should be a table
+ *
+ * | A | B |
+ * |---|---|
+ * | Hello | World |
+ *
+ * But nothing is rendered
+ */
+function a() {
+
+}
+
+a()
