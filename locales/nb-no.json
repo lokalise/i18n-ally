@@ -163,6 +163,7 @@
   "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Skriving til js/ts fil støttes ikke.",
   "refactor.extract_text": "Ekstraher tekst til i18n ally",
+  "refactor.replace_with": "",
   "review.accept_suggestion": "",
   "review.apply_suggestion": "",
   "review.apply_translation_candidate": "",
