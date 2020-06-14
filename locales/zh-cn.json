@@ -163,6 +163,7 @@
   "prompt.translate_no_jobs": "无翻译工作",
   "prompt.writing_js": "不支持写入文案至 js/ts 文件",
   "refactor.extract_text": "提取文案到 i18n",
+  "refactor.replace_with": "",
   "review.accept_suggestion": "接受建议",
   "review.apply_suggestion": "应用建议",
   "review.apply_translation_candidate": "应用翻译候选",
