@@ -21,6 +21,7 @@ class NgxTranslateFramework extends Framework {
   usageMatchRegex= [
     '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*translate',
     'translate\\.get\\([\\s\\n]*[\'"`]({key})[\'"`]',
+    '[\\s\\n]translate>[\\s\\n]*({key})[\\s\\n]*</',
   ]
 
   refactorTemplates(keypath: string, languageId: string) {

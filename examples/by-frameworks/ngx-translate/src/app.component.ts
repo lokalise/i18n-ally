@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core'
         <select attr="'HOME.SELECT' | translate">
           <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
         </select>
+        <div translate> HOME.SELECT </div>
       </label>
     </div>
   `,
