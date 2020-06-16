@@ -7,6 +7,7 @@ export const enum Commands {
   set_display_language = 'i18n-ally.set-display-language',
   set_source_language = 'i18n-ally.set-source-language',
   extract_text = 'i18n-ally.extract-text',
+  replace_with = 'i18n-ally.replace-with',
   copy_key = 'i18n-ally.copy-key',
   translate_key = 'i18n-ally.translate-key',
   edit_key = 'i18n-ally.edit-key',

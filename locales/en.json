@@ -165,6 +165,7 @@
   "prompt.translate_no_jobs": "No translation needed.",
   "prompt.writing_js": "Writing to js/ts files is not supported.",
   "refactor.extract_text": "Extract text into i18n messages",
+  "refactor.replace_with": "Replace text with existing translation: \"{0}\"",
   "review.accept_suggestion": "Accept Suggestion",
   "review.apply_suggestion": "Apply suggestion",
   "review.apply_translation_candidate": "Apply translation candidate",
