@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.6](https://github.com/antfu/i18n-ally/compare/v2.2.5...v2.2.6) (2020-06-16)
+
+
+### ⚡ Features
+
+* **ngx-translate:** add new usage, reslove [#333](https://github.com/antfu/i18n-ally/issues/333) ([b7481d7](https://github.com/antfu/i18n-ally/commit/b7481d7428baea0c4eeac9848ee1ba75317ddbd0))
+* Lightbulb will recommend using existing translations that match if any are found antfu[#326](https://github.com/antfu/i18n-ally/issues/326) ([#331](https://github.com/antfu/i18n-ally/issues/331)) ([f4e1e88](https://github.com/antfu/i18n-ally/commit/f4e1e88a372f4b37474e55045b4df79f452eaab2))
+
 ### [2.2.5](https://github.com/antfu/i18n-ally/compare/v2.2.4...v2.2.5) (2020-06-12)
 
 
