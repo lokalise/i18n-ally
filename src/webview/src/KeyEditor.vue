@@ -147,6 +147,9 @@ export default Vue.extend({
         keypath: this.data.keypath,
       })
     },
+    renameKey() {
+      vscode.renameKey({})
+    },
     translateAll() {
       vscode.postMessage({
         type: 'translate',
