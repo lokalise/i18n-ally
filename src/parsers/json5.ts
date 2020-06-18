@@ -17,7 +17,7 @@ export class Json5Parser extends Parser {
 
   async dump(object: object, sort: boolean) {
     return JSON5.stringify(object, {
-      space: this.options.indent,
+      space: this.options.tab === '\t' ? this.options.tab : this.options.indent,
     })
   }
 

@@ -17,10 +17,12 @@ export class JsonParser extends Parser {
   }
 
   async dump(object: object, sort: boolean) {
+    const indent = this.options.tab === '\t' ? this.options.tab : this.options.indent
+
     if (sort)
-      return `${SortedStringify(object, { space: this.options.indent })}\n`
+      return `${SortedStringify(object, { space: indent })}\n`
     else
-      return `${JSON.stringify(object, null, this.options.indent)}\n`
+      return `${JSON.stringify(object, null, indent)}\n`
   }
 
   annotationSupported = true
