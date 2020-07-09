@@ -8,7 +8,7 @@ export class PubspecYAMLParser extends PackageParser {
     const {
       dependencies = {},
       dev_dependencies = {},
-    } = YAML.safeLoad(raw)
+    } = YAML.safeLoad(raw) as any
 
     return [...Object.keys(dependencies), ...Object.keys(dev_dependencies)]
   }

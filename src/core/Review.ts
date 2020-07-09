@@ -220,7 +220,7 @@ export class Reviews {
 
       Log.info('📤 Loading review data')
       const content = await fs.readFile(this.filepath, 'utf-8')
-      this.data = YAML.safeLoad(content) || { reviews: {} }
+      this.data = YAML.safeLoad(content) as any || { reviews: {} }
     }
     else {
       this.data = { reviews: {} }

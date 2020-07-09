@@ -12,7 +12,7 @@ export class YamlParser extends Parser {
   }
 
   async parse(text: string) {
-    return yaml.safeLoad(text, Config.parserOptions?.yaml?.load)
+    return yaml.safeLoad(text, Config.parserOptions?.yaml?.load) as Object
   }
 
   async dump(object: object, sort: boolean) {
