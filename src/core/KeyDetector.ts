@@ -119,7 +119,7 @@ export class KeyDetector {
     const filepath = document.uri.fsPath
 
     // locale file
-    const localeFile = loader.files.find(f => f.filepath === filepath)
+    const localeFile = loader.files.find(f => f?.filepath === filepath)
     if (localeFile) {
       type = 'locale'
       const parser = Global.enabledParsers.find(p => p.annotationLanguageIds.includes(document.languageId))
