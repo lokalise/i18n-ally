@@ -42,6 +42,8 @@ export async function RenameKey(item?: LocaleTreeItem | string) {
 
     const edit = await Global.loader.renameKey(oldkeypath, newkeypath) // TODO:sfc
     await workspace.applyEdit(edit)
+
+    return newkeypath
   }
   catch (err) {
     Log.error(err)

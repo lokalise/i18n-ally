@@ -1,7 +1,8 @@
-// Protocol for exchanging data between webview/client/devtools
+/* eslint-disable no-case-declarations */
 
+// Protocol for exchanging data between webview/client/devtools
 import { commands } from 'vscode'
-import { TranslateKeys } from '../commands/manipulations'
+import { TranslateKeys, RenameKey } from '../commands/manipulations'
 import { EXT_ID } from '../meta'
 import { CurrentFile, Global, Commands, Config } from '../core'
 import i18n from '../i18n'
@@ -74,6 +75,13 @@ export class Protocol {
     })
   }
 
+  switchToKey(key: string) {
+    this.postMessage({
+      type: 'switch-to',
+      keypath: key,
+    })
+  }
+
   async handleMessages(message: Message) {
     const handled = this.extendHandler ? await Promise.resolve(this.extendHandler(message)) : undefined
     if (handled)
@@ -96,6 +104,12 @@ export class Protocol {
           locale: message.data.locale,
           value: message.data.value,
         })
+        break
+
+      case 'rename-key':
+        const newkey = await RenameKey(message.keypath)
+        if (newkey)
+          this.switchToKey(newkey)
         break
 
       case 'translate':

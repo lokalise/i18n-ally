@@ -69,7 +69,10 @@ export class EditorPanel {
 
     this._protocol = new Protocol(
       async(message) => {
-        this._panel.webview.postMessage(message)
+        if (message.type === 'switch-to')
+          this.openKey(message.keypath!)
+        else
+          this._panel.webview.postMessage(message)
       },
       async(message) => {
         switch (message.type) {

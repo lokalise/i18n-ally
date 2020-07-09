@@ -109,6 +109,9 @@ body
     opacity 0.4
     cursor pointer
 
+    &.small
+      font-size 1em
+
     &:hover
       opacity 0.9
 

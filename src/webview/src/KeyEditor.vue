@@ -30,7 +30,9 @@
             v-chevron-right
         br
 
-      .key-name "{{data.keypath}}"
+      .key-name
+        span "{{data.keypath}}"
+        v-pencil.setting-button.small(@click='renameKey')
 
       // pre {{$store.state.context}} {{keyIndex}}
 
@@ -144,6 +146,12 @@ export default Vue.extend({
     editDescription() {
       vscode.postMessage({
         type: 'review.description',
+        keypath: this.data.keypath,
+      })
+    },
+    renameKey() {
+      vscode.postMessage({
+        type: 'rename-key',
         keypath: this.data.keypath,
       })
     },
