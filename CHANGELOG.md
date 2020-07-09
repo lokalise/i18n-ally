@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.8](https://github.com/antfu/i18n-ally/compare/v2.2.7...v2.2.8) (2020-07-09)
+
+
+### ⚡ Features
+
+* add rename key icon in Editor UI, resolve [#335](https://github.com/antfu/i18n-ally/issues/335) ([616e62a](https://github.com/antfu/i18n-ally/commit/616e62ae1737d8fc8f5e186fa090bf6c59662664))
+
+
+### 🐞 Bug Fixes
+
+* resolve [#332](https://github.com/antfu/i18n-ally/issues/332) ([cd36fb4](https://github.com/antfu/i18n-ally/commit/cd36fb4b5fb3c01b8fe4c0c30a360f79dc1ce48c))
+* typing errors ([56216a0](https://github.com/antfu/i18n-ally/commit/56216a05d669aa320f37909f75b3b6e9c3151f1f))
+* **flutter:** mutliline regex, fix [#344](https://github.com/antfu/i18n-ally/issues/344) ([cb35395](https://github.com/antfu/i18n-ally/commit/cb353956db8a59728c17868a6268e121529a7fbd))
+
 ### [2.2.7](https://github.com/antfu/i18n-ally/compare/v2.2.6...v2.2.7) (2020-06-18)
 
 ### [2.2.6](https://github.com/antfu/i18n-ally/compare/v2.2.5...v2.2.6) (2020-06-16)
