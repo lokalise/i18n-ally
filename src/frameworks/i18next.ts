@@ -58,13 +58,13 @@ class I18nextFramework extends Framework {
     if (
       key.includes(this.namespaceDelimiter)
       && context.namespace
-      && key.startsWith(context.namespace)
+      && key.replaceAll(this.namespaceDelimiter, '.').startsWith(context.namespace.replaceAll(this.namespaceDelimiter, '.'))
     )
       // +1 for the an extra `.`
       key = key.slice(context.namespace.length + 1)
 
     // replace colons
-    return key.replace(this.namespaceDelimiter, '.')
+    return key.replaceAll(this.namespaceDelimiter, '.')
   }
 
   // useTranslation
