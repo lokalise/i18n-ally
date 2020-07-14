@@ -1011,7 +1011,7 @@
     "php-array-parser": "^1.0.1",
     "pug": "^3.0.0",
     "rimraf": "3.0.2",
-    "standard-version": "8.0.0",
+    "standard-version": "8.0.1",
     "stylus": "^0.54.7",
     "ts-jest": "^26.1.0",
     "ts-loader": "7.0.5",
