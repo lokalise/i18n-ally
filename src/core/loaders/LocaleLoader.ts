@@ -12,8 +12,8 @@ import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '.
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { hasCache, getCache, setCache } from '../../utils/cache'
-import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
+import { Loader } from './Loader'
 
 const THROTTLE_DELAY = 1500
 
