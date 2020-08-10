@@ -2,10 +2,10 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.2.11",
+  "version": "2.2.14",
   "publisher": "antfu",
   "engines": {
-    "vscode": "^1.46.0"
+    "vscode": "^1.47.0"
   },
   "categories": [
     "Other"
@@ -964,7 +964,6 @@
     ]
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "release:minor": "standard-version --release-as minor && npm run publish:gh",
     "release:patch": "standard-version --release-as patch && npm run publish:gh",
     "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
