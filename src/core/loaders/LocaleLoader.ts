@@ -12,8 +12,8 @@ import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '.
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
 import { hasCache, getCache, setCache } from '../../utils/cache'
-import { Loader } from './Loader'
 import { Analyst, Global, Config } from '..'
+import { Loader } from './Loader'
 
 const THROTTLE_DELAY = 1500
 
@@ -270,6 +270,7 @@ export class LocaleLoader extends Loader {
       for (const [filepath, pendings] of Object.entries(distributed)) {
         const ext = path.extname(filepath)
         const parser = Global.getMatchedParser(ext)
+        console.log(parser)
         if (!parser)
           throw new AllyError(ErrorType.unsupported_file_type, undefined, ext)
         if (parser.readonly)

@@ -4,7 +4,7 @@ import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocalePaths'
-import { AvaliablePasers, DefaultEnabledParsers } from '../parsers'
+import { AvailableParsers, DefaultEnabledParsers } from '../parsers'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
@@ -357,7 +357,7 @@ export class Global {
     if (!ids.length)
       ids = DefaultEnabledParsers
 
-    return AvaliablePasers.filter(i => ids.includes(i.id))
+    return AvailableParsers.filter(i => ids.includes(i.id))
   }
 
   static getMatchedParser(ext: string) {
