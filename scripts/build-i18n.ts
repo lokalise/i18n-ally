@@ -1,6 +1,6 @@
-import * as path from 'path'
-import * as fg from 'fast-glob'
-import * as fs from 'fs-extra'
+import path from 'path'
+import fg from 'fast-glob'
+import fs from 'fs-extra'
 
 const DEFAULT_LOCALE = 'en'
 
