@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.11](https://github.com/antfu/i18n-ally/compare/v2.2.10...v2.2.11) (2020-08-10)
+
+
+### ⚡ Features
+
+* update vue-i18n match regex ([9da2a6d](https://github.com/antfu/i18n-ally/commit/9da2a6d31d20f26753a8635dbf0580f69970d421))
+
 ### [2.2.10](https://github.com/antfu/i18n-ally/compare/v2.2.9...v2.2.10) (2020-07-25)
 
 
