@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npx pnpm i
+      - run: npm i
       - run: npm run build
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
