@@ -12,12 +12,12 @@
     "moduleResolution": "node",
     "typeRoots": [ "node_modules/@types" ],
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": true
   },
   "include": [
     "./src/**/*.ts",
     "./package.nls.*.json",
     "./node_modules/vscode/vscode.d.ts",
-    "./node_modules/vscode/lib/*",
+    "./node_modules/vscode/lib/*"
   ]
 }
