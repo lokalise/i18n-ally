@@ -62,7 +62,7 @@ const m: ExtensionModule = () => {
 
       // create and init a QuickPick for the path
       const pathPicker = window.createQuickPick()
-      pathPicker.placeholder = 'Select (or create) a Path'
+      pathPicker.placeholder = i18n.t('prompt.select_or_create_a_path')
       pathPicker.ignoreFocusOut = true
       pathPicker.canSelectMany = false
       pathPicker.items = quickPickItems
@@ -71,14 +71,14 @@ const m: ExtensionModule = () => {
         const selection = pathPicker.activeItems[0]
         pathPicker.hide()
         keypath = `${selection.label}.`
-        keyPicker.prompt = `Enter i18n key for the path: ${keypath}`
+        keyPicker.prompt = i18n.t('prompt.enter_i18n_key_for_the_path', keypath)
         keyPicker.show()
       })
 
       // create new item if value not exists
       pathPicker.onDidChangeValue(() => {
         if (!Object.keys(paths).map(key => (key)).includes(pathPicker.value)) {
-          const newItems = [{ label: pathPicker.value, description: 'create new path' }, ...quickPickItems]
+          const newItems = [{ label: pathPicker.value, description: i18n.t('prompt.create_new_path') }, ...quickPickItems]
           pathPicker.items = newItems
         }
       })
