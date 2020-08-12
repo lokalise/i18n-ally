@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.1](https://github.com/antfu/i18n-ally/compare/v2.3.0...v2.3.1) (2020-08-12)
+
+
+### ⚡ Features
+
+* improve extracting command ([2bd4855](https://github.com/antfu/i18n-ally/commit/2bd4855a4071370bcafdd44ba5951d64a364e9cf)), closes [#369](https://github.com/antfu/i18n-ally/issues/369)
+
+
+### 🌍 Internationalization
+
+* update zh-cn & zh-tw ([a980d44](https://github.com/antfu/i18n-ally/commit/a980d44d531d72707dd3c9b291cc07b5cd967b1c))
+
 ## [2.3.0](https://github.com/antfu/i18n-ally/compare/v2.2.16...v2.3.0) (2020-08-12)
 
 
