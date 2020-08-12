@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/antfu/i18n-ally/compare/v2.2.16...v2.3.0) (2020-08-12)
+
+
+### ⚡ Features
+
+* added keypath autocompletion ([#367](https://github.com/antfu/i18n-ally/issues/367)) ([76d31b4](https://github.com/antfu/i18n-ally/commit/76d31b45f8ab38c55db9872fce89cb1aac6a007d))
+* better extrat prompt ([1c8a33f](https://github.com/antfu/i18n-ally/commit/1c8a33fc511ac9f477af70a5f09738a736cf7683))
+
 ### [2.2.16](https://github.com/antfu/i18n-ally/compare/v2.2.15...v2.2.16) (2020-08-10)
 
 
