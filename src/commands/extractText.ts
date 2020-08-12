@@ -13,7 +13,7 @@ import { keypathValidate } from './keypathValidate'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
-  type: 'tree' | 'node' | 'new'
+  type: 'tree' | 'node' | 'new' | 'existed'
 }
 
 const m: ExtensionModule = () => {
@@ -33,10 +33,27 @@ const m: ExtensionModule = () => {
         }
       }
 
+      const locale = Config.sourceLanguage
+      const loader = CurrentFile.loader
       const { filepath, text, range, languageId } = options
+      const cleanedText = trim(text, '\'" ')
       let default_keypath: string
       const keygenStrategy = Config.keygenStrategy
       const keyPrefix = Config.keyPrefix
+
+      const existingItems: QuickPickItemWithKey[]
+        = loader.keys
+          .map(key => ({
+            description: loader.getValueByKey(key, Config.sourceLanguage, 0),
+            keypath: key,
+          }))
+          .filter(item => item.description === cleanedText)
+          .map(i => ({
+            ...i,
+            label: `$(replace-all) ${i.keypath}`,
+            type: 'existed' as const,
+            detail: i18n.t('prompt.existing_translation'),
+          }))
 
       if (keygenStrategy === 'random')
         default_keypath = nanoid()
@@ -47,9 +64,6 @@ const m: ExtensionModule = () => {
 
       if (keyPrefix && keygenStrategy !== 'empty')
         default_keypath = keyPrefix + default_keypath
-
-      const locale = Config.sourceLanguage
-      const loader = CurrentFile.loader
 
       const getPickItems = (input?: string) => {
         const path = input?.split('.').slice(0, -1).join()
@@ -81,6 +95,9 @@ const m: ExtensionModule = () => {
           ]
         }
 
+        if (existingItems.length)
+          items = [...existingItems, ...items]
+
         // create new item if value not exists
         if (input && !input.endsWith('.') && !items.find(i => i.keypath === input)) {
           items.unshift({
@@ -95,7 +112,7 @@ const m: ExtensionModule = () => {
         return items
       }
 
-      const extract = async(keypath: string) => {
+      const extract = async(keypath: string, checkOverride = true) => {
         if (!keypath) {
           window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
           return
@@ -104,46 +121,49 @@ const m: ExtensionModule = () => {
           return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
 
         const writeKeypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale })
-        const shouldOverride = await overrideConfirm(writeKeypath, true, true)
-        if (shouldOverride === 'retry') {
-          commands.executeCommand(Commands.extract_text, options)
-          return
-        }
-        if (shouldOverride === 'canceled')
-          return
-        const value = trim(text, '\'"')
-        const replacer = await promptTemplates(keypath, languageId)
 
-        if (!replacer) {
-          window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
-          return
-        }
-        // open editor if not exists
-        let editor = window.activeTextEditor
-        if (!editor) {
-          const document = await workspace.openTextDocument(filepath)
-          editor = await window.showTextDocument(document)
-        }
-        editor.edit((editBuilder) => {
-          editBuilder.replace(range, replacer)
-        })
+        if (checkOverride) {
+          const shouldOverride = await overrideConfirm(writeKeypath, true, true)
+          if (shouldOverride === 'retry') {
+            commands.executeCommand(Commands.extract_text, options)
+            return
+          }
+          if (shouldOverride === 'canceled')
+            return
 
-        if (shouldOverride === 'skip')
-          return
+          const replacer = await promptTemplates(keypath, languageId)
+
+          if (!replacer) {
+            window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
+            return
+          }
+          // open editor if not exists
+          let editor = window.activeTextEditor
+          if (!editor) {
+            const document = await workspace.openTextDocument(filepath)
+            editor = await window.showTextDocument(document)
+          }
+          editor.edit((editBuilder) => {
+            editBuilder.replace(range, replacer)
+          })
+
+          if (shouldOverride === 'skip')
+            return
+        }
 
         // save key
         await CurrentFile.loader.write({
           textFromPath: filepath,
           filepath: undefined,
           keypath: writeKeypath,
-          value,
+          value: cleanedText,
           locale,
         })
       }
 
       // create and init a QuickPick for the path
       const picker = window.createQuickPick<QuickPickItemWithKey>()
-      picker.placeholder = i18n.t('prompt.select_or_create_a_path')
+      picker.placeholder = i18n.t('prompt.enter_key_path', cleanedText)
       picker.ignoreFocusOut = true
       picker.canSelectMany = false
       picker.value = default_keypath
@@ -157,6 +177,10 @@ const m: ExtensionModule = () => {
         if (selection.type === 'new' || selection.type === 'node') {
           picker.dispose()
           extract(selection.keypath)
+        }
+        if (selection.type === 'existed') {
+          picker.dispose()
+          extract(selection.keypath, false)
         }
         else {
           const value = `${selection.keypath}.`

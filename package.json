@@ -19,6 +19,8 @@
     "workspaceContains:.vscode/i18n-ally-reviews.yml",
     "onWebviewPanel:i18n-ally-editor",
     "onLanguage:vue",
+    "onLanguage:html",
+    "onLanguage:pug",
     "onLanguage:javascript",
     "onLanguage:javascriptreact",
     "onLanguage:typescript",

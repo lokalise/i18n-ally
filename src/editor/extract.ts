@@ -1,5 +1,5 @@
 import { CodeActionKind, CodeActionProvider, Command, languages, Range, Selection, TextDocument } from 'vscode'
-import { Commands, Config, CurrentFile, Global } from '../core'
+import { Commands, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 
@@ -37,17 +37,6 @@ class ExtractProvider implements CodeActionProvider {
       title: i18n.t('refactor.extract_text'),
       arguments: [options],
     }]
-
-    // Check for existing translations to recommend, convert them to their templates and then to commands, and add the commands to the command array
-    CurrentFile.loader.keys.map(key => ({ label: key, description: CurrentFile.loader.getValueByKey(key, Config.displayLanguage, 30) }))
-      .filter(labelDescription => labelDescription.description === text)
-      .flatMap(t => Global.refactorTemplates(t.label, document.languageId))
-      .map(t => ({
-        command: Commands.replace_with,
-        title: i18n.t('refactor.replace_with', t),
-        arguments: [t],
-      }))
-      .forEach(c => commands.push(c))
 
     return commands
   }
