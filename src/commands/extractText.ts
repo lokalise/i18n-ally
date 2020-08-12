@@ -11,6 +11,11 @@ import { promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
 
+interface QuickPickItemWithKey extends QuickPickItem {
+  keypath: string
+  type: 'tree' | 'node' | 'new'
+}
+
 const m: ExtensionModule = () => {
   return commands.registerCommand(Commands.extract_text,
     async(options?: ExtractTextOptions) => {
@@ -35,66 +40,62 @@ const m: ExtensionModule = () => {
 
       if (keygenStrategy === 'random')
         default_keypath = nanoid()
+      else if (keygenStrategy === 'empty')
+        default_keypath = ''
       else
         default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
 
-      if (keyPrefix)
+      if (keyPrefix && keygenStrategy !== 'empty')
         default_keypath = keyPrefix + default_keypath
 
       const locale = Config.sourceLanguage
-      let keypath = default_keypath
+      const loader = CurrentFile.loader
 
-      const paths: Record<string, string> = {}
+      const getPickItems = (input?: string) => {
+        const path = input?.split('.').slice(0, -1).join()
 
-      // filter leafs from key tree
-      CurrentFile.loader.keys.forEach((key) => {
-        const lastIndex = key.lastIndexOf('.')
-        let label = ''
-        if (lastIndex === -1)
-          label = key
-        else
-          label = key.substr(0, lastIndex)
-        paths[label] = ''
-      })
+        const node = path
+          ? (loader.getTreeNodeByKey(path))
+          : CurrentFile.loader.root
 
-      // create quickPickItems out of the paths
-      const quickPickItems: QuickPickItem[] = Object.keys(paths).map(path => ({ label: path }))
-
-      // create and init a QuickPick for the path
-      const pathPicker = window.createQuickPick()
-      pathPicker.placeholder = i18n.t('prompt.select_or_create_a_path')
-      pathPicker.ignoreFocusOut = true
-      pathPicker.canSelectMany = false
-      pathPicker.items = quickPickItems
-
-      pathPicker.onDidAccept(() => {
-        const selection = pathPicker.activeItems[0]
-        pathPicker.hide()
-        keypath = `${selection.label}.`
-        keyPicker.prompt = i18n.t('prompt.enter_i18n_key_for_the_path', keypath)
-        keyPicker.show()
-      })
-
-      // create new item if value not exists
-      pathPicker.onDidChangeValue(() => {
-        if (!Object.keys(paths).map(key => (key)).includes(pathPicker.value)) {
-          const newItems = [{ label: pathPicker.value, description: i18n.t('prompt.create_new_path') }, ...quickPickItems]
-          pathPicker.items = newItems
+        let items: QuickPickItemWithKey[] = []
+        if (node?.type === 'tree') {
+          items = Object
+            .values(node.children)
+            .sort((a, b) => b.type.localeCompare(a.type))
+            .map(i => ({
+              label: `$(${i.type === 'tree' ? 'json' : 'symbol-parameter'}) ${i.keypath}`,
+              description: loader.getValueByKey(i.keypath),
+              type: i.type,
+              keypath: i.keypath,
+            }))
         }
-      })
+        else if (node?.type === 'node') {
+          items = [
+            {
+              label: `$(symbol-parameter) ${node.keypath}`,
+              description: loader.getValueByKey(node.keypath),
+              type: node.type,
+              keypath: node.keypath,
+            },
+          ]
+        }
 
-      pathPicker.onDidHide(() => pathPicker.dispose())
+        // create new item if value not exists
+        if (input && !input.endsWith('.') && !items.find(i => i.keypath === input)) {
+          items.unshift({
+            label: `$(add) ${input}`,
+            description: i18n.t('prompt.create_new_path'),
+            alwaysShow: true,
+            keypath: input,
+            type: 'new',
+          })
+        }
 
-      await pathPicker.show()
+        return items
+      }
 
-      // create and init a InputBox for the key
-      const keyPicker = window.createInputBox()
-      keyPicker.ignoreFocusOut = true
-      keyPicker.value = ''
-
-      keyPicker.onDidAccept(async() => {
-        keypath += keyPicker.value
-        keyPicker.hide()
+      const extract = async(keypath: string) => {
         if (!keypath) {
           window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
           return
@@ -138,7 +139,40 @@ const m: ExtensionModule = () => {
           value,
           locale,
         })
+      }
+
+      // create and init a QuickPick for the path
+      const picker = window.createQuickPick<QuickPickItemWithKey>()
+      picker.placeholder = i18n.t('prompt.select_or_create_a_path')
+      picker.ignoreFocusOut = true
+      picker.canSelectMany = false
+      picker.value = default_keypath
+      picker.items = getPickItems(default_keypath)
+
+      picker.onDidAccept(() => {
+        const selection = picker.activeItems[0]
+        if (!selection)
+          return
+
+        if (selection.type === 'new' || selection.type === 'node') {
+          picker.dispose()
+          extract(selection.keypath)
+        }
+        else {
+          const value = `${selection.keypath}.`
+          picker.value = value
+          picker.items = getPickItems(value)
+          picker.show()
+        }
       })
+
+      picker.onDidChangeValue(() => {
+        picker.items = getPickItems(picker.value)
+      })
+
+      picker.onDidHide(() => picker.dispose())
+
+      await picker.show()
     })
 }
 

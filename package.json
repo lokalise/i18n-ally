@@ -839,7 +839,8 @@
           "default": "slug",
           "enum": [
             "slug",
-            "random"
+            "random",
+            "empty"
           ],
           "description": "%config.keygen_strategy%"
         },
