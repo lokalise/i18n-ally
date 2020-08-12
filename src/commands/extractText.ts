@@ -1,4 +1,4 @@
-import { commands, window, workspace } from 'vscode'
+import { commands, window, workspace, QuickPickItem } from 'vscode'
 // @ts-ignore
 import * as limax from 'limax'
 import { trim } from 'lodash'
@@ -42,63 +42,102 @@ const m: ExtensionModule = () => {
         default_keypath = keyPrefix + default_keypath
 
       const locale = Config.sourceLanguage
+      let keypath = default_keypath
 
-      // prompt for keypath
-      const keypath = await window.showInputBox({
-        prompt: i18n.t('prompt.enter_i18n_key'),
-        value: default_keypath,
-        ignoreFocusOut: true,
+      const paths: Record<string, string> = {}
+
+      // filter leafs from key tree
+      CurrentFile.loader.keys.forEach((key) => {
+        const lastIndex = key.lastIndexOf('.')
+        let label = ''
+        if (lastIndex === -1)
+          label = key
+        else
+          label = key.substr(0, lastIndex)
+        paths[label] = ''
       })
 
-      if (!keypath) {
-        window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
-        return
-      }
+      // create quickPickItems out of the paths
+      const quickPickItems: QuickPickItem[] = Object.keys(paths).map(path => ({ label: path }))
 
-      if (!keypathValidate(keypath))
-        return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
+      // create and init a QuickPick for the path
+      const pathPicker = window.createQuickPick()
+      pathPicker.placeholder = i18n.t('prompt.select_or_create_a_path')
+      pathPicker.ignoreFocusOut = true
+      pathPicker.canSelectMany = false
+      pathPicker.items = quickPickItems
 
-      const writeKeypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale })
-
-      const shouldOverride = await overrideConfirm(writeKeypath, true, true)
-
-      if (shouldOverride === 'retry') {
-        commands.executeCommand(Commands.extract_text, options)
-        return
-      }
-      if (shouldOverride === 'canceled')
-        return
-
-      const value = trim(text, '\'"')
-
-      // prompt for template
-      const replacer = await promptTemplates(keypath, languageId)
-
-      if (!replacer) {
-        window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
-        return
-      }
-
-      // open editor if not exists
-      let editor = window.activeTextEditor
-      if (!editor) {
-        const document = await workspace.openTextDocument(filepath)
-        editor = await window.showTextDocument(document)
-      }
-      editor.edit((editBuilder) => {
-        editBuilder.replace(range, replacer)
+      pathPicker.onDidAccept(() => {
+        const selection = pathPicker.activeItems[0]
+        pathPicker.hide()
+        keypath = `${selection.label}.`
+        keyPicker.prompt = i18n.t('prompt.enter_i18n_key_for_the_path', keypath)
+        keyPicker.show()
       })
 
-      if (shouldOverride === 'skip')
-        return
+      // create new item if value not exists
+      pathPicker.onDidChangeValue(() => {
+        if (!Object.keys(paths).map(key => (key)).includes(pathPicker.value)) {
+          const newItems = [{ label: pathPicker.value, description: i18n.t('prompt.create_new_path') }, ...quickPickItems]
+          pathPicker.items = newItems
+        }
+      })
 
-      // save key
-      await CurrentFile.loader.write({
-        textFromPath: filepath,
-        filepath: undefined,
-        keypath: writeKeypath,
-        value,
-        locale,
+      pathPicker.onDidHide(() => pathPicker.dispose())
+
+      await pathPicker.show()
+
+      // create and init a InputBox for the key
+      const keyPicker = window.createInputBox()
+      keyPicker.ignoreFocusOut = true
+      keyPicker.value = ''
+
+      keyPicker.onDidAccept(async() => {
+        keypath += keyPicker.value
+        keyPicker.hide()
+        if (!keypath) {
+          window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
+          return
+        }
+        if (!keypathValidate(keypath))
+          return window.showWarningMessage(i18n.t('prompt.invalid_keypath'))
+
+        const writeKeypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale })
+        const shouldOverride = await overrideConfirm(writeKeypath, true, true)
+        if (shouldOverride === 'retry') {
+          commands.executeCommand(Commands.extract_text, options)
+          return
+        }
+        if (shouldOverride === 'canceled')
+          return
+        const value = trim(text, '\'"')
+        const replacer = await promptTemplates(keypath, languageId)
+
+        if (!replacer) {
+          window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
+          return
+        }
+        // open editor if not exists
+        let editor = window.activeTextEditor
+        if (!editor) {
+          const document = await workspace.openTextDocument(filepath)
+          editor = await window.showTextDocument(document)
+        }
+        editor.edit((editBuilder) => {
+          editBuilder.replace(range, replacer)
+        })
+
+        if (shouldOverride === 'skip')
+          return
+
+        // save key
+        await CurrentFile.loader.write({
+          textFromPath: filepath,
+          filepath: undefined,
+          keypath: writeKeypath,
+          value,
+          locale,
+        })
       })
     })
 }
