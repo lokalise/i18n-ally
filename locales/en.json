@@ -120,7 +120,7 @@
   "prompt.config_locales_button": "Config Now",
   "prompt.config_locales_info": "Configure the locales directory for your project",
   "prompt.config_locales_success": "Locales path successfully configured.",
-  "prompt.create_new_path": "create new path",
+  "prompt.create_new_path": "Create a new path",
   "prompt.delete_key": "Are you sure to remove key \"{0}\" from all locales?\n\nThis operation can NOT be undone.",
   "prompt.delete_keys_not_in_use": "Are you sure you want to remove {0} keys that are not in use?\n\nThis operation can NOT be undone.",
   "prompt.donate": "Donate",
