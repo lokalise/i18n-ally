@@ -1,11 +1,11 @@
-name: VSCE Publish
+name: Release
 
 on:
-  release:
-    types: [created]
+  tags:
+    - v*
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,3 +17,6 @@ jobs:
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
           VSCE_TOKEN: ${{secrets.VSCE_TOKEN}}
+      - run: npm run gh:release
+        env:
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}

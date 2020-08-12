@@ -967,9 +967,9 @@
     ]
   },
   "scripts": {
-    "release:minor": "standard-version --release-as minor && npm run publish:gh",
-    "release:patch": "standard-version --release-as patch && npm run publish:gh",
-    "publish:gh": "git push --follow-tags && conventional-github-releaser -p angular",
+    "release:minor": "standard-version --release-as minor && git push --follow-tags",
+    "release:patch": "standard-version --release-as patch && git push --follow-tags",
+    "gh:release": "conventional-github-releaser -p angular",
     "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
     "dev": "concurrently -n w: npm:*:dev",
     "main:build": "webpack --mode development",
