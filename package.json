@@ -119,6 +119,11 @@
         "title": "%refactor.extract_text%"
       },
       {
+        "command": "i18n-ally.lookup-translation",
+        "category": "%extname%",
+        "title": "%refactor.lookup_translation%"
+      },
+      {
         "command": "i18n-ally.open-url",
         "category": "%extname%",
         "title": "%command.open_url%"

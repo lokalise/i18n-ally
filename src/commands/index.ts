@@ -4,6 +4,7 @@ import configLocales from './configLocalePaths'
 import configLanguages from './configLanguages'
 import keyManipulations from './keyManipulations'
 import extractText from './extractText'
+import lookupTranslation from './lookupTranlation'
 import help from './help'
 import refreshUsageReport from './refreshUsageReport'
 import editor from './openEditor'
@@ -15,6 +16,7 @@ const m: ExtensionModule = (ctx) => {
     configLanguages(ctx),
     keyManipulations(ctx),
     extractText(ctx),
+    lookupTranslation(ctx),
     help(ctx),
     refreshUsageReport(ctx),
     editor(ctx),
