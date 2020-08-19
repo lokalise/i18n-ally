@@ -1,7 +1,7 @@
 import { commands, window, workspace, QuickPickItem } from 'vscode'
 // @ts-ignore
 import * as limax from 'limax'
-import { trim, pick } from 'lodash'
+import { trim } from 'lodash'
 import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
