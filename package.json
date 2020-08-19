@@ -1013,7 +1013,7 @@
     "php-array-parser": "^1.0.1",
     "pug": "^3.0.0",
     "rimraf": "3.0.2",
-    "standard-version": "8.0.2",
+    "standard-version": "9.0.0",
     "stylus": "^0.54.8",
     "ts-jest": "^26.1.4",
     "ts-loader": "8.0.2",
