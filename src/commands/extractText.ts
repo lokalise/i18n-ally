@@ -1,7 +1,7 @@
 import { commands, window, workspace, QuickPickItem } from 'vscode'
 // @ts-ignore
 import * as limax from 'limax'
-import { trim } from 'lodash'
+import { trim, pick } from 'lodash'
 import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
@@ -52,6 +52,7 @@ const m: ExtensionModule = () => {
             ...i,
             label: `$(replace-all) ${i.keypath}`,
             type: 'existed' as const,
+            alwaysShow: true,
             detail: i18n.t('prompt.existing_translation'),
           }))
 
@@ -168,6 +169,7 @@ const m: ExtensionModule = () => {
       picker.canSelectMany = false
       picker.value = default_keypath
       picker.items = getPickItems(default_keypath)
+      picker.matchOnDescription = true
 
       picker.onDidAccept(() => {
         const selection = picker.activeItems[0]
