@@ -28,6 +28,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config-ts': 0.2.14_eslint@7.6.0+typescript@3.9.7
   '@antfu/eslint-config-vue': 0.2.14_eslint@7.6.0+typescript@3.9.7
+  '@swc-node/jest': 0.1.23
   '@types/fs-extra': 9.0.1
   '@types/ini': 1.3.30
   '@types/jest': 26.0.9
@@ -57,7 +58,6 @@ devDependencies:
   rimraf: 3.0.2
   standard-version: 8.0.2
   stylus: 0.54.8
-  ts-jest: 26.1.4_jest@26.2.2+typescript@3.9.7
   ts-loader: 8.0.2_typescript@3.9.7
   vue: 2.6.11
   vue-i18n: 8.20.0
@@ -1345,6 +1345,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==
+  /@node-rs/helper/0.2.1:
+    dependencies:
+      tslib: 2.0.1
+    dev: true
+    resolution:
+      integrity: sha512-DEPYwfkkhJlVLFu6hWVGZi96jUCBahi1WoHZAC7gSFoeoJtxwJ+FrJSDx/8c9aIwAf477NnKj8bRJzFm98Me3A==
   /@nodelib/fs.scandir/2.1.3:
     dependencies:
       '@nodelib/fs.stat': 2.0.3
@@ -1452,6 +1458,57 @@ packages:
     dev: true
     resolution:
       integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
+  /@swc-node/core-darwin/0.2.9:
+    cpu:
+      - x64
+    dev: true
+    optional: true
+    os:
+      - darwin
+    resolution:
+      integrity: sha512-VQphQzeysThzSXU6aLhtFzQ9kj3+R4vlGcsaWn2yWjomUR0/7hBfIjBSiBpMYA/E8WXdVQOkemPlEnE2TW9czw==
+  /@swc-node/core-linux/0.2.9:
+    cpu:
+      - x64
+    dev: true
+    optional: true
+    os:
+      - linux
+    resolution:
+      integrity: sha512-vmkBH6TPLLcy3ab4dTjypNq5ARF4mx/X9daMtwSYrdPjRhuq/Y6FeNyAFsA1Sy8pSaBkZh2bbfZmUioHuSGIsA==
+  /@swc-node/core-win32/0.2.9:
+    cpu:
+      - x64
+    dev: true
+    optional: true
+    os:
+      - win32
+    resolution:
+      integrity: sha512-4ZejzX0WcNSXclBmCkEVgBIz35QBckCuZviN7sZz9+t10q7Vc98UWwQDAvPScNXardUai8HiDJGg9FOA1C9IEQ==
+  /@swc-node/core/0.2.9:
+    cpu:
+      - x64
+    dependencies:
+      '@node-rs/helper': 0.2.1
+    dev: true
+    engines:
+      node: '>= 8.9'
+    optionalDependencies:
+      '@swc-node/core-darwin': 0.2.9
+      '@swc-node/core-linux': 0.2.9
+      '@swc-node/core-win32': 0.2.9
+    os:
+      - darwin
+      - linux
+      - win32
+    resolution:
+      integrity: sha512-aqtWXIyExTuODN982Odd7cJdrKaCWqWHu6oT7iHF3EYEE4SdSUAY3uQNcvuTkbYuNKT91/4d9VvTXOrTa5L9ow==
+  /@swc-node/jest/0.1.23:
+    dependencies:
+      '@swc-node/core': 0.2.9
+    dev: true
+    resolution:
+      integrity: sha512-2d07Elq+EFMkkjgPOqaA36xyBtJ9l9KYD4mNsk2VVbvEoqgrt5pulsURsr3Q16RQF+iCYHhTYYs05OPIVhgJKQ==
   /@szmarczak/http-timer/1.1.2:
     dependencies:
       defer-to-connect: 1.1.3
@@ -2631,14 +2688,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-pUsXKAF2lVwhmtpeA3LJrZ76jXuusrNyhduuQs7CDFf9foT4Y38aQOserd2lMe5DSSrjf3fx34oHwryuvxAUgQ==
-  /bs-logger/0.2.6:
-    dependencies:
-      fast-json-stable-stringify: 2.1.0
-    dev: true
-    engines:
-      node: '>= 6'
-    resolution:
-      integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==
   /bser/2.1.1:
     dependencies:
       node-int64: 0.4.0
@@ -7493,6 +7542,7 @@ packages:
     resolution:
       integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
   /make-error/1.3.6:
+    dev: false
     resolution:
       integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
   /makeerror/1.0.11:
@@ -11089,29 +11139,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-n5up2e+odkw4dpi8v+sshI8RrbM=
-  /ts-jest/26.1.4_jest@26.2.2+typescript@3.9.7:
-    dependencies:
-      bs-logger: 0.2.6
-      buffer-from: 1.1.1
-      fast-json-stable-stringify: 2.1.0
-      jest: 26.2.2
-      jest-util: 26.2.0
-      json5: 2.1.3
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      mkdirp: 1.0.4
-      semver: 7.3.2
-      typescript: 3.9.7
-      yargs-parser: 18.1.3
-    dev: true
-    engines:
-      node: '>= 10'
-    hasBin: true
-    peerDependencies:
-      jest: '>=26 <27'
-      typescript: '>=3.8 <4.0'
-    resolution:
-      integrity: sha512-Nd7diUX6NZWfWq6FYyvcIPR/c7GbEF75fH1R6coOp3fbNzbRJBZZAn0ueVS0r8r9ral1VcrpneAFAwB3TsVS1Q==
   /ts-loader/8.0.2_typescript@3.9.7:
     dependencies:
       chalk: 2.4.2
@@ -11156,6 +11183,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
+  /tslib/2.0.1:
+    dev: true
+    resolution:
+      integrity: sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
   /tsutils/3.17.1_typescript@3.9.7:
     dependencies:
       tslib: 1.13.0
@@ -11238,6 +11269,7 @@ packages:
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   /typescript/3.9.7:
+    dev: false
     engines:
       node: '>=4.2.0'
     hasBin: true
@@ -11577,6 +11609,7 @@ packages:
     resolution:
       integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
   /vue/2.6.11:
+    dev: true
     resolution:
       integrity: sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
   /vuex/3.5.1_vue@2.6.11:
@@ -11981,6 +12014,7 @@ packages:
 specifiers:
   '@antfu/eslint-config-ts': 0.2.14
   '@antfu/eslint-config-vue': 0.2.14
+  '@swc-node/jest': ^0.1.23
   '@types/fs-extra': ^9.0.1
   '@types/ini': ^1.3.30
   '@types/jest': ^26.0.9
@@ -12032,7 +12066,6 @@ specifiers:
   standard-version: 8.0.2
   string-similarity: ^4.0.2
   stylus: ^0.54.8
-  ts-jest: ^26.1.4
   ts-loader: 8.0.2
   ts-node: ^8.10.2
   typescript: 3.9.7
