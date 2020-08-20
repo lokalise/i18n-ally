@@ -123,34 +123,36 @@ const m: ExtensionModule = () => {
 
         const writeKeypath = CurrentFile.loader.rewriteKeys(keypath, 'write', { locale })
 
+        let shouldOverride = 'skip'
         if (checkOverride) {
-          const shouldOverride = await overrideConfirm(writeKeypath, true, true)
+          shouldOverride = await overrideConfirm(writeKeypath, true, true)
           if (shouldOverride === 'retry') {
             commands.executeCommand(Commands.extract_text, options)
             return
           }
           if (shouldOverride === 'canceled')
             return
-
-          const replacer = await promptTemplates(keypath, languageId)
-
-          if (!replacer) {
-            window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
-            return
-          }
-          // open editor if not exists
-          let editor = window.activeTextEditor
-          if (!editor) {
-            const document = await workspace.openTextDocument(filepath)
-            editor = await window.showTextDocument(document)
-          }
-          editor.edit((editBuilder) => {
-            editBuilder.replace(range, replacer)
-          })
-
-          if (shouldOverride === 'skip')
-            return
         }
+
+        const replacer = await promptTemplates(keypath, languageId)
+
+        if (!replacer) {
+          window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
+          return
+        }
+
+        // open editor if not exists
+        let editor = window.activeTextEditor
+        if (!editor) {
+          const document = await workspace.openTextDocument(filepath)
+          editor = await window.showTextDocument(document)
+        }
+        editor.edit((editBuilder) => {
+          editBuilder.replace(range, replacer)
+        })
+
+        if (shouldOverride === 'skip')
+          return
 
         // save key
         await CurrentFile.loader.write({
