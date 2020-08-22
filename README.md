@@ -27,11 +27,18 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 </i></p>
 <br>
 
-
 <p align="center">
 <a href='https://github.com/antfu/i18n-ally/wiki/Supported-Frameworks' target="__blank">
 <img src="https://github.com/antfu/i18n-ally/blob/screenshots/supported-frameworks.png?raw=true" alt="Supported Frameworks" width="550"/>
 </a>
+</p>
+
+
+<h3 align="center">
+  Sponsored by
+</h3>
+<p align="center">
+  <a href="https://github.com/buzz-js">Roberth González</a>
 </p>
 
 <br>
