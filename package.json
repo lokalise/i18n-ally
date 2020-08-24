@@ -1048,7 +1048,7 @@
     "properties": "^1.2.1",
     "semver": "^7.3.2",
     "string-similarity": "^4.0.2",
-    "ts-node": "^8.10.2",
+    "ts-node": "^9.0.0",
     "typescript": "3.9.7",
     "vue-i18n-locale-message": "^0.16.3",
     "yaml": "^1.10.0"
