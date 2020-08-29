@@ -1,6 +1,7 @@
 import { commands, window, workspace, QuickPickItem } from 'vscode'
 // @ts-ignore
 import * as limax from 'limax'
+import * as path from "path";
 import { trim } from 'lodash'
 import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'
@@ -36,10 +37,14 @@ const m: ExtensionModule = () => {
       const locale = Config.sourceLanguage
       const loader = CurrentFile.loader
       const { filepath, text, range, languageId } = options
+      const fileName = path.basename(filepath)
+      const fileNameWithoutExt = path.basename(filepath, path.extname(filepath))
       const cleanedText = trim(text, '\'" ')
       let default_keypath: string
       const keygenStrategy = Config.keygenStrategy
       const keyPrefix = Config.keyPrefix
+        .replace('{fileName}', fileName)
+        .replace('{fileNameWithoutExt}', fileNameWithoutExt)
 
       const existingItems: QuickPickItemWithKey[]
         = loader.keys
