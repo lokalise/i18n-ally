@@ -77,7 +77,7 @@ class I18nextFramework extends Framework {
 
     const ranges: ScopeRange[] = []
     const text = document.getText()
-    const reg = /useTranslation\((?:['"`](.*)['"`]|)\)/g
+    const reg = /useTranslation\(\s*\[?\s*['"`](.*)['"`]/g
 
     for (const match of text.matchAll(reg)) {
       if (match?.index == null)

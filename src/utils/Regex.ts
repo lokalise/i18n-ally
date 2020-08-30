@@ -5,7 +5,14 @@ import i18n from '../i18n'
 import { ScopeRange } from '../frameworks/base'
 import { Log } from '.'
 
-export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, rewriteContext?: RewriteKeyContext, scopes: ScopeRange[] = []): KeyInDocument[] {
+export function regexFindKeys(
+  text: string,
+  regs: RegExp[],
+  dotEnding = false,
+  rewriteContext?: RewriteKeyContext,
+  scopes: ScopeRange[] = [],
+  namespaceDelimiters = [':', '/'],
+): KeyInDocument[] {
   if (Config.disablePathParsing)
     dotEnding = true
 
@@ -28,8 +35,18 @@ export function regexFindKeys(text: string, regs: RegExp[], dotEnding = false, r
       starts.push(start)
 
       // prefix the namespace
-      if (key && scope?.namespace)
-        key = `${scope.namespace}.${key}`
+      if (key && scope?.namespace) {
+        let hasNamespace = false
+        for (const np of namespaceDelimiters) {
+          if (key.includes(np)) {
+            hasNamespace = true
+            break
+          }
+        }
+
+        if (!hasNamespace)
+          key = `${scope.namespace}.${key}`
+      }
 
       if (key && (dotEnding || !key.endsWith('.'))) {
         key = CurrentFile.loader.rewriteKeys(key, 'reference', {

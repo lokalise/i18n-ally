@@ -56,7 +56,7 @@ function Page() {
 
 // hook with scope
 function Page2() {
-  const { t } = useTranslation('foo')
+  const { t } = useTranslation(['foo'])
 
   // inside default namespace ("foo.bar")
   t('bar')
