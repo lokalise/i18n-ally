@@ -43,7 +43,7 @@
   "config.include_subfolders": "Search recursively inside locale directories",
   "config.indent": "Indent space size for locale files",
   "config.keep_fulfill": "Always keep all keys fulfilled with empty strings",
-  "config.key_prefix": "String prepend to the extracting key.",
+  "config.key_prefix": "String to prepend to the extracting key. You can use {fileName} for the file name, and {fileNameWithoutExt} for the part of the file name before the first dot.",
   "config.keygen_strategy": "Strategy of generating key.",
   "config.keys_in_use": "Keys to mark as in use despite not appearing in the code",
   "config.keystyle": "Locale key style",
