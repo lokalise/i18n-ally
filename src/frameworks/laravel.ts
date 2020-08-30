@@ -39,6 +39,10 @@ class LaravelFramework extends Framework {
   }
 
   pathMatcher = () => '{locale}/**/{namespace}.{ext}'
+
+  rewriteKeys(keypath: string) {
+    return keypath.replace(/\//g, '.')
+  }
 }
 
 export default LaravelFramework

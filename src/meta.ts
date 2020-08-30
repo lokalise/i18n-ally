@@ -7,7 +7,7 @@ export const EXT_REVIEW_ID = 'i18n-ally-review'
 export const EXT_LEGACY_ID = 'antfu.vue-i18n-ally'
 export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 
-export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\:]*?'
+export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\\/:]*?'
 export const KEY_REG_ALL = '.*?'
 
 export const THROTTLE_DELAY = 800

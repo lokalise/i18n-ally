@@ -48,13 +48,13 @@ class RubyRailsFramework extends Framework {
 
       scope = scope
         // remove file extensions
-        .replace(/(?:\.html\.erb|\.html\.haml|\.haml)$/, '') 
+        .replace(/(?:\.html\.erb|\.html\.haml|\.haml)$/, '')
         // map path delimiter to dots
-        .replace(/(?:\/|\\)/g, '.') 
+        .replace(/(?:\/|\\)/g, '.')
         // omit the starting underscore on each file
-        .replace(/\._/g, '.') 
+        .replace(/\._/g, '.')
         // remove the very starting underscore
-        .replace(/^_/g, '') 
+        .replace(/^_/g, '')
 
       return scope + key
     }
