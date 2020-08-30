@@ -187,7 +187,6 @@ const annotation: ExtensionModule = (ctx) => {
           after: {
             color,
             contentText: (showAnnotations && locale) ? text : '',
-            fontWeight: 'normal',
             fontStyle: 'normal',
             border: inplace ? `0.5px solid ${borderColor}; border-radius: 2px;` : '',
           },
