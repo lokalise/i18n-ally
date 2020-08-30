@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.8](https://github.com/antfu/i18n-ally/compare/v2.3.7...v2.3.8) (2020-08-30)
+
+
+### ⚡ Features
+
+* add {fileName} variable support for config.keyPrefix ([#385](https://github.com/antfu/i18n-ally/issues/385)) ([992b870](https://github.com/antfu/i18n-ally/commit/992b870f8b48cb1572e459f6ac4fc0037d20f018))
+
+
+### 🐞 Bug Fixes
+
+* [#387](https://github.com/antfu/i18n-ally/issues/387) ([5ca8229](https://github.com/antfu/i18n-ally/commit/5ca8229b7f2ee06e7fb24d492c0ab7c2712a9a7e))
+
 ### [2.3.7](https://github.com/antfu/i18n-ally/compare/v2.3.6...v2.3.7) (2020-08-30)
 
 
