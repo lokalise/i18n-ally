@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.10](https://github.com/antfu/i18n-ally/compare/v2.3.9...v2.3.10) (2020-09-01)
+
+
+### 🌍 Internationalization
+
+* modified to commonly used words in zh-tw ([#389](https://github.com/antfu/i18n-ally/issues/389)) ([02cc89b](https://github.com/antfu/i18n-ally/commit/02cc89beb4d167d69baf7143a6ecdbffe331f8ee))
+
 ### [2.3.9](https://github.com/antfu/i18n-ally/compare/v2.3.8...v2.3.9) (2020-08-30)
 
 
