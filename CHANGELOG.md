@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.17](https://github.com/antfu/i18n-ally/compare/v2.3.16...v2.3.17) (2020-09-10)
+
+
+### ⚡ Features
+
+* allows to insert key when the selection is empty, resolves [#378](https://github.com/antfu/i18n-ally/issues/378) ([3d75677](https://github.com/antfu/i18n-ally/commit/3d75677988b692af0b63a87fdc50cdbe2cad9550))
+
 ### [2.3.16](https://github.com/antfu/i18n-ally/compare/v2.3.15...v2.3.16) (2020-09-10)
 
 ### [2.3.15](https://github.com/antfu/i18n-ally/compare/v2.3.14...v2.3.15) (2020-09-10)
