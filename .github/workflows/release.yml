@@ -19,13 +19,13 @@ jobs:
         with:
           version: 4.11.1
       - run: pnpm i
-      - run: pnpm build
-      - run: pnpx vsce publish -p ${{secrets.VSCE_TOKEN}}
+      - run: npm run build
+      - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
           VSCE_TOKEN: ${{secrets.VSCE_TOKEN}}
-      - run: pnpx ovsx publish -p ${{secrets.OVSX_TOKEN}}
+      - run: npx ovsx publish -p ${{secrets.OVSX_TOKEN}}
         env:
           OVSX_TOKEN: ${{secrets.OVSX_TOKEN}}
-      - run: pnpm gh:release
+      - run: npm run gh:release
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
