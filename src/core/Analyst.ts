@@ -4,6 +4,8 @@ import { workspace, Range, Location, TextDocument, Uri, EventEmitter } from 'vsc
 // @ts-ignore
 import { glob } from 'glob-gitignore'
 // @ts-ignore
+import micromatch from 'micromatch'
+// @ts-ignore
 import parseGitIgnore from 'parse-gitignore'
 import _, { uniq } from 'lodash'
 import { Log } from '../utils'
@@ -156,7 +158,9 @@ export class Analyst {
     // keys in use
     const activeKeys = inUseKeys.filter(i => allKeys.includes(i))
     // keys not in use
-    let idleKeys = allKeys.filter(i => !inUseKeys.includes(i))
+    let idleKeys = allKeys
+      .filter(i => !inUseKeys.includes(i))
+      .filter(i => !micromatch.isMatch(i, Config.keysInUse))
     // keys in use, but actually you don't have them
     const missingKeys = inUseKeys.filter(i => !allKeys.includes(i))
 

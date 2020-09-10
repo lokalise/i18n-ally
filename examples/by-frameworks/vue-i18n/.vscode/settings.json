@@ -1,5 +1,9 @@
 {
   "i18n-ally.localesPaths": "locales",
-  "i18n-ally.keyMatchRegex": ".*?",
-  "i18n-ally.sourceLanguage": "en"
+  "i18n-ally.regex.key": ".*?",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keysInUse": [
+    "date.long.*",
+    "yeah"
+  ]
 }
