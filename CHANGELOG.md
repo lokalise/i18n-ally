@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.14](https://github.com/antfu/i18n-ally/compare/v2.3.13...v2.3.14) (2020-09-10)
+
 ### [2.3.13](https://github.com/antfu/i18n-ally/compare/v2.3.12...v2.3.13) (2020-09-10)
 
 ### [2.3.12](https://github.com/antfu/i18n-ally/compare/v2.3.11...v2.3.12) (2020-09-10)
