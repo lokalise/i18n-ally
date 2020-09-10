@@ -15,10 +15,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - uses: pnpm/action-setup@v1.2.0
-        with:
-          version: 4.11.1
-      - run: pnpm i
+      - run: npm ci
       - run: npm run build
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
