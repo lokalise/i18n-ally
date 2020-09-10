@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.11](https://github.com/antfu/i18n-ally/compare/v2.3.10...v2.3.11) (2020-09-10)
+
+
+### 🐞 Bug Fixes
+
+* close [#392](https://github.com/antfu/i18n-ally/issues/392) ([a188e5f](https://github.com/antfu/i18n-ally/commit/a188e5faa5054ea4847c27eb2676b4cbc631d450))
+
+
+### ⚡ Features
+
+* support wildcard for `keysInUse`, close [#391](https://github.com/antfu/i18n-ally/issues/391) ([6929cd0](https://github.com/antfu/i18n-ally/commit/6929cd0960ad6170f52676fd4b8956494cbeb8d6))
+
 ### [2.3.10](https://github.com/antfu/i18n-ally/compare/v2.3.9...v2.3.10) (2020-09-01)
 
 
