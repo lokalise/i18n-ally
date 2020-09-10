@@ -69,6 +69,7 @@ class CustomFramework extends Framework {
     return id
   }
 
+  // @ts-expect-error
   get monopoly() {
     return this.data?.monopoly || false
   }

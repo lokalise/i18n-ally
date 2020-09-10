@@ -7,6 +7,7 @@ export class ProgressMissingListItem extends ProgressSubmenuItem {
     super(root, 'view.progress_submenu.missing_keys', 'icon-unknown')
   }
 
+  // @ts-expect-error
   get contextValue() {
     const values: string[] = []
     if (this.node.locale !== Config.sourceLanguage)

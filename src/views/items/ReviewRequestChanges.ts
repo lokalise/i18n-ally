@@ -14,6 +14,7 @@ export class ReviewRequestChangesRoot extends BaseTreeItem {
     this.collapsibleState = TreeItemCollapsibleState.Collapsed
   }
 
+  // @ts-expect-error
   get iconPath() {
     return this.getIcon('review-request-change', false)
   }

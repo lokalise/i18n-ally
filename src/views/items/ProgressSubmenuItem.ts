@@ -11,6 +11,7 @@ export abstract class ProgressSubmenuItem extends ProgressBaseItem {
     this.id = `progress-${this.node.locale}-${labelKey}`
   }
 
+  // @ts-expect-error
   get iconPath() {
     if (this.icon)
       return this.getIcon(this.icon)
@@ -25,6 +26,8 @@ export abstract class ProgressSubmenuItem extends ProgressBaseItem {
   }
 
   abstract getKeys(): string[]
+
+  // @ts-expect-error
   get collapsibleState() {
     if (this.getKeys().length)
       return TreeItemCollapsibleState.Collapsed

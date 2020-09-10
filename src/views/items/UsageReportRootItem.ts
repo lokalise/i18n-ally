@@ -30,6 +30,7 @@ export class UsageReportRootItem extends BaseTreeItem {
     }[this.key]
   }
 
+  // @ts-expect-error
   get contextValue() {
     return `usage_${this.key}`
   }

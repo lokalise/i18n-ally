@@ -5,10 +5,12 @@ export class LocationTreeItem extends TreeItem {
     super(location.uri)
   }
 
+  // @ts-expect-error
   get description() {
     return `${this.location.range.start.line + 1}:${this.location.range.start.character + 1}`
   }
 
+  // @ts-expect-error
   get command(): Command {
     return {
       title: '',

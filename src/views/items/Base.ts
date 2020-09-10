@@ -18,6 +18,7 @@ export abstract class BaseTreeItem extends TreeItem {
 
   protected setLabel(value: string) {}
 
+  // @ts-expect-error
   get label() {
     return this.getLabel()
   }

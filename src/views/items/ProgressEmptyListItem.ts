@@ -7,6 +7,7 @@ export class ProgressEmptyListItem extends ProgressSubmenuItem {
     super(root, 'view.progress_submenu.empty_keys', 'warning')
   }
 
+  // @ts-expect-error
   get contextValue() {
     const values: string[] = []
     if (this.node.locale !== Config.sourceLanguage)

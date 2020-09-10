@@ -11,6 +11,7 @@ import { ReviewSuggestions } from './ReviewSuggestions'
 import { Seperator } from './Seperator'
 
 export class ProgressRootItem extends ProgressBaseItem {
+  // @ts-expect-error
   get description(): string {
     const rate = this.node.translated / this.node.total
     const percent = +(rate * 100).toFixed(1)
@@ -40,12 +41,14 @@ export class ProgressRootItem extends ProgressBaseItem {
     return this.locale === Config.displayLanguage
   }
 
+  // @ts-expect-error
   get iconPath() {
     if (!this.visible)
       return this.getIcon('hidden', false)
     return this.getFlagIcon(this.locale)
   }
 
+  // @ts-expect-error
   get contextValue() {
     const context = ['progress']
     if (!this.isSource)

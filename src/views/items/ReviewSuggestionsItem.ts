@@ -18,6 +18,7 @@ export class ReviewSuggestionsItem extends BaseTreeItem {
     }
   }
 
+  // @ts-expect-error
   get iconPath() {
     return Uri.parse(getAvatarFromEmail(this.comment.user?.email))
   }
@@ -26,6 +27,7 @@ export class ReviewSuggestionsItem extends BaseTreeItem {
     return this.comment.user?.name || i18n.t('review.unknown_user')
   }
 
+  // @ts-expect-error
   get description() {
     let suggestion = this.comment.suggestion
     if (suggestion)

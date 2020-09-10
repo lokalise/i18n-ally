@@ -15,6 +15,7 @@ export class ReviewTranslationCandidates extends BaseTreeItem {
     this.contextValue = 'translation-candidate'
   }
 
+  // @ts-expect-error
   get iconPath() {
     return this.getIcon('translate-colored', false)
   }

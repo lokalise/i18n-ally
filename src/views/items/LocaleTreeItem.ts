@@ -16,6 +16,7 @@ export class LocaleTreeItem extends BaseTreeItem {
       this.node = node
   }
 
+  // @ts-expect-error
   get tooltip(): string {
     return resolveFlattenRootKeypath(this.node.keypath)
   }
@@ -33,6 +34,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     }
   }
 
+  // @ts-expect-error
   get collapsibleState() {
     if (this.node.type === 'record' || this.editorMode)
       return TreeItemCollapsibleState.None
@@ -42,6 +44,7 @@ export class LocaleTreeItem extends BaseTreeItem {
 
   set collapsibleState(_) { }
 
+  // @ts-expect-error
   get description(): string {
     if (this.node.type === 'node')
       return this.node.getValue(this.displayLocale, true)
@@ -50,6 +53,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     return ''
   }
 
+  // @ts-expect-error
   get iconPath() {
     if (Translator.isTranslating(this.node))
       return this.getIcon('loading')
@@ -73,6 +77,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     }
   }
 
+  // @ts-expect-error
   get contextValue() {
     const values: string[] = [this.node.type]
 
@@ -115,6 +120,7 @@ export class LocaleTreeItem extends BaseTreeItem {
     return items
   }
 
+  // @ts-expect-error
   get command() {
     if (this.editorMode) {
       return {
