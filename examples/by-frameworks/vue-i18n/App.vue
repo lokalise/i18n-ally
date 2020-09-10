@@ -44,10 +44,10 @@ export default {
   }),
 
   computed: {
-    foobar () {
+    foobar() {
       return this.$t('nested.foo.bar')
     },
-    exists () {
+    exists() {
       return this.$te('nested.foo.bar')
     },
   },

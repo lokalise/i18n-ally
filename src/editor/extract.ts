@@ -8,6 +8,7 @@ export interface ExtractTextOptions {
   text: string
   range: Range
   languageId?: string
+  isInsert?: boolean
 }
 
 class ExtractProvider implements CodeActionProvider {
