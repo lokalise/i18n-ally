@@ -49,7 +49,7 @@ English | <a href="https://github.com/antfu/i18n-ally/blob/master/README.zh-CN.m
 　|　
 <a href="https://github.com/antfu/i18n-ally/wiki/Configurations">⚙️ Configs</a>
 　|　
-<a href="https://github.com/antfu/i18n-ally/wiki/Supported-Locale-Formats">📜 Supported Formats</a>
+<a href="https://github.com/antfu/i18n-ally/wiki/Locale-Formats#supported-locale-formats">📜 Supported Formats</a>
 　|　
 <a href="https://github.com/antfu/i18n-ally/wiki/Contribute">🧱 Contribute</a>
 </h4>
