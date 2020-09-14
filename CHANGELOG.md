@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.18](https://github.com/antfu/i18n-ally/compare/v2.3.17...v2.3.18) (2020-09-14)
+
+
+### ⚡ Features
+
+* bring back "replace_with", close [#398](https://github.com/antfu/i18n-ally/issues/398) ([25015e9](https://github.com/antfu/i18n-ally/commit/25015e9a18dc990aeec223993f6af023c6004e7a))
+
 ### [2.3.17](https://github.com/antfu/i18n-ally/compare/v2.3.16...v2.3.17) (2020-09-10)
 
 
