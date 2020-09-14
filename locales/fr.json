@@ -165,6 +165,7 @@
   "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Le mode \"Ecriture\" n'est pas disponible pour les fichiers JS/TS.",
   "refactor.extract_text": "🌍 Extract text into i18n messages",
+  "refactor.replace_with": "",
   "review.accept_suggestion": "",
   "review.apply_suggestion": "",
   "review.apply_translation_candidate": "",

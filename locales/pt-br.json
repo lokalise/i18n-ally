@@ -165,6 +165,7 @@
   "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Passar para arquivo js/ts não é suportado",
   "refactor.extract_text": "🌍 Extrair texto como mensagem i18n",
+  "refactor.replace_with": "",
   "review.accept_suggestion": "",
   "review.apply_suggestion": "",
   "review.apply_translation_candidate": "",

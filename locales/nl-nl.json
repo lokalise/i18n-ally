@@ -165,6 +165,7 @@
   "prompt.translate_no_jobs": "",
   "prompt.writing_js": "Het schrijven naar js/ts bestanden wordt niet ondersteund.",
   "refactor.extract_text": "🌍 Extraheer tekst naar i18n berichten",
+  "refactor.replace_with": "",
   "review.accept_suggestion": "",
   "review.apply_suggestion": "",
   "review.apply_translation_candidate": "",

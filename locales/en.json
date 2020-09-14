@@ -164,6 +164,7 @@
   "prompt.translate_multiple_confirm": "Are you sure to translate {0} keys?",
   "prompt.translate_no_jobs": "No translation needed.",
   "prompt.writing_js": "Writing to js/ts files is not supported.",
+  "refactor.replace_with": "Replace text with existing translation: \"{0}\"",
   "refactor.extract_text": "🌍 Extract text into i18n messages",
   "review.accept_suggestion": "Accept Suggestion",
   "review.apply_suggestion": "Apply suggestion",
