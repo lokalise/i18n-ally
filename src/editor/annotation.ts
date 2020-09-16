@@ -222,12 +222,25 @@ const annotation: ExtensionModule = (ctx) => {
   }
 
   const throttledUpdate = throttle(() => update(), THROTTLE_DELAY)
+  const throttledRefresh = throttle(() => refresh(), THROTTLE_DELAY)
 
   const disposables: Disposable[] = []
   CurrentFile.loader.onDidChange(throttledUpdate, null, disposables)
-  window.onDidChangeActiveTextEditor(throttledUpdate, null, disposables)
   Global.reviews.onDidChange(throttledUpdate, null, disposables)
-  window.onDidChangeTextEditorSelection(refresh, null, disposables)
+  window.onDidChangeActiveTextEditor(throttledUpdate, null, disposables)
+  window.onDidChangeTextEditorSelection(throttledRefresh, null, disposables)
+  workspace.onDidChangeTextDocument(
+    (e) => {
+      if (e.document === window.activeTextEditor?.document) {
+        _current_doc = undefined
+        throttledUpdate()
+      }
+    },
+    null,
+    disposables,
+  )
+
+  // hover
   languages.registerHoverProvider('*', {
     provideHover(document, position, token) {
       if (document !== _current_doc || !_current_usages)
@@ -250,16 +263,6 @@ const annotation: ExtensionModule = (ctx) => {
         ))
     },
   })
-  workspace.onDidChangeTextDocument(
-    (e) => {
-      if (e.document === window.activeTextEditor?.document) {
-        _current_doc = undefined
-        throttledUpdate()
-      }
-    },
-    null,
-    disposables,
-  )
 
   update()
 
