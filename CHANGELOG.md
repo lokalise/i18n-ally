@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.19](https://github.com/antfu/i18n-ally/compare/v2.3.18...v2.3.19) (2020-09-16)
+
+
+### 🐞 Bug Fixes
+
+* throttledRefresh ([c33c19f](https://github.com/antfu/i18n-ally/commit/c33c19f478447dc7e994d739cdee609e1c58c014))
+
 ### [2.3.18](https://github.com/antfu/i18n-ally/compare/v2.3.17...v2.3.18) (2020-09-14)
 
 
