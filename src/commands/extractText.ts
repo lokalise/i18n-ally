@@ -38,7 +38,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
   const { filepath, text, range, languageId, isInsert } = options
   const fileName = path.basename(filepath)
   const fileNameWithoutExt = path.basename(filepath, path.extname(filepath))
-  const cleanedText = trim(text, '\'" ')
+  const cleanedText = trim(text, '\'"` ')
   let default_keypath: string
   const keygenStrategy = Config.keygenStrategy
   const keyPrefix = Config.keyPrefix
@@ -62,12 +62,16 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
           detail: i18n.t('prompt.existing_translation'),
         }))
 
-  if (keygenStrategy === 'random')
+  if (keygenStrategy === 'random') {
     default_keypath = nanoid()
-  else if (keygenStrategy === 'empty')
+  }
+  else if (keygenStrategy === 'empty') {
     default_keypath = ''
-  else
-    default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false }) as string
+  }
+  else {
+    default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false })
+      .slice(0, Config.keyMaxLength ?? Infinity)
+  }
 
   if (keyPrefix && keygenStrategy !== 'empty' && !isInsert)
     default_keypath = keyPrefix + default_keypath
