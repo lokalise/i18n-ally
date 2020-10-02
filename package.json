@@ -851,6 +851,11 @@
           "default": "",
           "description": "%config.key_prefix%"
         },
+        "i18n-ally.extract.keyMaxLength": {
+          "type": "number",
+          "default": null,
+          "description": "%config.key_max_length%"
+        },
         "i18n-ally.extract.targetPickingStrategy": {
           "type": "string",
           "default": "none",
