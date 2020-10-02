@@ -70,7 +70,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
   }
   else {
     default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false })
-      .slice(0, Config.keyMaxLength ?? Infinity)
+      .slice(0, Config.extractKeyMaxLength ?? Infinity)
   }
 
   if (keyPrefix && keygenStrategy !== 'empty' && !isInsert)

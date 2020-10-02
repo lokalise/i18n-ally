@@ -390,7 +390,7 @@ export class Config {
     return this.getConfig<string>('extract.keyPrefix') ?? ''
   }
 
-  static get keyMaxLength() {
+  static get extractKeyMaxLength() {
     return this.getConfig<number>('extract.keyMaxLength') ?? Infinity
   }
 
