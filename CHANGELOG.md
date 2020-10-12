@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.20](https://github.com/antfu/i18n-ally/compare/v2.3.19...v2.3.20) (2020-10-12)
+
+
+### ⚡ Features
+
+* add extract.keyMaxLength option ([#405](https://github.com/antfu/i18n-ally/issues/405)) ([5ddae59](https://github.com/antfu/i18n-ally/commit/5ddae59ef698d493686cd09d1df793bdc0e5c925))
+
+
+### 🐞 Bug Fixes
+
+* close [#410](https://github.com/antfu/i18n-ally/issues/410) ([97638c1](https://github.com/antfu/i18n-ally/commit/97638c156fe7202e75e91a211e964be1de55e8a1))
+
 ### [2.3.19](https://github.com/antfu/i18n-ally/compare/v2.3.18...v2.3.19) (2020-09-16)
 
 
