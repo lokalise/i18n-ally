@@ -63,14 +63,14 @@ export class Translator {
     if (!sourceNode) {
       if (Config.translateFallbackToKey)
         return keypath
-      throw new AllyError(ErrorType.translating_empty_source_value)
+      return ''
     }
 
     const sourceRecord = sourceNode.locales[sourceLanguage]
     if (!sourceRecord || !sourceRecord.value) {
       if (Config.translateFallbackToKey)
         return keypath
-      throw new AllyError(ErrorType.translating_empty_source_value)
+      return ''
     }
 
     return sourceRecord.value
@@ -281,7 +281,7 @@ export class Translator {
     results: ({result: PendingWrite | undefined; job: TranslateJob})[],
   ) {
     const now = new Date().toISOString()
-    const r = results.filter(i => i.result && i.result.value) as ({result: PendingWrite; job: TranslateJob})[]
+    const r = results.filter(i => i.result) as ({result: PendingWrite; job: TranslateJob})[]
 
     if (Config.translateSaveAsCandidates) {
       await Global.reviews.setTranslationCandidates(r.map(i => ({
@@ -304,6 +304,9 @@ export class Translator {
     let trans_result: TranslateResult | undefined
 
     const errors: Error[] = []
+
+    if (!text)
+      return ''
 
     for (const engine of engines) {
       try {
