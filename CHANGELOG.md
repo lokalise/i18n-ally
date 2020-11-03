@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.21](https://github.com/antfu/i18n-ally/compare/v2.3.20...v2.3.21) (2020-11-03)
+
+
+### ⚡ Features
+
+* add fluter_i18n text widget shorthand ([#420](https://github.com/antfu/i18n-ally/issues/420)) ([59a369c](https://github.com/antfu/i18n-ally/commit/59a369c7ca762f07116055176f76be1996c98a17))
+
 ### [2.3.20](https://github.com/antfu/i18n-ally/compare/v2.3.19...v2.3.20) (2020-10-12)
 
 
