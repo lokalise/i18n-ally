@@ -17,8 +17,8 @@ class FlutterFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '[^\\w\\d]FlutterI18n\\.(?:plural|translate)\\([\\w\\d]+,[\\s\\n]?[\'"`]({key})[\'"`]',
-    '[^\\w\\d]I18n(?:Plural|Text)\\([\\s\\n]?[\'"`]({key})[\'"`]',
+    '[^\\w\\d]FlutterI18n\\.(?:plural|translate)\\(\\s*[\\w\\d]+,\\s*[\'"`]({key})[\'"`]',
+    '[^\\w\\d]I18n(?:Plural|Text)\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
