@@ -972,6 +972,7 @@
     ]
   },
   "scripts": {
+    "release": "npm run release:patch",
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
     "release:patch": "standard-version --release-as patch && git push --follow-tags",
     "gh:release": "conventional-github-releaser -p angular",
