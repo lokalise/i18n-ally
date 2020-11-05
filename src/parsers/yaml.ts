@@ -53,6 +53,7 @@ export class YamlParser extends Parser {
             start: (origStart || start) + 1,
             end: (origEnd || end) - 1,
             key,
+            quoted: true,
           }]
         }
       }

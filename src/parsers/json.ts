@@ -36,6 +36,7 @@ export class JsonParser extends Parser {
     const pairs = Object.entries<any>(map)
       .filter(([k, v]) => k)
       .map(([k, v]) => ({
+        quoted: true,
         start: v.value.pos + 1,
         end: v.valueEnd.pos - 1,
         // https://tools.ietf.org/html/rfc6901
