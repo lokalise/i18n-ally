@@ -7,12 +7,15 @@ function hasCache(key: string): boolean {
   return Object.hasOwnProperty.call(cache, key)
 }
 
-function setCache(key: string, value: any): any {
+function setCache<T>(key: string, value: T): T {
   cache[key] = value
   return value
 }
 
-function getCache(key: string): any {
+function getCache<T = any>(key: string, value?: T): T {
+  if (cache[key] === undefined)
+    cache[key] = value
+
   return cache[key]
 }
 

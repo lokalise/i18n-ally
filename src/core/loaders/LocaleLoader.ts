@@ -11,7 +11,7 @@ import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
-import { hasCache, getCache, setCache } from '../../utils/cache'
+import { getCache, setCache } from '../../utils/cache'
 import { Analyst, Global, Config } from '..'
 import { Loader } from './Loader'
 
@@ -189,10 +189,22 @@ export class LocaleLoader extends Loader {
     if (Config.targetPickingStrategy === TargetPickingStrategy.GlobalPrevious)
       return this.handleExtractToGlobalPrevious(paths, keypath)
 
-    return await window.showQuickPick(paths, {
-      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
-      ignoreFocusOut: true,
-    })
+    return await this.promptPathToSave(paths, keypath)
+  }
+
+  async promptPathToSave(paths: string[], keypath: string) {
+    const result = await window.showQuickPick(
+      paths.map(i => ({
+        label: `$(file) ${path.basename(i)}`,
+        description: path.relative(this.rootpath, i),
+        path: i,
+      })),
+      {
+        placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
+        ignoreFocusOut: true,
+      })
+
+    return result?.path
   }
 
   /**
@@ -201,17 +213,15 @@ export class LocaleLoader extends Loader {
    * @param paths: paths of locale files
    * @param keypath
    */
-  async handleExtractToFilePrevious(fromPath: string, paths: any, keypath: string): Promise<string | void> {
+  async handleExtractToFilePrevious(fromPath: string, paths: string[], keypath: string): Promise<string | void> {
     const cacheKey = 'perFilePickingTargets'
-    const pickingTargets: any = hasCache(cacheKey) ? getCache(cacheKey) : setCache(cacheKey, {})
+    const pickingTargets: any = getCache(cacheKey, {})
     const cachedPath = pickingTargets[fromPath]
 
-    if (cachedPath) return cachedPath
+    if (cachedPath)
+      return cachedPath
 
-    const newPath = await window.showQuickPick(paths, {
-      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
-      ignoreFocusOut: true,
-    })
+    const newPath = await this.promptPathToSave(paths, keypath)
     pickingTargets[fromPath] = newPath
     setCache(cacheKey, pickingTargets)
 
@@ -225,14 +235,13 @@ export class LocaleLoader extends Loader {
    */
   async handleExtractToGlobalPrevious(paths: any, keypath: string): Promise<string | void> {
     const cacheKey = 'globalPickingTargets'
-    const pickingTarget: any = getCache(cacheKey)
+    const pickingTarget = getCache<string>(cacheKey)
 
-    if (pickingTarget) return pickingTarget
+    if (pickingTarget)
+      return pickingTarget
 
-    const newPath = await window.showQuickPick(paths, {
-      placeHolder: i18n.t('prompt.select_file_to_store_key', keypath),
-      ignoreFocusOut: true,
-    })
+    const newPath = await this.promptPathToSave(paths, keypath)
+
     setCache(cacheKey, newPath)
 
     return newPath
