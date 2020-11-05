@@ -5,7 +5,7 @@
   "version": "2.4.0",
   "publisher": "antfu",
   "engines": {
-    "vscode": "^1.48.0"
+    "vscode": "^1.50.0"
   },
   "categories": [
     "Other"
