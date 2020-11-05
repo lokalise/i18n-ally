@@ -1035,7 +1035,6 @@
     "@types/string-similarity": "^3.0.0",
     "bcp-47-normalize": "^1.1.1",
     "esm": "^3.2.25",
-    "esno": "^0.2.4",
     "fast-glob": "^3.2.4",
     "glob-gitignore": "^1.0.14",
     "htmlparser2": "^5.0.1",
