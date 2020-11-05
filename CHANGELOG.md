@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/antfu/i18n-ally/compare/v2.3.21...v2.4.0) (2020-11-05)
+
+
+### ⚡ Features
+
+* **react:** support <Trans> tag detection, close [#423](https://github.com/antfu/i18n-ally/issues/423) ([dbf4fde](https://github.com/antfu/i18n-ally/commit/dbf4fde382ace876f0cda54fec3d144261e00328))
+
+
+### 🐞 Bug Fixes
+
+* better file selection prompt, close [#422](https://github.com/antfu/i18n-ally/issues/422) ([f4d95d9](https://github.com/antfu/i18n-ally/commit/f4d95d960e7f6f21ccb6dd48d15d61bdf14a0dc6))
+* safe git user info fetch, fix [#404](https://github.com/antfu/i18n-ally/issues/404) ([749f6df](https://github.com/antfu/i18n-ally/commit/749f6df8bc9fed66f94860bfebde0620cc800d3f))
+
 ### [2.3.21](https://github.com/antfu/i18n-ally/compare/v2.3.20...v2.3.21) (2020-11-03)
 
 
