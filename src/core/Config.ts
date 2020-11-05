@@ -4,6 +4,7 @@ import { workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
+import i18n from '../i18n'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 
 export class Config {
@@ -350,19 +351,32 @@ export class Config {
     const config = this.getConfig<string>('review.user.name')
     if (config)
       return config
-    if (!Config._reviewUserName)
-      Config._reviewUserName = execSync('git config user.name').toString().trim()
+    if (!Config._reviewUserName) {
+      try {
+        Config._reviewUserName = execSync('git config user.name').toString().trim()
+      }
+      catch (e) {
+        return i18n.t('review.unknown_user')
+      }
+    }
 
     return Config._reviewUserName
   }
 
   private static _reviewUserEmail: string | undefined
+
   static get reviewUserEmail() {
     const config = this.getConfig<string>('review.user.email')
     if (config)
       return config
-    if (!Config._reviewUserEmail)
-      Config._reviewUserEmail = execSync('git config user.email').toString().trim()
+    if (!Config._reviewUserEmail) {
+      try {
+        Config._reviewUserEmail = execSync('git config user.email').toString().trim()
+      }
+      catch (e) {
+        return ''
+      }
+    }
 
     return Config._reviewUserEmail
   }
