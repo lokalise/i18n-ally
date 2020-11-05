@@ -82,7 +82,7 @@ const annotation: ExtensionModule = (ctx) => {
 
     const loader: Loader = CurrentFile.loader
     const selection = editor.selection
-    const { keys, locale, namespace, type: usageType, ranges } = _current_usages
+    const { keys, locale, namespace, type: usageType } = _current_usages
 
     const annotationDelimiter = Config.annotationDelimiter
     const annotations: DecorationOptionsWithGutter[] = []
@@ -100,15 +100,19 @@ const annotation: ExtensionModule = (ctx) => {
 
     const total = keys.length
     for (let i = 0; i < total; i++) {
-      const key = namespace
-        ? `${namespace}.${keys[i].key}`
-        : keys[i].key
+      const key = keys[i]
+      const keypath = namespace
+        ? `${namespace}.${key.key}`
+        : key.key
 
-      const range = ranges[i]
-      const rangeWithQuotes = new Range(
+      const range = new Range(
+        document.positionAt(key.start),
+        document.positionAt(key.end),
+      )
+      const rangeWithQuotes = key.quoted ? new Range(
         range.start.with(undefined, range.start.character - 1),
         range.end.with(undefined, range.end.character + 1),
-      )
+      ) : range
 
       let text: string | undefined
       let missing = false
@@ -118,9 +122,9 @@ const annotation: ExtensionModule = (ctx) => {
       if (usageType === 'locale') {
         inplace = false
         if (locale !== sourceLanguage) {
-          text = loader.getValueByKey(key, sourceLanguage, maxLength)
+          text = loader.getValueByKey(keypath, sourceLanguage, maxLength)
           // has source message but not current
-          if (!loader.getValueByKey(key, locale))
+          if (!loader.getValueByKey(keypath, locale))
             missing = true
         }
       }
@@ -135,10 +139,10 @@ const annotation: ExtensionModule = (ctx) => {
           inplace = false
         }
 
-        text = loader.getValueByKey(key, locale, maxLength)
+        text = loader.getValueByKey(keypath, locale, maxLength)
         // fallback to source
         if (!text && locale !== sourceLanguage) {
-          text = loader.getValueByKey(key, sourceLanguage, maxLength)
+          text = loader.getValueByKey(keypath, sourceLanguage, maxLength)
           missing = true
         }
 
@@ -166,7 +170,7 @@ const annotation: ExtensionModule = (ctx) => {
         gutterType = 'missing'
 
       if (Config.reviewEnabled) {
-        const comments = Global.reviews.getComments(key, locale)
+        const comments = Global.reviews.getComments(keypath, locale)
         gutterType = getCommentState(comments) || gutterType
       }
 

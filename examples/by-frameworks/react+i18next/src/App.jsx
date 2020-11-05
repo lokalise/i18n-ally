@@ -50,6 +50,8 @@ function Page() {
         <MyComponent />
       </div>
       <div>{t('description.part2')}</div>
+      {/* plain <Trans>, #423 */}
+      <Trans>description.part2</Trans>
     </div>
   )
 }

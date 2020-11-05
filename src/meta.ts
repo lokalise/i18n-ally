@@ -10,6 +10,8 @@ export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\\/:]*?'
 export const KEY_REG_ALL = '.*?'
 
+export const QUOTE_SYMBOLS = '\'"`'
+
 export const THROTTLE_DELAY = 800
 export const FILEWATCHER_TIMEOUT = 100
 

@@ -1,4 +1,5 @@
 import { sortBy } from 'lodash'
+import { QUOTE_SYMBOLS } from '../meta'
 import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
 import i18n from '../i18n'
@@ -28,10 +29,12 @@ export function regexFindKeys(
       const start = match.index + matchString.lastIndexOf(key)
       const end = start + key.length
       const scope = scopes.find(s => s.start <= start && s.end >= end)
+      const quoted = QUOTE_SYMBOLS.includes(text[start - 1])
 
       // prevent duplicated detection when multiple frameworks enables at the same time.
       if (starts.includes(start))
         continue
+
       starts.push(start)
 
       // prefix the namespace
@@ -57,6 +60,7 @@ export function regexFindKeys(
           key,
           start,
           end,
+          quoted,
         })
       }
     }

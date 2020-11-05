@@ -12,7 +12,6 @@ export interface KeyUsages {
   keys: KeyInDocument[]
   locale: string
   namespace?: string
-  ranges: Range[]
 }
 
 export class KeyDetector {
@@ -60,6 +59,7 @@ export class KeyDetector {
     const { range, key } = KeyDetector.getKeyRange(document, position, dotEnding) || {}
     if (!range || !key)
       return
+
     const end = range.end.character - 1
     const start = end - key.length
     const keyRange = new Range(
@@ -141,15 +141,9 @@ export class KeyDetector {
       return
     }
 
-    const ranges = keys.map(({ start, end }) => new Range(
-      document.positionAt(start),
-      document.positionAt(end),
-    ))
-
     return {
       type,
       keys,
-      ranges,
       locale,
       namespace,
     }
