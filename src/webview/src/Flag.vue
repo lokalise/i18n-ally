@@ -36,7 +36,7 @@ export default Vue.extend({
     style() {
       if (this.label) {
         return {
-          width: '40px',
+          width: '50px',
         }
       }
       return {}
@@ -59,6 +59,7 @@ export default Vue.extend({
     font-size 0.7em
     opacity 0.6
     line-height 1em
+    white-space nowrap
     text-overflow ellipsis
     overflow hidden
 </style>
