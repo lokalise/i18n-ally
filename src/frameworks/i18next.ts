@@ -8,6 +8,10 @@ class I18nextFramework extends Framework {
   display = 'i18next'
   namespaceDelimiter = ':'
 
+  // both `/` and `:` should work as delimiter, #425
+  namespaceDelimiters = [':', '/']
+  namespaceDelimitersRegex = /[\:\/]/g
+
   detection = {
     packageJSON: {
       any: [
@@ -54,13 +58,13 @@ class I18nextFramework extends Framework {
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
-    const dotedKey = key.split(this.namespaceDelimiter).join('.')
+    const dotedKey = key.split(this.namespaceDelimitersRegex).join('.')
 
     // when explicitly set the namespace, ignore current namespace scope
     if (
-      key.includes(this.namespaceDelimiter)
+      this.namespaceDelimiters.some(d => key.includes(d))
       && context.namespace
-      && dotedKey.startsWith(context.namespace.split(this.namespaceDelimiter).join('.'))
+      && dotedKey.startsWith(context.namespace.split(this.namespaceDelimitersRegex).join('.'))
     )
       // +1 for the an extra `.`
       key = key.slice(context.namespace.length + 1)

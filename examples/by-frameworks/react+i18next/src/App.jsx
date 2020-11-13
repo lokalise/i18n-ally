@@ -13,9 +13,9 @@ class LegacyWelcomeClass extends Component {
     const intl = useIntl()
     return (
       <div>
-        <h2>{t('title')}</h2>
-        <h2>{intl.formatPlural({ id: 'title' })}</h2>
-        <h2>{intl.formatMessage({ id: 'title' })}</h2>
+        <h2>{t('translation.title')}</h2>
+        <h2>{intl.formatPlural({ id: 'translation.title' })}</h2>
+        <h2>{intl.formatMessage({ id: 'translation.title' })}</h2>
       </div>
     )
   }
@@ -25,7 +25,7 @@ const Welcome = withTranslation()(LegacyWelcomeClass)
 // Component using the Trans component
 function MyComponent() {
   return (
-    <Trans i18nKey="description.part1">
+    <Trans i18nKey="translation:description.part1">
       To get started, edit <code>src/App.js</code> and save to reload.
     </Trans>
   )
@@ -49,30 +49,31 @@ function Page() {
       <div className="App-intro">
         <MyComponent />
       </div>
-      <div>{t('description.part2')}</div>
+      <div>{t('translation.description.part2')}</div>
       {/* plain <Trans>, #423 */}
-      <Trans>description.part2</Trans>
+      <Trans>translation.description.part2</Trans>
     </div>
   )
 }
 
 // hook with scope
 function Page2() {
-  const { t } = useTranslation(['foo'])
+  const { t } = useTranslation(['translation.foo'])
 
   // inside default namespace ("foo.bar")
   t('bar')
 
   // explicit namespace
-  t('description:part1')
+  t('pages.home:title')
+  t('pages/home:title')
 }
 
 // hook with another scope
 function Page3() {
-  const { t } = useTranslation('description')
+  const { t } = useTranslation('pages/home')
 
-  t('part1')
+  t('title')
 
   // explicit namespace
-  t('foo:bar')
+  t('translation:title')
 }
