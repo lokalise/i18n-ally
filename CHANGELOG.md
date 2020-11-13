@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.4](https://github.com/antfu/i18n-ally/compare/v2.4.3...v2.4.4) (2020-11-13)
+
+
+### ⚡ Features
+
+* **i18next:** support `/` as namespace delimiter, close [#425](https://github.com/antfu/i18n-ally/issues/425) ([433d673](https://github.com/antfu/i18n-ally/commit/433d673ca2256f267ddb96d6a3ef5bc057b050ab))
+
 ### [2.4.3](https://github.com/antfu/i18n-ally/compare/v2.4.2...v2.4.3) (2020-11-05)
 
 ### [2.4.2](https://github.com/antfu/i18n-ally/compare/v2.4.1...v2.4.2) (2020-11-05)
