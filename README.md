@@ -114,6 +114,8 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
 | French (Français) |  | [@Nicoxx45](https://github.com/Nicoxx45) |
 | Swedish (Svenska) |  | [@vladdeSV](https://github.com/vladdeSV) |
+| Ukrainian (Українська) |  | [@uhodav](https://github.com/uhodav) |
+| Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 
 [**Help Translate**](https://github.com/antfu/i18n-ally/wiki/Contribute#working-on-translations)
 
