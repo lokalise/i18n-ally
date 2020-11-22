@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.5](https://github.com/antfu/i18n-ally/compare/v2.4.4...v2.4.5) (2020-11-22)
+
+
+### 🌍 Internationalization
+
+* Add uk_UA and ru-RU locales ([#433](https://github.com/antfu/i18n-ally/issues/433)) ([b458fb8](https://github.com/antfu/i18n-ally/commit/b458fb84c9598fe8e168f34fbee0f4e51fedd252))
+
 ### [2.4.4](https://github.com/antfu/i18n-ally/compare/v2.4.3...v2.4.4) (2020-11-13)
 
 
