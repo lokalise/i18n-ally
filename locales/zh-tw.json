@@ -43,6 +43,7 @@
   "config.include_subfolders": "包含子目錄",
   "config.indent": "文案檔案的縮排大小",
   "config.keep_fulfill": "始終用空字串填充所有的鍵",
+  "config.key_max_length": "",
   "config.key_prefix": "文案 key 的前綴",
   "config.keygen_strategy": "文案 key 的生成策略, slug 默認策略, random 生成隨機字串",
   "config.keys_in_use": "儘管程式碼中沒有出現，但仍標記為正在使用的鍵",

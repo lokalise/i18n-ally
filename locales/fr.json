@@ -43,6 +43,7 @@
   "config.include_subfolders": "Recherche récursive dans les répertoires locaux.",
   "config.indent": "Taille de l'espace d'indentation pour les fichiers locaux.",
   "config.keep_fulfill": "Toujours garder les Clés remplies automatiquement.",
+  "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
   "config.keys_in_use": "",

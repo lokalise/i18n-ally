@@ -43,6 +43,7 @@
   "config.include_subfolders": "Sök rekursivt inuti översättningsvägars sökvägar",
   "config.indent": "Indenteringsstorlek för översättningsvägsfiler",
   "config.keep_fulfill": "Håll alltid alla nycklar fullgjorda med tomma strängar",
+  "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
   "config.keys_in_use": "Nycklar att markera som i användning fast de inte dyker upp i koden",
