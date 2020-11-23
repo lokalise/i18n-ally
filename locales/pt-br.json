@@ -43,6 +43,7 @@
   "config.include_subfolders": "Pesquisar recursivamente em diretórios de tradução (locales)",
   "config.indent": "Tamanho do espaço de identação dos arquivos de tradução (locales)",
   "config.keep_fulfill": "Sempre manter chaves com string vazias",
+  "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
   "config.keys_in_use": "",

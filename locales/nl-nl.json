@@ -43,6 +43,7 @@
   "config.include_subfolders": "Recursief zoeken binnen locale folders",
   "config.indent": "Spatie inspringing grootte voor locale bestanden",
   "config.keep_fulfill": "Behoud alle sleutels aanvullingn met een lege string waarde",
+  "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
   "config.keys_in_use": "",

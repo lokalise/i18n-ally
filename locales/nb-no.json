@@ -43,6 +43,7 @@
   "config.include_subfolders": "",
   "config.indent": "",
   "config.keep_fulfill": "",
+  "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
   "config.keys_in_use": "",
