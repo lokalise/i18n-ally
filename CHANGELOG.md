@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.6](https://github.com/antfu/i18n-ally/compare/v2.4.5...v2.4.6) (2020-11-23)
+
+
+### 🐞 Bug Fixes
+
+* **locales:** completes spanish and missing key ([#434](https://github.com/antfu/i18n-ally/issues/434)) ([7f56386](https://github.com/antfu/i18n-ally/commit/7f563865c47dd974514fe9fb229bf41b47aba0d6))
+
 ### [2.4.5](https://github.com/antfu/i18n-ally/compare/v2.4.4...v2.4.5) (2020-11-22)
 
 
