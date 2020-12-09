@@ -1,4 +1,4 @@
-i<p align="center">
+<p align="center">
 <img src="https://github.com/antfu/i18n-ally/blob/screenshots/full-logo.png?raw=true" alt="logo" width="450"/>
 </p>
 
