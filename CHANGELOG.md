@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.9](https://github.com/antfu/i18n-ally/compare/v2.4.8...v2.4.9) (2020-12-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove encoding auto detection
+
+### chore
+
+* remove encoding auto detection ([4beb6a9](https://github.com/antfu/i18n-ally/commit/4beb6a9e7044d468b5fa20455b7c306f93251316))
+
 ### [2.4.8](https://github.com/antfu/i18n-ally/compare/v2.4.7...v2.4.8) (2020-11-25)
 
 ### [2.4.7](https://github.com/antfu/i18n-ally/compare/v2.4.6...v2.4.7) (2020-11-25)
