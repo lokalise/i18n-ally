@@ -1,0 +1,6 @@
+{
+  "i18n-ally.enabledFrameworks": [
+    "php-gettext"
+  ],
+  "i18n-ally.localesPaths": "locale"
+}

@@ -28,5 +28,5 @@ export default abstract class TranslateEngine {
     return lang
   }
 
-  abstract async translate(options: TranslateOptions): Promise<TranslateResult>
+  abstract translate(options: TranslateOptions): Promise<TranslateResult>
 }

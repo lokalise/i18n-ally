@@ -23,6 +23,7 @@ import PolyglotFramework from './polyglot'
 import GlobalizeFramework from './globalize'
 import UI5Framework from './ui5'
 import NextTranslateFramework from './next-translate'
+import PhpGettextFramework from './php-gettext'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -48,6 +49,7 @@ export const frameworks: Framework[] = [
   new GlobalizeFramework(),
   new UI5Framework(),
   new NextTranslateFramework(),
+  new PhpGettextFramework(),
 
   // Vue SFC should be the last one
   new VueSFCFramework(),

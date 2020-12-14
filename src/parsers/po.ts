@@ -1,5 +1,4 @@
-// @ts-ignore
-import po2json from 'po2json'
+import PO from 'pofile'
 import { Parser } from './base'
 
 export class PoParser extends Parser {
@@ -12,9 +11,12 @@ export class PoParser extends Parser {
   readonly = true
 
   async parse(text: string) {
-    const result = po2json.parse(text)
-    for (const key of Object.keys(result))
-      result[key] = result[key][1]
+    const items = PO.parse(text).items
+    const result: Record<string, string> = {}
+    for (const item of items) {
+      if (item.msgstr.length)
+        result[item.msgid] = item.msgstr[0]
+    }
     return result
   }
 

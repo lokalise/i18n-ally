@@ -285,7 +285,7 @@ export abstract class Loader extends Disposable {
     return locales
   }
 
-  abstract async write (pendings: PendingWrite | PendingWrite[]): Promise<void>
+  abstract write (pendings: PendingWrite | PendingWrite[]): Promise<void>
 
   canHandleWrites(pending: PendingWrite) {
     return false
