@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import { env } from 'vscode'
 
-// eslint-disable-next-line @typescript-eslint/class-name-casing
 export default class i18n {
   static language = env.language.toLocaleLowerCase()
   static messages: Record<string, string> = {}

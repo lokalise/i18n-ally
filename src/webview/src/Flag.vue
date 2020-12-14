@@ -2,10 +2,10 @@
 .flag-icon(:style='style')
   img(
     v-if='$store.state.config.showFlags'
-    v-bind='$attrs' 
-    :src='src' 
-    :width='size || "20"' 
-    :height='size || "20"' 
+    v-bind='$attrs'
+    :src='src'
+    :width='size || "20"'
+    :height='size || "20"'
   )
   .locale-label.monospace(v-if='label') {{locale}}
 </template>

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
+/* eslint-disable no-use-before-define */
 import { getKeyname, Log } from '../utils'
 import { linkKeyMatcher, linkKeyPrefixMatcher, linkedKeyModifiers } from '../meta'
 import { Global } from './Global'

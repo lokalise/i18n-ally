@@ -23,6 +23,7 @@ export function regexFindKeys(
   for (const reg of regs) {
     let match = null
     reg.lastIndex = 0
+    // eslint-disable-next-line no-cond-assign
     while (match = reg.exec(text)) {
       const matchString = match[0]
       let key = match[1]

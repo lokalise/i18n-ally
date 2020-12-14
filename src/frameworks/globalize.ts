@@ -20,7 +20,7 @@ class GlobalizeFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '\.(?:messageFormatter|formatMessage)\\(\\s*[\'"`]({key})[\'"`]',
+    '.(?:messageFormatter|formatMessage)\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

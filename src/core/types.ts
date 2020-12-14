@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
-
 export interface OptionalFeatures {
   VueSfc?: boolean
   LinkedMessages?: boolean

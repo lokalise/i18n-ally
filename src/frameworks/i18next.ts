@@ -10,7 +10,7 @@ class I18nextFramework extends Framework {
 
   // both `/` and `:` should work as delimiter, #425
   namespaceDelimiters = [':', '/']
-  namespaceDelimitersRegex = /[\:\/]/g
+  namespaceDelimitersRegex = /[:/]/g
 
   detection = {
     packageJSON: {

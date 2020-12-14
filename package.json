@@ -991,7 +991,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.4.3",
     "@swc-node/jest": "^1.0.2",
     "@types/fs-extra": "^9.0.5",
     "@types/gettext-parser": "^4.0.0",
@@ -1012,7 +1011,14 @@
     "concurrently": "^5.3.0",
     "conventional-github-releaser": "^3.1.5",
     "eslint": "^7.15.0",
-    "esno": "^0.2.4",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.1.0",
+    "eslint-plugin-vue": "7.1.0",
+    "esno": "^0.3.0",
     "fs-extra": "^9.0.1",
     "jest": "^26.6.3",
     "micromatch": "^4.0.2",

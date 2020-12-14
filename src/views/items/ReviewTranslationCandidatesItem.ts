@@ -16,7 +16,7 @@ export class ReviewTranslationCandidatesItem extends BaseTreeItem {
       arguments: [this.candidate],
     }
   }
-  
+
   // @ts-expect-error
   get description(): string {
     return this.candidate.text

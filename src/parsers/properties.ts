@@ -1,7 +1,7 @@
 
+import properties from 'properties'
 import { Parser } from './base'
 // @ts-ignore
-import properties from 'properties'
 
 export class Properties extends Parser {
   id = 'properties'

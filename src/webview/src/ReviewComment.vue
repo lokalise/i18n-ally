@@ -133,6 +133,7 @@ export default Vue.extend({
       ta.style.height = `${ta.scrollHeight - 3}px`
     },
     cancel() {
+      // eslint-disable-next-line vue/no-mutating-props
       this.editing = false
       this.$emit('done')
     },
@@ -146,6 +147,7 @@ export default Vue.extend({
           type,
         },
       })
+      // eslint-disable-next-line vue/no-mutating-props
       this.editing = false
       this.$emit('done')
     },
