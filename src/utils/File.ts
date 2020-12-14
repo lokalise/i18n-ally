@@ -1,6 +1,5 @@
 import path, { normalize } from 'path'
 import * as iconv from 'iconv-lite'
-import * as jschardet from 'jschardet'
 import fs from 'fs-extra'
 import { Config } from '../core'
 
@@ -75,11 +74,6 @@ export class File {
   }
 
   static decode(buffer: Buffer, encoding?: string): DecodeData {
-    if (!encoding || encoding === 'auto') {
-      const res = jschardet.detect(buffer, { minimumThreshold: 0 })
-      encoding = res.encoding
-    }
-
     if (!encoding)
       encoding = defaultEncoding
 
