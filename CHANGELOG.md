@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.10](https://github.com/antfu/i18n-ally/compare/v2.4.9...v2.4.10) (2020-12-16)
+
+
+### ⚡ Features
+
+* **config:** new config defaultNamespace, close [#438](https://github.com/antfu/i18n-ally/issues/438) ([282287a](https://github.com/antfu/i18n-ally/commit/282287a2216521ff711d57d67072894e96d8aa1e))
+
+
+### 🐞 Bug Fixes
+
+* close [#412](https://github.com/antfu/i18n-ally/issues/412) ([1ab563d](https://github.com/antfu/i18n-ally/commit/1ab563dcba169c5d6a063b8c01628fe6b2f51ba7))
+
 ### [2.4.9](https://github.com/antfu/i18n-ally/compare/v2.4.8...v2.4.9) (2020-12-14)
 
 
