@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - run: npm ci
       - run: npm run build
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
