@@ -77,7 +77,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
     default_keypath = keyPrefix + default_keypath
 
   const getPickItems = (input?: string) => {
-    const path = input?.split('.').slice(0, -1).join()
+    const path = input?.split('.').slice(0, -1).join('.')
 
     const node = path
       ? (loader.getTreeNodeByKey(path))
@@ -206,6 +206,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
 
   picker.onDidChangeValue(() => {
     picker.items = getPickItems(picker.value)
+    picker.show()
   })
 
   picker.onDidHide(() => picker.dispose())
