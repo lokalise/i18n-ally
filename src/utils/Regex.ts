@@ -17,6 +17,7 @@ export function regexFindKeys(
   if (Config.disablePathParsing)
     dotEnding = true
 
+  const defaultNamespace = Config.defaultNamespace
   const keys = []
   const starts: number[] = []
 
@@ -27,10 +28,15 @@ export function regexFindKeys(
     while (match = reg.exec(text)) {
       const matchString = match[0]
       let key = match[1]
+      if (!key)
+        continue
+
       const start = match.index + matchString.lastIndexOf(key)
       const end = start + key.length
       const scope = scopes.find(s => s.start <= start && s.end >= end)
       const quoted = QUOTE_SYMBOLS.includes(text[start - 1])
+
+      const namespace = scope?.namespace || defaultNamespace
 
       // prevent duplicated detection when multiple frameworks enables at the same time.
       if (starts.includes(start))
@@ -39,23 +45,15 @@ export function regexFindKeys(
       starts.push(start)
 
       // prefix the namespace
-      if (key && scope?.namespace) {
-        let hasNamespace = false
-        for (const np of namespaceDelimiters) {
-          if (key.includes(np)) {
-            hasNamespace = true
-            break
-          }
-        }
+      const hasExplicitNamespace = namespaceDelimiters.some(delimiter => key.includes(delimiter))
 
-        if (!hasNamespace)
-          key = `${scope.namespace}.${key}`
-      }
+      if (!hasExplicitNamespace && namespace)
+        key = `${namespace}.${key}`
 
-      if (key && (dotEnding || !key.endsWith('.'))) {
+      if (dotEnding || !key.endsWith('.')) {
         key = CurrentFile.loader.rewriteKeys(key, 'reference', {
           ...rewriteContext,
-          namespace: scope?.namespace,
+          namespace,
         })
         keys.push({
           key,

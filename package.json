@@ -877,6 +877,10 @@
         "i18n-ally.parserOptions": {
           "type": "object"
         },
+        "i18n-ally.defaultNamespace": {
+          "type": "string",
+          "description": "%config.default_namespace%"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },

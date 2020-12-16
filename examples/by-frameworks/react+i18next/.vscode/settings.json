@@ -9,5 +9,6 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.keysInUse": [
     "description.part2_whatever"
-  ]
+  ],
+  // "i18n-ally.defaultNamespace": "translation"
 }

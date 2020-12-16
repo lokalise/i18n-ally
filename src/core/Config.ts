@@ -17,6 +17,7 @@ export class Config {
     'dirStructure',
     'encoding',
     'namespace',
+    'defaultNamespace',
     'disablePathParsing',
     'readonly',
     'languageTagSystem',
@@ -123,6 +124,10 @@ export class Config {
 
   static get namespace(): boolean | undefined {
     return this.getConfig<boolean>('namespace')
+  }
+
+  static get defaultNamespace(): string | undefined {
+    return this.getConfig<string>('defaultNamespace')
   }
 
   static get enabledFrameworks(): string[] | undefined {
