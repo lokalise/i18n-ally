@@ -6,19 +6,67 @@ import i18n from '../i18n'
 import { ScopeRange } from '../frameworks/base'
 import { Log } from '.'
 
+export function handleRegexMatch(
+  text: string,
+  match: RegExpExecArray,
+  dotEnding = false,
+  rewriteContext?: RewriteKeyContext,
+  scopes: ScopeRange[] = [],
+  namespaceDelimiters = [':', '/'],
+  defaultNamespace?: string,
+  starts: number[] = [],
+): KeyInDocument | undefined {
+  const matchString = match[0]
+  let key = match[1]
+  if (!key)
+    return
+
+  const start = match.index + matchString.lastIndexOf(key)
+  const end = start + key.length
+  const scope = scopes.find(s => s.start <= start && s.end >= end)
+  const quoted = QUOTE_SYMBOLS.includes(text[start - 1])
+
+  const namespace = scope?.namespace || defaultNamespace
+
+  // prevent duplicated detection when multiple frameworks enables at the same time.
+  if (starts.includes(start))
+    return
+
+  starts.push(start)
+
+  // prefix the namespace
+  const hasExplicitNamespace = namespaceDelimiters.some(delimiter => key.includes(delimiter))
+
+  if (!hasExplicitNamespace && namespace)
+    key = `${namespace}.${key}`
+
+  if (dotEnding || !key.endsWith('.')) {
+    key = CurrentFile.loader.rewriteKeys(key, 'reference', {
+      ...rewriteContext,
+      namespace,
+    })
+    return {
+      key,
+      start,
+      end,
+      quoted,
+    }
+  }
+}
+
 export function regexFindKeys(
   text: string,
   regs: RegExp[],
   dotEnding = false,
   rewriteContext?: RewriteKeyContext,
   scopes: ScopeRange[] = [],
-  namespaceDelimiters = [':', '/'],
+  namespaceDelimiters?: string[],
 ): KeyInDocument[] {
   if (Config.disablePathParsing)
     dotEnding = true
 
   const defaultNamespace = Config.defaultNamespace
-  const keys = []
+  const keys: KeyInDocument[] = []
   const starts: number[] = []
 
   for (const reg of regs) {
@@ -26,42 +74,9 @@ export function regexFindKeys(
     reg.lastIndex = 0
     // eslint-disable-next-line no-cond-assign
     while (match = reg.exec(text)) {
-      const matchString = match[0]
-      let key = match[1]
-      if (!key)
-        continue
-
-      const start = match.index + matchString.lastIndexOf(key)
-      const end = start + key.length
-      const scope = scopes.find(s => s.start <= start && s.end >= end)
-      const quoted = QUOTE_SYMBOLS.includes(text[start - 1])
-
-      const namespace = scope?.namespace || defaultNamespace
-
-      // prevent duplicated detection when multiple frameworks enables at the same time.
-      if (starts.includes(start))
-        continue
-
-      starts.push(start)
-
-      // prefix the namespace
-      const hasExplicitNamespace = namespaceDelimiters.some(delimiter => key.includes(delimiter))
-
-      if (!hasExplicitNamespace && namespace)
-        key = `${namespace}.${key}`
-
-      if (dotEnding || !key.endsWith('.')) {
-        key = CurrentFile.loader.rewriteKeys(key, 'reference', {
-          ...rewriteContext,
-          namespace,
-        })
-        keys.push({
-          key,
-          start,
-          end,
-          quoted,
-        })
-      }
+      const key = handleRegexMatch(text, match, dotEnding, rewriteContext, scopes, namespaceDelimiters, defaultNamespace, starts)
+      if (key)
+        keys.push(key)
     }
   }
 
