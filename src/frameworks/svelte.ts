@@ -19,7 +19,7 @@ class SvelteFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '\\$_\\([\'"`]({key})[\'"`]',
+    '\\$[_t]\\([\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
