@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.14](https://github.com/antfu/i18n-ally/compare/v2.4.13...v2.4.14) (2020-12-19)
+
+
+### 🐞 Bug Fixes
+
+* extracting in readonly mode,  close [#446](https://github.com/antfu/i18n-ally/issues/446) ([60387d5](https://github.com/antfu/i18n-ally/commit/60387d5c30a633366211b486aa3304dfbf927746))
+* **svelta:** regex update, close [#449](https://github.com/antfu/i18n-ally/issues/449) ([147138a](https://github.com/antfu/i18n-ally/commit/147138ab8ec2c51150fcab977615e32d4b2391ea))
+
 ### [2.4.13](https://github.com/antfu/i18n-ally/compare/v2.4.12...v2.4.13) (2020-12-16)
 
 ### [2.4.12](https://github.com/antfu/i18n-ally/compare/v2.4.11...v2.4.12) (2020-12-16)
