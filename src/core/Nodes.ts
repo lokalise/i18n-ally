@@ -73,7 +73,7 @@ export class LocaleNode extends BaseNode implements ILocaleNode {
           const keypath = link.replace(linkPrefix || '', '')
 
           if (visitedStack.includes(keypath)) {
-            Log.warning(`Circular reference found. "${link}" is already visited in the chain of ${visitedStack.reverse().join(' <- ')}`)
+            Log.warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedStack.reverse().join(' <- ')}`)
             return value
           }
           visitedStack.push(keypath)

@@ -73,7 +73,7 @@ export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressR
       commands.executeCommand('workbench.action.focusActiveEditorGroup')
     }
     else {
-      Log.warning(i18n.t('prompt.failed_to_locate_key', keypath), true)
+      Log.warn(i18n.t('prompt.failed_to_locate_key', keypath), true)
     }
   }
 }

@@ -125,7 +125,7 @@ export function getEnabledFrameworksByIds(ids: string[], root: string) {
   })
 
   if (missedFrameworks.length > 0)
-    Log.warning(i18n.t('prompt.frameworks_not_found', missedFrameworks.join(', ')), true)
+    Log.warn(i18n.t('prompt.frameworks_not_found', missedFrameworks.join(', ')), true)
 
   return enabledFrameworks
 }

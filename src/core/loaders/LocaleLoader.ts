@@ -281,7 +281,7 @@ export class LocaleLoader extends Loader {
         const parser = Global.getMatchedParser(ext)
         if (!parser)
           throw new AllyError(ErrorType.unsupported_file_type, undefined, ext)
-        if (parser.readonly)
+        if (parser.readonly || Config.readonly)
           throw new AllyError(ErrorType.write_in_readonly_mode)
 
         Log.info(`💾 Writing ${filepath}`)

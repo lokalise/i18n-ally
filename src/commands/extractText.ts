@@ -8,7 +8,7 @@ import { ExtensionModule } from '../modules'
 import { Commands, Config, CurrentFile } from '../core'
 import i18n from '../i18n'
 import { ExtractTextOptions } from '../editor/extract'
-import { promptTemplates } from '../utils'
+import { Log, promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
 
@@ -18,6 +18,11 @@ interface QuickPickItemWithKey extends QuickPickItem {
 }
 
 async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
+  if (Config.readonly) {
+    Log.warn(i18n.t('errors.write_in_readonly_mode'), true)
+    return
+  }
+
   if (!options) {
     // execute from command palette, get from active document
     const editor = window.activeTextEditor
