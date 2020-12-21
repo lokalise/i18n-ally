@@ -118,7 +118,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm), [@Excalibaard](https://github.com/Excalibaard) |
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
 | French (Français) |  | [@Nicoxx45](https://github.com/Nicoxx45) |
-| Swedish (Svenska) |  | [@vladdeSV](https://github.com/vladdeSV) |
+| Swedish (Svenska) | [@vladdeSV](https://github.com/vladdeSV) |  |
 | Ukrainian (Українська) |  | [@uhodav](https://github.com/uhodav) |
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 
