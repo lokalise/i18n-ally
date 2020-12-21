@@ -19,7 +19,7 @@ const DEFAULT_LOCALE = 'en'
 
     const output = locale === DEFAULT_LOCALE
       ? './package.nls.json'
-      : `./package.nls.${locale}.json`
+      : `./package.nls.${locale.toLowerCase()}.json`
 
     await fs.writeFile(output, JSON.stringify(messages, null, 2), 'utf-8')
   }
