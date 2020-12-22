@@ -150,3 +150,8 @@ export enum TargetPickingStrategy {
   FilePrevious ='file-previous',
   GlobalPrevious = 'global-previous',
 }
+
+export interface DeepLUsage {
+  character_count: number
+  character_limit: number
+}

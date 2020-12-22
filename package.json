@@ -229,6 +229,11 @@
         "command": "i18n-ally.insert-key",
         "category": "%extname%",
         "title": "%command.insert_key%"
+      },
+      {
+        "command": "i18n-ally.deepl-auth",
+        "category": "%extname%",
+        "title": "%command.deepl_auth%"
       }
     ],
     "menus": {
@@ -880,6 +885,11 @@
         "i18n-ally.defaultNamespace": {
           "type": "string",
           "description": "%config.default_namespace%"
+        },
+        "i18n-ally.deeplApiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.deepLApiKey%"
         },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."

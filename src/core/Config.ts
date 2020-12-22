@@ -464,4 +464,8 @@ export class Config {
       .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
   }
+
+  static get deeplAuth() {
+    return this.getConfig<string | null | undefined>('deeplApiKey')
+  }
 }
