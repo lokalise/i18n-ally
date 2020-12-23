@@ -21,7 +21,11 @@ const m: ExtensionModule = (ctx) => {
       const deeplUsage = await usage()
 
       window.showInformationMessage(
-        i18n.t('prompt.deepl_usage', deeplUsage.character_count, deeplUsage.character_limit),
+        i18n.t(
+          'prompt.deepl_usage',
+          deeplUsage.character_count,
+          deeplUsage.character_limit,
+        ),
         i18n.t('prompt.button_discard'),
       )
     }

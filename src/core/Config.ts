@@ -468,4 +468,8 @@ export class Config {
   static get deeplAuth() {
     return this.getConfig<string | null | undefined>('deeplApiKey')
   }
+
+  static get deeplLog(): Boolean {
+    return !!this.getConfig('deeplLog')
+  }
 }

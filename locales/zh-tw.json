@@ -29,6 +29,7 @@
   "config.annotation_in_place": "在路徑原位顯示翻譯文案，而不是附加在末尾",
   "config.annotation_max_length": "內聯註釋顯示的最大文字數。超出的部分將顯示為省略號（...）",
   "config.annotations": "啟用內聯註釋",
+  "config.deelLog": "",
   "config.deepLApiKey": "",
   "config.default_namespace": "",
   "config.deprecated": "不推薦使用。\n請使用 \"i18n-ally\" 前綴",

@@ -29,6 +29,7 @@
   "config.annotation_in_place": "",
   "config.annotation_max_length": "インラインアノテーションの最大文字数です。超過している部分は(...)と表示されます。",
   "config.annotations": "インラインアノテーションを有効にする.",
+  "config.deelLog": "",
   "config.deepLApiKey": "",
   "config.default_namespace": "",
   "config.deprecated": "非推奨です。 \"i18n-ally\" を使用してください。.",

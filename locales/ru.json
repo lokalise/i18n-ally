@@ -29,6 +29,7 @@
   "config.annotation_in_place": "Показувати анотацію на місці замість додавання в кінець",
   "config.annotation_max_length": "Максимальна кількість символів, що відображаються у вбудованих анотаціях. Зайві символи будуть відображатися у вигляді трьох крапок (...)",
   "config.annotations": "Включити вбудовані анотації.",
+  "config.deelLog": "",
   "config.deepLApiKey": "",
   "config.default_namespace": "",
   "config.deprecated": "Не рекомендується. Натомість використовуйте префікс \"i18n-ally.\"",
