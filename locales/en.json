@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Auto-detect locales path",
   "command.config_source_language": "Change source language",
   "command.copy_key": "Copy i18n key",
-  "command.deepl_auth": "DeepL Auth",
+  "command.deepl_usage": "DeepL API usage",
   "command.delete_key": "Delete key",
   "command.duplicate_key": "Duplicate key",
   "command.edit_key": "Edit translation",

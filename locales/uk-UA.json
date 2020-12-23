@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Автоматичне визначення шлях до перекладів",
   "command.config_source_language": "Змінити вихідну мову",
   "command.copy_key": "Копіювати ключ i18n",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "Видалити ключ",
   "command.duplicate_key": "Повторяющийся ключ",
   "command.edit_key": "Редактировать перевод",

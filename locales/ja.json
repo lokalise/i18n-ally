@@ -4,7 +4,7 @@
   "command.config_locales_auto": "パスを自動で取得する",
   "command.config_source_language": "もととなる言語を変更する",
   "command.copy_key": "i18nキーをコピーする",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "i18nキーを削除する",
   "command.duplicate_key": "",
   "command.edit_key": "翻訳を編集する",

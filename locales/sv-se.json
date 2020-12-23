@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Hitta locale-filers sökväg automatiskt",
   "command.config_source_language": "Ändra källspråk",
   "command.copy_key": "Kopiera i18n-nyckel",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "Ta bort nyckel",
   "command.duplicate_key": "Duplicera nyckel",
   "command.edit_key": "Ändra översättning",

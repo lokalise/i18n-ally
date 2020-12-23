@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Detekter oversettelsesbane automatisk",
   "command.config_source_language": "Endre kildespråk",
   "command.copy_key": "Kopier i18n-nøkkel",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "Slett nøkkel",
   "command.duplicate_key": "",
   "command.edit_key": "Rediger oversettelse",

@@ -231,9 +231,9 @@
         "title": "%command.insert_key%"
       },
       {
-        "command": "i18n-ally.deepl-auth",
+        "command": "i18n-ally.deepl-usage",
         "category": "%extname%",
-        "title": "%command.deepl_auth%"
+        "title": "%command.deepl_usage%"
       }
     ],
     "menus": {

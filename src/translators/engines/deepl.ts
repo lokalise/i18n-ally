@@ -25,7 +25,7 @@ const deepl = axios.create({
 
 deepl.interceptors.request.use((value) => {
   value.params = {
-    auth_key: Config.deeplAuth,
+    auth_key: Config.deeplUsage,
   }
 
   if (value.method === 'POST' || value.method === 'post') {
@@ -40,7 +40,7 @@ async function usage(): Promise<DeepLUsage> {
   try {
     return await deepl.get('/usage', {
       params: {
-        auth_key: Config.deeplAuth,
+        auth_key: Config.deeplUsage,
       },
     }).then(({ data }) => data)
   }

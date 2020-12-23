@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Détecter automatiquement le chemin de la locale",
   "command.config_source_language": "Changer la langue source",
   "command.copy_key": "Copier une Clé i18n",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "Supprimer une Clé",
   "command.duplicate_key": "Dupliquer une Clé",
   "command.edit_key": "Modifier la traduction",

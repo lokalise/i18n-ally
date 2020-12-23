@@ -4,7 +4,7 @@
   "command.config_locales_auto": "Locale pad automatisch detecteren",
   "command.config_source_language": "Verander bron taal",
   "command.copy_key": "Kopieer i18n sleutel",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "Verwijder sleutel",
   "command.duplicate_key": "Dupliceer sleutel",
   "command.edit_key": "Bewerk vertaling",

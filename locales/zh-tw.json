@@ -4,7 +4,7 @@
   "command.config_locales_auto": "自動設定語言目錄",
   "command.config_source_language": "修改源語言",
   "command.copy_key": "復制路徑",
-  "command.deepl_auth": "",
+  "command.deepl_usage": "",
   "command.delete_key": "刪除路徑",
   "command.duplicate_key": "建立副本",
   "command.edit_key": "編輯文案",

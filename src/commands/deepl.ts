@@ -9,7 +9,7 @@ const m: ExtensionModule = (ctx) => {
   Log.info('load deep')
 
   async function deepAuth() {
-    const apiKey = Config.deeplAuth
+    const apiKey = Config.deeplUsage
 
     if (!apiKey) {
       return window.showErrorMessage(
@@ -35,7 +35,7 @@ const m: ExtensionModule = (ctx) => {
   }
 
   return [
-    commands.registerCommand(Commands.deepl_auth, deepAuth),
+    commands.registerCommand(Commands.deepl_usage, deepAuth),
   ]
 }
 
