@@ -53,11 +53,7 @@ function log(inspector: boolean, ...args: any[]): void {
 
 async function usage(): Promise<DeepLUsage> {
   try {
-    return await deepl.get('/usage', {
-      params: {
-        auth_key: Config.deeplApiKey,
-      },
-    }).then(({ data }) => data)
+    return await deepl.get('/usage').then(({ data }) => data)
   }
   catch (err) {
     log(false, err)
