@@ -8,7 +8,7 @@ import { usage } from '../translators/engines/deepl'
 
 const m: ExtensionModule = (ctx) => {
   async function deepAuth() {
-    const apiKey = Config.deeplUsage
+    const apiKey = Config.deeplApiKey
 
     if (!apiKey) {
       return window.showErrorMessage(
