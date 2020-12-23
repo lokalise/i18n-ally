@@ -464,4 +464,12 @@ export class Config {
       .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
   }
+
+  static get deeplApiKey() {
+    return this.getConfig<string | null | undefined>('deeplApiKey')
+  }
+
+  static get deeplLog(): Boolean {
+    return !!this.getConfig('deeplLog')
+  }
 }
