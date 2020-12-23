@@ -57,6 +57,8 @@ export function applyPendingToObject(obj: any, keypath: string, value: any, keyS
   return obj
 }
 
+// abbreviateNumber source https://gist.github.com/tobyjsullivan/96d37ca0216adee20fa95fe1c3eb56ac
+
 export function abbreviateNumber(value: number): string {
   let newValue = value
   const suffixes = ['', 'K', 'M', 'B', 'T']
