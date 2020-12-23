@@ -1,4 +1,6 @@
 import { commands, window } from 'vscode'
+
+import { abbreviateNumber } from '../utils'
 import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
@@ -20,8 +22,8 @@ const m: ExtensionModule = (ctx) => {
       window.showInformationMessage(
         i18n.t(
           'prompt.deepl_usage',
-          deeplUsage.character_count,
-          deeplUsage.character_limit,
+          abbreviateNumber(deeplUsage.character_count),
+          abbreviateNumber(deeplUsage.character_limit),
         ),
         i18n.t('prompt.button_discard'),
       )
