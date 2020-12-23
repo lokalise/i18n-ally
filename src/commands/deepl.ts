@@ -1,13 +1,10 @@
 import { commands, window } from 'vscode'
-import { Log } from '../utils'
 import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'
 import { usage } from '../translators/engines/deepl'
 
 const m: ExtensionModule = (ctx) => {
-  Log.info('load deep')
-
   async function deepAuth() {
     const apiKey = Config.deeplUsage
 
