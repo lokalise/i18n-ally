@@ -23,18 +23,33 @@ const deepl = axios.create({
   baseURL: 'https://api.deepl.com/v2',
 })
 
-deepl.interceptors.request.use((value) => {
-  value.params = {
+deepl.interceptors.request.use((req) => {
+  req.params = {
     auth_key: Config.deeplApiKey,
   }
 
-  if (value.method === 'POST' || value.method === 'post') {
-    value.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    value.data = qs.stringify(value.data)
+  if (req.method === 'POST' || req.method === 'post') {
+    req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    req.data = qs.stringify(req.data)
   }
 
-  return value
+  log(true, req)
+
+  return req
 })
+
+deepl.interceptors.response.use((res) => {
+  log(true, res)
+
+  return res
+})
+
+function log(inspector: boolean, ...args: any[]): void {
+  if (Config.deeplLog) {
+    if (inspector) console.log('[DeepL]\n', ...args)
+    else Log.raw(...args)
+  }
+}
 
 async function usage(): Promise<DeepLUsage> {
   try {
@@ -45,8 +60,7 @@ async function usage(): Promise<DeepLUsage> {
     }).then(({ data }) => data)
   }
   catch (err) {
-    console.trace(err)
-    console.log(err)
+    log(false, err)
 
     throw err
   }
@@ -68,7 +82,7 @@ class DeepL extends TranslateEngine {
       return this.transform(res.translations, options)
     }
     catch (err) {
-      console.log(err)
+      log(false, err)
 
       throw err
     }
@@ -94,13 +108,9 @@ class DeepL extends TranslateEngine {
 
     if (!r.detailed && !r.result) r.error = new Error('No result')
 
-    this.log(`DEEPL TRANSLATE!! ${JSON.stringify(r.result)}, from ${options.from} to ${options.to}`)
+    log(false, `DEEPL TRANSLATE!! ${JSON.stringify(r.result)}, from ${options.from} to ${options.to}`)
 
     return r
-  }
-
-  log(...args: any[]) {
-    if (Config.deeplLog) Log.raw(args)
   }
 }
 
