@@ -4,5 +4,8 @@
     "target": "esnext",
     "lib": ["ESNext"],
     "moduleResolution": "node"
-  }
+  },
+  "exclude": [
+    "temp/*"
+  ]
 }
