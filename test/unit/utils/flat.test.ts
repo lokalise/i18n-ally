@@ -1,5 +1,5 @@
 /* eslint-disable no-dupe-keys */
-import { flatten, ROOT_KEY, unflatten } from './flat'
+import { flatten, ROOT_KEY, unflatten } from '../../../src/utils/flat'
 
 describe('utils', () => {
   describe('flatten', () => {

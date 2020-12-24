@@ -1,4 +1,4 @@
-import { cleanObject } from './cleanObject'
+import { cleanObject } from '../../../src/utils/cleanObject'
 
 describe('utils', () => {
   describe('cleanObject', () => {

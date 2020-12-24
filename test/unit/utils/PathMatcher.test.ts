@@ -1,4 +1,4 @@
-import { ParsePathMatcher, ReplaceLocale } from './PathMatcher'
+import { ParsePathMatcher, ReplaceLocale } from '../../../src/utils/PathMatcher'
 
 describe('PathMatching', () => {
   const cases = [
