@@ -1,7 +1,7 @@
-import * as path from 'path'
+import path from 'path'
 import { commands, window, workspace, QuickPickItem } from 'vscode'
 // @ts-ignore
-import * as limax from 'limax'
+import limax from 'limax'
 import { trim } from 'lodash'
 import { nanoid } from 'nanoid'
 import { ExtensionModule } from '../modules'

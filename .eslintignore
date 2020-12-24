@@ -3,3 +3,5 @@ dist/
 examples/
 .cache/
 res/
+test/e2e/**/*.js
+test-resources/

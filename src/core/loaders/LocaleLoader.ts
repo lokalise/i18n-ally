@@ -1,6 +1,6 @@
-import * as path from 'path'
+import path from 'path'
 import { workspace, window, WorkspaceEdit, RelativePattern } from 'vscode'
-import * as fg from 'fast-glob'
+import fg from 'fast-glob'
 import _, { uniq, throttle, set } from 'lodash'
 import fs from 'fs-extra'
 import { findBestMatch } from 'string-similarity'

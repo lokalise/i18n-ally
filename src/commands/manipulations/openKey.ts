@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import { workspace, window, Selection, TextEditorRevealType, commands } from 'vscode'
 import { LocaleTreeItem, ProgressRootItem } from '../../views'
 import { Config, Global, CurrentFile } from '../../core'

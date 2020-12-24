@@ -13,3 +13,6 @@ examples/**/i18n-ally-reviews.yml
 package.nls.*
 stats.json
 
+test-resources
+
+test/e2e/**/*.js

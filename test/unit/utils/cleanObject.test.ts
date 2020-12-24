@@ -1,4 +1,5 @@
-import { cleanObject } from './cleanObject'
+import { expect } from 'chai'
+import { cleanObject } from '../../../src/utils/cleanObject'
 
 describe('utils', () => {
   describe('cleanObject', () => {
@@ -17,7 +18,7 @@ describe('utils', () => {
         c: [false, {}],
         d: [[], { d: [] }],
         e: [[], { d: [0] }],
-      })).toEqual({
+      })).to.eql({
         a: {
           b:
            {
