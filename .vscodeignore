@@ -13,8 +13,10 @@ examples/**
 test/**
 docs/**
 .cache/**
+.github/**
 locales/**
 scripts/**
+test-resources/**
 
 stats.json
 .gitignore

@@ -16,6 +16,6 @@ describe('sample', () => {
   // test whatever we want using webdriver, here we are just checking the page title
   it('sample 1', async() => {
     const title = await driver.getTitle()
-    expect(title).to.be('whatever')
+    expect(title.startsWith('Welcome')).to.eql(true)
   })
 })
