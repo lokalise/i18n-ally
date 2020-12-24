@@ -466,7 +466,7 @@ export class Config {
   }
 
   static get deeplApiKey() {
-    return this.getConfig<string | null | undefined>('deeplApiKey')
+    return this.getConfig<string | null | undefined>('translate.deeplApiKey')
   }
 
   static get deeplLog(): Boolean {
