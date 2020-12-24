@@ -14,5 +14,5 @@ package.nls.*
 stats.json
 
 test-resources
-
+test/**/temp/
 test/e2e/**/*.js
