@@ -1,5 +1,5 @@
 import path, { normalize } from 'path'
-import * as iconv from 'iconv-lite'
+import iconv from 'iconv-lite'
 import fs from 'fs-extra'
 import { Config } from '../core'
 

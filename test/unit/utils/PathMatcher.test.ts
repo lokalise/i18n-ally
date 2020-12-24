@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import { ParsePathMatcher, ReplaceLocale } from '../../../src/utils/PathMatcher'
 
 describe('PathMatching', () => {
@@ -24,11 +25,11 @@ describe('PathMatching', () => {
       const result = re.exec(path)
 
       if (!result) {
-        expect(expectedNamespace).toBeNull()
+        expect(expectedNamespace).to.eql(null)
       }
       else {
-        expect(result.groups?.namespace).toEqual(expectedNamespace)
-        expect(result.groups?.locale).toEqual(expectedLocale)
+        expect(result.groups?.namespace).to.eql(expectedNamespace)
+        expect(result.groups?.locale).to.eql(expectedLocale)
       }
     })
   }
@@ -44,8 +45,10 @@ describe('ReplaceLocale', () => {
     it(c[0], () => {
       const args = c.slice(0, -1)
       const result = c[c.length - 1]
-      // @ts-ignore
-      expect(ReplaceLocale(...args)).toBe(result)
+      expect(
+        // @ts-ignore
+        ReplaceLocale(...args),
+      ).to.eql(result)
     })
   }
 })

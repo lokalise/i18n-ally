@@ -1,6 +1,6 @@
-import * as path from 'path'
+import path from 'path'
 import { Uri, workspace, window, commands } from 'vscode'
-import * as fg from 'fast-glob'
+import fg from 'fast-glob'
 import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import i18n from '../i18n'

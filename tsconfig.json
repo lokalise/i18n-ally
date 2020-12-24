@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/*"] },
     "target": "es2019",
     "lib": ["ESNext", "ESNext.AsyncIterable", "ESNext.Array"],
     "module": "esnext",
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true
   },

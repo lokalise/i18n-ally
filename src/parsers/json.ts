@@ -1,4 +1,4 @@
-import * as SortedStringify from 'json-stable-stringify'
+import SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
 import { Parser } from './base'

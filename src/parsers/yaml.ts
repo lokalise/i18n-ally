@@ -1,4 +1,4 @@
-import * as yaml from 'js-yaml'
+import yaml from 'js-yaml'
 import YAML from 'yaml'
 import _ from 'lodash'
 import { KeyInDocument, Config } from '../core'
