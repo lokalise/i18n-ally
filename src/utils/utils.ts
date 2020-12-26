@@ -56,3 +56,20 @@ export function applyPendingToObject(obj: any, keypath: string, value: any, keyS
 
   return obj
 }
+
+// abbreviateNumber source https://gist.github.com/tobyjsullivan/96d37ca0216adee20fa95fe1c3eb56ac
+
+export function abbreviateNumber(value: number): string {
+  let newValue = value
+  const suffixes = ['', 'K', 'M', 'B', 'T']
+  let suffixNum = 0
+  while (newValue >= 1000) {
+    newValue /= 1000
+    suffixNum++
+  }
+
+  let result = newValue.toPrecision(3)
+
+  result += suffixes[suffixNum]
+  return result
+}
