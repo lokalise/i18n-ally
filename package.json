@@ -22,8 +22,8 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run test:unit",
     "test:unit": "ts-mocha -p test/unit/tsconfig.json test/unit/**/*.test.ts",
-    "test:e2e": "tsc -p test/e2e && extest setup-and-run --yarn --extensions_dir test/e2e/temp/extensions test/e2e/*.js",
-    "test:e2e:run": "tsc -p test/e2e && extest run-tests --extensions_dir test/e2e/temp/extensions test/e2e/*.js"
+    "test:e2e": "tsc -p test/e2e && extest setup-and-run 'test/e2e/*.test.js' -o test/e2e/setting.json -m test/e2e/config.js -e test/e2e/temp/extensions --yarn",
+    "test:e2e:run": "tsc -p test/e2e && extest run-tests 'test/e2e/*.test.js' -o test/e2e/setting.json -m test/e2e/config.js -e test/e2e/temp/extensions"
   },
   "dependencies": {
     "@types/string-similarity": "^3.0.0",
