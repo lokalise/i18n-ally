@@ -51,8 +51,9 @@ export async function getElementPooling(driver: WebDriver, selector: Locator, ti
   let result: WebElement
 
   while (true) {
-    if (+new Date() - start > timeout)
+    if ((+new Date() - start) > timeout)
       throw new Error(`Timeout on querying ${JSON.stringify(selector)}`)
+
     try {
       result = await driver.findElement(selector)
     }

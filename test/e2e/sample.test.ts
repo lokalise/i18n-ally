@@ -9,10 +9,14 @@ describe('vue-i18n', () => {
     expect(title.startsWith('Welcome')).to.eql(true)
   })
 
-  it('activate i18n Ally', async() => {
+  it('open fixture', async() => {
     const { driver } = await openFixture('examples/by-frameworks/vue-i18n')
     const title = await driver.getTitle()
     expect(title).to.eql('Welcome — vue-i18n')
+  })
+
+  it('activate i18n Ally', async() => {
+    const { driver } = getContext()
 
     await gotoFile('App.vue')
 
