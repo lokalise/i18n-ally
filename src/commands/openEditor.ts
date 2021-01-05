@@ -35,14 +35,12 @@ const m: ExtensionModule = (ctx) => {
 
     // from code pattele
     if (!item) {
-      if (!supportedFileOpen()) {
-        key = await promptKeys(i18n.t('prompt.choice_key_to_open'))
-        if (!key)
-          return
-      }
-      else {
+      if (supportedFileOpen())
         mode = 'currentFile'
-      }
+
+      key = await promptKeys(i18n.t('prompt.choice_key_to_open'))
+      if (!key)
+        return
     }
     // from tree view
     else if (item instanceof LocaleTreeItem) {
