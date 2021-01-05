@@ -425,6 +425,10 @@
         {
           "command": "i18n-ally.duplicate-key",
           "when": "false"
+        },
+        {
+          "command": "i18n-ally.open-editor",
+          "when": "false"
         }
       ],
       "view/item/context": [
