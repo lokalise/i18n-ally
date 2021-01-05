@@ -144,7 +144,7 @@ My great thanks to all the awesome contributors:
 
 I made this project with heart ❤. If you found it useful, please consider buying me a coffee!
 
-[Open Collective](https://opencollective.com/i18n-ally/contribute)
+[GitHub Sponsor](https://github.com/sponsors/antfu)
 
 [Donate via PayPal](https://paypal.me/antfu7)
 
@@ -155,8 +155,6 @@ Thanks!
 <a href="https://opencollective.com/i18n-ally"><img src="https://opencollective.com/i18n-ally/individuals.svg?width=890"></a>
 
 #### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/i18n-ally/contribute)]
 
 <a href="https://opencollective.com/i18n-ally/organization/0/website"><img src="https://opencollective.com/i18n-ally/organization/0/avatar.svg"></a>
 <a href="https://opencollective.com/i18n-ally/organization/1/website"><img src="https://opencollective.com/i18n-ally/organization/1/avatar.svg"></a>
@@ -178,6 +176,6 @@ And thank you for read this! 🙇‍♂️
 
 ## 📄 License
 
-[MIT License](https://github.com/antfu/i18n-ally/blob/master/LICENSE) © 2019-2020 [Anthony Fu](https://github.com/antfu)
+[MIT License](https://github.com/antfu/i18n-ally/blob/master/LICENSE) © 2019-PRESENT [Anthony Fu](https://github.com/antfu)
 
 MIT License © 2018-2019 [think2011](https://github.com/think2011)
