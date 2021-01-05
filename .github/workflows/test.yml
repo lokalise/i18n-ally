@@ -1,10 +1,13 @@
-name: Test (Linux)
+name: Test
 
 on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, window-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -12,8 +15,19 @@ jobs:
         with:
           node-version: 12
 
+      - name: Linux Setup
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get install xvfb
+          export DISPLAY=:99.0
+          Xvfb -ac :99 -screen 0 1920x1080x16
+        env:
+          CI: true
+
       - name: Install
         run: yarn install --frozen-lockfile
+        env:
+          CI: true
 
       - name: Build
         run: yarn build
@@ -26,10 +40,6 @@ jobs:
           CI: true
 
       - name: E2E Tests
-        run: |
-          sudo apt-get install xvfb
-          export DISPLAY=:99.0
-          Xvfb -ac :99 -screen 0 1920x1080x16 &
-          yarn test:e2e
+        run: yarn test:e2e
         env:
           CI: true
