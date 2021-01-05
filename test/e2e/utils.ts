@@ -16,6 +16,7 @@ export function getContext() {
 
 export async function input(text: string) {
   const input = await InputBox.create()
+  await input.clear()
   await input.setText(text)
   await input.confirm()
 }
