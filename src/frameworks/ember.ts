@@ -21,7 +21,7 @@ class EmberFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '(?:{{\\s*t\\s+|[^\\w\\d]intl\\.t\\(\\s*)[\'"`]({key})[\'"`]',
+    '(?:{{\\s*t\\s+|[^\\w\\d]intl\\.t\\(\\s*|=\\s*\\(\\s*t[\\s\\n]+)[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {

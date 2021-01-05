@@ -1,3 +1,5 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "some.key": "Foo",
+  "some.other.key": "Bar"
 }
