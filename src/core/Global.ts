@@ -125,7 +125,12 @@ export class Global {
       .flatMap(f => f.languageIds)
       .flatMap(id => getExtOfLanguageId(id)))
 
-    return `**/*.{${exts.join(',')}}`
+    if (!exts.length)
+      return ''
+    else if (exts.length === 1)
+      return `**/*.${exts[0]}`
+    else
+      return `**/*.{${exts.join(',')}}`
   }
 
   static getNamespaceDelimiter() {

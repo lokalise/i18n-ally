@@ -77,10 +77,13 @@ export class Analyst {
       ...Config.usageScanningIgnore,
     ]
 
-    const files = await glob(Global.getSupportLangGlob(), {
+    const langGlob = Global.getSupportLangGlob()
+    const files = await glob(langGlob, {
       cwd: root,
       ignore,
     }) as string[]
+
+    console.log(langGlob, files)
 
     return files.map(f => resolve(root, f))
       .filter(f => !fs.lstatSync(f).isDirectory())
