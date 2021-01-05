@@ -37,7 +37,7 @@ export async function openFixture(path: string) {
 
   const lastWorkbench = new Workbench()
   await lastWorkbench.executeCommand('workbench.action.files.openFileFolder')
-  await input(`${resolve(__dirname, '../../', path)}/`)
+  await input(`${resolve(__dirname, '../../', path)}/`.slice(1))
 
   // wait for workbench to unload
   await driver.wait(until.stalenessOf(lastWorkbench))
