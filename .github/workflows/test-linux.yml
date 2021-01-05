@@ -1,10 +1,10 @@
-name: Test
+name: Test (Linux)
 
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: windows-latest
+  test:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -26,6 +26,10 @@ jobs:
           CI: true
 
       - name: E2E Tests
-        run: yarn test:e2e
+        run: |
+          sudo apt-get install xvfb
+          export DISPLAY=:99.0
+          Xvfb -ac :99 -screen 0 1920x1080x16 &
+          yarn test:e2e
         env:
           CI: true
