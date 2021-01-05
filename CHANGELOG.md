@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.15](https://github.com/antfu/i18n-ally/compare/v2.4.14...v2.4.15) (2021-01-05)
+
+
+### 🌍 Internationalization
+
+* **sv-SE:** tweaks and additions for sv_SE ([#450](https://github.com/antfu/i18n-ally/issues/450)) ([005589b](https://github.com/antfu/i18n-ally/commit/005589bba3f98729949182931206e253aec69ac9))
+
+
+### ⚗ Tests
+
+* update tests ([725323b](https://github.com/antfu/i18n-ally/commit/725323b9c23be3806719b08e485fff7ade679ddd))
+* **e2e:** able to detect i18n Ally ([7e7f428](https://github.com/antfu/i18n-ally/commit/7e7f42810c6058baf4236355c74c2ea07d0927b8))
+* refactor ([2f00c9e](https://github.com/antfu/i18n-ally/commit/2f00c9e6014e1dd2717b3fc516ced4989e119845))
+* **e2e:** open fixture ([2a73418](https://github.com/antfu/i18n-ally/commit/2a734181c0392f3dcbf7baaa432a0b9123530649))
+* setup e2e ([7f61121](https://github.com/antfu/i18n-ally/commit/7f61121daf06ff08dbb9aeb7f25d0bc1c9e0acb4))
+
+
+### 🐞 Bug Fixes
+
+* glob for analyst, close [#453](https://github.com/antfu/i18n-ally/issues/453) ([0744b42](https://github.com/antfu/i18n-ally/commit/0744b421f445a06fe6475df99a7dbf2a91f68466))
+* hide open editor command from comand palette, close [#456](https://github.com/antfu/i18n-ally/issues/456) ([742c124](https://github.com/antfu/i18n-ally/commit/742c12493e85ca5defd07fea2122132b002a7953))
+* open editor command, resolve [#456](https://github.com/antfu/i18n-ally/issues/456) ([7021c88](https://github.com/antfu/i18n-ally/commit/7021c882137fff1b825fcdfbd945cd2fa6104c36))
+
+
+### ⚡ Features
+
+* **ember:** update ember regex, by [@mamiller93](https://github.com/mamiller93), close [#448](https://github.com/antfu/i18n-ally/issues/448) ([ec2a123](https://github.com/antfu/i18n-ally/commit/ec2a12394cdc4968d76cadf9fda3c60ee173f04a))
+* add DeepL translate engine ([#452](https://github.com/antfu/i18n-ally/issues/452)) ([d6e7adc](https://github.com/antfu/i18n-ally/commit/d6e7adc1eba745b2f67ed517025216bcee623ccb))
+
 ### [2.4.14](https://github.com/antfu/i18n-ally/compare/v2.4.13...v2.4.14) (2020-12-19)
 
 

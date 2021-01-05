@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "%extname%",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.4.14",
+  "version": "2.4.15",
   "publisher": "antfu",
   "scripts": {
     "release": "npm run release:patch",
