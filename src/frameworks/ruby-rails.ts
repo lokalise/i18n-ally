@@ -10,6 +10,7 @@ class RubyRailsFramework extends Framework {
 
   detection = {
     gemfile: [
+      'rails',
       'rails-i18n',
     ],
   }
