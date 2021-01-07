@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.17](https://github.com/antfu/i18n-ally/compare/v2.4.16...v2.4.17) (2021-01-07)
+
+
+### 🐞 Bug Fixes
+
+* improve rails detection, close [#455](https://github.com/antfu/i18n-ally/issues/455) ([10f9951](https://github.com/antfu/i18n-ally/commit/10f9951ed42c4ce477967a3ee553afd13b7ec90f))
+
 ### [2.4.16](https://github.com/antfu/i18n-ally/compare/v2.4.15...v2.4.16) (2021-01-05)
 
 ### [2.4.15](https://github.com/antfu/i18n-ally/compare/v2.4.14...v2.4.15) (2021-01-05)
