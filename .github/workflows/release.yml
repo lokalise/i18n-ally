@@ -20,9 +20,9 @@ jobs:
       - run: npx vsce publish -p ${{secrets.VSCE_TOKEN}}
         env:
           VSCE_TOKEN: ${{secrets.VSCE_TOKEN}}
-      # - run: npx ovsx publish -p ${{secrets.OVSX_TOKEN}}
-      #   env:
-      #     OVSX_TOKEN: ${{secrets.OVSX_TOKEN}}
+      - run: npx ovsx publish -p ${{secrets.OVSX_TOKEN}}
+        env:
+          OVSX_TOKEN: ${{secrets.OVSX_TOKEN}}
       - run: yarn run gh:release
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
