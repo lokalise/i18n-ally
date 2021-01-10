@@ -19,6 +19,8 @@ class VueFramework extends Framework {
     'vue-html',
     'javascript',
     'typescript',
+    'javascriptreact',
+    'typescriptreact',
     'ejs',
   ]
 
