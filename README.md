@@ -139,16 +139,7 @@ My great thanks to all the awesome contributors:
 
 <a href="https://github.com/antfu/i18n-ally/graphs/contributors"><img src="https://opencollective.com/i18n-ally/contributors.svg?width=890"/></a>
 
-
 ### Financial Contributors
-
-I made this project with heart ❤. If you found it useful, please consider buying me a coffee!
-
-[GitHub Sponsor](https://github.com/sponsors/antfu)
-
-[Donate via PayPal](https://paypal.me/antfu7)
-
-Thanks!
 
 #### Individuals
 
@@ -167,12 +158,7 @@ Thanks!
 <a href="https://opencollective.com/i18n-ally/organization/8/website"><img src="https://opencollective.com/i18n-ally/organization/8/avatar.svg"></a>
 <a href="https://opencollective.com/i18n-ally/organization/9/website"><img src="https://opencollective.com/i18n-ally/organization/9/avatar.svg"></a>
 
-### Special Thanks
-
-Lastly, I want to have a **special thanks to my partner [@iiiiiiines](https://github.com/iiiiiiines)** who has encouraged and supported me working on this project.
-
 And thank you for read this! 🙇‍♂️
-
 
 ## 📄 License
 
