@@ -18,5 +18,17 @@
       ],
       "preLaunchTask": "npm: dev"
     },
+    {
+      "name": "Extension Tests",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--extensionTestsPath=${workspaceFolder}/test/e2e/suite/index"
+      ],
+      "outFiles": ["${workspaceFolder}/test/e2e/suite/**/*.js"]
+    }
   ]
 }

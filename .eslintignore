@@ -1,7 +1,7 @@
 out/
 dist/
-examples/
+/examples/
 .cache/
 res/
-test/e2e/**/*.js
 test-resources/
+test/e2e-out/

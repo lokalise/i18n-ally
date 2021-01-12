@@ -8,8 +8,8 @@ jobs:
     strategy:
       matrix:
         # TODO: somehow e2e fails on Linux and Windows, disabled for now
-        # os: [ubuntu-latest, window-latest, macos-latest]
-        os: [macos-latest]
+        os: [ubuntu-latest, window-latest, macos-latest]
+        # os: [macos-latest]
       fail-fast: false
 
     steps:
@@ -18,14 +18,14 @@ jobs:
         with:
           node-version: 12
 
-      - name: Linux Setup
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: |
-          sudo apt-get install xvfb
-          export DISPLAY=:99.0
-          Xvfb -ac :99 -screen 0 1920x1080x16
-        env:
-          CI: true
+      # - name: Linux Setup
+      #   if: ${{ matrix.os == 'ubuntu-latest' }}
+      #   run: |
+      #     sudo apt-get install xvfb
+      #     export DISPLAY=:99.0
+      #     Xvfb -ac :99 -screen 0 1920x1080x16
+      #   env:
+      #     CI: true
 
       - name: Install
         run: yarn install --frozen-lockfile
@@ -42,7 +42,8 @@ jobs:
         env:
           CI: true
 
-      - name: E2E Tests
-        run: yarn test:e2e
-        env:
-          CI: true
+      - run: xvfb-run -a yarn run test:e2e
+        if: runner.os == 'Linux'
+
+      - run: yarn run test:e2e
+        if: runner.os != 'Linux'

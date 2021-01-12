@@ -34,3 +34,13 @@ export async function activate(ctx: ExtensionContext) {
 export function deactivate() {
   Log.info('🈚 Deactivated')
 }
+
+export {
+  Global,
+  CurrentFile,
+  KeyDetector,
+  Config,
+  Log,
+}
+
+export { Commands } from './core/Commands'

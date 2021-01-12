@@ -3,9 +3,15 @@
     "module": "commonjs",
     "target": "esnext",
     "lib": ["ESNext"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@src/*": ["../../src/*"]
+    },
+    "outDir": "../e2e-out"
   },
   "exclude": [
-    "temp/*"
+    "../../src/"
   ]
 }

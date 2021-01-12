@@ -15,4 +15,4 @@ stats.json
 
 test-resources
 test/**/temp/
-test/e2e/**/*.js
+test/e2e-out/

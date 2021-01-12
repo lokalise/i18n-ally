@@ -9,7 +9,7 @@
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
     "release:patch": "standard-version --release-as patch && git push --follow-tags",
     "gh:release": "conventional-github-releaser -p angular",
-    "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
+    "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build && esno scripts/post-build.ts",
     "dev": "concurrently -n w: npm:*:dev",
     "main:build": "webpack --mode development",
     "main:dev": "webpack --mode development --watch --info-verbosity verbose",
@@ -21,9 +21,9 @@
     "lint": "eslint --ext .ts,.js,.vue .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run test:unit",
-    "test:unit": "ts-mocha -p test/unit/tsconfig.json test/unit/**/*.test.ts",
-    "test:e2e": "tsc -p test/e2e && extest setup-and-run 'test/e2e/*.test.js' -c 1.52.0 -o test/e2e/setting.json -e test/e2e/temp/extensions --yarn",
-    "test:e2e:run": "tsc -p test/e2e && extest run-tests 'test/e2e/*.test.js' -c 1.52.0 -o test/e2e/setting.json -e test/e2e/temp/extensions"
+    "test:e2e": "tsc -p test/e2e && esno ./test/e2e/index.ts",
+    "test:e2e:dev": "tsc -p test/e2e --watch",
+    "test:unit": "ts-mocha -p test/unit/tsconfig.json test/unit/**/*.test.ts"
   },
   "dependencies": {
     "@types/string-similarity": "^4.0.0",
@@ -95,7 +95,7 @@
     "stylus": "^0.54.8",
     "ts-loader": "^8.0.14",
     "ts-mocha": "^8.0.0",
-    "vscode-extension-tester": "^3.2.4",
+    "vscode-test": "^1.4.1",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.3",
     "vue-material-design-icons": "^4.11.0",
