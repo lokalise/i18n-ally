@@ -1,11 +1,12 @@
 import path from 'path'
 import Mocha from 'mocha'
 import fg from 'fast-glob'
+import { window } from 'vscode'
 
 export function createRunner(dir: string) {
   return () => {
     const mocha = new Mocha({
-      ui: 'tdd',
+      ui: 'bdd',
       reporter: 'list',
       color: true,
       timeout: 20_000,
@@ -14,14 +15,19 @@ export function createRunner(dir: string) {
     const files = fg.sync('*.test.js', { cwd: root })
     files.forEach(f => mocha.addFile(path.resolve(root, f)))
 
+    window.showInformationMessage('Tests started.')
+
     try {
-      mocha.run(failures =>
-        setTimeout(() => process.exit(failures > 0 ? 1 : 0), 2000),
-      )
+      mocha.run((failures) => {
+        if (failures > 0)
+          window.showErrorMessage(`${failures} tests failed.`)
+        window.showInformationMessage('Tests Finished.')
+        setTimeout(() => process.exit(failures > 0 ? 1 : 0), 2000)
+      })
     }
     catch (err) {
       console.error(err)
-      process.exit(1)
+      setTimeout(() => process.exit(1), 2000)
     }
   }
 }
