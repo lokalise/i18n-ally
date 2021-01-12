@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.18](https://github.com/antfu/i18n-ally/compare/v2.4.17...v2.4.18) (2021-01-12)
+
+
+### 🐞 Bug Fixes
+
+* **locales:** separation and completion of ru and uk-UA locales ([#461](https://github.com/antfu/i18n-ally/issues/461)) ([2e59af5](https://github.com/antfu/i18n-ally/commit/2e59af5e7c09cda372b5a58dcde139b6d0eca4ee))
+* **vue:** support annonation on jsx and tsx ([595ec5c](https://github.com/antfu/i18n-ally/commit/595ec5c6bfb227420ba21a720a91d87f68eec3d9))
+
 ### [2.4.17](https://github.com/antfu/i18n-ally/compare/v2.4.16...v2.4.17) (2021-01-07)
 
 
