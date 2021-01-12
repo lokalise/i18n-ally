@@ -9,7 +9,7 @@ Chai.use(Snapshot)
 
 export const expect = Chai.expect
 export { is, not }
-export { Global, Config, Log, CurrentFile } from '../../dist/extension'
+export { Global, Config, Log, CurrentFile, KeyDetector } from '../../dist/extension'
 
 export function timeout(ms = 1000) {
   return new Promise(resolve => setTimeout(resolve, ms))

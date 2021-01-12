@@ -1,4 +1,5 @@
-import { openFile, Global, is, not, expect, timeout, setupTest, getExt } from '../../ctx'
+import { window } from 'vscode'
+import { openFile, Global, is, not, expect, timeout, setupTest, getExt, KeyDetector } from '../../ctx'
 
 setupTest('React with i18next', () => {
   it('opens entry file', async() => {
@@ -22,6 +23,14 @@ setupTest('React with i18next', () => {
     await timeout(500)
     not(Global, undefined)
     not(Global.loader, undefined)
-    expect(Global.loader.getCoverage('en')).to.matchSnapshot()
+    const coverage = Global.loader.getCoverage('en')
+    expect(coverage).to.matchSnapshot()
+  })
+
+  it('get keys', async() => {
+    await openFile('src/App.jsx')
+    await timeout(500)
+    const keys = KeyDetector.getKeys(window.activeTextEditor!.document)
+    expect(keys).to.matchSnapshot()
   })
 })

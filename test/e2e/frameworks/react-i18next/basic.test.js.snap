@@ -26,3 +26,74 @@ Object {
   ],
 }
 `;
+
+exports[`React with i18next get keys 1`] = `
+Array [
+  Object {
+    "end": 525,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 508,
+  },
+  Object {
+    "end": 589,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 572,
+  },
+  Object {
+    "end": 656,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 639,
+  },
+  Object {
+    "end": 871,
+    "key": "translation.description.part1",
+    "quoted": true,
+    "start": 842,
+  },
+  Object {
+    "end": 1465,
+    "key": "translation.description.part2",
+    "quoted": true,
+    "start": 1436,
+  },
+  Object {
+    "end": 1551,
+    "key": "translation.description.part2",
+    "quoted": false,
+    "start": 1522,
+  },
+  Object {
+    "end": 1719,
+    "key": "translation.foo.bar",
+    "quoted": true,
+    "start": 1716,
+  },
+  Object {
+    "end": 1768,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1752,
+  },
+  Object {
+    "end": 1792,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1776,
+  },
+  Object {
+    "end": 1900,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1895,
+  },
+  Object {
+    "end": 1950,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 1933,
+  },
+]
+`;

@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Vue i18n get keys 1`] = `
+Array [
+  Object {
+    "end": 49,
+    "key": "project",
+    "quoted": true,
+    "start": 42,
+  },
+  Object {
+    "end": 83,
+    "key": "not_exists",
+    "quoted": true,
+    "start": 73,
+  },
+  Object {
+    "end": 139,
+    "key": "car",
+    "quoted": true,
+    "start": 136,
+  },
+  Object {
+    "end": 172,
+    "key": "apple",
+    "quoted": true,
+    "start": 167,
+  },
+  Object {
+    "end": 221,
+    "key": "apple",
+    "quoted": true,
+    "start": 216,
+  },
+  Object {
+    "end": 550,
+    "key": "nested.hello",
+    "quoted": true,
+    "start": 538,
+  },
+  Object {
+    "end": 688,
+    "key": "term",
+    "quoted": true,
+    "start": 684,
+  },
+  Object {
+    "end": 800,
+    "key": "tos",
+    "quoted": true,
+    "start": 797,
+  },
+  Object {
+    "end": 999,
+    "key": "nested.foo.bar",
+    "quoted": true,
+    "start": 985,
+  },
+  Object {
+    "end": 1061,
+    "key": "nested.foo.bar",
+    "quoted": true,
+    "start": 1047,
+  },
+]
+`;
