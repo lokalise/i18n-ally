@@ -1,17 +1,16 @@
-import { getExt, openFile, Global, is, not, expect, timeout, setupTest } from '../../ctx'
+import { openFile, Global, is, not, expect, timeout, setupTest, getExt } from '../../ctx'
 
-setupTest('React i18next', () => {
-  it('Navigate', async() => {
+setupTest('React with i18next', () => {
+  it('opens entry file', async() => {
     await openFile('package.json')
   })
 
-  it('Enabled', () => {
+  it('is active', () => {
     const ext = getExt()
     is(ext?.isActive, true)
-    ext.activate()
   })
 
-  it('Global State', async() => {
+  it('enables correct frameworks', async() => {
     not(Global, undefined)
     is(Global.enabled, true)
     is(Global.enabledFrameworks.length, 2)
@@ -19,11 +18,10 @@ setupTest('React i18next', () => {
     is(Global.enabledFrameworks[1].id, 'i18next')
   })
 
-  it('getCoverage', async() => {
-    await timeout(1000)
+  it('get correct coverage report', async() => {
+    await timeout(500)
     not(Global, undefined)
     not(Global.loader, undefined)
-    // @ts-ignore
     expect(Global.loader.getCoverage('en')).to.matchSnapshot()
   })
 })

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`React i18next getCoverage 1`] = `
+exports[`React with i18next get correct coverage report 1`] = `
 Object {
   "allKeys": Array [
     "pages.home.title",
