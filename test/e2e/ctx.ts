@@ -36,9 +36,6 @@ export function setupTest(name: string, fn: () => void) {
       Snapshot.setTestName(currentTest!.fullTitle())
     })
 
-    after(() => {
-    })
-
     fn()
   })
 }

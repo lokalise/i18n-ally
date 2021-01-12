@@ -22,7 +22,7 @@ export function createRunner(dir: string) {
         if (failures > 0)
           window.showErrorMessage(`${failures} tests failed.`)
         window.showInformationMessage('Tests Finished.')
-        setTimeout(() => process.exit(failures > 0 ? 1 : 0), 2000)
+        setTimeout(() => process.exit(failures || 0), 2000)
       })
     }
     catch (err) {

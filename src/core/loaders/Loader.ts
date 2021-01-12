@@ -38,12 +38,12 @@ export abstract class Loader extends Disposable {
   }
 
   getCoverage(locale: string, keys?: string[]): Coverage | undefined {
-    const totalKeys = keys || this.keys
-    totalKeys.sort()
-    const translatedKeys = totalKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
-    const missingKeys = totalKeys.filter(key => (!this.flattenLocaleTree[key]) || this.flattenLocaleTree[key].getValue(locale) == null)
-    const emptyKeys = totalKeys.filter(key => !translatedKeys.includes(key) && !missingKeys.includes(key))
-    const total = totalKeys.length
+    const allKeys = keys || this.keys
+    allKeys.sort()
+    const translatedKeys = allKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
+    const missingKeys = allKeys.filter(key => (!this.flattenLocaleTree[key]) || this.flattenLocaleTree[key].getValue(locale) == null)
+    const emptyKeys = allKeys.filter(key => !translatedKeys.includes(key) && !missingKeys.includes(key))
+    const total = allKeys.length
     const translated = translatedKeys.length
     const missing = missingKeys.length
     return {
@@ -52,7 +52,7 @@ export abstract class Loader extends Disposable {
       missing,
       translated,
       missingKeys,
-      totalKeys,
+      allKeys,
       translatedKeys,
       emptyKeys,
     }

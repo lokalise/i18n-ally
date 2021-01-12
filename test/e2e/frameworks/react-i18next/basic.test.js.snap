@@ -2,12 +2,7 @@
 
 exports[`React i18next getCoverage 1`] = `
 Object {
-  "emptyKeys": Array [],
-  "locale": "en",
-  "missing": 0,
-  "missingKeys": Array [],
-  "total": 6,
-  "totalKeys": Array [
+  "allKeys": Array [
     "pages.home.title",
     "translation.description.part1",
     "translation.description.part2",
@@ -15,6 +10,11 @@ Object {
     "translation.title",
     "translation.titlew",
   ],
+  "emptyKeys": Array [],
+  "locale": "en",
+  "missing": 0,
+  "missingKeys": Array [],
+  "total": 6,
   "translated": 6,
   "translatedKeys": Array [
     "pages.home.title",

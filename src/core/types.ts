@@ -79,7 +79,7 @@ export interface Coverage {
   translated: number
   total: number
   missing: number
-  totalKeys: string[]
+  allKeys: string[]
   translatedKeys: string[]
   missingKeys: string[]
   emptyKeys: string[]
