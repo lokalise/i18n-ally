@@ -29,7 +29,7 @@
     "@types/string-similarity": "^4.0.0",
     "bcp-47-normalize": "^1.1.1",
     "esm": "^3.2.25",
-    "fast-glob": "^3.2.4",
+    "fast-glob": "npm:@knightly/fast-glob@master",
     "glob-gitignore": "^1.0.14",
     "htmlparser2": "^5.0.1",
     "iconv-lite": "^0.6.2",
@@ -103,6 +103,9 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-filter-warnings-plugin": "^1.2.1"
+  },
+  "resolutions": {
+    "fast-glob": "npm:@knightly/fast-glob@master"
   },
   "engines": {
     "vscode": "^1.52.0"
