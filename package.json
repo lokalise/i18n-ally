@@ -66,6 +66,7 @@
     "@types/qs": "^6.9.5",
     "@types/semver": "^7.3.4",
     "@types/vscode": "^1.52.0",
+    "@types/webpack": "^4.41.26",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "axios": "^0.21.1",
