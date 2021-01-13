@@ -16,3 +16,4 @@ stats.json
 test-resources
 test/**/temp/
 test/e2e-out/
+test/e2e-fixtures-temp/

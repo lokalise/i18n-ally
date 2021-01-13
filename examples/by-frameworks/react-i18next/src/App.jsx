@@ -13,6 +13,7 @@ class LegacyWelcomeClass extends Component {
     const intl = useIntl()
     return (
       <div>
+        <h2>Plain Text</h2>
         <h2>{t('translation.title')}</h2>
         <h2>{intl.formatPlural({ id: 'translation.title' })}</h2>
         <h2>{intl.formatMessage({ id: 'translation.title' })}</h2>

@@ -1,6 +1,7 @@
 import { resolve, join } from 'path'
 import { runTests } from 'vscode-test'
 import fg from 'fast-glob'
+import fs from 'fs-extra'
 import chalk from 'chalk'
 
 const args = process.argv.slice(2)
@@ -11,6 +12,10 @@ async function main() {
 
   // Frameworks
   const testFrameworksDir = join(root, 'test/e2e-out/frameworks')
+  const fixtureTempPath = join(root, 'test/e2e-fixtures-temp')
+
+  if (fs.existsSync(fixtureTempPath))
+    await fs.remove(fixtureTempPath)
 
   const frameworks = args.length
     ? args
@@ -20,13 +25,16 @@ async function main() {
     for (const framework of frameworks) {
       console.log(`\n\n${chalk.blue('Start E2E testing for framework')} ${chalk.magenta(framework)} ${chalk.blue('...\n')}`)
       const extensionTestsPath = join(testFrameworksDir, framework, 'index')
-      const fixturePath = join(root, 'examples/by-frameworks', framework)
+      const fixtureSourcePath = join(root, 'examples/by-frameworks', framework)
+      const fixtureTargetPath = join(fixtureTempPath, framework)
+
+      await fs.copy(fixtureSourcePath, fixtureTargetPath)
 
       await runTests({
         extensionDevelopmentPath,
         extensionTestsPath,
         version: '1.52.0',
-        launchArgs: [fixturePath, '--disable-extensions'],
+        launchArgs: [fixtureTargetPath, '--disable-extensions'],
       })
 
       console.log(chalk.green(`E2E tests for framework ${framework} finished.\n`))
