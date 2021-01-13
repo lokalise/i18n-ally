@@ -121,6 +121,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Swedish (Svenska) | [@vladdeSV](https://github.com/vladdeSV) |  |
 | Ukrainian (Українська) |  | [@uhodav](https://github.com/uhodav) |
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
+| German (Deutsch) | [@alexanderniebuhr](https://github.com/alexanderniebuhr) | |
 
 [**Help Translate**](https://github.com/antfu/i18n-ally/wiki/Contribute#working-on-translations)
 
