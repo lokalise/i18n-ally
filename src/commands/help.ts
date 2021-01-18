@@ -17,9 +17,6 @@ const m: ExtensionModule = (ctx) => {
         const options = [{
           text: i18n.t('prompt.star_on_github'),
           url: Links.github,
-        }, {
-          text: i18n.t('prompt.donate'),
-          url: Links.open_collective,
         }]
         const result = await window.showInformationMessage(
           i18n.t('prompt.support'),

@@ -1,18 +1,31 @@
 import { ExtensionContext, window, Uri, env } from 'vscode'
 import semver from 'semver'
 import { version } from '../package.json'
-import i18n from './i18n'
+// import i18n from './i18n'
+
+interface Notification {
+  id: string
+  condition: string
+  message: string
+  buttons: {
+    text: string
+    url: string
+  }[]
+}
 
 export function checkNotification(ctx: ExtensionContext) {
-  const notifications = [{
-    id: 'v2-update',
-    condition: '<2.0.0',
-    message: i18n.t('notification.v2-update'),
-    buttons: [{
-      text: i18n.t('notification.migrate'),
-      url: 'https://github.com/antfu/i18n-ally/wiki/Migration-v1.x',
-    }],
-  }]
+  // TODO: notify about the transfer?
+  const notifications: Notification[] = [
+    // {
+    //   id: 'v2-update',
+    //   condition: '<2.0.0',
+    //   message: i18n.t('notification.v2-update'),
+    //   buttons: [{
+    //     text: i18n.t('notification.migrate'),
+    //     url: 'https://github.com/lokalise/i18n-ally/wiki/Migration-v1.x',
+    //   }],
+    // },
+  ]
 
   const previousVersion = ctx.globalState.get<string>('version') || '0.0.0'
   const notificationIds = (ctx.globalState.get<string>('notifications-ids') || '').split(',')

@@ -1,9 +1,9 @@
 {
   "name": "i18n-ally",
-  "displayName": "%extname%",
+  "displayName": "i18n Ally (Preview)",
   "description": "🌍 All in one i18n extension for VS Code",
   "version": "2.4.18",
-  "publisher": "antfu",
+  "publisher": "lokalise",
   "scripts": {
     "release": "nr release:patch",
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
@@ -153,10 +153,10 @@
   "icon": "res/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/i18n-ally"
+    "url": "https://github.com/lokalise/i18n-ally"
   },
-  "homepage": "https://github.com/antfu/i18n-ally",
-  "bugs": "https://github.com/antfu/i18n-ally/issues",
+  "homepage": "https://github.com/lokalise/i18n-ally",
+  "bugs": "https://github.com/lokalise/i18n-ally/issues",
   "main": "./dist/extension",
   "contributes": {
     "commands": [

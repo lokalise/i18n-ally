@@ -34,10 +34,6 @@ export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
       icon: 'help-star',
       url: Links.github,
     }, {
-      text: i18n.t('feedback.twitter_feedback'),
-      icon: 'help-tweet',
-      url: Links.twitter,
-    }, {
       text: i18n.t('feedback.report_issues'),
       icon: 'help-report-issue',
       url: Links.issues,

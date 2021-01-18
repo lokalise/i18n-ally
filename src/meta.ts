@@ -1,10 +1,9 @@
 export const EXT_NAMESPACE = 'i18n-ally'
-export const EXT_ID = 'antfu.i18n-ally'
+export const EXT_ID = 'lokalise.i18n-ally'
 export const EXT_NAME = 'i18n Ally'
 export const EXT_EDITOR_ID = 'i18n-ally-editor'
 export const EXT_REVIEW_ID = 'i18n-ally-review'
 
-export const EXT_LEGACY_ID = 'antfu.vue-i18n-ally'
 export const EXT_LEGACY_NAMESPACE = 'vue-i18n-ally'
 
 export const KEY_REG_DEFAULT = '[\\w\\d\\. \\-\\[\\]\\/:]*?'
