@@ -1,8 +1,8 @@
 {
   "name": "i18n-ally",
-  "displayName": "i18n Ally (Preview)",
+  "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.4.18",
+  "version": "2.4.19",
   "publisher": "lokalise",
   "scripts": {
     "release": "nr release:patch",
