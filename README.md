@@ -43,13 +43,13 @@ English | <a href="https://github.com/lokalise/i18n-ally/blob/master/README.zh-C
 
 <h4 align="center">
 <a href="https://github.com/lokalise/i18n-ally/wiki">📖 Docs</a>
-　|
+&nbsp;|&nbsp;
 <a href="https://github.com/lokalise/i18n-ally/wiki/FAQ">💭 FAQ</a>
-　|
+&nbsp;|&nbsp;
 <a href="https://github.com/lokalise/i18n-ally/wiki/Configurations">⚙️ Configs</a>
-　|
+&nbsp;|&nbsp;
 <a href="https://github.com/lokalise/i18n-ally/wiki/Locale-Formats#supported-locale-formats">📜 Supported Formats</a>
-　|
+&nbsp;|&nbsp;
 <a href="https://github.com/lokalise/i18n-ally/wiki/Contribute">🧱 Contribute</a>
 </h4>
 
