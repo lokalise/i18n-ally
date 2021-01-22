@@ -2,7 +2,7 @@
   "name": "i18n-ally",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.4.19",
+  "version": "2.4.21-test",
   "publisher": "lokalise",
   "scripts": {
     "release": "nr release:patch",
@@ -150,7 +150,7 @@
     "i18n",
     "i18next"
   ],
-  "icon": "res/dark.png",
+  "icon": "res/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/lokalise/i18n-ally"
