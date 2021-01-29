@@ -1,4 +1,4 @@
-import flags from '../utils/flags'
+import { FLAGS } from '../utils'
 
 export abstract class BaseTagSystem {
   normalize(locale?: string, fallback = 'en', strict = false): string {
@@ -19,7 +19,7 @@ export abstract class BaseTagSystem {
 
   getFlagName(locale: string): string {
     const flag = this.toFlagname(locale)
-    if (!flag || !flags.includes(flag))
+    if (!flag || !FLAGS.includes(flag))
       return 'unknown'
     return flag
   }

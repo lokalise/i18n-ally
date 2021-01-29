@@ -1,7 +1,7 @@
 // @ts-ignore
 import bcp47 from 'bcp-47'
-import { Config } from '../core'
 import { BaseTagSystem } from './base'
+import { Config } from '~/core'
 
 // https://tools.ietf.org/html/bcp47
 export class BCP47 extends BaseTagSystem {

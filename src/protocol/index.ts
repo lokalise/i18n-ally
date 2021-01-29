@@ -3,9 +3,10 @@
 // Protocol for exchanging data between webview/client/devtools
 import { commands } from 'vscode'
 import { TranslateKeys, RenameKey } from '../commands/manipulations'
-import { EXT_ID } from '../meta'
-import { CurrentFile, Global, Commands, Config } from '../core'
-import i18n from '../i18n'
+import { EXT_ID } from '~/meta'
+import { Commands } from '~/commands'
+import { CurrentFile, Global, Config } from '~/core'
+import i18n from '~/i18n'
 
 export interface Message {
   type: string

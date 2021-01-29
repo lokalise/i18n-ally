@@ -1,7 +1,8 @@
 import { MarkdownString } from 'vscode'
-import { CurrentFile, Global, Commands, LocaleRecord, Config } from '../core'
-import { decorateLocale, escapeMarkdown, NodeHelper } from '../utils'
-import i18n from '../i18n'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { CurrentFile, Global, LocaleRecord, Config } from '~/core'
+import { decorateLocale, escapeMarkdown, NodeHelper } from '~/utils'
 
 const EmptyButton = '⠀⠀'
 

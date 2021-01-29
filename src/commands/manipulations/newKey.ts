@@ -1,9 +1,9 @@
 import { window } from 'vscode'
-import { CurrentFile, Config, Global, PendingWrite } from '../../core'
-import i18n from '../../i18n'
 import { Log, promptEdit } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
+import i18n from '~/i18n'
+import { CurrentFile, Config, Global, PendingWrite } from '~/core'
 
 export async function NewKey(keypath?: string) {
   try {

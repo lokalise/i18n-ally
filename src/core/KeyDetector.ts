@@ -1,11 +1,11 @@
 import { TextDocument, Position, Range, ExtensionContext, workspace } from 'vscode'
-import { ScopeRange } from '../frameworks/base'
-import { KeyInDocument, CurrentFile } from '../core'
-import { regexFindKeys } from '../utils'
 import { Global } from './Global'
 import { RewriteKeyContext } from './types'
 import { Config } from './Config'
 import { Loader } from './loaders/Loader'
+import { ScopeRange } from '~/frameworks'
+import { regexFindKeys } from '~/utils'
+import { KeyInDocument, CurrentFile } from '~/core'
 
 export interface KeyUsages {
   type: 'code'| 'locale'
@@ -111,7 +111,10 @@ export class KeyDetector {
     return keys
   }
 
-  static getUsages(document: TextDocument, loader: Loader = CurrentFile.loader): KeyUsages | undefined {
+  static getUsages(document: TextDocument, loader?: Loader): KeyUsages | undefined {
+    if (loader == null)
+      loader = CurrentFile.loader
+
     let keys: KeyInDocument[] = []
     let locale = Config.displayLanguage
     let namespace: string | undefined
@@ -131,7 +134,7 @@ export class KeyDetector {
 
       locale = localeFile.locale
       keys = parser.annotationGetKeys(document)
-        .filter(({ key }) => loader.getTreeNodeByKey(key)?.type === 'node')
+        .filter(({ key }) => loader!.getTreeNodeByKey(key)?.type === 'node')
     }
     // code
     else if (Global.isLanguageIdSupported(document.languageId)) {

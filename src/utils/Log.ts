@@ -1,6 +1,6 @@
 import { OutputChannel, window } from 'vscode'
 import { EXT_NAME } from '../meta'
-import i18n from '../i18n'
+import i18n from '~/i18n'
 
 export class Log {
   private static _channel: OutputChannel

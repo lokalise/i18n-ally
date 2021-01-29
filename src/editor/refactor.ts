@@ -1,8 +1,8 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
-import { KeyDetector, Commands, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
-import { Global } from '../core/Global'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { KeyDetector, Config, Loader, CurrentFile, Global } from '~/core'
 
 export class Refactor implements CodeActionProvider {
   public static readonly providedCodeActionKinds = [

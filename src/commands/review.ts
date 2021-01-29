@@ -1,8 +1,9 @@
 import { commands, window } from 'vscode'
-import { Commands, Global, TranslationCandidateWithMeta, ReviewCommentWithMeta } from '../core'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
 import { ReviewTranslationCandidates } from '../views/items/ReviewTranslationCandidates'
+import { Commands } from './commands'
+import i18n from '~/i18n'
+import { Global, TranslationCandidateWithMeta, ReviewCommentWithMeta } from '~/core'
 
 const m: ExtensionModule = (ctx) => {
   return [

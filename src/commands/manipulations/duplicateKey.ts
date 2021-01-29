@@ -1,10 +1,10 @@
 import { window } from 'vscode'
 import { LocaleTreeItem } from '../../views'
-import { Node, CurrentFile, PendingWrite } from '../../core'
-import i18n from '../../i18n'
 import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate } from '../keypathValidate'
+import i18n from '~/i18n'
+import { Node, CurrentFile, PendingWrite } from '~/core'
 
 export async function DuplicateKey(item?: LocaleTreeItem | string) {
   if (!item)

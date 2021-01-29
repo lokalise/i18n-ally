@@ -1,20 +1,24 @@
-import path from 'path'
-import { commands, window, workspace, QuickPickItem } from 'vscode'
-// @ts-ignore
-import limax from 'limax'
+import { commands, window, workspace, QuickPickItem, Range } from 'vscode'
 import { trim } from 'lodash'
-import { nanoid } from 'nanoid'
-import { ExtensionModule } from '../modules'
-import { Commands, Config, CurrentFile } from '../core'
-import i18n from '../i18n'
-import { ExtractTextOptions } from '../editor/extract'
-import { Log, promptTemplates } from '../utils'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
+import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
+import { extractHardStrings, generateKeyFromText, Config, CurrentFile } from '~/core'
+import i18n from '~/i18n'
+import { Log, promptTemplates } from '~/utils'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
   type: 'tree' | 'node' | 'new' | 'existed'
+}
+
+export interface ExtractTextOptions {
+  filepath: string
+  text: string
+  range: Range
+  languageId?: string
+  isInsert?: boolean
 }
 
 async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
@@ -29,6 +33,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
     const document = editor?.document
     if (!editor || !document)
       return
+
     options = {
       filepath: document.uri.fsPath,
       text: document.getText(editor.selection),
@@ -41,14 +46,9 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
   const locale = Config.sourceLanguage
   const loader = CurrentFile.loader
   const { filepath, text, range, languageId, isInsert } = options
-  const fileName = path.basename(filepath)
-  const fileNameWithoutExt = path.basename(filepath, path.extname(filepath))
+
   const cleanedText = trim(text, '\'"` ')
-  let default_keypath: string
-  const keygenStrategy = Config.keygenStrategy
-  const keyPrefix = Config.keyPrefix
-    .replace('{fileName}', fileName)
-    .replace('{fileNameWithoutExt}', fileNameWithoutExt)
+  const default_keypath = generateKeyFromText(text, filepath)
 
   const existingItems: QuickPickItemWithKey[]
     = isInsert
@@ -66,20 +66,6 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
           alwaysShow: true,
           detail: i18n.t('prompt.existing_translation'),
         }))
-
-  if (keygenStrategy === 'random') {
-    default_keypath = nanoid()
-  }
-  else if (keygenStrategy === 'empty') {
-    default_keypath = ''
-  }
-  else {
-    default_keypath = limax(text, { separator: Config.preferredDelimiter, tone: false })
-      .slice(0, Config.extractKeyMaxLength ?? Infinity)
-  }
-
-  if (keyPrefix && keygenStrategy !== 'empty' && !isInsert)
-    default_keypath = keyPrefix + default_keypath
 
   const getPickItems = (input?: string) => {
     const path = input?.split('.').slice(0, -1).join('.')
@@ -156,27 +142,15 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
       return
     }
 
-    // open editor if not exists
-    let editor = window.activeTextEditor
-    if (!editor) {
-      const document = await workspace.openTextDocument(filepath)
-      editor = await window.showTextDocument(document)
-    }
-    editor.edit((editBuilder) => {
-      editBuilder.replace(range, replacer)
-    })
+    const document = await workspace.openTextDocument(filepath)
 
-    if (shouldOverride === 'skip')
-      return
-
-    // save key
-    await CurrentFile.loader.write({
-      textFromPath: filepath,
-      filepath: undefined,
-      keypath: writeKeypath,
-      value: cleanedText,
+    await extractHardStrings(document, [{
+      range,
+      replaceTo: replacer,
+      keypath: shouldOverride === 'skip' ? undefined : writeKeypath,
+      message: cleanedText,
       locale,
-    })
+    }])
   }
 
   // create and init a QuickPick for the path

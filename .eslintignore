@@ -1,7 +1,11 @@
 out/
 dist/
-/examples/
+examples/
 .cache/
 res/
 test-resources/
 test/e2e-out/
+test/e2e-fixtures-temp/
+test/fixture-scripts-out/
+test/fixtures/
+test/fixtures-temp/

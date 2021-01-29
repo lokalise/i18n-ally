@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { File, Log } from '../utils'
+import { File, Log } from '~/utils'
 
 export abstract class PackageParser {
   static filename: string

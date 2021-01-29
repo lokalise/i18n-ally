@@ -1,6 +1,6 @@
 import { commands } from 'vscode'
-import { Commands } from '../core'
 import { ExtensionModule } from '../modules'
+import { Commands } from './commands'
 import { TranslateKeys, OpenKey, CopyKey, RenameKey, DeleteKey, NewKey, FulfillKeys, DuplicateKey, EditKey, markKeyInUse, InsertKey } from './manipulations'
 import { ReplaceText } from './manipulations/replaceText'
 

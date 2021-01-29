@@ -1,7 +1,7 @@
 import { TextDocument } from 'vscode'
 import { Parser } from 'htmlparser2'
-import { LanguageId } from '../utils'
 import { Framework, ScopeRange } from './base'
+import { LanguageId } from '~/utils'
 
 export default class TranslocoFramework extends Framework {
   id = 'transloco'

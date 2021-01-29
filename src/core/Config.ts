@@ -4,8 +4,8 @@ import { workspace, extensions, ExtensionContext } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
-import i18n from '../i18n'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
+import i18n from '~/i18n'
 
 export class Config {
   static readonly reloadConfigs = [

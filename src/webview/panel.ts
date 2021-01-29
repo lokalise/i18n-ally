@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
 import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, workspace, EventEmitter, Selection, TextEditorRevealType } from 'vscode'
-import i18n from '../i18n'
-import { CurrentFile, Global, KeyInDocument, KeyDetector, Config } from '../core'
-import { EXT_EDITOR_ID } from '../meta'
-import { Protocol } from '../protocol'
+import { EXT_EDITOR_ID } from '~/meta'
+import { Protocol } from '~/protocol'
+import i18n from '~/i18n'
+import { CurrentFile, Global, KeyInDocument, KeyDetector, Config } from '~/core'
 
 export class EditorContext {
   filepath?: string

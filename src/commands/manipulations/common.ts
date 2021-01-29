@@ -1,7 +1,7 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '../../core'
-import i18n from '../../i18n'
+import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '~/core'
+import i18n from '~/i18n'
 
 export interface CommandOptions {
   keypath: string

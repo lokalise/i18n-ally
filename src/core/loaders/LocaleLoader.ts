@@ -4,16 +4,14 @@ import fg from 'fast-glob'
 import _, { uniq, throttle, set } from 'lodash'
 import fs from 'fs-extra'
 import { findBestMatch } from 'string-similarity'
-import { ReplaceLocale } from '../../utils/PathMatcher'
+import { ReplaceLocale, Log, applyPendingToObject, unflatten, NodeHelper, getCache, setCache } from '../../utils'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
-import { Log, applyPendingToObject, unflatten, NodeHelper } from '../../utils'
-import i18n from '../../i18n'
 import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '../types'
 import { LocaleTree } from '../Nodes'
 import { AllyError, ErrorType } from '../Errors'
-import { getCache, setCache } from '../../utils/cache'
 import { Analyst, Global, Config } from '..'
 import { Loader } from './Loader'
+import i18n from '~/i18n'
 
 const THROTTLE_DELAY = 1500
 

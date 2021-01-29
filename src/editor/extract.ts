@@ -1,15 +1,9 @@
 import { CodeActionKind, CodeActionProvider, Command, languages, Range, Selection, TextDocument } from 'vscode'
-import { Commands, Config, CurrentFile, Global } from '../core'
-import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
-
-export interface ExtractTextOptions {
-  filepath: string
-  text: string
-  range: Range
-  languageId?: string
-  isInsert?: boolean
-}
+import { ExtensionModule } from '~/modules'
+import { Config, CurrentFile, Global } from '~/core'
+import { Commands } from '~/commands'
+import { ExtractTextOptions } from '~/commands/extractText'
+import i18n from '~/i18n'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions(document: TextDocument, selection: Range | Selection): Promise<Command[]> {

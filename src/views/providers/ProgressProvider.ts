@@ -1,11 +1,11 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event } from 'vscode'
 import throttle from 'lodash/throttle'
-import { Global, Loader, CurrentFile } from '../../core'
 import { notEmpty } from '../../utils/utils'
 import { BaseTreeItem } from '../items/Base'
 import { ProgressRootItem } from '../items/ProgressRootItem'
 import { EditorPanel } from '../../webview/panel'
 import { THROTTLE_DELAY } from '../../meta'
+import { Global, Loader, CurrentFile } from '~/core'
 
 export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
   protected name = 'ProgressProvider'

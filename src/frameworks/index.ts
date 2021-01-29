@@ -1,6 +1,4 @@
 import { workspace } from 'vscode'
-import i18n from '../i18n'
-import { Log } from '../utils'
 import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
@@ -24,6 +22,10 @@ import GlobalizeFramework from './globalize'
 import UI5Framework from './ui5'
 import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
+
+export * from './base'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 

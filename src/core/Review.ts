@@ -6,11 +6,11 @@ import { get, set } from 'lodash'
 import { nanoid } from 'nanoid'
 import { cleanObject } from '../utils/cleanObject'
 import { promptEdit } from '../utils/prompts'
-import { Log } from '../utils'
 import { FILEWATCHER_TIMEOUT } from '../meta'
 import { Config } from './Config'
 import { ReviewData, ReviewComment, ReviewCommentWithMeta, TranslationCandidate, TranslationCandidateWithMeta, PendingWrite } from './types'
 import { CurrentFile } from './CurrentFile'
+import { Log } from '~/utils'
 
 export class Reviews {
   private filepath = ''

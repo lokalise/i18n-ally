@@ -1,5 +1,5 @@
-import { commands, Position, Selection, window, workspace } from 'vscode'
-import { openFile, Global, is, not, expect, timeout, setupTest, getExt, KeyDetector, Commands } from '../../ctx'
+import { window } from 'vscode'
+import { openFile, Global, is, not, expect, timeout, setupTest, getExt, KeyDetector } from '../../ctx'
 
 setupTest('React with i18next', () => {
   it('opens entry file', async() => {

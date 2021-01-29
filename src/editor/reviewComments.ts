@@ -1,10 +1,11 @@
 import { comments, CommentController, TextDocument, CancellationToken, Range, Disposable, commands, CommentReply, CommentAuthorInformation, Uri, Comment, MarkdownString, CommentMode, CommentThread } from 'vscode'
 import { EXT_REVIEW_ID } from '../meta'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
 import { getAvatarFromEmail } from '../utils/shared'
-import { Commands, Config, Global, ReviewComment, KeyDetector } from '../core'
-import { Log } from '../utils'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { Config, Global, ReviewComment, KeyDetector } from '~/core'
+import { Log } from '~/utils'
 
 function userToAuthorInfo(user?: {name?: string; email?: string}): CommentAuthorInformation {
   if (!user) {

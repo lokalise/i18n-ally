@@ -141,5 +141,5 @@ export class ComposedLoader extends Loader {
     }))
   }
 
-  // TODO:sfc merge tree nodes
+  // TODO: sfc merge tree nodes
 }

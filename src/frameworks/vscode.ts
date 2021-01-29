@@ -1,6 +1,6 @@
 import { basename } from 'path'
-import { LanguageId } from '../utils'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
 
 class VSCodeFramework extends Framework {
   id = 'vscode'

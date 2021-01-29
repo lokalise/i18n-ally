@@ -1,9 +1,9 @@
 import axios from 'axios'
 import qs from 'qs'
 
-import { Log } from '../../utils'
-import { Config } from '../../core'
 import TranslateEngine, { TranslateOptions, TranslateResult } from './base'
+import { Log } from '~/utils'
+import { Config } from '~/core'
 
 interface DeepLUsage {
   character_count: number

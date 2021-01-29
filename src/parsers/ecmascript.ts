@@ -1,9 +1,9 @@
 import child_process from 'child_process'
 import path from 'path'
-import i18n from '../i18n'
-import { Log } from '../utils'
-import { Config, Global } from '../core'
 import { Parser } from './base'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
+import { Config, Global } from '~/core'
 
 const LanguageIds = {
   js: 'javascript',

@@ -1,8 +1,8 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '../../core'
-import i18n from '../../i18n'
 import { getNodeOrRecord, CommandOptions, getNode } from './common'
+import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '~/core'
+import i18n from '~/i18n'
 
 export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode, to?: string) {
   const locales = Global.allLocales

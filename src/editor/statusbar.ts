@@ -1,8 +1,8 @@
 import { window, Disposable, StatusBarAlignment } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { Config, Global, CurrentFile } from '../core'
-import { Commands } from '../core/Commands'
-import i18n from '../i18n'
+import { Commands } from '../commands/commands'
+import { Config, Global, CurrentFile } from '~/core'
+import i18n from '~/i18n'
 
 const statusbar: ExtensionModule = (ctx) => {
   const disposables: Disposable[] = []

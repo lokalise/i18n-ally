@@ -1,10 +1,11 @@
 import { commands, window } from 'vscode'
 
-import { abbreviateNumber } from '../utils'
-import { Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
 import { usage } from '../translators/engines/deepl'
+import { Commands } from './commands'
+import i18n from '~/i18n'
+import { Config } from '~/core'
+import { abbreviateNumber } from '~/utils'
 
 const m: ExtensionModule = (ctx) => {
   async function deepAuth() {

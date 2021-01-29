@@ -11,11 +11,11 @@
     "resolveJsonModule": true,
     "declaration": true,
     "moduleResolution": "node",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "include": [
     "./src/**/*.ts",

@@ -1,12 +1,12 @@
 import { EventEmitter, CancellationToken, window, ProgressLocation, commands } from 'vscode'
-import { TranslateResult } from '../translators/engines/base'
-import Translate from '../translators'
-import i18n from '../i18n'
-import { Log } from '../utils'
 import { AllyError, ErrorType } from './Errors'
 import { PendingWrite } from './types'
 import { Global } from './Global'
-import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader, Commands } from '.'
+import { LocaleTree, LocaleNode, LocaleRecord, Config, Loader } from '.'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
+import { Translator as TranslateEngine, TranslateResult } from '~/translators'
 
 interface TranslatorChangeEvent {
   keypath: string
@@ -32,7 +32,7 @@ export class Translator {
   private static translatingKeys: {keypath: string; locale: string}[] = []
   private static _onDidChange = new EventEmitter<TranslatorChangeEvent>()
   static readonly onDidChange = Translator._onDidChange.event
-  private static _translator = new Translate()
+  private static _translator = new TranslateEngine()
 
   // #region utils
   private static start(keypath: string, locale: string, update = true) {

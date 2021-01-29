@@ -1,7 +1,7 @@
 import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
 import { ExtensionModule } from '../modules'
-import { KeyDetector, Analyst } from '../core'
 import { Global } from '../core/Global'
+import { KeyDetector, Analyst } from '~/core'
 
 class Provider implements ReferenceProvider, RenameProvider {
   async provideReferences(document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {

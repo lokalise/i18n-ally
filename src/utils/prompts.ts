@@ -1,7 +1,7 @@
 import { window } from 'vscode'
-import i18n from '../i18n'
-import { CurrentFile, Config, Global } from '../core'
 import { decorateLocale } from '.'
+import i18n from '~/i18n'
+import { CurrentFile, Config, Global } from '~/core'
 
 export async function promptEdit(keypath: string, locale: string, value?: string) {
   const result = await window.showInputBox({

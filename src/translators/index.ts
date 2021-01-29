@@ -1,13 +1,13 @@
 import TranslateEngine, { TranslateOptions } from './engines/base'
-import GoogleTranslate from './engines/google'
-import GoogleTranslateCN from './engines/google-cn'
-import DeepLTranslate from './engines/deepl'
+import GoogleTranslateEngine from './engines/google'
+import GoogleTranslateCnEngine from './engines/google-cn'
+import DeepLTranslateEngine from './engines/deepl'
 
-export default class Transaltor {
+export class Translator {
   engines: Record<string, TranslateEngine> ={
-    google: new GoogleTranslate(),
-    'google-cn': new GoogleTranslateCN(),
-    deepl: new DeepLTranslate(),
+    google: new GoogleTranslateEngine(),
+    'google-cn': new GoogleTranslateCnEngine(),
+    deepl: new DeepLTranslateEngine(),
   }
 
   async translate(options: TranslateOptions & { engine: string }) {
@@ -15,3 +15,12 @@ export default class Transaltor {
     return await engine.translate(options)
   }
 }
+
+export {
+  TranslateEngine,
+  GoogleTranslateEngine,
+  GoogleTranslateCnEngine,
+  DeepLTranslateEngine,
+}
+
+export * from './engines/base'

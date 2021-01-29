@@ -1,13 +1,12 @@
 import { ExtensionContext } from 'vscode'
 import { flatten } from 'lodash'
 import { version } from '../package.json'
-import { Global, Config, KeyDetector } from './core'
-import commandsModules from './commands'
-import editorModules from './editor'
-import viewsModules from './views'
-import { Log } from './utils'
-import { CurrentFile } from './core/CurrentFile'
-import i18n from './i18n'
+import { Global, Config, KeyDetector, CurrentFile } from '~/core'
+import commandsModules, { Commands } from '~/commands'
+import viewsModules from '~/views'
+import { Log } from '~/utils'
+import i18n from '~/i18n'
+import editorModules from '~/editor'
 
 export async function activate(ctx: ExtensionContext) {
   Log.info(`🈶 Activated, v${version}`)
@@ -41,6 +40,5 @@ export {
   KeyDetector,
   Config,
   Log,
+  Commands,
 }
-
-export { Commands } from './core/Commands'

@@ -1,10 +1,10 @@
 import path from 'path'
 import { workspace, window, Selection, TextEditorRevealType, commands } from 'vscode'
 import { LocaleTreeItem, ProgressRootItem } from '../../views'
-import { Config, Global, CurrentFile } from '../../core'
-import i18n from '../../i18n'
 import { Log, NodeHelper } from '../../utils'
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
+import { Config, Global, CurrentFile } from '~/core'
+import i18n from '~/i18n'
 
 export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
   if (item instanceof ProgressRootItem) {

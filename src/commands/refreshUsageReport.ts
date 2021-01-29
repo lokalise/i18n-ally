@@ -1,6 +1,7 @@
 import { commands } from 'vscode'
-import { Commands, Analyst } from '../core'
 import { ExtensionModule } from '../modules'
+import { Commands } from './commands'
+import { Analyst } from '~/core'
 
 const m: ExtensionModule = (ctx) => {
   return [

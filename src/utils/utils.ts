@@ -1,7 +1,7 @@
 import { set } from 'lodash'
-import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '../core'
 import { KeyStyle } from '../core/types'
 import { ROOT_KEY } from './flat'
+import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '~/core'
 
 export function caseInsensitiveMatch(a: string, b: string) {
   return a.toUpperCase() === b.toUpperCase()

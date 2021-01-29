@@ -1,7 +1,7 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { Coverage } from '../../core'
 import { decorateLocale } from '../../utils'
 import { BaseTreeItem } from './Base'
+import { Coverage } from '~/core'
 
 export abstract class ProgressBaseItem extends BaseTreeItem {
   constructor(public readonly ctx: ExtensionContext, public readonly node: Coverage) {

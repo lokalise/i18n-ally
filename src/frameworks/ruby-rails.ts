@@ -1,8 +1,8 @@
 import path from 'path'
-import { LanguageId } from '../utils'
 import { RewriteKeySource, DataProcessContext, RewriteKeyContext } from '../core/types'
-import { Config, Global } from '../core'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
+import { Config, Global } from '~/core'
 
 class RubyRailsFramework extends Framework {
   id= 'ruby-rails'

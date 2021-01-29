@@ -1,8 +1,8 @@
 import { commands, env, Uri, window } from 'vscode'
-import { Commands } from '../core'
 import { ExtensionModule } from '../modules'
 import Links from '../links'
-import i18n from '../i18n'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
 
 const m: ExtensionModule = (ctx) => {
   return [

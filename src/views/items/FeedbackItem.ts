@@ -1,7 +1,7 @@
 import { ExtensionContext } from 'vscode'
-import { Commands } from '../../core'
-import { FeedbackItemDefintion } from '../providers/HelpFeedbackProvider'
+import { FeedbackItemDefintion } from '../providers'
 import { BaseTreeItem } from './Base'
+import { Commands } from '~/commands'
 
 export class FeedbackItem extends BaseTreeItem {
   constructor(ctx: ExtensionContext, define: FeedbackItemDefintion) {

@@ -7,6 +7,8 @@ export const enum Commands {
   set_display_language = 'i18n-ally.set-display-language',
   set_source_language = 'i18n-ally.set-source-language',
   extract_text = 'i18n-ally.extract-text',
+  detect_hard_strings = 'i18n-ally.detect_hard_strings',
+  extract_current_file = 'i18n-ally.extract-current-file',
   replace_with = 'i18n-ally.replace-with',
   copy_key = 'i18n-ally.copy-key',
   translate_key = 'i18n-ally.translate-key',
@@ -36,5 +38,5 @@ export const enum Commands {
   review_refresh_thread = 'i18n-ally.review.refresh-thread',
   review_apply_translation = 'i18n-ally.review.apply-translation',
   review_apply_suggestion = 'i18n-ally.review.apply-suggestion',
-  deepl_usage = 'i18n-ally.deepl-usage'
+  deepl_usage = 'i18n-ally.deepl-usage',
 }

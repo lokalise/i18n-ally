@@ -4,6 +4,7 @@
 
 const path = require('path')
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 /** @type {import('webpack').Configuration} */
 const config = {
@@ -31,6 +32,9 @@ const config = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    plugins: [
+      new TsconfigPathsPlugin(),
+    ],
   },
   module: {
     rules: [

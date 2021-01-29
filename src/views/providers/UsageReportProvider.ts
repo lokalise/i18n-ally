@@ -1,7 +1,7 @@
 import { TreeDataProvider, EventEmitter, ExtensionContext, TreeItem, commands, TreeView } from 'vscode'
-import { Analyst, UsageReport } from '../../core'
 import { UsageReportTreeItem, UsageReportRootItem, LocationTreeItem } from '../items'
-import i18n from '../../i18n'
+import { Analyst, UsageReport } from '~/core'
+import i18n from '~/i18n'
 
 export class UsageReportProvider implements TreeDataProvider<TreeItem> {
   private _onDidChangeTreeData = new EventEmitter<TreeItem | undefined>()

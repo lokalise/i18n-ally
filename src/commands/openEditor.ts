@@ -1,11 +1,12 @@
 import { commands, window, ViewColumn, workspace, TextDocument } from 'vscode'
-import { promptKeys } from '../utils'
 import { EditorPanel } from '../webview/panel'
-import { Commands, Global } from '../core'
 import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
-import i18n from '../i18n'
+import { Commands } from './commands'
 import { CommandOptions } from './manipulations/common'
+import i18n from '~/i18n'
+import { Global } from '~/core'
+import { promptKeys } from '~/utils'
 
 const m: ExtensionModule = (ctx) => {
   /*

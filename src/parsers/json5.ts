@@ -1,6 +1,6 @@
 import JSON5 from 'json5'
-import { KeyStyle } from '../core'
 import { Parser } from './base'
+import { KeyStyle } from '~/core'
 
 export class Json5Parser extends Parser {
   id = 'json5'

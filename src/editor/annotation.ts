@@ -1,10 +1,10 @@
 import { window, DecorationOptions, Range, Disposable, TextEditorDecorationType, TextEditor, workspace, TextDocument, languages, Hover } from 'vscode'
 import throttle from 'lodash/throttle'
-import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '../core'
 import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
 import { THROTTLE_DELAY } from '../meta'
 import { createHover } from './hover'
+import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '~/core'
 
 const underlineDecorationType = window.createTextEditorDecorationType({
   textDecoration: 'underline',
@@ -109,10 +109,12 @@ const annotation: ExtensionModule = (ctx) => {
         document.positionAt(key.start),
         document.positionAt(key.end),
       )
-      const rangeWithQuotes = key.quoted ? new Range(
-        range.start.with(undefined, range.start.character - 1),
-        range.end.with(undefined, range.end.character + 1),
-      ) : range
+      const rangeWithQuotes = key.quoted
+        ? new Range(
+          range.start.with(undefined, range.start.character - 1),
+          range.end.with(undefined, range.end.character + 1),
+        )
+        : range
 
       let text: string | undefined
       let missing = false

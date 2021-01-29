@@ -1,9 +1,9 @@
 import { ExtensionContext, window } from 'vscode'
 import { uniq } from 'lodash'
 import { resolveFlattenRootKeypath } from '../../utils'
-import { KeyDetector, LocaleNode, Global } from '../../core'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 import { LocalesTreeProvider } from './LocalesTreeProvider'
+import { KeyDetector, LocaleNode, Global } from '~/core'
 
 export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
   protected name = 'CurrentFileLocalesTreeProvider'

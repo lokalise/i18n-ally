@@ -1,8 +1,8 @@
 import { window } from 'vscode'
 import { LocaleTreeItem, UsageReportRootItem } from '../../views'
-import { LocaleRecord, CurrentFile, Analyst } from '../../core'
 import { Log } from '../../utils'
-import i18n from '../../i18n'
+import i18n from '~/i18n'
+import { LocaleRecord, CurrentFile, Analyst } from '~/core'
 
 export async function DeleteRecords(records: LocaleRecord[]) {
   try {

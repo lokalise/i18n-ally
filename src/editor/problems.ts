@@ -1,8 +1,8 @@
 import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace, Uri } from 'vscode'
 import { EXT_NAMESPACE } from '../meta'
-import { Global, KeyDetector, Config, Loader, CurrentFile } from '../core'
 import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
+import { Global, KeyDetector, Config, Loader, CurrentFile } from '~/core'
+import i18n from '~/i18n'
 
 export class ProblemProvider {
   private collection: DiagnosticCollection

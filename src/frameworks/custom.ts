@@ -2,9 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import { workspace, FileSystemWatcher } from 'vscode'
 import YAML from 'js-yaml'
-import { Global } from '../core'
-import { LanguageId, File, Log } from '../utils'
 import { Framework } from './base'
+import { Global } from '~/core'
+import { LanguageId, File, Log } from '~/utils'
 
 const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 

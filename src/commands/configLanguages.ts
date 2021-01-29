@@ -1,8 +1,9 @@
 import { commands, window } from 'vscode'
-import { Global, Commands, Config } from '../core'
 import { ExtensionModule } from '../modules'
 import { ProgressBaseItem } from '../views'
-import i18n from '../i18n'
+import { Commands } from './commands'
+import i18n from '~/i18n'
+import { Global, Config } from '~/core'
 
 async function pickLocale(locale: any, type: 'displayLanguage' | 'sourceLanguage') {
   // from context menu
