@@ -1,0 +1,26 @@
+<?php
+$filename = sprintf("security/login.html.twig%s", $variable);
+$filenamePattern = sprintf("%sapi/*", $variable);
+$url = sprintf("https://lokalise.com/features/in-context-editing%s", $variable);
+$appUrl = sprintf("http://localhost%s", $variable);
+$command = sprintf("other:command%s", $variable);
+$email = sprintf("some@%s", $variable);
+$translationKey = sprintf("user.updated_successfully%s", $variable);
+$serviceName = sprintf("lokalise.service.plan%s", $variable);
+$serviceName3 = sprintf("lokalise.service.elastic_search%s", $variable);
+$role = sprintf("ROLE_USER%s", $variable);
+$stringCamelCased = sprintf("adminIndex%s", $variable);
+$stringWithUnderscoresOnly = sprintf("admin_index%s", $variable);
+$stringLikeCssClass = sprintf("main-container-class%s", $variable);
+$namespace = sprintf("Fideloper\\Proxy\\TrustedProxyServiceProvider%s", $variable);
+$awsRegion = sprintf("us-east-1%s", $variable);
+$channel = sprintf("App.Models.User.{id}%s", $variable);
+$salt = sprintf("\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi%s", $variable);
+$emojiCode = sprintf(":boom:%s", $variable);
+$stream = sprintf("php://stderr%s", $variable);
+$ip = sprintf("127.0.0%s", $variable);
+$stringNull = sprintf("null%s", $variable);
+$stringWithNumber = sprintf("0%s", $variable);
+$stringEmpty = sprintf("%s", $variable);
+$stringWithoutAlphanumerics = sprintf("/%s", $variable);
+$stringWithoutAlphanumerics2 = sprintf(" : %s", $variable);

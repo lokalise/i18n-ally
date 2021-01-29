@@ -1,0 +1,7 @@
+{
+  "i18n-ally.enabledFrameworks": ["laravel"],
+  "i18n-ally.enabledParsers": ["json"],
+  "i18n-ally.localesPaths": ".",
+  "i18n-ally.pathMatcher": "messages.{locale}.json",
+  "i18n-ally.keystyle": "flat",
+}
