@@ -604,15 +604,21 @@ export class LocaleLoader extends Loader {
   private async findLocaleDirs() {
     this._files = {}
     this._locale_dirs = []
-    if (this.localesPaths.length > 0) {
+    const localesPaths = this.localesPaths
+    if (localesPaths.length > 0) {
       try {
-        this._locale_dirs = await fg(this.localesPaths, {
+        const _locale_dirs = await fg(localesPaths, {
           cwd: this.rootpath,
           onlyDirectories: true,
         })
 
-        this._locale_dirs = this._locale_dirs
-          .map(p => path.resolve(this.rootpath, p))
+        if (localesPaths.includes('.'))
+          _locale_dirs.push('.')
+
+        this._locale_dirs = uniq(
+          _locale_dirs
+            .map(p => path.resolve(this.rootpath, p)),
+        )
       }
       catch (e) {
         Log.error(e)
