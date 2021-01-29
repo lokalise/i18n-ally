@@ -6,7 +6,10 @@
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
-    "outDir": "../e2e-out"
+    "outDir": "../e2e-out",
+    "paths": {
+      "~/*": ["../../dist/src/*"]
+    }
   },
   "exclude": [
     "../../src/",
