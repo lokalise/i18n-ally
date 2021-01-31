@@ -1,0 +1,8 @@
+{
+  "exclude": [
+    "vue",
+    "webpack",
+    "webpack-cli",
+    "limax"
+  ]
+}
