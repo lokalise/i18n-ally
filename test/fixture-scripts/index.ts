@@ -2,7 +2,8 @@ import { dirname, join, basename, resolve } from 'path'
 import { runTests } from 'vscode-test'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
-import chalk from 'chalk'
+import { red, green, yellow, gray, cyan } from 'chalk'
+import { ArrayChange, diffArrays } from 'diff'
 
 function deepDirname(dir: string, depth = 1) {
   for (let i = 0; i < depth; i++)
@@ -62,10 +63,10 @@ async function run() {
 }
 
 async function testFixture(fixture: FixtureInfo) {
-  try {
-    const root = resolve(__dirname, '../..')
-    const path = await prepareFixture(fixture)
+  const root = resolve(__dirname, '../..')
+  const path = await prepareFixture(fixture)
 
+  try {
     await runTests({
       extensionDevelopmentPath: root,
       extensionTestsPath: join(__dirname, 'runner.js'),
@@ -74,10 +75,68 @@ async function testFixture(fixture: FixtureInfo) {
     })
   }
   catch (e) {
-    console.log(chalk.red(`❌ ${fixture.category} > ${fixture.name}`))
+    console.log(yellow`❌ ${fixture.category} > ${fixture.name}`)
     return
   }
-  console.log(chalk.green(`✅ ${fixture.category} > ${fixture.name}`))
+  const result = await compareOut(fixture.dirOutput, path)
+  let passed = true
+
+  result.forEach((r) => {
+    if (r.result == null) {
+      console.log(yellow`${r.name}: file missing`)
+      passed = false
+    }
+    else if (r.result.some(i => i.added || i.removed)) {
+      console.log(cyan`${r.name}:`)
+      printDiff(r.result)
+      passed = false
+    }
+  })
+
+  if (passed)
+    console.log(green`✅ ${fixture.category} > ${fixture.name}`)
+  else
+    console.log(red`❌ ${fixture.category} > ${fixture.name}`)
+}
+
+async function compareOut(target: string, out: string) {
+  const files = await fg('**/*.*', { onlyFiles: true, cwd: target })
+  return await Promise.all(files.map(async(file) => {
+    const path = join(out, file)
+    if (!fs.existsSync(path))
+      return { name: file, result: null }
+
+    const a = await fs.readFile(join(target, file), 'utf-8')
+    const b = await fs.readFile(join(out, file), 'utf-8')
+    return { name: file, result: diffArrays(a.split('\n'), b.split('\n')) }
+  }))
+}
+
+function printDiff(diff: ArrayChange<string>[]) {
+  let line = 0
+
+  diff.forEach((part) => {
+    const color = part.added
+      ? red
+      : part.removed
+        ? green
+        : gray
+
+    for (const text of part.value) {
+      line += 1
+      const no = part.added
+        ? '+'
+        : part.removed
+          ? '-'
+          : line.toString()
+      const message = part.removed && !text ? '(empty)' : text
+      process.stderr.write(color`${no.padStart(3, ' ')} ${message}\n`)
+    }
+    if (part.removed)
+      line -= part.value.length
+  })
+
+  process.stderr.write('\n')
 }
 
 run()

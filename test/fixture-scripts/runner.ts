@@ -12,10 +12,10 @@ export const run = async() => {
     await window.showTextDocument(doc)
     await timeout(2000)
 
-    const strings = await commands.executeCommand(Commands.detect_hard_strings)
-    console.log(strings)
+    await commands.executeCommand(Commands.detect_hard_strings)
+    // console.log(strings)
 
-    await timeout(5000)
+    await timeout(1000)
   }
   catch (e) {
     console.error(e)
