@@ -4,7 +4,7 @@ import { ExtensionModule } from '~/modules'
 import { Global } from '~/core'
 import { Commands } from '~/commands'
 
-async function DetectHardStrings() {
+export async function DetectHardStrings() {
   const doc = window.activeTextEditor?.document
 
   if (!doc)

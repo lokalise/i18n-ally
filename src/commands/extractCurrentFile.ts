@@ -1,9 +1,10 @@
 import { commands } from 'vscode'
+import { DetectHardStrings } from './detectHardStrings'
 import { ExtensionModule } from '~/modules'
 import { Commands } from '~/commands'
 
-async function ExtractAllInFileCommand() {
-
+export async function ExtractAllInFileCommand() {
+  await DetectHardStrings()
 }
 
 const m: ExtensionModule = () => {

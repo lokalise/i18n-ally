@@ -19,6 +19,7 @@ export interface ScopeRange {
 
 export interface HardStringInfo {
   range: Range
+  value: string
 }
 
 export abstract class Framework {

@@ -7450,6 +7450,11 @@ php-parser@^2.0.3:
   resolved "https://registry.yarnpkg.com/php-parser/-/php-parser-2.2.0.tgz#67384f0a5933dbbef40beab0ab31d0b8c582ff88"
   integrity sha1-ZzhPClkz2770C+qwqzHQuMWC/4g=
 
+php-parser@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/php-parser/-/php-parser-3.0.2.tgz#a86dbbc110e57378cba71ab4cd9b0d18f3872ac3"
+  integrity sha512-a7y1+odEGsceLDLpu7oNyspZ0pK8FMWJOoim4/yd82AtnEZNLdCLZ67arnOQZ9K0lHJiSp4/7lVUpGELVxE14w==
+
 physical-cpu-count@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/physical-cpu-count/-/physical-cpu-count-2.0.0.tgz#18de2f97e4bf7a9551ad7511942b5496f7aba660"
