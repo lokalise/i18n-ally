@@ -13,6 +13,8 @@ export const LanguageIdExtMap = {
   ejs: 'ejs',
   ruby: 'rb',
   erb: 'erb',
+  'html.erb': 'erb',
+  'js.erb': 'erb',
   haml: 'haml',
   handlebars: 'hbs',
   blade: 'php',
