@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.20](https://github.com/lokalise/i18n-ally/compare/v2.4.18...v2.4.20) (2021-02-03)
+
+
+### 🌍 Internationalization
+
+* **de:** add local German (de) ([#463](https://github.com/lokalise/i18n-ally/issues/463)) ([9f7fae6](https://github.com/lokalise/i18n-ally/commit/9f7fae69c8bf5bda5c8454cf9cd78830481ba6a2))
+
+
+### 🔮 Refactor
+
+* path refactoring ([17ac3de](https://github.com/lokalise/i18n-ally/commit/17ac3de7922355b1379d91b03ad294c3df2a231d))
+
+
+### ⚗ Tests
+
+* add more tests ([5093e6d](https://github.com/lokalise/i18n-ally/commit/5093e6d534614ab02f004b6680ede729966faa1f))
+* add test cases for php from [@terales](https://github.com/terales) ([6698f0a](https://github.com/lokalise/i18n-ally/commit/6698f0ae436e2649cb1df9abeee00ec21d22e236))
+* diff for fixture tests ([73b4d69](https://github.com/lokalise/i18n-ally/commit/73b4d698324daada91d1821e84bf40bd3252530d))
+
+
+### ⚡ Features
+
+* introduce php parser ([2510faa](https://github.com/lokalise/i18n-ally/commit/2510faa88f02129b44cf615df40905a852717266))
+
+
+### 🐞 Bug Fixes
+
+* **rails:** works with the Rails extension, close [#472](https://github.com/lokalise/i18n-ally/issues/472) ([c52e40a](https://github.com/lokalise/i18n-ally/commit/c52e40ad2c38e56ebe817f12f0e86a877c17b9e8))
+* support '.' for localesPaths ([0924e3b](https://github.com/lokalise/i18n-ally/commit/0924e3b26bc441bff79a0c2fcf01dc9065f94259))
+
 ### [2.4.18](https://github.com/antfu/i18n-ally/compare/v2.4.17...v2.4.18) (2021-01-12)
 
 
