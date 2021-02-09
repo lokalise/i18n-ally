@@ -247,14 +247,11 @@ export class Config {
       localesPaths = paths.split(',')
     else
       localesPaths = paths || []
-    return localesPaths.map(i => trimEnd(i, '/\\'))
+    return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
   static set _localesPaths(paths: string[]) {
-    if (paths.length === 1)
-      this.setConfig('localesPaths', paths[0])
-    else
-      this.setConfig('localesPaths', paths)
+    this.setConfig('localesPaths', paths)
   }
 
   static updateLocalesPaths(paths: string[]) {
