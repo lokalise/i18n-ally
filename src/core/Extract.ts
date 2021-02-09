@@ -29,15 +29,15 @@ export function generateKeyFromText(text: string, filepath?: string) {
       .slice(0, Config.extractKeyMaxLength ?? Infinity)
   }
 
-  let keyPrefix = Config.keyPrefix
+  const keyPrefix = Config.keyPrefix
 
-  if (keyPrefix && keygenStrategy !== 'empty') {
-    if (filepath && filepath.includes('fileName')) {
-      keyPrefix = keyPrefix
-        .replace('{fileName}', basename(filepath))
-        .replace('{fileNameWithoutExt}', basename(filepath, extname(filepath)))
-    }
+  if (keyPrefix && keygenStrategy !== 'empty')
     key = keyPrefix + key
+
+  if (filepath && key.includes('fileName')) {
+    key = key
+      .replace('{fileName}', basename(filepath))
+      .replace('{fileNameWithoutExt}', basename(filepath, extname(filepath)))
   }
 
   return key
