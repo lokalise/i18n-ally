@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.4.20",
+  "version": "2.4.21",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "scripts": {

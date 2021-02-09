@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.21](https://github.com/lokalise/i18n-ally/compare/v2.4.20...v2.4.21) (2021-02-09)
+
+
+### 🐞 Bug Fixes
+
+* blackslash on configureLocalesPaths ([d00c9b5](https://github.com/lokalise/i18n-ally/commit/d00c9b5fe207580793b826aaf97d0d30d917be74))
+* extraction keygen, close [#476](https://github.com/lokalise/i18n-ally/issues/476) ([0cdd03c](https://github.com/lokalise/i18n-ally/commit/0cdd03cb4ddc819b9cad4d78513ea20a5e878691))
+* localesPaths backslash for Windows, close [#477](https://github.com/lokalise/i18n-ally/issues/477) ([7ab8269](https://github.com/lokalise/i18n-ally/commit/7ab82692eb7f2756558db79e2ff62d3699c23bd2))
+
 ### [2.4.20](https://github.com/lokalise/i18n-ally/compare/v2.4.18...v2.4.20) (2021-02-03)
 
 
