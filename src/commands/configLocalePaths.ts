@@ -46,7 +46,10 @@ export class ConfigLocalesGuide {
           return item.path.slice(1)
         return item.path
       })
-      .map(pa => path.relative(rootPath, pa))
+      .map(pa => path
+        .relative(rootPath, pa)
+        .replace(/\\/g, '/'),
+      )
   }
 
   static async success() {
