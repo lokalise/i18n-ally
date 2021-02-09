@@ -19,7 +19,7 @@ English | <a href="https://github.com/lokalise/i18n-ally/blob/master/README.zh-C
 </p>
 
 <p align='center'>
-<b>v2.0</b> is released with new <a href='https://github.com/lokalise/i18n-ally/wiki/Migration-v1.x'>Editor UI</a> and <a href='https://github.com/lokalise/i18n-ally/wiki/Review-&-Collaboration-System'>Review System</a> 🎉
+<b>v2.0</b> is released with new <a href='https://github.com/lokalise/i18n-ally/wiki/Editor-UI'>Editor UI</a> and <a href='https://github.com/lokalise/i18n-ally/wiki/Review-&-Collaboration-System'>Review System</a> 🎉
 </p>
 
 <p align='center'><i>
