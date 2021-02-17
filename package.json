@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/string-similarity": "^4.0.0",
     "bcp-47-normalize": "^1.1.1",
+    "change-case": "^4.1.2",
     "esm": "^3.2.25",
     "fast-glob": "^3.2.5",
     "glob-gitignore": "^1.0.14",
@@ -971,6 +972,19 @@
             "empty"
           ],
           "description": "%config.keygen_strategy%"
+        },
+        "i18n-ally.extract.keygenStyle": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "default",
+            "kebab-case",
+            "snake_case",
+            "camelCase",
+            "PascalCase",
+            "ALL_CAPS"
+          ],
+          "description": "%config.keygen_style%"
         },
         "i18n-ally.extract.keyPrefix": {
           "type": "string",

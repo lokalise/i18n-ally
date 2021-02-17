@@ -6,6 +6,7 @@ import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
+import { CaseStyles } from '~/utils/changeCase'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -400,6 +401,10 @@ export class Config {
 
   static get keygenStrategy() {
     return this.getConfig<string>('extract.keygenStrategy') ?? 'slug'
+  }
+
+  static get keygenStyle(): CaseStyles {
+    return this.getConfig<CaseStyles>('extract.keygenStyle') ?? 'default'
   }
 
   static get keyPrefix() {

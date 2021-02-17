@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid'
 import limax from 'limax'
 import { Config } from '../extension'
 import { CurrentFile } from '.'
+import { changeCase } from '~/utils/changeCase'
 
 export interface ExtractInfo {
   range: Range
@@ -39,6 +40,8 @@ export function generateKeyFromText(text: string, filepath?: string) {
       .replace('{fileName}', basename(filepath))
       .replace('{fileNameWithoutExt}', basename(filepath, extname(filepath)))
   }
+
+  key = changeCase(key, Config.keygenStyle)
 
   return key
 }
