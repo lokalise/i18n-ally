@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.22](https://github.com/lokalise/i18n-ally/compare/v2.4.21...v2.4.22) (2021-02-17)
+
+
+### 🐞 Bug Fixes
+
+* support underscore in keypathValidate ([aa2c957](https://github.com/lokalise/i18n-ally/commit/aa2c95729453f8ce3ffe1a9522bf1a56be037381))
+
+
+### ⚡ Features
+
+* new option `extract.keygenStyle`, close [#479](https://github.com/lokalise/i18n-ally/issues/479) ([6b40469](https://github.com/lokalise/i18n-ally/commit/6b40469d4efca1d10375988024e2466f28d0fb03))
+* support google translate api key ([a93a404](https://github.com/lokalise/i18n-ally/commit/a93a404943d0afe963a99b0d57255719dc1af648))
+
 ### [2.4.21](https://github.com/lokalise/i18n-ally/compare/v2.4.20...v2.4.21) (2021-02-09)
 
 
