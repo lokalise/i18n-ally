@@ -50,6 +50,7 @@
   "config.key_max_length": "Om specifierad kommer den genererade nyckeln vid extrahering trunkeras till så här många tecken (exklusive `keyPrefix`). Sätts som standard till obegränsat.",
   "config.key_prefix": "Sträng att lägga till innan dem extraherade nyckeln. Du kan använda {fileName} för filnamnet, och {fileNameWithoutExt} för den del av namnet fram tills första punkten.",
   "config.keygen_strategy": "Strategi för att generera nycklar.",
+  "config.keygen_style": "",
   "config.keys_in_use": "Nycklar att markera som i användning, även fast de inte dyker upp i koden",
   "config.keystyle": "locale-fils nyckelstilmall",
   "config.language_tag_system": "Språkmärkningssystem som används.",

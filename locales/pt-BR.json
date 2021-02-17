@@ -50,6 +50,7 @@
   "config.key_max_length": "",
   "config.key_prefix": "",
   "config.keygen_strategy": "",
+  "config.keygen_style": "",
   "config.keys_in_use": "",
   "config.keystyle": "Estilo de chave de tradução",
   "config.language_tag_system": "",

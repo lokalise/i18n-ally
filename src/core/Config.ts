@@ -467,6 +467,10 @@ export class Config {
       .update(key, value, isGlobal)
   }
 
+  static get googleApiKey() {
+    return this.getConfig<string | null | undefined>('translate.google.apiKey')
+  }
+
   static get deeplApiKey() {
     return this.getConfig<string | null | undefined>('translate.deepl.apiKey')
   }

@@ -908,6 +908,21 @@
           "default": false,
           "description": "%config.translate_override_existing%"
         },
+        "i18n-ally.translate.google.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.google_api_key%"
+        },
+        "i18n-ally.translate.deepl.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.deepl_api_key%"
+        },
+        "i18n-ally.translate.deepl.enableLog": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.deepl_log%"
+        },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
           "items": {
@@ -1019,16 +1034,6 @@
         "i18n-ally.defaultNamespace": {
           "type": "string",
           "description": "%config.default_namespace%"
-        },
-        "i18n-ally.translate.deepl.apiKey": {
-          "type": "string",
-          "default": null,
-          "description": "%config.deepl_api_key%"
-        },
-        "i18n-ally.translate.deepl.enableLog": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.deepl_log%"
         },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."

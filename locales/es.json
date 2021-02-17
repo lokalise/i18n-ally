@@ -50,6 +50,7 @@
   "config.key_max_length": "Si especificada, la clave generada al extraer se truncará a este número de caracteres (excluyendo el keyPrefix). El valor predeterminado es ilimitado.",
   "config.key_prefix": "Cadena a anteponer a la ",
   "config.keygen_strategy": "Estrategia para la generación de claves",
+  "config.keygen_style": "",
   "config.keys_in_use": "Claves a marcar para rellenar incluso sin aparecer en el código",
   "config.keystyle": "Estilo de la clave de configuración regional",
   "config.language_tag_system": "Sistema de etiquetado de lenguaje se está usando",

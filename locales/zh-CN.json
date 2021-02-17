@@ -50,6 +50,7 @@
   "config.key_max_length": "",
   "config.key_prefix": "提取出的文案路径前缀",
   "config.keygen_strategy": "提取文案路径的生成策略",
+  "config.keygen_style": "",
   "config.keys_in_use": "尽管代码中没有出现，但仍标记为正在使用的键",
   "config.keystyle": "翻译路径格式",
   "config.language_tag_system": "语言标签系统",

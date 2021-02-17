@@ -50,6 +50,7 @@
   "config.key_max_length": "",
   "config.key_prefix": "文案 key 的前綴",
   "config.keygen_strategy": "文案 key 的生成策略, slug 默認策略, random 生成隨機字串",
+  "config.keygen_style": "",
   "config.keys_in_use": "儘管程式碼中沒有出現，但仍標記為正在使用的鍵",
   "config.keystyle": "翻譯路徑格式",
   "config.language_tag_system": "語言標籤系統",

@@ -50,6 +50,7 @@
   "config.key_max_length": "Schlüssel werden bei der Extrahierung auf die angegebene Zeichenzahl gekürzt (exlusive des keyPrefix). Standardwert ist unlimitiert.",
   "config.key_prefix": "Zeichenfolge, die dem Schlüssel bei der Extrahierung vorangestellt wird. Sie können {fileName} für den Dateinamen und {fileNameWithoutExt} für den Teil des Dateinamens vor dem ersten Punkt verwenden.",
   "config.keygen_strategy": "Strategie der Schlüsselerzeugung.",
+  "config.keygen_style": "",
   "config.keys_in_use": "Schlüssel, die als verwendet markiert werden sollen, obwohl sie nicht im Code vorkommen",
   "config.keystyle": "Stil der Lokalisierungsschlüssel",
   "config.language_tag_system": "Sprachen tag system",
