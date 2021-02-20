@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/lokalise/i18n-ally/blob/screenshots/full-logo.png?raw=true" alt="logo" width="450"/>
+<img src="https://github.com/lokalise/i18n-ally/blob/master/screenshots/full-logo.png?raw=true" alt="logo" width="450"/>
 </p>
 
 <p align='center'>
