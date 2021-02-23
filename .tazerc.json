@@ -1,6 +1,7 @@
 {
   "exclude": [
     "vue",
+    "vuex",
     "webpack",
     "webpack-cli",
     "limax"
