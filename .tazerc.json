@@ -4,6 +4,7 @@
     "vuex",
     "webpack",
     "webpack-cli",
-    "limax"
+    "limax",
+    "@types/vscode"
   ]
 }
