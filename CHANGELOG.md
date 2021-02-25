@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.2](https://github.com/lokalise/i18n-ally/compare/v2.5.1...v2.5.2) (2021-02-25)
+
+
+### 🐞 Bug Fixes
+
+* vscode types version ([8fb34d1](https://github.com/lokalise/i18n-ally/commit/8fb34d17eacc32986d4f964d40f9b38a6fd735c3))
+
 ### [2.5.1](https://github.com/lokalise/i18n-ally/compare/v2.5.0...v2.5.1) (2021-02-25)
 
 
