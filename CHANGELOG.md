@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.1](https://github.com/lokalise/i18n-ally/compare/v2.5.0...v2.5.1) (2021-02-25)
+
+
+### ⚡ Features
+
+* support custom file extensions for parsers, close [#459](https://github.com/lokalise/i18n-ally/issues/459) ([758552d](https://github.com/lokalise/i18n-ally/commit/758552d96861880faeea6f7702743be5106f9967))
+
 ## [2.5.0](https://github.com/lokalise/i18n-ally/compare/v2.4.23...v2.5.0) (2021-02-23)
 
 ### [2.4.23](https://github.com/lokalise/i18n-ally/compare/v2.4.22...v2.4.23) (2021-02-23)
