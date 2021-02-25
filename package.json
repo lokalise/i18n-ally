@@ -950,6 +950,10 @@
           "type": "object",
           "default": {}
         },
+        "i18n-ally.parsers.extendFileExtensions": {
+          "type": "object",
+          "default": {}
+        },
         "i18n-ally.review.enabled": {
           "type": "boolean",
           "default": true,

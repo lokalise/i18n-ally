@@ -166,7 +166,12 @@ export class Global {
 
   static get enabledParserExts() {
     return this.enabledParsers
-      .map(f => f.supportedExts)
+      .flatMap(f => [
+        f.supportedExts,
+        Object.entries(Config.parsersExtendFileExtensions)
+          .find(([k, v]) => v === f.id)?.[0],
+      ])
+      .filter(Boolean)
       .join('|')
   }
 
@@ -368,6 +373,13 @@ export class Global {
   static getMatchedParser(ext: string) {
     if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
+
+    // resolve custom parser extensions
+    const id = Config.parsersExtendFileExtensions[ext.slice(1)]
+    if (id)
+      return this.enabledParsers.find(parser => parser.id === id)
+
+    // resolve parser
     return this.enabledParsers.find(parser => parser.supports(ext))
   }
 

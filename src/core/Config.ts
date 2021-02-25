@@ -24,6 +24,7 @@ export class Config {
     'languageTagSystem',
     'ignoreFiles',
     'parserOptions',
+    'parsers.extendFileExtensions',
   ]
 
   static readonly refreshConfigs = [
@@ -223,6 +224,10 @@ export class Config {
 
   static get parsersTypescriptCompilerOption(): any {
     return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
+  }
+
+  static get parsersExtendFileExtensions(): any {
+    return this.getConfig<any>('parsers.extendFileExtensions') || {}
   }
 
   static toggleLocaleVisibility(locale: string, visible?: boolean) {
