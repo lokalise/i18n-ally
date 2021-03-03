@@ -100,7 +100,7 @@
     "parcel-plugin-inliner": "^1.0.16",
     "php-array-parser": "^1.0.1",
     "php-parser": "^3.0.2",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "rimraf": "^3.0.2",
     "standard-version": "^9.1.1",
     "stylus": "^0.54.8",
