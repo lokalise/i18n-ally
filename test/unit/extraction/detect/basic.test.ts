@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { BasicExtrationRule, shouldExtract } from '../../../../src/core/extraction'
+import { BasicExtrationRule, shouldExtract } from '../../../../src/extraction'
 
 const rules = [
   new BasicExtrationRule(),
