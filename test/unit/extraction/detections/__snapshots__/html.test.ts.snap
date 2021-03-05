@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`detections html 1`] = `
+Array [
+  Object {
+    "end": 23,
+    "fullEnd": 24,
+    "fullStart": 5,
+    "fullText": "placeholder=\\"hello\\"",
+    "isDynamic": false,
+    "start": 18,
+    "text": "hello",
+  },
+]
+`;
+
+exports[`detections html 2`] = `
+Array [
+  Object {
+    "end": 117,
+    "fullEnd": 118,
+    "fullStart": 72,
+    "fullText": "placeholder=\\"Write your article (in markdown)\\"",
+    "isDynamic": false,
+    "start": 85,
+    "text": "Write your article (in markdown)",
+  },
+]
+`;
+
+exports[`detections html 3`] = `Array []`;
+
+exports[`detections html 4`] = `
+Array [
+  Object {
+    "end": 47,
+    "fullEnd": 48,
+    "fullStart": 25,
+    "fullText": "title=\\"This is a title\\"",
+    "isDynamic": false,
+    "start": 32,
+    "text": "This is a title",
+  },
+  Object {
+    "end": 69,
+    "fullEnd": 70,
+    "fullStart": 49,
+    "fullText": "alt=\\"This is an alt.\\"",
+    "isDynamic": false,
+    "start": 54,
+    "text": "This is an alt.",
+  },
+]
+`;
+
+exports[`detections vue-favored 1`] = `
+Array [
+  Object {
+    "end": 54,
+    "fullEnd": 55,
+    "fullStart": 7,
+    "fullText": "v-bind:placeholder=\\"'Placeholder ' + input_name\\"",
+    "isDynamic": true,
+    "start": 27,
+    "text": "'Placeholder ' + input_name",
+  },
+]
+`;

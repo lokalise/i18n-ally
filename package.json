@@ -25,7 +25,8 @@
     "test:e2e:update": "cross-env CHAI_JEST_SNAPSHOT_UPDATE_ALL=true yarn test:e2e",
     "test:e2e:dev": "rimraf test/e2e-out && tsc -p test/e2e --watch",
     "test:fixture": "rimraf test/fixture-scripts-out && tsc -p test/fixture-scripts && node ./test/fixture-scripts-out/index.js",
-    "test:unit": "ts-mocha -p test/unit/tsconfig.json test/unit/**/**/*.test.ts"
+    "test:unit": "ts-mocha -p test/unit/tsconfig.json --file test/unit/setup.ts test/unit/**/**/*.test.ts",
+    "test:update": "cross-env CHAI_JEST_SNAPSHOT_UPDATE_ALL=true nr test:unit"
   },
   "dependencies": {
     "@types/string-similarity": "^4.0.0",
