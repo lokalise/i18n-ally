@@ -104,6 +104,7 @@ export const FLAGS = [
   'hm',
   'hn',
   'hr',
+  'he',
   'ht',
   'hu',
   'id',

@@ -18,7 +18,7 @@ export class BCP47 extends BaseTagSystem {
 
   toFlagname(locale: string) {
     const { region, language } = bcp47.parse(locale, { normalize: true, forgiving: true })
-    return (region || Config.localeCountryMap[language] || '').toLowerCase()
+    return (region || Config.localeCountryMap[language] || language || '').toLowerCase()
   }
 
   lookup(locale: string) {
