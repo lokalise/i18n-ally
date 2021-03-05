@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.3](https://github.com/lokalise/i18n-ally/compare/v2.5.2...v2.5.3) (2021-03-05)
+
+
+### 🔮 Refactor
+
+* restructure ([23a6521](https://github.com/lokalise/i18n-ally/commit/23a652144e742266aea79b8dc782cc3d5654e2c3))
+
+
+### 🐞 Bug Fixes
+
+* es default flag, close [#489](https://github.com/lokalise/i18n-ally/issues/489) ([f62e49a](https://github.com/lokalise/i18n-ally/commit/f62e49aa36b6833bac52161c3f0ff9c76b9cf686))
+* UI editor font family, close [#496](https://github.com/lokalise/i18n-ally/issues/496) ([fab0ce0](https://github.com/lokalise/i18n-ally/commit/fab0ce03ae0f4ff1667c0f33a439e2c13c538d8d))
+
+
+### ⚡ Features
+
+* add flag for he, close [#442](https://github.com/lokalise/i18n-ally/issues/442) ([20b5b81](https://github.com/lokalise/i18n-ally/commit/20b5b81a8e4a93f5467d5f2558c5f510cdd09234))
+
 ### [2.5.2](https://github.com/lokalise/i18n-ally/compare/v2.5.1...v2.5.2) (2021-02-25)
 
 
