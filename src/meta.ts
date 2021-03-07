@@ -29,4 +29,5 @@ export const DEFAULT_LOCALE_COUNTRY_MAP = {
   fr: 'fr',
   ja: 'ja',
   es: 'es',
+  vi: 'vn',
 }
