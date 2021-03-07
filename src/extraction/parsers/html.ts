@@ -2,7 +2,6 @@ import { Parser } from 'htmlparser2'
 import { ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
 import { ExtractionHTMLOptions } from './options'
-import { Config } from '~/core'
 
 export interface DetectionResult {
   text: string
@@ -23,7 +22,7 @@ const defaultOptions: Required<ExtractionHTMLOptions> = {
 export function detect(
   input: string,
   rules?: ExtractionRule[],
-  userOptions: ExtractionHTMLOptions = Config.extractParserHTMLOptions,
+  userOptions: ExtractionHTMLOptions = {},
 ) {
   const {
     attributes: ATTRS,
