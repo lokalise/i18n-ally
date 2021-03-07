@@ -1033,6 +1033,11 @@
           ],
           "description": "%config.target_picking_strategy%"
         },
+        "i18n-ally.extract.parsers.html": {
+          "type": "object",
+          "default": {},
+          "description": "Parser options for extracting HTML, see https://github.com/lokalise/i18n-ally/blob/master/src/extraction/parsers/options.ts"
+        },
         "i18n-ally.parserOptions": {
           "type": "object"
         },

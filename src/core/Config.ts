@@ -7,6 +7,7 @@ import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_A
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
+import { ExtractionHTMLOptions } from '~/extraction/parsers/options'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -418,6 +419,10 @@ export class Config {
 
   static get extractKeyMaxLength() {
     return this.getConfig<number>('extract.keyMaxLength') ?? Infinity
+  }
+
+  static get extractParserHTMLOptions() {
+    return this.getConfig<ExtractionHTMLOptions>('extract.parsers.html') ?? {}
   }
 
   static get showFlags() {

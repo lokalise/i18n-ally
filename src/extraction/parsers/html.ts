@@ -1,9 +1,8 @@
 import { Parser } from 'htmlparser2'
 import { ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
-
-// TODO: make it configurable
-const ATTR_NAMES = ['title', 'alt', 'placeholder', 'label', 'aria-label']
+import { ExtractionHTMLOptions } from './options'
+import { Config } from '~/core'
 
 export interface DetectionResult {
   text: string
@@ -15,17 +14,32 @@ export interface DetectionResult {
   fullEnd?: number
 }
 
-export function detect(input: string, rules?: ExtractionRule[]) {
+const defaultOptions: Required<ExtractionHTMLOptions> = {
+  attributes: ['title', 'alt', 'placeholder', 'label', 'aria-label'],
+  vBind: true,
+  inlineText: true,
+}
+
+export function detect(
+  input: string,
+  rules?: ExtractionRule[],
+  userOptions: ExtractionHTMLOptions = Config.extractParserHTMLOptions,
+) {
+  const {
+    attributes: ATTRS,
+    vBind: V_BIND,
+  } = Object.assign({}, defaultOptions, userOptions)
+
   const detections: DetectionResult[] = []
 
   const parser = new Parser({
     onopentag(_, attrs) {
       const attrNames = Object.keys(attrs).map((name) => {
         // static
-        if (ATTR_NAMES.includes(name) && shouldExtract(attrs[name], rules))
+        if (ATTRS.includes(name) && shouldExtract(attrs[name], rules))
           return [name, false]
         // dynamic
-        else if (ATTR_NAMES.some(n => name === `:${n}` || name === `v-bind:${n}`))
+        else if (V_BIND && ATTRS.some(n => name === `:${n}` || name === `v-bind:${n}`))
           return [name, true]
         return null
       })
