@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.4](https://github.com/lokalise/i18n-ally/compare/v2.5.3...v2.5.4) (2021-03-07)
+
+
+### 🐞 Bug Fixes
+
+* flag for vi, close [#498](https://github.com/lokalise/i18n-ally/issues/498) ([6d0aab1](https://github.com/lokalise/i18n-ally/commit/6d0aab19e72149e8076fdfa6457472b628d1a81f))
+
 ### [2.5.3](https://github.com/lokalise/i18n-ally/compare/v2.5.2...v2.5.3) (2021-03-05)
 
 
