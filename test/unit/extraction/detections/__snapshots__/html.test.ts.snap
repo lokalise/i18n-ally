@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`detections html 1`] = `
+exports[`detections attrs html 1`] = `
 Array [
   Object {
     "end": 23,
@@ -10,11 +10,12 @@ Array [
     "isDynamic": false,
     "start": 18,
     "text": "hello",
+    "type": "attribute",
   },
 ]
 `;
 
-exports[`detections html 2`] = `
+exports[`detections attrs html 2`] = `
 Array [
   Object {
     "end": 117,
@@ -24,13 +25,12 @@ Array [
     "isDynamic": false,
     "start": 85,
     "text": "Write your article (in markdown)",
+    "type": "attribute",
   },
 ]
 `;
 
-exports[`detections html 3`] = `Array []`;
-
-exports[`detections html 4`] = `
+exports[`detections attrs html 3`] = `
 Array [
   Object {
     "end": 47,
@@ -40,6 +40,7 @@ Array [
     "isDynamic": false,
     "start": 32,
     "text": "This is a title",
+    "type": "attribute",
   },
   Object {
     "end": 69,
@@ -49,11 +50,12 @@ Array [
     "isDynamic": false,
     "start": 54,
     "text": "This is an alt.",
+    "type": "attribute",
   },
 ]
 `;
 
-exports[`detections vue-favored 1`] = `
+exports[`detections attrs vue-favored attrs 1`] = `
 Array [
   Object {
     "end": 54,
@@ -63,6 +65,69 @@ Array [
     "isDynamic": true,
     "start": 27,
     "text": "'Placeholder ' + input_name",
+    "type": "attribute",
+  },
+]
+`;
+
+exports[`detections inline mixed text 1`] = `
+Array [
+  Object {
+    "end": 50,
+    "start": 44,
+    "text": "Sign in",
+    "type": "inline",
+  },
+  Object {
+    "end": 72,
+    "start": 65,
+    "text": "or",
+    "type": "inline",
+  },
+  Object {
+    "end": 119,
+    "start": 113,
+    "text": "sign up",
+    "type": "inline",
+  },
+  Object {
+    "end": 169,
+    "start": 134,
+    "text": "to add comments on this article.",
+    "type": "inline",
+  },
+]
+`;
+
+exports[`detections inline multiple lines 1`] = `
+Array [
+  Object {
+    "end": 36,
+    "start": 4,
+    "text": "Using v-html directive:",
+    "type": "inline",
+  },
+]
+`;
+
+exports[`detections inline plain text 1`] = `
+Array [
+  Object {
+    "end": 14,
+    "start": 3,
+    "text": "Popular Tags",
+    "type": "inline",
+  },
+]
+`;
+
+exports[`detections inline vue-favored variables 1`] = `
+Array [
+  Object {
+    "end": 32,
+    "start": 3,
+    "text": "Using mustaches: {{ rawHtml }}",
+    "type": "inline",
   },
 ]
 `;

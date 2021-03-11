@@ -11,6 +11,7 @@ export interface DetectionResult {
   fullText?: string
   fullStart?: number
   fullEnd?: number
+  type: 'attribute' | 'inline'
 }
 
 const defaultOptions: Required<ExtractionHTMLOptions> = {
@@ -72,10 +73,28 @@ export function detect(
           fullStart,
           fullEnd,
           fullText,
+          type: 'attribute',
         })
       }
     },
+    ontext(text) {
+      const tagStart = parser.startIndex
+      const tagEnd = parser.endIndex!
+
+      text = text.split(/\n/g).map(i => i.trim()).filter(Boolean).join(' ')
+
+      if (!shouldExtract(text, rules))
+        return
+
+      detections.push({
+        text,
+        start: tagStart,
+        end: tagEnd,
+        type: 'inline',
+      })
+    },
   })
+
   parser.parseComplete(input)
 
   return detections

@@ -4,10 +4,11 @@ import { extractionsParsers } from '../../../../src/extraction'
 const html = extractionsParsers.html
 
 describe('detections', () => {
-  it('html', () => {
-    expect(html.detect('<div placeholder="hello"></div>')).to.matchSnapshot()
+  describe('attrs', () => {
+    it('html', () => {
+      expect(html.detect('<div placeholder="hello"></div>')).to.matchSnapshot()
 
-    expect(html.detect(`
+      expect(html.detect(`
 <textarea
   class="form-control"
   rows="8"
@@ -16,14 +17,50 @@ describe('detections', () => {
   ></textarea>
 `)).to.matchSnapshot()
 
-    expect(html.detect('<img src="https://example.com/img.svg" :title="image" alt="img.svg">')).to.matchSnapshot()
-    expect(html.detect('<img src="{{ img_url }}" title="This is a title" alt="This is an alt.">')).to.matchSnapshot()
+      expect(html.detect('<img src="{{ img_url }}" title="This is a title" alt="This is an alt.">')).to.matchSnapshot()
+      expect(html.detect('<img src="https://example.com/img.svg" :title="image" alt="img.svg">')).eql([])
+    })
+
+    it('vue-favored attrs', () => {
+      expect(html.detect(
+        // eslint-disable-next-line no-template-curly-in-string
+        '<input v-bind:placeholder="\'Placeholder \' + input_name" :title="`${input_name} title`" name="email">'),
+      ).to.matchSnapshot()
+    })
   })
 
-  it('vue-favored', () => {
-    expect(html.detect(
-      // eslint-disable-next-line no-template-curly-in-string
-      '<input v-bind:placeholder="\'Placeholder \' + input_name" :title="`${input_name} title`" name="email">'),
-    ).to.matchSnapshot()
+  describe('inline', () => {
+    it('plain text', () => {
+      expect(html.detect('<p>Popular Tags</p>')).to.matchSnapshot()
+    })
+
+    it('mixed text', () => {
+      expect(html.detect(`
+<p>
+  <router-link :to="{ name: 'login' }">Sign in</router-link>
+  or
+  <router-link :to="{ name: 'register' }">sign up</router-link>
+  to add comments on this article.
+</p>`)).to.matchSnapshot()
+    })
+
+    it('vue-favored variables', () => {
+      expect(html.detect('<p>Using mustaches: {{ rawHtml }}</p>')).to.matchSnapshot()
+    })
+
+    it('multiple lines', () => {
+      expect(html.detect(`
+<p>
+  Using
+  v-html
+  directive:
+  <span v-html="rawHtml"></span>
+</p>
+`)).to.matchSnapshot()
+    })
+
+    it('invalid', () => {
+      expect(html.detect('<p>class.name</p>')).eql([])
+    })
   })
 })
