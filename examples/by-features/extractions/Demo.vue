@@ -2,6 +2,7 @@
   <div id="app">
     <p title="Greating">
       Hello World
+      Good
     </p>
     <p>Foo</p>
   </div>

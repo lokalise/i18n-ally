@@ -9,7 +9,7 @@ const decoration = window.createTextEditorDecorationType({
   backgroundColor: '#edbe3230',
   border: '1px dashed #edbe32',
   borderRadius: '3px',
-  rangeBehavior: DecorationRangeBehavior.OpenOpen,
+  rangeBehavior: DecorationRangeBehavior.ClosedClosed,
 })
 
 export async function DetectHardStrings() {
@@ -36,7 +36,27 @@ export async function DetectHardStrings() {
 
   editor.setDecorations(
     decoration,
-    result.map(i => new Range(doc.positionAt(i.start), doc.positionAt(i.end))),
+    result.flatMap((i) => {
+      if (i.type !== 'inline')
+        return new Range(doc.positionAt(i.start), doc.positionAt(i.end))
+
+      let start = i.start
+      return i.fullText!.split(/\n/g).map((part, idx) => {
+        const leadingSpace = part.match(/^\s*/)?.[0] || ''
+        const tailingSpace = leadingSpace.length === part.length
+          ? ''
+          : part.match(/\s*$/)?.[0] || ''
+        start += leadingSpace.length
+        const end = start + (part.length - leadingSpace.length - tailingSpace.length)
+
+        const range = start === end
+          ? undefined!
+          : new Range(doc.positionAt(start), doc.positionAt(end))
+        start = end + 1
+        return range
+      })
+    })
+      .filter(Boolean),
   )
 
   window.showInformationMessage(result.map(i => i.text).join('\n'))

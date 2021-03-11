@@ -74,22 +74,23 @@ export function detect(
         })
       }
     },
-    ontext(text) {
+    ontext(fullText) {
       if (IGNORED_TAGS.includes(lastTag))
         return
 
-      const tagStart = parser.startIndex
-      const tagEnd = parser.endIndex! + 1
-
-      text = text.split(/\n/g).map(i => i.trim()).filter(Boolean).join(' ')
+      const text = fullText.split(/\n/g).map(i => i.trim()).filter(Boolean).join(' ')
 
       if (!shouldExtract(text, rules))
         return
 
+      const start = parser.startIndex
+      const end = parser.endIndex! + 1
+
       detections.push({
         text,
-        start: tagStart,
-        end: tagEnd,
+        fullText,
+        start,
+        end,
         type: 'inline',
       })
     },
