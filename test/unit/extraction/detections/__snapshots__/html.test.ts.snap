@@ -73,25 +73,33 @@ Array [
 exports[`detections inline mixed text 1`] = `
 Array [
   Object {
-    "end": 50,
+    "end": 51,
+    "fullText": "Sign in",
     "start": 44,
     "text": "Sign in",
     "type": "inline",
   },
   Object {
-    "end": 72,
+    "end": 73,
+    "fullText": "
+  or
+  ",
     "start": 65,
     "text": "or",
     "type": "inline",
   },
   Object {
-    "end": 119,
+    "end": 120,
+    "fullText": "sign up",
     "start": 113,
     "text": "sign up",
     "type": "inline",
   },
   Object {
-    "end": 169,
+    "end": 170,
+    "fullText": "
+  to add comments on this article.
+",
     "start": 134,
     "text": "to add comments on this article.",
     "type": "inline",
@@ -102,7 +110,12 @@ Array [
 exports[`detections inline multiple lines 1`] = `
 Array [
   Object {
-    "end": 36,
+    "end": 37,
+    "fullText": "
+  Using
+  v-html
+  directive:
+  ",
     "start": 4,
     "text": "Using v-html directive:",
     "type": "inline",
@@ -113,7 +126,8 @@ Array [
 exports[`detections inline plain text 1`] = `
 Array [
   Object {
-    "end": 14,
+    "end": 15,
+    "fullText": "Popular Tags",
     "start": 3,
     "text": "Popular Tags",
     "type": "inline",
@@ -124,7 +138,8 @@ Array [
 exports[`detections inline vue-favored variables 1`] = `
 Array [
   Object {
-    "end": 32,
+    "end": 33,
+    "fullText": "Using mustaches: {{ rawHtml }}",
     "start": 3,
     "text": "Using mustaches: {{ rawHtml }}",
     "type": "inline",
