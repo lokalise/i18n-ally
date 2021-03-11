@@ -61,6 +61,12 @@ describe('detections', () => {
 
     it('invalid', () => {
       expect(html.detect('<p>class.name</p>')).eql([])
+      expect(html.detect('<p> {{ $t("hello") }} </p>')).eql([])
+    })
+
+    it('exclude tag', () => {
+      expect(html.detect('<script>Hello</script>')).eql([])
+      expect(html.detect('<style lang="ts">Hello</style>')).eql([])
     })
   })
 })

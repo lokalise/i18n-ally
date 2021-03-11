@@ -2,20 +2,11 @@ import { Parser } from 'htmlparser2'
 import { ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
 import { ExtractionHTMLOptions } from './options'
-
-export interface DetectionResult {
-  text: string
-  start: number
-  end: number
-  isDynamic?: boolean
-  fullText?: string
-  fullStart?: number
-  fullEnd?: number
-  type: 'attribute' | 'inline'
-}
+import { DetectionResult } from './types'
 
 const defaultOptions: Required<ExtractionHTMLOptions> = {
   attributes: ['title', 'alt', 'placeholder', 'label', 'aria-label'],
+  ignoredTags: ['script', 'style'],
   vBind: true,
   inlineText: true,
 }
@@ -27,13 +18,19 @@ export function detect(
 ) {
   const {
     attributes: ATTRS,
+    ignoredTags: IGNORED_TAGS,
     vBind: V_BIND,
   } = Object.assign({}, defaultOptions, userOptions)
 
   const detections: DetectionResult[] = []
 
+  let lastTag = ''
   const parser = new Parser({
-    onopentag(_, attrs) {
+    onopentag(name, attrs) {
+      lastTag = name
+      if (IGNORED_TAGS.includes(name))
+        return
+
       const attrNames = Object.keys(attrs).map((name) => {
         // static
         if (ATTRS.includes(name) && shouldExtract(attrs[name], rules))
@@ -78,6 +75,9 @@ export function detect(
       }
     },
     ontext(text) {
+      if (IGNORED_TAGS.includes(lastTag))
+        return
+
       const tagStart = parser.startIndex
       const tagEnd = parser.endIndex!
 

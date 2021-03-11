@@ -36,6 +36,7 @@ const excludes = [
   ':boom:',
   'php://stderr',
   '127.0.0.1',
+  '{Hello World}',
   '0',
   '', // empty string
   '/',

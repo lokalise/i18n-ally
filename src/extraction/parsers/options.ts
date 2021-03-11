@@ -7,6 +7,13 @@ export interface ExtractionHTMLOptions {
   attributes?: string[]
 
   /**
+   * HTML tags to be ignored
+   *
+   * @default ['script', 'style']
+   */
+  ignoredTags?: string[]
+
+  /**
    * Extract Vue v-bind syntax
    *
    * @default true

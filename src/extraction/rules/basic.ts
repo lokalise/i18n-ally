@@ -6,6 +6,9 @@ export class BasicExtrationRule extends ExtractionRule {
   shouldExtract(str: string) {
     if (str.length === 0)
       return ExtractionScore.MustExclude
+    // ❌ brackets
+    if (str.match(/^{.*}$/))
+      return ExtractionScore.MustExclude
     // ✅ has a space, and any meaning full letters
     if (str.includes(' ') && str.match(/\w/))
       return ExtractionScore.ShouldInclude
