@@ -237,9 +237,9 @@
         "title": "%refactor.extract_text%"
       },
       {
-        "command": "i18n-ally.extract-current-file",
+        "command": "i18n-ally.extraction-detect-current-file",
         "category": "%extname%",
-        "title": "(expiremental) Extract current file"
+        "title": "(expiremental) Detect hard-coded strings in the current file"
       },
       {
         "command": "i18n-ally.open-url",

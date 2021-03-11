@@ -9,7 +9,7 @@ export async function ExtractAllInFileCommand() {
 
 const m: ExtensionModule = () => {
   return [
-    commands.registerCommand(Commands.extract_current_file, ExtractAllInFileCommand),
+    commands.registerCommand(Commands.extraction_detect_current_file, ExtractAllInFileCommand),
   ]
 }
 
