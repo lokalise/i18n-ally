@@ -239,7 +239,7 @@
       {
         "command": "i18n-ally.extract-current-file",
         "category": "%extname%",
-        "title": "Extract current file"
+        "title": "(expiremental) Extract current file"
       },
       {
         "command": "i18n-ally.open-url",

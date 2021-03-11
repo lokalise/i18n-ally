@@ -46,11 +46,12 @@ class LaravelFramework extends Framework {
     return keypath.replace(/\//g, '.')
   }
 
-  supportAutoExtraction = true
+  // TODO: not working yet
+  // supportAutoExtraction = ['php']
 
   _engine: Parser = undefined!
 
-  getHardStrings(doc: TextDocument) {
+  detectHardStrings(doc: TextDocument) {
     if (doc.languageId !== 'php')
       return undefined
 
@@ -67,7 +68,7 @@ class LaravelFramework extends Framework {
 
     const ast = engine.parseCode(text)
 
-    console.log('AST', ast)
+    // console.log('AST', ast)
 
     function searchFor(name: string, node: any = ast): Node[] {
       if (!node)

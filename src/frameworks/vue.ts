@@ -1,5 +1,8 @@
+import { TextDocument } from 'vscode'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
+import { defaultExtractionRules, extractionsParsers } from '~/extraction'
+import { Config } from '~/core'
 
 class VueFramework extends Framework {
   id = 'vue'
@@ -44,6 +47,17 @@ class VueFramework extends Framework {
 
   enableFeatures = {
     LinkedMessages: true,
+  }
+
+  supportAutoExtraction = ['vue', 'html']
+
+  detectHardStrings(doc: TextDocument) {
+    const text = doc.getText()
+
+    // TODO: support script block
+    const result = extractionsParsers.html.detect(text, defaultExtractionRules, Config.extractParserHTMLOptions)
+
+    return result
   }
 }
 

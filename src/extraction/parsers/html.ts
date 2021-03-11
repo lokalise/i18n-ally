@@ -79,7 +79,7 @@ export function detect(
         return
 
       const tagStart = parser.startIndex
-      const tagEnd = parser.endIndex!
+      const tagEnd = parser.endIndex! + 1
 
       text = text.split(/\n/g).map(i => i.trim()).filter(Boolean).join(' ')
 

@@ -1,6 +1,7 @@
-import { Range, TextDocument } from 'vscode'
+import { TextDocument } from 'vscode'
 import { LanguageId } from '~/utils'
 import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle, Config } from '~/core'
+import { DetectionResult } from '~/extraction'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -17,11 +18,6 @@ export interface ScopeRange {
   namespace: string
 }
 
-export interface HardStringInfo {
-  range: Range
-  value: string
-}
-
 export abstract class Framework {
   abstract id: string
   abstract display: string
@@ -29,7 +25,7 @@ export abstract class Framework {
   enabledParsers?: string[]
   derivedKeyRules?: string[]
   namespaceDelimiter?: string
-  supportAutoExtraction?: boolean
+  supportAutoExtraction?: string[]
 
   /**
    * Packages names determine whether a frameworks should enable or not
@@ -54,7 +50,7 @@ export abstract class Framework {
   /**
    * Analysis the file and get hard strings
    */
-  getHardStrings(document: TextDocument): HardStringInfo[] | undefined {
+  detectHardStrings(document: TextDocument): DetectionResult[] | undefined {
     return undefined
   }
 
