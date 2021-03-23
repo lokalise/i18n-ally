@@ -41,20 +41,31 @@ export async function DetectHardStrings() {
         return new Range(doc.positionAt(i.start), doc.positionAt(i.end))
 
       let start = i.start
-      return i.fullText!.split(/\n/g).map((part, idx) => {
-        const leadingSpace = part.match(/^\s*/)?.[0] || ''
-        const tailingSpace = leadingSpace.length === part.length
-          ? ''
-          : part.match(/\s*$/)?.[0] || ''
-        start += leadingSpace.length
-        const end = start + (part.length - leadingSpace.length - tailingSpace.length)
 
-        const range = start === end
-          ? undefined!
-          : new Range(doc.positionAt(start), doc.positionAt(end))
-        start = end + 1
-        return range
-      })
+      // the start line with meaningful content
+      let startLine = 0
+      const lines = i.fullText!.split(/\n/g)
+      return lines
+        .map((part, idx) => {
+          const leadingSpace = idx <= startLine
+            ? (part.match(/^\s*/)?.[0] || '')
+            : ''
+          const tailingSpace = leadingSpace.length === part.length
+            ? ''
+            : part.match(/\s*$/)?.[0] || ''
+          start += leadingSpace.length
+          const end = start + (part.length - leadingSpace.length - tailingSpace.length)
+
+          const range = start === end
+            ? undefined!
+            : new Range(doc.positionAt(start), doc.positionAt(end))
+          start = end + 1
+
+          if (idx === startLine && range == null)
+            startLine += 1
+
+          return range
+        })
     })
       .filter(Boolean),
   )
