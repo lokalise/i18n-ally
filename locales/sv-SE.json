@@ -198,6 +198,7 @@
   "review.translation_candidates": "Översättningskandidater",
   "review.unknown_user": "Okänd",
   "view.current_file": "Nuvarande fil",
+  "view.current_file_hard_strings_unknown": "",
   "view.current_file_keys_in_use": "",
   "view.current_file_keys_not_found": "",
   "view.help_feedback": "Hjälp & Feedback",

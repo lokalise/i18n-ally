@@ -198,6 +198,7 @@
   "review.translation_candidates": "Traducciones candidatas",
   "review.unknown_user": "Desconocido",
   "view.current_file": "Archivo actual",
+  "view.current_file_hard_strings_unknown": "",
   "view.current_file_keys_in_use": "",
   "view.current_file_keys_not_found": "",
   "view.help_feedback": "Ayuda y comentarios",

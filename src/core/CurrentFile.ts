@@ -3,6 +3,8 @@ import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
 import { VueSfcLoader } from './loaders/VueSfcLoader'
 import { Loader, Analyst } from '.'
+import { DetectHardStrings } from '~/commands/detectHardStrings'
+import { DetectionResult } from '~/extraction'
 
 export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
@@ -28,6 +30,7 @@ export class CurrentFile {
     if (!Global.enabled)
       return
 
+    this.hardStrings = undefined
     if (this.VueSfc) {
       if (this._vue_sfc_loader) {
         if (uri && this._vue_sfc_loader.uri.path === uri.path) {
@@ -57,5 +60,13 @@ export class CurrentFile {
 
   static get loader() {
     return this._composed_loader
+  }
+
+  static hardStrings: DetectionResult[] | undefined
+
+  static async detectHardStrings() {
+    const strings = await DetectHardStrings()
+    this.hardStrings = strings
+    return strings
   }
 }

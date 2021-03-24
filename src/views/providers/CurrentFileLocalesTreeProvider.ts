@@ -3,6 +3,7 @@ import { uniq } from 'lodash'
 import { BaseTreeItem } from '../items/Base'
 import { CurrentFileNotFoundItem } from '../items/CurrentFileNotFoundItem'
 import { CurrentFileInUseItem } from '../items/CurrentFileInUseItem'
+import { CurrentFileExtractionItem } from '../items/CurrentFileExtractionItem'
 import { KeyDetector, Global, CurrentFile } from '~/core'
 import { resolveFlattenRootKeypath } from '~/utils'
 
@@ -33,6 +34,7 @@ export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTree
     return [
       new CurrentFileInUseItem(this),
       new CurrentFileNotFoundItem(this),
+      new CurrentFileExtractionItem(this),
     ]
   }
 
