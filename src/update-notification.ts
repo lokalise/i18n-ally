@@ -14,7 +14,6 @@ interface Notification {
 }
 
 export function checkNotification(ctx: ExtensionContext) {
-  // TODO: notify about the transfer?
   const notifications: Notification[] = [
     // {
     //   id: 'v2-update',

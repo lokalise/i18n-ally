@@ -64,7 +64,7 @@ export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTree
   }
 
   updatePathsExists() {
-    const roots = Object.values(CurrentFile.loader.flattenLocaleTree)
+    const roots = Object.values(CurrentFile?.loader?.flattenLocaleTree || {})
     this.pathsExists = roots.map(i => resolveFlattenRootKeypath(i.keypath))
   }
 }
