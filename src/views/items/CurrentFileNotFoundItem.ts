@@ -15,6 +15,11 @@ export class CurrentFileNotFoundItem extends BaseTreeItem {
     return this.getIcon('warning')
   }
 
+  // @ts-expect-error
+  get description() {
+    return this.getKeys().length.toString()
+  }
+
   getLabel() {
     return i18n.t('view.current_file_keys_not_found', this.getKeys().length)
   }

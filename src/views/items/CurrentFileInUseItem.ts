@@ -16,7 +16,12 @@ export class CurrentFileInUseItem extends BaseTreeItem {
   }
 
   getLabel() {
-    return i18n.t('view.current_file_keys_in_use', this.getKeys().length)
+    return i18n.t('view.current_file_keys_in_use')
+  }
+
+  // @ts-expect-error
+  get description() {
+    return this.getKeys().length.toString()
   }
 
   getKeys() {

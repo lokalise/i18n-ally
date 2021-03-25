@@ -18,11 +18,13 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
   }
 
   getLabel() {
+    return i18n.t('view.current_file_hard_strings')
+  }
+
+  // @ts-expect-error
+  get description() {
     const length = CurrentFile.hardStrings?.length
-    if (length == null)
-      return i18n.t('view.current_file_hard_strings_unknown', '?')
-    else
-      return i18n.t('view.current_file_hard_strings', length)
+    return length == null ? '?' : length.toString()
   }
 
   async getChildren() {
