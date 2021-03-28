@@ -8,6 +8,7 @@ class SvelteFramework extends Framework {
   detection= {
     packageJSON: [
       'svelte-i18n',
+      's20n',
     ],
   }
 
