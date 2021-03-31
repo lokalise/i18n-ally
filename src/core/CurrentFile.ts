@@ -1,4 +1,4 @@
-import { workspace, ExtensionContext, Uri, window } from 'vscode'
+import { workspace, ExtensionContext, Uri, window, EventEmitter } from 'vscode'
 import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
 import { VueSfcLoader } from './loaders/VueSfcLoader'
@@ -9,6 +9,9 @@ import { DetectionResult } from '~/extraction'
 export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
+  static _onInvalidate = new EventEmitter<boolean>()
+
+  static onInvalidate = CurrentFile._onInvalidate.event
 
   static get VueSfc() {
     return Global.hasFeatureEnabled('VueSfc')
@@ -18,6 +21,7 @@ export class CurrentFile {
     ctx.subscriptions.push(workspace.onDidSaveTextDocument(e => this.update(e.uri)))
     ctx.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.update(e && e.document.uri)))
     ctx.subscriptions.push(Global.onDidChangeLoader(() => {
+      this.invalidate()
       this.updateLoaders()
       this._composed_loader.fire('{Config}')
     }))
@@ -64,6 +68,7 @@ export class CurrentFile {
 
   static invalidate() {
     this.hardStrings = undefined
+    this._onInvalidate.fire(true)
   }
 
   static hardStrings: DetectionResult[] | undefined

@@ -78,4 +78,6 @@ export async function extractHardStrings(document: TextDocument, extracts: Extra
       ),
     ],
   )
+
+  CurrentFile.invalidate()
 }
