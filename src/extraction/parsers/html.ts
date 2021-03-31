@@ -87,7 +87,7 @@ export function detect(
       const end = parser.endIndex! + 1
 
       detections.push({
-        text,
+        text: fullText,
         fullText,
         start,
         end,

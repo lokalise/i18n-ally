@@ -2,7 +2,7 @@ import { commands, DecorationRangeBehavior, Range, window } from 'vscode'
 import { ExtensionModule } from '~/modules'
 import { Global } from '~/core'
 import { Commands } from '~/commands'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult, trimDetection } from '~/extraction'
 import i18n from '~/i18n'
 
 const decoration = window.createTextEditorDecorationType({
@@ -30,53 +30,24 @@ export async function DetectHardStrings() {
   const result: DetectionResult[] = []
 
   for (const framework of frameworks) {
-    const temp = framework.detectHardStrings?.(doc)
-    if (temp && temp.length) {
-      result.push(...temp.map(i => ({
+    const temp = (framework.detectHardStrings?.(doc) || [])
+      .filter(Boolean)
+      .map(trimDetection)
+      .filter(Boolean)
+      .map(i => ({
         ...i,
         document: doc,
         editor,
-      })))
-    }
+      })) as DetectionResult[]
+
+    if (temp.length)
+      result.push(...temp)
   }
 
   editor.setDecorations(
     decoration,
-    result.flatMap((i) => {
-      if (i.type !== 'inline')
-        return new Range(doc.positionAt(i.start), doc.positionAt(i.end))
-
-      let start = i.start
-
-      // the start line with meaningful content
-      let startLine = 0
-      const lines = i.fullText!.split(/\n/g)
-      return lines
-        .map((part, idx) => {
-          const leadingSpace = idx <= startLine
-            ? (part.match(/^\s*/)?.[0] || '')
-            : ''
-          const tailingSpace = leadingSpace.length === part.length
-            ? ''
-            : part.match(/\s*$/)?.[0] || ''
-          start += leadingSpace.length
-          const end = start + (part.length - leadingSpace.length - tailingSpace.length)
-
-          const range = start === end
-            ? undefined!
-            : new Range(doc.positionAt(start), doc.positionAt(end))
-          start = end + 1
-
-          if (idx === startLine && range == null)
-            startLine += 1
-
-          return range
-        })
-    })
-      .filter(Boolean),
+    result.flatMap(i => new Range(doc.positionAt(i.start), doc.positionAt(i.end))),
   )
-
-  // window.showInformationMessage(result.map(i => i.text).join('\n'))
 
   return result
 }
