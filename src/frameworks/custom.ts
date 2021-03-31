@@ -74,6 +74,8 @@ class CustomFramework extends Framework {
     return this.data?.monopoly || false
   }
 
+  set monopoly(_) {}
+
   refactorTemplates(keypath: string) {
     return (this.data?.refactorTemplates || ['$1'])
       .map(i => i.replace(/\$1/g, keypath))
