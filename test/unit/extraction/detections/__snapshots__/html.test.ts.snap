@@ -85,7 +85,9 @@ Array [
   or
   ",
     "start": 65,
-    "text": "or",
+    "text": "
+  or
+  ",
     "type": "inline",
   },
   Object {
@@ -101,7 +103,9 @@ Array [
   to add comments on this article.
 ",
     "start": 134,
-    "text": "to add comments on this article.",
+    "text": "
+  to add comments on this article.
+",
     "type": "inline",
   },
 ]
@@ -117,7 +121,11 @@ Array [
   directive:
   ",
     "start": 4,
-    "text": "Using v-html directive:",
+    "text": "
+  Using
+  v-html
+  directive:
+  ",
     "type": "inline",
   },
 ]
