@@ -30,7 +30,7 @@ export class CurrentFile {
     if (!Global.enabled)
       return
 
-    this.hardStrings = undefined
+    this.invalidate()
     if (this.VueSfc) {
       if (this._vue_sfc_loader) {
         if (uri && this._vue_sfc_loader.uri.path === uri.path) {
@@ -62,11 +62,15 @@ export class CurrentFile {
     return this._composed_loader
   }
 
+  static invalidate() {
+    this.hardStrings = undefined
+  }
+
   static hardStrings: DetectionResult[] | undefined
 
-  static async detectHardStrings() {
-    const strings = await DetectHardStrings()
-    this.hardStrings = strings
-    return strings
+  static async detectHardStrings(force = false) {
+    if (!this.hardStrings || force)
+      this.hardStrings = await DetectHardStrings()
+    return this.hardStrings
   }
 }

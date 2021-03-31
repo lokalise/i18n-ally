@@ -2,6 +2,7 @@
   "exclude": [
     "vue",
     "vuex",
+    "@types/webpack",
     "webpack",
     "webpack-cli",
     "vue-i18n",

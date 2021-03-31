@@ -61,21 +61,22 @@
     "@types/chai": "^4.2.15",
     "@types/chai-jest-snapshot": "^1.3.6",
     "@types/diff": "^5.0.0",
-    "@types/fs-extra": "^9.0.8",
+    "@types/fs-extra": "^9.0.9",
     "@types/gettext-parser": "^4.0.0",
     "@types/ini": "^1.3.30",
     "@types/js-yaml": "^4.0.0",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/json5": "^2.2.0",
     "@types/lodash": "^4.14.168",
+    "@types/micromatch": "^4.0.1",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^14.14.35",
+    "@types/node": "^14.14.37",
     "@types/qs": "^6.9.6",
     "@types/semver": "^7.3.4",
     "@types/vscode": "^1.52.0",
     "@types/webpack": "^4.41.26",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
     "axios": "^0.21.1",
     "blueimp-md5": "^2.18.0",
     "chai": "^4.3.4",
@@ -83,7 +84,7 @@
     "chalk": "^4.1.0",
     "conventional-github-releaser": "^3.1.5",
     "diff": "^5.0.0",
-    "eslint": "^7.22.0",
+    "eslint": "^7.23.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.22.1",
@@ -105,10 +106,10 @@
     "rimraf": "^3.0.2",
     "standard-version": "^9.1.1",
     "stylus": "^0.54.8",
-    "ts-loader": "^8.0.18",
+    "ts-loader": "^8.1.0",
     "ts-mocha": "^8.0.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
-    "vscode-test": "^1.5.1",
+    "vscode-test": "^1.5.2",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.4",
     "vue-material-design-icons": "^4.11.0",
@@ -355,6 +356,11 @@
         "command": "i18n-ally.deepl-usage",
         "category": "%extname%",
         "title": "%command.deepl_usage%"
+      },
+      {
+        "command": "i18n-ally.go-to-range",
+        "category": "%extname%",
+        "title": "%command.go_to_range%"
       }
     ],
     "menus": {
@@ -445,6 +451,10 @@
         },
         {
           "command": "i18n-ally.duplicate-key",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.go-to-range",
           "when": "false"
         }
       ],

@@ -31,11 +31,16 @@ export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTree
     if (element)
       return await element.getChildren()
 
-    return [
+    const items: BaseTreeItem[] = [
       new CurrentFileInUseItem(this),
       new CurrentFileNotFoundItem(this),
-      new CurrentFileExtractionItem(this),
     ]
+
+    const langId = window.activeTextEditor?.document.languageId
+    if (langId && Global.getExtractionFrameworksByLang(langId).length)
+      items.push(new CurrentFileExtractionItem(this))
+
+    return items
   }
 
   protected refresh(): void {

@@ -3,7 +3,6 @@ import fs from 'fs'
 import { workspace, Range, Location, TextDocument, Uri, EventEmitter } from 'vscode'
 // @ts-ignore
 import { glob } from 'glob-gitignore'
-// @ts-ignore
 import micromatch from 'micromatch'
 // @ts-ignore
 import parseGitIgnore from 'parse-gitignore'
@@ -145,6 +144,10 @@ export class Analyst {
     return new Location(document.uri, range)
   }
 
+  static normalizeKey(key: string) {
+    return key.replace(/\[(.*)\]/g, '.$1')
+  }
+
   static async analyzeUsage(useCache = true): Promise<UsageReport> {
     const occurrences = await this.getAllOccurrences(undefined, useCache)
     const usages: KeyUsage[] = _(occurrences)
@@ -154,9 +157,9 @@ export class Analyst {
       .value()
 
     // all the keys you have
-    const allKeys = CurrentFile.loader.keys
+    const allKeys = CurrentFile.loader.keys.map(i => this.normalizeKey(i))
     // keys occur in your code
-    const inUseKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse])
+    const inUseKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse].map(i => this.normalizeKey(i)))
 
     // keys in use
     const activeKeys = inUseKeys.filter(i => allKeys.includes(i))

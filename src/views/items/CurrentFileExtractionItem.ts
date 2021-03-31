@@ -4,9 +4,11 @@ import { BaseTreeItem } from './Base'
 import { HardStringDetectResultItem } from './HardStringDetectResultItem'
 import i18n from '~/i18n'
 import { CurrentFile } from '~/core'
+import { DetectionResult } from '~/extraction'
 
 export class CurrentFileExtractionItem extends BaseTreeItem {
   collapsibleState = TreeItemCollapsibleState.Collapsed
+  result: DetectionResult[] | undefined
 
   constructor(readonly provider: CurrentFileLocalesTreeProvider) {
     super(provider.ctx)
@@ -28,11 +30,11 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
   }
 
   async getChildren() {
-    const strings = await CurrentFile.detectHardStrings()
+    this.result = await CurrentFile.detectHardStrings()
 
-    if (strings == null)
+    if (this.result == null)
       return []
 
-    return strings.map(i => new HardStringDetectResultItem(this.ctx, i))
+    return this.result.map(i => new HardStringDetectResultItem(this.ctx, i))
   }
 }

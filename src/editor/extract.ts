@@ -16,8 +16,8 @@ class ExtractProvider implements CodeActionProvider {
     if (!(selection instanceof Selection))
       return []
 
-    const text = document.getText(selection)
-    if (!text || selection.start.line !== selection.end.line)
+    const text = document.getText(selection)?.trim().replace(/\s*\r?\n\s*/g, ' ')
+    if (!text)
       return []
 
     const options: ExtractTextOptions = {
