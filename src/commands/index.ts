@@ -11,6 +11,7 @@ import refreshUsageReport from './refreshUsageReport'
 import editor from './openEditor'
 import review from './review'
 import deepl from './deepl'
+import gotoRange from './gotoRange'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -25,6 +26,7 @@ const m: ExtensionModule = (ctx) => {
     editor(ctx),
     review(ctx),
     deepl(ctx),
+    gotoRange(ctx),
   ])
 }
 

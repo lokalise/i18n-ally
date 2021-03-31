@@ -198,6 +198,7 @@
   "review.translation_candidates": "翻譯候選",
   "review.unknown_user": "未知",
   "view.current_file": "當前檔案",
+  "view.current_file_hard_strings": "",
   "view.current_file_hard_strings_unknown": "",
   "view.current_file_keys_in_use": "",
   "view.current_file_keys_not_found": "",

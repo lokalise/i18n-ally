@@ -30,8 +30,13 @@ export async function DetectHardStrings() {
 
   for (const framework of frameworks) {
     const temp = framework.detectHardStrings?.(doc)
-    if (temp && temp.length)
-      result.push(...temp)
+    if (temp && temp.length) {
+      result.push(...temp.map(i => ({
+        ...i,
+        document: doc,
+        editor,
+      })))
+    }
   }
 
   editor.setDecorations(
@@ -70,7 +75,7 @@ export async function DetectHardStrings() {
       .filter(Boolean),
   )
 
-  window.showInformationMessage(result.map(i => i.text).join('\n'))
+  // window.showInformationMessage(result.map(i => i.text).join('\n'))
 
   return result
 }

@@ -2,6 +2,8 @@ import { ExtensionContext, TreeItem } from 'vscode'
 import { Config } from '~/core'
 
 export abstract class BaseTreeItem extends TreeItem {
+  private _label = ''
+
   constructor(
     public readonly ctx: ExtensionContext,
   ) {
@@ -13,10 +15,12 @@ export abstract class BaseTreeItem extends TreeItem {
   }
 
   protected getLabel() {
-    return ''
+    return this._label
   }
 
-  protected setLabel(value: string) {}
+  protected setLabel(value: string) {
+    this._label = value
+  }
 
   // @ts-expect-error
   get label() {
