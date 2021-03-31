@@ -1,4 +1,5 @@
 <!-- Ported from https://raw.githubusercontent.com/pepf/retrospectify/master/src/components/SavedBoards.vue -->
+
 <template>
   <div class="sidebar-component">
     <transition name="slide">
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+/* eslint-disable  */
 import bus from '../bus.js'
 
 export default {
