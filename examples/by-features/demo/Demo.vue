@@ -5,7 +5,10 @@
     <p>{{ $t('intro') }}</p>
     <p>{{ $t('hello') }}</p>
     <p>{{ $t('not_exist') }}</p>
-    <p>{{ $t('hard-coded-string') }}</p>
+    <p>
+      Hard coded
+      String
+    </p>
   </div>
 </template>
 

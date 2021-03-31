@@ -30,8 +30,7 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
   }
 
   async getChildren() {
-    if (!this.result)
-      this.result = await CurrentFile.detectHardStrings()
+    this.result = await CurrentFile.detectHardStrings()
 
     if (this.result == null)
       return []
