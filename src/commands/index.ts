@@ -4,7 +4,6 @@ import configLocales from './configLocalePaths'
 import configLanguages from './configLanguages'
 import keyManipulations from './keyManipulations'
 import extractText from './extractText'
-import extractCurrentFile from './extractCurrentFile'
 import detectHardStrings from './detectHardStrings'
 import help from './help'
 import refreshUsageReport from './refreshUsageReport'
@@ -19,7 +18,6 @@ const m: ExtensionModule = (ctx) => {
     configLanguages(ctx),
     keyManipulations(ctx),
     extractText(ctx),
-    extractCurrentFile(ctx),
     detectHardStrings(ctx),
     help(ctx),
     refreshUsageReport(ctx),

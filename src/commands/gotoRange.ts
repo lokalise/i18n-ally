@@ -1,4 +1,4 @@
-import { commands, Range, Selection, TextEditor, TextEditorRevealType, window } from 'vscode'
+import { commands, Range, Selection, TextEditor, TextEditorRevealType } from 'vscode'
 import { Commands } from '~/extension'
 import { ExtensionModule } from '~/modules'
 
