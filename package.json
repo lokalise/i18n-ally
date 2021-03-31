@@ -235,7 +235,8 @@
       {
         "command": "i18n-ally.extract-text",
         "category": "%extname%",
-        "title": "%refactor.extract_text%"
+        "title": "%refactor.extract_text%",
+        "icon": "$(symbol-string)"
       },
       {
         "command": "i18n-ally.extraction-detect-current-file",
@@ -546,6 +547,11 @@
         {
           "command": "i18n-ally.open-docs-hard-string",
           "when": "viewItem =~ /i18n-ally-hard-string-root/",
+          "group": "inline@1"
+        },
+        {
+          "command": "i18n-ally.extract-text",
+          "when": "viewItem =~ /i18n-ally-hard-string-item/",
           "group": "inline@1"
         }
       ],

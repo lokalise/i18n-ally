@@ -1,4 +1,4 @@
-import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
+import { ExtensionContext, TreeItemCollapsibleState, Command } from 'vscode'
 import { EditorPanel } from '../../webview/panel'
 import { BaseTreeItem } from './Base'
 import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '~/utils'
@@ -122,7 +122,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   }
 
   // @ts-expect-error
-  get command() {
+  get command(): Command | undefined {
     if (this.editorMode) {
       return {
         command: Commands.open_in_editor,
