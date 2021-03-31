@@ -21,8 +21,8 @@ export class HardStringDetectResultItem extends BaseTreeItem {
         arguments: [
           this.detection.editor,
           new Range(
-            this.detection.document.positionAt(this.detection.fullStart ?? this.detection.start),
-            this.detection.document.positionAt(this.detection.fullEnd ?? this.detection.end),
+            this.detection.document.positionAt(this.detection.start),
+            this.detection.document.positionAt(this.detection.end),
           ),
         ],
       }
