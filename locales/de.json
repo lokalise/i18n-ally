@@ -9,6 +9,7 @@
   "command.duplicate_key": "Schlüssel kopieren",
   "command.edit_key": "Übersetzung bearbeiten",
   "command.fulfill_keys": "Vervollständige Schlüssel mit leeren Texten",
+  "command.go_to_range": "",
   "command.insert_key": "Schlüssel einfügen",
   "command.locale_visibility_hide": "Lokalisierung verbergen",
   "command.locale_visibility_show": "Lokalisierung anzeigen",

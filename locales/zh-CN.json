@@ -9,6 +9,7 @@
   "command.duplicate_key": "建立副本",
   "command.edit_key": "编辑文案",
   "command.fulfill_keys": "使用空字符串填充文案路径",
+  "command.go_to_range": "",
   "command.insert_key": "插入i18n文案",
   "command.locale_visibility_hide": "隐藏此语言",
   "command.locale_visibility_show": "显示此语言",

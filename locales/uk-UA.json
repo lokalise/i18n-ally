@@ -9,6 +9,7 @@
   "command.duplicate_key": "Дублікат ключа",
   "command.edit_key": "Редагувати переклад",
   "command.fulfill_keys": "Заповнювати ключ порожній рядком",
+  "command.go_to_range": "",
   "command.insert_key": "Вставити ключ",
   "command.locale_visibility_hide": "Приховати мову",
   "command.locale_visibility_show": "Показати мову",

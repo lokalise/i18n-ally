@@ -9,6 +9,7 @@
   "command.duplicate_key": "Dupliceer sleutel",
   "command.edit_key": "Bewerk vertaling",
   "command.fulfill_keys": "Sleutels met lege waarden aanvullen",
+  "command.go_to_range": "",
   "command.insert_key": "",
   "command.locale_visibility_hide": "Verberg locale",
   "command.locale_visibility_show": "Toon locale",

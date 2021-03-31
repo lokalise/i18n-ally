@@ -9,6 +9,7 @@
   "command.duplicate_key": "",
   "command.edit_key": "翻訳を編集する",
   "command.fulfill_keys": "空文字でキーを埋める",
+  "command.go_to_range": "",
   "command.insert_key": "",
   "command.locale_visibility_hide": "ロケールを隠す",
   "command.locale_visibility_show": "ロケールを表示する",

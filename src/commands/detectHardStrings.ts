@@ -3,6 +3,7 @@ import { ExtensionModule } from '~/modules'
 import { Global } from '~/core'
 import { Commands } from '~/commands'
 import { DetectionResult } from '~/extraction'
+import i18n from '~/i18n'
 
 const decoration = window.createTextEditorDecorationType({
   // TODO: configureable
@@ -19,10 +20,10 @@ export async function DetectHardStrings() {
   if (!doc || !editor)
     return
 
-  const frameworks = Global.enabledFrameworks.filter(i => i.supportAutoExtraction?.includes(doc.languageId))
+  const frameworks = Global.getExtractionFrameworksByLang(doc.languageId)
 
   if (!frameworks.length) {
-    window.showWarningMessage(`Extracting for language "${doc.languageId}" is not supported yet`)
+    window.showWarningMessage(i18n.t('refactor.extracting_not_support_for_lang'), doc.languageId)
     return
   }
 

@@ -9,6 +9,7 @@
   "command.duplicate_key": "Повторяющийся ключ",
   "command.edit_key": "Редактировать перевод",
   "command.fulfill_keys": "Заполнять ключ пустой строкой",
+  "command.go_to_range": "",
   "command.insert_key": "Вставить ключ",
   "command.locale_visibility_hide": "Скрыть перевод",
   "command.locale_visibility_show": "Показать перевод",

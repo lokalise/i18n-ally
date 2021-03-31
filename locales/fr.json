@@ -9,6 +9,7 @@
   "command.duplicate_key": "Dupliquer une Clé",
   "command.edit_key": "Modifier la traduction",
   "command.fulfill_keys": "Remplir les champs vides de Clés",
+  "command.go_to_range": "",
   "command.insert_key": "",
   "command.locale_visibility_hide": "Cacher le dossier de la locale",
   "command.locale_visibility_show": "Afficher le dossier locde la locale",

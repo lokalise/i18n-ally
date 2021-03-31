@@ -9,6 +9,7 @@
   "command.duplicate_key": "Duplicera nyckel",
   "command.edit_key": "Ändra översättning",
   "command.fulfill_keys": "Skapa saknade nycklar med tomma strängar",
+  "command.go_to_range": "",
   "command.insert_key": "Lägg till nyckel",
   "command.locale_visibility_hide": "Göm locale",
   "command.locale_visibility_show": "Visa locale",

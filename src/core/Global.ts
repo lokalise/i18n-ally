@@ -409,4 +409,8 @@ export class Global {
     const ignored = Config.ignoredLocales
     return locales.filter(locale => !ignored.includes(locale))
   }
+
+  static getExtractionFrameworksByLang(languageId: string) {
+    return this.enabledFrameworks.filter(i => i.supportAutoExtraction?.includes(languageId))
+  }
 }
