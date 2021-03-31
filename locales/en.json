@@ -24,6 +24,7 @@
   "command.rename_key": "Rename key",
   "command.set_display_language": "Set as display language",
   "command.set_source_language": "Set as source language",
+  "command.show_docs": "Show documentation",
   "command.translate_key": "Translate",
   "command.translate_key_from": "Translate from \"{0}\"",
   "config.annotation_delimiter": "The delimiter for annotations",

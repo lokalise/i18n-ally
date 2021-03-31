@@ -24,6 +24,7 @@ export const enum Commands {
   locale_visibility_show = 'i18n-ally.locale-visibility-show',
   locale_visibility_hide = 'i18n-ally.locale-visibility-hide',
   open_url = 'i18n-ally.open-url',
+  open_docs_hard_string = 'i18n-ally.open-docs-hard-string',
   support = 'i18n-ally.support',
   refresh_usage = 'i18n-ally.refresh-usage',
   mark_key_as_in_use = 'i18n-ally.mark-key-as-in-use',

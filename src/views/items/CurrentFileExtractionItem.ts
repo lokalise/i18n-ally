@@ -13,6 +13,8 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
   constructor(readonly provider: CurrentFileLocalesTreeProvider) {
     super(provider.ctx)
 
+    this.contextValue = 'i18n-ally-hard-string-root'
+
     this.langId = window.activeTextEditor?.document.languageId || 'unknown'
     if (this.langId && Global.getExtractionFrameworksByLang(this.langId).length)
       this.collapsibleState = TreeItemCollapsibleState.Collapsed

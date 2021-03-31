@@ -361,6 +361,12 @@
         "command": "i18n-ally.go-to-range",
         "category": "%extname%",
         "title": "%command.go_to_range%"
+      },
+      {
+        "command": "i18n-ally.open-docs-hard-string",
+        "category": "%extname%",
+        "title": "%command.show_docs%",
+        "icon": "$(question)"
       }
     ],
     "menus": {
@@ -536,6 +542,11 @@
           "command": "i18n-ally.mark-key-as-in-use",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /key_idle/",
           "group": "i18nally@1"
+        },
+        {
+          "command": "i18n-ally.open-docs-hard-string",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/",
+          "group": "inline@1"
         }
       ],
       "view/title": [
