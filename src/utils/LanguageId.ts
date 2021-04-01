@@ -16,6 +16,7 @@ export const LanguageIdExtMap = {
   'html.erb': 'erb',
   'js.erb': 'erb',
   haml: 'haml',
+  slim: 'slim',
   handlebars: 'hbs',
   blade: 'php',
   svelte: 'svelte',
