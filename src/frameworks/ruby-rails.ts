@@ -18,6 +18,7 @@ class RubyRailsFramework extends Framework {
   languageIds: LanguageId[] = [
     'ruby',
     'haml',
+    'slim',
     'html.erb',
     'js.erb',
     'erb',
