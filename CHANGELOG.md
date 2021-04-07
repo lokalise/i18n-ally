@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.5](https://github.com/lokalise/i18n-ally/compare/v2.5.4...v2.5.5) (2021-04-07)
+
+
+### 🔮 Refactor
+
+* make "Current File" tab a tree with multiple entries, close [#506](https://github.com/lokalise/i18n-ally/issues/506) ([e077a4b](https://github.com/lokalise/i18n-ally/commit/e077a4b2591a85802db9a66ddbd8aa053261604d))
+
+
+### 🐞 Bug Fixes
+
+* array notation detection, close [#482](https://github.com/lokalise/i18n-ally/issues/482) ([b732dd7](https://github.com/lokalise/i18n-ally/commit/b732dd7b24b3ef4bf2b6b3154d62e1f9e18976b1))
+* close [#511](https://github.com/lokalise/i18n-ally/issues/511) ([9dc48fa](https://github.com/lokalise/i18n-ally/commit/9dc48fa2dc1c5e6309210ba359718452a88dc620))
+* disable detection subtree instead of hiding ([8b7c414](https://github.com/lokalise/i18n-ally/commit/8b7c4147106808351a1b59823a20d927dbe59b85))
+* extraction range ([57d87a4](https://github.com/lokalise/i18n-ally/commit/57d87a4dafb8493d5d3b88f47853f5501c3255cd))
+* extraction updates, close [#520](https://github.com/lokalise/i18n-ally/issues/520) ([cc48574](https://github.com/lokalise/i18n-ally/commit/cc4857406d9f8dc50cfe856c6453b10765c4c573))
+* show detection subtree only for support language ([2a62205](https://github.com/lokalise/i18n-ally/commit/2a622054f110f9cfaab9d65e64342b542c49d599))
+
+
+### ⚡ Features
+
+* **rails:** add slim language to rails framework ([#521](https://github.com/lokalise/i18n-ally/issues/521)) ([99a7124](https://github.com/lokalise/i18n-ally/commit/99a7124c8f5b76b0da09146992528d7b9c3ab8fe))
+* add docs link to detections root, close [#519](https://github.com/lokalise/i18n-ally/issues/519) ([bd7f28a](https://github.com/lokalise/i18n-ally/commit/bd7f28a86ce68f0518e55f9a588cd4b7ee65235c))
+* click to navigate to detection, close [#509](https://github.com/lokalise/i18n-ally/issues/509) ([60c0f8a](https://github.com/lokalise/i18n-ally/commit/60c0f8aaf3775c2f9e6338527c2c95f5007eea52))
+* continue auto detection configuration, close [#523](https://github.com/lokalise/i18n-ally/issues/523) ([d90b065](https://github.com/lokalise/i18n-ally/commit/d90b065364673d55f400720802010c4f5015f793))
+* detection range, close [#518](https://github.com/lokalise/i18n-ally/issues/518) ([98af9b9](https://github.com/lokalise/i18n-ally/commit/98af9b90963c296b9ffd21c573d429456a7dc5d8))
+* extraction button in subtree, close [#510](https://github.com/lokalise/i18n-ally/issues/510) ([73bc114](https://github.com/lokalise/i18n-ally/commit/73bc1149a7efdb62dc137ab1c2761f84f916494d))
+
 ### [2.5.4](https://github.com/lokalise/i18n-ally/compare/v2.5.3...v2.5.4) (2021-03-07)
 
 
