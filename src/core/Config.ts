@@ -421,6 +421,10 @@ export class Config {
     return this.getConfig<number>('extract.keyMaxLength') ?? Infinity
   }
 
+  static get extractAutoDetect() {
+    return this.getConfig<boolean>('extract.autoDetect') ?? false
+  }
+
   static get extractParserHTMLOptions() {
     return this.getConfig<ExtractionHTMLOptions>('extract.parsers.html') ?? {}
   }

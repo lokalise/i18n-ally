@@ -3,7 +3,7 @@ import { CurrentFileLocalesTreeProvider } from '../providers'
 import { BaseTreeItem } from './Base'
 import { HardStringDetectResultItem } from './HardStringDetectResultItem'
 import i18n from '~/i18n'
-import { CurrentFile, Global } from '~/core'
+import { Config, CurrentFile, Global } from '~/core'
 import { DetectionResult } from '~/extraction'
 
 export class CurrentFileExtractionItem extends BaseTreeItem {
@@ -16,10 +16,14 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
     this.contextValue = 'i18n-ally-hard-string-root'
 
     this.langId = window.activeTextEditor?.document.languageId || 'unknown'
-    if (this.langId && Global.getExtractionFrameworksByLang(this.langId).length)
-      this.collapsibleState = TreeItemCollapsibleState.Collapsed
-    else
+    if (this.langId && Global.getExtractionFrameworksByLang(this.langId).length) {
+      this.collapsibleState = Config.extractAutoDetect
+        ? TreeItemCollapsibleState.Expanded
+        : TreeItemCollapsibleState.Collapsed
+    }
+    else {
       this.collapsibleState = TreeItemCollapsibleState.None
+    }
     this.updateDescription()
   }
 

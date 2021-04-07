@@ -1065,6 +1065,11 @@
           "default": {},
           "description": "Parser options for extracting HTML, see https://github.com/lokalise/i18n-ally/blob/master/src/extraction/parsers/options.ts"
         },
+        "i18n-ally.extract.autoDetect": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enables hard-coded strings detection automatically whenever opening supported a file"
+        },
         "i18n-ally.parserOptions": {
           "type": "object"
         },
