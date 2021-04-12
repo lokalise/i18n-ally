@@ -107,10 +107,10 @@ export class Global {
     return result.value as KeyStyle
   }
 
-  static refactorTemplates(keypath: string, languageId?: string) {
+  static refactorTemplates(keypath: string, args?: string[], languageId?: string) {
     return uniq([
       ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
-      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)),
+      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, args, languageId)),
     ])
   }
 

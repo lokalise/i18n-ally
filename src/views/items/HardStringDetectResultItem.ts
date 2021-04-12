@@ -9,6 +9,8 @@ export class HardStringDetectResultItem extends BaseTreeItem implements ExtractT
   filepath: string
   text: string
   range: Range
+  rawText?: string
+  args?: string[]
   languageId?: string | undefined
   isInsert?: boolean | undefined
 
