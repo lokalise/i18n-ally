@@ -2,7 +2,6 @@ import { CodeActionKind, CodeActionProvider, Command, languages, Range, Selectio
 import { ExtensionModule } from '~/modules'
 import { Config, CurrentFile, Global } from '~/core'
 import { Commands } from '~/commands'
-import { ExtractTextOptions } from '~/commands/extractText'
 import i18n from '~/i18n'
 import { parseHardString } from '~/extraction/parseHardString'
 
@@ -21,21 +20,12 @@ class ExtractProvider implements CodeActionProvider {
     if (!result)
       return []
 
-    const { text, args, trimmed } = result
-
-    const options: ExtractTextOptions = {
-      filepath: document.fileName,
-      text,
-      rawText: trimmed,
-      args,
-      range: selection,
-      languageId: document.languageId,
-    }
+    const { text, args } = result
 
     const commands: Command[] = [{
       command: Commands.extract_text,
       title: i18n.t('refactor.extract_text'),
-      arguments: [options],
+      arguments: [],
     }]
 
     // Check for existing translations to recommend, convert them to their templates and then to commands, and add the commands to the command array

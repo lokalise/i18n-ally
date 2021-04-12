@@ -33,8 +33,9 @@ class VueFramework extends Framework {
   ]
 
   refactorTemplates(keypath: string, args: string[] = []) {
-    console.log(args)
-    const params = [`'${keypath}'`, ...args].join(', ')
+    let params = `'${keypath}'`
+    if (args.length)
+      params += `, [${args.join(', ')}]`
     return [
       `{{$t(${params})}}`,
       `this.$t(${params})`,

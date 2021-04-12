@@ -82,7 +82,7 @@ export class Analyst {
       ignore,
     }) as string[]
 
-    console.log(langGlob, files)
+    // console.log(langGlob, files)
 
     return files.map(f => resolve(root, f))
       .filter(f => !fs.lstatSync(f).isDirectory())
