@@ -20,6 +20,7 @@ export interface ExtractTextOptions {
   rawText?: string
   args?: string[]
   range: Range
+  isDynamic?: boolean
   languageId?: string
   isInsert?: boolean
 }
@@ -37,15 +38,10 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
     if (!editor || !document)
       return
 
-    const result = parseHardString(trim(document.getText(editor.selection), '\'"` '))
-    if (!result)
-      return
-
     options = {
       filepath: document.uri.fsPath,
-      text: result.text,
-      args: result.args,
-      rawText: result.trimmed,
+      text: '',
+      rawText: trim(document.getText(editor.selection), '\'"` '),
       range: editor.selection,
       languageId: document.languageId,
       isInsert: editor.selection.start.isEqual(editor.selection.end),
@@ -54,6 +50,13 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
 
   const locale = Config.sourceLanguage
   const loader = CurrentFile.loader
+
+  if (options.rawText && !options.text) {
+    const result = parseHardString(options.rawText, options.languageId, options.isDynamic)
+    options.text = result?.text || ''
+    options.args = result?.args
+  }
+
   const { filepath, text, rawText, range, args, languageId, isInsert } = options
 
   const default_keypath = generateKeyFromText(rawText || text, filepath)
