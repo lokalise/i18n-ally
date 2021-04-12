@@ -240,7 +240,7 @@
         "icon": "$(symbol-string)"
       },
       {
-        "command": "i18n-ally.extraction-detect-current-file",
+        "command": "i18n-ally.detect_hard_strings",
         "category": "%extname%",
         "title": "(expiremental) Detect hard-coded strings in the current file"
       },

@@ -50,17 +50,20 @@ export function detect(
 
       for (const [name, isDynamic] of attrNames) {
         const match = code.match(
-          new RegExp(`\\b${name}=(["'])(.*?)\\1`, 'm'),
+          new RegExp(`\\s${name}=(["'])([^\\1]*?)\\1`, 'm'),
         )
         if (!match)
           continue
 
-        const fullStart = tagStart + match.index!
-        const fullEnd = fullStart + match[0].length
+        const fullStart = tagStart + match.index! + 1
+        const fullEnd = fullStart + match[0].length - 1
         const fullText = input.slice(fullStart, fullEnd)
         const start = fullStart + name.length + 2 // ="
         const end = fullEnd - 1 // "
         const text = input.slice(start, end)
+
+        if (isDynamic && !text.match(/['"`]/))
+          return
 
         detections.push({
           text,
