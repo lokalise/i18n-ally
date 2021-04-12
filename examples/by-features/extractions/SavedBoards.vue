@@ -30,7 +30,11 @@
         <button @click="createBoard">
           + New
         </button>
-        <div class="about">
+        <div
+          class="about"
+          :placeholder="`Version ${version}`"
+          :title="'Version' + version"
+        >
           Retrospectify V{{ version }}
         </div>
       </div>

@@ -67,6 +67,16 @@ Array [
     "text": "'Placeholder ' + input_name",
     "type": "attribute",
   },
+  Object {
+    "end": 85,
+    "fullEnd": 86,
+    "fullStart": 56,
+    "fullText": ":title=\\"\`\${input_name} title\`\\"",
+    "isDynamic": true,
+    "start": 64,
+    "text": "\`\${input_name} title\`",
+    "type": "attribute",
+  },
 ]
 `;
 
