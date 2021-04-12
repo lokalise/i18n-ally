@@ -26,7 +26,7 @@ class UI5Framework extends Framework {
     '\\{\\{({key})\\}\\}',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string) {
     return [
       `{i18n>${keypath}}`,
       `this.getResourceBundle().getText("${keypath}")`,

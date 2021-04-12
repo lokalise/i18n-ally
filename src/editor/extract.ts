@@ -4,6 +4,7 @@ import { Config, CurrentFile, Global } from '~/core'
 import { Commands } from '~/commands'
 import { ExtractTextOptions } from '~/commands/extractText'
 import i18n from '~/i18n'
+import { parseHardString } from '~/extraction/parseHardString'
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions(document: TextDocument, selection: Range | Selection): Promise<Command[]> {
@@ -16,13 +17,17 @@ class ExtractProvider implements CodeActionProvider {
     if (!(selection instanceof Selection))
       return []
 
-    const text = document.getText(selection)?.trim().replace(/\s*\r?\n\s*/g, ' ')
-    if (!text)
+    const result = parseHardString(document.getText(selection), document.languageId)
+    if (!result)
       return []
+
+    const { text, args, trimmed } = result
 
     const options: ExtractTextOptions = {
       filepath: document.fileName,
       text,
+      rawText: trimmed,
+      args,
       range: selection,
       languageId: document.languageId,
     }
@@ -40,7 +45,7 @@ class ExtractProvider implements CodeActionProvider {
         description: CurrentFile.loader.getValueByKey(key, Config.displayLanguage, 30),
       }))
       .filter(labelDescription => labelDescription.description === text)
-      .flatMap(t => Global.refactorTemplates(t.label, document.languageId))
+      .flatMap(t => Global.refactorTemplates(t.label, args, document.languageId))
       .map(t => ({
         command: Commands.replace_with,
         title: i18n.t('refactor.replace_with', t),

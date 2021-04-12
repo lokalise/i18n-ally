@@ -13,6 +13,11 @@
     prompts "^2.4.0"
     terminal-link "^2.1.1"
 
+"@antfu/utils@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.0.6.tgz#06c1b10ee34f8ce8b750ee7e5369cb3dfa8aa4aa"
+  integrity sha512-3aSvXU14tL4YnTJB6BYakAMlQfak1fmwevPENmxNbzDPezSVJ8k+6bpoLxwARf9bRuS78Zfh1oeN4GnsrsQ4VA==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"

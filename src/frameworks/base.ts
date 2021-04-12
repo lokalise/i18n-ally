@@ -45,7 +45,7 @@ export abstract class Framework {
   /**
    * Return possible choices of replacement for messages extracted from code
    */
-  abstract refactorTemplates (keypath: string, languageId?: string): string[]
+  abstract refactorTemplates (keypath: string, args?: string[], languageId?: string): string[]
 
   /**
    * Analysis the file and get hard strings
