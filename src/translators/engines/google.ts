@@ -22,7 +22,7 @@ export default class GoogleTranslate extends TranslateEngine {
     const { data } = await axios({
       method: 'GET',
       url: key
-        ? `${this.apiRootIfUserSuppliedKey}/language/translate/v2?key=${key}&q=${encodeURI(options.text)}${slugs.from}${slugs.to}&alt=json`
+        ? `${this.apiRootIfUserSuppliedKey}/language/translate/v2?key=${key}&q=${encodeURI(options.text)}${slugs.from}${slugs.to}&alt=json&format=text`
         : `${this.apiRoot}/translate_a/single?client=gtx&sl=${from}&tl=${to}&hl=zh-CN&dt=t&dt=bd&ie=UTF-8&oe=UTF-8&dj=1&source=icon&q=${encodeURI(options.text)}`,
     })
 
