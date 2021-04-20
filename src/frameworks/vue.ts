@@ -1,7 +1,7 @@
 import { TextDocument } from 'vscode'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
-import { defaultExtractionRules, extractionsParsers } from '~/extraction'
+import { DefaultDynamicExtractionsRules, DefaultExtractionRules, extractionsParsers } from '~/extraction'
 import { Config } from '~/core'
 
 class VueFramework extends Framework {
@@ -32,15 +32,18 @@ class VueFramework extends Framework {
     '(?:i18n[ (\n]\\s*path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.|[^\\w\\d])(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, args: string[] = []) {
+    let params = `'${keypath}'`
+    if (args.length)
+      params += `, [${args.join(', ')}]`
     return [
-      `{{$t('${keypath}')}}`,
-      `this.$t('${keypath}')`,
-      `$t('${keypath}')`,
-      `i18n.t('${keypath}')`,
+      `{{$t(${params})}}`,
+      `this.$t(${params})`,
+      `$t(${params})`,
+      `i18n.t(${params})`,
       // vue-i18n-next
-      `{{t('${keypath}')}}`,
-      `t('${keypath}')`,
+      `{{t(${params})}}`,
+      `t(${params})`,
       keypath,
     ]
   }
@@ -55,7 +58,12 @@ class VueFramework extends Framework {
     const text = doc.getText()
 
     // TODO: support script block
-    const result = extractionsParsers.html.detect(text, defaultExtractionRules, Config.extractParserHTMLOptions)
+    const result = extractionsParsers.html.detect(
+      text,
+      DefaultExtractionRules,
+      DefaultDynamicExtractionsRules,
+      Config.extractParserHTMLOptions,
+    )
 
     return result
   }

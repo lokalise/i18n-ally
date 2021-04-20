@@ -25,9 +25,9 @@ export async function promptKeys(text: string, locale = Config.displayLanguage) 
   return result?.label
 }
 
-export async function promptTemplates(keypath: string, languageId?: string) {
+export async function promptTemplates(keypath: string, args?: string[], languageId?: string) {
   const replacer = await window.showQuickPick(
-    Global.refactorTemplates(keypath, languageId),
+    Global.refactorTemplates(keypath, args, languageId),
     {
       placeHolder: i18n.t('prompt.replace_text_as'),
     })

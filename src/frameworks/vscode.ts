@@ -30,7 +30,7 @@ class VSCodeFramework extends Framework {
     return '(?:i18n[ (]path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.)(?:(?:d|n)\\(.*?,|(?:t|tc|te)\\()\\s*)[\'"`]({key})[\'"`]'
   }
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, args?: string[], languageId?: string) {
     if (languageId === 'json') {
       return [
         `%${keypath}%`,

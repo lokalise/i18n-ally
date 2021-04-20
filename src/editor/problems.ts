@@ -3,6 +3,13 @@ import { EXT_NAMESPACE } from '../meta'
 import { ExtensionModule } from '../modules'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '~/core'
 import i18n from '~/i18n'
+import { DetectionResult } from '~/extraction'
+
+export const PROBLEM_CODE_HARD_STRING = 'i18n-ally-hard-string'
+
+export interface DiagnosticWithDetection extends Diagnostic {
+  detection?: DetectionResult
+}
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -11,50 +18,60 @@ export class ProblemProvider {
     this.collection = languages.createDiagnosticCollection(EXT_NAMESPACE)
   }
 
-  update(document: TextDocument): void {
+  update(document?: TextDocument): void {
     if (!Global.enabled)
       return this.collection.clear()
 
-    if (!Global.isLanguageIdSupported(document.languageId))
+    if (!document)
+      document = window.activeTextEditor?.document
+
+    if (!document || !Global.isLanguageIdSupported(document.languageId))
       return
 
     const locale = Config.displayLanguage
     const loader: Loader = CurrentFile.loader
 
-    if (document) {
-      const problems: Diagnostic[] = []
-      this.collection.delete(document.uri)
+    const problems: DiagnosticWithDetection[] = []
+    this.collection.delete(document.uri)
 
-      const keys = KeyDetector.getKeys(document)
-      // get all keys of current file
-      keys.forEach(({ key, start, end }) => {
-        const has_translation = !!loader.getValueByKey(key, locale)
-        if (has_translation)
-          return
+    const keys = KeyDetector.getKeys(document)
+    // get all keys of current file
+    for (const { key, start, end } of keys) {
+      const has_translation = !!loader.getValueByKey(key, locale)
+      if (has_translation)
+        return
 
-        const exists = !!loader.getNodeByKey(key)
+      const exists = !!loader.getNodeByKey(key)
 
-        if (exists) {
-          problems.push({
-            message: i18n.t('misc.missing_translation', locale, key),
-            range: new Range(document.positionAt(start), document.positionAt(end)),
-            severity: DiagnosticSeverity.Information,
-          })
-        }
-        else {
-          problems.push({
-            message: i18n.t('misc.missing_key', locale, key),
-            range: new Range(document.positionAt(start), document.positionAt(end)),
-            severity: DiagnosticSeverity.Information,
-          })
-        }
-      })
-
-      this.collection.set(document.uri, problems)
+      if (exists) {
+        problems.push({
+          message: i18n.t('misc.missing_translation', locale, key),
+          range: new Range(document.positionAt(start), document.positionAt(end)),
+          severity: DiagnosticSeverity.Information,
+        })
+      }
+      else {
+        problems.push({
+          message: i18n.t('misc.missing_key', locale, key),
+          range: new Range(document.positionAt(start), document.positionAt(end)),
+          severity: DiagnosticSeverity.Information,
+        })
+      }
     }
-    else {
-      this.collection.clear()
+
+    if (CurrentFile.hardStrings?.length) {
+      for (const detection of CurrentFile.hardStrings) {
+        problems.push({
+          code: PROBLEM_CODE_HARD_STRING,
+          message: 'Possible Hard string',
+          range: new Range(document.positionAt(detection.start), document.positionAt(detection.end)),
+          severity: DiagnosticSeverity.Warning,
+          detection,
+        })
+      }
     }
+
+    this.collection.set(document.uri, problems)
   }
 
   clear() {
@@ -69,14 +86,11 @@ export class ProblemProvider {
 const m: ExtensionModule = (ctx: ExtensionContext) => {
   const provider = new ProblemProvider(ctx)
 
-  if (window.activeTextEditor)
-    provider.update(window.activeTextEditor.document)
+  provider.update()
 
   return [
-    CurrentFile.loader.onDidChange(() => {
-      if (window.activeTextEditor)
-        provider.update(window.activeTextEditor.document)
-    }),
+    CurrentFile.onHardStringDetected(() => provider.update()),
+    CurrentFile.loader.onDidChange(() => provider.update()),
     workspace.onDidChangeTextDocument(doc => provider.update(doc.document)),
     workspace.onDidCloseTextDocument(e => provider.clearUri(e.uri)),
   ]

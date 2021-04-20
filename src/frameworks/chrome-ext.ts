@@ -18,7 +18,7 @@ class ChromeExtensionFramework extends Framework {
     'i18n\\.getMessage\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string) {
     return [
       `chrome.i18n.getMessage('${keypath}')`,
       `browser.i18n.getMessage('${keypath}')`,

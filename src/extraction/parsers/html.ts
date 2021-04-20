@@ -1,5 +1,5 @@
 import { Parser } from 'htmlparser2'
-import { ExtractionRule } from '../rules'
+import { DefaultDynamicExtractionsRules, DefaultExtractionRules, ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
 import { ExtractionHTMLOptions } from './options'
 import { DetectionResult } from './types'
@@ -13,7 +13,8 @@ const defaultOptions: Required<ExtractionHTMLOptions> = {
 
 export function detect(
   input: string,
-  rules?: ExtractionRule[],
+  rules: ExtractionRule[] = DefaultExtractionRules,
+  dynamicRules: ExtractionRule[] = DefaultDynamicExtractionsRules,
   userOptions: ExtractionHTMLOptions = {},
 ) {
   const {
@@ -36,7 +37,11 @@ export function detect(
         if (ATTRS.includes(name) && shouldExtract(attrs[name], rules))
           return [name, false]
         // dynamic
-        else if (V_BIND && ATTRS.some(n => name === `:${n}` || name === `v-bind:${n}`))
+        else if (
+          V_BIND
+          && ATTRS.some(n => name === `:${n}` || name === `v-bind:${n}`)
+          && shouldExtract(attrs[name], dynamicRules)
+        )
           return [name, true]
         return null
       })
@@ -50,13 +55,13 @@ export function detect(
 
       for (const [name, isDynamic] of attrNames) {
         const match = code.match(
-          new RegExp(`\\b${name}=(["'])(.*?)\\1`, 'm'),
+          new RegExp(`\\s${name}=(["'])([^\\1]*?)\\1`, 'm'),
         )
         if (!match)
           continue
 
-        const fullStart = tagStart + match.index!
-        const fullEnd = fullStart + match[0].length
+        const fullStart = tagStart + match.index! + 1
+        const fullEnd = fullStart + match[0].length - 1
         const fullText = input.slice(fullStart, fullEnd)
         const start = fullStart + name.length + 2 // ="
         const end = fullEnd - 1 // "

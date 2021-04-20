@@ -48,6 +48,12 @@ describe('detections', () => {
       expect(html.detect('<p>Using mustaches: {{ rawHtml }}</p>')).to.matchSnapshot()
     })
 
+    it('ignore translated keys', () => {
+      expect(html.detect('<p>{{ $t("hello.world") }}</p>').length).to.eq(0)
+      expect(html.detect('<p :placeholder="t(`hello.world`)"></p>').length).to.eq(0)
+      expect(html.detect('<p :placeholder="hello + world"></p>').length).to.eq(0)
+    })
+
     it('multiple lines', () => {
       expect(html.detect(`
 <p>

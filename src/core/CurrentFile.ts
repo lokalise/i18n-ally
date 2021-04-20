@@ -10,8 +10,10 @@ export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
   static _onInvalidate = new EventEmitter<boolean>()
+  static _onHardStringDetected = new EventEmitter<DetectionResult[] | undefined>()
 
   static onInvalidate = CurrentFile._onInvalidate.event
+  static onHardStringDetected = CurrentFile._onHardStringDetected.event
 
   static get VueSfc() {
     return Global.hasFeatureEnabled('VueSfc')
@@ -76,6 +78,7 @@ export class CurrentFile {
   static async detectHardStrings(force = false) {
     if (!this.hardStrings || force)
       this.hardStrings = await DetectHardStrings()
+    this._onHardStringDetected.fire(this.hardStrings)
     return this.hardStrings
   }
 }

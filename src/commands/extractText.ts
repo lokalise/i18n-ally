@@ -7,6 +7,7 @@ import { ExtensionModule } from '~/modules'
 import { extractHardStrings, generateKeyFromText, Config, CurrentFile } from '~/core'
 import i18n from '~/i18n'
 import { Log, promptTemplates } from '~/utils'
+import { parseHardString } from '~/extraction/parseHardString'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
@@ -16,7 +17,10 @@ interface QuickPickItemWithKey extends QuickPickItem {
 export interface ExtractTextOptions {
   filepath: string
   text: string
+  rawText?: string
+  args?: string[]
   range: Range
+  isDynamic?: boolean
   languageId?: string
   isInsert?: boolean
 }
@@ -36,7 +40,8 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
 
     options = {
       filepath: document.uri.fsPath,
-      text: document.getText(editor.selection),
+      text: '',
+      rawText: trim(document.getText(editor.selection), '\'"` '),
       range: editor.selection,
       languageId: document.languageId,
       isInsert: editor.selection.start.isEqual(editor.selection.end),
@@ -45,10 +50,16 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
 
   const locale = Config.sourceLanguage
   const loader = CurrentFile.loader
-  const { filepath, text, range, languageId, isInsert } = options
 
-  const cleanedText = trim(text, '\'"` ')
-  const default_keypath = generateKeyFromText(text, filepath)
+  if (options.rawText && !options.text) {
+    const result = parseHardString(options.rawText, options.languageId, options.isDynamic)
+    options.text = result?.text || ''
+    options.args = result?.args
+  }
+
+  const { filepath, text, rawText, range, args, languageId, isInsert } = options
+
+  const default_keypath = generateKeyFromText(rawText || text, filepath)
 
   const existingItems: QuickPickItemWithKey[]
     = isInsert
@@ -58,7 +69,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
           description: loader.getValueByKey(key, Config.sourceLanguage, 0),
           keypath: key,
         }))
-        .filter(item => item.description === cleanedText)
+        .filter(item => item.description === text)
         .map(i => ({
           ...i,
           label: `$(replace-all) ${i.keypath}`,
@@ -135,7 +146,7 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
         return
     }
 
-    const replacer = await promptTemplates(keypath, languageId)
+    const replacer = await promptTemplates(keypath, args, languageId)
 
     if (!replacer) {
       window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
@@ -148,14 +159,14 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
       range,
       replaceTo: replacer,
       keypath: shouldOverride === 'skip' ? undefined : writeKeypath,
-      message: cleanedText,
+      message: text,
       locale,
     }])
   }
 
   // create and init a QuickPick for the path
   const picker = window.createQuickPick<QuickPickItemWithKey>()
-  picker.placeholder = i18n.t('prompt.enter_key_path', cleanedText)
+  picker.placeholder = i18n.t('prompt.enter_key_path', text)
   picker.ignoreFocusOut = true
   picker.canSelectMany = false
   picker.value = default_keypath

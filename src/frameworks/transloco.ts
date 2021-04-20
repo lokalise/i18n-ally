@@ -28,7 +28,7 @@ export default class TranslocoFramework extends Framework {
     '[^*\\w\\d]transloco=[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string) {
     return [
       `{{ '${keypath}' | transloco }}`,
       `t('${keypath}')`,
