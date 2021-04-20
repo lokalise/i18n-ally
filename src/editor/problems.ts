@@ -11,50 +11,58 @@ export class ProblemProvider {
     this.collection = languages.createDiagnosticCollection(EXT_NAMESPACE)
   }
 
-  update(document: TextDocument): void {
+  update(document?: TextDocument): void {
     if (!Global.enabled)
       return this.collection.clear()
 
-    if (!Global.isLanguageIdSupported(document.languageId))
+    if (!document)
+      document = window.activeTextEditor?.document
+
+    if (!document || !Global.isLanguageIdSupported(document.languageId))
       return
 
     const locale = Config.displayLanguage
     const loader: Loader = CurrentFile.loader
 
-    if (document) {
-      const problems: Diagnostic[] = []
-      this.collection.delete(document.uri)
+    const problems: Diagnostic[] = []
+    this.collection.delete(document.uri)
 
-      const keys = KeyDetector.getKeys(document)
-      // get all keys of current file
-      keys.forEach(({ key, start, end }) => {
-        const has_translation = !!loader.getValueByKey(key, locale)
-        if (has_translation)
-          return
+    const keys = KeyDetector.getKeys(document)
+    // get all keys of current file
+    for (const { key, start, end } of keys) {
+      const has_translation = !!loader.getValueByKey(key, locale)
+      if (has_translation)
+        return
 
-        const exists = !!loader.getNodeByKey(key)
+      const exists = !!loader.getNodeByKey(key)
 
-        if (exists) {
-          problems.push({
-            message: i18n.t('misc.missing_translation', locale, key),
-            range: new Range(document.positionAt(start), document.positionAt(end)),
-            severity: DiagnosticSeverity.Information,
-          })
-        }
-        else {
-          problems.push({
-            message: i18n.t('misc.missing_key', locale, key),
-            range: new Range(document.positionAt(start), document.positionAt(end)),
-            severity: DiagnosticSeverity.Information,
-          })
-        }
-      })
-
-      this.collection.set(document.uri, problems)
+      if (exists) {
+        problems.push({
+          message: i18n.t('misc.missing_translation', locale, key),
+          range: new Range(document.positionAt(start), document.positionAt(end)),
+          severity: DiagnosticSeverity.Information,
+        })
+      }
+      else {
+        problems.push({
+          message: i18n.t('misc.missing_key', locale, key),
+          range: new Range(document.positionAt(start), document.positionAt(end)),
+          severity: DiagnosticSeverity.Information,
+        })
+      }
     }
-    else {
-      this.collection.clear()
+
+    if (CurrentFile.hardStrings?.length) {
+      for (const { start, end } of CurrentFile.hardStrings) {
+        problems.push({
+          message: 'Possible Hard string',
+          range: new Range(document.positionAt(start), document.positionAt(end)),
+          severity: DiagnosticSeverity.Warning,
+        })
+      }
     }
+
+    this.collection.set(document.uri, problems)
   }
 
   clear() {
@@ -69,14 +77,11 @@ export class ProblemProvider {
 const m: ExtensionModule = (ctx: ExtensionContext) => {
   const provider = new ProblemProvider(ctx)
 
-  if (window.activeTextEditor)
-    provider.update(window.activeTextEditor.document)
+  provider.update()
 
   return [
-    CurrentFile.loader.onDidChange(() => {
-      if (window.activeTextEditor)
-        provider.update(window.activeTextEditor.document)
-    }),
+    CurrentFile.onHardStringDetected(() => provider.update()),
+    CurrentFile.loader.onDidChange(() => provider.update()),
     workspace.onDidChangeTextDocument(doc => provider.update(doc.document)),
     workspace.onDidCloseTextDocument(e => provider.clearUri(e.uri)),
   ]

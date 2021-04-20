@@ -44,7 +44,6 @@
 </template>
 
 <script>
-/* eslint-disable  */
 import bus from '../bus.js'
 
 export default {
