@@ -1,4 +1,4 @@
-import { CompletionItemProvider, TextDocument, Position, CompletionItem, CompletionItemKind, ExtensionContext, languages } from 'vscode'
+import { CompletionItemProvider, TextDocument, Position, CompletionItem, CompletionItemKind, languages } from 'vscode'
 import { ExtensionModule } from '../modules'
 import { Global, KeyDetector, Loader, CurrentFile, LocaleTree, LocaleNode } from '~/core'
 
@@ -28,7 +28,7 @@ class CompletionProvider implements CompletionItemProvider {
 
     let parent = ''
 
-    const parts = key.split('.')
+    const parts = key.split(/[.:]/g)
 
     if (parts.length > 1)
       parent = parts.slice(0, -1).join('.')
@@ -56,14 +56,14 @@ class CompletionProvider implements CompletionItemProvider {
             ? CompletionItemKind.Field
             : CompletionItemKind.Text,
         )
-        item.commitCharacters = ['.']
+        item.commitCharacters = ['.', ':']
         item.detail = child.type === 'node' ? child.getValue() : undefined
         return item
       })
   }
 }
 
-const m: ExtensionModule = (ctx: ExtensionContext) => {
+const m: ExtensionModule = () => {
   return languages.registerCompletionItemProvider(
     Global.getDocumentSelectors(),
     new CompletionProvider(),
