@@ -57,6 +57,7 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.6.4",
     "@antfu/ni": "^0.5.5",
     "@antfu/utils": "^0.0.6",
     "@types/chai": "^4.2.15",
