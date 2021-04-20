@@ -3,6 +3,13 @@ import { EXT_NAMESPACE } from '../meta'
 import { ExtensionModule } from '../modules'
 import { Global, KeyDetector, Config, Loader, CurrentFile } from '~/core'
 import i18n from '~/i18n'
+import { DetectionResult } from '~/extraction'
+
+export const PROBLEM_CODE_HARD_STRING = 'i18n-ally-hard-string'
+
+export interface DiagnosticWithDetection extends Diagnostic {
+  detection?: DetectionResult
+}
 
 export class ProblemProvider {
   private collection: DiagnosticCollection
@@ -24,7 +31,7 @@ export class ProblemProvider {
     const locale = Config.displayLanguage
     const loader: Loader = CurrentFile.loader
 
-    const problems: Diagnostic[] = []
+    const problems: DiagnosticWithDetection[] = []
     this.collection.delete(document.uri)
 
     const keys = KeyDetector.getKeys(document)
@@ -53,11 +60,13 @@ export class ProblemProvider {
     }
 
     if (CurrentFile.hardStrings?.length) {
-      for (const { start, end } of CurrentFile.hardStrings) {
+      for (const detection of CurrentFile.hardStrings) {
         problems.push({
+          code: PROBLEM_CODE_HARD_STRING,
           message: 'Possible Hard string',
-          range: new Range(document.positionAt(start), document.positionAt(end)),
+          range: new Range(document.positionAt(detection.start), document.positionAt(detection.end)),
           severity: DiagnosticSeverity.Warning,
+          detection,
         })
       }
     }
