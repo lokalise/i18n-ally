@@ -1,17 +1,9 @@
-import { commands, DecorationRangeBehavior, Range, window } from 'vscode'
+import { commands, window } from 'vscode'
 import { ExtensionModule } from '~/modules'
 import { Global } from '~/core'
 import { Commands } from '~/commands'
 import { DetectionResult, trimDetection } from '~/extraction'
 import i18n from '~/i18n'
-
-const decoration = window.createTextEditorDecorationType({
-  // TODO: configureable
-  backgroundColor: '#edbe3230',
-  border: '1px dashed #edbe32',
-  borderRadius: '3px',
-  rangeBehavior: DecorationRangeBehavior.ClosedClosed,
-})
 
 export async function DetectHardStrings() {
   const editor = window.activeTextEditor
@@ -43,11 +35,6 @@ export async function DetectHardStrings() {
     if (temp.length)
       result.push(...temp)
   }
-
-  editor.setDecorations(
-    decoration,
-    result.flatMap(i => new Range(doc.positionAt(i.start), doc.positionAt(i.end))),
-  )
 
   return result
 }
