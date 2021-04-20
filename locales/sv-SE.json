@@ -24,6 +24,7 @@
   "command.rename_key": "Ändra namn på nyckel",
   "command.set_display_language": "Sätt som visningsspråk",
   "command.set_source_language": "Sätt som källspråk",
+  "command.show_docs": "",
   "command.translate_key": "Översätt",
   "command.translate_key_from": "Översätt från \"{0}\"",
   "config.annotation_delimiter": "Avskiljare för anteckningar",

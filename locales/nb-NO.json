@@ -24,6 +24,7 @@
   "command.rename_key": "Gi nøkkel nytt navn",
   "command.set_display_language": "Sett som visningsspråk",
   "command.set_source_language": "Sett som kildespråk",
+  "command.show_docs": "",
   "command.translate_key": "Oversett",
   "command.translate_key_from": "Oversett fra \"{0}\"",
   "config.annotation_delimiter": "",

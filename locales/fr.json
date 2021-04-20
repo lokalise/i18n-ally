@@ -24,6 +24,7 @@
   "command.rename_key": "Renommer la Clé",
   "command.set_display_language": "Sélectionner en tant que langue affichée",
   "command.set_source_language": "Sélectionner en tant que langage source",
+  "command.show_docs": "",
   "command.translate_key": "Traduire",
   "command.translate_key_from": "Traduire depuis \"{0}\"",
   "config.annotation_delimiter": "Délimiteur d'annotations",

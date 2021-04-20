@@ -24,6 +24,7 @@
   "command.rename_key": "Перейменувати ключ",
   "command.set_display_language": "Встановити як мову відображення",
   "command.set_source_language": "Встановити як вихідну мову",
+  "command.show_docs": "",
   "command.translate_key": "Перекласти",
   "command.translate_key_from": "Перекласти з \"{0}\"",
   "config.annotation_delimiter": "Роздільник анотацій",

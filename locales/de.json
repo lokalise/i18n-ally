@@ -24,6 +24,7 @@
   "command.rename_key": "Schlüssel umbennen",
   "command.set_display_language": "Als Anzeigesprache festlegen",
   "command.set_source_language": "Als Quellsprache festlegen",
+  "command.show_docs": "",
   "command.translate_key": "Übersetzen",
   "command.translate_key_from": "\"{0}\" übersetzen",
   "config.annotation_delimiter": "Trennzeichen",

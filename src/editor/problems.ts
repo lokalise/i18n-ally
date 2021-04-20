@@ -32,14 +32,25 @@ export class ProblemProvider {
     const loader: Loader = CurrentFile.loader
 
     const problems: DiagnosticWithDetection[] = []
-    this.collection.delete(document.uri)
+
+    if (CurrentFile.hardStrings?.length) {
+      for (const detection of CurrentFile.hardStrings) {
+        problems.push({
+          code: PROBLEM_CODE_HARD_STRING,
+          message: i18n.t('command.possible_hard_string'),
+          range: new Range(document.positionAt(detection.start), document.positionAt(detection.end)),
+          severity: DiagnosticSeverity.Warning,
+          detection,
+        })
+      }
+    }
 
     const keys = KeyDetector.getKeys(document)
     // get all keys of current file
     for (const { key, start, end } of keys) {
       const has_translation = !!loader.getValueByKey(key, locale)
       if (has_translation)
-        return
+        continue
 
       const exists = !!loader.getNodeByKey(key)
 
@@ -55,18 +66,6 @@ export class ProblemProvider {
           message: i18n.t('misc.missing_key', locale, key),
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Information,
-        })
-      }
-    }
-
-    if (CurrentFile.hardStrings?.length) {
-      for (const detection of CurrentFile.hardStrings) {
-        problems.push({
-          code: PROBLEM_CODE_HARD_STRING,
-          message: 'Possible Hard string',
-          range: new Range(document.positionAt(detection.start), document.positionAt(detection.end)),
-          severity: DiagnosticSeverity.Warning,
-          detection,
         })
       }
     }

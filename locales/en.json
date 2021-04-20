@@ -20,6 +20,7 @@
   "command.open_key": "Go to definition",
   "command.open_review": "Open review",
   "command.open_url": "Open url",
+  "command.possible_hard_string": "Possible Hard string",
   "command.refresh_usage": "Refresh usage report",
   "command.rename_key": "Rename key",
   "command.set_display_language": "Set as display language",

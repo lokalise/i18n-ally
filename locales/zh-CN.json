@@ -24,6 +24,7 @@
   "command.rename_key": "重命名路径",
   "command.set_display_language": "设为显示语言",
   "command.set_source_language": "设为源语言",
+  "command.show_docs": "",
   "command.translate_key": "翻译文案",
   "command.translate_key_from": "从 \"{0}\" 翻译",
   "config.annotation_delimiter": "内联注释的分隔符",

@@ -24,6 +24,7 @@
   "command.rename_key": "キーを変更する",
   "command.set_display_language": "表示する言語を設定する",
   "command.set_source_language": "もととなる言語を設定する",
+  "command.show_docs": "",
   "command.translate_key": "翻訳",
   "command.translate_key_from": "\"{0}\"から翻訳する",
   "config.annotation_delimiter": "デリミタアノテーション",

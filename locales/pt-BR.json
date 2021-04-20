@@ -24,6 +24,7 @@
   "command.rename_key": "Renomear chave",
   "command.set_display_language": "Definir como idioma de exibição",
   "command.set_source_language": "Definir como idioma de origem",
+  "command.show_docs": "",
   "command.translate_key": "Traduzir",
   "command.translate_key_from": "Traduzir do \"{0}\"",
   "config.annotation_delimiter": "O delimitador de anotação",

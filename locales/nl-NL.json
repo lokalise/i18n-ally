@@ -24,6 +24,7 @@
   "command.rename_key": "Hernoem sleutel",
   "command.set_display_language": "Stel als weergave taal in",
   "command.set_source_language": "Stel als bron taal in",
+  "command.show_docs": "",
   "command.translate_key": "Vertalen",
   "command.translate_key_from": "Vertaal van \"{0}\"",
   "config.annotation_delimiter": "Scheidingsteken van annotaties",
