@@ -67,9 +67,6 @@ export function detect(
         const end = fullEnd - 1 // "
         const text = input.slice(start, end)
 
-        if (isDynamic && !text.match(/['"`]/))
-          return
-
         detections.push({
           text,
           start,
