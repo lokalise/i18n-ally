@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.6](https://github.com/lokalise/i18n-ally/compare/v2.5.5...v2.5.6) (2021-04-20)
+
+
+### 🔮 Refactor
+
+* switch hard string highlight to problems panel ([97e405c](https://github.com/lokalise/i18n-ally/commit/97e405cb0de34dc1b5785d64a8fcd2e5ea01d22a))
+
+
+### ⚡ Features
+
+* extraction for string concatenation, close [#527](https://github.com/lokalise/i18n-ally/issues/527) ([26ada5a](https://github.com/lokalise/i18n-ally/commit/26ada5a1f9eb7cb2ca718a236809e8aaaf87a414))
+* extraction strings with variables in vue, close [#525](https://github.com/lokalise/i18n-ally/issues/525), close [#526](https://github.com/lokalise/i18n-ally/issues/526) ([1a11b75](https://github.com/lokalise/i18n-ally/commit/1a11b75e9d15247a9f0109ab87998617be6433c8))
+* quick fix for hard string problem, close [#538](https://github.com/lokalise/i18n-ally/issues/538) ([f8e807c](https://github.com/lokalise/i18n-ally/commit/f8e807c6f2c91e478013896322923dfd22c9cca2))
+
+
+### 🐞 Bug Fixes
+
+* detection for vue dyamic props ([28382e2](https://github.com/lokalise/i18n-ally/commit/28382e270c26559bc6704348d657a37a25149156))
+* do not detect strings inside $t as hardcoded, close [#536](https://github.com/lokalise/i18n-ally/issues/536) ([27cebd5](https://github.com/lokalise/i18n-ally/commit/27cebd5293f9f4e6c7154d3e46bebd15fc21fa12))
+* partial fix for [#443](https://github.com/lokalise/i18n-ally/issues/443) ([a0f8f51](https://github.com/lokalise/i18n-ally/commit/a0f8f51ab54dd3518129f7da4ba4fb8d4a342ba7))
+* skip backquotes when extracting from JS template strings, close [#537](https://github.com/lokalise/i18n-ally/issues/537) ([46c3cab](https://github.com/lokalise/i18n-ally/commit/46c3cabd6e5a2a8495cd2476694ddf5824d6b007))
+* utilize Google API key with new api endpoint ([#534](https://github.com/lokalise/i18n-ally/issues/534)) ([96adc20](https://github.com/lokalise/i18n-ally/commit/96adc20dd8d55a6010d7296009a4ba9dc6903d6e))
+
 ### [2.5.5](https://github.com/lokalise/i18n-ally/compare/v2.5.4...v2.5.5) (2021-04-07)
 
 
