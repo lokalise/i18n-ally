@@ -99,7 +99,7 @@
     "rimraf": "^3.0.2",
     "standard-version": "^9.2.0",
     "stylus": "^0.54.8",
-    "ts-loader": "^9.0.0",
+    "ts-loader": "^8.1.0",
     "ts-mocha": "^8.0.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "vscode-test": "^1.5.2",

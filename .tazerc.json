@@ -7,6 +7,7 @@
     "webpack-cli",
     "vue-i18n",
     "limax",
+    "ts-loader",
     "@types/vscode"
   ]
 }
