@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.7](https://github.com/lokalise/i18n-ally/compare/v2.5.6...v2.5.7) (2021-04-20)
+
+
+### 🐞 Bug Fixes
+
+* hard string detection after extracting, close [#542](https://github.com/lokalise/i18n-ally/issues/542) ([9a250a8](https://github.com/lokalise/i18n-ally/commit/9a250a8668bce415641ed0b52100186a3baf607c))
+
 ### [2.5.6](https://github.com/lokalise/i18n-ally/compare/v2.5.5...v2.5.6) (2021-04-20)
 
 
