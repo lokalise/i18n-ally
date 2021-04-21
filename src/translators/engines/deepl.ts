@@ -19,11 +19,13 @@ interface DeepLTranslateRes {
   translations: DeepLTranslate[]
 }
 
-const deepl = axios.create({
-  baseURL: 'https://api.deepl.com/v2',
-})
+const deepl = axios.create({})
 
 deepl.interceptors.request.use((req) => {
+  req.baseURL = Config.deeplUseFreeApi
+    ? 'https://api-free.deepl.com/v2'
+    : 'https://api.deepl.com/v2'
+
   req.params = {
     auth_key: Config.deeplApiKey,
   }

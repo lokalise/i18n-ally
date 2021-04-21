@@ -489,6 +489,10 @@ export class Config {
     return this.getConfig<string | null | undefined>('translate.deepl.apiKey')
   }
 
+  static get deeplUseFreeApi() {
+    return this.getConfig<boolean>('translate.deepl.useFreeApi')
+  }
+
   static get deeplLog(): Boolean {
     return !!this.getConfig('translate.deepl.enableLog')
   }
