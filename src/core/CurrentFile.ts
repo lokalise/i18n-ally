@@ -21,6 +21,7 @@ export class CurrentFile {
 
   static watch(ctx: ExtensionContext) {
     ctx.subscriptions.push(workspace.onDidSaveTextDocument(e => this.update(e.uri)))
+    ctx.subscriptions.push(workspace.onDidChangeTextDocument(e => this.update(e.document.uri)))
     ctx.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.update(e && e.document.uri)))
     ctx.subscriptions.push(Global.onDidChangeLoader(() => {
       this.invalidate()

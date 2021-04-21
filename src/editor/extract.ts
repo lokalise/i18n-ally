@@ -29,7 +29,7 @@ class ExtractProvider implements CodeActionProvider {
         isDynamic: detection.isDynamic,
         languageId: document.languageId,
         filepath: document.fileName,
-        text: detection.text.trim(),
+        text: '',
         rawText: detection.text.trim(),
         isInsert: false,
         range: new Range(
