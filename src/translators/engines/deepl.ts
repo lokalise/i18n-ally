@@ -22,7 +22,7 @@ interface DeepLTranslateRes {
 const deepl = axios.create({})
 
 deepl.interceptors.request.use((req) => {
-  req.baseURL = Config.deeplUseFreeApi
+  req.baseURL = Config.deeplUseFreeApiEntry
     ? 'https://api-free.deepl.com/v2'
     : 'https://api.deepl.com/v2'
 
