@@ -941,10 +941,10 @@
           "default": false,
           "description": "%config.deepl_log%"
         },
-        "i18n-ally.translate.deepl.useFreeApi": {
+        "i18n-ally.translate.deepl.useFreeApiEntry": {
           "type": "boolean",
           "default": false,
-          "description": "%config.deepl_use_free_api%"
+          "description": "%config.deepl_use_free_api_entry%"
         },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
