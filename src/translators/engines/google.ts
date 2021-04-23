@@ -8,12 +8,18 @@ export default class GoogleTranslate extends TranslateEngine {
   apiRootIfUserSuppliedKey = 'https://translation.googleapis.com'
 
   async translate(options: TranslateOptions) {
-    const {
+    let {
       from = 'auto',
       to = 'auto',
     } = options
 
     const key = Config.googleApiKey
+
+    if (key) {
+      from = this.convertToSupportedLocalesForGoogleCloud(from);
+      to = this.convertToSupportedLocalesForGoogleCloud(to);
+    }
+
     const slugs = {
       from: from === 'auto' || !from ? '' : `&source=${from}`,
       to: to === 'auto' || !to ? '' : `&target=${to}`,
@@ -27,6 +33,14 @@ export default class GoogleTranslate extends TranslateEngine {
     })
 
     return this.transform(data, options, !!key)
+  }
+
+  convertToSupportedLocalesForGoogleCloud(locale: string): string {
+    const longSupportedLocales = ["ceb", "zh-TW", "haw", "hmn", "auto"];
+    if (locale && longSupportedLocales.indexOf(locale) === -1) {
+      locale = locale.substring(0, 2);
+    }
+    return locale;
   }
 
   transform(response: any, options: TranslateOptions, apiKeySuppliedByUser: boolean): TranslateResult {
