@@ -248,7 +248,7 @@ const annotation: ExtensionModule = (ctx) => {
 
   // hover
   languages.registerHoverProvider('*', {
-    provideHover(document, position, token) {
+    provideHover(document, position) {
       if (document !== _current_doc || !_current_usages)
         return
 
