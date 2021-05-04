@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.8](https://github.com/lokalise/i18n-ally/compare/v2.5.7...v2.5.8) (2021-05-04)
+
+
+### ⚡ Features
+
+* allow using deepl api free plan ([df8bb7f](https://github.com/lokalise/i18n-ally/commit/df8bb7ff761f1e26daaff78d5b72d45ad57c165e))
+
+
+### 🐞 Bug Fixes
+
+* improve Google Cloud key protected API usage by shortening unsupported locales ([0c192a2](https://github.com/lokalise/i18n-ally/commit/0c192a2d9578b5818c5f54cecc875465495f268d))
+* problem list detection on content change, close [#545](https://github.com/lokalise/i18n-ally/issues/545), close [#544](https://github.com/lokalise/i18n-ally/issues/544) ([f975298](https://github.com/lokalise/i18n-ally/commit/f9752983ac17e5c56310d713683f1431a5b623ad))
+* rename useFreeApi to useFreeApiEntry ([10923e8](https://github.com/lokalise/i18n-ally/commit/10923e8981d166f24e84380837c981803493ae36))
+
 ### [2.5.7](https://github.com/lokalise/i18n-ally/compare/v2.5.6...v2.5.7) (2021-04-20)
 
 
