@@ -751,7 +751,8 @@
               "globalize",
               "ui5",
               "next-translate",
-              "php-gettext"
+              "php-gettext",
+              "general"
             ]
           },
           "description": "%config.enabled_frameworks%"

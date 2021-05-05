@@ -1,4 +1,4 @@
-import { RewriteKeySource, RewriteKeyContext } from '../core/types'
+import { RewriteKeySource } from '../core/types'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
 
@@ -26,7 +26,7 @@ class ChromeExtensionFramework extends Framework {
     ]
   }
 
-  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string, source: RewriteKeySource) {
     if (source === 'reference' && !key.endsWith('.message'))
       return `${key}.message`
     if (source === 'write' && !key.endsWith('.message'))
