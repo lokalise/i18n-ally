@@ -60,8 +60,9 @@ export class ComposedLoader extends Loader {
 
     this._flattenLocaleTree = {}
     for (const loader of this._loaders) {
-      const loaderChildren = loader.flattenLocaleTree
-      Object.assign(this._flattenLocaleTree, loaderChildren)
+      const loaderChildren = loader?.flattenLocaleTree
+      if (loaderChildren)
+        Object.assign(this._flattenLocaleTree, loaderChildren)
     }
     this._isFlattenLocaleTreeDirty = false
     return this._flattenLocaleTree
