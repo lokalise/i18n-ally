@@ -10,5 +10,5 @@ export interface DetectionResult {
   fullText?: string
   fullStart?: number
   fullEnd?: number
-  type: 'attribute' | 'inline'
+  type: 'attribute' | 'inline' | 'js-string' | 'js-template' | 'jsx-text'
 }
