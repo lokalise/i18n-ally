@@ -6,10 +6,10 @@ Array [
     "end": 23,
     "fullEnd": 24,
     "fullStart": 5,
-    "fullText": "placeholder=\\"hello\\"",
+    "fullText": "placeholder=\\"Hello\\"",
     "isDynamic": false,
     "start": 18,
-    "text": "hello",
+    "text": "Hello",
     "type": "attribute",
   },
 ]
@@ -87,17 +87,6 @@ Array [
     "fullText": "Sign in",
     "start": 44,
     "text": "Sign in",
-    "type": "inline",
-  },
-  Object {
-    "end": 73,
-    "fullText": "
-  or
-  ",
-    "start": 65,
-    "text": "
-  or
-  ",
     "type": "inline",
   },
   Object {

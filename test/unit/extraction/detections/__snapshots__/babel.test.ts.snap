@@ -3,11 +3,6 @@
 exports[`detections - babel v2-cdn.js 1`] = `
 Array [
   "This should be detected",
-  "all",
-  "item",
-  "items",
-  "all",
-  "hashchange",
 ]
 `;
 
@@ -19,28 +14,15 @@ Array [
 
 exports[`detections - babel v2-class.js 1`] = `
 Array [
-  "vue",
   "computed ",
   "base greeting: ",
 ]
 `;
 
-exports[`detections - babel v2-class-tsx.tsx 1`] = `
-Array [
-  "create",
-  "edit",
-  "create",
-  "edit",
-  "create",
-  "create",
-]
-`;
+exports[`detections - babel v2-class-tsx.tsx 1`] = `Array []`;
 
 exports[`detections - babel v2-esm.js 1`] = `
 Array [
-  "static",
-  "server",
-  "client",
   "About page",
 ]
 `;
@@ -49,7 +31,6 @@ exports[`detections - babel v2-jsx.jsx 1`] = `
 Array [
   "Nigeria",
   "Nigeria is a large country that has a varied topography.",
-  "content",
   "Hello, ",
   " ",
   "country-name ",
@@ -59,10 +40,7 @@ Array [
 exports[`detections - babel v2-jsx-2.jsx 1`] = `
 Array [
   "Home page 🚀",
-  "description",
-  "description",
   "Home page description",
-  "container",
   "Home page 🚀",
   "About page",
 ]
@@ -70,10 +48,7 @@ Array [
 
 exports[`detections - babel v2-ts.ts 1`] = `
 Array [
-  "vue",
-  "numeric",
   "UTC",
-  "narrow",
   "UTC",
   "2017-01-\${first + i + 15}",
   "S",
@@ -83,46 +58,22 @@ Array [
   "T",
   "F",
   "S",
-  "th",
-  "th",
-  "thead",
   "\${this.displayedYear}-\${pad(this.displayedMonth + 1)}-01T00:00:00+00:00",
-  "td",
-  "small",
   "\${prevMonthYear}-\${pad(prevMonth + 1)}-\${pad(firstDayFromPreviousMonth - day)}",
-  "td",
-  "date",
   "\${this.displayedYear}-\${pad(this.displayedMonth + 1)}-\${pad(day)}",
-  "td",
-  "date",
   "\${nextMonthYear}-\${pad(nextMonth + 1)}-\${pad(nextMonthDay++)}",
-  "td",
-  "date",
-  "tbody",
-  "tr",
   "v-date-picker-table v-date-picker-table--date",
 ]
 `;
 
 exports[`detections - babel v3-ts.ts 1`] = `
 Array [
-  "vue",
-  "close",
-  "close",
-  ":",
+  "Filename",
 ]
 `;
 
 exports[`detections - babel v3-tsx.tsx 1`] = `
 Array [
-  "vue",
   "AComment",
-  "comment",
-  "actions",
-  "author",
-  "avatar",
-  "content",
-  "datetime",
-  "string",
 ]
 `;

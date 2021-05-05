@@ -6,7 +6,7 @@ const html = extractionsParsers.html
 describe('detections', () => {
   describe('attrs', () => {
     it('html', () => {
-      expect(html.detect('<div placeholder="hello"></div>')).to.matchSnapshot()
+      expect(html.detect('<div placeholder="Hello"></div>')).to.matchSnapshot()
 
       expect(html.detect(`
 <textarea

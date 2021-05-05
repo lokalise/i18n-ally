@@ -36,7 +36,7 @@ const download = async(type: string) => {
     return
   const name = `${toComponentName(props.icon)}.${type}`
   const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
-  Download(blob, name)
+  Download(blob, name || 'Filename')
 }
 const toggleSelectingMode = () => {
   selectingMode.value = !selectingMode.value

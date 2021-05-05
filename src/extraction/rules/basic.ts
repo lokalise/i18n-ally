@@ -15,6 +15,9 @@ export class BasicExtrationRule extends ExtractionRule {
     // ❌ camel case
     if (str.match(/[a-z][A-Z]/))
       return ExtractionScore.ShouldExclude
+    // ❌ all small cases
+    if (str.match(/^[a-z]+$/))
+      return ExtractionScore.ShouldExclude
     // ❌ all digits
     if (str.match(/^[\d.]+$/))
       return ExtractionScore.ShouldExclude
@@ -22,7 +25,7 @@ export class BasicExtrationRule extends ExtractionRule {
     if (str.match(/^[A-Za-z0-9]+$/))
       return ExtractionScore.ShouldInclude
     // ✅ one char
-    if (str.length === 1 && !'/.-\\+$^'.includes(str))
+    if (str.length === 1 && !'/.-\\:+$^'.includes(str))
       return ExtractionScore.ShouldInclude
   }
 }
