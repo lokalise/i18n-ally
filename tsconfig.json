@@ -20,8 +20,6 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./package.nls.*.json",
-    "./node_modules/vscode/vscode.d.ts",
-    "./node_modules/vscode/lib/*"
+    "./package.nls.*.json"
   ]
 }
