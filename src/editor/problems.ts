@@ -6,9 +6,15 @@ import i18n from '~/i18n'
 import { DetectionResult } from '~/extraction'
 
 export const PROBLEM_CODE_HARD_STRING = 'i18n-ally-hard-string'
+export const PROBLEM_KEY_MISSING = 'i18n-ally-key-missing'
+export const PROBLEM_TRANSLATION_MISSING = 'i18n-ally-translation-missing'
 
 export interface DiagnosticWithDetection extends Diagnostic {
   detection?: DetectionResult
+}
+
+export interface DiagnosticWithKey extends Diagnostic {
+  key?: string
 }
 
 export class ProblemProvider {
@@ -31,7 +37,7 @@ export class ProblemProvider {
     const locale = Config.displayLanguage
     const loader: Loader = CurrentFile.loader
 
-    const problems: DiagnosticWithDetection[] = []
+    const problems: (DiagnosticWithDetection | DiagnosticWithKey)[] = []
 
     if (CurrentFile.hardStrings?.length) {
       for (const detection of CurrentFile.hardStrings) {
@@ -56,16 +62,20 @@ export class ProblemProvider {
 
       if (exists) {
         problems.push({
+          code: PROBLEM_TRANSLATION_MISSING,
           message: i18n.t('misc.missing_translation', locale, key),
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Information,
+          key,
         })
       }
       else {
         problems.push({
+          code: PROBLEM_KEY_MISSING,
           message: i18n.t('misc.missing_key', locale, key),
           range: new Range(document.positionAt(start), document.positionAt(end)),
           severity: DiagnosticSeverity.Information,
+          key,
         })
       }
     }
