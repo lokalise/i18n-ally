@@ -5,7 +5,7 @@ export abstract class BaseTagSystem {
     return locale || fallback
   }
 
-  toBCP47(str: string): string {
+  toBCP47(str: string): string | undefined {
     return str
   }
 
