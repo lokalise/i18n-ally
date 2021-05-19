@@ -24,6 +24,7 @@ import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
+import LinguiFramework from './lingui'
 
 export * from './base'
 
@@ -52,6 +53,7 @@ export const frameworks: Framework[] = [
   new UI5Framework(),
   new NextTranslateFramework(),
   new PhpGettextFramework(),
+  new LinguiFramework(),
 
   // Vue SFC should be the last one
   new VueSFCFramework(),

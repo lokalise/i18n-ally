@@ -747,7 +747,8 @@
               "globalize",
               "ui5",
               "next-translate",
-              "php-gettext"
+              "php-gettext",
+              "lingui"
             ]
           },
           "description": "%config.enabled_frameworks%"
