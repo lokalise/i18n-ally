@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.9](https://github.com/lokalise/i18n-ally/compare/v2.5.8...v2.5.9) (2021-05-19)
+
+
+### 📚 Documentations
+
+* remove sponsorship ([c9588fc](https://github.com/lokalise/i18n-ally/commit/c9588fc3fdb2b54df31949a8e8e83fa49725b847))
+
+
+### 🌍 Internationalization
+
+* add Turkish support, complete French translations ([#560](https://github.com/lokalise/i18n-ally/issues/560)) ([2dde828](https://github.com/lokalise/i18n-ally/commit/2dde8284b8014ca04f190b1b4d4b3cb51588c0ba))
+
+
+### 🐞 Bug Fixes
+
+* **ngx-translate:** detect for array keys, and enable jsx/tsx, close [#517](https://github.com/lokalise/i18n-ally/issues/517) ([29e4668](https://github.com/lokalise/i18n-ally/commit/29e46682d0e7e65db14de20b8d58726a41bd1569))
+* missing keys quick fix, close [#529](https://github.com/lokalise/i18n-ally/issues/529) ([cc08cd2](https://github.com/lokalise/i18n-ally/commit/cc08cd258666cee77c0bccc4d4e8a76594a57638))
+
+
+### ⚡ Features
+
+* **lingui:** minimal support for lingui, close [#513](https://github.com/lokalise/i18n-ally/issues/513) ([cbb4de3](https://github.com/lokalise/i18n-ally/commit/cbb4de3bd96df7fe3d0de42dbdb6132ad688d3fa))
+
 ### [2.5.8](https://github.com/lokalise/i18n-ally/compare/v2.5.7...v2.5.8) (2021-05-04)
 
 
