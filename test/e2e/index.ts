@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { resolve, join } from 'path'
 import { runTests } from 'vscode-test'
 import fg from 'fast-glob'

@@ -31,7 +31,7 @@ export async function listAll(): Promise<FixtureInfo[]> {
   return inputs.map(input => ({
     dirInput: input,
     dirOutput: join(dirname(input), 'output'),
-    dirConfig: join(root, basename(deepDirname(input, 5)), '.vscode'),
+    dirConfig: join(root, '.vscode'),
     name: basename(dirname(input)),
     category: basename(deepDirname(input, 2)),
     type: basename(deepDirname(input, 4)),
@@ -49,17 +49,16 @@ export async function prepareFixture(info: FixtureInfo) {
 
   await fs.ensureDir(info.dirConfig)
   await fs.copy(info.dirInput, path, { recursive: true })
-  await fs.copy(info.dirConfig, join(path, basename(info.dirConfig)), { recursive: true })
+  await fs.copy(info.dirConfig, join(path, '.vscode'), { recursive: true })
 
   return path
 }
 
 async function run() {
   const fixtures = await listAll()
-  console.log(fixtures)
 
   // TODO: enable all cases
-  const fixtrue = fixtures.find(f => f.name === 'simple_variable' && f.category === 'concatenation')
+  const fixtrue = fixtures.find(f => f.name === 'simple_variable' && f.category === 'interpolation')
   if (fixtrue) {
     if (!await testFixture(fixtrue))
       process.exit(1)

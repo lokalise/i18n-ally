@@ -233,9 +233,9 @@
         "icon": "$(symbol-string)"
       },
       {
-        "command": "1i8n-ally.extract-hard-strings-batch",
+        "command": "i18n-ally.extract-hard-strings-batch",
         "category": "%extname%",
-        "title": "Extract hard strings batch (Expiremental)"
+        "title": "(Expiremental) Extract hard strings batch"
       },
       {
         "command": "i18n-ally.detect_hard_strings",

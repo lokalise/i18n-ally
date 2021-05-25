@@ -18,7 +18,16 @@ class GeneralFramework extends Framework {
     'typescriptreact',
   ]
 
-  refactorTemplates = () => []
+  refactorTemplates(keypath: string, args: string[] = []) {
+    let params = `'${keypath}'`
+    if (args.length)
+      params += `, [${args.join(', ')}]`
+    return [
+      `$t(${params})`,
+      keypath,
+    ]
+  }
+
   usageMatchRegex = []
 
   supportAutoExtraction = [
