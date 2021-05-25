@@ -5,9 +5,9 @@ import DeepLTranslateEngine from './engines/deepl'
 
 export class Translator {
   engines: Record<string, TranslateEngine> ={
-    google: new GoogleTranslateEngine(),
+    'google': new GoogleTranslateEngine(),
     'google-cn': new GoogleTranslateCnEngine(),
-    deepl: new DeepLTranslateEngine(),
+    'deepl': new DeepLTranslateEngine(),
   }
 
   async translate(options: TranslateOptions & { engine: string }) {

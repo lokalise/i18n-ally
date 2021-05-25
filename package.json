@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "scripts": {
@@ -32,7 +32,7 @@
     "@babel/parser": "^7.14.1",
     "@babel/traverse": "^7.14.0",
     "@types/string-similarity": "^4.0.0",
-    "bcp-47-normalize": "^1.1.1",
+    "bcp-47-normalize": "^2.0.1",
     "change-case": "^4.1.2",
     "esm": "^3.2.25",
     "fast-glob": "^3.2.5",
@@ -46,7 +46,7 @@
     "json5": "^2.2.0",
     "limax": "^2.1.0",
     "lodash": "^4.17.21",
-    "nanoid": "^3.1.22",
+    "nanoid": "^3.1.23",
     "parse-gitignore": "^1.0.1",
     "pofile": "^1.1.1",
     "properties": "^1.2.1",
@@ -59,7 +59,7 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.6.4",
+    "@antfu/eslint-config": "^0.6.5",
     "@antfu/ni": "^0.7.0",
     "@antfu/utils": "^0.1.5",
     "@babel/types": "^7.14.1",
@@ -72,12 +72,12 @@
     "@types/js-yaml": "^4.0.1",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/json5": "^2.2.0",
-    "@types/lodash": "^4.14.168",
+    "@types/lodash": "^4.14.169",
     "@types/micromatch": "^4.0.1",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^15.0.2",
+    "@types/node": "^15.3.0",
     "@types/qs": "^6.9.6",
-    "@types/semver": "^7.3.5",
+    "@types/semver": "^7.3.6",
     "@types/vscode": "^1.52.0",
     "@types/webpack": "^4.41.26",
     "axios": "^0.21.1",
@@ -88,11 +88,11 @@
     "conventional-github-releaser": "^3.1.5",
     "cross-env": "^7.0.3",
     "diff": "^5.0.0",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "esno": "^0.5.0",
     "fs-extra": "^10.0.0",
     "micromatch": "^4.0.4",
-    "mocha": "^8.3.2",
+    "mocha": "^8.4.0",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.5",
@@ -752,7 +752,8 @@
               "ui5",
               "next-translate",
               "php-gettext",
-              "general"
+              "general",
+              "lingui"
             ]
           },
           "description": "%config.enabled_frameworks%"

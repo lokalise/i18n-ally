@@ -1,10 +1,10 @@
-import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, ReferenceContext, CancellationToken, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
+import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
 import { ExtensionModule } from '../modules'
 import { Global } from '../core/Global'
 import { KeyDetector, Analyst } from '~/core'
 
 class Provider implements ReferenceProvider, RenameProvider {
-  async provideReferences(document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): Promise<Location[] | undefined> {
+  async provideReferences(document: TextDocument, position: Position): Promise<Location[] | undefined> {
     if (!Global.enabled)
       return []
 
@@ -16,7 +16,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     return await Analyst.getAllOccurrenceLocations(key)
   }
 
-  prepareRename(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Range | { range: Range; placeholder: string }> {
+  prepareRename(document: TextDocument, position: Position): ProviderResult<Range | { range: Range; placeholder: string }> {
     const result = KeyDetector.getKeyAndRange(document, position)
     if (!result)
       return
@@ -24,7 +24,7 @@ class Provider implements ReferenceProvider, RenameProvider {
     return { range, placeholder: key }
   }
 
-  async provideRenameEdits(document: TextDocument, position: Position, newName: string, token: CancellationToken): Promise<WorkspaceEdit | undefined> {
+  async provideRenameEdits(document: TextDocument, position: Position, newName: string): Promise<WorkspaceEdit | undefined> {
     if (!Global.enabled)
       return
 
