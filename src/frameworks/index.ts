@@ -23,9 +23,9 @@ import UI5Framework from './ui5'
 import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
 import GeneralFramework from './general'
+import LinguiFramework from './lingui'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
-import LinguiFramework from './lingui'
 
 export * from './base'
 

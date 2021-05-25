@@ -11,6 +11,7 @@ import editor from './openEditor'
 import review from './review'
 import deepl from './deepl'
 import gotoRange from './gotoRange'
+import batchHardStringsExtract from './batchHardStringsExtract'
 
 const m: ExtensionModule = (ctx) => {
   return flatten([
@@ -19,6 +20,7 @@ const m: ExtensionModule = (ctx) => {
     keyManipulations(ctx),
     extractText(ctx),
     detectHardStrings(ctx),
+    batchHardStringsExtract(ctx),
     help(ctx),
     refreshUsageReport(ctx),
     editor(ctx),

@@ -47,6 +47,7 @@ export async function prepareFixture(info: FixtureInfo) {
   if (fs.existsSync(path))
     await fs.remove(path)
 
+  await fs.ensureDir(info.dirConfig)
   await fs.copy(info.dirInput, path, { recursive: true })
   await fs.copy(info.dirConfig, join(path, basename(info.dirConfig)), { recursive: true })
 
@@ -59,8 +60,10 @@ async function run() {
 
   // TODO: enable all cases
   const fixtrue = fixtures.find(f => f.name === 'simple_variable' && f.category === 'concatenation')
-  if (fixtrue)
-    await testFixture(fixtrue)
+  if (fixtrue) {
+    if (!await testFixture(fixtrue))
+      process.exit(1)
+  }
 }
 
 async function testFixture(fixture: FixtureInfo) {
@@ -77,7 +80,8 @@ async function testFixture(fixture: FixtureInfo) {
   }
   catch (e) {
     console.log(yellow`❌ ${fixture.category} > ${fixture.name}`)
-    return
+    console.error(e)
+    return false
   }
   const result = await compareOut(fixture.dirOutput, path)
   let passed = true
@@ -98,6 +102,7 @@ async function testFixture(fixture: FixtureInfo) {
     console.log(green`✅ ${fixture.category} > ${fixture.name}`)
   else
     console.log(red`❌ ${fixture.category} > ${fixture.name}`)
+  return passed
 }
 
 async function compareOut(target: string, out: string) {

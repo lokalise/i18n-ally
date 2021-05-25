@@ -233,6 +233,11 @@
         "icon": "$(symbol-string)"
       },
       {
+        "command": "1i8n-ally.extract-hard-strings-batch",
+        "category": "%extname%",
+        "title": "Extract hard strings batch (Expiremental)"
+      },
+      {
         "command": "i18n-ally.detect_hard_strings",
         "category": "%extname%",
         "title": "(expiremental) Detect hard-coded strings in the current file"
