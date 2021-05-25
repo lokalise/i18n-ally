@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { dirname, join, basename, resolve } from 'path'
 import { runTests } from 'vscode-test'
 import fg from 'fast-glob'
@@ -22,7 +23,7 @@ export interface FixtureInfo {
 }
 
 export async function listAll(): Promise<FixtureInfo[]> {
-  const root = 'test/fixtures/'
+  const root = 'test/fixtures/js/'
   const inputs = await fg(`${root}**/input`, {
     onlyDirectories: true,
   })
@@ -54,7 +55,7 @@ export async function prepareFixture(info: FixtureInfo) {
 
 async function run() {
   const fixtures = await listAll()
-  // console.log(fixtures)
+  console.log(fixtures)
 
   // TODO: enable all cases
   const fixtrue = fixtures.find(f => f.name === 'simple_variable' && f.category === 'concatenation')
