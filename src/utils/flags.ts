@@ -67,6 +67,7 @@ export const FLAGS = [
   'ee',
   'eg',
   'eh',
+  'eo',
   'er',
   'es',
   'et',
