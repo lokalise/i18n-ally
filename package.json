@@ -128,6 +128,7 @@
     "workspaceContains:Gemfile",
     "workspaceContains:.vscode/i18n-ally-custom-framework.yml",
     "workspaceContains:.vscode/i18n-ally-reviews.yml",
+    "workspaceContains:*.vue",
     "onWebviewPanel:i18n-ally-editor",
     "onLanguage:vue",
     "onLanguage:html",
@@ -235,7 +236,7 @@
       {
         "command": "i18n-ally.extract-hard-strings-batch",
         "category": "%extname%",
-        "title": "(Expiremental) Extract hard strings batch"
+        "title": "(expiremental) Extract hard-coded strings in batch for current file"
       },
       {
         "command": "i18n-ally.detect_hard_strings",

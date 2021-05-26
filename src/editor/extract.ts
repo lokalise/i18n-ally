@@ -6,6 +6,22 @@ import { Commands } from '~/commands'
 import i18n from '~/i18n'
 import { parseHardString } from '~/extraction/parseHardString'
 import { ExtractTextOptions } from '~/commands/extractText'
+import { DetectionResult } from '~/extraction'
+
+export function DetectionResultToExtraction(detection: DetectionResult, document: TextDocument): ExtractTextOptions {
+  return {
+    isDynamic: detection.isDynamic,
+    languageId: document.languageId,
+    filepath: document.fileName,
+    text: '',
+    rawText: detection.text.trim(),
+    isInsert: false,
+    range: new Range(
+      document.positionAt(detection.start),
+      document.positionAt(detection.end),
+    ),
+  }
+}
 
 class ExtractProvider implements CodeActionProvider {
   public async provideCodeActions(
@@ -23,24 +39,13 @@ class ExtractProvider implements CodeActionProvider {
 
     // quick fix for hard string problems
     if (diagnostic?.detection) {
-      const detection = diagnostic.detection
       const action = new CodeAction(i18n.t('refactor.extract_text'), CodeActionKind.QuickFix)
-      const options: ExtractTextOptions = {
-        isDynamic: detection.isDynamic,
-        languageId: document.languageId,
-        filepath: document.fileName,
-        text: '',
-        rawText: detection.text.trim(),
-        isInsert: false,
-        range: new Range(
-          document.positionAt(detection.start),
-          document.positionAt(detection.end),
-        ),
-      }
       action.command = {
         command: Commands.extract_text,
         title: i18n.t('refactor.extract_text'),
-        arguments: [options],
+        arguments: [
+          DetectionResultToExtraction(diagnostic.detection, document),
+        ],
       }
       action.diagnostics = [diagnostic]
       action.isPreferred = true

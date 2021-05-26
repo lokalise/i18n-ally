@@ -31,8 +31,8 @@ export function detect(
     const fullEnd = path.node.end
     const fullText = input.slice(fullStart, fullEnd)
 
-    const start = quoted ? fullStart + 1 : fullStart
-    const end = quoted ? fullEnd - 1 : fullEnd
+    // const start = quoted ? fullStart + 1 : fullStart
+    // const end = quoted ? fullEnd - 1 : fullEnd
     const text = quoted ? fullText.slice(1, -1) : fullText
 
     if (type === 'js-template' && !shouldExtract(text, dynamicRules))
@@ -44,8 +44,8 @@ export function detect(
       fullEnd,
       fullStart,
       fullText,
-      start,
-      end,
+      start: fullStart,
+      end: fullEnd,
       text,
       type,
     })
