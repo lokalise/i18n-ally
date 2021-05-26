@@ -15,6 +15,6 @@ setupTest('Svelte', () => {
     is(Global.enabled, true)
     is(Global.enabledFrameworks.length, 2)
     is(Global.enabledFrameworks[0].id, 'svelte')
-    is(Global.enabledFrameworks[0].id, 'general')
+    is(Global.enabledFrameworks[1].id, 'general')
   })
 })
