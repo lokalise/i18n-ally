@@ -24,7 +24,7 @@ export const run = async() => {
   try {
     const doc = await workspace.openTextDocument(Uri.file(join(root, entry)))
     await window.showTextDocument(doc)
-    await timeout(500)
+    await timeout(1000)
 
     await commands.executeCommand('i18n-ally.extract-hard-strings-batch')
     await doc.save()
