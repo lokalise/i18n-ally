@@ -15,7 +15,7 @@ export async function DetectHardStrings() {
   const frameworks = Global.getExtractionFrameworksByLang(doc.languageId)
 
   if (!frameworks.length) {
-    window.showWarningMessage(i18n.t('refactor.extracting_not_support_for_lang'), doc.languageId)
+    window.showWarningMessage(i18n.t('refactor.extracting_not_support_for_lang', doc.languageId))
     return
   }
 

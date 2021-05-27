@@ -5,6 +5,7 @@ import { ExtensionModule } from '../modules'
 import { Commands } from './commands'
 import { Config } from '~/core'
 import i18n from '~/i18n'
+import { Log } from '~/utils'
 
 export class ConfigLocalesGuide {
   static async prompt() {
@@ -88,7 +89,7 @@ export class ConfigLocalesGuide {
       )
     }
     else {
-      window.showWarningMessage(i18n.t('prompt.locales_dir_not_found'))
+      Log.warn(i18n.t('prompt.locales_dir_not_found'), false)
       this.prompt()
     }
   }

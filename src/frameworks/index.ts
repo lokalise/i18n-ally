@@ -22,9 +22,10 @@ import GlobalizeFramework from './globalize'
 import UI5Framework from './ui5'
 import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
+import GeneralFramework from './general'
+import LinguiFramework from './lingui'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
-import LinguiFramework from './lingui'
 
 export * from './base'
 
@@ -54,6 +55,7 @@ export const frameworks: Framework[] = [
   new NextTranslateFramework(),
   new PhpGettextFramework(),
   new LinguiFramework(),
+  new GeneralFramework(),
 
   // Vue SFC should be the last one
   new VueSFCFramework(),

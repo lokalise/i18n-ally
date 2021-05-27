@@ -32,13 +32,13 @@ jobs:
           CI: true
 
       - name: E2E Tests
-        run: yarn run test:e2e
+        run: yarn run test:e2e && yarn run test:fixture
         if: runner.os != 'Linux'
         env:
           CI: true
 
       - name: E2E Tests (Linux)
-        run: xvfb-run -a yarn run test:e2e
+        run: xvfb-run -a yarn run test:e2e && xvfb-run -a yarn run test:fixture
         if: runner.os == 'Linux'
         env:
           CI: true

@@ -6,6 +6,12 @@
 npm run test:unit
 ```
 
+## Fixture Testing
+
+```bash
+npm run test:fixture
+```
+
 ## E2E Testing
 
 ```bash

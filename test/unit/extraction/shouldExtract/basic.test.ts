@@ -6,7 +6,6 @@ const rules = [
 ]
 
 const includes = [
-  't',
   'OK',
   'Created',
   '✅',

@@ -26,6 +26,7 @@ export function generateKeyFromText(text: string, filepath?: string) {
     key = ''
   }
   else {
+    text = text.replace(/\$/g, '')
     key = limax(text, { separator: Config.preferredDelimiter, tone: false })
       .slice(0, Config.extractKeyMaxLength ?? Infinity)
   }

@@ -39,7 +39,7 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
     else {
       this.iconPath = this.getIcon('symbol-string')
       const length = CurrentFile.hardStrings?.length
-      this.description = length == null ? '?' : length.toString()
+      this.description = length == null ? '' : length.toString()
     }
   }
 

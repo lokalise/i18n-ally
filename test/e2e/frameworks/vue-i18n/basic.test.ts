@@ -14,8 +14,9 @@ setupTest('Vue i18n', () => {
   it('enables correct frameworks', async() => {
     not(Global, undefined)
     is(Global.enabled, true)
-    is(Global.enabledFrameworks.length, 1)
+    is(Global.enabledFrameworks.length, 2)
     is(Global.enabledFrameworks[0].id, 'vue')
+    is(Global.enabledFrameworks[1].id, 'general')
   })
 
   it('get keys', async() => {

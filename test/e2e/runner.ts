@@ -26,6 +26,7 @@ export function createRunner(dir: string) {
       })
     }
     catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err)
       setTimeout(() => process.exit(1), 2000)
     }

@@ -1,5 +1,4 @@
 import { Framework } from './base'
-import { DirStructure, RewriteKeySource, RewriteKeyContext } from '~/core'
 import { LanguageId } from '~/utils'
 
 class UI5Framework extends Framework {
@@ -35,7 +34,7 @@ class UI5Framework extends Framework {
     ]
   }
 
-  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
+  rewriteKeys(key: string) {
     const regexI8n = /i18n>([\w\d\-.]*)/gm
     const matches = regexI8n.exec(key)
     if (matches && matches.length > 1)
@@ -45,7 +44,7 @@ class UI5Framework extends Framework {
 
   enabledParsers = ['properties']
 
-  pathMatcher(dirStructure?: DirStructure): string {
+  pathMatcher(): string {
     return 'i18n_{locale}.properties'
   }
 

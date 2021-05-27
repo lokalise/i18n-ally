@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     loadBoard(id) {
+      console.log('This should also be hard strings')
       bus.$emit('load-board', id)
     },
     createBoard() {

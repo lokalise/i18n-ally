@@ -13,9 +13,10 @@ setupTest('Vue i18n SFC', () => {
   it('enables correct frameworks', async() => {
     not(Global, undefined)
     is(Global.enabled, true)
-    is(Global.enabledFrameworks.length, 2)
+    is(Global.enabledFrameworks.length, 3)
     is(Global.enabledFrameworks[0].id, 'vue')
-    is(Global.enabledFrameworks[1].id, 'vue-sfc')
+    is(Global.enabledFrameworks[1].id, 'general')
+    is(Global.enabledFrameworks[2].id, 'vue-sfc')
   })
 
   // TODO: install Vetur to correctly infer the language ID
