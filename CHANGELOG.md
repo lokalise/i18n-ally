@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/lokalise/i18n-ally/compare/v2.5.9...v2.6.0) (2021-05-27)
+
+
+### 🐞 Bug Fixes
+
+* do not prompt when no locales found, log in the terminal instead ([8e74c8f](https://github.com/lokalise/i18n-ally/commit/8e74c8ff31aea89a990f91f73e13a78a0cc70898))
+* remove question mark in hard strings sidebar, close [#557](https://github.com/lokalise/i18n-ally/issues/557) ([f5c58cb](https://github.com/lokalise/i18n-ally/commit/f5c58cbcc185caf1314d3cad3f95dee0a5ad6036))
+
+
+### ⚗ Tests
+
+* add js fixtures ([e07fd50](https://github.com/lokalise/i18n-ally/commit/e07fd50cfa3f1f12bf1c6c6940ed1b2c69cb7301))
+* enable fixture test ([63b6ed6](https://github.com/lokalise/i18n-ally/commit/63b6ed6aa066536963206693e82f26768a1aee38))
+* test runner ([50d0510](https://github.com/lokalise/i18n-ally/commit/50d0510cc3d0ea4966f01016a33f67571b505a19))
+* update e2e ([9ca482d](https://github.com/lokalise/i18n-ally/commit/9ca482d8e7518578157a99e19d58bd3bb85b22b6))
+
+
+### ⚡ Features
+
+* add flag for eo ([#569](https://github.com/lokalise/i18n-ally/issues/569)) ([c0907b5](https://github.com/lokalise/i18n-ally/commit/c0907b5b11ae53fadf6a061d3a891033ba643519))
+* babel-detections ([#562](https://github.com/lokalise/i18n-ally/issues/562)) ([5448b32](https://github.com/lokalise/i18n-ally/commit/5448b3299f4aef1a61ab00f2fa6336d5696914eb))
+* **detection:** exclude all lowercases string as target ([6950438](https://github.com/lokalise/i18n-ally/commit/6950438032a0dc0e3767f0638c6e6861da746ed6))
+* support detection for js/ts/jsx/tsx, close [#558](https://github.com/lokalise/i18n-ally/issues/558) ([e11ec25](https://github.com/lokalise/i18n-ally/commit/e11ec25b7af2a4adaf4c001ece895d11eb031d4f))
+* support vue <script> detections, close [#559](https://github.com/lokalise/i18n-ally/issues/559) ([e060ed6](https://github.com/lokalise/i18n-ally/commit/e060ed68d069ed6db79a4a56d1e41ea6d135f2bf))
+
 ### [2.5.9](https://github.com/lokalise/i18n-ally/compare/v2.5.8...v2.5.9) (2021-05-19)
 
 
