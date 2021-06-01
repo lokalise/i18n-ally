@@ -654,6 +654,11 @@
       "type": "object",
       "title": "%extname%",
       "properties": {
+        "i18n-ally.disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.disabled%"
+        },
         "i18n-ally.localesPaths": {
           "type": [
             "string",

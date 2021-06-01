@@ -11,6 +11,7 @@ import { ExtractionHTMLOptions } from '~/extraction/parsers/options'
 
 export class Config {
   static readonly reloadConfigs = [
+    'disabled',
     'localesPaths',
     'pathMatcher',
     'includeSubfolders',
@@ -44,6 +45,10 @@ export class Config {
 
   static ctx: ExtensionContext
   static readonly debug = process.env.NODE_ENV === 'development'
+
+  static get disabled() {
+    return Config.getConfig<boolean>('disabled') ?? true
+  }
 
   // languages
   static get displayLanguage(): string {

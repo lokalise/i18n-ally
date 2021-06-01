@@ -38,10 +38,10 @@ export class Global {
   static async init(context: ExtensionContext) {
     this.context = context
 
-    context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(e => this.updateRootPath()))
-    context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
-    context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
-    context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(() => this.updateRootPath()))
+    context.subscriptions.push(window.onDidChangeActiveTextEditor(() => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidOpenTextDocument(() => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidCloseTextDocument(() => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update(e)))
     await this.updateRootPath()
   }
@@ -169,7 +169,7 @@ export class Global {
       .flatMap(f => [
         f.supportedExts,
         Object.entries(Config.parsersExtendFileExtensions)
-          .find(([k, v]) => v === f.id)?.[0],
+          .find(([, v]) => v === f.id)?.[0],
       ])
       .filter(Boolean)
       .join('|')
@@ -323,9 +323,9 @@ export class Global {
       const frameworks = Config.enabledFrameworks
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
-    const isValidProject = this.enabledFrameworks.length > 0
+    const isValidProject = this.enabledFrameworks.length > 0 && this.enabledParsers.length > 0
     const hasLocalesSet = Global.localesPaths.length > 0
-    const shouldEnabled = isValidProject && hasLocalesSet
+    const shouldEnabled = !Config.disabled && isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
@@ -335,13 +335,15 @@ export class Global {
       await this.initLoader(this._rootpath, reload)
     }
     else {
-      if (!isValidProject)
-        Log.info('⚠ Current workspace is not a valid project, extension disabled')
-      else if (!hasLocalesSet)
-        Log.info('⚠ No locales path setting found, extension disabled')
+      if (!Config.disabled) {
+        if (!isValidProject)
+          Log.info('⚠ Current workspace is not a valid project, extension disabled')
+        else if (!hasLocalesSet)
+          Log.info('⚠ No locales path setting found, extension disabled')
 
-      if (isValidProject && !hasLocalesSet)
-        ConfigLocalesGuide.autoSet()
+        if (isValidProject && !hasLocalesSet)
+          ConfigLocalesGuide.autoSet()
+      }
 
       this.unloadAll()
     }

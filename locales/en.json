@@ -40,6 +40,7 @@
   "config.derived_keys": "Rules to mark derived keys in the usage report",
   "config.dir_structure": "Preferred directory structure to organize locale files",
   "config.disable_path_parsing": "Disable path resolution",
+  "config.disabled": "Disable i18n Ally for the project",
   "config.display_language": "Displaying language",
   "config.editor_prefer_editor": "Prefer to use webview editor for locale editing.",
   "config.enabled_frameworks": "Specify the supported framework(s) to enable. If no value is set, the extension will detect frameworks automatically.",
