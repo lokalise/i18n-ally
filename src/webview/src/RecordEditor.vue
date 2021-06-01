@@ -15,52 +15,52 @@
 
     .buttons(v-if='active')
       .button(v-if='readonly' disabled)
-        v-pencil-off
+        mdi-pencil-off
 
       .button(@click='translate' v-if='!readonly && !review.translation_candidate && record.locale !== $store.state.config.sourceLanguage')
-        v-earth
+        mdi-earth
         span {{ $t('editor.translate') }}
 
       .button(@click='reviewing=!reviewing' v-if='$store.state.config.review')
-        v-comment-edit-outline
+        mdi-comment-edit-outline
         span {{ $t('review.review') }}
 
     .review-brief(v-if='$store.state.config.review')
-      v-earth.state-icon(v-if='!active && review.translation_candidate')
-      v-check.state-icon(v-if='reviewBrief==="approve"')
-      v-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
-      v-comment-question-outline.state-icon(v-else-if='reviewBrief==="conflict"')
-      v-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
+      mdi-earth.state-icon(v-if='!active && review.translation_candidate')
+      mdi-check.state-icon(v-if='reviewBrief==="approve"')
+      mdi-plus-minus.state-icon(v-else-if='reviewBrief==="request_change"')
+      mdi-comment-question-outline.state-icon(v-else-if='reviewBrief==="conflict"')
+      mdi-comment-outline.state-icon(v-else-if='reviewBrief==="comment"')
 
   .translation-candidate.panel.shadow.bottom-stacked(v-if='active && review.translation_candidate')
-    v-earth
+    mdi-earth
     .text {{review.translation_candidate.text}}
     .buttons
       .button.flat(@click='transDiscard()') {{$t('prompt.button_discard')}}
       .button(@click='transEdit()')
-        v-pencil
+        mdi-pencil
         span {{$t('prompt.button_edit_end_apply')}}
       .button(@click='transApply()')
-        v-check-all
+        mdi-check-all
         span {{$t('prompt.button_apply')}}
 
   .review-panel(v-if='$store.state.config.review && ((comments.length && active) || reviewing)')
-    template(v-for='c in comments')
-      review-comment(:record='record' :comment='c' :key='c.locale')
+    template(v-for='c in comments' :key='c.locale')
+      review-comment(:record='record' :comment='c')
 
     template(v-if='reviewing')
       review-comment(:record='record' :editing='true' mode='create' @done='reviewing=false')
 </template>
 
-<script lang="js">
-import Vue from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { getCommentState } from '../../utils/shared'
 import ReviewComment from './ReviewComment.vue'
 import Flag from './Flag.vue'
 import Avatar from './Avatar.vue'
 import { vscode } from './api'
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     Flag,
     Avatar,

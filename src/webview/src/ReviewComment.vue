@@ -62,13 +62,13 @@
         .button(@click='cancel()') {{ $t('prompt.button_cancel') }}
 </template>
 
-<script lang="js">
-import Vue from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 import cloneDeep from 'lodash/cloneDeep'
 import Avatar from './Avatar.vue'
 import { vscode } from './api'
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     Avatar,
   },

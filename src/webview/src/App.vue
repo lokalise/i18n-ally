@@ -2,9 +2,9 @@
 .container
   template(v-if='$store.state.ready')
     .actions-bar
-      v-magnify.setting-button(@click='openSearch')
-      v-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
-      v-cog.setting-button(@click='openSettings')
+      mdi-magnify.setting-button(@click='openSearch')
+      mdi-refresh.setting-button(v-if='$store.state.config.debug' @click='refresh')
+      mdi-cog.setting-button(@click='openSettings')
 
     key-editor(v-if='state.route === "open-key"' :data='state.routeData')
 
@@ -12,22 +12,16 @@
     p.loading Loading...
 </template>
 
-<script lang="js">
-import Vue from 'vue'
-import VCog from 'vue-material-design-icons/Cog.vue'
-import VRefresh from 'vue-material-design-icons/Refresh.vue'
-import VMagnify from 'vue-material-design-icons/Magnify.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Flag from './Flag.vue'
 import KeyEditor from './KeyEditor.vue'
 import { vscode } from './api'
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     Flag,
     KeyEditor,
-    VCog,
-    VRefresh,
-    VMagnify,
   },
 
   data() {

@@ -60,13 +60,13 @@
       )
 </template>
 
-<script lang="js">
-import Vue from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Flag from './Flag.vue'
 import RecordEditor from './RecordEditor.vue'
 import { vscode } from './api'
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     Flag,
     RecordEditor,
@@ -120,7 +120,7 @@ export default Vue.extend({
           this.current = v || ''
       },
     },
-    context: {
+    'context': {
       immiediate: true,
       handler() {
         this.keyIndex = this.data.keyIndex ?? this.contextKeys.indexOf(this.data.keypath) ?? 0
