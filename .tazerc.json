@@ -8,6 +8,7 @@
     "vue-i18n",
     "limax",
     "ts-loader",
-    "@types/vscode"
+    "@types/vscode",
+    "ts-node"
   ]
 }
