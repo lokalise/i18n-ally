@@ -3,6 +3,7 @@ import { createApp, h } from 'vue'
 import { createStore } from 'vuex'
 import { createI18n } from 'vue-i18n'
 import { vscode } from './api'
+// @ts-ignore
 import App from './App.vue'
 
 const app = createApp({

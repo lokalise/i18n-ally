@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es2019",
-    "lib": ["ESNext", "ESNext.AsyncIterable", "ESNext.Array"],
+    "lib": ["ESNext", "ESNext.AsyncIterable", "ESNext.Array", "DOM"],
     "module": "esnext",
     "outDir": "dist",
     "sourceMap": true,
