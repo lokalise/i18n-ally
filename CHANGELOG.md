@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/lokalise/i18n-ally/compare/v2.6.0...v2.6.1) (2021-06-01)
+
+
+### 🐞 Bug Fixes
+
+* downgrade ts-node, fix [#576](https://github.com/lokalise/i18n-ally/issues/576) ([a1c8261](https://github.com/lokalise/i18n-ally/commit/a1c8261f9602080dd356bc06891c70160d06d2b0))
+
+
+### ⚡ Features
+
+* new disabled setting ([181faa4](https://github.com/lokalise/i18n-ally/commit/181faa471ebc67065a3eeae0888c80902c847df3))
+
 ## [2.6.0](https://github.com/lokalise/i18n-ally/compare/v2.5.9...v2.6.0) (2021-05-27)
 
 
