@@ -33,10 +33,20 @@ class VueFramework extends Framework {
     '(?:i18n[ (\n]\\s*path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.|[^\\w\\d])(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, args: string[] = []) {
+  refactorTemplates(keypath: string, args: string[] = [], languageId?: string, detection?: DetectionResult) {
     let params = `'${keypath}'`
     if (args.length)
       params += `, [${args.join(', ')}]`
+
+    switch (detection?.type) {
+      case 'inline':
+        return [`{{$t(${params})}}`]
+      case 'attribute':
+        return [`$t(${params})`]
+      case 'js-string':
+        return [`this.$t(${params})`, `i18n.t(${params})`, `t(${params})`]
+    }
+
     return [
       `{{$t(${params})}}`,
       `this.$t(${params})`,

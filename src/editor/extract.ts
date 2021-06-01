@@ -45,6 +45,7 @@ class ExtractProvider implements CodeActionProvider {
         title: i18n.t('refactor.extract_text'),
         arguments: [
           DetectionResultToExtraction(diagnostic.detection, document),
+          diagnostic.detection,
         ],
       }
       action.diagnostics = [diagnostic]
@@ -76,7 +77,7 @@ class ExtractProvider implements CodeActionProvider {
         description: CurrentFile.loader.getValueByKey(key, Config.displayLanguage, 30),
       }))
       .filter(labelDescription => labelDescription.description === text)
-      .flatMap(t => Global.refactorTemplates(t.label, args, document.languageId))
+      .flatMap(t => Global.refactorTemplates(t.label, args, document.languageId, diagnostic?.detection))
       .map(t => ({
         command: Commands.replace_with,
         title: i18n.t('refactor.replace_with', t),

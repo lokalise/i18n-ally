@@ -28,7 +28,7 @@ export async function BatchHardStringExtraction() {
     const { filepath, rawText, text, range, args, languageId } = options
 
     const keypath = generateKeyFromText(rawText || text, filepath)
-    const templates = Global.refactorTemplates(keypath, args, languageId).filter(Boolean)
+    const templates = Global.refactorTemplates(keypath, args, languageId, i).filter(Boolean)
 
     return {
       range,

@@ -8,6 +8,7 @@ import { extractHardStrings, generateKeyFromText, Config, CurrentFile } from '~/
 import i18n from '~/i18n'
 import { Log, promptTemplates } from '~/utils'
 import { parseHardString } from '~/extraction/parseHardString'
+import { DetectionResult } from '~/extraction'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
@@ -25,7 +26,7 @@ export interface ExtractTextOptions {
   isInsert?: boolean
 }
 
-async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
+async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: DetectionResult) {
   if (Config.readonly) {
     Log.warn(i18n.t('errors.write_in_readonly_mode'), true)
     return
@@ -139,14 +140,14 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions) {
     if (checkOverride) {
       shouldOverride = await overrideConfirm(writeKeypath, true, true)
       if (shouldOverride === 'retry') {
-        commands.executeCommand(Commands.extract_text, options)
+        commands.executeCommand(Commands.extract_text, options, detection)
         return
       }
       if (shouldOverride === 'canceled')
         return
     }
 
-    const replacer = await promptTemplates(keypath, args, languageId)
+    const replacer = await promptTemplates(keypath, args, languageId, detection)
 
     if (!replacer) {
       window.showWarningMessage(i18n.t('prompt.extraction_canceled'))

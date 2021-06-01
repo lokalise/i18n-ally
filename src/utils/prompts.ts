@@ -2,6 +2,7 @@ import { window } from 'vscode'
 import { decorateLocale } from '.'
 import i18n from '~/i18n'
 import { CurrentFile, Config, Global } from '~/core'
+import { DetectionResult } from '~/extraction'
 
 export async function promptEdit(keypath: string, locale: string, value?: string) {
   const result = await window.showInputBox({
@@ -25,9 +26,9 @@ export async function promptKeys(text: string, locale = Config.displayLanguage) 
   return result?.label
 }
 
-export async function promptTemplates(keypath: string, args?: string[], languageId?: string) {
+export async function promptTemplates(keypath: string, args?: string[], languageId?: string, detection?: DetectionResult) {
   const replacer = await window.showQuickPick(
-    Global.refactorTemplates(keypath, args, languageId),
+    Global.refactorTemplates(keypath, args, languageId, detection),
     {
       placeHolder: i18n.t('prompt.replace_text_as'),
     })

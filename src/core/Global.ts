@@ -16,6 +16,7 @@ import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
 import i18n from '~/i18n'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '~/utils'
+import { DetectionResult } from '~/extraction'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -107,10 +108,10 @@ export class Global {
     return result.value as KeyStyle
   }
 
-  static refactorTemplates(keypath: string, args?: string[], languageId?: string) {
+  static refactorTemplates(keypath: string, args?: string[], languageId?: string, detection?: DetectionResult) {
     return uniq([
       ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
-      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, args, languageId)),
+      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, args, languageId, detection)),
     ])
   }
 

@@ -44,6 +44,7 @@ export class EcmascriptParser extends Parser {
 
     return new Promise<any>((resolve, reject) => {
       const cmd = `${tsNode} --dir "${dir}" --transpile-only --compiler-options "${options}" "${loader}" "${filepath}"`
+      // eslint-disable-next-line no-console
       console.log(`[i18n-ally] spawn: ${cmd}`)
       child_process.exec(cmd, (err, stdout) => {
         if (err)
