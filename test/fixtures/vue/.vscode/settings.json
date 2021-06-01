@@ -1,5 +1,5 @@
 {
-  "i18n-ally.enabledFrameworks": ["general", "vue"],
+  "i18n-ally.enabledFrameworks": ["vue", "general"],
   "i18n-ally.localesPaths": ".",
   "i18n-ally.pathMatcher": "messages.{locale}.json",
   "i18n-ally.enabledParsers": ["json"],
