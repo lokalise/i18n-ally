@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.2](https://github.com/lokalise/i18n-ally/compare/v2.6.1...v2.6.2) (2021-06-02)
+
+
+### ⚡ Features
+
+* configure for custom refactor template, close [#574](https://github.com/lokalise/i18n-ally/issues/574) ([261ce4f](https://github.com/lokalise/i18n-ally/commit/261ce4f415db18b3ce18f4379c67ec8d26c1b5bd))
+* refactor template based on detection type ([1d46b75](https://github.com/lokalise/i18n-ally/commit/1d46b7552b6a3aab99db0c91f75d63899bdaf6ee))
+* support extracting html, close [#575](https://github.com/lokalise/i18n-ally/issues/575) ([cd3ed5d](https://github.com/lokalise/i18n-ally/commit/cd3ed5d0ef9c0077368711f8d9fbca2ae36f3b63))
+
+
+### 🐞 Bug Fixes
+
+* don't enable if only general  framework is presented ([ab25966](https://github.com/lokalise/i18n-ally/commit/ab259667e1f2da384f4f09384a3234b81dba3a4a))
+* message set pathes, close [#565](https://github.com/lokalise/i18n-ally/issues/565) ([d4b14ea](https://github.com/lokalise/i18n-ally/commit/d4b14ea01adffd9d40965ecb9d13eba90599782b))
+
 ### [2.6.1](https://github.com/lokalise/i18n-ally/compare/v2.6.0...v2.6.1) (2021-06-01)
 
 
