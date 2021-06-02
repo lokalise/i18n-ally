@@ -5,7 +5,7 @@ import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRu
 import { Config } from '~/core'
 
 class GeneralFramework extends Framework {
-  id ='general'
+  id = 'general'
   display = 'General'
 
   detection = {

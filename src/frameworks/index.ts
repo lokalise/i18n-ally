@@ -81,7 +81,7 @@ export function getPackageDependencies(projectUrl: string): PackageDependencies 
 }
 
 export function getEnabledFrameworks(dependencies: PackageDependencies, root: string) {
-  const enabledFrameworks = frameworks.filter((framework) => {
+  let enabledFrameworks = frameworks.filter((framework) => {
     for (const k of Object.keys(dependencies)) {
       const key = k as PackageFileType
       const packages = dependencies[key]
@@ -109,8 +109,12 @@ export function getEnabledFrameworks(dependencies: PackageDependencies, root: st
 
   for (const framework of enabledFrameworks) {
     if (framework.monopoly)
-      return [framework]
+      enabledFrameworks = [framework]
   }
+
+  // don't enable if only general framework is presented
+  if (enabledFrameworks.length === 1 && enabledFrameworks[0].id === 'general')
+    enabledFrameworks = []
 
   return enabledFrameworks
 }
