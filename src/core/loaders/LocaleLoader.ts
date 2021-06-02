@@ -467,6 +467,7 @@ export class LocaleLoader extends Loader {
     catch (e) {
       this.unsetFile(relativePath)
       Log.info(`🐛 Failed to load ${e}`, 2)
+      // eslint-disable-next-line no-console
       console.error(e)
     }
   }

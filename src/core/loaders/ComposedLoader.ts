@@ -120,7 +120,7 @@ export class ComposedLoader extends Loader {
 
     pendings = pendings.filter(i => i)
 
-    const distrubtedPendings: PendingWrite[][] = new Array(this.loadersReversed.length).fill(null).map(_ => [])
+    const distrubtedPendings: PendingWrite[][] = new Array(this.loadersReversed.length).fill(null).map(() => [])
     const loaders = this.loadersReversed
     for (const pending of pendings) {
       let handled = false

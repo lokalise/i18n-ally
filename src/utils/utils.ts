@@ -1,4 +1,3 @@
-import { set } from 'lodash'
 import { KeyStyle } from '../core/types'
 import { ROOT_KEY } from './flat'
 import { Node, LocaleTree, LocaleNode, LocaleRecord, Config } from '~/core'
@@ -45,6 +44,30 @@ export function resolveFlattenRoot(node?: Node) {
   return node
 }
 
+export function set(obj: any, key: string, value: any, override = true) {
+  if (Array.isArray(obj)) {
+    const num = parseInt(key)
+    if (!isNaN(num)) {
+      if (override || obj[num] == null)
+        obj[num] = value
+      return obj[num]
+    }
+  }
+  if (override || obj[key] == null)
+    obj[key] = value
+  return obj[key]
+}
+
+export function setNested(obj: any, keys: string[], value: any) {
+  if (!keys.length)
+    return
+  const key = keys[0]
+  if (keys.length === 1)
+    set(obj, key, value)
+  else
+    setNested(set(obj, key, {}, false), keys.slice(1), value)
+}
+
 export function applyPendingToObject(obj: any, keypath: string, value: any, keyStyle?: KeyStyle) {
   if (!Config.disablePathParsing)
     keypath = resolveFlattenRootKeypath(keypath)
@@ -52,7 +75,7 @@ export function applyPendingToObject(obj: any, keypath: string, value: any, keyS
   if (keyStyle === 'flat')
     obj[keypath] = value
   else
-    set(obj, keypath, value)
+    setNested(obj, keypath.split(/\./g), value)
 
   return obj
 }
