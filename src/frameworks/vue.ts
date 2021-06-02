@@ -1,8 +1,8 @@
 import { TextDocument } from 'vscode'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
-import { DefaultDynamicExtractionsRules, DefaultExtractionRules, DetectionResult, extractionsParsers } from '~/extraction'
-import { Config } from '~/core'
+import { DefaultDynamicExtractionsRules, DefaultExtractionRules, extractionsParsers } from '~/extraction'
+import { Config, DetectionResult } from '~/core'
 import { shiftDetectionPosition } from '~/extraction/parsers/utils'
 
 class VueFramework extends Framework {
@@ -33,15 +33,15 @@ class VueFramework extends Framework {
     '(?:i18n[ (\n]\\s*path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.|[^\\w\\d])(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, args: string[] = [], languageId?: string, detection?: DetectionResult) {
+  refactorTemplates(keypath: string, args: string[] = [], doc?: TextDocument, detection?: DetectionResult) {
     let params = `'${keypath}'`
     if (args.length)
       params += `, [${args.join(', ')}]`
 
-    switch (detection?.type) {
-      case 'inline':
+    switch (detection?.source) {
+      case 'html-inline':
         return [`{{$t(${params})}}`]
-      case 'attribute':
+      case 'html-attribute':
         return [`$t(${params})`]
       case 'js-string':
         return [`this.$t(${params})`, `i18n.t(${params})`, `t(${params})`]

@@ -4,7 +4,7 @@ import { Global } from './Global'
 import { VueSfcLoader } from './loaders/VueSfcLoader'
 import { Loader, Analyst } from '.'
 import { DetectHardStrings } from '~/commands/detectHardStrings'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 
 export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null

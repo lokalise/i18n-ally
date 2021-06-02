@@ -8,6 +8,7 @@ import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
 import { ExtractionHTMLOptions } from '~/extraction/parsers/options'
+import { resolveRefactorTemplate } from '~/utils/resolveRefactorTemplate'
 
 export class Config {
   static readonly reloadConfigs = [
@@ -319,7 +320,7 @@ export class Config {
   }
 
   static get refactorTemplates() {
-    return this.getConfig<string[]>('refactor.templates') || []
+    return resolveRefactorTemplate(this.getConfig<string[]>('refactor.templates') || [])
   }
 
   static get disablePathParsing() {

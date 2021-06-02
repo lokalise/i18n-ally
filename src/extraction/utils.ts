@@ -1,4 +1,4 @@
-import { DetectionResult } from './parsers/types'
+import { DetectionResult } from '~/core/types'
 
 const regexLeading = /^[\s\n]*/mg
 const regexTailing = /[\s\n]+$/mg

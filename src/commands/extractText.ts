@@ -1,4 +1,4 @@
-import { commands, window, workspace, QuickPickItem, Range } from 'vscode'
+import { commands, window, QuickPickItem, Range, TextDocument } from 'vscode'
 import { trim } from 'lodash'
 import { overrideConfirm } from './overrideConfirm'
 import { keypathValidate } from './keypathValidate'
@@ -8,7 +8,7 @@ import { extractHardStrings, generateKeyFromText, Config, CurrentFile } from '~/
 import i18n from '~/i18n'
 import { Log, promptTemplates } from '~/utils'
 import { parseHardString } from '~/extraction/parseHardString'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
@@ -16,13 +16,12 @@ interface QuickPickItemWithKey extends QuickPickItem {
 }
 
 export interface ExtractTextOptions {
-  filepath: string
   text: string
   rawText?: string
   args?: string[]
   range: Range
   isDynamic?: boolean
-  languageId?: string
+  document: TextDocument
   isInsert?: boolean
 }
 
@@ -35,16 +34,15 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: 
   if (!options) {
     // execute from command palette, get from active document
     const editor = window.activeTextEditor
-    const document = editor?.document
-    if (!editor || !document)
+    const currentDoc = editor?.document
+    if (!editor || !currentDoc)
       return
 
     options = {
-      filepath: document.uri.fsPath,
       text: '',
-      rawText: trim(document.getText(editor.selection), '\'"` '),
+      rawText: trim(currentDoc.getText(editor.selection), '\'"` '),
       range: editor.selection,
-      languageId: document.languageId,
+      document: currentDoc,
       isInsert: editor.selection.start.isEqual(editor.selection.end),
     }
   }
@@ -53,12 +51,13 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: 
   const loader = CurrentFile.loader
 
   if (options.rawText && !options.text) {
-    const result = parseHardString(options.rawText, options.languageId, options.isDynamic)
+    const result = parseHardString(options.rawText, options.document?.languageId, options.isDynamic)
     options.text = result?.text || ''
     options.args = result?.args
   }
 
-  const { filepath, text, rawText, range, args, languageId, isInsert } = options
+  const { text, rawText, range, args, document, isInsert } = options
+  const filepath = document.uri.fsPath
 
   const default_keypath = generateKeyFromText(rawText || text, filepath)
 
@@ -147,14 +146,12 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: 
         return
     }
 
-    const replacer = await promptTemplates(keypath, args, languageId, detection)
+    const replacer = await promptTemplates(keypath, args, document, detection)
 
     if (!replacer) {
       window.showWarningMessage(i18n.t('prompt.extraction_canceled'))
       return
     }
-
-    const document = await workspace.openTextDocument(filepath)
 
     await extractHardStrings(document, [{
       range,

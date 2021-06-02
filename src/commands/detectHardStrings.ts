@@ -1,8 +1,8 @@
 import { commands, window } from 'vscode'
 import { ExtensionModule } from '~/modules'
-import { Global } from '~/core'
+import { Global, DetectionResult } from '~/core'
 import { Commands } from '~/commands'
-import { DetectionResult, trimDetection } from '~/extraction'
+import { trimDetection } from '~/extraction'
 import i18n from '~/i18n'
 
 export async function DetectHardStrings() {

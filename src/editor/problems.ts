@@ -1,9 +1,8 @@
 import { ExtensionContext, languages, DiagnosticCollection, window, TextDocument, Diagnostic, DiagnosticSeverity, Range, workspace, Uri } from 'vscode'
 import { EXT_NAMESPACE } from '../meta'
 import { ExtensionModule } from '../modules'
-import { Global, KeyDetector, Config, Loader, CurrentFile } from '~/core'
+import { Global, KeyDetector, Config, Loader, CurrentFile, DetectionResult } from '~/core'
 import i18n from '~/i18n'
-import { DetectionResult } from '~/extraction'
 
 export const PROBLEM_CODE_HARD_STRING = 'i18n-ally-hard-string'
 export const PROBLEM_KEY_MISSING = 'i18n-ally-key-missing'

@@ -3,8 +3,7 @@ import { CurrentFileLocalesTreeProvider } from '../providers'
 import { BaseTreeItem } from './Base'
 import { HardStringDetectResultItem } from './HardStringDetectResultItem'
 import i18n from '~/i18n'
-import { Config, CurrentFile, Global } from '~/core'
-import { DetectionResult } from '~/extraction'
+import { Config, CurrentFile, Global, DetectionResult } from '~/core'
 
 export class CurrentFileExtractionItem extends BaseTreeItem {
   result: DetectionResult[] | undefined

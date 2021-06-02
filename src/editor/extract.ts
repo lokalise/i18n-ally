@@ -6,13 +6,12 @@ import { Commands } from '~/commands'
 import i18n from '~/i18n'
 import { parseHardString } from '~/extraction/parseHardString'
 import { ExtractTextOptions } from '~/commands/extractText'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 
 export function DetectionResultToExtraction(detection: DetectionResult, document: TextDocument): ExtractTextOptions {
   return {
     isDynamic: detection.isDynamic,
-    languageId: document.languageId,
-    filepath: document.fileName,
+    document,
     text: '',
     rawText: detection.text.trim(),
     isInsert: false,
@@ -77,7 +76,7 @@ class ExtractProvider implements CodeActionProvider {
         description: CurrentFile.loader.getValueByKey(key, Config.displayLanguage, 30),
       }))
       .filter(labelDescription => labelDescription.description === text)
-      .flatMap(t => Global.refactorTemplates(t.label, args, document.languageId, diagnostic?.detection))
+      .flatMap(t => Global.interpretRefactorTemplates(t.label, args, document, diagnostic?.detection))
       .map(t => ({
         command: Commands.replace_with,
         title: i18n.t('refactor.replace_with', t),

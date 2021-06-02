@@ -1,5 +1,5 @@
 import { extname } from 'path'
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument } from 'vscode'
 import { uniq } from 'lodash'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
@@ -16,7 +16,7 @@ import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
 import i18n from '~/i18n'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '~/utils'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -108,10 +108,30 @@ export class Global {
     return result.value as KeyStyle
   }
 
-  static refactorTemplates(keypath: string, args?: string[], languageId?: string, detection?: DetectionResult) {
+  static interpretRefactorTemplates(keypath: string, args?: string[], document?: TextDocument, detection?: DetectionResult) {
+    // const path = document?.uri.fsPath
+    const customTemplates = Config.refactorTemplates
+      .filter((i) => {
+        if (i.source && i.source !== detection?.source)
+          return false
+        // TODO: include / exclude
+        return true
+      })
+    const argsString = args?.length ? `,${args?.join(',')}` : ''
+
+    const customReplacers = customTemplates
+      .flatMap(i => i.templates)
+      .map(i => i
+        .replace(/{key}/, keypath)
+        .replace(/{args}/, argsString),
+      )
+
+    const frameworkReplacers = this.enabledFrameworks
+      .flatMap(f => f.refactorTemplates(keypath, args, document, detection))
+
     return uniq([
-      ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
-      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, args, languageId, detection)),
+      ...customReplacers,
+      ...frameworkReplacers,
     ])
   }
 

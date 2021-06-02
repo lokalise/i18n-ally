@@ -2,7 +2,7 @@ import { Parser } from 'htmlparser2'
 import { DefaultDynamicExtractionsRules, DefaultExtractionRules, ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
 import { ExtractionHTMLOptions } from './options'
-import { DetectionResult } from './types'
+import { DetectionResult } from '~/core/types'
 
 const defaultOptions: Required<ExtractionHTMLOptions> = {
   attributes: ['title', 'alt', 'placeholder', 'label', 'aria-label'],
@@ -75,7 +75,7 @@ export function detect(
           fullStart,
           fullEnd,
           fullText,
-          type: 'attribute',
+          source: 'html-attribute',
         })
       }
     },
@@ -96,7 +96,7 @@ export function detect(
         fullText,
         start,
         end,
-        type: 'inline',
+        source: 'html-inline',
       })
     },
   })

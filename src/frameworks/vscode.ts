@@ -1,4 +1,5 @@
 import { basename } from 'path'
+import { TextDocument } from 'vscode'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
 
@@ -30,8 +31,8 @@ class VSCodeFramework extends Framework {
     return '(?:i18n[ (]path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.)(?:(?:d|n)\\(.*?,|(?:t|tc|te)\\()\\s*)[\'"`]({key})[\'"`]'
   }
 
-  refactorTemplates(keypath: string, args?: string[], languageId?: string) {
-    if (languageId === 'json') {
+  refactorTemplates(keypath: string, args?: string[], doc?: TextDocument) {
+    if (doc?.languageId === 'json') {
       return [
         `%${keypath}%`,
         keypath,

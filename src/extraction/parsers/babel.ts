@@ -3,7 +3,7 @@ import { parse } from '@babel/parser'
 import traverse from '@babel/traverse'
 import { DefaultDynamicExtractionsRules, DefaultExtractionRules, ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
-import { DetectionResult } from './types'
+import { DetectionResult } from '~/core/types'
 
 export function detect(
   input: string,
@@ -21,7 +21,7 @@ export function detect(
     ],
   })
 
-  function handlePath(path: any, type: DetectionResult['type']) {
+  function handlePath(path: any, type: DetectionResult['source']) {
     if (!path.node.start || !path.node.end)
       return
 
@@ -47,7 +47,7 @@ export function detect(
       start: fullStart,
       end: fullEnd,
       text,
-      type,
+      source: type,
     })
   }
 

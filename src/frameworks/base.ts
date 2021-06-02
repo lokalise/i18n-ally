@@ -2,7 +2,7 @@
 import { TextDocument } from 'vscode'
 import { LanguageId } from '~/utils'
 import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle, Config } from '~/core'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -46,7 +46,7 @@ export abstract class Framework {
   /**
    * Return possible choices of replacement for messages extracted from code
    */
-  abstract refactorTemplates (keypath: string, args?: string[], languageId?: string, detection?: DetectionResult): string[]
+  abstract refactorTemplates (keypath: string, args?: string[], document?: TextDocument, detection?: DetectionResult): string[]
 
   /**
    * Analysis the file and get hard strings

@@ -14,7 +14,7 @@ export async function InsertKey() {
   if (!keypath)
     return
 
-  const replacer = await promptTemplates(keypath, [], document.languageId)
+  const replacer = await promptTemplates(keypath, [], document)
 
   if (!replacer)
     return

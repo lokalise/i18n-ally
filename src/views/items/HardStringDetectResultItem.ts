@@ -1,18 +1,17 @@
-import { ExtensionContext, Range, TreeItemCollapsibleState } from 'vscode'
+import { ExtensionContext, Range, TextDocument, TreeItemCollapsibleState } from 'vscode'
 import { BaseTreeItem } from './Base'
-import { DetectionResult } from '~/extraction'
+import { DetectionResult } from '~/core/types'
 import { Commands } from '~/commands'
 import { ExtractTextOptions } from '~/commands/extractText'
 
 export class HardStringDetectResultItem extends BaseTreeItem implements ExtractTextOptions {
   collapsibleState = TreeItemCollapsibleState.None
-  filepath: string
   text = ''
   isDynamic?: boolean
   range: Range
   rawText?: string
   args?: string[]
-  languageId?: string | undefined
+  document: TextDocument
   isInsert?: boolean | undefined
 
   constructor(
@@ -23,8 +22,7 @@ export class HardStringDetectResultItem extends BaseTreeItem implements ExtractT
 
     const document = this.detection.document!
 
-    this.languageId = document.languageId
-    this.filepath = document.fileName
+    this.document = document
     this.rawText = detection.text.trim()
     this.isInsert = false
     this.isDynamic = detection.isDynamic

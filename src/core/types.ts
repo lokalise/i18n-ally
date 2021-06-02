@@ -1,3 +1,5 @@
+import { Range, TextDocument, TextEditor } from 'vscode'
+
 export interface OptionalFeatures {
   VueSfc?: boolean
   LinkedMessages?: boolean
@@ -149,4 +151,34 @@ export enum TargetPickingStrategy {
   MostSimilar = 'most-similar',
   FilePrevious ='file-previous',
   GlobalPrevious = 'global-previous',
+}
+
+export type DetectionSource = 'html-attribute' | 'html-inline' | 'js-string' | 'js-template' | 'jsx-text'
+
+export interface DetectionResult {
+  text: string
+  start: number
+  end: number
+  document?: TextDocument
+  editor?: TextEditor
+  isDynamic?: boolean
+  fullText?: string
+  fullStart?: number
+  fullEnd?: number
+  source: DetectionSource
+}
+
+export interface ExtractInfo {
+  range: Range
+  replaceTo: string
+  keypath?: string
+  message?: string
+  locale?: string
+}
+
+export interface CustomRefactorTemplate {
+  source?: DetectionSource
+  templates: string[]
+  include?: string[]
+  exclude?: string[]
 }

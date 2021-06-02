@@ -899,7 +899,40 @@
         "i18n-ally.refactor.templates": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "html-attribute",
+                  "html-inline",
+                  "js-string",
+                  "js-template",
+                  "jsx-text"
+                ]
+              },
+              "template": {
+                "type": "string"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "include": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "description": "%config.refactor_templates%"
         },

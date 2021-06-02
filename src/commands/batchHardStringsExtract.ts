@@ -20,15 +20,15 @@ export async function BatchHardStringExtraction() {
     const options = DetectionResultToExtraction(i, document)
 
     if (options.rawText && !options.text) {
-      const result = parseHardString(options.rawText, options.languageId, options.isDynamic)
+      const result = parseHardString(options.rawText, options.document.languageId, options.isDynamic)
       options.text = result?.text || ''
       options.args = result?.args
     }
 
-    const { filepath, rawText, text, range, args, languageId } = options
-
+    const { rawText, text, range, args } = options
+    const filepath = document.uri.fsPath
     const keypath = generateKeyFromText(rawText || text, filepath)
-    const templates = Global.refactorTemplates(keypath, args, languageId, i).filter(Boolean)
+    const templates = Global.interpretRefactorTemplates(keypath, args, document, i).filter(Boolean)
 
     return {
       range,
