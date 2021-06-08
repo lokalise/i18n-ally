@@ -40,7 +40,7 @@ class VueFramework extends Framework {
 
     switch (detection?.source) {
       case 'html-inline':
-        return [`{{$t(${params})}}`]
+        return [`{{ $t(${params}) }}`]
       case 'html-attribute':
         return [`$t(${params})`]
       case 'js-string':
@@ -48,12 +48,12 @@ class VueFramework extends Framework {
     }
 
     return [
-      `{{$t(${params})}}`,
+      `{{ $t(${params}) }}`,
       `this.$t(${params})`,
       `$t(${params})`,
       `i18n.t(${params})`,
       // vue-i18n-next
-      `{{t(${params})}}`,
+      `{{ t(${params}) }}`,
       `t(${params})`,
       keypath,
     ]
