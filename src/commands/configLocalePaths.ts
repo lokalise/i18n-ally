@@ -29,7 +29,7 @@ export class ConfigLocalesGuide {
   }
 
   static async pickDir(): Promise<string[]> {
-    const rootPath = workspace.rootPath
+    const rootPath = workspace.workspaceFolders?.[0]?.uri.path
     if (!rootPath)
       return []
 

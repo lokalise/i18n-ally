@@ -1,6 +1,8 @@
-import { extname } from 'path'
+import { extname, resolve } from 'path'
 import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument } from 'vscode'
 import { uniq } from 'lodash'
+import { slash } from '@antfu/utils'
+import { isMatch } from 'micromatch'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocalePaths'
@@ -109,12 +111,20 @@ export class Global {
   }
 
   static interpretRefactorTemplates(keypath: string, args?: string[], document?: TextDocument, detection?: DetectionResult) {
-    // const path = document?.uri.fsPath
+    const path = slash(document?.uri.fsPath || '')
+    const root = workspace.workspaceFolders?.[0]?.uri.fsPath
     const customTemplates = Config.refactorTemplates
       .filter((i) => {
         if (i.source && i.source !== detection?.source)
           return false
-        // TODO: include / exclude
+        if (i.exclude || i.include) {
+          if (!path || !root)
+            return false
+          if (i.exclude && isMatch(path, i.exclude.map(i => slash(resolve(root, i)))))
+            return false
+          if (i.include && !isMatch(path, i.include.map(i => slash(resolve(root, i)))))
+            return false
+        }
         return true
       })
     const argsString = args?.length ? `,${args?.join(',')}` : ''

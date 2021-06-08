@@ -8,6 +8,12 @@
     {
       "source": "html-attribute",
       "template": "z('{key}'{args})"
+    },
+    {
+      "template": "ttt('{key}')",
+      "include": [
+        "Demo.vue"
+      ]
     }
   ]
 }
