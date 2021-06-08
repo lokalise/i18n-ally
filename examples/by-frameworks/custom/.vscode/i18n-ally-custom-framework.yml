@@ -1,0 +1,10 @@
+# .vscode/i18n-ally-custom-framework.yml
+languageIds:
+  - javascript
+  - typescript
+  - javascriptreact
+  - typescriptreact
+  - vue
+usageMatchRegex:
+  - "[^\\w\\d]customT\\(['\"`]({key})['\"`]"
+monopoly: false

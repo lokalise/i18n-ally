@@ -1,0 +1,19 @@
+{
+  "apple": "no apples | one apple | {count} apples",
+  "car": "car | cars",
+  "currency": {
+    "currency": "USD",
+    "style": "currency"
+  },
+  "nested": {
+    "foo": {
+      "bar": "foobar"
+    },
+    "greeting": "good morning",
+    "hello": "Hello again"
+  },
+  "project": "Basic",
+  "term": "I accept {0}",
+  "tos": "Term of Service",
+  "yeah": "yeah"
+}
