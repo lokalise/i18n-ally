@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.3](https://github.com/lokalise/i18n-ally/compare/v2.6.2...v2.6.3) (2021-06-08)
+
+
+### ⚡ Features
+
+* **rails:** support symbol usage, close [#583](https://github.com/lokalise/i18n-ally/issues/583) ([3041900](https://github.com/lokalise/i18n-ally/commit/30419007e15d460ee53e1808a9ea6b7c2cf8f1bb))
+* **vue:** support vue-i18n-next  component interpolation, close [#582](https://github.com/lokalise/i18n-ally/issues/582) ([ddcbce5](https://github.com/lokalise/i18n-ally/commit/ddcbce5442a2624ae74b03947b619b9aaefe8d78))
+* support include/exclude in refactor templates, close [#579](https://github.com/lokalise/i18n-ally/issues/579) ([1bd6b27](https://github.com/lokalise/i18n-ally/commit/1bd6b277eff9f077293e1f16167fa6c337357e3b))
+
+
+### 📚 Documentations
+
+* add custom framework example ([8e5196b](https://github.com/lokalise/i18n-ally/commit/8e5196bca5d845ae14c154d5c9af7ad7c5b32b40))
+
 ### [2.6.2](https://github.com/lokalise/i18n-ally/compare/v2.6.1...v2.6.2) (2021-06-02)
 
 
