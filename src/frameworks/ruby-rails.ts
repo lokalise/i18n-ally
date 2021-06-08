@@ -26,6 +26,8 @@ class RubyRailsFramework extends Framework {
 
   usageMatchRegex = [
     '[^\\w\\d]t(?:\\(| )[\'"`]({key})[\'"`]',
+    // #583
+    '[^\\w\\d]t\\(\\:({key})\\)',
   ]
 
   refactorTemplates(keypath: string) {
