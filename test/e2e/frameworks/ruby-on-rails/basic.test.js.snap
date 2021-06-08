@@ -32,5 +32,11 @@ Array [
     "quoted": true,
     "start": 309,
   },
+  Object {
+    "end": 368,
+    "key": "pages.index.new_post",
+    "quoted": false,
+    "start": 348,
+  },
 ]
 `;
