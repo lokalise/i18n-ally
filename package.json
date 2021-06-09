@@ -109,7 +109,7 @@
     "ts-mocha": "^8.0.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "vscode-test": "^1.5.2",
-    "vue": "^2.6.12",
+    "vue": "^2.6.14",
     "vue-i18n": "^8.22.4",
     "vue-material-design-icons": "^4.11.0",
     "vuex": "^3.6.2",
