@@ -1,7 +1,7 @@
 .github/**
 .vscode/**
 .vscode-test/**
-node_modules
+node_modules/*
 out/**
 dist/test/**
 dist/**/*.map
@@ -35,39 +35,60 @@ jest.config.js
 
 # Externals
 # jieba
+!node_modules/nodejieba
 !node_modules/nodejieba/build/Release/nodejieba.*
 !node_modules/nodejieba/dict/**
 !node_modules/nodejieba/*.js
 !node_modules/nodejieba/*.json
 
 # ts-node
+!node_modules/ts-node
 !node_modules/ts-node/**/*.js
 !node_modules/ts-node/**/*.json
+
+!node_modules/arg
 !node_modules/arg/*.js
 !node_modules/arg/*.json
+
+!node_modules/buffer-from
 !node_modules/buffer-from/*.js
 !node_modules/buffer-from/*.json
+
+!node_modules/source-map
 !node_modules/source-map/**/*.js
 !node_modules/source-map/**/*.json
+
+!node_modules/source-map-support
 !node_modules/source-map-support/*.js
 !node_modules/source-map-support/*.json
+
+!node_modules/yn
 !node_modules/yn/*.js
 !node_modules/yn/*.json
+
+!node_modules/make-error
 !node_modules/make-error/*.js
 !node_modules/make-error/*.json
+
+!node_modules/typescript
 !node_modules/typescript/bin/**
 !node_modules/typescript/lib/**
 !node_modules/typescript/*.js
 !node_modules/typescript/*.json
+
+!node_modules/diff
 !node_modules/diff/**/*.js
 !node_modules/diff/**/*.json
 
 # vue-i18n-locale-messages
+!node_modules/consolidate
 !node_modules/consolidate/**/*.js
 !node_modules/consolidate/*.json
+!node_modules/bluebird
 !node_modules/bluebird/**/*.js
 !node_modules/bluebird/*.json
 
 # vue
+!node_modules/vue/dist
 !node_modules/vue/dist/vue.min.js
 

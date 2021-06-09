@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: npm i -g vsce@1.91.0 ovsx
+      - run: npm i -g vsce ovsx
       - run: yarn install
       - run: yarn run gh:release
         env:
