@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.4](https://github.com/lokalise/i18n-ally/compare/v2.6.3...v2.6.4) (2021-06-09)
+
+
+### 🔮 Refactor
+
+* **vue:** space for vue mustache in refactor template, close [#584](https://github.com/lokalise/i18n-ally/issues/584) ([c29e38c](https://github.com/lokalise/i18n-ally/commit/c29e38c77cb471b3fbe7ef0d7006cd771e2c1e09))
+
 ### [2.6.3](https://github.com/lokalise/i18n-ally/compare/v2.6.2...v2.6.3) (2021-06-08)
 
 
