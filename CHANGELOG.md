@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.7](https://github.com/lokalise/i18n-ally/compare/v2.6.6...v2.6.7) (2021-06-09)
+
+
+### 🐞 Bug Fixes
+
+* release script ([0e77cb0](https://github.com/lokalise/i18n-ally/commit/0e77cb04e8b438fe237b67c94c25bfd72402fa45))
+
 ### [2.6.6](https://github.com/lokalise/i18n-ally/compare/v2.6.5...v2.6.6) (2021-06-09)
 
 ### [2.6.5](https://github.com/lokalise/i18n-ally/compare/v2.6.4...v2.6.5) (2021-06-09)
