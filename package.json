@@ -4,6 +4,18 @@
   "version": "2.6.9",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
+  "keywords": [
+    "vue",
+    "vue-i18n",
+    "translate",
+    "i18n",
+    "i18next"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lokalise/i18n-ally"
+  },
+  "main": "./dist/extension",
   "scripts": {
     "release": "nr release:patch",
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
@@ -148,21 +160,9 @@
     "onLanguage:ini",
     "onLanguage:svelte"
   ],
-  "keywords": [
-    "vue",
-    "vue-i18n",
-    "translate",
-    "i18n",
-    "i18next"
-  ],
   "icon": "res/logo.png",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lokalise/i18n-ally"
-  },
   "homepage": "https://github.com/lokalise/i18n-ally",
   "bugs": "https://github.com/lokalise/i18n-ally/issues",
-  "main": "./dist/extension",
   "contributes": {
     "commands": [
       {
@@ -238,12 +238,12 @@
       {
         "command": "i18n-ally.extract-hard-strings-batch",
         "category": "%extname%",
-        "title": "(expiremental) Extract hard-coded strings in batch for current file"
+        "title": "(expiremental) Extract all hard-coded strings"
       },
       {
         "command": "i18n-ally.detect_hard_strings",
         "category": "%extname%",
-        "title": "(expiremental) Detect hard-coded strings in the current file"
+        "title": "(expiremental) Detect hard-coded strings in current file"
       },
       {
         "command": "i18n-ally.open-url",
@@ -555,6 +555,11 @@
           "command": "i18n-ally.extract-text",
           "when": "viewItem =~ /i18n-ally-hard-string-item/",
           "group": "inline@1"
+        },
+        {
+          "command": "i18n-ally.extract-hard-strings-batch",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/",
+          "group": "i18nally@1"
         }
       ],
       "view/title": [
