@@ -39,7 +39,7 @@ export class HardStringDetectResultItem extends BaseTreeItem implements ExtractT
       title: 'Go To',
       command: Commands.go_to_range,
       arguments: [
-        this.detection.editor,
+        this.detection.document,
         this.range,
       ],
     }

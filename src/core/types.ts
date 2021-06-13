@@ -1,4 +1,4 @@
-import { Range, TextDocument, TextEditor } from 'vscode'
+import { Range, TextDocument } from 'vscode'
 
 export interface OptionalFeatures {
   VueSfc?: boolean
@@ -160,7 +160,6 @@ export interface DetectionResult {
   start: number
   end: number
   document?: TextDocument
-  editor?: TextEditor
   isDynamic?: boolean
   fullText?: string
   fullStart?: number

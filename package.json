@@ -574,6 +574,12 @@
           "when": "view =~ /i18n-ally-locales-tree/"
         }
       ],
+      "explorer/context": [
+        {
+          "command": "i18n-ally.extract-hard-strings-batch",
+          "group": "1_i18nally@1"
+        }
+      ],
       "comments/commentThread/title": [
         {
           "command": "i18n-ally.review.resolve-thread",

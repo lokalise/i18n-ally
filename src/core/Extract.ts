@@ -41,6 +41,9 @@ export function generateKeyFromText(text: string, filepath?: string) {
 }
 
 export async function extractHardStrings(document: TextDocument, extracts: ExtractInfo[]) {
+  if (!extracts.length)
+    return
+
   const editor = await window.showTextDocument(document)
   const filepath = document.uri.fsPath
   const sourceLanguage = Config.sourceLanguage
