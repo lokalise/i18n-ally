@@ -251,24 +251,26 @@ export class Config {
   }
 
   // locales
-  static get _localesPaths(): string[] {
+  static get _localesPaths(): string[] | undefined {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
     if (!paths)
-      localesPaths = []
+      return
     else if (typeof paths === 'string')
       localesPaths = paths.split(',')
     else
-      localesPaths = paths || []
+      localesPaths = paths
+    if (!localesPaths)
+      return
     return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
-  static set _localesPaths(paths: string[]) {
+  static set _localesPaths(paths: string[] | undefined) {
     this.setConfig('localesPaths', paths)
   }
 
   static updateLocalesPaths(paths: string[]) {
-    this._localesPaths = uniq(this._localesPaths.concat(paths))
+    this._localesPaths = uniq((this._localesPaths || []).concat(paths))
   }
 
   static get themeAnnotation(): string {

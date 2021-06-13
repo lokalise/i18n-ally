@@ -604,7 +604,7 @@ export class LocaleLoader extends Loader {
     this._files = {}
     this._locale_dirs = []
     const localesPaths = this.localesPaths
-    if (localesPaths.length > 0) {
+    if (localesPaths?.length) {
       try {
         const _locale_dirs = await fg(localesPaths, {
           cwd: this.rootpath,

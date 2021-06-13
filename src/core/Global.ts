@@ -241,10 +241,13 @@ export class Global {
     return Config.namespace || this.hasFeatureEnabled('namespace')
   }
 
-  static get localesPaths() {
+  static get localesPaths(): string[] | undefined {
     let config = Config._localesPaths
-    if (!config.length)
+    if (!config) {
       config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
+      if (!config.length)
+        config = undefined
+    }
     return config
   }
 
@@ -355,7 +358,7 @@ export class Global {
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
     const isValidProject = this.enabledFrameworks.length > 0 && this.enabledParsers.length > 0
-    const hasLocalesSet = Global.localesPaths.length > 0
+    const hasLocalesSet = !!Global.localesPaths
     const shouldEnabled = !Config.disabled && isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
