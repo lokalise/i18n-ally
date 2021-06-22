@@ -7,11 +7,19 @@ import { ExtractInfo } from './types'
 import { CurrentFile } from './CurrentFile'
 import { changeCase } from '~/utils/changeCase'
 
-export function generateKeyFromText(text: string, filepath?: string) {
-  let key: string
+export function generateKeyFromText(text: string, filepath?: string, reuseExisting = false): string {
+  let key: string | undefined
 
+  // already existed, reuse the key
+  // mostly for auto extraction
+  if (reuseExisting) {
+    key = CurrentFile.searchForTranslations(Config.sourceLanguage, text)
+    if (key)
+      return key
+  }
+
+  // keygent
   const keygenStrategy = Config.keygenStrategy
-
   if (keygenStrategy === 'random') {
     key = nanoid()
   }
@@ -25,7 +33,6 @@ export function generateKeyFromText(text: string, filepath?: string) {
   }
 
   const keyPrefix = Config.keyPrefix
-
   if (keyPrefix && keygenStrategy !== 'empty')
     key = keyPrefix + key
 
@@ -35,7 +42,24 @@ export function generateKeyFromText(text: string, filepath?: string) {
       .replace('{fileNameWithoutExt}', basename(filepath, extname(filepath)))
   }
 
-  key = changeCase(key, Config.keygenStyle)
+  key = changeCase(key, Config.keygenStyle).trim()
+
+  // some symbol can't convert to alphabet correctly, apply a default key to it
+  if (!key)
+    key = 'key'
+
+  // suffix with a auto increment number if same key
+  if (CurrentFile.loader.getNodeByKey(key)) {
+    const originalKey = key
+    let num = 0
+
+    do {
+      key = `${originalKey}${Config.preferredDelimiter}${num}`
+      num += 1
+    } while (
+      CurrentFile.loader.getNodeByKey(key, false)
+    )
+  }
 
   return key
 }

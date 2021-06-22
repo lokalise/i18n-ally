@@ -5,6 +5,8 @@
       Good
     </p>
     <p>Foo</p>
+    <p>Demo</p>
+    <p>Hello</p>
   </div>
 </template>
 

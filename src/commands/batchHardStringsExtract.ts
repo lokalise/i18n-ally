@@ -49,7 +49,7 @@ export async function BatchHardStringExtraction(...args: any[]) {
 
           const { rawText, text, range, args } = options
           const filepath = document.uri.fsPath
-          const keypath = generateKeyFromText(rawText || text, filepath)
+          const keypath = generateKeyFromText(rawText || text, filepath, true)
           const templates = Global.interpretRefactorTemplates(keypath, args, document, i).filter(Boolean)
 
           if (!templates.length) {

@@ -2,7 +2,7 @@ import { workspace, ExtensionContext, Uri, window, EventEmitter } from 'vscode'
 import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
 import { VueSfcLoader } from './loaders/VueSfcLoader'
-import { Loader, Analyst } from '.'
+import { Loader, Analyst, Config } from '.'
 import { DetectHardStrings } from '~/commands/detectHardStrings'
 import { DetectionResult } from '~/core/types'
 
@@ -81,5 +81,11 @@ export class CurrentFile {
       this.hardStrings = await DetectHardStrings()
     this._onHardStringDetected.fire(this.hardStrings)
     return this.hardStrings
+  }
+
+  static searchForTranslations(locale = Config.sourceLanguage, msg: string) {
+    return Object
+      .entries(this.loader.flattenLocaleTree)
+      .find(([, v]) => v.locales[locale].value === msg)?.[0]
   }
 }
