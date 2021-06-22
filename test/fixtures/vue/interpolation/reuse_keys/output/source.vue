@@ -1,4 +1,4 @@
 <template>
   <div>{{ $t('foo') }}</div>
-  <div>{{ $t('bar') }}</div>
+  <div>{{ $t('barfoo') }}</div>
 </template>

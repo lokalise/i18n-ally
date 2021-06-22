@@ -10,8 +10,6 @@ import { DetectionResultToExtraction } from '~/editor/extract'
 import { Log } from '~/utils'
 
 export async function BatchHardStringExtraction(...args: any[]) {
-  // console.log('BatchHardStringExtraction', args)
-
   const documents: (TextDocument | undefined)[] = []
 
   // call from file explorer context
@@ -36,6 +34,8 @@ export async function BatchHardStringExtraction(...args: any[]) {
       if (!result)
         continue
 
+      const usedKeys: string[] = []
+
       await extractHardStrings(
         document,
         result.map((i) => {
@@ -49,13 +49,15 @@ export async function BatchHardStringExtraction(...args: any[]) {
 
           const { rawText, text, range, args } = options
           const filepath = document.uri.fsPath
-          const keypath = generateKeyFromText(rawText || text, filepath, true)
+          const keypath = generateKeyFromText(rawText || text, filepath, true, usedKeys)
           const templates = Global.interpretRefactorTemplates(keypath, args, document, i).filter(Boolean)
 
           if (!templates.length) {
             Log.warn(`No refactor template found for "${keypath}" in "${filepath}"`)
             return undefined
           }
+
+          usedKeys.push(keypath)
 
           return {
             range,

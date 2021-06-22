@@ -83,9 +83,8 @@ export class CurrentFile {
     return this.hardStrings
   }
 
-  static searchForTranslations(locale = Config.sourceLanguage, msg: string) {
-    return Object
-      .entries(this.loader.flattenLocaleTree)
-      .find(([, v]) => v.locales[locale].value === msg)?.[0]
+  static searchKeyForTranslations(text: string, locale = Config.sourceLanguage) {
+    return this.loader.keys
+      .find(i => this.loader.getTranslationsByKey(i, false)?.[locale]?.value === text)
   }
 }

@@ -1,4 +1,4 @@
 <template>
-  <div>Bar</div>
-  <div>bar</div>
+  <div>Foobar</div>
+  <div>Barfoo</div>
 </template>
