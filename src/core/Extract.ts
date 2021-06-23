@@ -2,7 +2,7 @@ import { basename, extname } from 'path'
 import { TextDocument, window } from 'vscode'
 import { nanoid } from 'nanoid'
 import limax from 'limax'
-import { Config } from '../extension'
+import { Config, Global } from '../extension'
 import { ExtractInfo } from './types'
 import { CurrentFile } from './CurrentFile'
 import { changeCase } from '~/utils/changeCase'
@@ -13,7 +13,7 @@ export function generateKeyFromText(text: string, filepath?: string, reuseExisti
   // already existed, reuse the key
   // mostly for auto extraction
   if (reuseExisting) {
-    key = CurrentFile.searchKeyForTranslations(text)
+    key = Global.loader.searchKeyForTranslations(text)
     if (key)
       return key
   }

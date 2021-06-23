@@ -292,6 +292,11 @@ export abstract class Loader extends Disposable {
     return false
   }
 
+  searchKeyForTranslations(text: string, locale = Config.sourceLanguage) {
+    return this.keys
+      .find(i => this.getTranslationsByKey(i, false)?.[locale]?.value === text)
+  }
+
   protected onDispose() {
     // Log.info(`🗑 Disposing loader "${this.name}"`)
     this._disposables.forEach(d => d.dispose())

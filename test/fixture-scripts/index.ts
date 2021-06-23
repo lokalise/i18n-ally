@@ -60,7 +60,7 @@ async function run() {
   let fixtures = await listAll()
 
   if (args[0])
-    fixtures = fixtures.filter(i => i.framework === args[0])
+    fixtures = fixtures.filter(i => i.dirInput.includes(args[0]))
 
   let failed = false
   for (const fixture of fixtures) {
