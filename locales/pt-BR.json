@@ -59,6 +59,7 @@
   "config.keys_in_use": "",
   "config.keystyle": "Estilo de chave de tradução",
   "config.language_tag_system": "",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "",
   "config.locales_paths": "Caminho para os arquivos de tradução (relativo à raiz do projeto). O padrão glob também é aceito.",
   "config.namespace": "",

@@ -59,6 +59,7 @@
   "config.keys_in_use": "Nycklar att markera som i användning, även fast de inte dyker upp i koden",
   "config.keystyle": "locale-fils nyckelstilmall",
   "config.language_tag_system": "Språkmärkningssystem som används.",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "Ett objekt för att mappa två-bokstäverskod till landskod",
   "config.locales_paths": "Sökväg till locale-filer (relativt projektets rot). `glob` mönster är också accepterat.",
   "config.namespace": "Aktivera \"namespaces\". Se dokumentation för mer detaljer.",

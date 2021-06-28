@@ -59,6 +59,7 @@
   "config.keys_in_use": "",
   "config.keystyle": "Oversettelseskodestil",
   "config.language_tag_system": "",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "",
   "config.locales_paths": "Bane til oversettelsesmappe (relativt til prosjektets rotmappe). Glob-mønster er også akseptabelt.",
   "config.namespace": "",

@@ -502,4 +502,8 @@ export class Config {
   static get deeplLog(): Boolean {
     return !!this.getConfig('translate.deepl.enableLog')
   }
+
+  static get libreTranslateApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
 }

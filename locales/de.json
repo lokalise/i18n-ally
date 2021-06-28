@@ -59,6 +59,7 @@
   "config.keys_in_use": "Schlüssel, die als verwendet markiert werden sollen, obwohl sie nicht im Code vorkommen",
   "config.keystyle": "Stil der Lokalisierungsschlüssel",
   "config.language_tag_system": "Sprachen tag system",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "Ein Objekt zur Zuordnung von zwei Buchstaben des Lokalisierungscodes zum Ländercode",
   "config.locales_paths": "Pfad des Lokalisierungsordners (relative zum Hauptverzeichnes). Glob pattern akzeptiert.",
   "config.namespace": "Namespace aktivieren. Dokumentation für weitere Details prüfen.",
