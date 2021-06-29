@@ -370,6 +370,16 @@
         "category": "%extname%",
         "title": "%command.show_docs%",
         "icon": "$(question)"
+      },
+      {
+        "command": "i18n-ally.extract-disable-auto-detect",
+        "category": "%extname%",
+        "title": "%command.extract.disable-auto-detect%"
+      },
+      {
+        "command": "i18n-ally.extract-enable-auto-detect",
+        "category": "%extname%",
+        "title": "%command.extract.enable-auto-detect%"
       }
     ],
     "menus": {
@@ -464,6 +474,14 @@
         },
         {
           "command": "i18n-ally.go-to-range",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.extract-disable-auto-detect",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.extract-enable-auto-detect",
           "when": "false"
         }
       ],
@@ -560,6 +578,16 @@
           "command": "i18n-ally.extract-hard-strings-batch",
           "when": "viewItem =~ /i18n-ally-hard-string-root/",
           "group": "i18nally@1"
+        },
+        {
+          "command": "i18n-ally.extract-disable-auto-detect",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/ && i18n-ally.extract.autoDetect == true",
+          "group": "i18nally@2"
+        },
+        {
+          "command": "i18n-ally.extract-enable-auto-detect",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/ && i18n-ally.extract.autoDetect == false",
+          "group": "i18nally@2"
         }
       ],
       "view/title": [

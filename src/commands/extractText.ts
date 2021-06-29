@@ -205,6 +205,12 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: 
 const m: ExtensionModule = () => {
   return [
     commands.registerCommand(Commands.extract_text, ExtractOrInsertCommnad),
+    commands.registerCommand(Commands.extract_enable_auto_detect, () => {
+      Config.extractAutoDetect = true
+    }),
+    commands.registerCommand(Commands.extract_disable_auto_detect, () => {
+      Config.extractAutoDetect = false
+    }),
   ]
 }
 

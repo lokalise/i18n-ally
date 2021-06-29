@@ -366,6 +366,8 @@ export class Global {
       Log.info(`🧩 Enabled frameworks: ${this.enabledFrameworks.map(i => i.display).join(', ')}`)
       Log.info(`🧬 Enabled parsers: ${this.enabledParsers.map(i => i.id).join(', ')}`)
       Log.info('')
+      commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
+
       await this.initLoader(this._rootpath, reload)
     }
     else {

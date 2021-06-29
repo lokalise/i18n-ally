@@ -1,6 +1,6 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { workspace, extensions, ExtensionContext } from 'vscode'
+import { workspace, extensions, ExtensionContext, commands } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
@@ -435,6 +435,11 @@ export class Config {
 
   static get extractAutoDetect() {
     return this.getConfig<boolean>('extract.autoDetect') ?? false
+  }
+
+  static set extractAutoDetect(v: boolean) {
+    this.setConfig('extract.autoDetect', v, false)
+    commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', v)
   }
 
   static get extractParserHTMLOptions() {
