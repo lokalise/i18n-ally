@@ -40,6 +40,7 @@
   "config.derived_keys": "Règles pour marquer les clés dérivées dans le rapport d'utilisation",
   "config.dir_structure": "Structure de répertoire préferé pour organiser les fichiers de la locale.",
   "config.disable_path_parsing": "Désactiver la résolution de chemin",
+  "config.disabled": "",
   "config.display_language": "Afficher la langue",
   "config.editor_prefer_editor": "Préférer utiliser l'éditeur web pour l'édition des locales.",
   "config.enabled_frameworks": "Vous pouvez choisir les Frameworks supportés. Si aucune valeur n'est spécifiée, l'extension choisira automatiquement les Frameworks supportés.",

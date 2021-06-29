@@ -40,6 +40,7 @@
   "config.derived_keys": "Regler för att markera deriverade regler i användsningsrapporten",
   "config.dir_structure": "Föredragen sökvägsstruktur för att organisera locale-filer",
   "config.disable_path_parsing": "Inaktivera sökvägsdetektering",
+  "config.disabled": "",
   "config.display_language": "Visar språk",
   "config.editor_prefer_editor": "Föredra att använda webview-editor för att redigera locale-filer.",
   "config.enabled_frameworks": "Ange de stöttade ramverk som ska aktiveras. Om inget värde är satt, kommer tillägget känna igen ramverken automatiskt.",

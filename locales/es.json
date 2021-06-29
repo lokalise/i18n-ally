@@ -40,6 +40,7 @@
   "config.derived_keys": "Reglas para marcar claves derivadas en el informe de uso",
   "config.dir_structure": "Estructura de directorios preferida para organizar los archivos de configuración regional",
   "config.disable_path_parsing": "Desabilitar resolución del path",
+  "config.disabled": "",
   "config.display_language": "Idioma de visualización",
   "config.editor_prefer_editor": "Preferencia a usar webview para editar archivos locales.",
   "config.enabled_frameworks": "Especifica el/los framework(s) soportados para habilitar.Si no se establece ningún valor, la extensión detectará los marcos automáticamente. ",

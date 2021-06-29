@@ -40,6 +40,7 @@
   "config.derived_keys": "在使用情況報告中標記分支路径的規則",
   "config.dir_structure": "用於組織本地檔案的主要目錄結構",
   "config.disable_path_parsing": "禁用路徑解析",
+  "config.disabled": "",
   "config.display_language": "顯示語言",
   "config.editor_prefer_editor": "偏好使用UI編輯器進文案編輯",
   "config.enabled_frameworks": "指定要使用的框架支援。\n如果未設置任何值，插件將自動偵測框架。",

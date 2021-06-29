@@ -40,6 +40,7 @@
   "config.derived_keys": "Markierungsregelen im Bericht für abgeleitete Schlüssel",
   "config.dir_structure": "Bevorzugte Ordnerstruktur der Lokalisierungsdateien",
   "config.disable_path_parsing": "Pfadauflösung deaktivieren",
+  "config.disabled": "",
   "config.display_language": "Anzeigesprache",
   "config.editor_prefer_editor": "Webeditor bevorzugen",
   "config.enabled_frameworks": "Unterstütze Framework(s). Wenn keine Werte festgelet werden, erkennt die Erweiterung die Framework(s) automatisch.",

@@ -48,7 +48,11 @@ export class Config {
   static readonly debug = process.env.NODE_ENV === 'development'
 
   static get disabled() {
-    return Config.getConfig<boolean>('disabled') ?? true
+    return Config.getConfig<boolean>('disabled') ?? false
+  }
+
+  static get autoDetection() {
+    return Config.getConfig<boolean>('autoDetection') ?? true
   }
 
   // languages

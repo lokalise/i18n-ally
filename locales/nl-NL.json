@@ -40,6 +40,7 @@
   "config.derived_keys": "",
   "config.dir_structure": "Geweenste folder structuur om locale bestanden te organiseren",
   "config.disable_path_parsing": "Schakel padresolutie uit (voor het gebruik van taal in plaats van pad als sleutel).",
+  "config.disabled": "",
   "config.display_language": "Weergave taal",
   "config.editor_prefer_editor": "",
   "config.enabled_frameworks": "Specificeer welke framework ondersteuningen je wilt gebruiken. Als er geen waarde is gezet dan zal de extensie automatisch de frameworks detecteren.",

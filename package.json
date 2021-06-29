@@ -672,6 +672,11 @@
           "default": false,
           "description": "%config.disabled%"
         },
+        "i18n-ally.autoDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.auto_detection%"
+        },
         "i18n-ally.localesPaths": {
           "type": [
             "string",

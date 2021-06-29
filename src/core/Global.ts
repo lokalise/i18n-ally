@@ -370,12 +370,10 @@ export class Global {
     }
     else {
       if (!Config.disabled) {
-        if (!isValidProject)
+        if (!isValidProject && hasLocalesSet)
           Log.info('⚠ Current workspace is not a valid project, extension disabled')
-        else if (!hasLocalesSet)
-          Log.info('⚠ No locales path setting found, extension disabled')
 
-        if (isValidProject && !hasLocalesSet)
+        if (isValidProject && !hasLocalesSet && Config.autoDetection)
           ConfigLocalesGuide.autoSet()
       }
 
