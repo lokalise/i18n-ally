@@ -1,5 +1,6 @@
-import { commands, TextDocument, window, workspace } from 'vscode'
+import { commands, TextDocument, Uri, window, workspace } from 'vscode'
 import { notNullish } from '@antfu/utils'
+import fs from 'fs-extra'
 import { DetectHardStrings } from './detectHardStrings'
 import { ExtensionModule } from '~/modules'
 import { Commands } from '~/commands'
@@ -8,16 +9,35 @@ import { Config, Global } from '~/core'
 import { parseHardString } from '~/extraction/parseHardString'
 import { DetectionResultToExtraction } from '~/editor/extract'
 import { Log } from '~/utils'
+import { gitignoredGlob } from '~/utils/glob'
 
 export async function BatchHardStringExtraction(...args: any[]) {
   const documents: (TextDocument | undefined)[] = []
 
   // call from file explorer context
   if (args.length >= 2 && Array.isArray(args[1])) {
+    const map = new Map<string, Uri>()
+
+    for (const uri of args[1]) {
+      // folder, scan glob
+      if (fs.lstatSync(uri.fsPath).isDirectory()) {
+        const files = await gitignoredGlob('**/*.*', uri.fsPath)
+
+        files.forEach((f) => {
+          if (!map.has(f))
+            map.set(f, Uri.file(f))
+        })
+      }
+      // file, append to the map
+      else {
+        map.set(uri.fsPath, uri)
+      }
+    }
+
+    const files = [...map.values()]
+
     documents.push(
-      ...await Promise.all(
-        args[1].map(i => workspace.openTextDocument(i)),
-      ),
+      ...await Promise.all(files.map(i => workspace.openTextDocument(i))),
     )
   }
   // call from command pattale
@@ -25,12 +45,16 @@ export async function BatchHardStringExtraction(...args: any[]) {
     documents.push(window.activeTextEditor?.document)
   }
 
+  Log.info('📤 Bulk extracting')
+  Log.info(documents.map(i => `  ${i?.uri.fsPath}`).join('\n'))
+
   for (const document of documents) {
     if (!document)
       continue
 
     try {
-      const result = await DetectHardStrings(document)
+      const result = await DetectHardStrings(document, false)
+      Log.info(`📤 Extracting [${result?.length || 0}] ${document.uri.fsPath}`)
       if (!result)
         continue
 
@@ -68,6 +92,7 @@ export async function BatchHardStringExtraction(...args: any[]) {
           }
         })
           .filter(notNullish),
+        true,
       )
     }
     catch (e) {

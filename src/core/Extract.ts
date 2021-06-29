@@ -64,7 +64,7 @@ export function generateKeyFromText(text: string, filepath?: string, reuseExisti
   return key
 }
 
-export async function extractHardStrings(document: TextDocument, extracts: ExtractInfo[]) {
+export async function extractHardStrings(document: TextDocument, extracts: ExtractInfo[], saveFile = false) {
   if (!extracts.length)
     return
 
@@ -99,6 +99,9 @@ export async function extractHardStrings(document: TextDocument, extracts: Extra
       ),
     ],
   )
+
+  if (saveFile)
+    await document.save()
 
   CurrentFile.invalidate()
 }

@@ -5,14 +5,15 @@ import { Commands } from '~/commands'
 import { trimDetection } from '~/extraction'
 import i18n from '~/i18n'
 
-export async function DetectHardStrings(document = window.activeTextEditor?.document) {
+export async function DetectHardStrings(document = window.activeTextEditor?.document, warn = true) {
   if (!document)
     return
 
   const frameworks = Global.getExtractionFrameworksByLang(document.languageId)
 
   if (!frameworks.length) {
-    window.showWarningMessage(i18n.t('refactor.extracting_not_support_for_lang', document.languageId))
+    if (warn)
+      window.showWarningMessage(i18n.t('refactor.extracting_not_support_for_lang', document.languageId))
     return
   }
 
