@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.10](https://github.com/lokalise/i18n-ally/compare/v2.6.9...v2.6.10) (2021-06-29)
+
+
+### 🐞 Bug Fixes
+
+* do not override localesPath if empty array passed, close [#578](https://github.com/lokalise/i18n-ally/issues/578) ([52a8fff](https://github.com/lokalise/i18n-ally/commit/52a8fff694f9adf3eb4b4017c26d86956daf0fe2))
+
+
+### ⚡ Features
+
+* allow toggle `i18n-ally.extract.autoDetect` from UI, close [#591](https://github.com/lokalise/i18n-ally/issues/591) ([a9ca8ca](https://github.com/lokalise/i18n-ally/commit/a9ca8ca658a77bc6b82b787f1c3dbaa9121f2c9f))
+* extract all in file, close [#592](https://github.com/lokalise/i18n-ally/issues/592) ([5b61082](https://github.com/lokalise/i18n-ally/commit/5b61082a2845bfabc1af773df90d37576b429666))
+* extract batch in files, close [#593](https://github.com/lokalise/i18n-ally/issues/593) ([c4ca3b8](https://github.com/lokalise/i18n-ally/commit/c4ca3b891b00c209373b3a9029b98286cc3a8c55))
+* extraction key reuse and auto increment ([a148839](https://github.com/lokalise/i18n-ally/commit/a148839d1a1691fd7756a33ce5014a7021af0725)), closes [#594](https://github.com/lokalise/i18n-ally/issues/594) [#595](https://github.com/lokalise/i18n-ally/issues/595)
+* new autoDetection config, close [#606](https://github.com/lokalise/i18n-ally/issues/606) ([bcb9fa2](https://github.com/lokalise/i18n-ally/commit/bcb9fa2779b3c8425bca1c4b114164ef0b23a529))
+* support selection of folders for bulk extraction, close [#603](https://github.com/lokalise/i18n-ally/issues/603) ([33f339b](https://github.com/lokalise/i18n-ally/commit/33f339b89647328eb520b765023e547e1070b7bf))
+* **ngx-translate:** add support for stream method ([#598](https://github.com/lokalise/i18n-ally/issues/598)) ([ade5701](https://github.com/lokalise/i18n-ally/commit/ade5701c095569c12197c3c169e8115fab878353))
+
 ### [2.6.9](https://github.com/lokalise/i18n-ally/compare/v2.6.8...v2.6.9) (2021-06-09)
 
 ### [2.6.8](https://github.com/lokalise/i18n-ally/compare/v2.6.7...v2.6.8) (2021-06-09)
