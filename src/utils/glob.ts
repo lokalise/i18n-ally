@@ -33,5 +33,5 @@ export async function gitignoredGlob(globStr: string, dir: string) {
     ignore,
   }) as string[]
 
-  return files.map(f => resolve(root, f))
+  return files.map(f => resolve(dir, f))
 }
