@@ -26,12 +26,26 @@ deepl.interceptors.request.use((req) => {
     ? 'https://api-free.deepl.com/v2'
     : 'https://api.deepl.com/v2'
 
-  req.params = {
-    auth_key: Config.deeplApiKey,
+  // Just add to payload... (not a param, then everything needs to be in params)
+  if (req.data && !req.data.auth_key) {
+    req.data.auth_key = Config.deeplApiKey
   }
-
+  else {
+    // ...unless you don't send payload, I guess
+    req.params = {
+      auth_key: Config.deeplApiKey,
+    }
+  }
+  // post is a special case, not json
   if (req.method === 'POST' || req.method === 'post') {
     req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    // @see https://www.deepl.com/docs-api/translating-text/request/
+    if (req.data.source_lang && req.data.source_lang.length > 2)
+      req.data.source_lang = req.data.source_lang.slice(0, 2)
+    // black-listing, not pretty, @TODO white-listing? Something else?
+    const longSupportedLocales = ['EN-GB', 'EN-US', 'PT-PT', 'PT-BR']
+    if (req.data.target_lang && !longSupportedLocales.includes(req.data.target_lang))
+      req.data.target_lang = req.data.target_lang.slice(0, 2)
     req.data = qs.stringify(req.data)
   }
 
@@ -48,6 +62,7 @@ deepl.interceptors.response.use((res) => {
 
 function log(inspector: boolean, ...args: any[]): void {
   if (Config.deeplLog) {
+    // eslint-disable-next-line no-console
     if (inspector) console.log('[DeepL]\n', ...args)
     else Log.raw(...args)
   }

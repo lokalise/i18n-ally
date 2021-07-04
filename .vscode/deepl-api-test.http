@@ -1,0 +1,7 @@
+POST https://api-free.deepl.com/v2/translate HTTP/1.0
+User-Agent: YourApp
+Accept: */*
+Content-Length: 54
+Content-Type: application/x-www-form-urlencoded
+
+text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=en&auth_key={{$dotenv [%]DEEPL_FREE_API_KEY}}
