@@ -26,26 +26,23 @@ deepl.interceptors.request.use((req) => {
     ? 'https://api-free.deepl.com/v2'
     : 'https://api.deepl.com/v2'
 
-  // Just add to payload... (not a param, then everything needs to be in params)
-  if (req.data && !req.data.auth_key) {
-    req.data.auth_key = Config.deeplApiKey
+  req.params = {
+    auth_key: Config.deeplApiKey,
   }
-  else {
-    // ...unless you don't send payload, I guess
-    req.params = {
-      auth_key: Config.deeplApiKey,
-    }
-  }
-  // post is a special case, not json
   if (req.method === 'POST' || req.method === 'post') {
+    // post body/data, not in json format
     req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // @see https://www.deepl.com/docs-api/translating-text/request/
+    // Source language: no 5 character ISO 3166 language codes, those
+    // need to be cut off at 2 characters
     if (req.data.source_lang && req.data.source_lang.length > 2)
       req.data.source_lang = req.data.source_lang.slice(0, 2)
-    // black-listing, not pretty, @TODO white-listing? Something else?
+    // Target language: certain exceptions to the above, but the rest
+    // has to be 2 characters as well
     const longSupportedLocales = ['EN-GB', 'EN-US', 'PT-PT', 'PT-BR']
-    if (req.data.target_lang && !longSupportedLocales.includes(req.data.target_lang))
+    if (req.data.target_lang && !longSupportedLocales.includes(req.data.target_lang.toUpperCase()))
       req.data.target_lang = req.data.target_lang.slice(0, 2)
+    // lower-case, upper-case both work, so left as is.
     req.data = qs.stringify(req.data)
   }
 

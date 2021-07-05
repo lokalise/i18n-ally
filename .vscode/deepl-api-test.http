@@ -1,7 +1,72 @@
+# DeepL translating the string "拷贝设置"(EN: "Copy settings")
+# often times url-encoded (api handled both fine, see below)
+#
+# Meant to be used with "humao.rest-client" extension (contains
+# telemetry, as a setting) in visual studio code
+#
+# Ah, that's it: you need to place a .env file next to this one for
+# the extension to pick it up, besides npm installing dotenv.
+#
+# This works (I knew that):
 POST https://api-free.deepl.com/v2/translate HTTP/1.0
 User-Agent: YourApp
 Accept: */*
 Content-Length: 54
 Content-Type: application/x-www-form-urlencoded
 
-text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=en&auth_key={{$dotenv [%]DEEPL_FREE_API_KEY}}
+text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=en&auth_key={{$dotenv DEEPL_FREE_API_KEY}}
+###
+# But this works as well:
+POST https://api-free.deepl.com/v2/translate HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=en
+###
+# However, this doesn't work, as they specify in DeepL api docs, but also in their response
+# `{"message":"Value for 'source_lang' not supported."}`
+POST https://api-free.deepl.com/v2/translate HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh-CN&target_lang=en-US
+###
+# This also doesn't work, as they specify in their api docs, and in their response
+# `{"message":"Value for 'target_lang' not supported."}`
+POST https://api-free.deepl.com/v2/translate HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=nl-NL
+###
+# But this works again (us english as target):
+POST https://api-free.deepl.com/v2/translate HTTP/2.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=zh&target_lang=en-US
+###
+# Is this even better (capital source_lang)? (see api doc)
+# No, doesn't make a different response, still says: "detected_source_language": "ZH",...
+POST https://api-free.deepl.com/v2/translate HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=%E6%8B%B7%E8%B4%9D%E8%AE%BE%E7%BD%AE&source_lang=ZH&target_lang=NL
+###
+# So uppercase, lowercase, it's all good for deepl's api
+# not url-encoded zh-CN characters? No problem
+# (this is the same sentence, perhaps this extension is encoding it for me, but I don't think so):
+
+POST https://api-free.deepl.com/v2/translate HTTP/1.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+auth_key={{$dotenv DEEPL_FREE_API_KEY}}&text=拷贝设置&source_lang=zh&target_lang=en
+###
+# This ~didn't work though~ also works, okay!
+POST https://api-free.deepl.com/v2/translate?auth_key={{$dotenv DEEPL_FREE_API_KEY}} HTTP/1.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+text=拷贝设置&source_lang=zh&target_lang=en

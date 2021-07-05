@@ -134,6 +134,7 @@ export class Translator {
             cancelledJobs.push(job)
         }
         catch (err) {
+          // eslint-disable-next-line no-console
           console.error(err)
           failedJobs.push([job, err])
         }
