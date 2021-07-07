@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.11](https://github.com/lokalise/i18n-ally/compare/v2.6.10...v2.6.11) (2021-07-07)
+
+
+### ⚡ Features
+
+* enable user analytics ([#618](https://github.com/lokalise/i18n-ally/issues/618)) ([19f8b37](https://github.com/lokalise/i18n-ally/commit/19f8b374c9992bc7a88f60d8299e011b74bbdb70))
+
 ### [2.6.10](https://github.com/lokalise/i18n-ally/compare/v2.6.9...v2.6.10) (2021-06-29)
 
 
