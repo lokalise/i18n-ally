@@ -1,12 +1,14 @@
 import path from 'path'
 import { workspace, window, Selection, TextEditorRevealType, commands } from 'vscode'
-import { LocaleTreeItem, ProgressRootItem } from '../../views'
-import { Log, NodeHelper } from '../../utils'
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
-import { Config, Global, CurrentFile } from '~/core'
+import { LocaleTreeItem, ProgressRootItem } from '~/views'
+import { Log, NodeHelper } from '~/utils'
+import { Config, Global, CurrentFile, Telemetry, TelemetryEvent } from '~/core'
 import i18n from '~/i18n'
 
-export async function OpenKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
+export async function GoToKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
+  Telemetry.track(TelemetryEvent.GoToKey)
+
   if (item instanceof ProgressRootItem) {
     const locale = item.locale
     const files = CurrentFile.loader.files.filter(f => f.locale === locale).map(f => f.filepath)

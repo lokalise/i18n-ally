@@ -36,10 +36,8 @@ export async function DetectHardStrings(document = window.activeTextEditor?.docu
   return result
 }
 
-const m: ExtensionModule = () => {
+export default <ExtensionModule> function m() {
   return [
     commands.registerCommand(Commands.detect_hard_strings, DetectHardStrings),
   ]
 }
-
-export default m

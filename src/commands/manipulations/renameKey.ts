@@ -1,12 +1,13 @@
 import { window, workspace } from 'vscode'
-import { LocaleTreeItem } from '../../views'
-import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
-import { keypathValidate } from '../keypathValidate'
+import { LocaleTreeItem } from '~/views'
+import { Log, keypathValidate } from '~/utils'
 import i18n from '~/i18n'
-import { Node, CurrentFile, Global } from '~/core'
+import { Node, CurrentFile, Global, Telemetry, TelemetryEvent } from '~/core'
 
 export async function RenameKey(item?: LocaleTreeItem | string) {
+  Telemetry.track(TelemetryEvent.RenameKey)
+
   if (!item)
     return
 

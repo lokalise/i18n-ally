@@ -1,5 +1,5 @@
 import { window } from 'vscode'
-import { ProgressSubmenuItem, LocaleTreeItem } from '../../views'
+import { ProgressSubmenuItem, LocaleTreeItem } from '~/views'
 import { CommandOptions } from './common'
 import { Global, PendingWrite, CurrentFile } from '~/core'
 import i18n from '~/i18n'

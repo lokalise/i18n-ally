@@ -1,8 +1,8 @@
 import { window } from 'vscode'
-import { LocaleTreeItem } from '../../views'
-import { Log } from '../../utils'
 import { overrideConfirm } from '../overrideConfirm'
-import { keypathValidate } from '../keypathValidate'
+import { keypathValidate } from '../../utils/keypathValidate'
+import { Log } from '~/utils'
+import { LocaleTreeItem } from '~/views'
 import i18n from '~/i18n'
 import { Node, CurrentFile, PendingWrite } from '~/core'
 

@@ -1,5 +1,5 @@
 import { window, env } from 'vscode'
-import { LocaleTreeItem } from '../../views'
+import { LocaleTreeItem } from '~/views'
 import i18n from '~/i18n'
 
 export async function CopyKey({ node }: LocaleTreeItem) {

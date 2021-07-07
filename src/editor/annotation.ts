@@ -1,9 +1,9 @@
 import { window, DecorationOptions, Range, Disposable, TextEditorDecorationType, TextEditor, workspace, TextDocument, languages, Hover } from 'vscode'
 import throttle from 'lodash/throttle'
-import { ExtensionModule } from '../modules'
 import { getCommentState } from '../utils/shared'
 import { THROTTLE_DELAY } from '../meta'
 import { createHover } from './hover'
+import { ExtensionModule } from '~/modules'
 import { Global, KeyDetector, Config, Loader, CurrentFile, KeyUsages } from '~/core'
 
 const underlineDecorationType = window.createTextEditorDecorationType({
