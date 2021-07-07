@@ -370,6 +370,7 @@ export class Global {
       commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
 
       Telemetry.track(TelemetryKey.Enabled)
+      Telemetry.updateUserProperties()
 
       await this.initLoader(this._rootpath, reload)
     }

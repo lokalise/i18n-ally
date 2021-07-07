@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
+import { version } from '../../package.json'
 import { Config } from './Config'
 import { Log } from '~/utils'
+import { isDev, isProd, isTest } from '~/env'
 
 const HEAP_ID_DEV = '1082064308'
 const HEAP_ID_PROD = '4118173713'
 
-const HEAP_ID = process.env.NODE_ENV === 'production' ? HEAP_ID_PROD : HEAP_ID_DEV
+const HEAP_ID = isProd ? HEAP_ID_PROD : HEAP_ID_DEV
 
 export enum TelemetryKey {
   DeleteKey = 'delete_key',
@@ -52,8 +54,12 @@ export class Telemetry {
     return this._id
   }
 
+  static get isEnabled() {
+    return Config.telemetry && !isTest
+  }
+
   static async track(key: TelemetryKey, properties?: Record<string, string>, immediate = false) {
-    if (!Config.telemetry || process.env.NODE_ENV === 'test')
+    if (!this.isEnabled)
       return
 
     const event: TelemetryEvent = {
@@ -63,7 +69,8 @@ export class Telemetry {
       properties,
     }
 
-    // Log.info(`[telemetry] ${key}: ${JSON.stringify(data)}`)
+    if (isDev)
+      Log.info(`[telemetry] ${key}: ${JSON.stringify(properties)}`)
 
     if (immediate) {
       try {
@@ -90,14 +97,52 @@ export class Telemetry {
   }
 
   static schedule() {
-    if (this.events.length >= 100)
+    if (this.events.length >= 100) {
       this.sendBulk()
-
-    if (!this._timer && this.events.length) {
+    }
+    else if (!this._timer && this.events.length) {
       this._timer = setInterval(
         () => this.sendBulk(),
-        5 * 60 * 1000, // 5 minutes
+        isDev
+          ? 10 * 1000 // 10 seconds
+          : 5 * 60 * 1000, // 5 minutes
       )
+    }
+  }
+
+  static async updateUserProperties() {
+    if (!this.isEnabled)
+      return
+
+    const data = {
+      version,
+      feature_auto_detection: !!Config.autoDetection,
+      feature_annotation_in_place: !!Config.annotationInPlace,
+      feature_disable_path_parsing: !!Config.disablePathParsing,
+      feature_extract_auto_detect: !!Config.extractAutoDetect,
+      feature_keep_fulfilled: !!Config.keepFulfilled,
+      feature_prefer_editor: !!Config.preferEditor,
+    }
+
+    if (isDev)
+      Log.info(`[telemetry] user: ${JSON.stringify(data)}`)
+
+    try {
+      await axios({
+        url: 'https://heapanalytics.com/api/add_user_properties',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          app_id: HEAP_ID,
+          identity: this.userId,
+          properties: data,
+        },
+      })
+    }
+    catch (e) {
+      Log.error(e)
     }
   }
 
@@ -107,6 +152,9 @@ export class Telemetry {
       this._timer = null
       return
     }
+
+    if (isDev)
+      Log.info('[telemetry] sending bulk')
 
     const events = this.events
     this.events.length = 0
