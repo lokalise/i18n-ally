@@ -156,7 +156,7 @@ export class Telemetry {
     if (isDev)
       Log.info('[telemetry] sending bulk')
 
-    const events = this.events
+    const events = Array.from(this.events)
     this.events.length = 0
     try {
       await axios({
