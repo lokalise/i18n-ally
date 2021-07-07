@@ -3,7 +3,7 @@ import { getNodeOrRecord, CommandOptions, getNode } from './common'
 import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '~/core'
 import i18n from '~/i18n'
-import { Telemetry, TelemetryEvent } from '~/core/Telemetry'
+import { Telemetry, TelemetryKey } from '~/core/Telemetry'
 
 export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode) {
   const locales = Global.allLocales
@@ -24,7 +24,7 @@ export async function promptForSourceLocale(defaultLocale: string, node?: Locale
 }
 
 export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
-  Telemetry.track(TelemetryEvent.TranslateKey)
+  Telemetry.track(TelemetryKey.TranslateKey)
 
   let source: string | undefined
 

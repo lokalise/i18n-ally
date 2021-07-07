@@ -3,11 +3,11 @@ import { workspace, window, Selection, TextEditorRevealType, commands } from 'vs
 import { CommandOptions, getNodeOrRecord, getRecordFromNode } from './common'
 import { LocaleTreeItem, ProgressRootItem } from '~/views'
 import { Log, NodeHelper } from '~/utils'
-import { Config, Global, CurrentFile, Telemetry, TelemetryEvent } from '~/core'
+import { Config, Global, CurrentFile, Telemetry, TelemetryKey } from '~/core'
 import i18n from '~/i18n'
 
 export async function GoToKey(item?: LocaleTreeItem | CommandOptions | ProgressRootItem) {
-  Telemetry.track(TelemetryEvent.GoToKey)
+  Telemetry.track(TelemetryKey.GoToKey)
 
   if (item instanceof ProgressRootItem) {
     const locale = item.locale

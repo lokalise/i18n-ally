@@ -10,10 +10,10 @@ import { parseHardString } from '~/extraction/parseHardString'
 import { DetectionResultToExtraction } from '~/editor/extract'
 import { Log } from '~/utils'
 import { gitignoredGlob } from '~/utils/glob'
-import { Telemetry, TelemetryEvent } from '~/core/Telemetry'
+import { Telemetry, TelemetryKey } from '~/core/Telemetry'
 
 export async function BatchHardStringExtraction(...args: any[]) {
-  Telemetry.track(TelemetryEvent.ExtractStringBulk)
+  Telemetry.track(TelemetryKey.ExtractStringBulk)
 
   const documents: (TextDocument | undefined)[] = []
 

@@ -8,7 +8,7 @@ const HEAP_ID_PROD = '4118173713'
 
 const HEAP_ID = process.env.NODE_ENV === 'production' ? HEAP_ID_PROD : HEAP_ID_DEV
 
-export enum TelemetryEvent {
+export enum TelemetryKey {
   DeleteKey = 'delete_key',
   Disabled = 'disabled',
   EditKey = 'edit_key',
@@ -26,29 +26,90 @@ export enum TelemetryEvent {
   TranslateKey = 'translate_key',
 }
 
+export interface TelemetryEvent {
+  event: TelemetryKey
+  timestamp: number
+  identity: string
+  properties?: Record<string, string>
+}
+
 export class Telemetry {
+  private static _id: string
+  private static _timer: any = null
+
+  static events: TelemetryEvent[] = []
+
   static get userId() {
-    let id = Config.ctx.globalState.get('i18n-ally.telemetry-user-id')
-    if (!id) {
-      id = uuid()
-      Config.ctx.globalState.update('i18n-ally.telemetry-user-id', id)
+    if (this._id)
+      return this._id
+    this._id = Config.ctx.globalState.get('i18n-ally.telemetry-user-id')!
+    if (!this._id) {
+      this._id = uuid()
+      Config.ctx.globalState.update('i18n-ally.telemetry-user-id', this._id)
     }
-    return id
+    Log.info(`📈 Telemetry id: ${this._id}`)
+
+    return this._id
   }
 
-  static async track(key: string, properties?: Record<string, string>) {
-    if (!Config.telemetry)
+  static async track(key: TelemetryKey, properties?: Record<string, string>, immediate = false) {
+    if (!Config.telemetry || process.env.NODE_ENV === 'test')
       return
 
-    const data = {
-      app_id: HEAP_ID,
-      identity: this.userId,
+    const event: TelemetryEvent = {
       event: key,
+      identity: this.userId,
+      timestamp: +new Date(),
       properties,
     }
 
     // Log.info(`[telemetry] ${key}: ${JSON.stringify(data)}`)
 
+    if (immediate) {
+      try {
+        await axios({
+          url: 'https://heapanalytics.com/api/track',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: {
+            app_id: HEAP_ID,
+            ...event,
+          },
+        })
+      }
+      catch (e) {
+        Log.error(e)
+      }
+    }
+    else {
+      this.events.push(event)
+      this.schedule()
+    }
+  }
+
+  static schedule() {
+    if (this.events.length >= 100)
+      this.sendBulk()
+
+    if (!this._timer && this.events.length) {
+      this._timer = setInterval(
+        () => this.sendBulk(),
+        5 * 60 * 1000, // 5 minutes
+      )
+    }
+  }
+
+  static async sendBulk() {
+    if (!this.events.length) {
+      clearInterval(this._timer)
+      this._timer = null
+      return
+    }
+
+    const events = this.events
+    this.events.length = 0
     try {
       await axios({
         url: 'https://heapanalytics.com/api/track',
@@ -56,7 +117,10 @@ export class Telemetry {
         headers: {
           'Content-Type': 'application/json',
         },
-        data,
+        data: {
+          app_id: HEAP_ID,
+          events,
+        },
       })
     }
     catch (e) {

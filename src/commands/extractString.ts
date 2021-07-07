@@ -4,7 +4,7 @@ import { overrideConfirm } from './overrideConfirm'
 import { Commands } from './commands'
 import { keypathValidate, Log, promptTemplates } from '~/utils'
 import { ExtensionModule } from '~/modules'
-import { extractHardStrings, generateKeyFromText, Config, CurrentFile, DetectionResult, Telemetry, TelemetryEvent } from '~/core'
+import { extractHardStrings, generateKeyFromText, Config, CurrentFile, DetectionResult, Telemetry, TelemetryKey } from '~/core'
 import i18n from '~/i18n'
 
 import { parseHardString } from '~/extraction/parseHardString'
@@ -25,7 +25,7 @@ export interface ExtractTextOptions {
 }
 
 async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: DetectionResult) {
-  Telemetry.track(TelemetryEvent.ExtractString)
+  Telemetry.track(TelemetryKey.ExtractString)
 
   if (Config.readonly) {
     Log.warn(i18n.t('errors.write_in_readonly_mode'), true)

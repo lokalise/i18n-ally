@@ -2,10 +2,10 @@ import { window } from 'vscode'
 import { overrideConfirm } from '../overrideConfirm'
 import { keypathValidate, Log, promptEdit } from '~/utils'
 import i18n from '~/i18n'
-import { CurrentFile, Config, Global, PendingWrite, Telemetry, TelemetryEvent } from '~/core'
+import { CurrentFile, Config, Global, PendingWrite, Telemetry, TelemetryKey } from '~/core'
 
 export async function NewKey(keypath?: string) {
-  Telemetry.track(TelemetryEvent.NewKey)
+  Telemetry.track(TelemetryKey.NewKey)
 
   try {
     keypath = await window.showInputBox({

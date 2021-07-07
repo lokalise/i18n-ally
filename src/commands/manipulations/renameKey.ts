@@ -3,10 +3,10 @@ import { overrideConfirm } from '../overrideConfirm'
 import { LocaleTreeItem } from '~/views'
 import { Log, keypathValidate } from '~/utils'
 import i18n from '~/i18n'
-import { Node, CurrentFile, Global, Telemetry, TelemetryEvent } from '~/core'
+import { Node, CurrentFile, Global, Telemetry, TelemetryKey } from '~/core'
 
 export async function RenameKey(item?: LocaleTreeItem | string) {
-  Telemetry.track(TelemetryEvent.RenameKey)
+  Telemetry.track(TelemetryKey.RenameKey)
 
   if (!item)
     return

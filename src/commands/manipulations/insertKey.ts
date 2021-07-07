@@ -1,10 +1,10 @@
 import { window } from 'vscode'
 import { promptKeys, promptTemplates } from '~/utils'
 import i18n from '~/i18n'
-import { Telemetry, TelemetryEvent } from '~/core/Telemetry'
+import { Telemetry, TelemetryKey } from '~/core/Telemetry'
 
 export async function InsertKey() {
-  Telemetry.track(TelemetryEvent.InsertKey)
+  Telemetry.track(TelemetryKey.InsertKey)
 
   const editor = window.activeTextEditor
   const document = editor?.document

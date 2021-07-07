@@ -5,7 +5,7 @@ import { Commands } from './commands'
 import { CommandOptions } from './manipulations/common'
 import { ExtensionModule } from '~/modules'
 import i18n from '~/i18n'
-import { Global, Telemetry, TelemetryEvent } from '~/core'
+import { Global, Telemetry, TelemetryKey } from '~/core'
 import { promptKeys } from '~/utils'
 
 export default <ExtensionModule> function(ctx) {
@@ -21,7 +21,7 @@ export default <ExtensionModule> function(ctx) {
   }
 
   const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
-    Telemetry.track(TelemetryEvent.EditorOpen)
+    Telemetry.track(TelemetryKey.EditorOpen)
 
     let key: string | undefined
     let locale: string | undefined

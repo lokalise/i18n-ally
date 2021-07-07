@@ -16,7 +16,7 @@ import { Config } from './Config'
 import { DirStructure, OptionalFeatures, KeyStyle } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
-import { Telemetry } from './Telemetry'
+import { Telemetry, TelemetryKey } from './Telemetry'
 import i18n from '~/i18n'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '~/utils'
 import { DetectionResult } from '~/core/types'
@@ -369,7 +369,7 @@ export class Global {
       Log.info('')
       commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
 
-      Telemetry.track('enable')
+      Telemetry.track(TelemetryKey.Enabled)
 
       await this.initLoader(this._rootpath, reload)
     }
