@@ -23,7 +23,7 @@
     "gh:release": "conventional-github-releaser -p angular",
     "build": "rimraf dist && nr i18n:build && nr main:build && nr editor:build && esno scripts/post-build.ts",
     "dev": "run-p *:dev",
-    "main:build": "cross-env NODE_ENV=production webpack --mode development",
+    "main:build": "cross-env NODE_ENV=production webpack --mode production",
     "main:dev": "webpack --mode development --watch --info-verbosity verbose",
     "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"nr editor:build\"",
