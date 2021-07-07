@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.13](https://github.com/lokalise/i18n-ally/compare/v2.6.12...v2.6.13) (2021-07-07)
+
+
+### 🐞 Bug Fixes
+
+* events length ([9ad04b4](https://github.com/lokalise/i18n-ally/commit/9ad04b412d78b4b64ced4a2f1a2b4fda3249750e))
+
 ### [2.6.12](https://github.com/lokalise/i18n-ally/compare/v2.6.11...v2.6.12) (2021-07-07)
 
 ### [2.6.11](https://github.com/lokalise/i18n-ally/compare/v2.6.10...v2.6.11) (2021-07-07)
