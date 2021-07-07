@@ -1,5 +1,5 @@
 import { window } from 'vscode'
-import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
+import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '~/core'
 import i18n from '~/i18n'
 

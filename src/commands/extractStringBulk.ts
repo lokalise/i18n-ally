@@ -10,8 +10,11 @@ import { parseHardString } from '~/extraction/parseHardString'
 import { DetectionResultToExtraction } from '~/editor/extract'
 import { Log } from '~/utils'
 import { gitignoredGlob } from '~/utils/glob'
+import { Telemetry, TelemetryKey } from '~/core/Telemetry'
 
 export async function BatchHardStringExtraction(...args: any[]) {
+  Telemetry.track(TelemetryKey.ExtractStringBulk)
+
   const documents: (TextDocument | undefined)[] = []
 
   // call from file explorer context

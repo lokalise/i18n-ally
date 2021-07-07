@@ -1,14 +1,13 @@
 import { commands, window, QuickPickItem, Range, TextDocument } from 'vscode'
 import { trim } from 'lodash'
 import { overrideConfirm } from './overrideConfirm'
-import { keypathValidate } from './keypathValidate'
 import { Commands } from './commands'
+import { keypathValidate, Log, promptTemplates } from '~/utils'
 import { ExtensionModule } from '~/modules'
-import { extractHardStrings, generateKeyFromText, Config, CurrentFile } from '~/core'
+import { extractHardStrings, generateKeyFromText, Config, CurrentFile, DetectionResult, Telemetry, TelemetryKey } from '~/core'
 import i18n from '~/i18n'
-import { Log, promptTemplates } from '~/utils'
+
 import { parseHardString } from '~/extraction/parseHardString'
-import { DetectionResult } from '~/core/types'
 
 interface QuickPickItemWithKey extends QuickPickItem {
   keypath: string
@@ -26,6 +25,8 @@ export interface ExtractTextOptions {
 }
 
 async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: DetectionResult) {
+  Telemetry.track(TelemetryKey.ExtractString)
+
   if (Config.readonly) {
     Log.warn(i18n.t('errors.write_in_readonly_mode'), true)
     return

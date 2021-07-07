@@ -1,10 +1,10 @@
 import { commands, env, Uri, window } from 'vscode'
-import { ExtensionModule } from '../modules'
-import Links from '../links'
+import { ExtensionModule } from '~/modules'
+import Links from '~/links'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'
 
-const m: ExtensionModule = (ctx) => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.open_url,
       async(url: string) => {
@@ -33,5 +33,3 @@ const m: ExtensionModule = (ctx) => {
       }),
   ]
 }
-
-export default m

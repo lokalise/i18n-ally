@@ -1,15 +1,14 @@
 import { commands } from 'vscode'
-import { ExtensionModule } from '../modules'
 import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
 import { Analyst } from '~/core'
 
-const m: ExtensionModule = (ctx) => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.refresh_usage,
-      async(url: string) => {
+      async() => {
         await Analyst.analyzeUsage(false)
-      }),
+      },
+    ),
   ]
 }
-
-export default m

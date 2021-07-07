@@ -1,4 +1,4 @@
-import { FLAGS } from '../utils'
+import { FLAGS } from '~/utils'
 
 export abstract class BaseTagSystem {
   normalize(locale?: string, fallback = 'en', strict = false): string {

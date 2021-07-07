@@ -1,22 +1,14 @@
 import { commands, window, ViewColumn, workspace, TextDocument } from 'vscode'
 import { EditorPanel } from '../webview/panel'
-import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
 import { Commands } from './commands'
 import { CommandOptions } from './manipulations/common'
+import { ExtensionModule } from '~/modules'
 import i18n from '~/i18n'
-import { Global } from '~/core'
+import { Global, Telemetry, TelemetryKey } from '~/core'
 import { promptKeys } from '~/utils'
 
-const m: ExtensionModule = (ctx) => {
-  /*
-  window.registerWebviewPanelSerializer(EXT_EDITOR_ID, {
-    async deserializeWebviewPanel(panel: WebviewPanel, options: any) {
-      EditorPanel.revive(ctx, options, panel)
-    },
-  })
-  */
-
+export default <ExtensionModule> function(ctx) {
   // if the editor is bind with current document
 
   const supportedFileOpen = () => {
@@ -29,6 +21,8 @@ const m: ExtensionModule = (ctx) => {
   }
 
   const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
+    Telemetry.track(TelemetryKey.EditorOpen)
+
     let key: string | undefined
     let locale: string | undefined
     let mode: EditorPanel['mode'] = 'standalone'
@@ -88,5 +82,3 @@ const m: ExtensionModule = (ctx) => {
     window.onDidChangeActiveTextEditor(e => updateContext(e?.document)),
   ]
 }
-
-export default m

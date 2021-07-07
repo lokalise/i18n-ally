@@ -1,5 +1,5 @@
 import { window } from 'vscode'
-import { ExtensionModule } from '../modules'
+import { ExtensionModule } from '~/modules'
 import { ViewIds } from './ViewIds'
 import { CurrentFileLocalesTreeProvider, HelpFeedbackProvider, ProgressProvider, LocalesTreeProvider } from './providers'
 import { UsageReportProvider } from './providers/UsageReportProvider'

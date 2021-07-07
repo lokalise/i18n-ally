@@ -5,7 +5,7 @@ import { Config, CurrentFile, Global } from '~/core'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'
 import { parseHardString } from '~/extraction/parseHardString'
-import { ExtractTextOptions } from '~/commands/extractText'
+import { ExtractTextOptions } from '~/commands/extractString'
 import { DetectionResult } from '~/core/types'
 
 export function DetectionResultToExtraction(detection: DetectionResult, document: TextDocument): ExtractTextOptions {

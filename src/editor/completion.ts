@@ -1,5 +1,5 @@
 import { CompletionItemProvider, TextDocument, Position, CompletionItem, CompletionItemKind, languages } from 'vscode'
-import { ExtensionModule } from '../modules'
+import { ExtensionModule } from '~/modules'
 import { Global, KeyDetector, Loader, CurrentFile, LocaleTree, LocaleNode } from '~/core'
 
 class CompletionProvider implements CompletionItemProvider {

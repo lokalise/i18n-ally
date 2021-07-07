@@ -1,6 +1,6 @@
 import { ExtensionContext, languages, ReferenceProvider, TextDocument, Position, Location, Range, RenameProvider, WorkspaceEdit, ProviderResult } from 'vscode'
-import { ExtensionModule } from '../modules'
 import { Global } from '../core/Global'
+import { ExtensionModule } from '~/modules'
 import { KeyDetector, Analyst } from '~/core'
 
 class Provider implements ReferenceProvider, RenameProvider {

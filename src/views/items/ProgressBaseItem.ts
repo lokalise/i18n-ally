@@ -1,5 +1,5 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { decorateLocale } from '../../utils'
+import { decorateLocale } from '~/utils'
 import { BaseTreeItem } from './Base'
 import { Coverage } from '~/core'
 

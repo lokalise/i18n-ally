@@ -1,6 +1,6 @@
 import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages, CodeActionContext } from 'vscode'
-import { ExtensionModule } from '../modules'
 import { DiagnosticWithKey, PROBLEM_KEY_MISSING, PROBLEM_TRANSLATION_MISSING } from './problems'
+import { ExtensionModule } from '~/modules'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'
 import { Config, Loader, CurrentFile } from '~/core'

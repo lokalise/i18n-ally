@@ -1,5 +1,5 @@
 import { languages, TextDocument, Position, CancellationToken, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
-import { ExtensionModule } from '../modules'
+import { ExtensionModule } from '~/modules'
 import { Global, KeyDetector, CurrentFile } from '~/core'
 
 class DefinitionProvider {

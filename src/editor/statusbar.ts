@@ -1,6 +1,6 @@
 import { window, Disposable, StatusBarAlignment } from 'vscode'
-import { ExtensionModule } from '../modules'
 import { Commands } from '../commands/commands'
+import { ExtensionModule } from '~/modules'
 import { Config, Global, CurrentFile } from '~/core'
 import i18n from '~/i18n'
 

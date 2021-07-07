@@ -1,4 +1,3 @@
-
 export * from './utils'
 export * from './UnicodeDecorator'
 export * from './UnicodeProgressBar'
@@ -13,3 +12,4 @@ export * from './cache'
 export * from './PathMatcher'
 export * from './prompts'
 export * from './shared'
+export * from './keypathValidate'

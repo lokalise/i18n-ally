@@ -13,10 +13,8 @@ export async function GoToRange(document: TextDocument, range: Range) {
   }
 }
 
-const m: ExtensionModule = () => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.go_to_range, GoToRange),
   ]
 }
-
-export default m

@@ -510,7 +510,11 @@ export class Config {
     return this.getConfig<boolean>('translate.deepl.useFreeApiEntry')
   }
 
-  static get deeplLog(): Boolean {
+  static get deeplLog(): boolean {
     return !!this.getConfig('translate.deepl.enableLog')
+  }
+
+  static get telemetry(): boolean {
+    return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
   }
 }

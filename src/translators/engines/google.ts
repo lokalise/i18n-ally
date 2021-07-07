@@ -16,8 +16,8 @@ export default class GoogleTranslate extends TranslateEngine {
     const key = Config.googleApiKey
 
     if (key) {
-      from = this.convertToSupportedLocalesForGoogleCloud(from);
-      to = this.convertToSupportedLocalesForGoogleCloud(to);
+      from = this.convertToSupportedLocalesForGoogleCloud(from)
+      to = this.convertToSupportedLocalesForGoogleCloud(to)
     }
 
     const slugs = {
@@ -36,11 +36,11 @@ export default class GoogleTranslate extends TranslateEngine {
   }
 
   convertToSupportedLocalesForGoogleCloud(locale: string): string {
-    const longSupportedLocales = ["ceb", "zh-TW", "haw", "hmn", "auto"];
-    if (locale && longSupportedLocales.indexOf(locale) === -1) {
-      locale = locale.substring(0, 2);
-    }
-    return locale;
+    const longSupportedLocales = ['ceb', 'zh-TW', 'haw', 'hmn', 'auto']
+    if (locale && !longSupportedLocales.includes(locale))
+      locale = locale.substring(0, 2)
+
+    return locale
   }
 
   transform(response: any, options: TranslateOptions, apiKeySuppliedByUser: boolean): TranslateResult {
