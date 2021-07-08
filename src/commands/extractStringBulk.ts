@@ -10,15 +10,15 @@ import { parseHardString } from '~/extraction/parseHardString'
 import { DetectionResultToExtraction } from '~/editor/extract'
 import { Log } from '~/utils'
 import { gitignoredGlob } from '~/utils/glob'
-import { Telemetry, TelemetryKey } from '~/core/Telemetry'
+import { ActionSource, Telemetry, TelemetryKey } from '~/core/Telemetry'
 
 export async function BatchHardStringExtraction(...args: any[]) {
-  Telemetry.track(TelemetryKey.ExtractStringBulk)
-
   const documents: (TextDocument | undefined)[] = []
+  let actionSource: ActionSource
 
   // call from file explorer context
   if (args.length >= 2 && Array.isArray(args[1])) {
+    actionSource = ActionSource.ContextMenu
     const map = new Map<string, Uri>()
 
     for (const uri of args[1]) {
@@ -45,8 +45,11 @@ export async function BatchHardStringExtraction(...args: any[]) {
   }
   // call from command pattale
   else {
+    actionSource = ActionSource.CommandPattele
     documents.push(window.activeTextEditor?.document)
   }
+
+  Telemetry.track(TelemetryKey.ExtractStringBulk, { source: actionSource, files: documents.length })
 
   Log.info('📤 Bulk extracting')
   Log.info(documents.map(i => `  ${i?.uri.fsPath}`).join('\n'))

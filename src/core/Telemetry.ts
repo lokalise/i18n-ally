@@ -28,11 +28,19 @@ export enum TelemetryKey {
   TranslateKey = 'translate_key',
 }
 
+export enum ActionSource {
+  None = 'none',
+  CommandPattele = 'command_pattele',
+  TreeView = 'tree_view',
+  Hover = 'hover',
+  ContextMenu = 'ContextMenu'
+}
+
 export interface TelemetryEvent {
   event: TelemetryKey
   timestamp: number
   identity: string
-  properties?: Record<string, string>
+  properties?: Record<string, any>
 }
 
 export class Telemetry {
@@ -58,7 +66,7 @@ export class Telemetry {
     return Config.telemetry && !isTest
   }
 
-  static async track(key: TelemetryKey, properties?: Record<string, string>, immediate = false) {
+  static async track(key: TelemetryKey, properties?: Record<string, any>, immediate = false) {
     if (!this.isEnabled)
       return
 
