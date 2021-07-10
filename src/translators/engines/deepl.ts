@@ -30,7 +30,6 @@ deepl.interceptors.request.use((req) => {
     auth_key: Config.deeplApiKey,
   }
   if (req.method === 'POST' || req.method === 'post') {
-    // post body/data, not in json format
     req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // @see https://www.deepl.com/docs-api/translating-text/request/
     // Source language: no 5 character ISO 3166 language codes, those
@@ -59,7 +58,6 @@ deepl.interceptors.response.use((res) => {
 
 function log(inspector: boolean, ...args: any[]): void {
   if (Config.deeplLog) {
-    // eslint-disable-next-line no-console
     if (inspector) console.log('[DeepL]\n', ...args)
     else Log.raw(...args)
   }
