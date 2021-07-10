@@ -29,6 +29,7 @@ deepl.interceptors.request.use((req) => {
   req.params = {
     auth_key: Config.deeplApiKey,
   }
+
   if (req.method === 'POST' || req.method === 'post') {
     req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // @see https://www.deepl.com/docs-api/translating-text/request/
