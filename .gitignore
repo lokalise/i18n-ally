@@ -19,7 +19,3 @@ test/e2e-out/
 test/e2e-fixtures-temp/
 test/fixtures-temp/
 test/fixture-scripts-out/
-.history/
-.dccache
-.dcignore
-.env
