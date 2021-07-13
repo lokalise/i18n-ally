@@ -101,6 +101,7 @@ export const FLAGS = [
   'gu',
   'gw',
   'gy',
+  'hi',
   'hk',
   'hm',
   'hn',
