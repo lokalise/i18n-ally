@@ -4,7 +4,7 @@ import fg from 'fast-glob'
 import _, { uniq, throttle, set } from 'lodash'
 import fs from 'fs-extra'
 import { findBestMatch } from 'string-similarity'
-import { ReplaceLocale, Log, applyPendingToObject, unflatten, NodeHelper, getCache, setCache } from '../../utils'
+import { ReplaceLocale, Log, applyPendingToObject, unflatten, NodeHelper, getCache, setCache } from '~/utils'
 import { FILEWATCHER_TIMEOUT } from '../../meta'
 import { ParsedFile, PendingWrite, DirStructure, TargetPickingStrategy } from '../types'
 import { LocaleTree } from '../Nodes'
@@ -604,7 +604,7 @@ export class LocaleLoader extends Loader {
     this._files = {}
     this._locale_dirs = []
     const localesPaths = this.localesPaths
-    if (localesPaths.length > 0) {
+    if (localesPaths?.length) {
       try {
         const _locale_dirs = await fg(localesPaths, {
           cwd: this.rootpath,

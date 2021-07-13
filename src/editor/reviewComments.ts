@@ -1,6 +1,6 @@
 import { comments, CommentController, TextDocument, CancellationToken, Range, Disposable, commands, CommentReply, CommentAuthorInformation, Uri, Comment, MarkdownString, CommentMode, CommentThread } from 'vscode'
 import { EXT_REVIEW_ID } from '../meta'
-import { ExtensionModule } from '../modules'
+import { ExtensionModule } from '~/modules'
 import { getAvatarFromEmail } from '../utils/shared'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'

@@ -63,7 +63,7 @@ class VueFramework extends Framework {
     LinkedMessages: true,
   }
 
-  supportAutoExtraction = ['vue', 'html']
+  supportAutoExtraction = ['vue']
 
   detectHardStrings(doc: TextDocument) {
     const text = doc.getText()

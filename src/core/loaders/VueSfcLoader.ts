@@ -1,6 +1,6 @@
 import { workspace, Uri, TextDocument, WorkspaceEdit, Range } from 'vscode'
 import { squeeze, SFCI18nBlock, MetaLocaleMessage, infuse } from 'vue-i18n-locale-message'
-import { Log, applyPendingToObject, File, unflatten } from '../../utils'
+import { Log, applyPendingToObject, File, unflatten } from '~/utils'
 import { PendingWrite, NodeOptions } from '../types'
 import { LocaleTree } from '../Nodes'
 import { Global } from '../Global'

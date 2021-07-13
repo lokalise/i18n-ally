@@ -9,7 +9,9 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 /** @type {import('webpack').Configuration} */
 const config = {
   target: 'node',
-
+  optimization: {
+    minimize: false
+  },
   entry: './src/extension.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),

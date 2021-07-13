@@ -1,8 +1,8 @@
 import path from 'path'
 import { Uri, workspace, window, commands } from 'vscode'
 import fg from 'fast-glob'
-import { ExtensionModule } from '../modules'
 import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
 import { Config } from '~/core'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
@@ -95,7 +95,7 @@ export class ConfigLocalesGuide {
   }
 }
 
-const m: ExtensionModule = () => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.config_locales_auto,
       () => ConfigLocalesGuide.autoSet()),
@@ -103,5 +103,3 @@ const m: ExtensionModule = () => {
       () => ConfigLocalesGuide.config()),
   ]
 }
-
-export default m

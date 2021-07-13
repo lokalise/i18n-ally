@@ -1,22 +1,14 @@
 import { commands, window, ViewColumn, workspace, TextDocument } from 'vscode'
 import { EditorPanel } from '../webview/panel'
-import { ExtensionModule } from '../modules'
 import { LocaleTreeItem } from '../views'
 import { Commands } from './commands'
 import { CommandOptions } from './manipulations/common'
+import { ExtensionModule } from '~/modules'
 import i18n from '~/i18n'
-import { Global } from '~/core'
+import { ActionSource, Global, Telemetry, TelemetryKey } from '~/core'
 import { promptKeys } from '~/utils'
 
-const m: ExtensionModule = (ctx) => {
-  /*
-  window.registerWebviewPanelSerializer(EXT_EDITOR_ID, {
-    async deserializeWebviewPanel(panel: WebviewPanel, options: any) {
-      EditorPanel.revive(ctx, options, panel)
-    },
-  })
-  */
-
+export default <ExtensionModule> function(ctx) {
   // if the editor is bind with current document
 
   const supportedFileOpen = () => {
@@ -29,22 +21,24 @@ const m: ExtensionModule = (ctx) => {
   }
 
   const openEditor = async(item?: string | LocaleTreeItem | CommandOptions) => {
+    let actionSource = ActionSource.None
+
     let key: string | undefined
     let locale: string | undefined
     let mode: EditorPanel['mode'] = 'standalone'
     let index: number | undefined
 
-    // from code pattele
+    // from command pattele
     if (!item) {
+      actionSource = ActionSource.CommandPattele
       if (supportedFileOpen())
         mode = 'currentFile'
 
       key = await promptKeys(i18n.t('prompt.choice_key_to_open'))
-      if (!key)
-        return
     }
     // from tree view
     else if (item instanceof LocaleTreeItem) {
+      actionSource = ActionSource.TreeView
       key = item.node.keypath
       locale = item.node.type === 'record' ? item.node.locale : undefined
     }
@@ -52,8 +46,9 @@ const m: ExtensionModule = (ctx) => {
     else if (typeof item === 'string') {
       key = item
     }
-    // from hover or comand call
+    // from hover
     else if (item.keypath) {
+      actionSource = ActionSource.Hover
       key = item.keypath
       locale = item.locale
       if (item.keyIndex != null) {
@@ -64,6 +59,9 @@ const m: ExtensionModule = (ctx) => {
 
     if (!key)
       return
+
+    if (actionSource !== ActionSource.None)
+      Telemetry.track(TelemetryKey.EditorOpen, { source: actionSource })
 
     const panel = EditorPanel.createOrShow(ctx, mode === 'currentFile' ? ViewColumn.Two : undefined)
     panel.mode = mode
@@ -88,5 +86,3 @@ const m: ExtensionModule = (ctx) => {
     window.onDidChangeActiveTextEditor(e => updateContext(e?.document)),
   ]
 }
-
-export default m

@@ -1,6 +1,6 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { workspace, extensions, ExtensionContext } from 'vscode'
+import { workspace, extensions, ExtensionContext, commands } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
@@ -48,7 +48,11 @@ export class Config {
   static readonly debug = process.env.NODE_ENV === 'development'
 
   static get disabled() {
-    return Config.getConfig<boolean>('disabled') ?? true
+    return Config.getConfig<boolean>('disabled') ?? false
+  }
+
+  static get autoDetection() {
+    return Config.getConfig<boolean>('autoDetection') ?? true
   }
 
   // languages
@@ -251,24 +255,26 @@ export class Config {
   }
 
   // locales
-  static get _localesPaths(): string[] {
+  static get _localesPaths(): string[] | undefined {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
     if (!paths)
-      localesPaths = []
+      return
     else if (typeof paths === 'string')
       localesPaths = paths.split(',')
     else
-      localesPaths = paths || []
+      localesPaths = paths
+    if (!localesPaths)
+      return
     return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
-  static set _localesPaths(paths: string[]) {
+  static set _localesPaths(paths: string[] | undefined) {
     this.setConfig('localesPaths', paths)
   }
 
   static updateLocalesPaths(paths: string[]) {
-    this._localesPaths = uniq(this._localesPaths.concat(paths))
+    this._localesPaths = uniq((this._localesPaths || []).concat(paths))
   }
 
   static get themeAnnotation(): string {
@@ -431,6 +437,11 @@ export class Config {
     return this.getConfig<boolean>('extract.autoDetect') ?? false
   }
 
+  static set extractAutoDetect(v: boolean) {
+    this.setConfig('extract.autoDetect', v, false)
+    commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', v)
+  }
+
   static get extractParserHTMLOptions() {
     return this.getConfig<ExtractionHTMLOptions>('extract.parsers.html') ?? {}
   }
@@ -499,11 +510,15 @@ export class Config {
     return this.getConfig<boolean>('translate.deepl.useFreeApiEntry')
   }
 
-  static get deeplLog(): Boolean {
+  static get deeplLog(): boolean {
     return !!this.getConfig('translate.deepl.enableLog')
   }
 
   static get libreTranslateApiRoot() {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
+  
+  static get telemetry(): boolean {
+    return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
   }
 }

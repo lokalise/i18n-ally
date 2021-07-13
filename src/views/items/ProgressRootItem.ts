@@ -1,4 +1,4 @@
-import { unicodeProgressBar, unicodeDecorate } from '../../utils'
+import { unicodeProgressBar, unicodeDecorate } from '~/utils'
 import { ProgressMissingListItem } from './ProgressMissingListItem'
 import { ProgressEmptyListItem } from './ProgressEmptyListItem'
 import { ProgressBaseItem } from './ProgressBaseItem'

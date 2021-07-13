@@ -2,7 +2,7 @@ import { ExtensionContext, Range, TextDocument, TreeItemCollapsibleState } from 
 import { BaseTreeItem } from './Base'
 import { DetectionResult } from '~/core/types'
 import { Commands } from '~/commands'
-import { ExtractTextOptions } from '~/commands/extractText'
+import { ExtractTextOptions } from '~/commands/extractString'
 
 export class HardStringDetectResultItem extends BaseTreeItem implements ExtractTextOptions {
   collapsibleState = TreeItemCollapsibleState.None
@@ -39,7 +39,7 @@ export class HardStringDetectResultItem extends BaseTreeItem implements ExtractT
       title: 'Go To',
       command: Commands.go_to_range,
       arguments: [
-        this.detection.editor,
+        this.detection.document,
         this.range,
       ],
     }

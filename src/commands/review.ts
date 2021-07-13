@@ -1,15 +1,16 @@
 import { commands, window } from 'vscode'
-import { ExtensionModule } from '../modules'
-import { ReviewTranslationCandidates } from '../views/items/ReviewTranslationCandidates'
 import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
+import { ReviewTranslationCandidates } from '~/views/items/ReviewTranslationCandidates'
 import i18n from '~/i18n'
-import { Global, TranslationCandidateWithMeta, ReviewCommentWithMeta } from '~/core'
+import { Global, TranslationCandidateWithMeta, ReviewCommentWithMeta, Telemetry, TelemetryKey } from '~/core'
 
-const m: ExtensionModule = (ctx) => {
+export default <ExtensionModule> function() {
   return [
-
     commands.registerCommand(Commands.review_apply_translation,
       async(candidate: TranslationCandidateWithMeta | ReviewTranslationCandidates) => {
+        Telemetry.track(TelemetryKey.ReviewApplyTranslation)
+
         if (candidate instanceof ReviewTranslationCandidates) {
           const candidates = candidate.candidates
 
@@ -52,10 +53,13 @@ const m: ExtensionModule = (ctx) => {
           await Global.reviews.applyTranslationCandidate(candidate.keypath, candidate.locale)
         else if (result === Discard)
           await Global.reviews.discardTranslationCandidate(candidate.keypath, candidate.locale)
-      }),
+      },
+    ),
 
     commands.registerCommand(Commands.review_apply_suggestion,
       async(comment: ReviewCommentWithMeta) => {
+        Telemetry.track(TelemetryKey.ReviewApplySuggestion)
+
         const Apply = i18n.t('prompt.button_apply')
 
         const result = await window.showInformationMessage(
@@ -66,8 +70,7 @@ const m: ExtensionModule = (ctx) => {
 
         if (result === Apply)
           await Global.reviews.applySuggestion(comment.keypath, comment.locale, comment.id)
-      }),
+      },
+    ),
   ]
 }
-
-export default m

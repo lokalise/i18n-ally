@@ -16,6 +16,7 @@ import { Config } from './Config'
 import { DirStructure, OptionalFeatures, KeyStyle } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
+import { Telemetry, TelemetryKey } from './Telemetry'
 import i18n from '~/i18n'
 import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '~/utils'
 import { DetectionResult } from '~/core/types'
@@ -241,10 +242,13 @@ export class Global {
     return Config.namespace || this.hasFeatureEnabled('namespace')
   }
 
-  static get localesPaths() {
+  static get localesPaths(): string[] | undefined {
     let config = Config._localesPaths
-    if (!config.length)
+    if (!config) {
       config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
+      if (!config.length)
+        config = undefined
+    }
     return config
   }
 
@@ -355,7 +359,7 @@ export class Global {
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
     const isValidProject = this.enabledFrameworks.length > 0 && this.enabledParsers.length > 0
-    const hasLocalesSet = Global.localesPaths.length > 0
+    const hasLocalesSet = !!Global.localesPaths
     const shouldEnabled = !Config.disabled && isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
@@ -363,16 +367,19 @@ export class Global {
       Log.info(`🧩 Enabled frameworks: ${this.enabledFrameworks.map(i => i.display).join(', ')}`)
       Log.info(`🧬 Enabled parsers: ${this.enabledParsers.map(i => i.id).join(', ')}`)
       Log.info('')
+      commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
+
+      Telemetry.track(TelemetryKey.Enabled)
+      Telemetry.updateUserProperties()
+
       await this.initLoader(this._rootpath, reload)
     }
     else {
       if (!Config.disabled) {
-        if (!isValidProject)
+        if (!isValidProject && hasLocalesSet)
           Log.info('⚠ Current workspace is not a valid project, extension disabled')
-        else if (!hasLocalesSet)
-          Log.info('⚠ No locales path setting found, extension disabled')
 
-        if (isValidProject && !hasLocalesSet)
+        if (isValidProject && !hasLocalesSet && Config.autoDetection)
           ConfigLocalesGuide.autoSet()
       }
 

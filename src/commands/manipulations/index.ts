@@ -1,5 +1,5 @@
 export * from './translateKey'
-export * from './openKey'
+export * from './gotoKey'
 export * from './copyKey'
 export * from './renameKey'
 export * from './deleteKey'
