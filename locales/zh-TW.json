@@ -63,6 +63,7 @@
   "config.keys_in_use": "儘管程式碼中沒有出現，但仍標記為正在使用的鍵",
   "config.keystyle": "翻譯路徑格式",
   "config.language_tag_system": "語言標籤系統",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "將兩個字母的區域設置代碼映射到國家/地區代碼的對象",
   "config.locales_paths": "翻譯資料夾路徑 (相對於專案根目錄)，你也可以使用Glob匹配模式。",
   "config.namespace": "啟用命名空間。\n查看文件了解更多詳細信息。",

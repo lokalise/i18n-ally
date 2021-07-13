@@ -63,6 +63,7 @@
   "config.keys_in_use": "Claves a marcar para rellenar incluso sin aparecer en el código",
   "config.keystyle": "Estilo de la clave de configuración regional",
   "config.language_tag_system": "Sistema de etiquetado de lenguaje se está usando",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "Un objeto para relacionar dos letras de código regional a código de país",
   "config.locales_paths": "Ruta de acceso al directorio de configuración regional (relativa a la raíz del proyecto). Acepta patrón Glob.",
   "config.namespace": "Habilitar espacios de nombres. Comprueba la documentación para más detalles.",

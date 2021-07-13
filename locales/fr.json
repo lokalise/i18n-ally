@@ -63,6 +63,7 @@
   "config.keys_in_use": "Clés à marquer comme étant utilisées bien qu'elles n'apparaissent pas dans le code",
   "config.keystyle": "Style de clé locale.",
   "config.language_tag_system": "Utilisation du système de balise pour la langue utilisée.",
+  "config.libretranslate_api_root": "Point d'entree pour l'API LibreTranslate",
   "config.locale_country_map": "Objet pour mapper le code local de deux lettres au code du pays",
   "config.locales_paths": "Chemin du répertoire de la locale (par rapport à la racine). Les schémas globaux sont acceptés.",
   "config.namespace": "Activer les namespaces. Vérifiez la documentation pour plus de détails.",

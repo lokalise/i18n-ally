@@ -63,6 +63,7 @@
   "config.keys_in_use": "Kod içerisinde belirtilmeyen ama kullanımda olarak işaretlenecek çeviriler",
   "config.keystyle": "Çeviri anahtarı görünümü",
   "config.language_tag_system": "Kullandığınız dil eki sistemi",
+  "config.libretranslate_api_root": "",
   "config.locale_country_map": "İki harfli yerel kodunu ülke koduyla eşleştirmek için bir 'object'",
   "config.locales_paths": "Çeviri dosyalarının bulunduğu alan (projenin olduğu yere göre). Global patternler de kabul edilmektedir.",
   "config.namespace": "Namespace'lerini etkinleştirin. Daha fazla ayrıntı için dokümantasyona göz atın.",
