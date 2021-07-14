@@ -33,7 +33,7 @@ export enum ActionSource {
   CommandPattele = 'command_pattele',
   TreeView = 'tree_view',
   Hover = 'hover',
-  ContextMenu = 'ContextMenu'
+  ContextMenu = 'context_menu'
 }
 
 export interface TelemetryEvent {

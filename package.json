@@ -242,12 +242,12 @@
       {
         "command": "i18n-ally.extract-hard-strings-batch",
         "category": "%extname%",
-        "title": "(expiremental) Extract all hard-coded strings"
+        "title": "Extract all hard-coded strings (expiremental)"
       },
       {
         "command": "i18n-ally.detect_hard_strings",
         "category": "%extname%",
-        "title": "(expiremental) Detect hard-coded strings in current file"
+        "title": "Detect hard-coded strings in current file (expiremental)"
       },
       {
         "command": "i18n-ally.open-url",
