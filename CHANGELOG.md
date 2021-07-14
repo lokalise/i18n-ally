@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.15](https://github.com/lokalise/i18n-ally/compare/v2.6.13...v2.6.15) (2021-07-14)
+
+
+### ⚡ Features
+
+* added flag for hi (hindi) ([#612](https://github.com/lokalise/i18n-ally/issues/612)) ([0c963d7](https://github.com/lokalise/i18n-ally/commit/0c963d7748ce2a55ca904c6c3735da86b3dd1054))
+* libretranslate support ([#607](https://github.com/lokalise/i18n-ally/issues/607)) ([ab3451d](https://github.com/lokalise/i18n-ally/commit/ab3451d7a726d141ee36b8f2381cbeea911c581a))
+* update german locales de-DE ([#620](https://github.com/lokalise/i18n-ally/issues/620)) ([b35f9a4](https://github.com/lokalise/i18n-ally/commit/b35f9a4d5e5341b15ab682c9c4611ef988ce8578))
+
+
+### 🐞 Bug Fixes
+
+* build mode ([fd4feda](https://github.com/lokalise/i18n-ally/commit/fd4feda5f9dc0c940de71b2c15d6e1f31aecf635))
+
 ### [2.6.14](https://github.com/lokalise/i18n-ally/compare/v2.6.13...v2.6.14) (2021-07-14)
 
 
