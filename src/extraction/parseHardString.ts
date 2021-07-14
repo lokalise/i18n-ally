@@ -33,12 +33,10 @@ export function parseHardString(text = '', languageId?: string, isDynamic = fals
   if (isDynamic && ['vue', 'js'].includes(languageId || ''))
     processed = stringConcatenationToTemplate(processed).slice(1, -1)
 
-  if (languageId === 'vue') {
-    processed = processed.replace(/(?:\{\{(.*?)\}\}|\$\{(.*?)\})/g, (full, content, content2) => {
-      args.push((content ?? content2 ?? '').trim())
-      return `{${args.length - 1}}`
-    })
-  }
+  processed = processed.replace(/(?:\{\{(.*?)\}\}|\$\{(.*?)\})/g, (full, content, content2) => {
+    args.push((content ?? content2 ?? '').trim())
+    return `{${args.length - 1}}`
+  })
 
   return {
     trimmed,
