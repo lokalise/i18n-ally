@@ -4,6 +4,7 @@ import { version } from '../../package.json'
 import { Config } from './Config'
 import { Log } from '~/utils'
 import { isDev, isProd, isTest } from '~/env'
+import { Global } from '~/extension'
 
 const HEAP_ID_DEV = '1082064308'
 const HEAP_ID_PROD = '4118173713'
@@ -126,10 +127,14 @@ export class Telemetry {
       version,
       feature_auto_detection: !!Config.autoDetection,
       feature_annotation_in_place: !!Config.annotationInPlace,
+      feature_annotations: !!Config.annotations,
       feature_disable_path_parsing: !!Config.disablePathParsing,
       feature_extract_auto_detect: !!Config.extractAutoDetect,
       feature_keep_fulfilled: !!Config.keepFulfilled,
       feature_prefer_editor: !!Config.preferEditor,
+      feature_review_enabled: !!Config.reviewEnabled,
+      feature_has_path_matcher: !!Config._pathMatcher,
+      feature_has_custom_framework: !!Global.enabledFrameworks.find(i => i.id === 'custom'),
     }
 
     if (isDev)
