@@ -10812,6 +10812,11 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
+unplugin@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/unplugin/-/unplugin-0.0.2.tgz#e185d480b80758f75eb1a5007aff8feea076ce2a"
+  integrity sha512-g7Yw73sCXouX+CnO5OfSfS7YsLQ9qS9Y+pQ1A3uS5EX7Pv1ob5afFViedTTosPZJKA3WUXk2pBlKcO5AuJfsxA==
+
 unquote@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
@@ -11149,11 +11154,6 @@ webpack-filter-warnings-plugin@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/webpack-filter-warnings-plugin/-/webpack-filter-warnings-plugin-1.2.1.tgz#dc61521cf4f9b4a336fbc89108a75ae1da951cdb"
   integrity sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==
-
-webpack-plugin-replace@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-plugin-replace/-/webpack-plugin-replace-1.2.0.tgz#3f20db96237400433231e35ea76d9be3f7128916"
-  integrity sha512-1HA3etHpJW55qonJqv84o5w5GY7iqF8fqSHpTWdNwarj1llkkt4jT4QSvYs1hoaU8Lu5akDnq/spHHO5mXwo1w==
 
 webpack-sources@^1.4.0, webpack-sources@^1.4.1:
   version "1.4.3"

@@ -1,5 +1,5 @@
-// @ts-expect-error
-export const isProd = __PROD__
-export const isDev = !isProd
-// @ts-expect-error
-export const isTest = __TEST__
+// @ts-ignore
+export const isProd: boolean = process.env.NODE_ENV === 'production' 
+export const isDev: boolean = !isProd
+// @ts-ignore
+export const isTest: boolean = process.env.NODE_ENV === 'test' 

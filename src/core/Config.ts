@@ -45,7 +45,6 @@ export class Config {
   ]
 
   static ctx: ExtensionContext
-  static readonly debug = process.env.NODE_ENV === 'development'
 
   static get disabled() {
     return Config.getConfig<boolean>('disabled') ?? false
