@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.18](https://github.com/lokalise/i18n-ally/compare/v2.6.17...v2.6.18) (2021-07-14)
+
+
+### ⚡ Features
+
+* support extraction for svelte, close [#621](https://github.com/lokalise/i18n-ally/issues/621) ([57d9d96](https://github.com/lokalise/i18n-ally/commit/57d9d96109537e4b3d260d42efd28eb19ce95f11))
+
 ### [2.6.17](https://github.com/lokalise/i18n-ally/compare/v2.6.16...v2.6.17) (2021-07-14)
 
 
