@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.16](https://github.com/lokalise/i18n-ally/compare/v2.6.15...v2.6.16) (2021-07-14)
+
+
+### 🐞 Bug Fixes
+
+* build ([7921dae](https://github.com/lokalise/i18n-ally/commit/7921daebfd57f2a2deb2bc0e316683eb230a6de1))
+* extracting for js template, close [#613](https://github.com/lokalise/i18n-ally/issues/613) ([fb82a96](https://github.com/lokalise/i18n-ally/commit/fb82a96e4b847a253dc4a5043f95e87f8918ae7d))
+* improve detection rules, close [#600](https://github.com/lokalise/i18n-ally/issues/600) ([4f764bb](https://github.com/lokalise/i18n-ally/commit/4f764bb8ba7d04525cd63ab9057b7d29b17fe6f7))
+
 ### [2.6.15](https://github.com/lokalise/i18n-ally/compare/v2.6.13...v2.6.15) (2021-07-14)
 
 
