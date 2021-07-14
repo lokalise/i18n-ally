@@ -5,6 +5,7 @@
 const path = require('path')
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
+const ReplacePlugin = require('webpack-plugin-replace')
 
 /** @type {import('webpack').Configuration} */
 const config = {
@@ -56,6 +57,16 @@ const config = {
     new FilterWarningsPlugin({
       exclude: /Critical dependency: the request of a dependency is an expression/,
     }),
+    new ReplacePlugin({
+      exclude: [
+        /node_modules/,
+      ],
+      values: {
+        '__PROD__': process.env.NODE_ENV === 'production',
+        '__TEST__': process.env.NODE_ENV === 'test'
+      }
+    })
   ],
 }
+
 module.exports = config
