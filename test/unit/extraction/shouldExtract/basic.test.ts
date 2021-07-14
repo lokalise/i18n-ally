@@ -40,6 +40,10 @@ const excludes = [
   '', // empty string
   '/',
   ' : ',
+  '#',
+  'i18n',
+  // eslint-disable-next-line no-template-curly-in-string
+  '${retStr}, ${v}',
 ]
 
 describe('extraction-basic', () => {

@@ -14,7 +14,6 @@ Array [
 
 exports[`detections - babel v2-class.js 1`] = `
 Array [
-  "computed ",
   "base greeting: ",
 ]
 `;
@@ -31,9 +30,6 @@ exports[`detections - babel v2-jsx.jsx 1`] = `
 Array [
   "Nigeria",
   "Nigeria is a large country that has a varied topography.",
-  "Hello, ",
-  " ",
-  "country-name ",
 ]
 `;
 
@@ -50,7 +46,6 @@ exports[`detections - babel v2-ts.ts 1`] = `
 Array [
   "UTC",
   "UTC",
-  "2017-01-\${first + i + 15}",
   "S",
   "M",
   "T",
@@ -58,10 +53,6 @@ Array [
   "T",
   "F",
   "S",
-  "\${this.displayedYear}-\${pad(this.displayedMonth + 1)}-01T00:00:00+00:00",
-  "\${prevMonthYear}-\${pad(prevMonth + 1)}-\${pad(firstDayFromPreviousMonth - day)}",
-  "\${this.displayedYear}-\${pad(this.displayedMonth + 1)}-\${pad(day)}",
-  "\${nextMonthYear}-\${pad(nextMonth + 1)}-\${pad(nextMonthDay++)}",
   "v-date-picker-table v-date-picker-table--date",
 ]
 `;
