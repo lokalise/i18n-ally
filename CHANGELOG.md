@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.17](https://github.com/lokalise/i18n-ally/compare/v2.6.16...v2.6.17) (2021-07-14)
+
+
+### 🐞 Bug Fixes
+
+* webpack build ([f603d02](https://github.com/lokalise/i18n-ally/commit/f603d02978e8a7045ccda47226afdcc5cd67f67a))
+
 ### [2.6.16](https://github.com/lokalise/i18n-ally/compare/v2.6.15...v2.6.16) (2021-07-14)
 
 
