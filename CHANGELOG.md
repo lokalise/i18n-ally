@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.19](https://github.com/lokalise/i18n-ally/compare/v2.6.18...v2.6.19) (2021-07-16)
+
+
+### 🐞 Bug Fixes
+
+* **detection:** better `<script/>` detect, close [#623](https://github.com/lokalise/i18n-ally/issues/623) ([67dc0b0](https://github.com/lokalise/i18n-ally/commit/67dc0b0b2e60825b2985d5e8e2062ed7c1431b58))
+* **detection:** svelte inline function, close [#624](https://github.com/lokalise/i18n-ally/issues/624) ([519f5b6](https://github.com/lokalise/i18n-ally/commit/519f5b6ce6f61bc074f8e31bf89bc611196075db))
+* telemetry slient on error ([38a5c47](https://github.com/lokalise/i18n-ally/commit/38a5c47a55d2a6c6ecba1a289feaf30997f6d0ea))
+
+
+### ⚡ Features
+
+* **detection:** ignore texts in conosle.log ([8751d71](https://github.com/lokalise/i18n-ally/commit/8751d7160a1d705cd9201216df890b61b785468b))
+
 ### [2.6.18](https://github.com/lokalise/i18n-ally/compare/v2.6.17...v2.6.18) (2021-07-14)
 
 
