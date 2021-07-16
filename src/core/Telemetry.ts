@@ -96,7 +96,7 @@ export class Telemetry {
         })
       }
       catch (e) {
-        Log.error(e)
+        Log.error(e, false)
       }
     }
     else {
@@ -155,7 +155,7 @@ export class Telemetry {
       })
     }
     catch (e) {
-      Log.error(e)
+      Log.error(e, false)
     }
   }
 
@@ -185,7 +185,7 @@ export class Telemetry {
       })
     }
     catch (e) {
-      Log.error(e)
+      Log.error(e, false)
     }
   }
 }
