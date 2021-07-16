@@ -2,6 +2,7 @@ import { Parser } from 'htmlparser2'
 import { DefaultDynamicExtractionsRules, DefaultExtractionRules, ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
 import { ExtractionHTMLOptions } from './options'
+import { shiftDetectionPosition } from './utils'
 import { DetectionResult } from '~/core/types'
 
 const defaultOptions: Required<ExtractionHTMLOptions> = {
@@ -16,7 +17,8 @@ export function detect(
   rules: ExtractionRule[] = DefaultExtractionRules,
   dynamicRules: ExtractionRule[] = DefaultDynamicExtractionsRules,
   userOptions: ExtractionHTMLOptions = {},
-) {
+  extractScripts?: (script: string, start: number) => DetectionResult[],
+): DetectionResult[] {
   const {
     attributes: ATTRS,
     ignoredTags: IGNORED_TAGS,
@@ -80,6 +82,14 @@ export function detect(
       }
     },
     ontext(fullText) {
+      const start = parser.startIndex
+      const end = parser.endIndex! + 1
+
+      if (extractScripts && lastTag === 'script') {
+        detections.push(...shiftDetectionPosition(extractScripts(fullText, start), start))
+        return
+      }
+
       if (IGNORED_TAGS.includes(lastTag))
         return
 
@@ -87,9 +97,6 @@ export function detect(
 
       if (!shouldExtract(text, rules))
         return
-
-      const start = parser.startIndex
-      const end = parser.endIndex! + 1
 
       detections.push({
         text: fullText,
