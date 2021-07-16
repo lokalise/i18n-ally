@@ -12,11 +12,7 @@ Array [
 ]
 `;
 
-exports[`detections - babel v2-class.js 1`] = `
-Array [
-  "base greeting: ",
-]
-`;
+exports[`detections - babel v2-class.js 1`] = `Array []`;
 
 exports[`detections - babel v2-class-tsx.tsx 1`] = `Array []`;
 
