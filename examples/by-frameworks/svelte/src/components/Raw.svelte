@@ -2,6 +2,8 @@
 	export let name;
 
 	let a = 'Hello'
+
+	console.log('Should not be extracted')
 </script>
 
 <main>
