@@ -1,9 +1,8 @@
 import { TextDocument } from 'vscode'
 import { Framework } from './base'
 import { LanguageId } from '~/utils'
-import { DetectionResult, Config } from '~/core'
+import { Config } from '~/core'
 import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules } from '~/extraction'
-import { shiftDetectionPosition } from '~/extraction/parsers/utils'
 
 class SvelteFramework extends Framework {
   id= 'svelte'

@@ -27,6 +27,9 @@ export function detect(
 
   const detections: DetectionResult[] = []
 
+  // replace svelte inline function, #624
+  input = input.replace(/<(.*?)={(.*?)}(.*?)>/g, '<$1="$2"$3>')
+
   let lastTag = ''
   const parser = new Parser({
     onopentag(name, attrs) {

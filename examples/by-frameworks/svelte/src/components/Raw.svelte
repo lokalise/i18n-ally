@@ -9,6 +9,10 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
 
+<f-button class="bg-light-300" on:click={(e) => handle365Login(e)}>
+  {$t("page.login.ms365")}
+</f-button>
+
 <style>
 	main {
 		text-align: center;
