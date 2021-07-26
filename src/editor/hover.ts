@@ -1,13 +1,13 @@
 import { MarkdownString } from 'vscode'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'
-import { CurrentFile, Global, LocaleRecord, Config } from '~/core'
+import { CurrentFile, Global, LocaleRecord, Config, ActionSource } from '~/core'
 import { decorateLocale, escapeMarkdown, NodeHelper } from '~/utils'
 
 const EmptyButton = '⠀⠀'
 
 function makeMarkdownCommand(command: Commands, args: any): string {
-  return `command:${command}?${encodeURIComponent(JSON.stringify(args))}`
+  return `command:${command}?${encodeURIComponent(JSON.stringify({ actionSource: ActionSource.Hover, ...args }))}`
 }
 
 function formatValue(text: string) {

@@ -5,7 +5,7 @@ import { commands } from 'vscode'
 import { TranslateKeys, RenameKey } from '../commands/manipulations'
 import { EXT_ID } from '~/meta'
 import { Commands } from '~/commands'
-import { CurrentFile, Global, Config } from '~/core'
+import { CurrentFile, Global, Config, ActionSource, Telemetry, TelemetryKey } from '~/core'
 import i18n from '~/i18n'
 import { isDev } from '~/env'
 
@@ -115,7 +115,7 @@ export class Protocol {
         break
 
       case 'translate':
-        TranslateKeys(message.data)
+        TranslateKeys(message.data, ActionSource.UiEditor)
         break
 
       case 'review.description':
@@ -123,14 +123,17 @@ export class Protocol {
         break
 
       case 'review.comment':
+        Telemetry.track(TelemetryKey.ReviewAddComment, { source: ActionSource.UiEditor })
         Global.reviews.addComment(message.keypath!, message.locale!, message.data!)
         break
 
       case 'review.edit':
+        Telemetry.track(TelemetryKey.ReviewEditComment, { source: ActionSource.UiEditor })
         Global.reviews.editComment(message.keypath!, message.locale!, message.data!)
         break
 
       case 'review.resolve':
+        Telemetry.track(TelemetryKey.ReviewResolveComment, { source: ActionSource.UiEditor })
         Global.reviews.resolveComment(message.keypath!, message.locale!, message.commentId!)
         break
 

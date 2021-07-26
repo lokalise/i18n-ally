@@ -23,9 +23,9 @@ export async function promptForSourceLocale(defaultLocale: string, node?: Locale
   return result.label || defaultLocale
 }
 
-export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
-  Telemetry.track(TelemetryKey.TranslateKey)
-
+export async function TranslateKeys(
+  item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions,
+) {
   let source: string | undefined
 
   if (item && !(item instanceof LocaleTreeItem) && !(item instanceof ProgressSubmenuItem) && item.from) {
@@ -41,6 +41,8 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
     if (source == null)
       return
   }
+
+  Telemetry.track(TelemetryKey.TranslateKey, { actionSource: Telemetry.getActionSource(item) })
 
   let nodes: AccaptableTranslateItem[] = []
   let targetLocales: string[] | undefined

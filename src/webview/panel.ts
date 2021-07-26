@@ -4,7 +4,7 @@ import { WebviewPanel, Disposable, window, ViewColumn, Uri, ExtensionContext, wo
 import { EXT_EDITOR_ID } from '~/meta'
 import { Protocol } from '~/protocol'
 import i18n from '~/i18n'
-import { CurrentFile, Global, KeyInDocument, KeyDetector, Config } from '~/core'
+import { CurrentFile, Global, KeyInDocument, KeyDetector, Config, Telemetry, TelemetryKey, ActionSource } from '~/core'
 
 export class EditorContext {
   filepath?: string
@@ -198,6 +198,8 @@ export class EditorPanel {
   }
 
   async navigateKey(data: KeyInDocument & {filepath: string; keyIndex: number}) {
+    Telemetry.track(TelemetryKey.GoToKey, { source: ActionSource.UiEditor })
+
     if (!data.filepath)
       return
 

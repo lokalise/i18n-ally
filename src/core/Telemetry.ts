@@ -5,6 +5,8 @@ import { Config } from './Config'
 import { Log } from '~/utils'
 import { isDev, isProd, isTest } from '~/env'
 import { Global } from '~/extension'
+import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
+import { CommandOptions } from '~/commands/manipulations/common'
 
 const HEAP_ID_DEV = '1082064308'
 const HEAP_ID_PROD = '4118173713'
@@ -12,6 +14,7 @@ const HEAP_ID_PROD = '4118173713'
 const HEAP_ID = isProd ? HEAP_ID_PROD : HEAP_ID_DEV
 
 export enum TelemetryKey {
+  Activated = 'activated',
   DeleteKey = 'delete_key',
   Disabled = 'disabled',
   EditKey = 'edit_key',
@@ -21,12 +24,16 @@ export enum TelemetryKey {
   ExtractStringBulk = 'extract_string_bulk',
   GoToKey = 'goto_key',
   InsertKey = 'insert_key',
+  Installed = 'installed',
   NewKey = 'new_key',
   RenameKey = 'rename_key',
   ReviewAddComment = 'review_add_comment',
   ReviewApplySuggestion = 'review_apply_suggestion',
   ReviewApplyTranslation = 'review_apply_translation',
   TranslateKey = 'translate_key',
+  Updated = 'updated',
+  ReviewEditComment = 'review_edit_comment',
+  ReviewResolveComment = 'review_resolve_comment'
 }
 
 export enum ActionSource {
@@ -34,7 +41,9 @@ export enum ActionSource {
   CommandPattele = 'command_pattele',
   TreeView = 'tree_view',
   Hover = 'hover',
-  ContextMenu = 'context_menu'
+  ContextMenu = 'context_menu',
+  UiEditor = 'ui_editor',
+  Review = 'review'
 }
 
 export interface TelemetryEvent {
@@ -61,6 +70,17 @@ export class Telemetry {
     Log.info(`📈 Telemetry id: ${this._id}`)
 
     return this._id
+  }
+
+  static checkVersionChange() {
+    const previousVersion = Config.ctx.globalState.get('i18n-ally.previous-version')
+
+    if (!previousVersion)
+      Telemetry.track(TelemetryKey.Installed, { new_version: version })
+    else if (previousVersion !== version)
+      Telemetry.track(TelemetryKey.Updated, { new_version: version, previous_version: previousVersion })
+
+    Config.ctx.globalState.update('i18n-ally.previous-version', version)
   }
 
   static get isEnabled() {
@@ -117,6 +137,12 @@ export class Telemetry {
           : 5 * 60 * 1000, // 5 minutes
       )
     }
+  }
+
+  static getActionSource(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+    return (item instanceof LocaleTreeItem || item instanceof ProgressSubmenuItem)
+      ? ActionSource.TreeView
+      : item?.actionSource || ActionSource.CommandPattele
   }
 
   static async updateUserProperties() {

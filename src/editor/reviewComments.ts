@@ -1,10 +1,10 @@
 import { comments, CommentController, TextDocument, CancellationToken, Range, Disposable, commands, CommentReply, CommentAuthorInformation, Uri, Comment, MarkdownString, CommentMode, CommentThread } from 'vscode'
 import { EXT_REVIEW_ID } from '../meta'
-import { ExtensionModule } from '~/modules'
 import { getAvatarFromEmail } from '../utils/shared'
+import { ExtensionModule } from '~/modules'
 import { Commands } from '~/commands'
 import i18n from '~/i18n'
-import { Config, Global, ReviewComment, KeyDetector } from '~/core'
+import { Config, Global, ReviewComment, KeyDetector, ActionSource, Telemetry, TelemetryKey } from '~/core'
 import { Log } from '~/utils'
 
 function userToAuthorInfo(user?: {name?: string; email?: string}): CommentAuthorInformation {
@@ -63,16 +63,16 @@ class ReviewCommentProvider implements Disposable {
   }
 
   typeIcon = {
-    approve: '✅ ',
-    request_change: '❌ ',
-    comment: '',
+    'approve': '✅ ',
+    'request_change': '❌ ',
+    'comment': '',
     '': '',
   }
 
   typeComment = {
-    approve: `*${i18n.t('review.placeholder.approve')}*`,
-    request_change: `*${i18n.t('review.placeholder.request_change')}*`,
-    comment: `*${i18n.t('review.placeholder.comment')}*`,
+    'approve': `*${i18n.t('review.placeholder.approve')}*`,
+    'request_change': `*${i18n.t('review.placeholder.request_change')}*`,
+    'comment': `*${i18n.t('review.placeholder.comment')}*`,
     '': '',
   }
 
@@ -102,6 +102,7 @@ class ReviewCommentProvider implements Disposable {
       return
     }
 
+    Telemetry.track(TelemetryKey.ReviewAddComment, { source: ActionSource.Review })
     await Global.reviews.addComment(info.keypath, info.locale, {
       type,
       comment: reply.text,
@@ -124,6 +125,7 @@ class ReviewCommentProvider implements Disposable {
       return
     }
 
+    Telemetry.track(TelemetryKey.ReviewResolveComment, { source: ActionSource.Review })
     await Global.reviews.resolveComment(info.keypath, info.locale, reply.id)
 
     this.updateThread(thread, info.keypath, info.locale)
@@ -191,7 +193,7 @@ class ReviewCommentProvider implements Disposable {
   }
 }
 
-const reviewComments: ExtensionModule = (ctx) => {
+const reviewComments: ExtensionModule = () => {
   const disposableds = []
   const controller = comments.createCommentController(EXT_REVIEW_ID, i18n.t('review.title'))
   disposableds.push(new ReviewCommentProvider(controller))

@@ -4,7 +4,7 @@ import { Log, promptEdit } from '~/utils'
 import { Config, CurrentFile, Telemetry, TelemetryKey } from '~/core'
 
 export async function EditKey(item?: LocaleTreeItem | CommandOptions) {
-  Telemetry.track(TelemetryKey.EditKey)
+  Telemetry.track(TelemetryKey.EditKey, { source: Telemetry.getActionSource(item) })
 
   let node = getNodeOrRecord(item)
 
