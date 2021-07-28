@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.22](https://github.com/lokalise/i18n-ally/compare/v2.6.21...v2.6.22) (2021-07-28)
+
+
+### 🐞 Bug Fixes
+
+* try fix progress loader update ([0fea000](https://github.com/lokalise/i18n-ally/commit/0fea00051f385a4d639285faf31561ac4fbcd6cb))
+
+
+### ⚡ Features
+
+* add a number of detected hardcoded strings in tree view, close [#633](https://github.com/lokalise/i18n-ally/issues/633) ([a83f00c](https://github.com/lokalise/i18n-ally/commit/a83f00c860e1f89d3ca09acaefc30a0cf802aff5))
+* new framework jeklly support, close [#568](https://github.com/lokalise/i18n-ally/issues/568) ([6d6f96c](https://github.com/lokalise/i18n-ally/commit/6d6f96c15aa7644a6827082fd56f6d4e0be8fcb1))
+
 ### [2.6.21](https://github.com/lokalise/i18n-ally/compare/v2.6.20...v2.6.21) (2021-07-28)
 
 
