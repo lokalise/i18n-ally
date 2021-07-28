@@ -115,7 +115,10 @@ export class Protocol {
         break
 
       case 'translate':
-        TranslateKeys(message.data, ActionSource.UiEditor)
+        TranslateKeys({
+          actionSource: ActionSource.UiEditor,
+          ...message.data,
+        })
         break
 
       case 'review.description':
