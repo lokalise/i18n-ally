@@ -1,4 +1,4 @@
-import { comments, CommentController, TextDocument, CancellationToken, Range, Disposable, commands, CommentReply, CommentAuthorInformation, Uri, Comment, MarkdownString, CommentMode, CommentThread } from 'vscode'
+import { comments, CommentController, TextDocument, Range, Disposable, commands, CommentReply, CommentAuthorInformation, Uri, Comment, MarkdownString, CommentMode, CommentThread } from 'vscode'
 import { EXT_REVIEW_ID } from '../meta'
 import { getAvatarFromEmail } from '../utils/shared'
 import { ExtensionModule } from '~/modules'
@@ -141,7 +141,7 @@ class ReviewCommentProvider implements Disposable {
     return Global.enabledParsers.filter(p => p.annotationSupported)
   }
 
-  async provideCommentingRanges(document: TextDocument, token: CancellationToken): Promise<Range[]> {
+  async provideCommentingRanges(document: TextDocument): Promise<Range[]> {
     const filepath = document.uri.fsPath
 
     if (this._threads[filepath]) {

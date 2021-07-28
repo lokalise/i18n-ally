@@ -1,9 +1,9 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, EventEmitter, Event } from 'vscode'
 import { sortBy, throttle } from 'lodash'
-import { resolveFlattenRootKeypath } from '~/utils'
 import { LocaleTreeItem } from '../items/LocaleTreeItem'
 import { EditorPanel } from '../../webview/panel'
 import { THROTTLE_DELAY } from '../../meta'
+import { resolveFlattenRootKeypath } from '~/utils'
 import { Node, Loader, CurrentFile, LocaleTree, LocaleNode } from '~/core'
 
 export class LocalesTreeProvider implements TreeDataProvider<LocaleTreeItem> {

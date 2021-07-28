@@ -23,23 +23,32 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
     else {
       this.collapsibleState = TreeItemCollapsibleState.None
     }
-    this.updateDescription()
   }
 
   getLabel() {
     return i18n.t('view.current_file_hard_strings')
   }
 
-  updateDescription() {
+  // @ts-expect-error
+  get description() {
     if (this.collapsibleState === TreeItemCollapsibleState.None) {
-      this.iconPath = this.getIcon('symbol-string-gray')
-      this.description = i18n.t('view.current_file_hard_strings_not_supported', this.langId)
+      return i18n.t('view.current_file_hard_strings_not_supported', this.langId)
     }
     else {
-      this.iconPath = this.getIcon('symbol-string')
       const length = CurrentFile.hardStrings?.length
-      this.description = length == null ? '' : length.toString()
+      if (this.collapsibleState === TreeItemCollapsibleState.Collapsed && !length)
+        return i18n.t('view.current_file_hard_strings_expand_to_detect')
+      else
+        return length == null ? '' : length.toString()
     }
+  }
+
+  // @ts-expect-error
+  get iconPath() {
+    if (this.collapsibleState === TreeItemCollapsibleState.None)
+      return this.getIcon('symbol-string-gray')
+    else
+      return this.getIcon('symbol-string')
   }
 
   async getChildren() {
