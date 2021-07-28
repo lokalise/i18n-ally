@@ -24,6 +24,7 @@ import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
 import GeneralFramework from './general'
 import LinguiFramework from './lingui'
+import JekyllFramework from './jekyll'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
 
@@ -55,6 +56,7 @@ export const frameworks: Framework[] = [
   new NextTranslateFramework(),
   new PhpGettextFramework(),
   new LinguiFramework(),
+  new JekyllFramework(),
   new GeneralFramework(),
 
   // Vue SFC should be the last one

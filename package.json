@@ -814,7 +814,8 @@
               "next-translate",
               "php-gettext",
               "general",
-              "lingui"
+              "lingui",
+              "jekyll"
             ]
           },
           "description": "%config.enabled_frameworks%"
