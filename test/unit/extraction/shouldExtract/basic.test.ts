@@ -6,7 +6,6 @@ const rules = [
 ]
 
 const includes = [
-  'OK',
   'Created',
   '✅',
   'Follow this link: https://lokalise.com/features/in-context-editing',

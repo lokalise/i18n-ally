@@ -40,15 +40,6 @@ Array [
 
 exports[`detections - babel v2-ts.ts 1`] = `
 Array [
-  "UTC",
-  "UTC",
-  "S",
-  "M",
-  "T",
-  "W",
-  "T",
-  "F",
-  "S",
   "v-date-picker-table v-date-picker-table--date",
 ]
 `;
