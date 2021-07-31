@@ -10,10 +10,12 @@ export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
   static _onInvalidate = new EventEmitter<boolean>()
+  static _onInitialized = new EventEmitter<void>()
   static _onHardStringDetected = new EventEmitter<DetectionResult[] | undefined>()
 
   static onInvalidate = CurrentFile._onInvalidate.event
   static onHardStringDetected = CurrentFile._onHardStringDetected.event
+  static onInitialized = CurrentFile._onInitialized.event
 
   static get VueSfc() {
     return Global.hasFeatureEnabled('VueSfc')
@@ -54,6 +56,7 @@ export class CurrentFile {
     }
 
     this.updateLoaders()
+    this._onInitialized.fire()
   }
 
   static updateLoaders() {

@@ -14,9 +14,9 @@ export class ProgressProvider implements TreeDataProvider<BaseTreeItem> {
 
   constructor(private ctx: ExtensionContext) {
     const throttledRefresh = throttle(() => this.refresh(), THROTTLE_DELAY)
-    CurrentFile.loader.onDidChange(throttledRefresh)
     EditorPanel.onDidChange(throttledRefresh)
-    Global.loader.onDidChange(throttledRefresh)
+    CurrentFile.onInitialized(() => CurrentFile.loader.onDidChange(throttledRefresh))
+    Global.onDidChangeLoader(() => Global.loader.onDidChange(throttledRefresh))
   }
 
   refresh(): void {
