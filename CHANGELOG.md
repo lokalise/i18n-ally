@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.23](https://github.com/lokalise/i18n-ally/compare/v2.6.22...v2.6.23) (2021-07-31)
+
+
+### 🐞 Bug Fixes
+
+* event registration for ProgressProvider ([0c5828d](https://github.com/lokalise/i18n-ally/commit/0c5828d2f0dff1f7b7a6ef50faa176b0ed2c7c04))
+* keepFulfilled triggering, close [#581](https://github.com/lokalise/i18n-ally/issues/581) ([a3029c5](https://github.com/lokalise/i18n-ally/commit/a3029c5b83c8738b4a18a3f7f5e3e21a4741ed49))
+
 ### [2.6.22](https://github.com/lokalise/i18n-ally/compare/v2.6.21...v2.6.22) (2021-07-28)
 
 
