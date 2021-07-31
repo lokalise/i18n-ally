@@ -1,5 +1,6 @@
 import { Disposable } from 'vscode'
 import _ from 'lodash'
+import { uniq } from '@antfu/utils'
 import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
 import { Config } from '../Config'
@@ -115,8 +116,12 @@ export class ComposedLoader extends Loader {
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
-    if (Config.keepFulfilled && triggerFullfilled)
-      pendings = [...await FulfillAllMissingKeys(false) || [], ...pendings]
+    if (Config.keepFulfilled && triggerFullfilled) {
+      pendings = [
+        ...await FulfillAllMissingKeys(false, uniq(pendings.map(i => i.keypath))) || [],
+        ...pendings,
+      ]
+    }
 
     pendings = pendings.filter(i => i)
 

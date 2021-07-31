@@ -29,7 +29,7 @@ export async function FulfillMissingKeysForProgress(item: ProgressSubmenuItem) {
   return pendings
 }
 
-export async function FulfillAllMissingKeys(prompt = true) {
+export async function FulfillAllMissingKeys(prompt = true, extraKeys?: string[]) {
   if (prompt) {
     const Yes = i18n.t('prompt.button_yes')
     const result = await window.showWarningMessage(
@@ -44,7 +44,15 @@ export async function FulfillAllMissingKeys(prompt = true) {
   let pendings: PendingWrite[] = []
   const loader = CurrentFile.loader
   for (const locale of Global.visibleLocales) {
-    const cov = loader.getCoverage(locale)
+    const keys = loader.keys
+    if (extraKeys?.length) {
+      extraKeys.forEach((i) => {
+        if (!keys.includes(i))
+          keys.push(i)
+      })
+    }
+
+    const cov = loader.getCoverage(locale, keys)
     if (!cov)
       continue
 

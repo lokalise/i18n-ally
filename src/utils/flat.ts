@@ -36,7 +36,7 @@ export function flatten(data: any) {
 export function unflatten(data: any) {
   const output: any = {}
 
-  Object.keys(data)
+  Object.keys(data || {})
     .sort((a, b) => b.length - a.length)
     .forEach((key) => {
       const original = key
