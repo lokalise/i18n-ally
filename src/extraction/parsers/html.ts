@@ -109,6 +109,11 @@ export function detect(
         source: 'html-inline',
       })
     },
+  }, {
+    xmlMode: true,
+    lowerCaseTags: false,
+    lowerCaseAttributeNames: false,
+    recognizeSelfClosing: true,
   })
 
   parser.parseComplete(input)
