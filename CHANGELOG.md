@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.24](https://github.com/lokalise/i18n-ally/compare/v2.6.23...v2.6.24) (2021-08-10)
+
+
+### ⚡ Features
+
+* config for extract.parsers.babel, close [#634](https://github.com/lokalise/i18n-ally/issues/634) ([6c2ea99](https://github.com/lokalise/i18n-ally/commit/6c2ea99ce9bf913e5659c519e679a88f6a02bf3c))
+* ignore className and other attrs in JSX extraction ([2e0d277](https://github.com/lokalise/i18n-ally/commit/2e0d277d9e43ce954dc9565fa57da1fe3a0e7d6e))
+* more forgiving html parser ([b1409bc](https://github.com/lokalise/i18n-ally/commit/b1409bc0652d4fe09e0b10031086ebe400b2918b))
+
 ### [2.6.23](https://github.com/lokalise/i18n-ally/compare/v2.6.22...v2.6.23) (2021-07-31)
 
 
