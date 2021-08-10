@@ -27,3 +27,12 @@ export interface ExtractionHTMLOptions {
    */
   inlineText?: boolean
 }
+
+export interface ExtractionBabelOptions {
+  /**
+   * HTML tags to be ignored
+   *
+   * @default ['class', 'className', 'key', 'style', 'ref', 'onClick']
+   */
+  ignoredJSXAttributes?: string[]
+}

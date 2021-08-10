@@ -3,13 +3,23 @@ import { parse } from '@babel/parser'
 import traverse from '@babel/traverse'
 import { DefaultDynamicExtractionsRules, DefaultExtractionRules, ExtractionRule } from '../rules'
 import { shouldExtract } from '../shouldExtract'
+import { ExtractionBabelOptions } from './options'
 import { DetectionResult } from '~/core/types'
+
+const defaultOptions: Required<ExtractionBabelOptions> = {
+  ignoredJSXAttributes: ['class', 'className', 'key', 'style', 'ref', 'onClick'],
+}
 
 export function detect(
   input: string,
   rules: ExtractionRule[] = DefaultExtractionRules,
   dynamicRules: ExtractionRule[] = DefaultDynamicExtractionsRules,
+  userOptions: ExtractionBabelOptions = {},
 ) {
+  const {
+    ignoredJSXAttributes,
+  } = Object.assign({}, defaultOptions, userOptions)
+
   const detections: DetectionResult[] = []
 
   const ast = parse(input, {
@@ -57,8 +67,8 @@ export function detect(
   }
 
   function recordIgnore(path: any) {
-    const fullStart = path?.node?.start
-    const fullEnd = path?.node?.end
+    const fullStart = path?.node?.start ?? path?.start
+    const fullEnd = path?.node?.end ?? path?.end
 
     if (!fullStart || !fullEnd)
       return
@@ -79,6 +89,13 @@ export function detect(
     },
     JSXText(path: any) {
       handlePath(path, 'jsx-text')
+    },
+    // scan for jsx attributes
+    JSXElement(path: any) {
+      path?.node?.openingElement?.attributes?.forEach((i: any) => {
+        if (ignoredJSXAttributes.includes(i?.name?.name))
+          recordIgnore(i)
+      })
     },
     // ignore `console.xxx`
     CallExpression(path: any) {
