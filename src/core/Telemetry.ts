@@ -7,6 +7,7 @@ import { isDev, isProd, isTest } from '~/env'
 import { Global } from '~/extension'
 import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CommandOptions } from '~/commands/manipulations/common'
+import { promptForSurvey } from '~/timely/survey'
 
 const HEAP_ID_DEV = '1082064308'
 const HEAP_ID_PROD = '4118173713'
@@ -58,6 +59,7 @@ export class Telemetry {
   private static _timer: any = null
 
   static events: TelemetryEvent[] = []
+  static count = 0
 
   static get userId() {
     if (this._id)
@@ -123,6 +125,10 @@ export class Telemetry {
       this.events.push(event)
       this.schedule()
     }
+
+    this.count += 1
+    if (this.count > 1) // TODO: change the threshold
+      promptForSurvey()
   }
 
   static schedule() {
