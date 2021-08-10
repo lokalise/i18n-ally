@@ -77,6 +77,7 @@ class VueFramework extends Framework {
         script,
         DefaultExtractionRules,
         DefaultDynamicExtractionsRules,
+        Config.extractParserBabelOptions,
       ),
     )
   }

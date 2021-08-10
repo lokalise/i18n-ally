@@ -7,7 +7,7 @@ import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_A
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
-import { ExtractionHTMLOptions } from '~/extraction/parsers/options'
+import { ExtractionBabelOptions, ExtractionHTMLOptions } from '~/extraction/parsers/options'
 import { resolveRefactorTemplate } from '~/utils/resolveRefactorTemplate'
 
 export class Config {
@@ -443,6 +443,10 @@ export class Config {
 
   static get extractParserHTMLOptions() {
     return this.getConfig<ExtractionHTMLOptions>('extract.parsers.html') ?? {}
+  }
+
+  static get extractParserBabelOptions() {
+    return this.getConfig<ExtractionBabelOptions>('extract.parsers.babel') ?? {}
   }
 
   static get showFlags() {
