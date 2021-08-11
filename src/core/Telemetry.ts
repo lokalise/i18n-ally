@@ -2,6 +2,7 @@ import axios from 'axios'
 import { v4 as uuid } from 'uuid'
 import { version } from '../../package.json'
 import { Config } from './Config'
+import { Storage } from './Storage'
 import { Log } from '~/utils'
 import { isDev, isProd, isTest } from '~/env'
 import { Global } from '~/extension'
@@ -64,11 +65,8 @@ export class Telemetry {
   static get userId() {
     if (this._id)
       return this._id
-    this._id = Config.ctx.globalState.get('i18n-ally.telemetry-user-id')!
-    if (!this._id) {
-      this._id = uuid()
-      Config.ctx.globalState.update('i18n-ally.telemetry-user-id', this._id)
-    }
+
+    this._id = Storage.get('telemetry-user-id', uuid, true)
     Log.info(`📈 Telemetry id: ${this._id}`)
 
     return this._id
@@ -127,7 +125,7 @@ export class Telemetry {
     }
 
     this.count += 1
-    if (this.count > 1) // TODO: change the threshold
+    if (this.count > 0) // TODO: change the threshold
       promptForSurvey()
   }
 
