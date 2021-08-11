@@ -48,6 +48,7 @@ deepl.interceptors.response.use((res) => {
 
 function log(inspector: boolean, ...args: any[]): void {
   if (Config.deeplLog) {
+    // eslint-disable-next-line no-console
     if (inspector) console.log('[DeepL]\n', ...args)
     else Log.raw(...args)
   }
