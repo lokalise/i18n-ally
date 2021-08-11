@@ -15,4 +15,8 @@ export class Storage {
   static set<T>(key: string, value: T): void {
     Config.ctx.globalState.update(`i18n-ally.${key}`, value)
   }
+
+  static delete(key: string): void {
+    Config.ctx.globalState.update(`i18n-ally.${key}`, undefined)
+  }
 }
