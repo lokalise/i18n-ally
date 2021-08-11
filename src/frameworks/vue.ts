@@ -13,6 +13,7 @@ class VueFramework extends Framework {
       'vue-i18n',
       'vuex-i18n',
       '@panter/vue-i18next',
+      '@nuxtjs/i18n',
       'nuxt-i18n',
     ],
   }
