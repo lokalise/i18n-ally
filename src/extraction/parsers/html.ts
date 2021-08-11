@@ -31,9 +31,11 @@ export function detect(
   input = input.replace(/<(.*?)={(.*?)}(.*?)>/g, '<$1="$2"$3>')
 
   let lastTag = ''
+  let lastTagIndex: number | null = null
   const parser = new Parser({
     onopentag(name, attrs) {
       lastTag = name
+      lastTagIndex = parser.endIndex! + 1
       if (IGNORED_TAGS.includes(name))
         return
 
@@ -84,14 +86,17 @@ export function detect(
         })
       }
     },
+    onclosetag(name) {
+      if (name !== 'script' || lastTagIndex == null)
+        return
+      const start = lastTagIndex
+      const fullText = input.slice(start, parser.startIndex!)
+      if (extractScripts && lastTag === 'script')
+        detections.push(...shiftDetectionPosition(extractScripts(fullText, start), start))
+    },
     ontext(fullText) {
       const start = parser.startIndex
       const end = parser.endIndex! + 1
-
-      if (extractScripts && lastTag === 'script') {
-        detections.push(...shiftDetectionPosition(extractScripts(fullText, start), start))
-        return
-      }
 
       if (IGNORED_TAGS.includes(lastTag))
         return

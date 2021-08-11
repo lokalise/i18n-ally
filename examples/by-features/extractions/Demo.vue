@@ -14,7 +14,7 @@
 export default {
   computed: {
     foobar() {
-      return 'Good Morning!'
+      return '<>Good Morning!'
     },
   },
 }
