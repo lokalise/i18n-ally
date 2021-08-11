@@ -29,7 +29,6 @@ export class CurrentFile {
     ctx.subscriptions.push(workspace.onDidChangeTextDocument(e => this._currentUri && e?.document?.uri === this._currentUri && this.throttleUpdate(e.document.uri)))
     ctx.subscriptions.push(window.onDidChangeActiveTextEditor(e => e?.document && this.update(e.document.uri)))
     ctx.subscriptions.push(Global.onDidChangeLoader(() => {
-      Log.warn('invalidate1', true)
       this.invalidate()
       this.updateLoaders()
       this._composed_loader.fire('{Config}')
