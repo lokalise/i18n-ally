@@ -2,19 +2,21 @@ import { window } from 'vscode'
 import { Storage } from '~/core/Storage'
 
 let promptedThisTime = false
+const STORAGE_KEY = 'timely.2021-survey'
 
 export async function promptForSurvey() {
   if (promptedThisTime)
     return
-  let prompted = Storage.get('timely.2021-survey', () => false, false)
+  let prompted = Storage.get(STORAGE_KEY, () => false, false)
   if (prompted)
     return
 
   prompted = true
   promptedThisTime = true
 
-  Storage.set('timely.2021-survey', true)
+  Storage.set(STORAGE_KEY, true)
 
+  // TODO: i18n
   const Take = 'Provide Feedback'
   const RemindLater = 'Remind me later'
   const Dismiss = 'Dismiss'
@@ -29,6 +31,6 @@ export async function promptForSurvey() {
     // TODO
   }
   else if (result === RemindLater) {
-    Storage.delete('timely.2021-survey')
+    Storage.delete(STORAGE_KEY)
   }
 }
