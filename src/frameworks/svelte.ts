@@ -28,6 +28,8 @@ class SvelteFramework extends Framework {
   refactorTemplates(keypath: string) {
     return [
       `$_('${keypath}')`,
+      `$t('${keypath}')`,
+      `{ $t('${keypath}') }`,
       keypath,
     ]
   }
