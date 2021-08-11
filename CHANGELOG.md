@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.25](https://github.com/lokalise/i18n-ally/compare/v2.6.24...v2.6.25) (2021-08-11)
+
+
+### 🐞 Bug Fixes
+
+* html parser, close [#628](https://github.com/lokalise/i18n-ally/issues/628) ([d2aee15](https://github.com/lokalise/i18n-ally/commit/d2aee155475e00f7483db486f54c43ee96ededfe))
+
+
+### ⚡ Features
+
+* add more refactor templates for svelte, close [#629](https://github.com/lokalise/i18n-ally/issues/629) ([8940cc2](https://github.com/lokalise/i18n-ally/commit/8940cc23885cd18393ef052a0f491fe438c53e58))
+* print more info the error log, close [#641](https://github.com/lokalise/i18n-ally/issues/641) ([d648a01](https://github.com/lokalise/i18n-ally/commit/d648a0162660269a5011a5f4c22dd140391deaef))
+
 ### [2.6.24](https://github.com/lokalise/i18n-ally/compare/v2.6.23...v2.6.24) (2021-08-10)
 
 
