@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.26](https://github.com/lokalise/i18n-ally/compare/v2.6.25...v2.6.26) (2021-08-11)
+
+
+### ⚡ Features
+
+* add @nuxtjs/i18n to the detection trigger ([#645](https://github.com/lokalise/i18n-ally/issues/645)) ([643919b](https://github.com/lokalise/i18n-ally/commit/643919bf162518b8b3423c9aa2b79c821c507aa2))
+
 ### [2.6.25](https://github.com/lokalise/i18n-ally/compare/v2.6.24...v2.6.25) (2021-08-11)
 
 
