@@ -11,6 +11,7 @@
   "command.extract.disable-auto-detect": "",
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "Заполнять ключ пустой строкой",
+  "command.go_to_next_usage": "",
   "command.go_to_range": "",
   "command.insert_key": "Вставить ключ",
   "command.locale_visibility_hide": "Скрыть перевод",

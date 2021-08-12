@@ -11,6 +11,7 @@
   "command.extract.disable-auto-detect": "Deaktivieren der automatisierten Erkennung",
   "command.extract.enable-auto-detect": "Aktivieren der automatisierten Erkennung",
   "command.fulfill_keys": "Vervollständige Schlüssel mit leeren Texten",
+  "command.go_to_next_usage": "",
   "command.go_to_range": "Springe zum Bereich",
   "command.insert_key": "Schlüssel einfügen",
   "command.locale_visibility_hide": "Lokalisierung verbergen",

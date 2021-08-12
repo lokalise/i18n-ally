@@ -11,6 +11,7 @@
   "command.extract.disable-auto-detect": "",
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "空文字でキーを埋める",
+  "command.go_to_next_usage": "",
   "command.go_to_range": "",
   "command.insert_key": "",
   "command.locale_visibility_hide": "ロケールを隠す",

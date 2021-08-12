@@ -5,6 +5,7 @@ export const enum Commands {
   config_source_language = 'i18n-ally.config-source-language',
   config_locales = 'i18n-ally.config-locales',
   go_to_range = 'i18n-ally.go-to-range',
+  go_to_next_usage = 'i18n-ally.go-to-next-usage',
   set_display_language = 'i18n-ally.set-display-language',
   set_source_language = 'i18n-ally.set-source-language',
   extract_text = 'i18n-ally.extract-text',

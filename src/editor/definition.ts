@@ -1,9 +1,9 @@
-import { languages, TextDocument, Position, CancellationToken, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
+import { languages, TextDocument, Position, Definition, DefinitionLink, Uri, workspace, Location, Range } from 'vscode'
 import { ExtensionModule } from '~/modules'
 import { Global, KeyDetector, CurrentFile } from '~/core'
 
 class DefinitionProvider {
-  async provideDefinition(document: TextDocument, position: Position, token: CancellationToken): Promise<Definition | DefinitionLink[]> {
+  async provideDefinition(document: TextDocument, position: Position): Promise<Definition | DefinitionLink[]> {
     const key = KeyDetector.getKey(document, position)
     if (!key)
       return []

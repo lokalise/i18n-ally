@@ -11,6 +11,7 @@
   "command.extract.disable-auto-detect": "",
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "Boş bırakılmış çevirileri doldur",
+  "command.go_to_next_usage": "",
   "command.go_to_range": "Aralığa git",
   "command.insert_key": "Çeviri ekle",
   "command.locale_visibility_hide": "Dili gizle",

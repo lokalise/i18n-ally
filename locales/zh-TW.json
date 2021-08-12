@@ -11,6 +11,7 @@
   "command.extract.disable-auto-detect": "",
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "使用空字串填充文案路徑",
+  "command.go_to_next_usage": "",
   "command.go_to_range": "",
   "command.insert_key": "插入i18n文案",
   "command.locale_visibility_hide": "隱藏此語言",
