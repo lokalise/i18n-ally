@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/lokalise/i18n-ally/compare/v2.6.26...v2.7.0) (2021-08-12)
+
+
+### 🐞 Bug Fixes
+
+* **deepl:** stipe locale code for deepl, close [#622](https://github.com/lokalise/i18n-ally/issues/622) ([c976cdb](https://github.com/lokalise/i18n-ally/commit/c976cdb986a39ed88a304512decde6f741e927c0))
+
+
+### ⚡ Features
+
+* new command get next usage, close [#636](https://github.com/lokalise/i18n-ally/issues/636) ([ea1b386](https://github.com/lokalise/i18n-ally/commit/ea1b386eaa765761eccb9003daf7c59ede73d850))
+
 ### [2.6.26](https://github.com/lokalise/i18n-ally/compare/v2.6.25...v2.6.26) (2021-08-11)
 
 
