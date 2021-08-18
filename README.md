@@ -1,9 +1,9 @@
 <p align="center">
-<img src="https://github.com/lokalise/i18n-ally/blob/master/screenshots/full-logo-new.png?raw=true" alt="logo" width="450"/>
+<img src="https://github.com/lokalise/i18n-ally/blob/main/screenshots/full-logo-new.png?raw=true" alt="logo" width="450"/>
 </p>
 
 <p align='center'>
-English | <a href="https://github.com/lokalise/i18n-ally/blob/master/README.zh-CN.md">简体中文</a>
+English | <a href="https://github.com/lokalise/i18n-ally/blob/main/README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
