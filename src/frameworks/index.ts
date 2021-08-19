@@ -2,6 +2,7 @@ import { workspace } from 'vscode'
 import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
+import FluentVueFramework from './fluent-vue'
 import ReactFramework from './react'
 import I18nextFramework from './i18next'
 import VSCodeFramework from './vscode'
@@ -44,6 +45,7 @@ export const frameworks: Framework[] = [
   new EmberFramework(),
   new I18nextFramework(),
   new I18nTagFramework(),
+  new FluentVueFramework(),
   new PhpJoomlaFramework(),
   new LaravelFramework(),
   new ChromeExtensionFramework(),

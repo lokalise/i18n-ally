@@ -994,6 +994,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fluent/syntax@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@fluent/syntax/-/syntax-0.17.0.tgz#3e6385c44bda2a44a68b83a1efbadc1a134e9805"
+  integrity sha512-fgJNUZRBk/n5MO5AxZ7Vvv8aCzMF6NanGBS1GFR2HG2lnsGqHLAe9OeHpyg+FkKfP5SvOtbyk3Nkza5iIwN/Ug==
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"

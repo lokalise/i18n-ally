@@ -43,6 +43,7 @@
   "dependencies": {
     "@babel/parser": "^7.15.3",
     "@babel/traverse": "^7.15.0",
+    "@fluent/syntax": "^0.17.0",
     "bcp-47-normalize": "^2.0.1",
     "change-case": "^4.1.2",
     "consolidate": "^0.16.0",
