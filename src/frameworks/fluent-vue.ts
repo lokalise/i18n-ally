@@ -1,7 +1,8 @@
 import { TextDocument } from 'vscode'
 import { LanguageId, Log } from '../utils'
 import { Framework } from './base'
-import { DetectionResult } from '~/core'
+import { Config, DetectionResult } from '~/core'
+import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules, ExtractionRule, ExtractionScore } from '~/extraction'
 
 class FluentVueFramework extends Framework {
   id = 'fluent-vue'
@@ -57,6 +58,37 @@ class FluentVueFramework extends Framework {
       `$t(${params})`,
       keypath,
     ]
+  }
+
+  supportAutoExtraction = ['vue']
+
+  detectHardStrings(doc: TextDocument) {
+    const text = doc.getText()
+
+    return extractionsParsers.html.detect(
+      text,
+      [new FluentVueExtractionRule(), ...DefaultExtractionRules],
+      DefaultDynamicExtractionsRules,
+      Config.extractParserHTMLOptions,
+      // <script>
+      script => extractionsParsers.babel.detect(
+        script,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+        Config.extractParserBabelOptions,
+      ),
+    )
+  }
+}
+
+export class FluentVueExtractionRule extends ExtractionRule {
+  name = 'fluent-vue'
+
+  shouldExtract(str: string) {
+    // Looks like ftl format: "key = value"
+    if (str.match(/[\w-]+\s?=.+/gm))
+      return ExtractionScore.MustExclude
+    return ExtractionScore.ShouldInclude
   }
 }
 
