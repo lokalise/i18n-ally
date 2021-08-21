@@ -16,6 +16,10 @@
         </RouterLink>
       </template>
     </i18n>
+
+    <div>
+      Plain text to extract
+    </div>
   </div>
 </template>
 
@@ -36,6 +40,9 @@ export default {
     },
     notExists() {
       return this.$t('wrong-key')
+    },
+    plainText() {
+      return "Plain text in js to extract"
     },
   },
 }
