@@ -34,9 +34,8 @@ export class FluentParser extends Parser {
     throw new Error('Not implemented')
   }
 
-  async save(filepath: string, object: Record<string, string>) {
-    const currentFile = await File.read(filepath)
-    const currentResourse = parse(currentFile, { withSpans: true })
+  merge(ftlSource: string, object: Record<string, string>): string {
+    const currentResourse = parse(ftlSource, { withSpans: true })
 
     for (const [key, value] of Object.entries(object)) {
       const resourceString = `${key} = ${value}`
@@ -58,7 +57,13 @@ export class FluentParser extends Parser {
       }
     }
 
-    const text = serialize(currentResourse, { withJunk: true })
+    return serialize(currentResourse, { withJunk: true })
+  }
+
+  async save(filepath: string, object: Record<string, string>) {
+    const currentFile = await File.read(filepath)
+    const text = this.merge(currentFile, object)
+
     await File.write(filepath, text)
   }
 }
