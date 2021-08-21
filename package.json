@@ -123,6 +123,7 @@
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "unplugin": "^0.0.5",
     "uuid": "^8.3.2",
+    "vsce": "^1.96.1",
     "vscode-test": "^1.6.1",
     "vue": "^2.6.14",
     "vue-i18n": "^8.22.4",
