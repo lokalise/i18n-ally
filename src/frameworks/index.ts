@@ -26,6 +26,7 @@ import PhpGettextFramework from './php-gettext'
 import GeneralFramework from './general'
 import LinguiFramework from './lingui'
 import JekyllFramework from './jekyll'
+import FluentVueSFCFramework from './fluent-vue-sfc'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
 
@@ -61,8 +62,9 @@ export const frameworks: Framework[] = [
   new JekyllFramework(),
   new GeneralFramework(),
 
-  // Vue SFC should be the last one
+  // Vue SFC and FluentVue SFC should be the last ones
   new VueSFCFramework(),
+  new FluentVueSFCFramework(),
 ]
 
 export function getFramework(id: string): Framework | undefined {
