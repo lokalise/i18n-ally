@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/lokalise/i18n-ally/compare/v2.7.0...v2.7.1) (2021-08-21)
+
+
+### ⚡ Features
+
+* ignore optons for hard-coded detection, close [#649](https://github.com/lokalise/i18n-ally/issues/649) ([1d0a020](https://github.com/lokalise/i18n-ally/commit/1d0a020a30a49c3ac7e30ad36bb74eb9302aa49a))
+
 ## [2.7.0](https://github.com/lokalise/i18n-ally/compare/v2.6.26...v2.7.0) (2021-08-12)
 
 
