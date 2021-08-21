@@ -1,5 +1,8 @@
 import { workspace, Uri, WorkspaceEdit, Range } from 'vscode'
-import { parse as vueParse, SFCDescriptor, SFCBlock } from '@vue/compiler-sfc'
+import { parse as vueParse } from '@vue/component-compiler-utils'
+import { VueTemplateCompiler } from '@vue/component-compiler-utils/dist/types'
+import { SFCDescriptor, SFCBlock } from '@vue/component-compiler-utils/dist/parse'
+import * as compiler from 'vue-template-compiler'
 import { PendingWrite, NodeOptions } from '../types'
 import { FluentParser } from '../../parsers/ftl'
 import { LocaleTree } from '../Nodes'
@@ -20,9 +23,11 @@ type SFCFluentBlock = {
 const parser = new FluentParser()
 
 async function getFluentBlocks(file: SFCFileInfo): Promise<SFCFluentBlock[]> {
-  const descriptor = vueParse(file.content, {
+  const descriptor = vueParse({
+    source: file.content,
     filename: file.path,
-  }).descriptor
+    compiler: compiler as VueTemplateCompiler,
+  })
 
   const promises = descriptor.customBlocks.map(async(block) => {
     if (block.type === 'fluent') {
@@ -111,9 +116,13 @@ export class FluentVueSfcLoader extends Loader {
       const doc = await workspace.openTextDocument(this.uri)
       const source = doc.getText()
 
-      const parseResult = vueParse(source, { filename: pending.textFromPath })
+      const parseResult = vueParse({
+        source,
+        filename: pending.filepath ?? pending.textFromPath,
+        compiler: compiler as VueTemplateCompiler,
+      })
 
-      let fluentBlock = parseResult.descriptor.customBlocks
+      let fluentBlock = parseResult.customBlocks
         .find(block => block.type === 'fluent' && block.attrs.locale === pending.locale)
 
       const newTranslation = { [pending.keypath]: pending.value! }
@@ -129,12 +138,13 @@ export class FluentVueSfcLoader extends Loader {
             locale: pending.locale,
           },
           content: parser.merge('', newTranslation),
-          loc: null!,
+          start: 0,
+          end: 0,
         }
       }
 
       // Write back
-      const blocks = getBlocks(parseResult.descriptor)
+      const blocks = getBlocks(parseResult)
       const newContent = buildContent(fluentBlock, source, blocks)
 
       if (doc.isDirty) {
@@ -162,7 +172,7 @@ function getBlocks(descriptor: SFCDescriptor): SFCBlock[] {
   template && blocks.push(template as SFCBlock)
   script && blocks.push(script as SFCBlock)
   blocks.sort((a, b) => {
-    return a.loc.start.offset - b.loc.start.offset
+    return a.start! - b.start!
   })
   return blocks
 }
@@ -175,14 +185,14 @@ function buildContent(blockToAdd: SFCBlock, raw: string, blocks: SFCBlock[]): st
 
   contents = blocks.reduce((contents, block) => {
     if (block.type === 'fluent' && block.attrs.locale === blockToAdd.attrs.locale) {
-      contents = contents.concat(raw.slice(offset, block.loc.start.offset))
+      contents = contents.concat(raw.slice(offset, block.start))
       contents = contents.concat(`\n${blockToAdd.content}`)
-      offset = block.loc.end.offset
+      offset = block.end as number
       inserted = true
     }
     else {
-      contents = contents.concat(raw.slice(offset, block.loc.end.offset))
-      offset = block.loc.end.offset
+      contents = contents.concat(raw.slice(offset, block.end))
+      offset = block.end as number
 
       if (block.type === 'fluent')
         fluentOffset = contents.length
