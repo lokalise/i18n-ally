@@ -108,7 +108,9 @@ export class FluentVueSfcLoader extends Loader {
       if (!path)
         continue
 
-      const source = await File.read(path)
+      const doc = await workspace.openTextDocument(this.uri)
+      const source = doc.getText()
+
       const parseResult = vueParse(source, { filename: pending.textFromPath })
 
       let fluentBlock = parseResult.descriptor.customBlocks
@@ -135,8 +137,6 @@ export class FluentVueSfcLoader extends Loader {
       const blocks = getBlocks(parseResult.descriptor)
       const newContent = buildContent(fluentBlock, source, blocks)
 
-      const doc = await workspace.openTextDocument(this.uri)
-
       if (doc.isDirty) {
         const edit = new WorkspaceEdit()
         edit.replace(this.uri, new Range(doc.positionAt(0), doc.positionAt(Infinity)), newContent)
@@ -152,7 +152,7 @@ export class FluentVueSfcLoader extends Loader {
   }
 
   canHandleWrites(pending: PendingWrite) {
-    return pending.filepath === this.filepath
+    return pending.filepath === this.filepath || pending.textFromPath === this.filepath
   }
 }
 
@@ -193,7 +193,7 @@ function buildContent(blockToAdd: SFCBlock, raw: string, blocks: SFCBlock[]): st
   contents = contents.concat(raw.slice(offset, raw.length))
 
   if (!inserted) {
-    const content = `<fluent locale=${blockToAdd.attrs.locale}>\n${blockToAdd.content}</fluent>`
+    const content = `\n<fluent locale="${blockToAdd.attrs.locale}">\n${blockToAdd.content}</fluent>\n`
 
     if (fluentOffset !== -1)
       contents.splice(fluentOffset, 0, content)

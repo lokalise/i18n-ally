@@ -1,5 +1,5 @@
 import { TextDocument } from 'vscode'
-import { LanguageId, Log } from '../utils'
+import { LanguageId } from '../utils'
 import { Framework } from './base'
 import { Config, DetectionResult } from '~/core'
 import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules, ExtractionRule, ExtractionScore } from '~/extraction'
@@ -40,8 +40,6 @@ class FluentVueFramework extends Framework {
     let params = `'${keypath}'`
     if (args?.length)
       params += `, [${args.join(', ')}]`
-
-    Log.warn(detection?.source ?? 'no-source')
 
     switch (detection?.source) {
       case 'html-inline':
