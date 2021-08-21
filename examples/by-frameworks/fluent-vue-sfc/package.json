@@ -1,0 +1,13 @@
+{
+  "name": "basic",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fluent/bundle": "^0.16.0",
+    "fluent-vue": "^3.0.0-beta.16",
+    "vue": "~2.6.12"
+  },
+  "devDependencies": {
+    "fluent-vue-loader": "^3.0.0-beta.16"
+  }
+}
