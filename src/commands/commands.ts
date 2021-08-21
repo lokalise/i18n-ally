@@ -12,6 +12,7 @@ export const enum Commands {
   extract_hard_strings_batch = 'i18n-ally.extract-hard-strings-batch',
   extract_disable_auto_detect = 'i18n-ally.extract-disable-auto-detect',
   extract_enable_auto_detect = 'i18n-ally.extract-enable-auto-detect',
+  extract_ignore = 'i18n-ally.extract-ignore',
   detect_hard_strings = 'i18n-ally.detect_hard_strings',
   replace_with = 'i18n-ally.replace-with',
   copy_key = 'i18n-ally.copy-key',

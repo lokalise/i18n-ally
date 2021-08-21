@@ -46,6 +46,10 @@ export class Config {
 
   static ctx: ExtensionContext
 
+  static get root() {
+    return workspace.rootPath!
+  }
+
   static get disabled() {
     return Config.getConfig<boolean>('disabled') ?? false
   }
@@ -447,6 +451,22 @@ export class Config {
 
   static get extractParserBabelOptions() {
     return this.getConfig<ExtractionBabelOptions>('extract.parsers.babel') ?? {}
+  }
+
+  static get extractIgnored() {
+    return this.getConfig<string[]>('extract.ignored') ?? []
+  }
+
+  static set extractIgnored(v) {
+    this.setConfig('extract.ignored', v)
+  }
+
+  static get extractIgnoredByFiles() {
+    return this.getConfig<Record<string, string[]>>('extract.ignoredByFiles') ?? {}
+  }
+
+  static set extractIgnoredByFiles(v) {
+    this.setConfig('extract.ignoredByFiles', v)
   }
 
   static get showFlags() {

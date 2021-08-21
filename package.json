@@ -1182,6 +1182,18 @@
           "default": false,
           "description": "Enables hard-coded strings detection automatically whenever opening supported a file"
         },
+        "i18n-ally.extract.ignored": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Strings to be ignored on hard-coded strings detection"
+        },
+        "i18n-ally.extract.ignoredByFiles": {
+          "type": "object",
+          "default": {},
+          "description": "Strings to be ignored on hard-coded strings detection, by files"
+        },
         "i18n-ally.parserOptions": {
           "type": "object"
         },

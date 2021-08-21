@@ -38,8 +38,8 @@ class ExtractProvider implements CodeActionProvider {
 
     // quick fix for hard string problems
     if (diagnostic?.detection) {
-      const action = new CodeAction(i18n.t('refactor.extract_text'), CodeActionKind.QuickFix)
-      action.command = {
+      const extract = new CodeAction(i18n.t('refactor.extract_text'), CodeActionKind.QuickFix)
+      extract.command = {
         command: Commands.extract_text,
         title: i18n.t('refactor.extract_text'),
         arguments: [
@@ -47,9 +47,33 @@ class ExtractProvider implements CodeActionProvider {
           diagnostic.detection,
         ],
       }
-      action.diagnostics = [diagnostic]
-      action.isPreferred = true
-      return [action]
+      extract.diagnostics = [diagnostic]
+      extract.isPreferred = true
+
+      const ignoreTitle = i18n.t('refactor.extract_ignore', diagnostic.detection.text)
+      const ignore = new CodeAction(ignoreTitle, CodeActionKind.QuickFix)
+      ignore.command = {
+        command: Commands.extract_ignore,
+        title: ignoreTitle,
+        arguments: [
+          diagnostic.detection.text,
+        ],
+      }
+      ignore.diagnostics = [diagnostic]
+
+      const ignoreFileTitle = i18n.t('refactor.extract_ignore_by_file', diagnostic.detection.text)
+      const ignoreByFile = new CodeAction(ignoreFileTitle, CodeActionKind.QuickFix)
+      ignoreByFile.command = {
+        command: Commands.extract_ignore,
+        title: ignoreTitle,
+        arguments: [
+          diagnostic.detection.text,
+          document,
+        ],
+      }
+      ignoreByFile.diagnostics = [diagnostic]
+
+      return [extract, ignoreByFile, ignore]
     }
 
     // user selection context
