@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ruby on Rails get keys 1`] = `
+Array [
+  Object {
+    "end": 19,
+    "key": "pages.index.welcome",
+    "quoted": true,
+    "start": 11,
+  },
+  Object {
+    "end": 53,
+    "key": "pages.index.bold_text.html",
+    "quoted": true,
+    "start": 38,
+  },
+  Object {
+    "end": 73,
+    "key": "welcome",
+    "quoted": true,
+    "start": 66,
+  },
+  Object {
+    "end": 269,
+    "key": "pages.index.new_post",
+    "quoted": true,
+    "start": 260,
+  },
+  Object {
+    "end": 315,
+    "key": "pages.index.posts",
+    "quoted": true,
+    "start": 309,
+  },
+  Object {
+    "end": 368,
+    "key": "pages.index.new_post",
+    "quoted": false,
+    "start": 348,
+  },
+]
+`;

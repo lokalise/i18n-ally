@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Disposable, EventEmitter } from 'vscode'
 import { uniq, isObject } from 'lodash'
 import { LocaleTree, LocaleNode, LocaleRecord, FlattenLocaleTree } from '../Nodes'
 import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, RewriteKeyContext, DataProcessContext } from '../types'
-import { resolveFlattenRootKeypath, resolveFlattenRoot, NodeHelper } from '../../utils'
 import { Config, Global } from '..'
+import { resolveFlattenRootKeypath, resolveFlattenRoot, NodeHelper } from '~/utils'
 
 export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
@@ -38,12 +39,12 @@ export abstract class Loader extends Disposable {
   }
 
   getCoverage(locale: string, keys?: string[]): Coverage | undefined {
-    const totalKeys = keys || this.keys
-    totalKeys.sort()
-    const translatedKeys = totalKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
-    const missingKeys = totalKeys.filter(key => (!this.flattenLocaleTree[key]) || this.flattenLocaleTree[key].getValue(locale) == null)
-    const emptyKeys = totalKeys.filter(key => !translatedKeys.includes(key) && !missingKeys.includes(key))
-    const total = totalKeys.length
+    const allKeys = keys || this.keys
+    allKeys.sort()
+    const translatedKeys = allKeys.filter(key => this.flattenLocaleTree[key] && this.flattenLocaleTree[key].getValue(locale))
+    const missingKeys = allKeys.filter(key => (!this.flattenLocaleTree[key]) || this.flattenLocaleTree[key].getValue(locale) == null)
+    const emptyKeys = allKeys.filter(key => !translatedKeys.includes(key) && !missingKeys.includes(key))
+    const total = allKeys.length
     const translated = translatedKeys.length
     const missing = missingKeys.length
     return {
@@ -52,7 +53,7 @@ export abstract class Loader extends Disposable {
       missing,
       translated,
       missingKeys,
-      totalKeys,
+      allKeys,
       translatedKeys,
       emptyKeys,
     }
@@ -289,6 +290,11 @@ export abstract class Loader extends Disposable {
 
   canHandleWrites(pending: PendingWrite) {
     return false
+  }
+
+  searchKeyForTranslations(text: string, locale = Config.sourceLanguage) {
+    return this.keys
+      .find(i => this.getTranslationsByKey(i, false)?.[locale]?.value === text)
   }
 
   protected onDispose() {

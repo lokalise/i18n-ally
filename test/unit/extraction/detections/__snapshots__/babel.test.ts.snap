@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`detections - babel v2-cdn.js 1`] = `
+Array [
+  "This should be detected",
+]
+`;
+
+exports[`detections - babel v2-cjs.js 1`] = `
+Array [
+  "Hello",
+]
+`;
+
+exports[`detections - babel v2-class.js 1`] = `Array []`;
+
+exports[`detections - babel v2-class-tsx.tsx 1`] = `Array []`;
+
+exports[`detections - babel v2-esm.js 1`] = `
+Array [
+  "About page",
+]
+`;
+
+exports[`detections - babel v2-jsx.jsx 1`] = `
+Array [
+  "Nigeria",
+  "Nigeria is a large country that has a varied topography.",
+]
+`;
+
+exports[`detections - babel v2-jsx-2.jsx 1`] = `
+Array [
+  "Home page 🚀",
+  "Home page description",
+  "Home page 🚀",
+  "About page",
+]
+`;
+
+exports[`detections - babel v2-ts.ts 1`] = `
+Array [
+  "v-date-picker-table v-date-picker-table--date",
+]
+`;
+
+exports[`detections - babel v3-ts.ts 1`] = `
+Array [
+  "Filename",
+]
+`;
+
+exports[`detections - babel v3-tsx.tsx 1`] = `
+Array [
+  "AComment",
+]
+`;

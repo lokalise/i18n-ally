@@ -1,11 +1,11 @@
-import flags from '../utils/flags'
+import { FLAGS } from '~/utils'
 
 export abstract class BaseTagSystem {
   normalize(locale?: string, fallback = 'en', strict = false): string {
     return locale || fallback
   }
 
-  toBCP47(str: string): string {
+  toBCP47(str: string): string | undefined {
     return str
   }
 
@@ -13,13 +13,14 @@ export abstract class BaseTagSystem {
     return bcp47
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   toFlagname(locale: string): string | undefined {
     return undefined
   }
 
   getFlagName(locale: string): string {
     const flag = this.toFlagname(locale)
-    if (!flag || !flags.includes(flag))
+    if (!flag || !FLAGS.includes(flag))
       return 'unknown'
     return flag
   }

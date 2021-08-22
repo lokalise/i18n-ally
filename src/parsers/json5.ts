@@ -1,6 +1,6 @@
 import JSON5 from 'json5'
-import { KeyStyle } from '../core'
 import { Parser } from './base'
+import { KeyStyle } from '~/core'
 
 export class Json5Parser extends Parser {
   id = 'json5'
@@ -15,7 +15,7 @@ export class Json5Parser extends Parser {
     return JSON5.parse(text)
   }
 
-  async dump(object: object, sort: boolean) {
+  async dump(object: object) {
     return JSON5.stringify(object, {
       space: this.options.tab === '\t' ? this.options.tab : this.options.indent,
     })

@@ -4,7 +4,7 @@ import { BCP47 } from './bcp47'
 // but do nothing on normalization
 export class NoneTagSystem extends BCP47 {
   // no convertsion
-  normalize(locale?: string, fallback = 'en', strict = false) {
+  normalize(locale?: string, fallback = 'en') {
     return locale || fallback
   }
 }

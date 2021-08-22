@@ -1,8 +1,8 @@
-import yaml from 'js-yaml'
-import YAML from 'yaml'
+import YAML from 'js-yaml'
+import YamlLex from 'yaml'
 import _ from 'lodash'
-import { KeyInDocument, Config } from '../core'
 import { Parser } from './base'
+import { KeyInDocument, Config } from '~/core'
 
 export class YamlParser extends Parser {
   id = 'yaml'
@@ -12,12 +12,12 @@ export class YamlParser extends Parser {
   }
 
   async parse(text: string) {
-    return yaml.safeLoad(text, Config.parserOptions?.yaml?.load) as Object
+    return YAML.load(text, Config.parserOptions?.yaml?.load) as Object
   }
 
   async dump(object: object, sort: boolean) {
     object = JSON.parse(JSON.stringify(object))
-    return yaml.safeDump(object, {
+    return YAML.dump(object, {
       indent: this.options.indent,
       sortKeys: sort,
       ...Config.parserOptions?.yaml?.dump,
@@ -28,9 +28,9 @@ export class YamlParser extends Parser {
   annotationLanguageIds = ['yaml']
 
   parseAST(text: string) {
-    const cst = YAML.parseCST(text)
+    const cst = YamlLex.parseCST(text)
     cst.setOrigRanges() // Workaround for CRLF eol, https://github.com/eemeli/yaml/issues/127
-    const doc = new YAML.Document({ keepCstNodes: true }).parse(cst[0])
+    const doc = new YamlLex.Document({ keepCstNodes: true }).parse(cst[0])
 
     const findPairs = (node: any, path: string[] = []): KeyInDocument[] => {
       if (!node)

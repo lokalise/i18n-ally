@@ -11,9 +11,9 @@
     "vue-i18n": "^8.12.0"
   },
   "devDependencies": {
-    "@kazupon/vue-i18n-loader": "^0.4.0",
-    "@vue/cli-plugin-babel": "^3.9.2",
-    "@vue/cli-service": "^3.9.3",
-    "vue-template-compiler": "^2.6.10"
+    "@intlify/vue-i18n-loader": "^2.1.0",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
+    "vue-template-compiler": "^2.6.12"
   }
 }

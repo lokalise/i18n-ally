@@ -1,7 +1,7 @@
 import { window } from 'vscode'
-import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { CurrentFile, Global, Node, LocaleNode, LocaleRecord } from '../../core'
-import i18n from '../../i18n'
+import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
+import { CurrentFile, Global, Node, LocaleNode, LocaleRecord, ActionSource } from '~/core'
+import i18n from '~/i18n'
 
 export interface CommandOptions {
   keypath: string
@@ -9,6 +9,7 @@ export interface CommandOptions {
   from?: string
   locales?: string[]
   keyIndex?: number
+  actionSource?: ActionSource
 }
 
 export function getNodeOrRecord(item?: LocaleTreeItem | CommandOptions): LocaleNode | LocaleRecord | undefined {

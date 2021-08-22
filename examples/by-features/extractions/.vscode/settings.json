@@ -1,0 +1,19 @@
+{
+  "i18n-ally.localesPaths": "locales",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.extract.autoDetect": true,
+  "i18n-ally.translate.saveAsCandidates": true,
+  "i18n-ally.refactor.templates": [
+    {
+      "source": "html-attribute",
+      "template": "z('{key}'{args})"
+    },
+    {
+      "template": "ttt('{key}')",
+      "include": [
+        "Demo.vue"
+      ]
+    }
+  ]
+}

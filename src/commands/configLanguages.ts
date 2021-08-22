@@ -1,8 +1,9 @@
 import { commands, window } from 'vscode'
-import { Global, Commands, Config } from '../core'
-import { ExtensionModule } from '../modules'
-import { ProgressBaseItem } from '../views'
-import i18n from '../i18n'
+import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
+import { ProgressBaseItem } from '~/views'
+import i18n from '~/i18n'
+import { Global, Config } from '~/core'
 
 async function pickLocale(locale: any, type: 'displayLanguage' | 'sourceLanguage') {
   // from context menu
@@ -37,7 +38,7 @@ function visibilityHandler(value?: boolean) {
   }
 }
 
-const m: ExtensionModule = () => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.config_display_language, handler('displayLanguage')),
     commands.registerCommand(Commands.set_display_language, handler('displayLanguage')),
@@ -48,5 +49,3 @@ const m: ExtensionModule = () => {
     commands.registerCommand(Commands.locale_visibility_hide, visibilityHandler(false)),
   ]
 }
-
-export default m

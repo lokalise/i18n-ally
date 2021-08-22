@@ -18,7 +18,7 @@ export class PhpParser extends Parser {
     return parser.parse(text)
   }
 
-  async dump(object: object, sort: boolean) {
+  async dump() {
     return ''
   }
 }

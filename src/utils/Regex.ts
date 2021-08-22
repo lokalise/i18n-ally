@@ -1,10 +1,10 @@
 import { sortBy } from 'lodash'
 import { QUOTE_SYMBOLS } from '../meta'
-import { CurrentFile, Config } from '../core'
 import { KeyInDocument, RewriteKeyContext } from '../core/types'
-import i18n from '../i18n'
 import { ScopeRange } from '../frameworks/base'
 import { Log } from '.'
+import i18n from '~/i18n'
+import { CurrentFile, Config } from '~/core'
 
 export function handleRegexMatch(
   text: string,

@@ -1,43 +1,97 @@
-import { CodeActionKind, CodeActionProvider, Command, languages, Range, Selection, TextDocument } from 'vscode'
-import { Commands, Config, CurrentFile, Global } from '../core'
-import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
+import { CodeAction, CodeActionContext, CodeActionKind, CodeActionProvider, Command, languages, Range, Selection, TextDocument } from 'vscode'
+import { DiagnosticWithDetection, PROBLEM_CODE_HARD_STRING } from './problems'
+import { ExtensionModule } from '~/modules'
+import { Config, CurrentFile, Global } from '~/core'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { parseHardString } from '~/extraction/parseHardString'
+import { ExtractTextOptions } from '~/commands/extractString'
+import { DetectionResult } from '~/core/types'
 
-export interface ExtractTextOptions {
-  filepath: string
-  text: string
-  range: Range
-  languageId?: string
-  isInsert?: boolean
+export function DetectionResultToExtraction(detection: DetectionResult, document: TextDocument): ExtractTextOptions {
+  return {
+    isDynamic: detection.isDynamic,
+    document,
+    text: '',
+    rawText: detection.text.trim(),
+    isInsert: false,
+    range: new Range(
+      document.positionAt(detection.start),
+      document.positionAt(detection.end),
+    ),
+  }
 }
 
 class ExtractProvider implements CodeActionProvider {
-  public async provideCodeActions(document: TextDocument, selection: Range | Selection): Promise<Command[]> {
+  public async provideCodeActions(
+    document: TextDocument,
+    selection: Range | Selection,
+    context: CodeActionContext,
+  ): Promise<(Command | CodeAction)[]> {
     if (!Global.enabled)
       return []
 
     if (!Global.isLanguageIdSupported(document.languageId))
       return []
 
+    const diagnostic = context.diagnostics.find(i => i.code === PROBLEM_CODE_HARD_STRING) as DiagnosticWithDetection | undefined
+
+    // quick fix for hard string problems
+    if (diagnostic?.detection) {
+      const extract = new CodeAction(i18n.t('refactor.extract_text'), CodeActionKind.QuickFix)
+      extract.command = {
+        command: Commands.extract_text,
+        title: i18n.t('refactor.extract_text'),
+        arguments: [
+          DetectionResultToExtraction(diagnostic.detection, document),
+          diagnostic.detection,
+        ],
+      }
+      extract.diagnostics = [diagnostic]
+      extract.isPreferred = true
+
+      const ignoreTitle = i18n.t('refactor.extract_ignore', diagnostic.detection.text)
+      const ignore = new CodeAction(ignoreTitle, CodeActionKind.QuickFix)
+      ignore.command = {
+        command: Commands.extract_ignore,
+        title: ignoreTitle,
+        arguments: [
+          diagnostic.detection.text,
+        ],
+      }
+      ignore.diagnostics = [diagnostic]
+
+      const ignoreFileTitle = i18n.t('refactor.extract_ignore_by_file', diagnostic.detection.text)
+      const ignoreByFile = new CodeAction(ignoreFileTitle, CodeActionKind.QuickFix)
+      ignoreByFile.command = {
+        command: Commands.extract_ignore,
+        title: ignoreTitle,
+        arguments: [
+          diagnostic.detection.text,
+          document,
+        ],
+      }
+      ignoreByFile.diagnostics = [diagnostic]
+
+      return [extract, ignoreByFile, ignore]
+    }
+
+    // user selection context
     if (!(selection instanceof Selection))
       return []
 
-    const text = document.getText(selection)
-    if (!text || selection.start.line !== selection.end.line)
+    const result = parseHardString(document.getText(selection), document.languageId)
+    if (!result)
       return []
 
-    const options: ExtractTextOptions = {
-      filepath: document.fileName,
-      text,
-      range: selection,
-      languageId: document.languageId,
-    }
+    const { text, args } = result
+    const actions: (Command | CodeAction)[] = []
 
-    const commands: Command[] = [{
+    actions.push({
       command: Commands.extract_text,
       title: i18n.t('refactor.extract_text'),
-      arguments: [options],
-    }]
+      arguments: [],
+    })
 
     // Check for existing translations to recommend, convert them to their templates and then to commands, and add the commands to the command array
     CurrentFile.loader.keys
@@ -46,15 +100,15 @@ class ExtractProvider implements CodeActionProvider {
         description: CurrentFile.loader.getValueByKey(key, Config.displayLanguage, 30),
       }))
       .filter(labelDescription => labelDescription.description === text)
-      .flatMap(t => Global.refactorTemplates(t.label, document.languageId))
+      .flatMap(t => Global.interpretRefactorTemplates(t.label, args, document, diagnostic?.detection))
       .map(t => ({
         command: Commands.replace_with,
         title: i18n.t('refactor.replace_with', t),
         arguments: [t],
       }))
-      .forEach(c => commands.push(c))
+      .forEach(c => actions.push(c))
 
-    return commands
+    return actions
   }
 }
 
@@ -64,7 +118,10 @@ const m: ExtensionModule = () => {
       '*',
       new ExtractProvider(),
       {
-        providedCodeActionKinds: [CodeActionKind.Refactor],
+        providedCodeActionKinds: [
+          CodeActionKind.QuickFix,
+          CodeActionKind.Refactor,
+        ],
       },
     ),
   ]

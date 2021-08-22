@@ -1,7 +1,7 @@
 import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { KeyUsage } from '../../core'
-import i18n from '../../i18n'
 import { BaseTreeItem } from '.'
+import i18n from '~/i18n'
+import { KeyUsage } from '~/core'
 
 export class UsageReportRootItem extends BaseTreeItem {
   public readonly count: number

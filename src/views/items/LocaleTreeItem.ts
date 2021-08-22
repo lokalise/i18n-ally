@@ -1,9 +1,10 @@
-import { ExtensionContext, TreeItemCollapsibleState } from 'vscode'
-import { Node, Translator, CurrentFile, Commands, Config } from '../../core'
-import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '../../utils'
+import { ExtensionContext, TreeItemCollapsibleState, Command } from 'vscode'
 import { EditorPanel } from '../../webview/panel'
-import i18n from '../../i18n'
 import { BaseTreeItem } from './Base'
+import { decorateLocale, NodeHelper, resolveFlattenRootKeypath, ROOT_KEY, resolveFlattenRoot } from '~/utils'
+import i18n from '~/i18n'
+import { Node, Translator, CurrentFile, Config } from '~/core'
+import { Commands } from '~/commands'
 
 export class LocaleTreeItem extends BaseTreeItem {
   public readonly node: Node
@@ -121,7 +122,7 @@ export class LocaleTreeItem extends BaseTreeItem {
   }
 
   // @ts-expect-error
-  get command() {
+  get command(): Command | undefined {
     if (this.editorMode) {
       return {
         command: Commands.open_in_editor,

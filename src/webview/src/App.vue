@@ -69,6 +69,9 @@ export default Vue.extend({
 body
   padding 0
 
+body, html, #app
+  font-family var(--vscode-font-family)
+
 .container
   --review-approve #768741
   --review-request-change #d8583e

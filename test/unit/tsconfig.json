@@ -3,6 +3,7 @@
     "module": "commonjs",
     "lib": ["ESNext"],
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "strict": true
   }
 }

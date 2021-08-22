@@ -1,7 +1,5 @@
-
-import { DirStructure, RewriteKeySource, RewriteKeyContext } from '../core/types'
-import { LanguageId } from '../utils'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
 
 class UI5Framework extends Framework {
   id = 'ui5'
@@ -27,7 +25,7 @@ class UI5Framework extends Framework {
     '\\{\\{({key})\\}\\}',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string) {
     return [
       `{i18n>${keypath}}`,
       `this.getResourceBundle().getText("${keypath}")`,
@@ -36,8 +34,8 @@ class UI5Framework extends Framework {
     ]
   }
 
-  rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
-    const regexI8n = new RegExp(/i18n>([\w\d\-.]*)/, 'gm')
+  rewriteKeys(key: string) {
+    const regexI8n = /i18n>([\w\d\-.]*)/gm
     const matches = regexI8n.exec(key)
     if (matches && matches.length > 1)
       key = matches[1]
@@ -46,7 +44,7 @@ class UI5Framework extends Framework {
 
   enabledParsers = ['properties']
 
-  pathMatcher(dirStructure?: DirStructure): string {
+  pathMatcher(): string {
     return 'i18n_{locale}.properties'
   }
 

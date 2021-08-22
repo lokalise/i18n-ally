@@ -1,106 +1,135 @@
 {
+  "publisher": "lokalise",
   "name": "i18n-ally",
-  "displayName": "%extname%",
+  "version": "2.7.1",
+  "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
-  "version": "2.4.17",
-  "publisher": "antfu",
+  "keywords": [
+    "vue",
+    "vue-i18n",
+    "translate",
+    "i18n",
+    "i18next"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lokalise/i18n-ally"
+  },
+  "main": "./dist/extension",
   "scripts": {
-    "release": "npm run release:patch",
+    "release": "nr release:patch",
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
     "release:patch": "standard-version --release-as patch && git push --follow-tags",
     "gh:release": "conventional-github-releaser -p angular",
-    "build": "rimraf dist && npm run i18n:build && npm run main:build && npm run editor:build",
-    "dev": "concurrently -n w: npm:*:dev",
-    "main:build": "webpack --mode development",
-    "main:dev": "webpack --mode development --watch --info-verbosity verbose",
-    "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor",
-    "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"npm run editor:build\"",
-    "i18n:build": "esno ./scripts/build-i18n.ts",
-    "i18n:dev": "nodemon -w ./locales -e json --exec \"npm run i18n:build\"",
-    "flags:build": "esno ./scripts/build-flags.ts",
+    "build": "rimraf dist && nr i18n:build && nr main:build && nr editor:build && esno scripts/post-build.ts",
+    "dev": "run-p *:dev",
+    "main:build": "cross-env I18N_ALLY_ENV=production webpack --mode development",
+    "main:dev": "cross-env I18N_ALLY_ENV=development webpack --mode development --watch --info-verbosity verbose",
+    "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor --no-minify",
+    "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"nr editor:build\"",
+    "i18n:build": "esno scripts/build-i18n.ts",
+    "i18n:dev": "nodemon -w ./locales -e json --exec \"nr i18n:build\"",
+    "flags:build": "esno scripts/build-flags.ts",
     "lint": "eslint --ext .ts,.js,.vue .",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "npm run test:unit",
-    "test:unit": "ts-mocha -p test/unit/tsconfig.json test/unit/**/*.test.ts",
-    "test:e2e": "tsc -p test/e2e && extest setup-and-run 'test/e2e/*.test.js' -c 1.52.0 -o test/e2e/setting.json -e test/e2e/temp/extensions --yarn",
-    "test:e2e:run": "tsc -p test/e2e && extest run-tests 'test/e2e/*.test.js' -c 1.52.0 -o test/e2e/setting.json -e test/e2e/temp/extensions"
+    "lint:fix": "nr lint -- --fix",
+    "test": "nr test:unit",
+    "test:e2e": "rimraf test/e2e-out && tsc -p test/e2e && cross-env I18N_ALLY_ENV=test node ./test/e2e-out/index.js",
+    "test:e2e:update": "cross-env CHAI_JEST_SNAPSHOT_UPDATE_ALL=true yarn test:e2e",
+    "test:e2e:dev": "rimraf test/e2e-out && tsc -p test/e2e --watch",
+    "test:fixture": "rimraf test/fixture-scripts-out && tsc -p test/fixture-scripts && cross-env I18N_ALLY_ENV=test node ./test/fixture-scripts-out/index.js",
+    "test:unit": "cross-env I18N_ALLY_ENV=test ts-mocha -p test/unit/tsconfig.json --file test/unit/setup.ts test/unit/**/*.test.ts test/unit/**/**/*.test.ts",
+    "test:update": "cross-env CHAI_JEST_SNAPSHOT_UPDATE_ALL=true nr test:unit"
   },
   "dependencies": {
-    "@types/string-similarity": "^4.0.0",
-    "bcp-47-normalize": "^1.1.1",
+    "@babel/parser": "^7.15.3",
+    "@babel/traverse": "^7.15.0",
+    "bcp-47-normalize": "^2.0.1",
+    "change-case": "^4.1.2",
+    "consolidate": "^0.16.0",
     "esm": "^3.2.25",
-    "fast-glob": "^3.2.4",
+    "fast-glob": "^3.2.7",
     "glob-gitignore": "^1.0.14",
-    "htmlparser2": "^5.0.1",
-    "iconv-lite": "^0.6.2",
-    "ini": "^1.3.8",
-    "js-yaml": "^3.14.1",
+    "htmlparser2": "^6.1.0",
+    "iconv-lite": "^0.6.3",
+    "ini": "^2.0.0",
+    "js-yaml": "^4.1.0",
     "json-source-map": "^0.6.1",
     "json-stable-stringify": "^1.0.1",
-    "json5": "^2.1.3",
+    "json5": "^2.2.0",
     "limax": "^2.1.0",
-    "lodash": "^4.17.20",
-    "nanoid": "^3.1.20",
+    "lodash": "^4.17.21",
+    "micromatch": "^4.0.4",
+    "nanoid": "^3.1.25",
     "parse-gitignore": "^1.0.1",
-    "pofile": "^1.1.0",
+    "pofile": "^1.1.1",
     "properties": "^1.2.1",
-    "qs": "^6.9.4",
-    "semver": "^7.3.4",
+    "qs": "^6.10.1",
+    "semver": "^7.3.5",
     "string-similarity": "^4.0.4",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.3",
-    "vue-i18n-locale-message": "^0.16.3",
-    "yaml": "^1.10.0"
+    "typescript": "^4.3.5",
+    "vue-i18n-locale-message": "^1.8.0",
+    "vue-template-compiler": "^2.6.14",
+    "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.14",
-    "@types/fs-extra": "^9.0.6",
-    "@types/gettext-parser": "^4.0.0",
+    "@antfu/eslint-config": "^0.7.0",
+    "@antfu/ni": "^0.7.0",
+    "@antfu/utils": "^0.2.4",
+    "@babel/types": "^7.15.0",
+    "@types/chai": "^4.2.21",
+    "@types/chai-jest-snapshot": "^1.3.6",
+    "@types/diff": "^5.0.1",
+    "@types/fs-extra": "^9.0.12",
+    "@types/gettext-parser": "^4.0.1",
     "@types/ini": "^1.3.30",
-    "@types/js-yaml": "^3.12.6",
-    "@types/json-stable-stringify": "^1.0.32",
-    "@types/json5": "^0.0.30",
-    "@types/lodash": "^4.14.167",
-    "@types/mocha": "^8.2.0",
-    "@types/node": "^14.14.20",
-    "@types/qs": "^6.9.5",
-    "@types/semver": "^7.3.4",
+    "@types/js-yaml": "^4.0.3",
+    "@types/json-stable-stringify": "^1.0.33",
+    "@types/json5": "^2.2.0",
+    "@types/lodash": "^4.14.172",
+    "@types/micromatch": "^4.0.2",
+    "@types/mocha": "^8.2.3",
+    "@types/node": "^15.14.9",
+    "@types/qs": "^6.9.7",
+    "@types/semver": "^7.3.8",
+    "@types/string-similarity": "^4.0.0",
+    "@types/uuid": "^8.3.1",
     "@types/vscode": "^1.52.0",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
+    "@types/webpack": "^4.41.26",
     "axios": "^0.21.1",
     "blueimp-md5": "^2.18.0",
-    "chai": "^4.2.0",
-    "concurrently": "^5.3.0",
+    "chai": "^4.3.4",
+    "chai-jest-snapshot": "^2.0.0",
+    "chalk": "^4.1.2",
     "conventional-github-releaser": "^3.1.5",
-    "eslint": "^7.17.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-html": "^6.1.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-vue": "^7.4.1",
-    "esno": "^0.4.0",
-    "fs-extra": "^9.0.1",
-    "micromatch": "^4.0.2",
-    "mocha": "^8.2.1",
-    "nodemon": "^2.0.7",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-inliner": "^1.0.14",
+    "cross-env": "^7.0.3",
+    "diff": "^5.0.0",
+    "eslint": "^7.32.0",
+    "esno": "^0.9.1",
+    "fs-extra": "^10.0.0",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-inliner": "^1.0.16",
     "php-array-parser": "^1.0.1",
-    "pug": "^3.0.0",
+    "php-parser": "^3.0.3",
+    "pug": "^3.0.2",
     "rimraf": "^3.0.2",
-    "standard-version": "^9.1.0",
+    "standard-version": "^9.3.1",
     "stylus": "^0.54.8",
-    "ts-loader": "^8.0.14",
+    "ts-loader": "^8.1.0",
     "ts-mocha": "^8.0.0",
-    "vscode-extension-tester": "^3.2.4",
-    "vue": "^2.6.12",
-    "vue-i18n": "^8.22.2",
-    "vue-material-design-icons": "^4.11.0",
-    "vuex": "^3.6.0",
-    "webpack": "^4.44.2",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "unplugin": "^0.0.5",
+    "uuid": "^8.3.2",
+    "vsce": "^1.96.1",
+    "vscode-test": "^1.6.1",
+    "vue": "^2.6.14",
+    "vue-i18n": "^8.22.4",
+    "vue-material-design-icons": "^4.12.1",
+    "vuex": "^3.6.2",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
@@ -117,6 +146,7 @@
     "workspaceContains:Gemfile",
     "workspaceContains:.vscode/i18n-ally-custom-framework.yml",
     "workspaceContains:.vscode/i18n-ally-reviews.yml",
+    "workspaceContains:*.vue",
     "onWebviewPanel:i18n-ally-editor",
     "onLanguage:vue",
     "onLanguage:html",
@@ -134,21 +164,9 @@
     "onLanguage:ini",
     "onLanguage:svelte"
   ],
-  "keywords": [
-    "vue",
-    "vue-i18n",
-    "translate",
-    "i18n",
-    "i18next"
-  ],
   "icon": "res/logo.png",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/antfu/i18n-ally"
-  },
-  "homepage": "https://github.com/antfu/i18n-ally",
-  "bugs": "https://github.com/antfu/i18n-ally/issues",
-  "main": "./dist/extension",
+  "homepage": "https://github.com/lokalise/i18n-ally",
+  "bugs": "https://github.com/lokalise/i18n-ally/issues",
   "contributes": {
     "commands": [
       {
@@ -218,7 +236,18 @@
       {
         "command": "i18n-ally.extract-text",
         "category": "%extname%",
-        "title": "%refactor.extract_text%"
+        "title": "%refactor.extract_text%",
+        "icon": "$(symbol-string)"
+      },
+      {
+        "command": "i18n-ally.extract-hard-strings-batch",
+        "category": "%extname%",
+        "title": "Extract all hard-coded strings (expiremental)"
+      },
+      {
+        "command": "i18n-ally.detect_hard_strings",
+        "category": "%extname%",
+        "title": "Detect hard-coded strings in current file (expiremental)"
       },
       {
         "command": "i18n-ally.open-url",
@@ -334,6 +363,32 @@
         "command": "i18n-ally.deepl-usage",
         "category": "%extname%",
         "title": "%command.deepl_usage%"
+      },
+      {
+        "command": "i18n-ally.go-to-range",
+        "category": "%extname%",
+        "title": "%command.go_to_range%"
+      },
+      {
+        "command": "i18n-ally.go-to-next-usage",
+        "category": "%extname%",
+        "title": "%command.go_to_next_usage%"
+      },
+      {
+        "command": "i18n-ally.open-docs-hard-string",
+        "category": "%extname%",
+        "title": "%command.show_docs%",
+        "icon": "$(question)"
+      },
+      {
+        "command": "i18n-ally.extract-disable-auto-detect",
+        "category": "%extname%",
+        "title": "%command.extract.disable-auto-detect%"
+      },
+      {
+        "command": "i18n-ally.extract-enable-auto-detect",
+        "category": "%extname%",
+        "title": "%command.extract.enable-auto-detect%"
       }
     ],
     "menus": {
@@ -425,6 +480,18 @@
         {
           "command": "i18n-ally.duplicate-key",
           "when": "false"
+        },
+        {
+          "command": "i18n-ally.go-to-range",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.extract-disable-auto-detect",
+          "when": "false"
+        },
+        {
+          "command": "i18n-ally.extract-enable-auto-detect",
+          "when": "false"
         }
       ],
       "view/item/context": [
@@ -505,6 +572,31 @@
           "command": "i18n-ally.mark-key-as-in-use",
           "when": "view =~ /i18n-ally-locales/ && viewItem =~ /key_idle/",
           "group": "i18nally@1"
+        },
+        {
+          "command": "i18n-ally.open-docs-hard-string",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/",
+          "group": "inline@1"
+        },
+        {
+          "command": "i18n-ally.extract-text",
+          "when": "viewItem =~ /i18n-ally-hard-string-item/",
+          "group": "inline@1"
+        },
+        {
+          "command": "i18n-ally.extract-hard-strings-batch",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/",
+          "group": "i18nally@1"
+        },
+        {
+          "command": "i18n-ally.extract-disable-auto-detect",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/ && i18n-ally.extract.autoDetect == true",
+          "group": "i18nally@2"
+        },
+        {
+          "command": "i18n-ally.extract-enable-auto-detect",
+          "when": "viewItem =~ /i18n-ally-hard-string-root/ && i18n-ally.extract.autoDetect == false",
+          "group": "i18nally@2"
         }
       ],
       "view/title": [
@@ -517,6 +609,12 @@
           "command": "i18n-ally.new-key",
           "group": "navigation",
           "when": "view =~ /i18n-ally-locales-tree/"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "i18n-ally.extract-hard-strings-batch",
+          "group": "1_i18nally@1"
         }
       ],
       "comments/commentThread/title": [
@@ -606,6 +704,16 @@
       "type": "object",
       "title": "%extname%",
       "properties": {
+        "i18n-ally.disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.disabled%"
+        },
+        "i18n-ally.autoDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.auto_detection%"
+        },
         "i18n-ally.localesPaths": {
           "type": [
             "string",
@@ -709,7 +817,10 @@
               "globalize",
               "ui5",
               "next-translate",
-              "php-gettext"
+              "php-gettext",
+              "general",
+              "lingui",
+              "jekyll"
             ]
           },
           "description": "%config.enabled_frameworks%"
@@ -844,7 +955,40 @@
         "i18n-ally.refactor.templates": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "html-attribute",
+                  "html-inline",
+                  "js-string",
+                  "js-template",
+                  "jsx-text"
+                ]
+              },
+              "template": {
+                "type": "string"
+              },
+              "templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "include": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "description": "%config.refactor_templates%"
         },
@@ -865,7 +1009,8 @@
             "enum": [
               "google",
               "google-cn",
-              "deepl"
+              "deepl",
+              "libretranslate"
             ]
           },
           "default": [
@@ -887,6 +1032,31 @@
           "type": "boolean",
           "default": false,
           "description": "%config.translate_override_existing%"
+        },
+        "i18n-ally.translate.google.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.google_api_key%"
+        },
+        "i18n-ally.translate.deepl.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.deepl_api_key%"
+        },
+        "i18n-ally.translate.deepl.enableLog": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.deepl_log%"
+        },
+        "i18n-ally.translate.deepl.useFreeApiEntry": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.deepl_use_free_api_entry%"
+        },
+        "i18n-ally.translate.libre.apiRoot": {
+          "type": "string",
+          "default": "http://localhost:5000",
+          "description": "%config.libretranslate_api_root%"
         },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
@@ -912,6 +1082,10 @@
           "default": "node_modules/ts-node/dist/bin.js"
         },
         "i18n-ally.parsers.typescript.compilerOptions": {
+          "type": "object",
+          "default": {}
+        },
+        "i18n-ally.parsers.extendFileExtensions": {
           "type": "object",
           "default": {}
         },
@@ -953,6 +1127,19 @@
           ],
           "description": "%config.keygen_strategy%"
         },
+        "i18n-ally.extract.keygenStyle": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "default",
+            "kebab-case",
+            "snake_case",
+            "camelCase",
+            "PascalCase",
+            "ALL_CAPS"
+          ],
+          "description": "%config.keygen_style%"
+        },
         "i18n-ally.extract.keyPrefix": {
           "type": "string",
           "default": "",
@@ -980,22 +1167,39 @@
           ],
           "description": "%config.target_picking_strategy%"
         },
+        "i18n-ally.extract.parsers.html": {
+          "type": "object",
+          "default": {},
+          "description": "Parser options for extracting HTML, see https://github.com/lokalise/i18n-ally/blob/master/src/extraction/parsers/options.ts"
+        },
+        "i18n-ally.extract.parsers.babel": {
+          "type": "object",
+          "default": {},
+          "description": "Parser options for extracting JS/TS/JSX/TSX, see https://github.com/lokalise/i18n-ally/blob/master/src/extraction/parsers/options.ts"
+        },
+        "i18n-ally.extract.autoDetect": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enables hard-coded strings detection automatically whenever opening supported a file"
+        },
+        "i18n-ally.extract.ignored": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Strings to be ignored on hard-coded strings detection"
+        },
+        "i18n-ally.extract.ignoredByFiles": {
+          "type": "object",
+          "default": {},
+          "description": "Strings to be ignored on hard-coded strings detection, by files"
+        },
         "i18n-ally.parserOptions": {
           "type": "object"
         },
         "i18n-ally.defaultNamespace": {
           "type": "string",
           "description": "%config.default_namespace%"
-        },
-        "i18n-ally.translate.deepl.apiKey": {
-          "type": "string",
-          "default": null,
-          "description": "%config.deepl_api_key%"
-        },
-        "i18n-ally.translate.deepl.enableLog": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.deepl_log%"
         },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."

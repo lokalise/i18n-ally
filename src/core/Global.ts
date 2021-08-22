@@ -1,21 +1,25 @@
-import { extname } from 'path'
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent } from 'vscode'
+import { extname, resolve } from 'path'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument } from 'vscode'
 import { uniq } from 'lodash'
+import { slash } from '@antfu/utils'
+import { isMatch } from 'micromatch'
 import { ParsePathMatcher } from '../utils/PathMatcher'
 import { EXT_NAMESPACE } from '../meta'
 import { ConfigLocalesGuide } from '../commands/configLocalePaths'
 import { AvailableParsers, DefaultEnabledParsers } from '../parsers'
-import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '../utils'
 import { Framework } from '../frameworks/base'
 import { getEnabledFrameworks, getEnabledFrameworksByIds, getPackageDependencies } from '../frameworks'
 import { checkNotification } from '../update-notification'
-import i18n from '../i18n'
 import { Reviews } from './Review'
 import { CurrentFile } from './CurrentFile'
 import { Config } from './Config'
 import { DirStructure, OptionalFeatures, KeyStyle } from './types'
 import { LocaleLoader } from './loaders/LocaleLoader'
 import { Analyst } from './Analyst'
+import { Telemetry, TelemetryKey } from './Telemetry'
+import i18n from '~/i18n'
+import { Log, getExtOfLanguageId, normalizeUsageMatchRegex } from '~/utils'
+import { DetectionResult } from '~/core/types'
 
 export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
@@ -38,10 +42,10 @@ export class Global {
   static async init(context: ExtensionContext) {
     this.context = context
 
-    context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(e => this.updateRootPath()))
-    context.subscriptions.push(window.onDidChangeActiveTextEditor(e => this.updateRootPath()))
-    context.subscriptions.push(workspace.onDidOpenTextDocument(e => this.updateRootPath()))
-    context.subscriptions.push(workspace.onDidCloseTextDocument(e => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidChangeWorkspaceFolders(() => this.updateRootPath()))
+    context.subscriptions.push(window.onDidChangeActiveTextEditor(() => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidOpenTextDocument(() => this.updateRootPath()))
+    context.subscriptions.push(workspace.onDidCloseTextDocument(() => this.updateRootPath()))
     context.subscriptions.push(workspace.onDidChangeConfiguration(e => this.update(e)))
     await this.updateRootPath()
   }
@@ -107,10 +111,38 @@ export class Global {
     return result.value as KeyStyle
   }
 
-  static refactorTemplates(keypath: string, languageId?: string) {
+  static interpretRefactorTemplates(keypath: string, args?: string[], document?: TextDocument, detection?: DetectionResult) {
+    const path = slash(document?.uri.fsPath || '')
+    const root = workspace.workspaceFolders?.[0]?.uri.fsPath
+    const customTemplates = Config.refactorTemplates
+      .filter((i) => {
+        if (i.source && i.source !== detection?.source)
+          return false
+        if (i.exclude || i.include) {
+          if (!path || !root)
+            return false
+          if (i.exclude && isMatch(path, i.exclude.map(i => slash(resolve(root, i)))))
+            return false
+          if (i.include && !isMatch(path, i.include.map(i => slash(resolve(root, i)))))
+            return false
+        }
+        return true
+      })
+    const argsString = args?.length ? `,${args?.join(',')}` : ''
+
+    const customReplacers = customTemplates
+      .flatMap(i => i.templates)
+      .map(i => i
+        .replace(/{key}/, keypath)
+        .replace(/{args}/, argsString),
+      )
+
+    const frameworkReplacers = this.enabledFrameworks
+      .flatMap(f => f.refactorTemplates(keypath, args, document, detection))
+
     return uniq([
-      ...Config.refactorTemplates.map(i => i.replace(/{key}/, keypath)),
-      ...this.enabledFrameworks.flatMap(f => f.refactorTemplates(keypath, languageId)),
+      ...customReplacers,
+      ...frameworkReplacers,
     ])
   }
 
@@ -166,7 +198,12 @@ export class Global {
 
   static get enabledParserExts() {
     return this.enabledParsers
-      .map(f => f.supportedExts)
+      .flatMap(f => [
+        f.supportedExts,
+        Object.entries(Config.parsersExtendFileExtensions)
+          .find(([, v]) => v === f.id)?.[0],
+      ])
+      .filter(Boolean)
       .join('|')
   }
 
@@ -205,10 +242,13 @@ export class Global {
     return Config.namespace || this.hasFeatureEnabled('namespace')
   }
 
-  static get localesPaths() {
+  static get localesPaths(): string[] | undefined {
     let config = Config._localesPaths
-    if (!config.length)
+    if (!config) {
       config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
+      if (!config.length)
+        config = undefined
+    }
     return config
   }
 
@@ -318,25 +358,30 @@ export class Global {
       const frameworks = Config.enabledFrameworks
       this.enabledFrameworks = getEnabledFrameworksByIds(frameworks, this._rootpath)
     }
-    const isValidProject = this.enabledFrameworks.length > 0
-    const hasLocalesSet = Global.localesPaths.length > 0
-    const shouldEnabled = isValidProject && hasLocalesSet
+    const isValidProject = this.enabledFrameworks.length > 0 && this.enabledParsers.length > 0
+    const hasLocalesSet = !!Global.localesPaths
+    const shouldEnabled = !Config.disabled && isValidProject && hasLocalesSet
     this.setEnabled(shouldEnabled)
 
     if (this.enabled) {
       Log.info(`🧩 Enabled frameworks: ${this.enabledFrameworks.map(i => i.display).join(', ')}`)
       Log.info(`🧬 Enabled parsers: ${this.enabledParsers.map(i => i.id).join(', ')}`)
       Log.info('')
+      commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
+
+      Telemetry.track(TelemetryKey.Enabled)
+      Telemetry.updateUserProperties()
+
       await this.initLoader(this._rootpath, reload)
     }
     else {
-      if (!isValidProject)
-        Log.info('⚠ Current workspace is not a valid project, extension disabled')
-      else if (!hasLocalesSet)
-        Log.info('⚠ No locales path setting found, extension disabled')
+      if (!Config.disabled) {
+        if (!isValidProject && hasLocalesSet)
+          Log.info('⚠ Current workspace is not a valid project, extension disabled')
 
-      if (isValidProject && !hasLocalesSet)
-        ConfigLocalesGuide.autoSet()
+        if (isValidProject && !hasLocalesSet && Config.autoDetection)
+          ConfigLocalesGuide.autoSet()
+      }
 
       this.unloadAll()
     }
@@ -368,6 +413,13 @@ export class Global {
   static getMatchedParser(ext: string) {
     if (!ext.startsWith('.') && ext.includes('.'))
       ext = extname(ext)
+
+    // resolve custom parser extensions
+    const id = Config.parsersExtendFileExtensions[ext.slice(1)]
+    if (id)
+      return this.enabledParsers.find(parser => parser.id === id)
+
+    // resolve parser
     return this.enabledParsers.find(parser => parser.supports(ext))
   }
 
@@ -396,5 +448,9 @@ export class Global {
   static getVisibleLocales(locales: string[]) {
     const ignored = Config.ignoredLocales
     return locales.filter(locale => !ignored.includes(locale))
+  }
+
+  static getExtractionFrameworksByLang(languageId: string) {
+    return this.enabledFrameworks.filter(i => i.supportAutoExtraction?.includes(languageId))
   }
 }

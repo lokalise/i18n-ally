@@ -1,6 +1,4 @@
 import { workspace } from 'vscode'
-import i18n from '../i18n'
-import { Log } from '../utils'
 import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser } from '../packagesParsers'
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
@@ -24,6 +22,13 @@ import GlobalizeFramework from './globalize'
 import UI5Framework from './ui5'
 import NextTranslateFramework from './next-translate'
 import PhpGettextFramework from './php-gettext'
+import GeneralFramework from './general'
+import LinguiFramework from './lingui'
+import JekyllFramework from './jekyll'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
+
+export * from './base'
 
 export type PackageDependencies = Partial<Record<PackageFileType, string[]>>
 
@@ -50,6 +55,9 @@ export const frameworks: Framework[] = [
   new UI5Framework(),
   new NextTranslateFramework(),
   new PhpGettextFramework(),
+  new LinguiFramework(),
+  new JekyllFramework(),
+  new GeneralFramework(),
 
   // Vue SFC should be the last one
   new VueSFCFramework(),
@@ -75,7 +83,7 @@ export function getPackageDependencies(projectUrl: string): PackageDependencies 
 }
 
 export function getEnabledFrameworks(dependencies: PackageDependencies, root: string) {
-  const enabledFrameworks = frameworks.filter((framework) => {
+  let enabledFrameworks = frameworks.filter((framework) => {
     for (const k of Object.keys(dependencies)) {
       const key = k as PackageFileType
       const packages = dependencies[key]
@@ -103,8 +111,12 @@ export function getEnabledFrameworks(dependencies: PackageDependencies, root: st
 
   for (const framework of enabledFrameworks) {
     if (framework.monopoly)
-      return [framework]
+      enabledFrameworks = [framework]
   }
+
+  // don't enable if only general framework is presented
+  if (enabledFrameworks.length === 1 && enabledFrameworks[0].id === 'general')
+    enabledFrameworks = []
 
   return enabledFrameworks
 }

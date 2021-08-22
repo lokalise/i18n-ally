@@ -1,9 +1,9 @@
 import child_process from 'child_process'
 import path from 'path'
-import i18n from '../i18n'
-import { Log } from '../utils'
-import { Config, Global } from '../core'
 import { Parser } from './base'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
+import { Config, Global } from '~/core'
 
 const LanguageIds = {
   js: 'javascript',
@@ -44,6 +44,7 @@ export class EcmascriptParser extends Parser {
 
     return new Promise<any>((resolve, reject) => {
       const cmd = `${tsNode} --dir "${dir}" --transpile-only --compiler-options "${options}" "${loader}" "${filepath}"`
+      // eslint-disable-next-line no-console
       console.log(`[i18n-ally] spawn: ${cmd}`)
       child_process.exec(cmd, (err, stdout) => {
         if (err)

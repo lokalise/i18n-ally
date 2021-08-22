@@ -1,5 +1,8 @@
-import { LanguageId } from '../utils'
+import { TextDocument } from 'vscode'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
+import { DefaultDynamicExtractionsRules, DefaultExtractionRules, extractionsParsers } from '~/extraction'
+import { Config, DetectionResult } from '~/core'
 
 class VueFramework extends Framework {
   id = 'vue'
@@ -10,6 +13,7 @@ class VueFramework extends Framework {
       'vue-i18n',
       'vuex-i18n',
       '@panter/vue-i18next',
+      '@nuxtjs/i18n',
       'nuxt-i18n',
     ],
   }
@@ -26,24 +30,57 @@ class VueFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '(?:i18n[ (\n]\\s*path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.|[^\\w\\d])(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
+    '(?:i18n(?:-\\w+)?[ (\n]\\s*(?:key)?path=|v-t=[\'"`{]|(?:this\\.|\\$|i18n\\.|[^\\w\\d])(?:t|tc|te)\\()\\s*[\'"`]({key})[\'"`]',
   ]
 
-  refactorTemplates(keypath: string, languageId: string) {
+  refactorTemplates(keypath: string, args: string[] = [], doc?: TextDocument, detection?: DetectionResult) {
+    let params = `'${keypath}'`
+    if (args.length)
+      params += `, [${args.join(', ')}]`
+
+    switch (detection?.source) {
+      case 'html-inline':
+        return [`{{ $t(${params}) }}`]
+      case 'html-attribute':
+        return [`$t(${params})`]
+      case 'js-string':
+        return [`this.$t(${params})`, `i18n.t(${params})`, `t(${params})`]
+    }
+
     return [
-      `{{$t('${keypath}')}}`,
-      `this.$t('${keypath}')`,
-      `$t('${keypath}')`,
-      `i18n.t('${keypath}')`,
+      `{{ $t(${params}) }}`,
+      `this.$t(${params})`,
+      `$t(${params})`,
+      `i18n.t(${params})`,
       // vue-i18n-next
-      `{{t('${keypath}')}}`,
-      `t('${keypath}')`,
+      `{{ t(${params}) }}`,
+      `t(${params})`,
       keypath,
     ]
   }
 
   enableFeatures = {
     LinkedMessages: true,
+  }
+
+  supportAutoExtraction = ['vue']
+
+  detectHardStrings(doc: TextDocument) {
+    const text = doc.getText()
+
+    return extractionsParsers.html.detect(
+      text,
+      DefaultExtractionRules,
+      DefaultDynamicExtractionsRules,
+      Config.extractParserHTMLOptions,
+      // <script>
+      script => extractionsParsers.babel.detect(
+        script,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+        Config.extractParserBabelOptions,
+      ),
+    )
   }
 }
 

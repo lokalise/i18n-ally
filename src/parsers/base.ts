@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TextDocument } from 'vscode'
-import { KeyStyle, ParserOptions, KeyInDocument, Config } from '../core'
-import { File } from '../utils'
+import { KeyStyle, ParserOptions, KeyInDocument, Config } from '~/core'
+import { File } from '~/utils'
 
 export abstract class Parser {
   abstract readonly id: string

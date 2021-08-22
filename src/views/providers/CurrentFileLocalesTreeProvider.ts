@@ -1,20 +1,48 @@
-import { ExtensionContext, window } from 'vscode'
+import { ExtensionContext, window, TreeDataProvider, TreeItem, Event, EventEmitter } from 'vscode'
 import { uniq } from 'lodash'
-import { resolveFlattenRootKeypath } from '../../utils'
-import { KeyDetector, LocaleNode, Global } from '../../core'
-import { LocaleTreeItem } from '../items/LocaleTreeItem'
-import { LocalesTreeProvider } from './LocalesTreeProvider'
+import { BaseTreeItem } from '../items/Base'
+import { CurrentFileNotFoundItem } from '../items/CurrentFileNotFoundItem'
+import { CurrentFileInUseItem } from '../items/CurrentFileInUseItem'
+import { CurrentFileExtractionItem } from '../items/CurrentFileExtractionItem'
+import { KeyDetector, Global, CurrentFile } from '~/core'
+import { resolveFlattenRootKeypath } from '~/utils'
 
-export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
+export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTreeItem> {
   protected name = 'CurrentFileLocalesTreeProvider'
+  private _onDidChangeTreeData: EventEmitter<BaseTreeItem | undefined> = new EventEmitter<BaseTreeItem | undefined>()
+  readonly onDidChangeTreeData: Event<BaseTreeItem | undefined> = this._onDidChangeTreeData.event
+
+  public paths: string[] = []
+  public pathsExists: string[] = []
 
   constructor(
-    ctx: ExtensionContext,
+    public ctx: ExtensionContext,
   ) {
-    super(ctx, [], true)
     this.loadCurrentDocument()
-    window.onDidChangeActiveTextEditor(() => this.loadCurrentDocument())
-    window.onDidChangeTextEditorSelection(() => this.loadCurrentDocument())
+
+    CurrentFile.onInvalidate(() => this.loadCurrentDocument())
+    CurrentFile.onHardStringDetected(() => this.refresh())
+  }
+
+  getTreeItem(element: BaseTreeItem): TreeItem {
+    return element
+  }
+
+  async getChildren(element?: BaseTreeItem) {
+    if (element)
+      return await element.getChildren()
+
+    const items: BaseTreeItem[] = [
+      new CurrentFileInUseItem(this),
+      new CurrentFileNotFoundItem(this),
+      new CurrentFileExtractionItem(this),
+    ]
+
+    return items
+  }
+
+  protected refresh(): void {
+    this._onDidChangeTreeData.fire(undefined)
   }
 
   loadCurrentDocument() {
@@ -24,34 +52,24 @@ export class CurrentFileLocalesTreeProvider extends LocalesTreeProvider {
       return
 
     if (!Global.isLanguageIdSupported(editor.document.languageId))
-      this.includePaths = []
+      this.paths = []
     else
-      this.includePaths = uniq(KeyDetector.getKeys(editor.document).map(i => i.key))
+      this.paths = uniq(KeyDetector.getKeys(editor.document).map(i => i.key))
 
+    this.updatePathsExists()
     this.refresh()
   }
 
-  getRoots() {
-    const roots = super.getRoots()
-    const realPaths = roots.map(i => resolveFlattenRootKeypath(i.node.keypath))
-    if (!this.includePaths)
-      return roots
+  public get pathsInUse() {
+    return this.paths.filter(i => this.pathsExists.includes(i))
+  }
 
-    // create shadow nodes
-    const shadowPaths = this.includePaths
-      .filter(path => !realPaths.includes(path))
+  public get pathsNotFound() {
+    return this.paths.filter(i => !this.pathsExists.includes(i))
+  }
 
-    for (const keypath of shadowPaths) {
-      let node = this.loader.getTreeNodeByKey(keypath)
-      if (node && node.type === 'tree') {
-        roots.push(new LocaleTreeItem(this.ctx, node, this.flatten))
-      }
-      else {
-        node = new LocaleNode({ keypath, shadow: true })
-        roots.push(new LocaleTreeItem(this.ctx, node, this.flatten))
-      }
-    }
-
-    return this.sort(roots)
+  updatePathsExists() {
+    const roots = Object.values(CurrentFile?.loader?.flattenLocaleTree || {})
+    this.pathsExists = roots.map(i => resolveFlattenRootKeypath(i.keypath))
   }
 }

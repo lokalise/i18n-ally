@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define */
-import { getKeyname, Log } from '../utils'
 import { linkKeyMatcher, linkKeyPrefixMatcher, linkedKeyModifiers } from '../meta'
 import { Global } from './Global'
 import { Config } from './Config'
 import { CurrentFile } from './CurrentFile'
 import { OptionalFeatures, NodeMeta } from './types'
+import { getKeyname, Log } from '~/utils'
 
 export interface INode {
   keypath: string

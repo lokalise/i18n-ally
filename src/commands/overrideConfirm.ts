@@ -1,6 +1,6 @@
 import { window } from 'vscode'
-import { CurrentFile } from '../core'
-import i18n from '../i18n'
+import { CurrentFile } from '~/core'
+import i18n from '~/i18n'
 
 export async function overrideConfirm(keypath: string, allowSkip = false, allowRenter = false) {
   const node = CurrentFile.loader.getTreeNodeByKey(keypath)

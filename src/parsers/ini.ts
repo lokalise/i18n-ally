@@ -5,7 +5,7 @@ export class IniParser extends Parser {
   id = 'ini'
 
   constructor() {
-    super(['ini'], 'ini')
+    super(['ini'], 'ini|cfg')
   }
 
   async parse(text: string) {

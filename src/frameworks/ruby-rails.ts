@@ -1,8 +1,8 @@
 import path from 'path'
-import { LanguageId } from '../utils'
 import { RewriteKeySource, DataProcessContext, RewriteKeyContext } from '../core/types'
-import { Config, Global } from '../core'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
+import { Config, Global } from '~/core'
 
 class RubyRailsFramework extends Framework {
   id= 'ruby-rails'
@@ -18,11 +18,16 @@ class RubyRailsFramework extends Framework {
   languageIds: LanguageId[] = [
     'ruby',
     'haml',
+    'slim',
+    'html.erb',
+    'js.erb',
     'erb',
   ]
 
   usageMatchRegex = [
     '[^\\w\\d]t(?:\\(| )[\'"`]({key})[\'"`]',
+    // #583
+    '[^\\w\\d]t\\(\\:({key})\\)',
   ]
 
   refactorTemplates(keypath: string) {
@@ -49,7 +54,7 @@ class RubyRailsFramework extends Framework {
 
       scope = scope
         // remove file extensions
-        .replace(/(?:\.html\.erb|\.html\.haml|\.haml)$/, '')
+        .replace(/(?:\.html\.erb|\.html\.haml|\.html\.slim|\.haml)$/, '')
         // map path delimiter to dots
         .replace(/(?:\/|\\)/g, '.')
         // omit the starting underscore on each file

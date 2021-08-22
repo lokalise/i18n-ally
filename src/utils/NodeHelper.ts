@@ -1,4 +1,4 @@
-import { Node, Config, Global } from '../core'
+import { Node, Config, Global } from '~/core'
 
 export class NodeHelper {
   static isSource(node: Node) {

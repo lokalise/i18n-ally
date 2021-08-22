@@ -8,17 +8,9 @@
     <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
     <p>{{ $tc('apple', 10) }}</p>
 
-    <!-- DateTime localization -->
-    <p>{{ $d(new Date(), 'date.short') }}</p>
-    <p>{{ $d(new Date(), 'date.long', 'ja-JP') }}</p>
-
-    <!-- Number localization -->
-    <p>{{ $n(100, 'currency') }}</p>
-    <p>{{ $n(100, 'currency', 'ja-JP') }}</p>
-
     <!-- Directive localization -->
     <p v-t="'nested.hello'" />
-    <p v-t="&quot;nested.greeting&quot;" />
+    <p v-t='"nested.greeting"' />
     <p v-t="invalid" />
 
     <!-- Component interpolation -->
@@ -31,6 +23,18 @@
         :href="url"
         target="_blank"
       >{{ $t('tos') }}</a>
+    </i18n>
+
+    <!-- Component interpolation (Vue 3) -->
+    <i18n-t keypath="term" tag="span">
+      <RouterLink to="/login/register">
+        {{ t('tos') }}
+      </RouterLink>
+    </i18n-t>
+    <i18n keypath="term" tag="span">
+      <RouterLink to="/login/register">
+        {{ t('tos') }}
+      </RouterLink>
     </i18n>
   </div>
 </template>

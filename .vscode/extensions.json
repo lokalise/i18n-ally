@@ -3,7 +3,7 @@
   // for the documentation about the extensions.json format
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "antfu.i18n-ally",
+    "lokalise.i18n-ally",
     "eamodio.tsl-problem-matcher",
   ]
 }
