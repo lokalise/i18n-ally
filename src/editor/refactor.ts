@@ -1,21 +1,22 @@
-import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages } from 'vscode'
-import { KeyDetector, Commands, Config, Loader, CurrentFile } from '../core'
-import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
-import { Global } from '../core/Global'
+import { CodeActionProvider, CodeActionKind, TextDocument, Range, CodeAction, languages, CodeActionContext } from 'vscode'
+import { DiagnosticWithKey, PROBLEM_KEY_MISSING, PROBLEM_TRANSLATION_MISSING } from './problems'
+import { ExtensionModule } from '~/modules'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
+import { Config, Loader, CurrentFile } from '~/core'
 
 export class Refactor implements CodeActionProvider {
-  public static readonly providedCodeActionKinds = [
-    CodeActionKind.Refactor,
-    CodeActionKind.QuickFix,
-  ]
+  public provideCodeActions(
+    document: TextDocument,
+    range: Range,
+    context: CodeActionContext,
+  ): CodeAction[] | undefined {
+    const diagnostic = context.diagnostics.find(i => i.code === PROBLEM_KEY_MISSING || i.code === PROBLEM_TRANSLATION_MISSING) as DiagnosticWithKey | undefined
 
-  public provideCodeActions(document: TextDocument, { start }: Range): CodeAction[] | undefined {
-    const keyInfo = KeyDetector.getKeyAndRange(document, start)
-    if (!keyInfo)
+    const key = diagnostic?.key
+
+    if (!diagnostic || !key)
       return
-
-    const { key } = keyInfo
 
     const actions = []
 
@@ -69,11 +70,15 @@ export class Refactor implements CodeActionProvider {
 const m: ExtensionModule = () => {
   return [
     languages.registerCodeActionsProvider(
-      Global.getDocumentSelectors(),
+      '*',
       new Refactor(),
       {
-        providedCodeActionKinds: Refactor.providedCodeActionKinds,
-      }),
+        providedCodeActionKinds: [
+          CodeActionKind.Refactor,
+          CodeActionKind.QuickFix,
+        ],
+      },
+    ),
   ]
 }
 

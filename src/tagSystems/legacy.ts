@@ -23,6 +23,8 @@ export class LegacyTagSystem extends BaseTagSystem {
   }
 
   toFlagname(locale: string) {
-    return locale.toLocaleLowerCase().split('-', 2).slice(-1)[0]
+    return locale.includes('-')
+      ? locale.toLocaleLowerCase().split('-', 2).slice(-1)[0]?.toLowerCase()
+      : locale.toLowerCase()
   }
 }

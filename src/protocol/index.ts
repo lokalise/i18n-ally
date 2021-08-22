@@ -3,9 +3,11 @@
 // Protocol for exchanging data between webview/client/devtools
 import { commands } from 'vscode'
 import { TranslateKeys, RenameKey } from '../commands/manipulations'
-import { EXT_ID } from '../meta'
-import { CurrentFile, Global, Commands, Config } from '../core'
-import i18n from '../i18n'
+import { EXT_ID } from '~/meta'
+import { Commands } from '~/commands'
+import { CurrentFile, Global, Config, ActionSource, Telemetry, TelemetryKey } from '~/core'
+import i18n from '~/i18n'
+import { isDev } from '~/env'
 
 export interface Message {
   type: string
@@ -35,7 +37,7 @@ export class Protocol {
   get config() {
     const locales = Global.loader?.locales || []
     return {
-      debug: Config.debug,
+      debug: isDev,
       review: Config.reviewEnabled,
       locales,
       flags: locales.map(i => Config.tagSystem.getFlagName(i)),
@@ -113,7 +115,10 @@ export class Protocol {
         break
 
       case 'translate':
-        TranslateKeys(message.data)
+        TranslateKeys({
+          actionSource: ActionSource.UiEditor,
+          ...message.data,
+        })
         break
 
       case 'review.description':
@@ -121,14 +126,17 @@ export class Protocol {
         break
 
       case 'review.comment':
+        Telemetry.track(TelemetryKey.ReviewAddComment, { source: ActionSource.UiEditor })
         Global.reviews.addComment(message.keypath!, message.locale!, message.data!)
         break
 
       case 'review.edit':
+        Telemetry.track(TelemetryKey.ReviewEditComment, { source: ActionSource.UiEditor })
         Global.reviews.editComment(message.keypath!, message.locale!, message.data!)
         break
 
       case 'review.resolve':
+        Telemetry.track(TelemetryKey.ReviewResolveComment, { source: ActionSource.UiEditor })
         Global.reviews.resolveComment(message.keypath!, message.locale!, message.commentId!)
         break
 

@@ -1,10 +1,10 @@
 import { window, Disposable, StatusBarAlignment } from 'vscode'
-import { ExtensionModule } from '../modules'
-import { Config, Global, CurrentFile } from '../core'
-import { Commands } from '../core/Commands'
-import i18n from '../i18n'
+import { Commands } from '../commands/commands'
+import { ExtensionModule } from '~/modules'
+import { Config, Global, CurrentFile } from '~/core'
+import i18n from '~/i18n'
 
-const statusbar: ExtensionModule = (ctx) => {
+const statusbar: ExtensionModule = () => {
   const disposables: Disposable[] = []
   const priority = -1000
   const bar1 = window.createStatusBarItem(StatusBarAlignment.Right, priority + 1)

@@ -1,5 +1,5 @@
-import { LanguageId } from '../utils'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
 
 class PhpJoomlaFramework extends Framework {
   id = 'php-joomla'

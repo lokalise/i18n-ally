@@ -1,4 +1,3 @@
-
 export interface TranslateEngineConfig {
   timeout?: number
   apiKey?: string

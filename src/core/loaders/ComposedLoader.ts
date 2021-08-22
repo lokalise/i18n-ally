@@ -1,12 +1,13 @@
 import { Disposable } from 'vscode'
 import _ from 'lodash'
+import { uniq } from '@antfu/utils'
 import { PendingWrite } from '../types'
 import { Translator } from '../Translator'
-import { Log } from '../../utils'
 import { Config } from '../Config'
 import { FulfillAllMissingKeys } from '../../commands/manipulations'
 import { LocaleTree, LocaleNode, FlattenLocaleTree } from '../Nodes'
 import { Loader } from './Loader'
+import { Log } from '~/utils'
 
 export class ComposedLoader extends Loader {
   constructor() {
@@ -60,8 +61,9 @@ export class ComposedLoader extends Loader {
 
     this._flattenLocaleTree = {}
     for (const loader of this._loaders) {
-      const loaderChildren = loader.flattenLocaleTree
-      Object.assign(this._flattenLocaleTree, loaderChildren)
+      const loaderChildren = loader?.flattenLocaleTree
+      if (loaderChildren)
+        Object.assign(this._flattenLocaleTree, loaderChildren)
     }
     this._isFlattenLocaleTreeDirty = false
     return this._flattenLocaleTree
@@ -114,12 +116,16 @@ export class ComposedLoader extends Loader {
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
-    if (Config.keepFulfilled && triggerFullfilled)
-      pendings = [...await FulfillAllMissingKeys(false) || [], ...pendings]
+    if (Config.keepFulfilled && triggerFullfilled) {
+      pendings = [
+        ...await FulfillAllMissingKeys(false, uniq(pendings.map(i => i.keypath))) || [],
+        ...pendings,
+      ]
+    }
 
     pendings = pendings.filter(i => i)
 
-    const distrubtedPendings: PendingWrite[][] = new Array(this.loadersReversed.length).fill(null).map(_ => [])
+    const distrubtedPendings: PendingWrite[][] = new Array(this.loadersReversed.length).fill(null).map(() => [])
     const loaders = this.loadersReversed
     for (const pending of pendings) {
       let handled = false
@@ -141,5 +147,5 @@ export class ComposedLoader extends Loader {
     }))
   }
 
-  // TODO:sfc merge tree nodes
+  // TODO: sfc merge tree nodes
 }

@@ -1,4 +1,4 @@
-import i18n from '../i18n'
+import i18n from '~/i18n'
 
 export enum ErrorType {
   translating_same_locale = /* i18n */ 'errors.translating_same_locale',

@@ -3,5 +3,9 @@ dist/
 examples/
 .cache/
 res/
-test/e2e/**/*.js
 test-resources/
+test/e2e-out/
+test/e2e-fixtures-temp/
+test/fixture-scripts-out/
+test/fixtures/
+test/fixtures-temp/

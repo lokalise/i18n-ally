@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TextDocument } from 'vscode'
-import { Config } from '../core'
-import { LanguageId } from '../utils'
-import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle } from '../core/types'
+import { LanguageId } from '~/utils'
+import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle, Config } from '~/core'
+import { DetectionResult } from '~/core/types'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
 
@@ -25,6 +26,7 @@ export abstract class Framework {
   enabledParsers?: string[]
   derivedKeyRules?: string[]
   namespaceDelimiter?: string
+  supportAutoExtraction?: string[]
 
   /**
    * Packages names determine whether a frameworks should enable or not
@@ -44,7 +46,14 @@ export abstract class Framework {
   /**
    * Return possible choices of replacement for messages extracted from code
    */
-  abstract refactorTemplates (keypath: string, languageId?: string): string[]
+  abstract refactorTemplates (keypath: string, args?: string[], document?: TextDocument, detection?: DetectionResult): string[]
+
+  /**
+   * Analysis the file and get hard strings
+   */
+  detectHardStrings(document: TextDocument): DetectionResult[] | undefined {
+    return undefined
+  }
 
   /**
    * Tell the key dector how to add prefix scopes

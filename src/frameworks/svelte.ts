@@ -1,5 +1,8 @@
-import { LanguageId } from '../utils'
+import { TextDocument } from 'vscode'
 import { Framework } from './base'
+import { LanguageId } from '~/utils'
+import { Config } from '~/core'
+import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules } from '~/extraction'
 
 class SvelteFramework extends Framework {
   id= 'svelte'
@@ -25,8 +28,29 @@ class SvelteFramework extends Framework {
   refactorTemplates(keypath: string) {
     return [
       `$_('${keypath}')`,
+      `$t('${keypath}')`,
+      `{ $t('${keypath}') }`,
       keypath,
     ]
+  }
+
+  supportAutoExtraction = ['svelte']
+
+  detectHardStrings(doc: TextDocument) {
+    const text = doc.getText()
+
+    return extractionsParsers.html.detect(
+      text,
+      DefaultExtractionRules,
+      DefaultDynamicExtractionsRules,
+      Config.extractParserHTMLOptions,
+      // <script>
+      script => extractionsParsers.babel.detect(
+        script,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+      ),
+    )
   }
 }
 

@@ -1,7 +1,7 @@
 import { TextDocument } from 'vscode'
-import { RewriteKeySource, RewriteKeyContext } from '../core'
-import { LanguageId } from '../utils'
 import { Framework, ScopeRange } from './base'
+import { RewriteKeySource, RewriteKeyContext } from '~/core'
+import { LanguageId } from '~/utils'
 
 class I18nextFramework extends Framework {
   id ='i18next'

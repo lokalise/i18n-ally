@@ -1,9 +1,11 @@
 import path from 'path'
 import { Uri, workspace, window, commands } from 'vscode'
 import fg from 'fast-glob'
-import { Commands, Config } from '../core'
-import { ExtensionModule } from '../modules'
-import i18n from '../i18n'
+import { Commands } from './commands'
+import { ExtensionModule } from '~/modules'
+import { Config } from '~/core'
+import i18n from '~/i18n'
+import { Log } from '~/utils'
 
 export class ConfigLocalesGuide {
   static async prompt() {
@@ -27,7 +29,7 @@ export class ConfigLocalesGuide {
   }
 
   static async pickDir(): Promise<string[]> {
-    const rootPath = workspace.rootPath
+    const rootPath = workspace.workspaceFolders?.[0]?.uri.path
     if (!rootPath)
       return []
 
@@ -45,7 +47,10 @@ export class ConfigLocalesGuide {
           return item.path.slice(1)
         return item.path
       })
-      .map(pa => path.relative(rootPath, pa))
+      .map(pa => path
+        .relative(rootPath, pa)
+        .replace(/\\/g, '/'),
+      )
   }
 
   static async success() {
@@ -84,13 +89,13 @@ export class ConfigLocalesGuide {
       )
     }
     else {
-      window.showWarningMessage(i18n.t('prompt.locales_dir_not_found'))
+      Log.warn(i18n.t('prompt.locales_dir_not_found'), false)
       this.prompt()
     }
   }
 }
 
-const m: ExtensionModule = () => {
+export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.config_locales_auto,
       () => ConfigLocalesGuide.autoSet()),
@@ -98,5 +103,3 @@ const m: ExtensionModule = () => {
       () => ConfigLocalesGuide.config()),
   ]
 }
-
-export default m

@@ -1,8 +1,8 @@
 import { TreeItem, ExtensionContext, TreeDataProvider, Command } from 'vscode'
-import i18n from '../../i18n'
-import { Commands } from '../../core'
-import Links from '../../links'
 import { FeedbackItem } from '../items/FeedbackItem'
+import Links from '~/links'
+import { Commands } from '~/commands'
+import i18n from '~/i18n'
 
 export interface FeedbackItemDefintion {
   text: string
@@ -33,10 +33,6 @@ export class HelpFeedbackProvider implements TreeDataProvider<FeedbackItem> {
       text: i18n.t('feedback.github'),
       icon: 'help-star',
       url: Links.github,
-    }, {
-      text: i18n.t('feedback.twitter_feedback'),
-      icon: 'help-tweet',
-      url: Links.twitter,
     }, {
       text: i18n.t('feedback.report_issues'),
       icon: 'help-report-issue',

@@ -2,9 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import { workspace, FileSystemWatcher } from 'vscode'
 import YAML from 'js-yaml'
-import { Global } from '../core'
-import { LanguageId, File, Log } from '../utils'
 import { Framework } from './base'
+import { Global } from '~/core'
+import { LanguageId, File, Log } from '~/utils'
 
 const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 
@@ -42,7 +42,7 @@ class CustomFramework extends Framework {
 
     try {
       const raw = File.readSync(filename)
-      this.data = YAML.safeLoad(raw) as any
+      this.data = YAML.load(raw) as any
       Log.info(`🍱 Custom framework setting loaded. \n${JSON.stringify(this.data, null, 2)}\n`)
       return true
     }
@@ -73,6 +73,8 @@ class CustomFramework extends Framework {
   get monopoly() {
     return this.data?.monopoly || false
   }
+
+  set monopoly(_) {}
 
   refactorTemplates(keypath: string) {
     return (this.data?.refactorTemplates || ['$1'])

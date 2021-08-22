@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "lib": ["ESNext"],
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "../fixture-scripts-out",
+    "paths": {
+      "~/*": ["../../dist/src/*"]
+    }
+  },
+  "exclude": [
+    "../../src/",
+    "../../dist/"
+  ]
+}

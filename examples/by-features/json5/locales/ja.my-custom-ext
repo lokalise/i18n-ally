@@ -1,0 +1,15 @@
+{
+  apple: 'Good',
+  currency: {
+    currency: 'JPY',
+    style: 'currency',
+  },
+  nested: {
+    greeting: 'おはようございます',
+    hello: 'また会いましたね',
+  },
+  project: '基本',
+  term: '{0}を受け入れます',
+  tos: '利用規約',
+  yeah: 'ええ',
+}

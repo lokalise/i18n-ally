@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`detections attrs html 1`] = `
+Array [
+  Object {
+    "end": 23,
+    "fullEnd": 24,
+    "fullStart": 5,
+    "fullText": "placeholder=\\"Hello\\"",
+    "isDynamic": false,
+    "source": "html-attribute",
+    "start": 18,
+    "text": "Hello",
+  },
+]
+`;
+
+exports[`detections attrs html 2`] = `
+Array [
+  Object {
+    "end": 117,
+    "fullEnd": 118,
+    "fullStart": 72,
+    "fullText": "placeholder=\\"Write your article (in markdown)\\"",
+    "isDynamic": false,
+    "source": "html-attribute",
+    "start": 85,
+    "text": "Write your article (in markdown)",
+  },
+]
+`;
+
+exports[`detections attrs html 3`] = `
+Array [
+  Object {
+    "end": 47,
+    "fullEnd": 48,
+    "fullStart": 25,
+    "fullText": "title=\\"This is a title\\"",
+    "isDynamic": false,
+    "source": "html-attribute",
+    "start": 32,
+    "text": "This is a title",
+  },
+  Object {
+    "end": 69,
+    "fullEnd": 70,
+    "fullStart": 49,
+    "fullText": "alt=\\"This is an alt.\\"",
+    "isDynamic": false,
+    "source": "html-attribute",
+    "start": 54,
+    "text": "This is an alt.",
+  },
+]
+`;
+
+exports[`detections attrs vue-favored attrs 1`] = `
+Array [
+  Object {
+    "end": 54,
+    "fullEnd": 55,
+    "fullStart": 7,
+    "fullText": "v-bind:placeholder=\\"'Placeholder ' + input_name\\"",
+    "isDynamic": true,
+    "source": "html-attribute",
+    "start": 27,
+    "text": "'Placeholder ' + input_name",
+  },
+  Object {
+    "end": 85,
+    "fullEnd": 86,
+    "fullStart": 56,
+    "fullText": ":title=\\"\`\${input_name} title\`\\"",
+    "isDynamic": true,
+    "source": "html-attribute",
+    "start": 64,
+    "text": "\`\${input_name} title\`",
+  },
+]
+`;
+
+exports[`detections inline mixed text 1`] = `
+Array [
+  Object {
+    "end": 51,
+    "fullText": "Sign in",
+    "source": "html-inline",
+    "start": 44,
+    "text": "Sign in",
+  },
+  Object {
+    "end": 120,
+    "fullText": "sign up",
+    "source": "html-inline",
+    "start": 113,
+    "text": "sign up",
+  },
+  Object {
+    "end": 170,
+    "fullText": "
+  to add comments on this article.
+",
+    "source": "html-inline",
+    "start": 134,
+    "text": "
+  to add comments on this article.
+",
+  },
+]
+`;
+
+exports[`detections inline multiple lines 1`] = `
+Array [
+  Object {
+    "end": 37,
+    "fullText": "
+  Using
+  v-html
+  directive:
+  ",
+    "source": "html-inline",
+    "start": 4,
+    "text": "
+  Using
+  v-html
+  directive:
+  ",
+  },
+]
+`;
+
+exports[`detections inline plain text 1`] = `
+Array [
+  Object {
+    "end": 15,
+    "fullText": "Popular Tags",
+    "source": "html-inline",
+    "start": 3,
+    "text": "Popular Tags",
+  },
+]
+`;
+
+exports[`detections inline vue-favored variables 1`] = `
+Array [
+  Object {
+    "end": 33,
+    "fullText": "Using mustaches: {{ rawHtml }}",
+    "source": "html-inline",
+    "start": 3,
+    "text": "Using mustaches: {{ rawHtml }}",
+  },
+]
+`;

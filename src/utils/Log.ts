@@ -1,6 +1,6 @@
 import { OutputChannel, window } from 'vscode'
 import { EXT_NAME } from '../meta'
-import i18n from '../i18n'
+import i18n from '~/i18n'
 
 export class Log {
   private static _channel: OutputChannel
@@ -26,8 +26,16 @@ export class Log {
   }
 
   static async error(err: Error | string | any = {}, prompt = true, intend = 0) {
-    if (typeof err !== 'string')
-      Log.info(`🐛 ERROR: ${err.name}: ${err.message}\n${err.stack}`, intend)
+    if (typeof err !== 'string') {
+      const messages = [
+        err.message,
+        err.response?.data,
+        err.stack,
+        err.toJSON?.(),
+      ]
+        .filter(Boolean).join('\n')
+      Log.info(`🐛 ERROR: ${err.name}: ${messages}`, intend)
+    }
 
     if (prompt) {
       const openOutputButton = i18n.t('prompt.show_error_log')

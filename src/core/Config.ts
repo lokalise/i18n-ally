@@ -1,14 +1,18 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { workspace, extensions, ExtensionContext } from 'vscode'
+import { workspace, extensions, ExtensionContext, commands } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
-import i18n from '../i18n'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
+import i18n from '~/i18n'
+import { CaseStyles } from '~/utils/changeCase'
+import { ExtractionBabelOptions, ExtractionHTMLOptions } from '~/extraction/parsers/options'
+import { resolveRefactorTemplate } from '~/utils/resolveRefactorTemplate'
 
 export class Config {
   static readonly reloadConfigs = [
+    'disabled',
     'localesPaths',
     'pathMatcher',
     'includeSubfolders',
@@ -23,6 +27,7 @@ export class Config {
     'languageTagSystem',
     'ignoreFiles',
     'parserOptions',
+    'parsers.extendFileExtensions',
   ]
 
   static readonly refreshConfigs = [
@@ -40,7 +45,18 @@ export class Config {
   ]
 
   static ctx: ExtensionContext
-  static readonly debug = process.env.NODE_ENV === 'development'
+
+  static get root() {
+    return workspace.rootPath!
+  }
+
+  static get disabled() {
+    return Config.getConfig<boolean>('disabled') ?? false
+  }
+
+  static get autoDetection() {
+    return Config.getConfig<boolean>('autoDetection') ?? true
+  }
 
   // languages
   static get displayLanguage(): string {
@@ -224,6 +240,10 @@ export class Config {
     return this.getConfig<any>('parsers.typescript.compilerOptions') || {}
   }
 
+  static get parsersExtendFileExtensions(): any {
+    return this.getConfig<any>('parsers.extendFileExtensions') || {}
+  }
+
   static toggleLocaleVisibility(locale: string, visible?: boolean) {
     const ignored = this.ignoredLocales
     if (visible == null)
@@ -238,27 +258,26 @@ export class Config {
   }
 
   // locales
-  static get _localesPaths(): string[] {
+  static get _localesPaths(): string[] | undefined {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
     if (!paths)
-      localesPaths = []
+      return
     else if (typeof paths === 'string')
       localesPaths = paths.split(',')
     else
-      localesPaths = paths || []
-    return localesPaths.map(i => trimEnd(i, '/\\'))
+      localesPaths = paths
+    if (!localesPaths)
+      return
+    return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
-  static set _localesPaths(paths: string[]) {
-    if (paths.length === 1)
-      this.setConfig('localesPaths', paths[0])
-    else
-      this.setConfig('localesPaths', paths)
+  static set _localesPaths(paths: string[] | undefined) {
+    this.setConfig('localesPaths', paths)
   }
 
   static updateLocalesPaths(paths: string[]) {
-    this._localesPaths = uniq(this._localesPaths.concat(paths))
+    this._localesPaths = uniq((this._localesPaths || []).concat(paths))
   }
 
   static get themeAnnotation(): string {
@@ -310,7 +329,7 @@ export class Config {
   }
 
   static get refactorTemplates() {
-    return this.getConfig<string[]>('refactor.templates') || []
+    return resolveRefactorTemplate(this.getConfig<string[]>('refactor.templates') || [])
   }
 
   static get disablePathParsing() {
@@ -405,12 +424,49 @@ export class Config {
     return this.getConfig<string>('extract.keygenStrategy') ?? 'slug'
   }
 
+  static get keygenStyle(): CaseStyles {
+    return this.getConfig<CaseStyles>('extract.keygenStyle') ?? 'default'
+  }
+
   static get keyPrefix() {
     return this.getConfig<string>('extract.keyPrefix') ?? ''
   }
 
   static get extractKeyMaxLength() {
     return this.getConfig<number>('extract.keyMaxLength') ?? Infinity
+  }
+
+  static get extractAutoDetect() {
+    return this.getConfig<boolean>('extract.autoDetect') ?? false
+  }
+
+  static set extractAutoDetect(v: boolean) {
+    this.setConfig('extract.autoDetect', v, false)
+    commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', v)
+  }
+
+  static get extractParserHTMLOptions() {
+    return this.getConfig<ExtractionHTMLOptions>('extract.parsers.html') ?? {}
+  }
+
+  static get extractParserBabelOptions() {
+    return this.getConfig<ExtractionBabelOptions>('extract.parsers.babel') ?? {}
+  }
+
+  static get extractIgnored() {
+    return this.getConfig<string[]>('extract.ignored') ?? []
+  }
+
+  static set extractIgnored(v) {
+    this.setConfig('extract.ignored', v)
+  }
+
+  static get extractIgnoredByFiles() {
+    return this.getConfig<Record<string, string[]>>('extract.ignoredByFiles') ?? {}
+  }
+
+  static set extractIgnoredByFiles(v) {
+    this.setConfig('extract.ignoredByFiles', v)
   }
 
   static get showFlags() {
@@ -465,11 +521,27 @@ export class Config {
       .update(key, value, isGlobal)
   }
 
+  static get googleApiKey() {
+    return this.getConfig<string | null | undefined>('translate.google.apiKey')
+  }
+
   static get deeplApiKey() {
     return this.getConfig<string | null | undefined>('translate.deepl.apiKey')
   }
 
-  static get deeplLog(): Boolean {
+  static get deeplUseFreeApiEntry() {
+    return this.getConfig<boolean>('translate.deepl.useFreeApiEntry')
+  }
+
+  static get deeplLog(): boolean {
     return !!this.getConfig('translate.deepl.enableLog')
+  }
+
+  static get libreTranslateApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
+
+  static get telemetry(): boolean {
+    return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
   }
 }

@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "vue": "2.6.10",
-    "vue-router": "^3.0.1",
+    "vue-router": "^4.0.8",
     "vuex": "^3.0.1",
-    "vuex-i18n": "^1.8.0",
+    "vuex-i18n": "^1.13.1",
     "vuex-router-sync": "^5.0.0"
   }
 }

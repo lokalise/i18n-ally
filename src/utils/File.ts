@@ -1,7 +1,7 @@
 import path, { normalize } from 'path'
 import iconv from 'iconv-lite'
 import fs from 'fs-extra'
-import { Config } from '../core'
+import { Config } from '~/core'
 
 interface FileEncoding {
   encoding: string

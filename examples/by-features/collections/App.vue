@@ -7,7 +7,7 @@
     <!-- array -->
     <p>{{ $t('errors[0]') }}</p>
     <!-- object in array -->
-    <p>{{ $t('errors[1].internal1') }}</p>
+    <p>{{ $t('errors.1.internal1') }}</p>
     <!-- array in array -->
     <p>{{ $t('errors[2][0]') }}</p>
   </div>
@@ -22,10 +22,10 @@ export default {
   }),
 
   computed: {
-    foobar () {
+    foobar() {
       return this.$t('nested.foo.bar')
     },
-    exists () {
+    exists() {
       return this.$te('nested.foo.bar')
     },
   },

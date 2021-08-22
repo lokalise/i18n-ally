@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`React with i18next get correct coverage report 1`] = `
+Object {
+  "allKeys": Array [
+    "pages.home.title",
+    "translation.description.part1",
+    "translation.description.part2",
+    "translation.foo.bar",
+    "translation.title",
+    "translation.titlew",
+  ],
+  "emptyKeys": Array [],
+  "locale": "en",
+  "missing": 0,
+  "missingKeys": Array [],
+  "total": 6,
+  "translated": 6,
+  "translatedKeys": Array [
+    "pages.home.title",
+    "translation.description.part1",
+    "translation.description.part2",
+    "translation.foo.bar",
+    "translation.title",
+    "translation.titlew",
+  ],
+}
+`;
+
+exports[`React with i18next get keys 1`] = `
+Array [
+  Object {
+    "end": 553,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 536,
+  },
+  Object {
+    "end": 617,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 600,
+  },
+  Object {
+    "end": 684,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 667,
+  },
+  Object {
+    "end": 899,
+    "key": "translation.description.part1",
+    "quoted": true,
+    "start": 870,
+  },
+  Object {
+    "end": 1493,
+    "key": "translation.description.part2",
+    "quoted": true,
+    "start": 1464,
+  },
+  Object {
+    "end": 1579,
+    "key": "translation.description.part2",
+    "quoted": false,
+    "start": 1550,
+  },
+  Object {
+    "end": 1747,
+    "key": "translation.foo.bar",
+    "quoted": true,
+    "start": 1744,
+  },
+  Object {
+    "end": 1796,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1780,
+  },
+  Object {
+    "end": 1820,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1804,
+  },
+  Object {
+    "end": 1928,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1923,
+  },
+  Object {
+    "end": 1978,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 1961,
+  },
+]
+`;

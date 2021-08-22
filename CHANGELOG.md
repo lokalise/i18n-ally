@@ -2,6 +2,468 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/lokalise/i18n-ally/compare/v2.7.0...v2.7.1) (2021-08-21)
+
+
+### ⚡ Features
+
+* ignore optons for hard-coded detection, close [#649](https://github.com/lokalise/i18n-ally/issues/649) ([1d0a020](https://github.com/lokalise/i18n-ally/commit/1d0a020a30a49c3ac7e30ad36bb74eb9302aa49a))
+
+## [2.7.0](https://github.com/lokalise/i18n-ally/compare/v2.6.26...v2.7.0) (2021-08-12)
+
+
+### 🐞 Bug Fixes
+
+* **deepl:** stipe locale code for deepl, close [#622](https://github.com/lokalise/i18n-ally/issues/622) ([c976cdb](https://github.com/lokalise/i18n-ally/commit/c976cdb986a39ed88a304512decde6f741e927c0))
+
+
+### ⚡ Features
+
+* new command get next usage, close [#636](https://github.com/lokalise/i18n-ally/issues/636) ([ea1b386](https://github.com/lokalise/i18n-ally/commit/ea1b386eaa765761eccb9003daf7c59ede73d850))
+
+### [2.6.26](https://github.com/lokalise/i18n-ally/compare/v2.6.25...v2.6.26) (2021-08-11)
+
+
+### ⚡ Features
+
+* add @nuxtjs/i18n to the detection trigger ([#645](https://github.com/lokalise/i18n-ally/issues/645)) ([643919b](https://github.com/lokalise/i18n-ally/commit/643919bf162518b8b3423c9aa2b79c821c507aa2))
+
+### [2.6.25](https://github.com/lokalise/i18n-ally/compare/v2.6.24...v2.6.25) (2021-08-11)
+
+
+### 🐞 Bug Fixes
+
+* html parser, close [#628](https://github.com/lokalise/i18n-ally/issues/628) ([d2aee15](https://github.com/lokalise/i18n-ally/commit/d2aee155475e00f7483db486f54c43ee96ededfe))
+
+
+### ⚡ Features
+
+* add more refactor templates for svelte, close [#629](https://github.com/lokalise/i18n-ally/issues/629) ([8940cc2](https://github.com/lokalise/i18n-ally/commit/8940cc23885cd18393ef052a0f491fe438c53e58))
+* print more info the error log, close [#641](https://github.com/lokalise/i18n-ally/issues/641) ([d648a01](https://github.com/lokalise/i18n-ally/commit/d648a0162660269a5011a5f4c22dd140391deaef))
+
+### [2.6.24](https://github.com/lokalise/i18n-ally/compare/v2.6.23...v2.6.24) (2021-08-10)
+
+
+### ⚡ Features
+
+* config for extract.parsers.babel, close [#634](https://github.com/lokalise/i18n-ally/issues/634) ([6c2ea99](https://github.com/lokalise/i18n-ally/commit/6c2ea99ce9bf913e5659c519e679a88f6a02bf3c))
+* ignore className and other attrs in JSX extraction ([2e0d277](https://github.com/lokalise/i18n-ally/commit/2e0d277d9e43ce954dc9565fa57da1fe3a0e7d6e))
+* more forgiving html parser ([b1409bc](https://github.com/lokalise/i18n-ally/commit/b1409bc0652d4fe09e0b10031086ebe400b2918b))
+
+### [2.6.23](https://github.com/lokalise/i18n-ally/compare/v2.6.22...v2.6.23) (2021-07-31)
+
+
+### 🐞 Bug Fixes
+
+* event registration for ProgressProvider ([0c5828d](https://github.com/lokalise/i18n-ally/commit/0c5828d2f0dff1f7b7a6ef50faa176b0ed2c7c04))
+* keepFulfilled triggering, close [#581](https://github.com/lokalise/i18n-ally/issues/581) ([a3029c5](https://github.com/lokalise/i18n-ally/commit/a3029c5b83c8738b4a18a3f7f5e3e21a4741ed49))
+
+### [2.6.22](https://github.com/lokalise/i18n-ally/compare/v2.6.21...v2.6.22) (2021-07-28)
+
+
+### 🐞 Bug Fixes
+
+* try fix progress loader update ([0fea000](https://github.com/lokalise/i18n-ally/commit/0fea00051f385a4d639285faf31561ac4fbcd6cb))
+
+
+### ⚡ Features
+
+* add a number of detected hardcoded strings in tree view, close [#633](https://github.com/lokalise/i18n-ally/issues/633) ([a83f00c](https://github.com/lokalise/i18n-ally/commit/a83f00c860e1f89d3ca09acaefc30a0cf802aff5))
+* new framework jeklly support, close [#568](https://github.com/lokalise/i18n-ally/issues/568) ([6d6f96c](https://github.com/lokalise/i18n-ally/commit/6d6f96c15aa7644a6827082fd56f6d4e0be8fcb1))
+
+### [2.6.21](https://github.com/lokalise/i18n-ally/compare/v2.6.20...v2.6.21) (2021-07-28)
+
+
+### 🐞 Bug Fixes
+
+* build ([67251a8](https://github.com/lokalise/i18n-ally/commit/67251a817a9bbf9cba3e9d5f701f6ad4cce38c51))
+* improve extraction rules ([5850694](https://github.com/lokalise/i18n-ally/commit/5850694d037b1a91250f76c792c0a41c565cca20))
+
+### [2.6.20](https://github.com/lokalise/i18n-ally/compare/v2.6.19...v2.6.20) (2021-07-28)
+
+### [2.6.19](https://github.com/lokalise/i18n-ally/compare/v2.6.18...v2.6.19) (2021-07-16)
+
+
+### 🐞 Bug Fixes
+
+* **detection:** better `<script/>` detect, close [#623](https://github.com/lokalise/i18n-ally/issues/623) ([67dc0b0](https://github.com/lokalise/i18n-ally/commit/67dc0b0b2e60825b2985d5e8e2062ed7c1431b58))
+* **detection:** svelte inline function, close [#624](https://github.com/lokalise/i18n-ally/issues/624) ([519f5b6](https://github.com/lokalise/i18n-ally/commit/519f5b6ce6f61bc074f8e31bf89bc611196075db))
+* telemetry slient on error ([38a5c47](https://github.com/lokalise/i18n-ally/commit/38a5c47a55d2a6c6ecba1a289feaf30997f6d0ea))
+
+
+### ⚡ Features
+
+* **detection:** ignore texts in conosle.log ([8751d71](https://github.com/lokalise/i18n-ally/commit/8751d7160a1d705cd9201216df890b61b785468b))
+
+### [2.6.18](https://github.com/lokalise/i18n-ally/compare/v2.6.17...v2.6.18) (2021-07-14)
+
+
+### ⚡ Features
+
+* support extraction for svelte, close [#621](https://github.com/lokalise/i18n-ally/issues/621) ([57d9d96](https://github.com/lokalise/i18n-ally/commit/57d9d96109537e4b3d260d42efd28eb19ce95f11))
+
+### [2.6.17](https://github.com/lokalise/i18n-ally/compare/v2.6.16...v2.6.17) (2021-07-14)
+
+
+### 🐞 Bug Fixes
+
+* webpack build ([f603d02](https://github.com/lokalise/i18n-ally/commit/f603d02978e8a7045ccda47226afdcc5cd67f67a))
+
+### [2.6.16](https://github.com/lokalise/i18n-ally/compare/v2.6.15...v2.6.16) (2021-07-14)
+
+
+### 🐞 Bug Fixes
+
+* build ([7921dae](https://github.com/lokalise/i18n-ally/commit/7921daebfd57f2a2deb2bc0e316683eb230a6de1))
+* extracting for js template, close [#613](https://github.com/lokalise/i18n-ally/issues/613) ([fb82a96](https://github.com/lokalise/i18n-ally/commit/fb82a96e4b847a253dc4a5043f95e87f8918ae7d))
+* improve detection rules, close [#600](https://github.com/lokalise/i18n-ally/issues/600) ([4f764bb](https://github.com/lokalise/i18n-ally/commit/4f764bb8ba7d04525cd63ab9057b7d29b17fe6f7))
+
+### [2.6.15](https://github.com/lokalise/i18n-ally/compare/v2.6.13...v2.6.15) (2021-07-14)
+
+
+### ⚡ Features
+
+* added flag for hi (hindi) ([#612](https://github.com/lokalise/i18n-ally/issues/612)) ([0c963d7](https://github.com/lokalise/i18n-ally/commit/0c963d7748ce2a55ca904c6c3735da86b3dd1054))
+* libretranslate support ([#607](https://github.com/lokalise/i18n-ally/issues/607)) ([ab3451d](https://github.com/lokalise/i18n-ally/commit/ab3451d7a726d141ee36b8f2381cbeea911c581a))
+* update german locales de-DE ([#620](https://github.com/lokalise/i18n-ally/issues/620)) ([b35f9a4](https://github.com/lokalise/i18n-ally/commit/b35f9a4d5e5341b15ab682c9c4611ef988ce8578))
+
+
+### 🐞 Bug Fixes
+
+* build mode ([fd4feda](https://github.com/lokalise/i18n-ally/commit/fd4feda5f9dc0c940de71b2c15d6e1f31aecf635))
+
+### [2.6.14](https://github.com/lokalise/i18n-ally/compare/v2.6.13...v2.6.14) (2021-07-14)
+
+
+### ⚡ Features
+
+* added flag for hi (hindi) ([#612](https://github.com/lokalise/i18n-ally/issues/612)) ([0c963d7](https://github.com/lokalise/i18n-ally/commit/0c963d7748ce2a55ca904c6c3735da86b3dd1054))
+* libretranslate support ([#607](https://github.com/lokalise/i18n-ally/issues/607)) ([ab3451d](https://github.com/lokalise/i18n-ally/commit/ab3451d7a726d141ee36b8f2381cbeea911c581a))
+
+
+### 🐞 Bug Fixes
+
+* build mode ([89404e0](https://github.com/lokalise/i18n-ally/commit/89404e06b9358906099c8e893f53a76b9e4e151a))
+
+### [2.6.13](https://github.com/lokalise/i18n-ally/compare/v2.6.12...v2.6.13) (2021-07-07)
+
+
+### 🐞 Bug Fixes
+
+* events length ([9ad04b4](https://github.com/lokalise/i18n-ally/commit/9ad04b412d78b4b64ced4a2f1a2b4fda3249750e))
+
+### [2.6.12](https://github.com/lokalise/i18n-ally/compare/v2.6.11...v2.6.12) (2021-07-07)
+
+### [2.6.11](https://github.com/lokalise/i18n-ally/compare/v2.6.10...v2.6.11) (2021-07-07)
+
+
+### ⚡ Features
+
+* enable user analytics ([#618](https://github.com/lokalise/i18n-ally/issues/618)) ([19f8b37](https://github.com/lokalise/i18n-ally/commit/19f8b374c9992bc7a88f60d8299e011b74bbdb70))
+
+### [2.6.10](https://github.com/lokalise/i18n-ally/compare/v2.6.9...v2.6.10) (2021-06-29)
+
+
+### 🐞 Bug Fixes
+
+* do not override localesPath if empty array passed, close [#578](https://github.com/lokalise/i18n-ally/issues/578) ([52a8fff](https://github.com/lokalise/i18n-ally/commit/52a8fff694f9adf3eb4b4017c26d86956daf0fe2))
+
+
+### ⚡ Features
+
+* allow toggle `i18n-ally.extract.autoDetect` from UI, close [#591](https://github.com/lokalise/i18n-ally/issues/591) ([a9ca8ca](https://github.com/lokalise/i18n-ally/commit/a9ca8ca658a77bc6b82b787f1c3dbaa9121f2c9f))
+* extract all in file, close [#592](https://github.com/lokalise/i18n-ally/issues/592) ([5b61082](https://github.com/lokalise/i18n-ally/commit/5b61082a2845bfabc1af773df90d37576b429666))
+* extract batch in files, close [#593](https://github.com/lokalise/i18n-ally/issues/593) ([c4ca3b8](https://github.com/lokalise/i18n-ally/commit/c4ca3b891b00c209373b3a9029b98286cc3a8c55))
+* extraction key reuse and auto increment ([a148839](https://github.com/lokalise/i18n-ally/commit/a148839d1a1691fd7756a33ce5014a7021af0725)), closes [#594](https://github.com/lokalise/i18n-ally/issues/594) [#595](https://github.com/lokalise/i18n-ally/issues/595)
+* new autoDetection config, close [#606](https://github.com/lokalise/i18n-ally/issues/606) ([bcb9fa2](https://github.com/lokalise/i18n-ally/commit/bcb9fa2779b3c8425bca1c4b114164ef0b23a529))
+* support selection of folders for bulk extraction, close [#603](https://github.com/lokalise/i18n-ally/issues/603) ([33f339b](https://github.com/lokalise/i18n-ally/commit/33f339b89647328eb520b765023e547e1070b7bf))
+* **ngx-translate:** add support for stream method ([#598](https://github.com/lokalise/i18n-ally/issues/598)) ([ade5701](https://github.com/lokalise/i18n-ally/commit/ade5701c095569c12197c3c169e8115fab878353))
+
+### [2.6.9](https://github.com/lokalise/i18n-ally/compare/v2.6.8...v2.6.9) (2021-06-09)
+
+### [2.6.8](https://github.com/lokalise/i18n-ally/compare/v2.6.7...v2.6.8) (2021-06-09)
+
+### [2.6.7](https://github.com/lokalise/i18n-ally/compare/v2.6.6...v2.6.7) (2021-06-09)
+
+
+### 🐞 Bug Fixes
+
+* release script ([0e77cb0](https://github.com/lokalise/i18n-ally/commit/0e77cb04e8b438fe237b67c94c25bfd72402fa45))
+
+### [2.6.6](https://github.com/lokalise/i18n-ally/compare/v2.6.5...v2.6.6) (2021-06-09)
+
+### [2.6.5](https://github.com/lokalise/i18n-ally/compare/v2.6.4...v2.6.5) (2021-06-09)
+
+### [2.6.4](https://github.com/lokalise/i18n-ally/compare/v2.6.3...v2.6.4) (2021-06-09)
+
+
+### 🔮 Refactor
+
+* **vue:** space for vue mustache in refactor template, close [#584](https://github.com/lokalise/i18n-ally/issues/584) ([c29e38c](https://github.com/lokalise/i18n-ally/commit/c29e38c77cb471b3fbe7ef0d7006cd771e2c1e09))
+
+### [2.6.3](https://github.com/lokalise/i18n-ally/compare/v2.6.2...v2.6.3) (2021-06-08)
+
+
+### ⚡ Features
+
+* **rails:** support symbol usage, close [#583](https://github.com/lokalise/i18n-ally/issues/583) ([3041900](https://github.com/lokalise/i18n-ally/commit/30419007e15d460ee53e1808a9ea6b7c2cf8f1bb))
+* **vue:** support vue-i18n-next  component interpolation, close [#582](https://github.com/lokalise/i18n-ally/issues/582) ([ddcbce5](https://github.com/lokalise/i18n-ally/commit/ddcbce5442a2624ae74b03947b619b9aaefe8d78))
+* support include/exclude in refactor templates, close [#579](https://github.com/lokalise/i18n-ally/issues/579) ([1bd6b27](https://github.com/lokalise/i18n-ally/commit/1bd6b277eff9f077293e1f16167fa6c337357e3b))
+
+
+### 📚 Documentations
+
+* add custom framework example ([8e5196b](https://github.com/lokalise/i18n-ally/commit/8e5196bca5d845ae14c154d5c9af7ad7c5b32b40))
+
+### [2.6.2](https://github.com/lokalise/i18n-ally/compare/v2.6.1...v2.6.2) (2021-06-02)
+
+
+### ⚡ Features
+
+* configure for custom refactor template, close [#574](https://github.com/lokalise/i18n-ally/issues/574) ([261ce4f](https://github.com/lokalise/i18n-ally/commit/261ce4f415db18b3ce18f4379c67ec8d26c1b5bd))
+* refactor template based on detection type ([1d46b75](https://github.com/lokalise/i18n-ally/commit/1d46b7552b6a3aab99db0c91f75d63899bdaf6ee))
+* support extracting html, close [#575](https://github.com/lokalise/i18n-ally/issues/575) ([cd3ed5d](https://github.com/lokalise/i18n-ally/commit/cd3ed5d0ef9c0077368711f8d9fbca2ae36f3b63))
+
+
+### 🐞 Bug Fixes
+
+* don't enable if only general  framework is presented ([ab25966](https://github.com/lokalise/i18n-ally/commit/ab259667e1f2da384f4f09384a3234b81dba3a4a))
+* message set pathes, close [#565](https://github.com/lokalise/i18n-ally/issues/565) ([d4b14ea](https://github.com/lokalise/i18n-ally/commit/d4b14ea01adffd9d40965ecb9d13eba90599782b))
+
+### [2.6.1](https://github.com/lokalise/i18n-ally/compare/v2.6.0...v2.6.1) (2021-06-01)
+
+
+### 🐞 Bug Fixes
+
+* downgrade ts-node, fix [#576](https://github.com/lokalise/i18n-ally/issues/576) ([a1c8261](https://github.com/lokalise/i18n-ally/commit/a1c8261f9602080dd356bc06891c70160d06d2b0))
+
+
+### ⚡ Features
+
+* new disabled setting ([181faa4](https://github.com/lokalise/i18n-ally/commit/181faa471ebc67065a3eeae0888c80902c847df3))
+
+## [2.6.0](https://github.com/lokalise/i18n-ally/compare/v2.5.9...v2.6.0) (2021-05-27)
+
+
+### 🐞 Bug Fixes
+
+* do not prompt when no locales found, log in the terminal instead ([8e74c8f](https://github.com/lokalise/i18n-ally/commit/8e74c8ff31aea89a990f91f73e13a78a0cc70898))
+* remove question mark in hard strings sidebar, close [#557](https://github.com/lokalise/i18n-ally/issues/557) ([f5c58cb](https://github.com/lokalise/i18n-ally/commit/f5c58cbcc185caf1314d3cad3f95dee0a5ad6036))
+
+
+### ⚗ Tests
+
+* add js fixtures ([e07fd50](https://github.com/lokalise/i18n-ally/commit/e07fd50cfa3f1f12bf1c6c6940ed1b2c69cb7301))
+* enable fixture test ([63b6ed6](https://github.com/lokalise/i18n-ally/commit/63b6ed6aa066536963206693e82f26768a1aee38))
+* test runner ([50d0510](https://github.com/lokalise/i18n-ally/commit/50d0510cc3d0ea4966f01016a33f67571b505a19))
+* update e2e ([9ca482d](https://github.com/lokalise/i18n-ally/commit/9ca482d8e7518578157a99e19d58bd3bb85b22b6))
+
+
+### ⚡ Features
+
+* add flag for eo ([#569](https://github.com/lokalise/i18n-ally/issues/569)) ([c0907b5](https://github.com/lokalise/i18n-ally/commit/c0907b5b11ae53fadf6a061d3a891033ba643519))
+* babel-detections ([#562](https://github.com/lokalise/i18n-ally/issues/562)) ([5448b32](https://github.com/lokalise/i18n-ally/commit/5448b3299f4aef1a61ab00f2fa6336d5696914eb))
+* **detection:** exclude all lowercases string as target ([6950438](https://github.com/lokalise/i18n-ally/commit/6950438032a0dc0e3767f0638c6e6861da746ed6))
+* support detection for js/ts/jsx/tsx, close [#558](https://github.com/lokalise/i18n-ally/issues/558) ([e11ec25](https://github.com/lokalise/i18n-ally/commit/e11ec25b7af2a4adaf4c001ece895d11eb031d4f))
+* support vue <script> detections, close [#559](https://github.com/lokalise/i18n-ally/issues/559) ([e060ed6](https://github.com/lokalise/i18n-ally/commit/e060ed68d069ed6db79a4a56d1e41ea6d135f2bf))
+
+### [2.5.9](https://github.com/lokalise/i18n-ally/compare/v2.5.8...v2.5.9) (2021-05-19)
+
+
+### 📚 Documentations
+
+* remove sponsorship ([c9588fc](https://github.com/lokalise/i18n-ally/commit/c9588fc3fdb2b54df31949a8e8e83fa49725b847))
+
+
+### 🌍 Internationalization
+
+* add Turkish support, complete French translations ([#560](https://github.com/lokalise/i18n-ally/issues/560)) ([2dde828](https://github.com/lokalise/i18n-ally/commit/2dde8284b8014ca04f190b1b4d4b3cb51588c0ba))
+
+
+### 🐞 Bug Fixes
+
+* **ngx-translate:** detect for array keys, and enable jsx/tsx, close [#517](https://github.com/lokalise/i18n-ally/issues/517) ([29e4668](https://github.com/lokalise/i18n-ally/commit/29e46682d0e7e65db14de20b8d58726a41bd1569))
+* missing keys quick fix, close [#529](https://github.com/lokalise/i18n-ally/issues/529) ([cc08cd2](https://github.com/lokalise/i18n-ally/commit/cc08cd258666cee77c0bccc4d4e8a76594a57638))
+
+
+### ⚡ Features
+
+* **lingui:** minimal support for lingui, close [#513](https://github.com/lokalise/i18n-ally/issues/513) ([cbb4de3](https://github.com/lokalise/i18n-ally/commit/cbb4de3bd96df7fe3d0de42dbdb6132ad688d3fa))
+
+### [2.5.8](https://github.com/lokalise/i18n-ally/compare/v2.5.7...v2.5.8) (2021-05-04)
+
+
+### ⚡ Features
+
+* allow using deepl api free plan ([df8bb7f](https://github.com/lokalise/i18n-ally/commit/df8bb7ff761f1e26daaff78d5b72d45ad57c165e))
+
+
+### 🐞 Bug Fixes
+
+* improve Google Cloud key protected API usage by shortening unsupported locales ([0c192a2](https://github.com/lokalise/i18n-ally/commit/0c192a2d9578b5818c5f54cecc875465495f268d))
+* problem list detection on content change, close [#545](https://github.com/lokalise/i18n-ally/issues/545), close [#544](https://github.com/lokalise/i18n-ally/issues/544) ([f975298](https://github.com/lokalise/i18n-ally/commit/f9752983ac17e5c56310d713683f1431a5b623ad))
+* rename useFreeApi to useFreeApiEntry ([10923e8](https://github.com/lokalise/i18n-ally/commit/10923e8981d166f24e84380837c981803493ae36))
+
+### [2.5.7](https://github.com/lokalise/i18n-ally/compare/v2.5.6...v2.5.7) (2021-04-20)
+
+
+### 🐞 Bug Fixes
+
+* hard string detection after extracting, close [#542](https://github.com/lokalise/i18n-ally/issues/542) ([9a250a8](https://github.com/lokalise/i18n-ally/commit/9a250a8668bce415641ed0b52100186a3baf607c))
+
+### [2.5.6](https://github.com/lokalise/i18n-ally/compare/v2.5.5...v2.5.6) (2021-04-20)
+
+
+### 🔮 Refactor
+
+* switch hard string highlight to problems panel ([97e405c](https://github.com/lokalise/i18n-ally/commit/97e405cb0de34dc1b5785d64a8fcd2e5ea01d22a))
+
+
+### ⚡ Features
+
+* extraction for string concatenation, close [#527](https://github.com/lokalise/i18n-ally/issues/527) ([26ada5a](https://github.com/lokalise/i18n-ally/commit/26ada5a1f9eb7cb2ca718a236809e8aaaf87a414))
+* extraction strings with variables in vue, close [#525](https://github.com/lokalise/i18n-ally/issues/525), close [#526](https://github.com/lokalise/i18n-ally/issues/526) ([1a11b75](https://github.com/lokalise/i18n-ally/commit/1a11b75e9d15247a9f0109ab87998617be6433c8))
+* quick fix for hard string problem, close [#538](https://github.com/lokalise/i18n-ally/issues/538) ([f8e807c](https://github.com/lokalise/i18n-ally/commit/f8e807c6f2c91e478013896322923dfd22c9cca2))
+
+
+### 🐞 Bug Fixes
+
+* detection for vue dyamic props ([28382e2](https://github.com/lokalise/i18n-ally/commit/28382e270c26559bc6704348d657a37a25149156))
+* do not detect strings inside $t as hardcoded, close [#536](https://github.com/lokalise/i18n-ally/issues/536) ([27cebd5](https://github.com/lokalise/i18n-ally/commit/27cebd5293f9f4e6c7154d3e46bebd15fc21fa12))
+* partial fix for [#443](https://github.com/lokalise/i18n-ally/issues/443) ([a0f8f51](https://github.com/lokalise/i18n-ally/commit/a0f8f51ab54dd3518129f7da4ba4fb8d4a342ba7))
+* skip backquotes when extracting from JS template strings, close [#537](https://github.com/lokalise/i18n-ally/issues/537) ([46c3cab](https://github.com/lokalise/i18n-ally/commit/46c3cabd6e5a2a8495cd2476694ddf5824d6b007))
+* utilize Google API key with new api endpoint ([#534](https://github.com/lokalise/i18n-ally/issues/534)) ([96adc20](https://github.com/lokalise/i18n-ally/commit/96adc20dd8d55a6010d7296009a4ba9dc6903d6e))
+
+### [2.5.5](https://github.com/lokalise/i18n-ally/compare/v2.5.4...v2.5.5) (2021-04-07)
+
+
+### 🔮 Refactor
+
+* make "Current File" tab a tree with multiple entries, close [#506](https://github.com/lokalise/i18n-ally/issues/506) ([e077a4b](https://github.com/lokalise/i18n-ally/commit/e077a4b2591a85802db9a66ddbd8aa053261604d))
+
+
+### 🐞 Bug Fixes
+
+* array notation detection, close [#482](https://github.com/lokalise/i18n-ally/issues/482) ([b732dd7](https://github.com/lokalise/i18n-ally/commit/b732dd7b24b3ef4bf2b6b3154d62e1f9e18976b1))
+* close [#511](https://github.com/lokalise/i18n-ally/issues/511) ([9dc48fa](https://github.com/lokalise/i18n-ally/commit/9dc48fa2dc1c5e6309210ba359718452a88dc620))
+* disable detection subtree instead of hiding ([8b7c414](https://github.com/lokalise/i18n-ally/commit/8b7c4147106808351a1b59823a20d927dbe59b85))
+* extraction range ([57d87a4](https://github.com/lokalise/i18n-ally/commit/57d87a4dafb8493d5d3b88f47853f5501c3255cd))
+* extraction updates, close [#520](https://github.com/lokalise/i18n-ally/issues/520) ([cc48574](https://github.com/lokalise/i18n-ally/commit/cc4857406d9f8dc50cfe856c6453b10765c4c573))
+* show detection subtree only for support language ([2a62205](https://github.com/lokalise/i18n-ally/commit/2a622054f110f9cfaab9d65e64342b542c49d599))
+
+
+### ⚡ Features
+
+* **rails:** add slim language to rails framework ([#521](https://github.com/lokalise/i18n-ally/issues/521)) ([99a7124](https://github.com/lokalise/i18n-ally/commit/99a7124c8f5b76b0da09146992528d7b9c3ab8fe))
+* add docs link to detections root, close [#519](https://github.com/lokalise/i18n-ally/issues/519) ([bd7f28a](https://github.com/lokalise/i18n-ally/commit/bd7f28a86ce68f0518e55f9a588cd4b7ee65235c))
+* click to navigate to detection, close [#509](https://github.com/lokalise/i18n-ally/issues/509) ([60c0f8a](https://github.com/lokalise/i18n-ally/commit/60c0f8aaf3775c2f9e6338527c2c95f5007eea52))
+* continue auto detection configuration, close [#523](https://github.com/lokalise/i18n-ally/issues/523) ([d90b065](https://github.com/lokalise/i18n-ally/commit/d90b065364673d55f400720802010c4f5015f793))
+* detection range, close [#518](https://github.com/lokalise/i18n-ally/issues/518) ([98af9b9](https://github.com/lokalise/i18n-ally/commit/98af9b90963c296b9ffd21c573d429456a7dc5d8))
+* extraction button in subtree, close [#510](https://github.com/lokalise/i18n-ally/issues/510) ([73bc114](https://github.com/lokalise/i18n-ally/commit/73bc1149a7efdb62dc137ab1c2761f84f916494d))
+
+### [2.5.4](https://github.com/lokalise/i18n-ally/compare/v2.5.3...v2.5.4) (2021-03-07)
+
+
+### 🐞 Bug Fixes
+
+* flag for vi, close [#498](https://github.com/lokalise/i18n-ally/issues/498) ([6d0aab1](https://github.com/lokalise/i18n-ally/commit/6d0aab19e72149e8076fdfa6457472b628d1a81f))
+
+### [2.5.3](https://github.com/lokalise/i18n-ally/compare/v2.5.2...v2.5.3) (2021-03-05)
+
+
+### 🔮 Refactor
+
+* restructure ([23a6521](https://github.com/lokalise/i18n-ally/commit/23a652144e742266aea79b8dc782cc3d5654e2c3))
+
+
+### 🐞 Bug Fixes
+
+* es default flag, close [#489](https://github.com/lokalise/i18n-ally/issues/489) ([f62e49a](https://github.com/lokalise/i18n-ally/commit/f62e49aa36b6833bac52161c3f0ff9c76b9cf686))
+* UI editor font family, close [#496](https://github.com/lokalise/i18n-ally/issues/496) ([fab0ce0](https://github.com/lokalise/i18n-ally/commit/fab0ce03ae0f4ff1667c0f33a439e2c13c538d8d))
+
+
+### ⚡ Features
+
+* add flag for he, close [#442](https://github.com/lokalise/i18n-ally/issues/442) ([20b5b81](https://github.com/lokalise/i18n-ally/commit/20b5b81a8e4a93f5467d5f2558c5f510cdd09234))
+
+### [2.5.2](https://github.com/lokalise/i18n-ally/compare/v2.5.1...v2.5.2) (2021-02-25)
+
+
+### 🐞 Bug Fixes
+
+* vscode types version ([8fb34d1](https://github.com/lokalise/i18n-ally/commit/8fb34d17eacc32986d4f964d40f9b38a6fd735c3))
+
+### [2.5.1](https://github.com/lokalise/i18n-ally/compare/v2.5.0...v2.5.1) (2021-02-25)
+
+
+### ⚡ Features
+
+* support custom file extensions for parsers, close [#459](https://github.com/lokalise/i18n-ally/issues/459) ([758552d](https://github.com/lokalise/i18n-ally/commit/758552d96861880faeea6f7702743be5106f9967))
+
+## [2.5.0](https://github.com/lokalise/i18n-ally/compare/v2.4.23...v2.5.0) (2021-02-23)
+
+### [2.4.23](https://github.com/lokalise/i18n-ally/compare/v2.4.22...v2.4.23) (2021-02-23)
+
+### [2.4.22](https://github.com/lokalise/i18n-ally/compare/v2.4.21...v2.4.22) (2021-02-17)
+
+
+### 🐞 Bug Fixes
+
+* support underscore in keypathValidate ([aa2c957](https://github.com/lokalise/i18n-ally/commit/aa2c95729453f8ce3ffe1a9522bf1a56be037381))
+
+
+### ⚡ Features
+
+* new option `extract.keygenStyle`, close [#479](https://github.com/lokalise/i18n-ally/issues/479) ([6b40469](https://github.com/lokalise/i18n-ally/commit/6b40469d4efca1d10375988024e2466f28d0fb03))
+* support google translate api key ([a93a404](https://github.com/lokalise/i18n-ally/commit/a93a404943d0afe963a99b0d57255719dc1af648))
+
+### [2.4.21](https://github.com/lokalise/i18n-ally/compare/v2.4.20...v2.4.21) (2021-02-09)
+
+
+### 🐞 Bug Fixes
+
+* blackslash on configureLocalesPaths ([d00c9b5](https://github.com/lokalise/i18n-ally/commit/d00c9b5fe207580793b826aaf97d0d30d917be74))
+* extraction keygen, close [#476](https://github.com/lokalise/i18n-ally/issues/476) ([0cdd03c](https://github.com/lokalise/i18n-ally/commit/0cdd03cb4ddc819b9cad4d78513ea20a5e878691))
+* localesPaths backslash for Windows, close [#477](https://github.com/lokalise/i18n-ally/issues/477) ([7ab8269](https://github.com/lokalise/i18n-ally/commit/7ab82692eb7f2756558db79e2ff62d3699c23bd2))
+
+### [2.4.20](https://github.com/lokalise/i18n-ally/compare/v2.4.18...v2.4.20) (2021-02-03)
+
+
+### 🌍 Internationalization
+
+* **de:** add local German (de) ([#463](https://github.com/lokalise/i18n-ally/issues/463)) ([9f7fae6](https://github.com/lokalise/i18n-ally/commit/9f7fae69c8bf5bda5c8454cf9cd78830481ba6a2))
+
+
+### 🔮 Refactor
+
+* path refactoring ([17ac3de](https://github.com/lokalise/i18n-ally/commit/17ac3de7922355b1379d91b03ad294c3df2a231d))
+
+
+### ⚗ Tests
+
+* add more tests ([5093e6d](https://github.com/lokalise/i18n-ally/commit/5093e6d534614ab02f004b6680ede729966faa1f))
+* add test cases for php from [@terales](https://github.com/terales) ([6698f0a](https://github.com/lokalise/i18n-ally/commit/6698f0ae436e2649cb1df9abeee00ec21d22e236))
+* diff for fixture tests ([73b4d69](https://github.com/lokalise/i18n-ally/commit/73b4d698324daada91d1821e84bf40bd3252530d))
+
+
+### ⚡ Features
+
+* introduce php parser ([2510faa](https://github.com/lokalise/i18n-ally/commit/2510faa88f02129b44cf615df40905a852717266))
+
+
+### 🐞 Bug Fixes
+
+* **rails:** works with the Rails extension, close [#472](https://github.com/lokalise/i18n-ally/issues/472) ([c52e40a](https://github.com/lokalise/i18n-ally/commit/c52e40ad2c38e56ebe817f12f0e86a877c17b9e8))
+* support '.' for localesPaths ([0924e3b](https://github.com/lokalise/i18n-ally/commit/0924e3b26bc441bff79a0c2fcf01dc9065f94259))
+
+### [2.4.18](https://github.com/antfu/i18n-ally/compare/v2.4.17...v2.4.18) (2021-01-12)
+
+
+### 🐞 Bug Fixes
+
+* **locales:** separation and completion of ru and uk-UA locales ([#461](https://github.com/antfu/i18n-ally/issues/461)) ([2e59af5](https://github.com/antfu/i18n-ally/commit/2e59af5e7c09cda372b5a58dcde139b6d0eca4ee))
+* **vue:** support annonation on jsx and tsx ([595ec5c](https://github.com/antfu/i18n-ally/commit/595ec5c6bfb227420ba21a720a91d87f68eec3d9))
+
 ### [2.4.17](https://github.com/antfu/i18n-ally/compare/v2.4.16...v2.4.17) (2021-01-07)
 
 

@@ -1,10 +1,11 @@
 import { window } from 'vscode'
-import { LocaleTreeItem, ProgressSubmenuItem } from '../../views'
-import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '../../core'
-import i18n from '../../i18n'
 import { getNodeOrRecord, CommandOptions, getNode } from './common'
+import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
+import { Translator, CurrentFile, Config, Global, LocaleNode, AccaptableTranslateItem } from '~/core'
+import i18n from '~/i18n'
+import { Telemetry, TelemetryKey } from '~/core/Telemetry'
 
-export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode, to?: string) {
+export async function promptForSourceLocale(defaultLocale: string, node?: LocaleNode) {
   const locales = Global.allLocales
   const placeHolder = i18n.t('prompt.select_source_language_for_translating', defaultLocale)
 
@@ -22,7 +23,9 @@ export async function promptForSourceLocale(defaultLocale: string, node?: Locale
   return result.label || defaultLocale
 }
 
-export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions) {
+export async function TranslateKeys(
+  item?: LocaleTreeItem | ProgressSubmenuItem | CommandOptions,
+) {
   let source: string | undefined
 
   if (item && !(item instanceof LocaleTreeItem) && !(item instanceof ProgressSubmenuItem) && item.from) {
@@ -38,6 +41,8 @@ export async function TranslateKeys(item?: LocaleTreeItem | ProgressSubmenuItem 
     if (source == null)
       return
   }
+
+  Telemetry.track(TelemetryKey.TranslateKey, { actionSource: Telemetry.getActionSource(item) })
 
   let nodes: AccaptableTranslateItem[] = []
   let targetLocales: string[] | undefined

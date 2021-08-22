@@ -120,7 +120,7 @@ export default Vue.extend({
           this.current = v || ''
       },
     },
-    context: {
+    'context': {
       immiediate: true,
       handler() {
         this.keyIndex = this.data.keyIndex ?? this.contextKeys.indexOf(this.data.keypath) ?? 0
