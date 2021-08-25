@@ -50,6 +50,13 @@ class GeneralFramework extends Framework {
         DefaultExtractionRules,
         DefaultDynamicExtractionsRules,
         Config.extractParserHTMLOptions,
+        // <script>
+        script => extractionsParsers.babel.detect(
+          script,
+          DefaultExtractionRules,
+          DefaultDynamicExtractionsRules,
+          Config.extractParserBabelOptions,
+        ),
       )
     }
     else {

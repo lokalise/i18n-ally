@@ -15,5 +15,16 @@
         "Demo.vue"
       ]
     }
-  ]
+  ],
+  "i18n-ally.extract.ignored": [
+    "Hello"
+  ],
+  "i18n-ally.extract.ignoredByFiles": {
+    "Demo.vue": [
+      "Demo"
+    ],
+    "nested/a.tsx": [
+      "World"
+    ]
+  }
 }
