@@ -2,6 +2,7 @@ import { Range, TextDocument } from 'vscode'
 
 export interface OptionalFeatures {
   VueSfc?: boolean
+  FluentVueSfc?: boolean
   LinkedMessages?: boolean
   namespace?: boolean
 }

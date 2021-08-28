@@ -333,7 +333,7 @@ export class LocaleLoader extends Loader {
   }
 
   canHandleWrites(pending: PendingWrite) {
-    return !pending.features?.VueSfc
+    return !pending.features?.VueSfc && !pending.features?.FluentVueSfc
   }
 
   async renameKey(oldkey: string, newkey: string) {

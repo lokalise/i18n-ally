@@ -3,6 +3,7 @@ import { throttle } from 'lodash'
 import { ComposedLoader } from './loaders/ComposedLoader'
 import { Global } from './Global'
 import { VueSfcLoader } from './loaders/VueSfcLoader'
+import { FluentVueSfcLoader } from './loaders/FluentVueSfcLoader'
 import { Loader, Analyst } from '.'
 import { DetectHardStrings } from '~/commands/detectHardStrings'
 import { DetectionResult } from '~/core/types'
@@ -10,6 +11,7 @@ import { Log } from '~/utils/Log'
 
 export class CurrentFile {
   static _vue_sfc_loader: VueSfcLoader | null = null
+  static _fluent_vue_sfc_loader: FluentVueSfcLoader | null = null
   static _composed_loader = new ComposedLoader()
   static _onInvalidate = new EventEmitter<boolean>()
   static _onInitialized = new EventEmitter<void>()
@@ -22,6 +24,10 @@ export class CurrentFile {
 
   static get VueSfc() {
     return Global.hasFeatureEnabled('VueSfc')
+  }
+
+  static get FluentVueSfc() {
+    return Global.hasFeatureEnabled('FluentVueSfc')
   }
 
   static watch(ctx: ExtensionContext) {
@@ -61,6 +67,21 @@ export class CurrentFile {
         this._vue_sfc_loader = new VueSfcLoader(uri)
     }
 
+    if (this.FluentVueSfc) {
+      if (this._fluent_vue_sfc_loader) {
+        if (uri && this._fluent_vue_sfc_loader.uri.path === uri.path) {
+          this._fluent_vue_sfc_loader.load()
+          return
+        }
+        else {
+          this._fluent_vue_sfc_loader.dispose()
+          this._fluent_vue_sfc_loader = null
+        }
+      }
+      if (uri && uri.fsPath.endsWith('.vue'))
+        this._fluent_vue_sfc_loader = new FluentVueSfcLoader(uri)
+    }
+
     this.updateLoaders()
     this._onInitialized.fire()
   }
@@ -70,6 +91,9 @@ export class CurrentFile {
 
     if (this.VueSfc && this._vue_sfc_loader)
       loaders.push(this._vue_sfc_loader)
+
+    if (this.FluentVueSfc && this._fluent_vue_sfc_loader)
+      loaders.push(this._fluent_vue_sfc_loader)
 
     this._composed_loader.loaders = loaders
   }
