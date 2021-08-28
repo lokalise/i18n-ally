@@ -69,8 +69,6 @@ export class FluentVueSfcLoader extends Loader {
     if (!Array.isArray(pendings))
       pendings = [pendings]
 
-    Log.warn(JSON.stringify(pendings))
-
     pendings = pendings.filter(i => i)
 
     for (const pending of pendings) {
@@ -84,8 +82,6 @@ export class FluentVueSfcLoader extends Loader {
       const newTranslation = { [pending.keypath]: pending.value! }
 
       const newContent = mergeVue(content, pending.locale, newTranslation)
-
-      Log.warn(newContent)
 
       if (doc.isDirty) {
         const edit = new WorkspaceEdit()
