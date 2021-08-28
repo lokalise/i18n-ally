@@ -74,7 +74,7 @@ export class FluentVueSfcLoader extends Loader {
     pendings = pendings.filter(i => i)
 
     for (const pending of pendings) {
-      const path = pending.textFromPath
+      const path = pending.textFromPath || pending.filepath
       if (!path)
         continue
 
