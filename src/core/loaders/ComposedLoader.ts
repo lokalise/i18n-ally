@@ -38,6 +38,7 @@ export class ComposedLoader extends Loader {
         this._onDidChange.fire(`${e}+${this.name}`)
       }),
     )
+    this._isFlattenLocaleTreeDirty = true
   }
 
   get loadersReversed() {

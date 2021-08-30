@@ -1,3 +1,4 @@
+import { relative } from 'path'
 import { commands, window, QuickPickItem, Range, TextDocument } from 'vscode'
 import { trim } from 'lodash'
 import { overrideConfirm } from './overrideConfirm'
@@ -203,9 +204,26 @@ async function ExtractOrInsertCommnad(options?: ExtractTextOptions, detection?: 
   await picker.show()
 }
 
+function ExtractIngore(text: string, document?: TextDocument) {
+  if (document) {
+    const path = relative(Config.root, document.uri.fsPath)
+    const obj = Config.extractIgnoredByFiles
+    if (!obj[path])
+      obj[path] = []
+    obj[path].push(text)
+    Config.extractIgnoredByFiles = obj
+  }
+  else {
+    Config.extractIgnored = [...Config.extractIgnored, text]
+  }
+
+  CurrentFile.detectHardStrings(true)
+}
+
 const m: ExtensionModule = () => {
   return [
     commands.registerCommand(Commands.extract_text, ExtractOrInsertCommnad),
+    commands.registerCommand(Commands.extract_ignore, ExtractIngore),
     commands.registerCommand(Commands.extract_enable_auto_detect, () => {
       Config.extractAutoDetect = true
     }),

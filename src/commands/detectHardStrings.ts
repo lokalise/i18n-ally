@@ -1,6 +1,7 @@
+import { relative } from 'path'
 import { commands, window } from 'vscode'
 import { ExtensionModule } from '~/modules'
-import { Global, DetectionResult } from '~/core'
+import { Global, DetectionResult, Config } from '~/core'
 import { Commands } from '~/commands'
 import { trimDetection } from '~/extraction'
 import i18n from '~/i18n'
@@ -17,7 +18,7 @@ export async function DetectHardStrings(document = window.activeTextEditor?.docu
     return
   }
 
-  const result: DetectionResult[] = []
+  let result: DetectionResult[] = []
 
   for (const framework of frameworks) {
     const temp = (framework.detectHardStrings?.(document) || [])
@@ -32,6 +33,11 @@ export async function DetectHardStrings(document = window.activeTextEditor?.docu
     if (temp.length)
       result.push(...temp)
   }
+
+  // filter out ignored results
+  const ignored = Config.extractIgnored
+  const ignoredByFiles = Config.extractIgnoredByFiles[relative(Config.root, document.uri.fsPath)] || []
+  result = result.filter(r => !ignored.includes(r.text) && !ignoredByFiles.includes(r.text))
 
   return result
 }

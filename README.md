@@ -1,9 +1,9 @@
 <p align="center">
-<img src="https://github.com/lokalise/i18n-ally/blob/master/screenshots/full-logo-new.png?raw=true" alt="logo" width="450"/>
+<img src="https://github.com/lokalise/i18n-ally/blob/main/screenshots/full-logo-new.png?raw=true" alt="logo" width="450"/>
 </p>
 
 <p align='center'>
-English | <a href="https://github.com/lokalise/i18n-ally/blob/master/README.zh-CN.md">简体中文</a>
+English | <a href="https://github.com/lokalise/i18n-ally/blob/main/README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
@@ -39,12 +39,6 @@ English | <a href="https://github.com/lokalise/i18n-ally/blob/master/README.zh-C
 <sup>Lokalise is the fastest growing language cloud technology made by developers, for developers.<br>
 As a collaborative productivity platform, it helps structure and automate the translation and localization process for any company in the world.<br>
 <a title="Lokalise: accelerate localization from code to delivery" href="https://lokalise.com/?utm_source=vscmarket&amp;utm_campaign=i18nally&amp;utm_medium=banner">Learn more</a></sup>
-</p>
-
-<h3 align="center">Sponsored by</h3>
-<p align="center">
-<a title="Try CodeStream" href="https://sponsorlink.codestream.com/?utm_source=vscmarket&amp;utm_campaign=i18nally&amp;utm_medium=banner"><img src="https://alt-images.codestream.com/codestream_logo_i18nally.png"></a></br>
-<sup>Eliminate context switching and costly distractions. Create and merge PRs and perform code reviews from inside your IDE while using jump-to-definition, your favorite keybindings, and other IDE tools. <a title="Try CodeStream" href="https://sponsorlink.codestream.com/?utm_source=vscmarket&amp;utm_campaign=i18nally&amp;utm_medium=banner">Learn more</a></sup>
 </p>
 
 <br>

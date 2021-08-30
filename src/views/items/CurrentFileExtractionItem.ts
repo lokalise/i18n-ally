@@ -3,10 +3,9 @@ import { CurrentFileLocalesTreeProvider } from '../providers'
 import { BaseTreeItem } from './Base'
 import { HardStringDetectResultItem } from './HardStringDetectResultItem'
 import i18n from '~/i18n'
-import { Config, CurrentFile, Global, DetectionResult } from '~/core'
+import { Config, CurrentFile, Global } from '~/core'
 
 export class CurrentFileExtractionItem extends BaseTreeItem {
-  result: DetectionResult[] | undefined
   langId = 'unknown'
 
   constructor(readonly provider: CurrentFileLocalesTreeProvider) {
@@ -36,7 +35,7 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
     }
     else {
       const length = CurrentFile.hardStrings?.length
-      if (this.collapsibleState === TreeItemCollapsibleState.Collapsed && !length)
+      if (this.collapsibleState === TreeItemCollapsibleState.Collapsed && length == null)
         return i18n.t('view.current_file_hard_strings_expand_to_detect')
       else
         return length == null ? '' : length.toString()
@@ -55,11 +54,8 @@ export class CurrentFileExtractionItem extends BaseTreeItem {
     if (this.collapsibleState === TreeItemCollapsibleState.None)
       return []
 
-    this.result = await CurrentFile.detectHardStrings()
+    await CurrentFile.detectHardStrings()
 
-    if (this.result == null)
-      return []
-
-    return this.result.map(i => new HardStringDetectResultItem(this.ctx, i))
+    return CurrentFile.hardStrings?.map(i => new HardStringDetectResultItem(this.ctx, i)) || []
   }
 }

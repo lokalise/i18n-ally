@@ -48,6 +48,7 @@ deepl.interceptors.response.use((res) => {
 
 function log(inspector: boolean, ...args: any[]): void {
   if (Config.deeplLog) {
+    // eslint-disable-next-line no-console
     if (inspector) console.log('[DeepL]\n', ...args)
     else Log.raw(...args)
   }
@@ -64,6 +65,15 @@ async function usage(): Promise<DeepLUsage> {
   }
 }
 
+function stripeLocaleCode(locale?: string): string | undefined {
+  if (!locale)
+    return locale
+  const index = locale.indexOf('-')
+  if (index === -1)
+    return locale
+  return locale.slice(0, index)
+}
+
 class DeepL extends TranslateEngine {
   async translate(options: TranslateOptions) {
     try {
@@ -72,8 +82,8 @@ class DeepL extends TranslateEngine {
         url: '/translate',
         data: {
           text: options.text,
-          source_lang: options.from || undefined,
-          target_lang: options.to,
+          source_lang: stripeLocaleCode(options.from || undefined),
+          target_lang: stripeLocaleCode(options.to),
         },
       }).then(({ data }) => data)
 

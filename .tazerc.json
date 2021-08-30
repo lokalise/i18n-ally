@@ -1,14 +1,14 @@
 {
   "exclude": [
-    "vue",
-    "vuex",
+    "@types/vscode",
     "@types/webpack",
-    "webpack",
-    "webpack-cli",
-    "vue-i18n",
     "limax",
     "ts-loader",
-    "@types/vscode",
-    "ts-node"
+    "ts-node",
+    "vue-i18n",
+    "vue",
+    "vuex",
+    "webpack-cli",
+    "webpack"
   ]
 }

@@ -74,30 +74,27 @@ export async function extractHardStrings(document: TextDocument, extracts: Extra
 
   extracts.sort((a, b) => b.range.start.compareTo(a.range.start))
 
-  await Promise.all(
-    [
-      // replace
-      editor.edit((editBuilder) => {
-        for (const extract of extracts) {
-          editBuilder.replace(
-            extract.range,
-            extract.replaceTo,
-          )
-        }
-      }),
-      // save keys
-      CurrentFile.loader.write(
-        extracts
-          .filter(i => i.keypath != null && i.message != null)
-          .map(e => ({
-            textFromPath: filepath,
-            filepath: undefined,
-            keypath: e.keypath!,
-            value: e.message!,
-            locale: e.locale || sourceLanguage,
-          })),
-      ),
-    ],
+  // replace
+  await editor.edit((editBuilder) => {
+    for (const extract of extracts) {
+      editBuilder.replace(
+        extract.range,
+        extract.replaceTo,
+      )
+    }
+  })
+
+  // save keys
+  await CurrentFile.loader.write(
+    extracts
+      .filter(i => i.keypath != null && i.message != null)
+      .map(e => ({
+        textFromPath: filepath,
+        filepath: undefined,
+        keypath: e.keypath!,
+        value: e.message!,
+        locale: e.locale || sourceLanguage,
+      })),
   )
 
   if (saveFile)

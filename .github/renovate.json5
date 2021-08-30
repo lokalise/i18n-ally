@@ -1,0 +1,18 @@
+{
+  "extends": ["config:base", "schedule:weekly", "group:allNonMajor"],
+  "labels": ["dependencies"],
+  "ignorePaths": [
+    "examples/**",
+    "test/**",
+    "**/__tests__/**"
+  ],
+  "pin": false,
+  "rangeStrategy": "bump",
+  "node": false,
+  "ignoreDeps": [
+    // manually bumping
+    "webpack",
+    "vue",
+    "vue-i18n"
+  ]
+}
