@@ -31,11 +31,13 @@ export function detect(
   input = input.replace(/<(.*?)={(.*?)}(.*?)>/g, '<$1="$2"$3>')
 
   let lastTag = ''
-  let lastTagIndex: number | null = null
+  let lastScriptIndex: number | null = null
   const parser = new Parser({
     onopentag(name, attrs) {
       lastTag = name
-      lastTagIndex = parser.endIndex! + 1
+      if (name === 'script')
+        lastScriptIndex = parser.endIndex! + 1
+
       if (IGNORED_TAGS.includes(name))
         return
 
@@ -87,19 +89,22 @@ export function detect(
       }
     },
     onclosetag(name) {
-      if (name !== 'script' || lastTagIndex == null)
+      if (name !== 'script' || lastScriptIndex == null)
         return
-      const start = lastTagIndex
+      const start = lastScriptIndex
       const fullText = input.slice(start, parser.startIndex!)
-      if (extractScripts && lastTag === 'script')
+      if (extractScripts)
         detections.push(...shiftDetectionPosition(extractScripts(fullText, start), start))
+      lastScriptIndex = null
     },
     ontext(fullText) {
-      const start = parser.startIndex
-      const end = parser.endIndex! + 1
-
+      if (lastScriptIndex != null)
+        return
       if (IGNORED_TAGS.includes(lastTag))
         return
+
+      const start = parser.startIndex
+      const end = parser.endIndex! + 1
 
       const text = fullText.split(/\n/g).map(i => i.trim()).filter(Boolean).join(' ')
 
