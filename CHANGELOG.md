@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/lokalise/i18n-ally/compare/v2.7.1...v2.8.0) (2021-08-30)
+
+
+### 🐞 Bug Fixes
+
+* try fix [#626](https://github.com/lokalise/i18n-ally/issues/626) ([bee57f2](https://github.com/lokalise/i18n-ally/commit/bee57f2816c4cf8eab06e694a4e21832c1d173eb))
+* vue detection, close [#654](https://github.com/lokalise/i18n-ally/issues/654) ([7be1824](https://github.com/lokalise/i18n-ally/commit/7be1824a95335c212c234f78d7d59a84bd6e53ba))
+
+
+### ⚡ Features
+
+* add support for fluent-vue ([#652](https://github.com/lokalise/i18n-ally/issues/652)) ([a2c6549](https://github.com/lokalise/i18n-ally/commit/a2c65497cd22a8b32f45f6547ad6ba507813b279))
+* goto next usage for ui editor ([15897a5](https://github.com/lokalise/i18n-ally/commit/15897a53a15019ce4da84d9c11c115ca20fd1714))
+* support extracting script tag in html ([78ac18c](https://github.com/lokalise/i18n-ally/commit/78ac18c62d1ea89e0b337edc654c049d0736065a))
+* support goto prev command ([9572e73](https://github.com/lokalise/i18n-ally/commit/9572e73b6f9e341b8893bf2609399a84d7502114))
+* support scoped `localesPaths` setting ([#655](https://github.com/lokalise/i18n-ally/issues/655)) ([dbdf1b5](https://github.com/lokalise/i18n-ally/commit/dbdf1b57d68b7589bd5cbba79bb3293cd5ec6b9e))
+* update ru translation ([#653](https://github.com/lokalise/i18n-ally/issues/653)) ([3e60c3e](https://github.com/lokalise/i18n-ally/commit/3e60c3ef6d2d2dfd3b6573db589ff3d4540802c5))
+
 ### [2.7.1](https://github.com/lokalise/i18n-ally/compare/v2.7.0...v2.7.1) (2021-08-21)
 
 
