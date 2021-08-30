@@ -41,7 +41,6 @@ export class CurrentFile {
     }))
     ctx.subscriptions.push(Analyst.watch())
     this.update(window.activeTextEditor?.document.uri)
-    this.updateLoaders()
   }
 
   static throttleUpdate = throttle((uri?: Uri) => CurrentFile.update(uri), 100)
