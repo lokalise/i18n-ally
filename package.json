@@ -723,7 +723,8 @@
           "items": {
             "type": "string"
           },
-          "description": "%config.locales_paths%"
+          "description": "%config.locales_paths%",
+          "scope": "resource"
         },
         "i18n-ally.encoding": {
           "type": "string",

@@ -1,6 +1,6 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { workspace, extensions, ExtensionContext, commands } from 'vscode'
+import { workspace, extensions, ExtensionContext, commands, ConfigurationScope, WorkspaceFolder } from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
@@ -276,6 +276,21 @@ export class Config {
     this.setConfig('localesPaths', paths)
   }
 
+  static getLocalesPathsInScope(scope: WorkspaceFolder): string[] | undefined {
+    const paths = this.getConfig('localesPaths', scope)
+
+    let localesPaths: string[]
+    if (!paths)
+      return
+    else if (typeof paths === 'string')
+      localesPaths = paths.split(',')
+    else
+      localesPaths = paths
+    if (!localesPaths)
+      return
+    return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
+  }
+
   static updateLocalesPaths(paths: string[]) {
     this._localesPaths = uniq((this._localesPaths || []).concat(paths))
   }
@@ -490,9 +505,9 @@ export class Config {
   }
 
   // config
-  private static getConfig<T = any>(key: string): T | undefined {
+  private static getConfig<T = any>(key: string, scope?: ConfigurationScope | undefined): T | undefined {
     let config = workspace
-      .getConfiguration(EXT_NAMESPACE)
+      .getConfiguration(EXT_NAMESPACE, scope)
       .get<T>(key)
 
     // compatible to vue-i18n-ally
