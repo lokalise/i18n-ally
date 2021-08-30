@@ -12,6 +12,7 @@
   "command.extract.enable-auto-detect": "Включить автоопределение жестко запрограммированных строк",
   "command.fulfill_keys": "Заполнять ключ пустой строкой",
   "command.go_to_next_usage": "Перейти к следующему использованию",
+  "command.go_to_prev_usage": "",
   "command.go_to_range": "Перейти к диапазону",
   "command.insert_key": "Вставить ключ",
   "command.locale_visibility_hide": "Скрыть перевод",

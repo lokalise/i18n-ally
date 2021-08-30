@@ -12,6 +12,7 @@
   "command.extract.enable-auto-detect": "Enable hard-coded strings auto detection",
   "command.fulfill_keys": "Fulfill keys with empty strings",
   "command.go_to_next_usage": "Go to next usage",
+  "command.go_to_prev_usage": "Go to previous usage",
   "command.go_to_range": "Go to range",
   "command.insert_key": "Insert key",
   "command.locale_visibility_hide": "Hide locale",

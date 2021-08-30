@@ -12,6 +12,7 @@
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "Remplir les champs vides de Clés",
   "command.go_to_next_usage": "",
+  "command.go_to_prev_usage": "",
   "command.go_to_range": "Aller à la plage",
   "command.insert_key": "Insérer une clé",
   "command.locale_visibility_hide": "Cacher le dossier de la locale",

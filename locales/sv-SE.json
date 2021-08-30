@@ -12,6 +12,7 @@
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "Skapa saknade nycklar med tomma strängar",
   "command.go_to_next_usage": "",
+  "command.go_to_prev_usage": "",
   "command.go_to_range": "",
   "command.insert_key": "Lägg till nyckel",
   "command.locale_visibility_hide": "Göm locale",

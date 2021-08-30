@@ -5,7 +5,7 @@ import { Commands } from '~/extension'
 import { ExtensionModule } from '~/modules'
 import { EditorPanel } from '~/webview/panel'
 
-export function GoToNextUsage() {
+export function getCurrentUsagePos() {
   const editor = window.activeTextEditor
   const document = editor?.document
   if (!editor || !document)
@@ -30,6 +30,17 @@ export function GoToNextUsage() {
     return
 
   const index = usages.keys.indexOf(last)
+
+  return { index, usages, document }
+}
+
+export function GoToNextUsage() {
+  const result = getCurrentUsagePos()
+  if (result == null)
+    return
+
+  const { index, usages, document } = result
+
   const next = (index + 1) % usages.keys.length
   const nextKey = usages.keys[next]
 
@@ -42,15 +53,42 @@ export function GoToNextUsage() {
       filepath: document.uri.fsPath,
       ...nextKey,
     })
-    return
   }
+  else {
+    const range = new Range(document.positionAt(nextKey.start), document.positionAt(nextKey.end))
+    GoToRange(document, range)
+  }
+}
 
-  const range = new Range(document.positionAt(nextKey.start), document.positionAt(nextKey.end))
-  GoToRange(document, range)
+export function GoToPrevUsage() {
+  const result = getCurrentUsagePos()
+  if (result == null)
+    return
+
+  const { index, usages, document } = result
+
+  const next = (index - 1 + usages.keys.length) % usages.keys.length
+  const prevKey = usages.keys[next]
+
+  if (!prevKey)
+    return
+
+  if (EditorPanel.currentPanel) {
+    EditorPanel.currentPanel.navigateKey({
+      keyIndex: next,
+      filepath: document.uri.fsPath,
+      ...prevKey,
+    })
+  }
+  else {
+    const range = new Range(document.positionAt(prevKey.start), document.positionAt(prevKey.end))
+    GoToRange(document, range)
+  }
 }
 
 export default <ExtensionModule> function() {
   return [
     commands.registerCommand(Commands.go_to_next_usage, GoToNextUsage),
+    commands.registerCommand(Commands.go_to_prev_usage, GoToPrevUsage),
   ]
 }

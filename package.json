@@ -376,6 +376,11 @@
         "title": "%command.go_to_next_usage%"
       },
       {
+        "command": "i18n-ally.go-to-prev-usage",
+        "category": "%extname%",
+        "title": "%command.go_to_prev_usage%"
+      },
+      {
         "command": "i18n-ally.open-docs-hard-string",
         "category": "%extname%",
         "title": "%command.show_docs%",

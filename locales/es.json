@@ -12,6 +12,7 @@
   "command.extract.enable-auto-detect": "",
   "command.fulfill_keys": "Rellenar claves con cadena vacía",
   "command.go_to_next_usage": "",
+  "command.go_to_prev_usage": "",
   "command.go_to_range": "",
   "command.insert_key": "Insertar clave",
   "command.locale_visibility_hide": "Ocultar configuración regional",
