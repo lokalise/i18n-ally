@@ -1,5 +1,5 @@
 import { extname, resolve } from 'path'
-import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument } from 'vscode'
+import { workspace, commands, window, EventEmitter, Event, ExtensionContext, ConfigurationChangeEvent, TextDocument, WorkspaceFolder } from 'vscode'
 import { uniq } from 'lodash'
 import { slash } from '@antfu/utils'
 import { isMatch } from 'micromatch'
@@ -25,6 +25,7 @@ export class Global {
   private static _loaders: Record<string, LocaleLoader> = {}
   private static _rootpath: string
   private static _enabled = false
+  private static _currentWorkspaceFolder: WorkspaceFolder
 
   static context: ExtensionContext
   static enabledFrameworks: Framework[] = []
@@ -243,7 +244,13 @@ export class Global {
   }
 
   static get localesPaths(): string[] | undefined {
-    let config = Config._localesPaths
+    let config
+
+    if (this._currentWorkspaceFolder)
+      config = Config.getLocalesPathsInScope(this._currentWorkspaceFolder)
+    else
+      config = Config._localesPaths
+
     if (!config) {
       config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
       if (!config.length)
@@ -288,8 +295,10 @@ export class Global {
     const resource = editor.document.uri
     if (resource.scheme === 'file') {
       const folder = workspace.getWorkspaceFolder(resource)
-      if (folder)
+      if (folder) {
+        this._currentWorkspaceFolder = folder
         rootpath = folder.uri.fsPath
+      }
     }
 
     if (!rootpath && workspace.rootPath)
