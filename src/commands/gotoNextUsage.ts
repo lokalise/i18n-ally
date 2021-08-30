@@ -3,6 +3,7 @@ import { GoToRange } from './gotoRange'
 import { CurrentFile, KeyDetector, KeyInDocument } from '~/core'
 import { Commands } from '~/extension'
 import { ExtensionModule } from '~/modules'
+import { EditorPanel } from '~/webview/panel'
 
 export function GoToNextUsage() {
   const editor = window.activeTextEditor
@@ -34,6 +35,15 @@ export function GoToNextUsage() {
 
   if (!nextKey)
     return
+
+  if (EditorPanel.currentPanel) {
+    EditorPanel.currentPanel.navigateKey({
+      keyIndex: next,
+      filepath: document.uri.fsPath,
+      ...nextKey,
+    })
+    return
+  }
 
   const range = new Range(document.positionAt(nextKey.start), document.positionAt(nextKey.end))
   GoToRange(document, range)
