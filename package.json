@@ -827,7 +827,9 @@
               "php-gettext",
               "general",
               "lingui",
-              "jekyll"
+              "jekyll",
+              "fluent-vue",
+              "fluent-vue-sfc"
             ]
           },
           "description": "%config.enabled_frameworks%"
