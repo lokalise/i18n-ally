@@ -1404,7 +1404,7 @@
     estree-walker "^2.0.2"
     source-map "^0.6.1"
 
-"@vue/compiler-dom@3.2.6":
+"@vue/compiler-dom@3.2.6", "@vue/compiler-dom@^3.2.6":
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.2.6.tgz#3764d7fe1a696e39fb2a3c9d638da0749e369b2d"
   integrity sha512-+a/3oBAzFIXhHt8L5IHJOTP4a5egzvpXYyi13jR7CUYOR1S+Zzv7vBWKYBnKyJLwnrxTZnTQVjeHCgJq743XKg==
@@ -4920,12 +4920,13 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.2.tgz#64bfed5cb68fe3ca78b3eb214ad97b63bedce561"
   integrity sha512-JaTY/wtrcSyvXJl4IMFHPKyFur1sE9AUqc0QnhOaJ0CxHtAoIV8pYDzeEfAaNEtGkOfq4gr3LBFmdXW5mOQFnA==
 
-fluent-vue-cli@^3.0.0-beta.18:
-  version "3.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/fluent-vue-cli/-/fluent-vue-cli-3.0.0-beta.18.tgz#483dea1ffb343f66106965d76afa2b61d994ed0e"
-  integrity sha512-n54gim9E9xGRrUYFY4g5nEOYFLWzvHp7YbVdKqQEKnBHuVYfqjwmUBRwi5Rb+bO21twH3zW4VNmGys5L7fHTGA==
+fluent-vue-cli@^3.0.0-beta.19:
+  version "3.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/fluent-vue-cli/-/fluent-vue-cli-3.0.0-beta.19.tgz#262a7ffd6b87f05278f8291b50155a0907d9b294"
+  integrity sha512-w6Ry+nRzp1oX3v9KwE0w+f+bWI5aIL9ViPYGEUx5y1o7TmbtJQEpi1kQO7jz4Ixhk9kviKTk8wInTksIxHtmFw==
   dependencies:
     "@fluent/syntax" "^0.17.0"
+    "@vue/compiler-dom" "^3.2.6"
     "@vue/compiler-sfc" "^3.2.6"
 
 flush-write-stream@^1.0.0:
