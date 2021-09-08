@@ -12,6 +12,7 @@ const includes = [
   '안녕하십니까',
   '再見',
   '再见',
+  'Привет',
 ]
 
 const excludes = [

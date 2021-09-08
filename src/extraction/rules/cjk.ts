@@ -13,5 +13,8 @@ export class CJKExtrationRule extends ExtractionRule {
     // Korean
     if (str.match(/\p{Script=Hangul}/u))
       return ExtractionScore.MustInclude
+    // Russian/Cyrillic
+    if (str.match(/\p{Script=Cyrillic}/u))
+      return ExtractionScore.MustInclude
   }
 }
