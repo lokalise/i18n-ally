@@ -1,6 +1,7 @@
 import { ExtensionContext } from 'vscode'
 import { flatten } from 'lodash'
 import { version } from '../package.json'
+import { registerSurveyPrompt } from './timely/surveyPrompt'
 import { Global, Config, KeyDetector, CurrentFile, Storage } from '~/core'
 import commandsModules, { Commands } from '~/commands'
 import viewsModules from '~/views'
@@ -29,6 +30,8 @@ export async function activate(ctx: ExtensionContext) {
 
   const disposables = flatten(modules.map(m => m(ctx)))
   disposables.forEach(d => ctx.subscriptions.push(d))
+
+  registerSurveyPrompt()
 }
 
 export function deactivate() {

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
+import { EventEmitter } from 'vscode'
 import { version } from '../../package.json'
 import { Config } from './Config'
 import { Storage } from './Storage'
@@ -8,7 +9,6 @@ import { isDev, isProd, isTest } from '~/env'
 import { Global } from '~/extension'
 import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CommandOptions } from '~/commands/manipulations/common'
-import { promptForSurvey } from '~/timely/survey'
 
 const HEAP_ID_DEV = '1082064308'
 const HEAP_ID_PROD = '4118173713'
@@ -58,6 +58,8 @@ export interface TelemetryEvent {
 export class Telemetry {
   private static _id: string
   private static _timer: any = null
+  private static _onTrack = new EventEmitter<{ key: TelemetryKey; properties?: Record<string, any> }>()
+  static onTrack = Telemetry._onTrack.event
 
   static events: TelemetryEvent[] = []
   static count = 0
@@ -88,6 +90,8 @@ export class Telemetry {
   }
 
   static async track(key: TelemetryKey, properties?: Record<string, any>, immediate = false) {
+    this._onTrack.fire({ key, properties })
+
     if (!this.isEnabled)
       return
 
@@ -123,10 +127,6 @@ export class Telemetry {
       this.events.push(event)
       this.schedule()
     }
-
-    this.count += 1
-    if (this.count > 0) // TODO: change the threshold
-      promptForSurvey()
   }
 
   static schedule() {
