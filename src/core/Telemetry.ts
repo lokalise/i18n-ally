@@ -73,14 +73,14 @@ export class Telemetry {
   }
 
   static checkVersionChange() {
-    const previousVersion = Config.ctx.globalState.get('i18n-ally.previous-version')
+    const previousVersion = Storage.previousVersion
 
     if (!previousVersion)
       Telemetry.track(TelemetryKey.Installed, { new_version: version })
     else if (previousVersion !== version)
       Telemetry.track(TelemetryKey.Updated, { new_version: version, previous_version: previousVersion })
 
-    Config.ctx.globalState.update('i18n-ally.previous-version', version)
+    Storage.previousVersion = version
   }
 
   static get isEnabled() {

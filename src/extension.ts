@@ -1,7 +1,7 @@
 import { ExtensionContext } from 'vscode'
 import { flatten } from 'lodash'
 import { version } from '../package.json'
-import { Global, Config, KeyDetector, CurrentFile } from '~/core'
+import { Global, Config, KeyDetector, CurrentFile, Storage } from '~/core'
 import commandsModules, { Commands } from '~/commands'
 import viewsModules from '~/views'
 import { Log } from '~/utils'
@@ -15,6 +15,7 @@ export async function activate(ctx: ExtensionContext) {
 
   i18n.init(ctx.extensionPath)
   KeyDetector.init(ctx)
+  Storage.init()
 
   // activate the extension
   await Global.init(ctx)

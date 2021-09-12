@@ -1,8 +1,9 @@
-import { window } from 'vscode'
+import { window, env, Uri } from 'vscode'
 import { Storage } from '~/core/Storage'
 
 let promptedThisTime = false
 const STORAGE_KEY = 'timely.2021-survey'
+const SURVEY_URL = 'https://lokalise.com/'
 
 export async function promptForSurvey() {
   if (promptedThisTime)
@@ -18,19 +19,13 @@ export async function promptForSurvey() {
 
   // TODO: i18n
   const Take = 'Provide Feedback'
-  const RemindLater = 'Remind me later'
   const Dismiss = 'Dismiss'
   const result = await window.showInformationMessage(
     'Enjoy using i18n Ally?\nWe\'d like to hear your voice and make it better!',
     Take,
-    RemindLater,
     Dismiss,
   )
 
-  if (result === Take) {
-    // TODO
-  }
-  else if (result === RemindLater) {
-    Storage.delete(STORAGE_KEY)
-  }
+  if (result === Take)
+    await env.openExternal(Uri.parse(SURVEY_URL))
 }
