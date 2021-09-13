@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://github.com/lokalise/i18n-ally/compare/v2.8.0...v2.8.1) (2021-09-13)
+
+
+### 🐞 Bug Fixes
+
+* fluent-vue fixes ([#658](https://github.com/lokalise/i18n-ally/issues/658)) ([c41a964](https://github.com/lokalise/i18n-ally/commit/c41a9649ec15b8a2506f923ce9400cc005672046))
+* include all unicode scripts for detection ([1ff16a7](https://github.com/lokalise/i18n-ally/commit/1ff16a737cf71502af62d337806a53ac82fc1f0b))
+* include cyrillic for detection ([36ea0d5](https://github.com/lokalise/i18n-ally/commit/36ea0d5fe5dab69dfec8940a4e69cbeb7bc79f6e))
+* speed up NonAsciiExtractionRule ([b39150b](https://github.com/lokalise/i18n-ally/commit/b39150ba5e623192163ff75529b10a557e6e2c6e))
+
 ## [2.8.0](https://github.com/lokalise/i18n-ally/compare/v2.7.1...v2.8.0) (2021-08-30)
 
 
