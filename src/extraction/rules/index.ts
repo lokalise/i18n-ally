@@ -1,14 +1,14 @@
 import { BasicExtrationRule } from './basic'
-import { CJKExtrationRule } from './cjk'
+import { NonAsciiExtractionRule } from './non-ascii-characters'
 import { DynamicExtractionRule } from './dynamic'
 
 export * from './base'
 export * from './basic'
-export * from './cjk'
+export * from './non-ascii-characters'
 
 export const DefaultExtractionRules = [
   new BasicExtrationRule(),
-  new CJKExtrationRule(),
+  new NonAsciiExtractionRule(),
 ]
 
 export const DefaultDynamicExtractionsRules = [
