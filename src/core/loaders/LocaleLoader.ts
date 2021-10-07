@@ -319,7 +319,10 @@ export class LocaleLoader extends Loader {
         await parser.save(filepath, processed, Config.sortKeys)
 
         if (this._files[filepath]) {
-          this._files[filepath].value = modified
+          const value = Config.disablePathParsing
+            ? modified
+            : unflatten(modified)
+          this._files[filepath].value = value
           this._files[filepath].mtime = this.getMtime(filepath)
         }
       }
