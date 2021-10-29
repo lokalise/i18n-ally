@@ -198,7 +198,7 @@ export class Config {
 
   static get regexKey(): string {
     return this.getConfig('regex.key')
-      || this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      || this.getConfig('keyMatchRegex') // back compatible, deprecated.
       || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
