@@ -77,6 +77,8 @@ export interface NodeOptions {
 export type DirStructureAuto = 'auto' | 'file' | 'dir'
 export type DirStructure = 'file' | 'dir'
 
+export type SortCompare = 'binary' | 'locale'
+
 export interface Coverage {
   locale: string
   translated: number

@@ -4,7 +4,7 @@ import { workspace, extensions, ExtensionContext, commands, ConfigurationScope, 
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
-import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
+import { KeyStyle, DirStructureAuto, SortCompare, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
 import { ExtractionBabelOptions, ExtractionHTMLOptions } from '~/extraction/parsers/options'
@@ -174,6 +174,14 @@ export class Config {
 
   static get sortKeys(): boolean {
     return this.getConfig<boolean>('sortKeys') || false
+  }
+
+  static get sortCompare(): SortCompare {
+    return this.getConfig<SortCompare>('sortCompare') || 'binary'
+  }
+
+  static get sortLocale(): string | undefined{
+    return this.getConfig<string>('sortLocale')
   }
 
   static get readonly(): boolean {

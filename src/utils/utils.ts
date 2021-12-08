@@ -96,3 +96,14 @@ export function abbreviateNumber(value: number): string {
   result += suffixes[suffixNum]
   return result
 }
+
+/**
+ * Get a locale aware comparison function
+ */
+export function getLocaleCompare(
+  sortLocaleSetting: string | undefined,
+  fileLocale: string
+): (x: string, y: string) => number {
+  const sortLocale = sortLocaleSetting ? sortLocaleSetting : fileLocale;
+  return new Intl.Collator(sortLocale).compare;
+}

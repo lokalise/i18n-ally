@@ -864,6 +864,19 @@
           "default": false,
           "description": "%config.sort_keys%"
         },
+        "i18n-ally.sortCompare": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "locale"
+          ],
+          "default": "binary",
+          "description": "%config.sort_compare%"
+        },
+        "i18n-ally.sortLocale": {
+          "type": "string",
+          "description": "%config.sort_locale%"
+        },
         "i18n-ally.preferredDelimiter": {
           "type": "string",
           "default": "-",

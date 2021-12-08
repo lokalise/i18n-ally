@@ -84,6 +84,8 @@
   "config.review_username": "Username for reviewing",
   "config.show_flags": "Show flags along with locale codes",
   "config.sort_keys": "Sort keys when saving to JSON/YAML",
+  "config.sort_compare": "Strategy for sorting keys.",
+  "config.sort_locale": "Locale to with if locale sort is used (will use the file's own locale if not specified)",
   "config.source_language": "Source language for machine translation",
   "config.tab_style": "Tab style for locale files",
   "config.target_picking_strategy": "Strategy dealing with more than one locale files were found.",
