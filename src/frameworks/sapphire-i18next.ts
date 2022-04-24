@@ -23,7 +23,7 @@ class SapphireI18nextFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '[^\\w\\d](?:(?:resolveKey)|(?:(?:send)|(?:reply)|(?:edit))Localized)\\(\\s*?.*?\\s*?,\\s*?(?:{?\\s*?(?:.*?,)?\\s*?(?:keys:)?\\s*?\\[?[\'"`]({key})[\'"`]\\]?\\s*?(?:,[\\s\\S]*?)?}?)\\)',
+    '[^\\w\\d](?:(?:resolveKey)|(?:(?:send)|(?:reply)|(?:edit))Localized)\\(\\s*?[\\s\\S]*?\\s*?,?\\s*?(?:{?\\s*?(?:[\\s\\S]*?,)?\\s*?(?:keys:)?\\s*?\\[?[\'"`]({key})[\'"`]\\]?\\s*?(?:,[\\s\\S]*?)?}?)\\)',
   ]
 
   derivedKeyRules = [
