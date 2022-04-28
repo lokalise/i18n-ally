@@ -152,6 +152,7 @@ export enum TargetPickingStrategy {
   MostSimilar = 'most-similar',
   FilePrevious ='file-previous',
   GlobalPrevious = 'global-previous',
+  MostSimilarByKey = 'most-similar-by-key',
 }
 
 export type DetectionSource = 'html-attribute' | 'html-inline' | 'js-string' | 'js-template' | 'jsx-text'

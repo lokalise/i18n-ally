@@ -1165,6 +1165,7 @@
           "enum": [
             "none",
             "most-similar",
+            "most-similar-by-key",
             "file-previous",
             "global-previous"
           ],
@@ -1172,7 +1173,8 @@
             "%config.target_picking_strategy.none%",
             "%config.target_picking_strategy.most-similar%",
             "%config.target_picking_strategy.file-previous%",
-            "%config.target_picking_strategy.global-previous%"
+            "%config.target_picking_strategy.global-previous%",
+            "%config.target_picking_strategy.most-similar-by-key%"
           ],
           "description": "%config.target_picking_strategy%"
         },

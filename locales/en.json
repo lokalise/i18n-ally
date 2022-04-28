@@ -90,6 +90,7 @@
   "config.target_picking_strategy.file-previous": "Extract text to current file's previous selected locale file",
   "config.target_picking_strategy.global-previous": "Extract text to (current or other) file 's previous selected locale file",
   "config.target_picking_strategy.most-similar": "Automatically extract text to the file which path most matches to current file's path",
+  "config.target_picking_strategy.most-similar-by-key": "Automatically fill the extracted copy into the language file that best matches the current i18n key",
   "config.target_picking_strategy.none": "User manually select which file to extract text to",
   "config.translate.engines": "Translation services.",
   "config.translate.fallbackToKey": "Use key itself to translate when there is no source translation for that key.",

@@ -179,8 +179,12 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
+
     if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilar && pending.textFromPath)
       return this.findBestMatchFile(pending.textFromPath, paths)
+
+    if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilarByKey && keypath)
+      return this.findBestMatchFile(keypath, paths)
 
     if (Config.targetPickingStrategy === TargetPickingStrategy.FilePrevious && pending.textFromPath)
       return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)
