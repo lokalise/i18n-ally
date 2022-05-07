@@ -1,5 +1,5 @@
 import { Framework } from './base'
-import { RewriteKeySource, RewriteKeyContext } from '~/core'
+import { RewriteKeyContext, RewriteKeySource } from '~/core'
 import { LanguageId } from '~/utils'
 
 class SapphireI18nextFramework extends Framework {
@@ -9,6 +9,14 @@ class SapphireI18nextFramework extends Framework {
 
   namespaceDelimiters = [':', '/']
   namespaceDelimitersRegex = /[:/]/g
+
+  perferredLocalePaths = [
+    'src/languages',
+  ]
+
+  enableFeatures = {
+    namespace: true,
+  }
 
   detection = {
     packageJSON: [
@@ -23,7 +31,7 @@ class SapphireI18nextFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '\\b(?:(?:resolveKey)|(?:(?:send)|(?:reply)|(?:edit))Localized)\\(\\s*?[\\s\\S]*?\\s*?,?\\s*?(?:{?\\s*?(?:[\\s\\S]*?,?)?\\s*?(?:keys:)?\\s*?\\[?[\'"`]({key})[\'"`]\\]?\\s*?(?:,[\\s\\S]*?)?}?)\\)',
+    '\\b(?:(?:resolveKey)|(?:(?:send)|(?:reply)|(?:edit))Localized)\\(\\s*?[\\s\\S]*?\\s*?,?\\s*?(?:{?\\s*?(?:[\\s\\S]*?,?)?\\s*?(?:keys:)?\\s*?\\[?[\'"`](.*?)[\'"`]\\]?\\s*?(?:,[\\s\\S]*?)?}?)\\)',
     '(?:i18n\\s*?\\.)?(?:(?:getT)|(?:format))\\([\\s\\S]*?(?:(?:\\)\\s*?\\()|(?:,))\\s*?[\'"`](.*?)[\'"`]',
   ]
 
@@ -43,6 +51,10 @@ class SapphireI18nextFramework extends Framework {
 
   refactorTemplates(keypath: string) {
     return [
+      `resolveKey(target, '${keypath}')`,
+      `replyLocalized(target, '${keypath}')`,
+      `editLocalized(target, '${keypath}')`,
+      `sendLocalized(target, '${keypath}')`,
       keypath,
     ]
   }
