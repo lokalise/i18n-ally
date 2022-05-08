@@ -49,12 +49,18 @@ class SapphireI18nextFramework extends Framework {
     '{key}_9',
   ]
 
+  pathMatcher(): string {
+    return '{locale}/{namespaces}.{ext}'
+  }
+
   refactorTemplates(keypath: string) {
     return [
       `resolveKey(target, '${keypath}')`,
       `replyLocalized(target, '${keypath}')`,
       `editLocalized(target, '${keypath}')`,
       `sendLocalized(target, '${keypath}')`,
+      `container.i18n.getT(locale)('${keypath}')`,
+      `container.i18n.format(locale, '${keypath}')`,
       keypath,
     ]
   }
