@@ -1019,7 +1019,8 @@
               "google",
               "google-cn",
               "deepl",
-              "libretranslate"
+              "libretranslate",
+              "baidu"
             ]
           },
           "default": [
@@ -1051,6 +1052,16 @@
           "type": "string",
           "default": null,
           "description": "%config.deepl_api_key%"
+        },
+        "i18n-ally.translate.baidu.appid": {
+          "type": "string",
+          "default": null,
+          "description": "%config.baidu_appid%"
+        },
+        "i18n-ally.translate.baidu.apiSecret": {
+          "type": "string",
+          "default": null,
+          "description": "%config.baidu_app_secret%"
         },
         "i18n-ally.translate.deepl.enableLog": {
           "type": "boolean",

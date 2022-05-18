@@ -37,6 +37,8 @@
   "config.annotation_max_length": "Max number of characters shown in the inline annotations. Excess characters will display as an ellipses (...)",
   "config.annotations": "Enable the inline annotations.",
   "config.auto_detection": "Enable locales auto detection for projects",
+  "config.baidu_app_secret": "APP Secret to use Baidu translate engine",
+  "config.baidu_appid": "APP ID to use Baidu translate engine",
   "config.deepl_api_key": "API key to use DeepL translate engine",
   "config.deepl_log": "Show DeepL engine debug logs",
   "config.deepl_use_free_api_entry": "Use DeepL Free API entry point",

@@ -37,6 +37,8 @@
   "config.annotation_max_length": "Максимальна кількість символів, що відображаються у вбудованих анотаціях. Зайві символи будуть відображатися у вигляді трьох крапок (...)",
   "config.annotations": "Включити вбудовані анотації.",
   "config.auto_detection": "",
+  "config.baidu_app_secret": "",
+  "config.baidu_appid": "",
   "config.deepl_api_key": "Ключ для використання API DeepL",
   "config.deepl_log": "Відображати налагоджувальні журнали DeepL",
   "config.deepl_use_free_api_entry": "",

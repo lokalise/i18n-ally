@@ -536,6 +536,14 @@ export class Config {
       .update(key, value, isGlobal)
   }
 
+  static get baiduApiSecret() {
+    return this.getConfig<string | null | undefined>('translate.baidu.apiSecret')
+  }
+
+  static get baiduAppid() {
+    return this.getConfig<string | null | undefined>('translate.baidu.appid')
+  }
+
   static get googleApiKey() {
     return this.getConfig<string | null | undefined>('translate.google.apiKey')
   }

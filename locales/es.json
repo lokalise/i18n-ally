@@ -37,6 +37,8 @@
   "config.annotation_max_length": "Máximo número de caracteres que se mostrarán en las anotaciones en línea. Los restantes se mostrarán como elipses (...)",
   "config.annotations": "Habilitar las anotaciones en línea.",
   "config.auto_detection": "",
+  "config.baidu_app_secret": "",
+  "config.baidu_appid": "",
   "config.deepl_api_key": "API key para el traductor DeepL",
   "config.deepl_log": "Mostrar mensajes de depuración del motor DeepL",
   "config.deepl_use_free_api_entry": "",
