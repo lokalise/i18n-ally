@@ -1,6 +1,7 @@
+import crypto from 'crypto'
 import axios from 'axios'
+import qs from 'qs'
 import TranslateEngine, { TranslateOptions, TranslateResult } from './base'
-import crypto from 'crypto';
 import { Config } from '~/core'
 
 interface BaiduSignOptions {
@@ -11,76 +12,72 @@ interface BaiduSignOptions {
 }
 
 export default class BaiduTranslate extends TranslateEngine {
-  apiRoot = 'https://fanyi.baidu.com'
+  apiLink = 'https://fanyi.baidu.com'
+  apiRoot = 'https://fanyi-api.baidu.com'
 
   async translate(options: TranslateOptions) {
-    let {
-      from = 'auto',
-      to = 'auto',
-    } = options
+    let { from = 'auto', to = 'auto' } = options
+
+    from = this.convertToSupportedLocalesForGoogleCloud(from)
+    to = this.convertToSupportedLocalesForGoogleCloud(to)
 
     const appid = Config.baiduAppid
     const secret = Config.baiduApiSecret
     const salt = Date.now().toString()
-    const sign = this.getSign({ appid, secret, query: options.text, salt });
+    const sign = this.getSign({ appid, secret, query: options.text, salt })
 
     const form = {
+      q: options.text,
       appid,
       salt,
-      q: options.text,
       from,
       to,
-      sign
+      sign,
     }
 
     const { data } = await axios({
-      method: 'POST',
-      url: `${this.apiRoot}/api/trans/vip/translate`,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: form
+      method: 'GET',
+      url: `${this.apiRoot}/api/trans/vip/translate?${qs.stringify(form)}`,
     })
 
     return this.transform(data, options)
   }
 
-  getSign({appid, salt, query, secret} : BaiduSignOptions): string {
+  convertToSupportedLocalesForGoogleCloud(locale: string): string {
+    return locale.replace(/-/g, '_').split('_')[0]
+  }
+
+  getSign({ appid, salt, query, secret }: BaiduSignOptions): string {
     if (appid && salt) {
-      let string = appid + query + salt + secret;
-      const md5 = crypto.createHash('md5');
-      md5.update(string);
-      return md5.digest('hex');
+      const string = appid + query + salt + secret
+      const md5 = crypto.createHash('md5')
+      md5.update(string)
+      return md5.digest('hex')
     }
-    return '';
+    return ''
   }
 
   transform(response: any, options: TranslateOptions): TranslateResult {
-    const {
-      text,
-      from = 'auto',
-      to = 'auto',
-    } = options
+    const { text } = options
 
     const r: TranslateResult = {
       text,
-      to,
-      from: response.src,
+      to: response.to,
+      from: response.from,
       response,
-      linkToResult: `${this.apiRoot}/#${from}/${to}/${text}`,
+      linkToResult: `${this.apiLink}/#${response.from}/${response.to}/${text}`,
     }
 
     try {
       const result: string[] = []
-      response.data.trans_result.forEach((v: any) => {
+      response.trans_result.forEach((v: any) => {
         result.push(v.dst)
       })
       r.result = result
     }
     catch (e) {}
 
-    if (!r.result)
-      r.error = new Error('No result')
+    if (!r.result) r.error = new Error((`[${response.error_code}] ${response.error_msg}`) || 'No result')
 
     return r
   }
