@@ -28,6 +28,7 @@ export class Config {
     'ignoreFiles',
     'parserOptions',
     'parsers.extendFileExtensions',
+    'enableKeyPrefix',
   ]
 
   static readonly refreshConfigs = [
@@ -558,5 +559,9 @@ export class Config {
 
   static get telemetry(): boolean {
     return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
+  }
+
+  static get enableKeyPrefix(): boolean {
+    return !!this.getConfig('enableKeyPrefix')
   }
 }
