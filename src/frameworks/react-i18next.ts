@@ -1,15 +1,18 @@
-import { I18nextFramework } from './i18next'
+import I18nextFramework from './i18next'
 import { LanguageId } from '~/utils'
 
-class ReactI18nextFramework extends Framework {
+class ReactI18nextFramework extends I18nextFramework {
   id= 'react-i18next'
-  display= 'React'
+  display= 'React i18next'
 
   detection= {
-    packageJSON: [
-      'react-i18next',
-      'next-i18next',
-    ],
+    packageJSON: {
+      any: [
+        'react-i18next',
+        'next-i18next',
+      ],
+      none: [],
+    },
   }
 
   languageIds: LanguageId[] = [
