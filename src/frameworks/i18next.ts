@@ -55,7 +55,7 @@ class I18nextFramework extends Framework {
     '{key}_two',
     '{key}_few',
     '{key}_many',
-    '{key}_other'
+    '{key}_other',
   ]
 
   refactorTemplates(keypath: string) {
