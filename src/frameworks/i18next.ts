@@ -49,6 +49,13 @@ class I18nextFramework extends Framework {
     '{key}_7',
     '{key}_8',
     '{key}_9',
+    // support v4 format as well as v3
+    '{key}_zero',
+    '{key}_one',
+    '{key}_two',
+    '{key}_few',
+    '{key}_many',
+    '{key}_other'
   ]
 
   refactorTemplates(keypath: string) {
