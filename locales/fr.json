@@ -99,7 +99,7 @@
   "config.usage.scanning_ignore": "Ignorer les patterns globales pour analyser l'utilisation des clés",
   "editor.add_description": "Ajouter une description...",
   "editor.empty": "(vide)",
-  "editor.title": "Édiyeur i18n Ally",
+  "editor.title": "Éditeur i18n Ally",
   "editor.translate": "Traduire",
   "editor.translate_all_missing": "Traduire Tout ce qui est Manquant",
   "errors.keystyle_not_set": "Le style de clé n'est pas spécifié, opération annulée.",
