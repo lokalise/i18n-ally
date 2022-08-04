@@ -46,7 +46,7 @@
   "config.dir_structure": "Structure de répertoire préferé pour organiser les fichiers de la locale.",
   "config.disable_path_parsing": "Désactiver la résolution de chemin",
   "config.disabled": "",
-  "config.display_language": "Afficher la langue",
+  "config.display_language": "Langue affichée",
   "config.editor_prefer_editor": "Préférer utiliser l'éditeur web pour l'édition des locales.",
   "config.enabled_frameworks": "Vous pouvez choisir les Frameworks supportés. Si aucune valeur n'est spécifiée, l'extension choisira automatiquement les Frameworks supportés.",
   "config.enabled_parsers": "Analyseurs de format de fichier locale. Par défaut, il sera géré par les frameworks activés",
