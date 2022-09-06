@@ -4911,10 +4911,10 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.2.tgz#64bfed5cb68fe3ca78b3eb214ad97b63bedce561"
   integrity sha512-JaTY/wtrcSyvXJl4IMFHPKyFur1sE9AUqc0QnhOaJ0CxHtAoIV8pYDzeEfAaNEtGkOfq4gr3LBFmdXW5mOQFnA==
 
-fluent-vue-cli@^3.0.1:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/fluent-vue-cli/-/fluent-vue-cli-3.0.4.tgz#7d7d87b7ccf2cb6746436e986c97142b60878baa"
-  integrity sha512-8jyxLpXd+fPXQKfEDYnFCJM7kg+U/YwV2xFm8EjM78AVJPUzlwtgJXz6XwuaDJUNBbFp64NtLJWdmba0NfqyJw==
+fluent-vue-cli@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/fluent-vue-cli/-/fluent-vue-cli-3.0.2.tgz#38ce7cc127305d305a5b039a03a0f830ab191118"
+  integrity sha512-n1Y/uov/ueuVeuV71jm5Cfxq2Fg4FQ9GyzWXlMHRFEa6erG5AVjv+pb1NhVf/acldITfZV2SzEpkgxQ1SC6gQQ==
   dependencies:
     "@fluent/syntax" "^0.18.0"
     "@vue/compiler-dom" "^3.2.6"
