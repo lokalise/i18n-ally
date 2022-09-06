@@ -7,6 +7,8 @@ class FluentVueSFCFramework extends Framework {
   detection = {
     packageJSON: [
       'fluent-vue-loader',
+      'rollup-plugin-fluent-vue',
+      'unplugin-fluent-vue',
     ],
   }
 
