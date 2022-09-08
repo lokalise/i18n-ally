@@ -1,1 +1,0 @@
-global-key = Global value
