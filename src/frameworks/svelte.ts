@@ -22,7 +22,7 @@ class SvelteFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    '(\\$(_|t|format)|(get)\\((_|t|format)\\))\(\s*[\'"`]({key})[\'"`]',
+    '(\\$(_|t|format)|(get)\\(\s*(_|t|format)\s*\\))\(\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
