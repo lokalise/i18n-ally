@@ -1,13 +1,30 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { workspace, extensions, ExtensionContext, commands, ConfigurationScope, WorkspaceFolder } from 'vscode'
+import {
+  workspace,
+  extensions,
+  ExtensionContext,
+  commands,
+  ConfigurationScope,
+  WorkspaceFolder,
+} from 'vscode'
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
-import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
+import {
+  EXT_NAMESPACE,
+  EXT_ID,
+  EXT_LEGACY_NAMESPACE,
+  KEY_REG_DEFAULT,
+  KEY_REG_ALL,
+  DEFAULT_LOCALE_COUNTRY_MAP,
+} from '../meta'
 import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
-import { ExtractionBabelOptions, ExtractionHTMLOptions } from '~/extraction/parsers/options'
+import {
+  ExtractionBabelOptions,
+  ExtractionHTMLOptions,
+} from '~/extraction/parsers/options'
 import { resolveRefactorTemplate } from '~/utils/resolveRefactorTemplate'
 
 export class Config {
@@ -39,10 +56,7 @@ export class Config {
     'regex.usageMatchAppend',
   ]
 
-  static readonly usageRefreshConfigs = [
-    'keysInUse',
-    'derivedKeyRules',
-  ]
+  static readonly usageRefreshConfigs = ['keysInUse', 'derivedKeyRules']
 
   static ctx: ExtensionContext
 
@@ -60,7 +74,9 @@ export class Config {
 
   // languages
   static get displayLanguage(): string {
-    return this.normalizeLocale(Config.getConfig<string>('displayLanguage') || '')
+    return this.normalizeLocale(
+      Config.getConfig<string>('displayLanguage') || '',
+    )
   }
 
   static set displayLanguage(value) {
@@ -68,7 +84,14 @@ export class Config {
   }
 
   static get sourceLanguage(): string {
-    return this.normalizeLocale(this.getConfig<string>('sourceLanguage') || '', '') || this.displayLanguage || 'en'
+    return (
+      this.normalizeLocale(
+        this.getConfig<string>('sourceLanguage') || '',
+        '',
+      )
+      || this.displayLanguage
+      || 'en'
+    )
   }
 
   static set sourceLanguage(value) {
@@ -90,12 +113,9 @@ export class Config {
 
   static get ignoredLocales(): string[] {
     const ignored = this.getConfig('ignoredLocales')
-    if (!ignored)
-      return []
-    if (ignored && typeof ignored === 'string')
-      return [ignored]
-    if (Array.isArray(ignored))
-      return ignored
+    if (!ignored) return []
+    if (ignored && typeof ignored === 'string') return [ignored]
+    if (Array.isArray(ignored)) return ignored
     return []
   }
 
@@ -105,8 +125,7 @@ export class Config {
 
   static get _keyStyle(): KeyStyle {
     const style = this.getConfig<KeyStyle>('keystyle') || 'auto'
-    if (style === 'auto' && this.disablePathParsing)
-      return 'flat'
+    if (style === 'auto' && this.disablePathParsing) return 'flat'
     return style
   }
 
@@ -148,24 +167,20 @@ export class Config {
 
   static get enabledFrameworks(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledFrameworks')
-    if (!ids || !ids.length)
-      return undefined
-    if (typeof ids === 'string')
-      ids = [ids]
+    if (!ids || !ids.length) return undefined
+    if (typeof ids === 'string') ids = [ids]
     return ids
   }
 
   static get enabledParsers(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledParsers')
-    if (!ids || !ids.length)
-      return undefined
-    if (typeof ids === 'string')
-      ids = [ids]
+    if (!ids || !ids.length) return undefined
+    if (typeof ids === 'string') ids = [ids]
     return ids
   }
 
   static get _dirStructure(): DirStructureAuto {
-    return (this.getConfig('dirStructure')) as (DirStructureAuto) || 'auto'
+    return (this.getConfig('dirStructure') as DirStructureAuto) || 'auto'
   }
 
   static set _dirStructure(value: DirStructureAuto) {
@@ -197,15 +212,16 @@ export class Config {
   }
 
   static get regexKey(): string {
-    return this.getConfig('regex.key')
+    return (
+      this.getConfig('regex.key')
       || this.getConfig('keyMatchRegex') // back compatible, depreacted.
       || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
+    )
   }
 
   static get _regexUsageMatch(): string[] | undefined {
     const config = this.getConfig<string[]>('regex.usageMatch')
-    if (config && config.length)
-      return config
+    if (config && config.length) return config
   }
 
   static get _regexUsageMatchAppend(): string[] {
@@ -230,8 +246,7 @@ export class Config {
 
   static get parsersTypescriptTsNodePath(): string {
     const config = this.getConfig<string>('parsers.typescript.tsNodePath')!
-    if (config === 'ts-node')
-      return config
+    if (config === 'ts-node') return config
 
     return `node "${path.resolve(this.extensionPath!, config)}"`
   }
@@ -246,8 +261,7 @@ export class Config {
 
   static toggleLocaleVisibility(locale: string, visible?: boolean) {
     const ignored = this.ignoredLocales
-    if (visible == null)
-      visible = !ignored.includes(locale)
+    if (visible == null) visible = !ignored.includes(locale)
     if (!visible) {
       ignored.push(locale)
       this.ignoredLocales = ignored
@@ -261,14 +275,10 @@ export class Config {
   static get _localesPaths(): string[] | undefined {
     const paths = this.getConfig('localesPaths')
     let localesPaths: string[]
-    if (!paths)
-      return
-    else if (typeof paths === 'string')
-      localesPaths = paths.split(',')
-    else
-      localesPaths = paths
-    if (!localesPaths)
-      return
+    if (!paths) return
+    else if (typeof paths === 'string') localesPaths = paths.split(',')
+    else localesPaths = paths
+    if (!localesPaths) return
     return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
@@ -280,14 +290,10 @@ export class Config {
     const paths = this.getConfig('localesPaths', scope)
 
     let localesPaths: string[]
-    if (!paths)
-      return
-    else if (typeof paths === 'string')
-      localesPaths = paths.split(',')
-    else
-      localesPaths = paths
-    if (!localesPaths)
-      return
+    if (!paths) return
+    else if (typeof paths === 'string') localesPaths = paths.split(',')
+    else localesPaths = paths
+    if (!localesPaths) return
     return localesPaths.map(i => trimEnd(i, '/\\').replace(/\\/g, '/'))
   }
 
@@ -344,7 +350,9 @@ export class Config {
   }
 
   static get refactorTemplates() {
-    return resolveRefactorTemplate(this.getConfig<string[]>('refactor.templates') || [])
+    return resolveRefactorTemplate(
+      this.getConfig<string[]>('refactor.templates') || [],
+    )
   }
 
   static get disablePathParsing() {
@@ -364,9 +372,11 @@ export class Config {
   }
 
   static get usageDerivedKeyRules() {
-    return this.getConfig<string[]>('usage.derivedKeyRules')
-    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
-    ?? undefined
+    return (
+      this.getConfig<string[]>('usage.derivedKeyRules')
+      ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+      ?? undefined
+    )
   }
 
   static get usageScanningIgnore() {
@@ -388,11 +398,12 @@ export class Config {
   private static _reviewUserName: string | undefined
   static get reviewUserName() {
     const config = this.getConfig<string>('review.user.name')
-    if (config)
-      return config
+    if (config) return config
     if (!Config._reviewUserName) {
       try {
-        Config._reviewUserName = execSync('git config user.name').toString().trim()
+        Config._reviewUserName = execSync('git config user.name')
+          .toString()
+          .trim()
       }
       catch (e) {
         return i18n.t('review.unknown_user')
@@ -406,11 +417,12 @@ export class Config {
 
   static get reviewUserEmail() {
     const config = this.getConfig<string>('review.user.email')
-    if (config)
-      return config
+    if (config) return config
     if (!Config._reviewUserEmail) {
       try {
-        Config._reviewUserEmail = execSync('git config user.email').toString().trim()
+        Config._reviewUserEmail = execSync('git config user.email')
+          .toString()
+          .trim()
       }
       catch (e) {
         return ''
@@ -465,7 +477,9 @@ export class Config {
   }
 
   static get extractParserBabelOptions() {
-    return this.getConfig<ExtractionBabelOptions>('extract.parsers.babel') ?? {}
+    return (
+      this.getConfig<ExtractionBabelOptions>('extract.parsers.babel') ?? {}
+    )
   }
 
   static get extractIgnored() {
@@ -477,7 +491,9 @@ export class Config {
   }
 
   static get extractIgnoredByFiles() {
-    return this.getConfig<Record<string, string[]>>('extract.ignoredByFiles') ?? {}
+    return (
+      this.getConfig<Record<string, string[]>>('extract.ignoredByFiles') ?? {}
+    )
   }
 
   static set extractIgnoredByFiles(v) {
@@ -500,33 +516,32 @@ export class Config {
   }
 
   static get targetPickingStrategy(): TargetPickingStrategy {
-    return this.getConfig<TargetPickingStrategy | undefined>('extract.targetPickingStrategy')
-      ?? TargetPickingStrategy.None
+    return (
+      this.getConfig<TargetPickingStrategy | undefined>(
+        'extract.targetPickingStrategy',
+      ) ?? TargetPickingStrategy.None
+    )
   }
 
   // config
-  private static getConfig<T = any>(key: string, scope?: ConfigurationScope | undefined): T | undefined {
-    let config = workspace
-      .getConfiguration(EXT_NAMESPACE, scope)
-      .get<T>(key)
+  private static getConfig<T = any>(
+    key: string,
+    scope?: ConfigurationScope | undefined,
+  ): T | undefined {
+    let config = workspace.getConfiguration(EXT_NAMESPACE, scope).get<T>(key)
 
     // compatible to vue-i18n-ally
-    if (config === undefined) {
-      config = workspace
-        .getConfiguration(EXT_LEGACY_NAMESPACE)
-        .get<T>(key)
-    }
+    if (config === undefined)
+      config = workspace.getConfiguration(EXT_LEGACY_NAMESPACE).get<T>(key)
 
     return config
   }
 
   private static async setConfig(key: string, value: any, isGlobal = false) {
     // transfer legacy config
-    if (workspace
-      .getConfiguration(EXT_LEGACY_NAMESPACE)
-      .get<any>(key)
-    ) {
-      await workspace.getConfiguration(EXT_LEGACY_NAMESPACE)
+    if (workspace.getConfiguration(EXT_LEGACY_NAMESPACE).get<any>(key)) {
+      await workspace
+        .getConfiguration(EXT_LEGACY_NAMESPACE)
         .update(key, undefined, isGlobal)
     }
 
@@ -552,11 +567,25 @@ export class Config {
     return !!this.getConfig('translate.deepl.enableLog')
   }
 
+  static get baiduAppId() {
+    return this.getConfig<string | null | undefined>('translate.baidu.appId')
+  }
+
+  static get baiduSecretKey() {
+    return this.getConfig<string | null | undefined>('translate.baidu.secretKey')
+  }
+
+  static get baiduLog(): boolean {
+    return !!this.getConfig('translate.baidu.enableLog')
+  }
+
   static get libreTranslateApiRoot() {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
   }
 
   static get telemetry(): boolean {
-    return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
+    return workspace
+      .getConfiguration()
+      .get('telemetry.enableTelemetry') as boolean
   }
 }

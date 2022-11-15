@@ -2,6 +2,7 @@ import TranslateEngine, { TranslateOptions } from './engines/base'
 import GoogleTranslateEngine from './engines/google'
 import GoogleTranslateCnEngine from './engines/google-cn'
 import DeepLTranslateEngine from './engines/deepl'
+import BaiduTranslateEngine from './engines/baidu'
 import LibreTranslateEngine from './engines/libretranslate'
 
 export class Translator {
@@ -9,6 +10,7 @@ export class Translator {
     'google': new GoogleTranslateEngine(),
     'google-cn': new GoogleTranslateCnEngine(),
     'deepl': new DeepLTranslateEngine(),
+    'baidu': new BaiduTranslateEngine(),
     'libretranslate': new LibreTranslateEngine(),
   }
 
@@ -23,6 +25,7 @@ export {
   GoogleTranslateEngine,
   GoogleTranslateCnEngine,
   DeepLTranslateEngine,
+  BaiduTranslateEngine,
   LibreTranslateEngine,
 }
 
