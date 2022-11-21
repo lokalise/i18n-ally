@@ -1,4 +1,4 @@
-import { I18nextFramework } from './i18next'
+import { Framework } from './base'
 import { LanguageId } from '~/utils'
 
 class ReactI18nextFramework extends Framework {
