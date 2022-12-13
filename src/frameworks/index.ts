@@ -3,7 +3,8 @@ import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
 import FluentVueFramework from './fluent-vue'
-import ReactFramework from './react'
+import ReactI18nextFramework from './react-i18next'
+import ReactIntlFramework from './react-intl'
 import I18nextFramework from './i18next'
 import VSCodeFramework from './vscode'
 import NgxTranslateFramework from './ngx-translate'
@@ -39,7 +40,8 @@ export const frameworks: Framework[] = [
   new CustomFramework(),
 
   new VueFramework(),
-  new ReactFramework(),
+  new ReactI18nextFramework(),
+  new ReactIntlFramework(),
   new NgxTranslateFramework(),
   new VSCodeFramework(),
   new FlutterFramework(),
