@@ -1,0 +1,7 @@
+languageIds:
+  - javascript
+  - typescript
+  - javascriptreact
+  - typescriptreact
+scopeRangeRegex: "customScopeRangeFn\\(\\s*\\[?\\s*['\"`](.*?)['\"`]"
+monopoly: false
