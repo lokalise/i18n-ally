@@ -1,8 +1,8 @@
 {
-  "publisher": "lokalise",
+  "publisher": "aranard",
   "name": "i18n-ally",
-  "version": "2.8.1",
-  "displayName": "i18n Ally",
+  "version": "2.8.2",
+  "displayName": "i18n Ally (TTD Fork)",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
     "vue",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lokalise/i18n-ally"
+    "url": "https://github.com/aranard/i18n-ally"
   },
   "main": "./dist/extension",
   "scripts": {

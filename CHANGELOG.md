@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.2](https://github.com/aranard/i18n-ally/compare/v2.8.1...v2.8.2) (2022-12-20)
+
+
+### 🐞 Bug Fixes
+
+* Build errors ([738536f](https://github.com/aranard/i18n-ally/commit/738536f621f31c9401fc1c95a678678dcf3189a0))
+
+### ⚡ Features
+
+* add support for custom framework getScopeRange ([899fe37](https://github.com/aranard/i18n-ally/commit/899fe3777a1c8281b0be32ea2f649bcd6511ceef))
+
 ### [2.8.1](https://github.com/lokalise/i18n-ally/compare/v2.8.0...v2.8.1) (2021-09-13)
 
 
