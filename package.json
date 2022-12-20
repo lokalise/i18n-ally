@@ -48,7 +48,7 @@
     "consolidate": "^0.16.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.2.7",
-    "fluent-vue-cli": "^3.0.0-beta.19",
+    "fluent-vue-cli": "^3.0.1",
     "glob-gitignore": "^1.0.14",
     "htmlparser2": "^6.1.0",
     "iconv-lite": "^0.6.3",
@@ -71,6 +71,7 @@
     "typescript": "^4.3.5",
     "vue-i18n-locale-message": "^1.8.0",
     "vue-template-compiler": "^2.6.14",
+    "vue-template-es2015-compiler": "^1.9.1",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
@@ -811,6 +812,7 @@
               "vscode",
               "ngx-translate",
               "i18next",
+              "react-i18next",
               "i18n-tag",
               "flutter",
               "vue-sfc",

@@ -1,5 +1,4 @@
-import { TextDocument } from 'vscode'
-import { Framework, ScopeRange } from './base'
+import { Framework } from './base'
 import { RewriteKeySource, RewriteKeyContext } from '~/core'
 import { LanguageId } from '~/utils'
 
@@ -19,7 +18,6 @@ class I18nextFramework extends Framework {
       ],
       none: [
         'react-i18next',
-        'next-i18next',
       ],
     },
   }
@@ -78,37 +76,6 @@ class I18nextFramework extends Framework {
 
     // replace colons
     return dotedKey
-  }
-
-  // useTranslation
-  // https://react.i18next.com/latest/usetranslation-hook#loading-namespaces
-  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
-    if (!this.languageIds.includes(document.languageId as any))
-      return
-
-    const ranges: ScopeRange[] = []
-    const text = document.getText()
-    const reg = /useTranslation\(\s*\[?\s*['"`](.*?)['"`]/g
-
-    for (const match of text.matchAll(reg)) {
-      if (match?.index == null)
-        continue
-
-      // end previous scope
-      if (ranges.length)
-        ranges[ranges.length - 1].end = match.index
-
-      // start new scope if namespace provides
-      if (match[1]) {
-        ranges.push({
-          start: match.index,
-          end: text.length,
-          namespace: match[1] as string,
-        })
-      }
-    }
-
-    return ranges
   }
 }
 
