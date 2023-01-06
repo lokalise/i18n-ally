@@ -45,10 +45,10 @@ export class NodeHelper {
     return keypath.replace(/\[(.*?)\]/g, '.$1').split('.')
   }
 
-  static getPathWithoutNamespace(keypath: string, node?: Node, namespace?: string) {
+  static getPathWithoutNamespace(keypath: string, node?: Node, namespace?: string, delimiter = '.') {
     if (Global.namespaceEnabled) {
       namespace = node?.meta?.namespace || namespace
-      if (namespace && keypath.startsWith(namespace))
+      if (namespace && keypath.startsWith(namespace + delimiter))
         return keypath.slice(namespace.length + 1)
     }
     return keypath
