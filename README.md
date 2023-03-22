@@ -132,6 +132,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 | German (Deutsch) | [@alexanderniebuhr](https://github.com/alexanderniebuhr) | |
 | Turkish (Türkçe) |  | [@eri](https://github.com/eri) |
+| Thai (ภาษาไทย) | [@watchakorn-18k](https://github.com/watchakorn-18k) |  |
 
 [**Help Translate**](https://github.com/lokalise/i18n-ally/wiki/Contribute#working-on-translations)
 
