@@ -19,8 +19,4 @@ test/e2e-out/
 test/e2e-fixtures-temp/
 test/fixtures-temp/
 test/fixture-scripts-out/
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/.gitignore
-/.idea/i18n-ally.iml
-/.idea/modules.xml
-/.idea/vcs.xml
+/.idea/
