@@ -811,6 +811,7 @@
               "vscode",
               "ngx-translate",
               "i18next",
+              "sapphire-i18next",
               "i18n-tag",
               "flutter",
               "vue-sfc",
