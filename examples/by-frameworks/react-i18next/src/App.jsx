@@ -87,7 +87,7 @@ function Page4() {
 }
 
 
-// compnent with scope in props
+// component with scope in props
 function Page5() {
   const { t } = useTranslation('pages/home');
 
