@@ -4,6 +4,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "lokalise.i18n-ally",
-    "eamodio.tsl-problem-matcher",
+    "amodio.tsl-problem-matcher",
   ]
 }

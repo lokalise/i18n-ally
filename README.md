@@ -60,6 +60,17 @@ As a collaborative productivity platform, it helps structure and automate the tr
 <br>
 <br>
 
+<h3 align='center'>Demo</h3>
+
+<div align="center">
+
+[![i18n-ally on VS code demo](https://img.youtube.com/vi/kowM-MoGVns/0.jpg)](https://youtu.be/kowM-MoGVns)
+
+</div>
+
+<br>
+<br>
+
 <h3 align='center'>Inline Annotations</h3>
 
 ![](https://github.com/lokalise/i18n-ally/blob/screenshots/annotation-animated.gif?raw=true)
@@ -121,6 +132,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 | German (Deutsch) | [@alexanderniebuhr](https://github.com/alexanderniebuhr) | |
 | Turkish (Türkçe) |  | [@eri](https://github.com/eri), [@dilekerkut](https://github.com/dilekerkut) |
+| Korean (한국어) |  | [@moka-ayumu](https://github.com/moka-ayumu) |
 
 [**Help Translate**](https://github.com/lokalise/i18n-ally/wiki/Contribute#working-on-translations)
 
