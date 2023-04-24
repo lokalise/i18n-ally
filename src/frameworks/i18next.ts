@@ -63,19 +63,19 @@ class I18nextFramework extends Framework {
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
-    const dotedKey = key.split(this.namespaceDelimitersRegex).join('.')
+    const dottedKey = key.split(this.namespaceDelimitersRegex).join('.')
 
     // when explicitly set the namespace, ignore current namespace scope
     if (
       this.namespaceDelimiters.some(d => key.includes(d))
       && context.namespace
-      && dotedKey.startsWith(context.namespace.split(this.namespaceDelimitersRegex).join('.'))
+      && dottedKey.startsWith(context.namespace.split(this.namespaceDelimitersRegex).join('.'))
     )
       // +1 for the an extra `.`
       key = key.slice(context.namespace.length + 1)
 
     // replace colons
-    return dotedKey
+    return dottedKey
   }
 }
 
