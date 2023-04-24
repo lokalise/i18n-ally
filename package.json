@@ -918,6 +918,7 @@
             "legacy",
             "none"
           ],
+          "default": "bcp47",
           "description": "%config.language_tag_system%"
         },
         "i18n-ally.ignoreFiles": {
