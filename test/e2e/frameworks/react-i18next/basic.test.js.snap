@@ -96,16 +96,16 @@ Array [
     "start": 1986,
   },
   Object {
-    "end": 2189,
+    "end": 2190,
     "key": "pages.home.title",
     "quoted": true,
-    "start": 2184,
+    "start": 2185,
   },
   Object {
-    "end": 2266,
+    "end": 2267,
     "key": "translation.title",
     "quoted": true,
-    "start": 2261,
+    "start": 2262,
   },
 ]
 `;
