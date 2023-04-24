@@ -808,6 +808,7 @@
             "enum": [
               "vue",
               "react",
+              "react-i18next",
               "vscode",
               "ngx-translate",
               "i18next",

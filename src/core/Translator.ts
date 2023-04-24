@@ -136,7 +136,7 @@ export class Translator {
         catch (err) {
           // eslint-disable-next-line no-console
           console.error(err)
-          failedJobs.push([job, err])
+          failedJobs.push([job, err as Error])
         }
         finished += 1
         progress.report({ increment, message })
@@ -318,7 +318,7 @@ export class Translator {
         break
       }
       catch (e) {
-        errors.push(e)
+        errors.push(e as Error)
       }
     }
 
