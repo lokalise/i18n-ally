@@ -131,6 +131,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Ukrainian (Українська) |  | [@uhodav](https://github.com/uhodav) |
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 | German (Deutsch) | [@alexanderniebuhr](https://github.com/alexanderniebuhr) | |
+| Thai (ภาษาไทย) | [@watchakorn-18k](https://github.com/watchakorn-18k) |  |
 | Turkish (Türkçe) |  | [@eri](https://github.com/eri), [@dilekerkut](https://github.com/dilekerkut) |
 | Korean (한국어) |  | [@moka-ayumu](https://github.com/moka-ayumu) |
 
