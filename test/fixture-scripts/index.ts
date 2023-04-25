@@ -77,7 +77,7 @@ async function prepareVSCode() {
   vscodeExecutablePath = await downloadAndUnzipVSCode('1.52.0')
   const cliPath = resolveCliPathFromVSCodeExecutablePath(vscodeExecutablePath)
 
-  spawnSync(cliPath, ['--install-extension', 'johnsoncodehk.volar'], {
+  spawnSync(cliPath, ['--install-extension', 'vue.volar'], {
     encoding: 'utf-8',
     stdio: 'inherit',
   })
