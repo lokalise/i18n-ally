@@ -96,7 +96,7 @@
     "@types/semver": "^7.3.8",
     "@types/string-similarity": "^4.0.0",
     "@types/uuid": "^8.3.1",
-    "@types/vscode": "^1.52.0",
+    "@types/vscode": "^1.77.0",
     "@types/webpack": "^4.41.26",
     "axios": "^0.21.1",
     "blueimp-md5": "^2.18.0",
@@ -136,7 +136,7 @@
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "engines": {
-    "vscode": "^1.52.0"
+    "vscode": "^1.77.3"
   },
   "categories": [
     "Other"

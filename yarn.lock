@@ -1293,10 +1293,10 @@
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.1.tgz#1a32969cf8f0364b3d8c8af9cc3555b7805df14f"
   integrity sha512-Y2mHTRAbqfFkpjldbkHGY8JIzRN6XqYRliG8/24FcHm2D2PwW24fl5xMRTVGdrb7iMrwCaIEbLWerGIkXuFWVg==
 
-"@types/vscode@^1.52.0":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@types/vscode/-/vscode-1.59.0.tgz#11c93f5016926126bf30b47b9ece3bd617eeef31"
-  integrity sha512-Zg38rusx2nU6gy6QdF7v4iqgxNfxzlBlDhrRCjOiPQp+sfaNrp3f9J6OHIhpGNN1oOAca4+9Hq0+8u3jwzPMlQ==
+"@types/vscode@^1.77.0":
+  version "1.77.0"
+  resolved "https://registry.yarnpkg.com/@types/vscode/-/vscode-1.77.0.tgz#f92f15a636abc9ef562f44dd8af6766aefedb445"
+  integrity sha512-MWFN5R7a33n8eJZJmdVlifjig3LWUNRrPeO1xemIcZ0ae0TEQuRc7G2xV0LUX78RZFECY1plYBn+dP/Acc3L0Q==
 
 "@types/webpack-sources@*":
   version "3.2.0"
