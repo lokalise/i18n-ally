@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.2](https://github.com/lokalise/i18n-ally/compare/v2.8.1...v2.8.2) (2023-04-27)
+
+### 🐞 Bug Fixes
+
+* correctly extend react-i18next from i18next framework ([2a493e6](https://github.com/lokalise/i18n-ally/commit/2a493e6a1ee998483958d96a19e071cf165aabd0))
+* i18next greedy namespace regex ([533d16a](https://github.com/lokalise/i18n-ally/commit/533d16a32dc90ab27c4c6743c164a0c69d1533be))
+* react-i18next, added better support for namespace overrides, corrected e2e-tests ([#871](https://github.com/lokalise/i18n-ally/issues/871)) ([6f61ef2](https://github.com/lokalise/i18n-ally/commit/6f61ef24edcdebe594a01e71ca578473db912138))
+* remove other packages from react-intl ([d0c7d72](https://github.com/lokalise/i18n-ally/commit/d0c7d7202f8ab02d310624cc6fc08143964a8716))
+* set bcp47 as default ([#884](https://github.com/lokalise/i18n-ally/issues/884)) ([a0959a6](https://github.com/lokalise/i18n-ally/commit/a0959a60465abc9959d73c453417c551b8d1a503))
+* rename `eamodio.tsl-problem-matcher` recommended extension ([#907](https://github.com/lokalise/i18n-ally/pull/907))
+* rename `johnsoncodehk.volar` for tests ([#908](https://github.com/lokalise/i18n-ally/pull/908))
+* bump version of VSCode used in tests ([#911](https://github.com/lokalise/i18n-ally/pull/911))
+
+### Translations
+
+* add Thai translation ([#900](https://github.com/lokalise/i18n-ally/pull/900))
+* add Korean translation ([#756](https://github.com/lokalise/i18n-ally/pull/756))
+* update Turkish translations ([#733](https://github.com/lokalise/i18n-ally/pull/733))
+* update German translation ([#693](https://github.com/lokalise/i18n-ally/issues/693)) ([f45839f](https://github.com/lokalise/i18n-ally/commit/f45839f1c3cca3a9363b9fb8aab44302a7a69508))
+* update Portuguese translations ([#723](https://github.com/lokalise/i18n-ally/pull/723))
+* display language and editor title in french translation ([#788](https://github.com/lokalise/i18n-ally/issues/788)) ([6ccb5e3](https://github.com/lokalise/i18n-ally/commit/6ccb5e315b3f75db81625841f4abaa672703c725))
+
+
 ### [2.8.1](https://github.com/lokalise/i18n-ally/compare/v2.8.0...v2.8.1) (2021-09-13)
 
 

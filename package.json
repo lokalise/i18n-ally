@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -64,7 +64,7 @@
     "parse-gitignore": "^1.0.1",
     "pofile": "^1.1.1",
     "properties": "^1.2.1",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "semver": "^7.3.5",
     "string-similarity": "^4.0.4",
     "ts-node": "^9.1.1",
