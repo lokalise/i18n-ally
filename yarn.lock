@@ -4911,7 +4911,7 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.2.tgz#64bfed5cb68fe3ca78b3eb214ad97b63bedce561"
   integrity sha512-JaTY/wtrcSyvXJl4IMFHPKyFur1sE9AUqc0QnhOaJ0CxHtAoIV8pYDzeEfAaNEtGkOfq4gr3LBFmdXW5mOQFnA==
 
-fluent-vue-cli@^3.0.1:
+fluent-vue-cli@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/fluent-vue-cli/-/fluent-vue-cli-3.0.4.tgz#7d7d87b7ccf2cb6746436e986c97142b60878baa"
   integrity sha512-8jyxLpXd+fPXQKfEDYnFCJM7kg+U/YwV2xFm8EjM78AVJPUzlwtgJXz6XwuaDJUNBbFp64NtLJWdmba0NfqyJw==
