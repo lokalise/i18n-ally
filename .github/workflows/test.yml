@@ -16,10 +16,34 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
 
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 16
+
+      # The vue I18next framework fixture tests rely on the documents getting recognized as `vue` documents by VSCode.
+      # We set the `file.association` in the tests' .vscode/settings.json. However, `vue` is not a language identifier
+      # that VSCode knows about by default, so those are ignored. It requires extensions to teach it about the `vue`
+      # identifier, otherwise it marks the files as `plaintext`, the vue I18next framework doesn't run, and the tests
+      # fail.
+      # Instead of installing a separate Vue extension just for this identifier, for the tests, we have i18n-ally itself
+      # tell VSCode about the `vue` language identifier.
+      - name: Register `vue` as a VSCode language identifier
+        if: runner.os != 'Windows'
+        run: 'contents="$(jq ''.contributes.languages += [{"id": "vue"}]'' package.json)" && echo -E "${contents}" > package.json'
+
+      - name: Install jq (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe" -OutFile "C:\jq.exe"
+          $env:Path += ";C:\"
+
+      - name: Register `vue` as a VSCode language identifier (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          jq --ascii-output '.contributes.languages += [{\"id\": \"vue\"}]' package.json | Out-File -Encoding ascii "package.json.tmp"
+          Move-Item -Path package.json.tmp -Destination package.json -Force
+        shell: powershell
 
       - name: Install
         run: yarn install --frozen-lockfile
@@ -47,4 +71,3 @@ jobs:
         if: runner.os == 'Linux'
         env:
           CI: true
-

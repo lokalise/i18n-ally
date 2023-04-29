@@ -10,13 +10,10 @@ import './App.css'
 class LegacyWelcomeClass extends Component {
   render() {
     const { t } = this.props
-    const intl = useIntl()
     return (
       <div>
         <h2>Plain Text</h2>
         <h2>{t('translation.title')}</h2>
-        <h2>{intl.formatPlural({ id: 'translation.title' })}</h2>
-        <h2>{intl.formatMessage({ id: 'translation.title' })}</h2>
       </div>
     )
   }
@@ -52,7 +49,7 @@ function Page() {
       </div>
       <div>{t('translation.description.part2')}</div>
       {/* plain <Trans>, #423 */}
-      <Trans>translation.description.part2</Trans>
+      <Trans i18nKey="translation.description.part2">Fallback text</Trans>
     </div>
   )
 }
@@ -78,3 +75,28 @@ function Page3() {
   // explicit namespace
   t('translation:title')
 }
+
+// hook with scope in options
+function Page4() {
+  const { t } = useTranslation('pages/home')
+
+  t('title')
+
+  // explicit namespace
+  t('title', { ns: 'translation' })
+}
+
+
+// component with scope in props
+function Page5() {
+  const { t } = useTranslation('pages/home');
+
+  return (
+    <div className="App">
+      <Trans t={t} i18nKey="title"></Trans>
+      {/* explicit namespace */}
+      <Trans t={t} i18nKey="title" ns="translation"></Trans>
+    </div>
+  )
+}
+

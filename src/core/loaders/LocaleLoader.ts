@@ -300,7 +300,8 @@ export class LocaleLoader extends Loader {
 
           if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
-            keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace)
+            const delimiter = Global.getNamespaceDelimiter()
+            keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace, delimiter)
           }
 
           modified = applyPendingToObject(

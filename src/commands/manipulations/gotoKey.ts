@@ -67,7 +67,8 @@ export async function GoToKey(item?: LocaleTreeItem | CommandOptions | ProgressR
       return
 
     const text = editor.document.getText()
-    const range = parser.navigateToKey(text, NodeHelper.getPathWithoutNamespace(keypath, node), await Global.requestKeyStyle())
+    const delimiter = Global.getNamespaceDelimiter()
+    const range = parser.navigateToKey(text, NodeHelper.getPathWithoutNamespace(keypath, node, undefined, delimiter), await Global.requestKeyStyle())
 
     if (range) {
       editor.selection = new Selection(

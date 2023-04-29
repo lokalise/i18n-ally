@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -48,7 +48,7 @@
     "consolidate": "^0.16.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.2.7",
-    "fluent-vue-cli": "^3.0.0-beta.19",
+    "fluent-vue-cli": "^3.0.4",
     "glob-gitignore": "^1.0.14",
     "htmlparser2": "^6.1.0",
     "iconv-lite": "^0.6.3",
@@ -64,13 +64,14 @@
     "parse-gitignore": "^1.0.1",
     "pofile": "^1.1.1",
     "properties": "^1.2.1",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "semver": "^7.3.5",
     "string-similarity": "^4.0.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.5",
     "vue-i18n-locale-message": "^1.8.0",
     "vue-template-compiler": "^2.6.14",
+    "vue-template-es2015-compiler": "^1.9.1",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
@@ -95,8 +96,9 @@
     "@types/semver": "^7.3.8",
     "@types/string-similarity": "^4.0.0",
     "@types/uuid": "^8.3.1",
-    "@types/vscode": "^1.52.0",
+    "@types/vscode": "^1.77.0",
     "@types/webpack": "^4.41.26",
+    "@vscode/test-electron": "^2.3.0",
     "axios": "^0.21.1",
     "blueimp-md5": "^2.18.0",
     "chai": "^4.3.4",
@@ -125,7 +127,6 @@
     "unplugin": "^0.0.5",
     "uuid": "^8.3.2",
     "vsce": "^1.96.1",
-    "vscode-test": "^1.6.1",
     "vue": "^2.6.14",
     "vue-i18n": "^8.22.4",
     "vue-material-design-icons": "^4.12.1",
@@ -135,7 +136,7 @@
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "engines": {
-    "vscode": "^1.52.0"
+    "vscode": "^1.77.3"
   },
   "categories": [
     "Other"
@@ -811,6 +812,7 @@
               "vscode",
               "ngx-translate",
               "i18next",
+              "react-i18next",
               "i18n-tag",
               "flutter",
               "vue-sfc",
@@ -847,7 +849,8 @@
               "ini",
               "po",
               "php",
-              "properties"
+              "properties",
+              "ftl"
             ]
           },
           "description": "%config.enabled_parsers%"
@@ -918,6 +921,7 @@
             "legacy",
             "none"
           ],
+          "default": "bcp47",
           "description": "%config.language_tag_system%"
         },
         "i18n-ally.ignoreFiles": {

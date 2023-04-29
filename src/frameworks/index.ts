@@ -3,8 +3,9 @@ import { PackageJSONParser, PubspecYAMLParser, ComposerJSONParser, GemfileParser
 import { Framework, PackageFileType } from './base'
 import VueFramework from './vue'
 import FluentVueFramework from './fluent-vue'
-import ReactFramework from './react'
+import ReactFramework from './react-intl'
 import I18nextFramework from './i18next'
+import ReactI18nextFramework from './react-i18next'
 import VSCodeFramework from './vscode'
 import NgxTranslateFramework from './ngx-translate'
 import I18nTagFramework from './i18n-tag'
@@ -45,6 +46,7 @@ export const frameworks: Framework[] = [
   new FlutterFramework(),
   new EmberFramework(),
   new I18nextFramework(),
+  new ReactI18nextFramework(),
   new I18nTagFramework(),
   new FluentVueFramework(),
   new PhpJoomlaFramework(),
