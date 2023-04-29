@@ -21,7 +21,7 @@ export default class TranslocoFramework extends Framework {
 
   usageMatchRegex = [
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/pipe
-    '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*transloco',
+    '[\']({key})[\']([\\s\\n]*\\|[\\s\\n]*(\\w+))*([\\s\\n]*\\|[\\s\\n]*transloco)',
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/structural-directive
     '[^\\w\\d](?:t|translate|selectTranslate|getTranslateObject|selectTranslateObject|getTranslation|setTranslationKey)\\([\\s\\n]*[\'"`]({key})[\'"`]',
     // https://netbasal.gitbook.io/transloco/translation-in-the-template/attribute-directive
