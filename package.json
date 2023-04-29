@@ -849,7 +849,8 @@
               "ini",
               "po",
               "php",
-              "properties"
+              "properties",
+              "ftl"
             ]
           },
           "description": "%config.enabled_parsers%"
