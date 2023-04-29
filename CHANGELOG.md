@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/lokalise/i18n-ally/compare/v2.8.2...v2.9.0) (2023-04-29)
+
+
+### ⚡ Features
+
+* add `sveltekit-i18n` detection ([#815](https://github.com/lokalise/i18n-ally/issues/815)) ([f4e50e9](https://github.com/lokalise/i18n-ally/commit/f4e50e9f756bf8e3fb225f57f94b3390d9f54c0b))
+* add more detections for `fluent-vue` ([#802](https://github.com/lokalise/i18n-ally/issues/802)) ([450bc19](https://github.com/lokalise/i18n-ally/commit/450bc1925dc57f55af634dd42d42b1313cf329c9))
+
+
+### 🐞 Bug Fixes
+
+* add `ftl` as a parser that can be enabled ([#797](https://github.com/lokalise/i18n-ally/issues/797)) ([232da97](https://github.com/lokalise/i18n-ally/commit/232da972ffd9599fd6234655d3127936104460c8))
+* fix spelling for choice prompt ([#814](https://github.com/lokalise/i18n-ally/issues/814)) ([a2c035b](https://github.com/lokalise/i18n-ally/commit/a2c035b48bda4f69506e8b44128b8c9e034f58a5))
+
 ### [2.8.2](https://github.com/lokalise/i18n-ally/compare/v2.8.1...v2.8.2) (2023-04-27)
 
 ### 🐞 Bug Fixes
