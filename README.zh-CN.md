@@ -114,6 +114,8 @@ Vue SFC 的支持来自于 vue-i18n 的作者 [kazupon](https://github.com/kazup
 
 ## 📄 License
 
-[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2019-2020 [Anthony Fu](https://github.com/lokalise)
+[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2021 年至今 [Lokalise Inc.](https://github.com/lokalise)
+
+MIT License © 2019-2020 [Anthony Fu](https://github.com/antfu)
 
 MIT License © 2018-2019 [think2011](https://github.com/think2011)

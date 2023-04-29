@@ -154,6 +154,8 @@ My great thanks to all the awesome contributors:
 
 ## 📄 License
 
-[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2019-PRESENT [Anthony Fu](https://github.com/antfu)
+[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2021-PRESENT [Lokalise](https://github.com/lokalise)
+
+MIT License © 2019-2020 [Anthony Fu](https://github.com/antfu)
 
 MIT License © 2018-2019 [think2011](https://github.com/think2011)
