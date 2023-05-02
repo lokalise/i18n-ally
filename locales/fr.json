@@ -8,7 +8,7 @@
   "command.delete_key": "Supprimer une Clé",
   "command.duplicate_key": "Dupliquer une Clé",
   "command.edit_key": "Modifier la traduction",
-  "command.extract.disable-auto-detect": "Désactiver l'auto-détection du texte écrit en dur.",
+  "command.extract.disable-auto-detect": "Désactiver l'autodétection du texte écrit en dur.",
   "command.extract.enable-auto-detect": "Valider l'autodétection du texte écrit en dur.",
   "command.fulfill_keys": "Remplir les champs vides de Clés",
   "command.go_to_next_usage": "Passer à l'utilisation suivante",
