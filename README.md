@@ -133,6 +133,7 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Thai (ภาษาไทย) | [@watchakorn-18k](https://github.com/watchakorn-18k) |  |
 | Turkish (Türkçe) |  | [@eri](https://github.com/eri), [@dilekerkut](https://github.com/dilekerkut) |
 | Korean (한국어) |  | [@moka-ayumu](https://github.com/moka-ayumu) |
+| Hungarian (Magyar)  | [@Cs4K1Sr4C](https://github.com/Cs4K1Sr4C)  | [@Cs4K1Sr4C](https://github.com/Cs4K1Sr4C)  |
 
 [**Help Translate**](https://github.com/lokalise/i18n-ally/wiki/Contribute#working-on-translations)
 
