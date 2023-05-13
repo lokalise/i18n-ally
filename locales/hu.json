@@ -169,7 +169,7 @@
 "prompt.replace_text_as": "Szöveg helyettesítése:",
 "prompt.select_display_locale": "Válassza ki a megjelenítendő nyelvet ({0})",
 "prompt.select_file_to_open": "Válassza ki a megnyitandó fájlt",
-"prompt.select_file_to_store_key": "Válassza ki a fájlt, amelyben tárolni kívánja a(z) "{0}" kulcsot",
+"prompt.select_file_to_store_key": "Válassza ki a fájlt, amelyben tárolni kívánja a(z) \"{0}\" kulcsot",
 "prompt.select_source_language_for_translating": "Válassza ki a forrásnyelvet a fordításhoz ({0})",
 "prompt.select_source_locale": "Válassza ki a forrás lokalizációt ({0})",
 "prompt.show_error_log": "Naplózás megjelenítése",
