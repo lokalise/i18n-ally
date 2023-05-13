@@ -300,7 +300,6 @@ export class LocaleLoader extends Loader {
 
           if (Global.namespaceEnabled) {
             const node = this.getNodeByKey(keypath)
-
             keypath = NodeHelper.getPathWithoutNamespace(keypath, node, pending.namespace)
           }
 
