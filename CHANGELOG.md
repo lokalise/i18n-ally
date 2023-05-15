@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.1](https://github.com/lokalise/i18n-ally/compare/v2.9.0...v2.9.1) (2023-05-15)
+
+### 🐞 Bug Fixes
+
+* re-enable adding and navigation to strings in the expected namespace ([#920](https://github.com/lokalise/i18n-ally/issues/920)) ([0967340](https://github.com/lokalise/i18n-ally/commit/0967340e51467490940414e62515a4b77c1f43ae))
+* change luxembourgish flag association ([#925](https://github.com/lokalise/i18n-ally/issues/925)) ([f6e105c](https://github.com/lokalise/i18n-ally/commit/f6e105c0abd5d0fe40dee6af3ccc45d66c6b94ef))
+
+### 🌐 Translations
+
+* add Hungarian translation ([#924](https://github.com/lokalise/i18n-ally/issues/924)) ([de4218f](https://github.com/lokalise/i18n-ally/commit/de4218f564bb2baf72de38b6de495ee4cce14543))
+* use french quotes and improve wording in french translation ([#744](https://github.com/lokalise/i18n-ally/issues/744)) ([ffa0930](https://github.com/lokalise/i18n-ally/commit/ffa09309db77d7bdd81d1b515e82386acbf76f28))
+
 ## [2.9.0](https://github.com/lokalise/i18n-ally/compare/v2.8.2...v2.9.0) (2023-04-29)
 
 
