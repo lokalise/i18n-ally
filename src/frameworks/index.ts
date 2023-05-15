@@ -28,6 +28,7 @@ import GeneralFramework from './general'
 import LinguiFramework from './lingui'
 import JekyllFramework from './jekyll'
 import FluentVueSFCFramework from './fluent-vue-sfc'
+import ShopifyI18nextFramework from './i18next-shopify'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
 
@@ -62,6 +63,7 @@ export const frameworks: Framework[] = [
   new PhpGettextFramework(),
   new LinguiFramework(),
   new JekyllFramework(),
+  new ShopifyI18nextFramework(),
   new GeneralFramework(),
 
   // Vue SFC and FluentVue SFC should be the last ones

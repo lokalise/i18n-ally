@@ -830,6 +830,7 @@
               "general",
               "lingui",
               "jekyll",
+              "i18next-shopify",
               "fluent-vue",
               "fluent-vue-sfc"
             ]
