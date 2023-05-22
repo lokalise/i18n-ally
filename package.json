@@ -831,7 +831,8 @@
               "lingui",
               "jekyll",
               "fluent-vue",
-              "fluent-vue-sfc"
+              "fluent-vue-sfc",
+              "next-intl"
             ]
           },
           "description": "%config.enabled_frameworks%"
