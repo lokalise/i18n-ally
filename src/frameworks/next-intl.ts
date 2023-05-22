@@ -1,12 +1,13 @@
 import { TextDocument } from 'vscode'
 import { Framework, ScopeRange } from './base'
 import { LanguageId } from '~/utils'
-import { RewriteKeySource, RewriteKeyContext } from '~/core'
+import { RewriteKeySource, RewriteKeyContext, KeyStyle } from '~/core'
 
 class NextIntlFramework extends Framework {
   id = 'next-intl'
   display = 'next-intl'
   namespaceDelimiter = '.'
+  perferredKeystyle?: KeyStyle = 'nested'
 
   namespaceDelimiters = ['.']
   namespaceDelimitersRegex = /[\.]/g
