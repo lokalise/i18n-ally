@@ -21,10 +21,10 @@ export default function IndexPage() {
 
 function Test1() {
   const t = useTranslations('Test')
-  return <>{t('title')}</>
+  return <p>{t('title')}</p>
 }
 
 function Test2() {
   const t = useTranslations()
-  return <>{t('Test.title')}</>
+  return <p>{t('Test.title')}</p>
 }
