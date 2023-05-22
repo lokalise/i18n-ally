@@ -43,10 +43,10 @@ class NextIntlFramework extends Framework {
     const lastSegment = keypath.split('.').pop()
 
     return [
-      `{t('${keypath}')}`,
       `{t('${lastSegment}')}`,
-      `t('${keypath}')`,
+      `{t('${keypath}')}`,
       `t('${lastSegment}')`,
+      `t('${keypath}')`,
     ]
   }
 
