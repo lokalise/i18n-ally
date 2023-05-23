@@ -38,15 +38,21 @@ class NextIntlFramework extends Framework {
   ]
 
   refactorTemplates(keypath: string) {
-    // Provide options where the last segment is the keypath.
-    // Ideally we'd automatically consider the namespace here.
-    const lastSegment = keypath.split('.').pop()
+    // Ideally we'd automatically consider the namespace here. Since this
+    // doesn't seem to be possible though, we'll generate all permutations for
+    // the `keypath`. E.g. `one.two.three` will generate `three`, `two.three`,
+    // `one.two.three`.
 
+    const keypaths = keypath.split('.').map((cur, index, parts) => {
+      return parts.slice(parts.length - index - 1).join('.')
+    })
     return [
-      `{t('${lastSegment}')}`,
-      `{t('${keypath}')}`,
-      `t('${lastSegment}')`,
-      `t('${keypath}')`,
+      ...keypaths.map(cur =>
+        `{t('${cur}')}`,
+      ),
+      ...keypaths.map(cur =>
+        `t('${cur}')`,
+      ),
     ]
   }
 
