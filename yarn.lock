@@ -57,12 +57,10 @@
   resolved "https://registry.yarnpkg.com/@antfu/ni/-/ni-0.7.0.tgz#e815913723059af7cf54fee980ab0b42d73da158"
   integrity sha512-wXtpUOMu3l5QWVXBrsaxCbgD2dbKQ1N/5ji7Xl3FTrfSb96+BElRhmaLyZd1A5U4TXz6S/FLR8jQQ3XJ78aHIQ==
 
-"@antfu/utils@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.2.4.tgz#c7d33fc6faa0d3a6fcc2555673f5e9b19c0fbc15"
-  integrity sha512-2bZNkVfL9IZESmvE26UKi8SzyvSoaIsGXDcnbHFMtmGMqUiB1fXpAJ1ijGf+tSqKRQ5yagck2U1Qk0p+705/kw==
-  dependencies:
-    "@types/throttle-debounce" "^2.1.0"
+"@antfu/utils@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.7.3.tgz#aec3c1deaf1b620770fa7c48ef2b03a26ac01b20"
+  integrity sha512-sAPXKvlJFVQB4cvmdGoUa9IAavzRrm7N2ctxdD1GuAEIOZu8BRrv2SUzquGXTpRDUa0sY7OkkVHqhi6ySMnMTg==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -1275,11 +1273,6 @@
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.8.tgz#b94a4391c85666c7b73299fd3ad79d4faa435310"
   integrity sha512-ipixuVrh2OdNmauvtT51o3d8z12p6LtFW9in7U79der/kwejjdNchQC5UMn5u/KxNoM7VHHOs/l8KS8uHxhODQ==
-
-"@types/throttle-debounce@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-2.1.0.tgz#1c3df624bfc4b62f992d3012b84c56d41eab3776"
-  integrity sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==
 
 "@types/uglify-js@*":
   version "3.13.1"
