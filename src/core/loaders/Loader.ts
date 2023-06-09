@@ -6,6 +6,7 @@ import { Coverage, FileInfo, PendingWrite, NodeOptions, RewriteKeySource, Rewrit
 import { Config, Global } from '..'
 import { resolveFlattenRootKeypath, resolveFlattenRoot, NodeHelper } from '~/utils'
 
+const NESTED_PLURALIZATION_KEYS = ['one', 'other', 'zero', 'two', 'few', 'many']
 export abstract class Loader extends Disposable {
   protected _disposables: Disposable[] = []
   protected _onDidChange = new EventEmitter<string>()
@@ -200,6 +201,19 @@ export abstract class Loader extends Disposable {
     return str
   }
 
+  private treeNodeValueHasPluralizationKeys(value: Record<string, any>, locale: string) {
+    return value && isObject(value) && Object.keys(value).some(key => NESTED_PLURALIZATION_KEYS.includes(key))
+  }
+
+  private firstPluralizationKeyValue(value: Record<string, any>, locale: string) {
+    if (!value || !isObject(value))
+      return undefined
+
+    const firstPluralizationKey = Object.keys(value).find(key => NESTED_PLURALIZATION_KEYS.includes(key))
+
+    return firstPluralizationKey ? (value as Record<string, any>)[firstPluralizationKey] : undefined
+  }
+
   getValueByKey(key: string, locale?: string, maxlength = 0, stringifySpace?: number, context: RewriteKeyContext = {}) {
     locale = locale || Config.displayLanguage
 
@@ -212,6 +226,9 @@ export abstract class Loader extends Disposable {
       const value = node.values[locale]
       if (!value)
         return undefined
+
+      if (Config._keyStyle !== 'flat' && this.treeNodeValueHasPluralizationKeys(value, locale))
+        return this.stripAnnotationString(this.firstPluralizationKeyValue(value, locale), maxlength)
 
       let text = JSON
         .stringify(value, null, stringifySpace)
