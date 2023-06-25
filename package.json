@@ -65,7 +65,7 @@
     "pofile": "^1.1.1",
     "properties": "^1.2.1",
     "qs": "^6.10.3",
-    "semver": "^7.3.5",
+    "semver": "^7.5.2",
     "string-similarity": "^4.0.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.5",
