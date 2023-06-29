@@ -5,8 +5,8 @@ class ShopifyI18nextFramework extends ReactI18nextFramework {
   id = 'i18next-shopify'
   display = 'Shopify I18next'
 
-  perferredKeystyle?: KeyStyle = 'nested'
-  perferredDirStructure?: DirStructure = 'file'
+  preferredKeystyle?: KeyStyle = 'nested'
+  preferredDirStructure?: DirStructure = 'file'
 
   detection = {
     packageJSON: [

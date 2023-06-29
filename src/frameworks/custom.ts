@@ -14,7 +14,7 @@ interface CustomFrameworkConfig {
   refactorTemplates?: string[]
   monopoly?: boolean
 
-  keyMatchReg?: string[] | string // depreacted. use "usageMatchRegex" instead
+  keyMatchReg?: string[] | string // deprecated. use "usageMatchRegex" instead
 }
 
 class CustomFramework extends Framework {
