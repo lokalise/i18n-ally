@@ -7,9 +7,7 @@ class ReactFramework extends Framework {
 
   detection= {
     packageJSON: [
-      'react-i18next',
-      'react-intl',
-      'next-i18next',
+      'react-intl'
     ],
   }
 

@@ -7,14 +7,13 @@ English | <a href="https://github.com/lokalise/i18n-ally/blob/main/README.zh-CN.
 </p>
 
 <p align="center">
-<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/lokalise.i18n-ally.svg?color=blue&amp;label=VS%20Code%20Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
-<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/d/lokalise.i18n-ally.svg?color=4bdbe3" alt="Visual Studio Marketplace Downloads" /></a>
-<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/i/lokalise.i18n-ally.svg?color=63ba83" alt="Visual Studio Marketplace Installs" /></a>
-<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://vsmarketplacebadge.apphb.com/trending-monthly/lokalise.i18n-ally.svg?color=a1b858" alt="Marketplace Trending Monthly" /></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/lokalise.i18n-ally?color=blue&amp;label=VS%20Code%20Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/d/lokalise.i18n-ally?color=4bdbe3" alt="Visual Studio Marketplace Downloads" /></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/i/lokalise.i18n-ally?color=63ba83" alt="Visual Studio Marketplace Installs" /></a>
 <br/>
 <a href="https://github.com/lokalise/i18n-ally/wiki" target="__blank"><img alt="Wiki" src="https://img.shields.io/static/v1?label=docs&message=wiki&color=e3897b"></a>
-<a href="https://github.com/lokalise/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/lokalise/i18n-ally.svg?color=c977be" alt="GitHub last commit" /></a>
-<a href="https://github.com/lokalise/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/lokalise/i18n-ally.svg?color=a38eed" alt="GitHub issues" /></a>
+<a href="https://github.com/lokalise/i18n-ally" target="__blank"><img src="https://img.shields.io/github/last-commit/lokalise/i18n-ally?color=c977be" alt="GitHub last commit" /></a>
+<a href="https://github.com/lokalise/i18n-ally/issues" target="__blank"><img src="https://img.shields.io/github/issues/lokalise/i18n-ally?color=a38eed" alt="GitHub issues" /></a>
 <a href="https://github.com/lokalise/i18n-ally" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/lokalise/i18n-ally?style=social"></a>
 </p>
 
@@ -56,6 +55,17 @@ As a collaborative productivity platform, it helps structure and automate the tr
 &nbsp;|&nbsp;
 <a href="https://github.com/lokalise/i18n-ally/wiki/Contribute">🧱 Contribute</a>
 </h4>
+
+<br>
+<br>
+
+<h3 align='center'>Demo</h3>
+
+<div align="center">
+
+[![i18n-ally on VS code demo](https://img.youtube.com/vi/kowM-MoGVns/0.jpg)](https://youtu.be/kowM-MoGVns)
+
+</div>
 
 <br>
 <br>
@@ -115,12 +125,15 @@ This extension itself supports i18n as well. It will be auto-matched to the disp
 | Japanese (日本語) |  | [@isdh](https://github.com/isdh) |
 | Dutch (Nederlands) |  | [@Niekvdm](https://github.com/Niekvdm), [@Excalibaard](https://github.com/Excalibaard) |
 | Portuguese (Brazilian)  |  | [@Ibcs16](https://github.com/Ibcs16) |
-| French (Français) |  | [@Nicoxx45](https://github.com/Nicoxx45), [@eri](https://github.com/eri) |
+| French (Français) |  | [@Nicoxx45](https://github.com/Nicoxx45), [@eri](https://github.com/eri), [@Frank](https://github.com/FrankSAURET) |
 | Swedish (Svenska) | [@vladdeSV](https://github.com/vladdeSV) |  |
 | Ukrainian (Українська) |  | [@uhodav](https://github.com/uhodav) |
 | Russian (Русский) |  | [@uhodav](https://github.com/uhodav) |
 | German (Deutsch) | [@alexanderniebuhr](https://github.com/alexanderniebuhr) | |
-| Turkish (Türkçe) |  | [@eri](https://github.com/eri) |
+| Thai (ภาษาไทย) | [@watchakorn-18k](https://github.com/watchakorn-18k) |  |
+| Turkish (Türkçe) |  | [@eri](https://github.com/eri), [@dilekerkut](https://github.com/dilekerkut) |
+| Korean (한국어) |  | [@moka-ayumu](https://github.com/moka-ayumu) |
+| Hungarian (Magyar)  | [@Cs4K1Sr4C](https://github.com/Cs4K1Sr4C)  | [@Cs4K1Sr4C](https://github.com/Cs4K1Sr4C)  |
 
 [**Help Translate**](https://github.com/lokalise/i18n-ally/wiki/Contribute#working-on-translations)
 
@@ -137,10 +150,12 @@ Support for Vue Single File Component (SFC) is powered by [kazupon/vue-i18n-loca
 
 My great thanks to all the awesome contributors:
 
-<a href="https://github.com/lokalise/i18n-ally/graphs/contributors"><img src="https://opencollective.com/i18n-ally/contributors.svg?width=890"/></a>
+<a href="https://github.com/lokalise/i18n-ally/graphs/contributors"><img src="https://contrib.rocks/image?repo=lokalise/i18n-ally" /></a>
 
 ## 📄 License
 
-[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2019-PRESENT [Anthony Fu](https://github.com/antfu)
+[MIT License](https://github.com/lokalise/i18n-ally/blob/master/LICENSE) © 2021-PRESENT [Lokalise](https://github.com/lokalise)
+
+MIT License © 2019-2020 [Anthony Fu](https://github.com/antfu)
 
 MIT License © 2018-2019 [think2011](https://github.com/think2011)

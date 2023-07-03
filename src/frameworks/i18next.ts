@@ -1,5 +1,4 @@
-import { TextDocument } from 'vscode'
-import { Framework, ScopeRange } from './base'
+import { Framework } from './base'
 import { RewriteKeySource, RewriteKeyContext } from '~/core'
 import { LanguageId } from '~/utils'
 
@@ -19,7 +18,6 @@ class I18nextFramework extends Framework {
       ],
       none: [
         'react-i18next',
-        'next-i18next',
       ],
     },
   }
@@ -49,6 +47,13 @@ class I18nextFramework extends Framework {
     '{key}_7',
     '{key}_8',
     '{key}_9',
+    // support v4 format as well as v3
+    '{key}_zero',
+    '{key}_one',
+    '{key}_two',
+    '{key}_few',
+    '{key}_many',
+    '{key}_other'
   ]
 
   refactorTemplates(keypath: string) {
@@ -58,50 +63,19 @@ class I18nextFramework extends Framework {
   }
 
   rewriteKeys(key: string, source: RewriteKeySource, context: RewriteKeyContext = {}) {
-    const dotedKey = key.split(this.namespaceDelimitersRegex).join('.')
+    const dottedKey = key.split(this.namespaceDelimitersRegex).join('.')
 
     // when explicitly set the namespace, ignore current namespace scope
     if (
       this.namespaceDelimiters.some(d => key.includes(d))
       && context.namespace
-      && dotedKey.startsWith(context.namespace.split(this.namespaceDelimitersRegex).join('.'))
+      && dottedKey.startsWith(context.namespace.split(this.namespaceDelimitersRegex).join('.'))
     )
       // +1 for the an extra `.`
       key = key.slice(context.namespace.length + 1)
 
     // replace colons
-    return dotedKey
-  }
-
-  // useTranslation
-  // https://react.i18next.com/latest/usetranslation-hook#loading-namespaces
-  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
-    if (!this.languageIds.includes(document.languageId as any))
-      return
-
-    const ranges: ScopeRange[] = []
-    const text = document.getText()
-    const reg = /useTranslation\(\s*\[?\s*['"`](.*?)['"`]/g
-
-    for (const match of text.matchAll(reg)) {
-      if (match?.index == null)
-        continue
-
-      // end previous scope
-      if (ranges.length)
-        ranges[ranges.length - 1].end = match.index
-
-      // start new scope if namespace provides
-      if (match[1]) {
-        ranges.push({
-          start: match.index,
-          end: text.length,
-          namespace: match[1] as string,
-        })
-      }
-    }
-
-    return ranges
+    return dottedKey
   }
 }
 

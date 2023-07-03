@@ -20,11 +20,13 @@ export default class TranslocoFramework extends Framework {
   ]
 
   usageMatchRegex = [
-    // https://netbasal.gitbook.io/transloco/translation-in-the-template/pipe
+    // https://ngneat.github.io/transloco/docs/translation-in-the-template#pipe
     '[`\'"]({key})[`\'"][\\s\\n]*\\|[\\s\\n]*transloco',
-    // https://netbasal.gitbook.io/transloco/translation-in-the-template/structural-directive
-    '[^\\w\\d](?:t|translate|selectTranslate|getTranslateObject|selectTranslateObject|getTranslation|setTranslationKey)\\([\\s\\n]*[\'"`]({key})[\'"`]',
-    // https://netbasal.gitbook.io/transloco/translation-in-the-template/attribute-directive
+    // https://ngneat.github.io/transloco/docs/translation-in-the-template#structural-directive
+    '[^\\w\\d](?:t)\\([\\s\\n]*[\'"`]({key})[\'"`]',
+    // https://ngneat.github.io/transloco/docs/translation-api
+    '[^\\w\\d](?:translate|selectTranslate|getTranslateObject|selectTranslateObject|getTranslation|setTranslationKey)\\([\\s\\n]*(.*?)[\\s\\n]*\\)',
+    // https://ngneat.github.io/transloco/docs/translation-in-the-template#attribute-directive
     '[^*\\w\\d]transloco=[\'"`]({key})[\'"`]',
   ]
 
@@ -34,6 +36,31 @@ export default class TranslocoFramework extends Framework {
       `t('${keypath}')`,
       keypath,
     ]
+  }
+
+  rewriteKeys(key: string) {
+    // find extra scope
+    const regex = /[\'"`]([\w.]+)[\'"`]/gm
+    let index = 0
+    let match, actualKey, scope
+
+    // eslint-disable-next-line no-cond-assign
+    while ((match = regex.exec(key)) !== null) {
+      // this is necessary to avoid infinite loops with zero-width matches
+      if (match.index === regex.lastIndex)
+        regex.lastIndex++
+
+      if (index === 0)
+        actualKey = match[1]
+
+      if (index === 1)
+        scope = match[1]
+
+      index++
+    }
+
+    // return new key if the extra scope regex matched
+    return actualKey && scope ? `${scope}.${actualKey}` : key
   }
 
   // support for `read` syntax

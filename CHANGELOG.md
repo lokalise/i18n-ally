@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.1](https://github.com/lokalise/i18n-ally/compare/v2.9.0...v2.9.1) (2023-05-15)
+
+### 🐞 Bug Fixes
+
+* re-enable adding and navigation to strings in the expected namespace ([#920](https://github.com/lokalise/i18n-ally/issues/920)) ([0967340](https://github.com/lokalise/i18n-ally/commit/0967340e51467490940414e62515a4b77c1f43ae))
+* change luxembourgish flag association ([#925](https://github.com/lokalise/i18n-ally/issues/925)) ([f6e105c](https://github.com/lokalise/i18n-ally/commit/f6e105c0abd5d0fe40dee6af3ccc45d66c6b94ef))
+
+### 🌐 Translations
+
+* add Hungarian translation ([#924](https://github.com/lokalise/i18n-ally/issues/924)) ([de4218f](https://github.com/lokalise/i18n-ally/commit/de4218f564bb2baf72de38b6de495ee4cce14543))
+* use french quotes and improve wording in french translation ([#744](https://github.com/lokalise/i18n-ally/issues/744)) ([ffa0930](https://github.com/lokalise/i18n-ally/commit/ffa09309db77d7bdd81d1b515e82386acbf76f28))
+
+## [2.9.0](https://github.com/lokalise/i18n-ally/compare/v2.8.2...v2.9.0) (2023-04-29)
+
+
+### ⚡ Features
+
+* add `sveltekit-i18n` detection ([#815](https://github.com/lokalise/i18n-ally/issues/815)) ([f4e50e9](https://github.com/lokalise/i18n-ally/commit/f4e50e9f756bf8e3fb225f57f94b3390d9f54c0b))
+* add more detections for `fluent-vue` ([#802](https://github.com/lokalise/i18n-ally/issues/802)) ([450bc19](https://github.com/lokalise/i18n-ally/commit/450bc1925dc57f55af634dd42d42b1313cf329c9))
+
+
+### 🐞 Bug Fixes
+
+* add `ftl` as a parser that can be enabled ([#797](https://github.com/lokalise/i18n-ally/issues/797)) ([232da97](https://github.com/lokalise/i18n-ally/commit/232da972ffd9599fd6234655d3127936104460c8))
+* fix spelling for choice prompt ([#814](https://github.com/lokalise/i18n-ally/issues/814)) ([a2c035b](https://github.com/lokalise/i18n-ally/commit/a2c035b48bda4f69506e8b44128b8c9e034f58a5))
+
+### [2.8.2](https://github.com/lokalise/i18n-ally/compare/v2.8.1...v2.8.2) (2023-04-27)
+
+### 🐞 Bug Fixes
+
+* correctly extend react-i18next from i18next framework ([2a493e6](https://github.com/lokalise/i18n-ally/commit/2a493e6a1ee998483958d96a19e071cf165aabd0))
+* i18next greedy namespace regex ([533d16a](https://github.com/lokalise/i18n-ally/commit/533d16a32dc90ab27c4c6743c164a0c69d1533be))
+* react-i18next, added better support for namespace overrides, corrected e2e-tests ([#871](https://github.com/lokalise/i18n-ally/issues/871)) ([6f61ef2](https://github.com/lokalise/i18n-ally/commit/6f61ef24edcdebe594a01e71ca578473db912138))
+* remove other packages from react-intl ([d0c7d72](https://github.com/lokalise/i18n-ally/commit/d0c7d7202f8ab02d310624cc6fc08143964a8716))
+* set bcp47 as default ([#884](https://github.com/lokalise/i18n-ally/issues/884)) ([a0959a6](https://github.com/lokalise/i18n-ally/commit/a0959a60465abc9959d73c453417c551b8d1a503))
+* rename `eamodio.tsl-problem-matcher` recommended extension ([#907](https://github.com/lokalise/i18n-ally/pull/907))
+* rename `johnsoncodehk.volar` for tests ([#908](https://github.com/lokalise/i18n-ally/pull/908))
+* bump version of VSCode used in tests ([#911](https://github.com/lokalise/i18n-ally/pull/911))
+
+### Translations
+
+* add Thai translation ([#900](https://github.com/lokalise/i18n-ally/pull/900))
+* add Korean translation ([#756](https://github.com/lokalise/i18n-ally/pull/756))
+* update Turkish translations ([#733](https://github.com/lokalise/i18n-ally/pull/733))
+* update German translation ([#693](https://github.com/lokalise/i18n-ally/issues/693)) ([f45839f](https://github.com/lokalise/i18n-ally/commit/f45839f1c3cca3a9363b9fb8aab44302a7a69508))
+* update Portuguese translations ([#723](https://github.com/lokalise/i18n-ally/pull/723))
+* display language and editor title in french translation ([#788](https://github.com/lokalise/i18n-ally/issues/788)) ([6ccb5e3](https://github.com/lokalise/i18n-ally/commit/6ccb5e315b3f75db81625841f4abaa672703c725))
+
+
 ### [2.8.1](https://github.com/lokalise/i18n-ally/compare/v2.8.0...v2.8.1) (2021-09-13)
 
 
