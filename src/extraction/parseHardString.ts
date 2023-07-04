@@ -1,3 +1,4 @@
+import { Config } from '~/core'
 
 /**
  * 'foo' + bar() + ' is cool' -> `foo${bar()} is cool`
@@ -35,7 +36,7 @@ export function parseHardString(text = '', languageId?: string, isDynamic = fals
 
   processed = processed.replace(/(?:\{\{(.*?)\}\}|\$\{(.*?)\})/g, (full, content, content2) => {
     args.push((content ?? content2 ?? '').trim())
-    return `{${args.length - 1}}`
+    return `${Config.argsPrefix}${args.length - 1}${Config.argsSuffix}`
   })
 
   return {
