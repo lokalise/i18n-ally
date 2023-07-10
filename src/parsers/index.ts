@@ -17,7 +17,7 @@ export const AvailableParsers: Parser[] = [
   new YamlParser(),
   new Json5Parser(),
 
-  // avaliable parsers
+  // available parsers
   new EcmascriptParser('js'),
   new EcmascriptParser('ts'),
   new IniParser(),

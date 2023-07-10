@@ -1216,7 +1216,7 @@
           "description": "%config.default_namespace%"
         },
         "i18n-ally.derivedKeyRules": {
-          "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },
         "i18n-ally.filenameMatchRegex": {
           "deprecationMessage": "Deprecated. Use \"i18n-ally.pathMatcher\" instead."
@@ -1225,7 +1225,7 @@
           "deprecationMessage": "Deprecated. Use \"i18n-ally.namespace\" instead."
         },
         "i18n-ally.keyMatchRegex": {
-          "deprecationMessage": "Depreacted. Use \"i18n-ally.regex.key\" instead."
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.regex.key\" instead."
         },
         "vue-i18n-ally.localesPaths": {
           "deprecationMessage": "%config.deprecated%"

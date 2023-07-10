@@ -74,11 +74,11 @@ export abstract class Framework {
       return '{locale}/**/*.{ext}'
   }
 
-  perferredLocalePaths?: string[]
+  preferredLocalePaths?: string[]
 
-  perferredKeystyle?: KeyStyle
+  preferredKeystyle?: KeyStyle
 
-  perferredDirStructure?: DirStructure
+  preferredDirStructure?: DirStructure
 
   enableFeatures?: OptionalFeatures
 
