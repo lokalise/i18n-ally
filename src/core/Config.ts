@@ -365,7 +365,7 @@ export class Config {
 
   static get usageDerivedKeyRules() {
     return this.getConfig<string[]>('usage.derivedKeyRules')
-    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, deprecated.
     ?? undefined
   }
 
