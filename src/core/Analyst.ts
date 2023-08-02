@@ -127,7 +127,6 @@ export class Analyst {
     const allKeys = CurrentFile.loader.keys.map(i => this.normalizeKey(i))
     // keys occur in your code
     const inUseKeys = uniq([...usages.map(i => i.keypath), ...Config.keysInUse].map(i => this.normalizeKey(i)))
-
     // keys in use
     const activeKeys = inUseKeys.filter(i => allKeys.includes(i))
     // keys not in use
@@ -135,10 +134,10 @@ export class Analyst {
       .filter(i => !inUseKeys.includes(i))
       .filter(i => !micromatch.isMatch(i, Config.keysInUse))
     // keys in use, but actually you don't have them
-    const missingKeys = inUseKeys.filter(i => !allKeys.includes(i))
+    let missingKeys = inUseKeys.filter(i => !allKeys.includes(i))
 
-    // remove dervied keys from idle, if the source key is in use
     const rules = Global.derivedKeyRules
+    // remove derived keys from idle, if the source key is in use
     idleKeys = idleKeys.filter((key) => {
       for (const r of rules) {
         const match = r.exec(key)
@@ -147,6 +146,25 @@ export class Analyst {
       }
       return true
     })
+
+    // for derived keys whose source key is considered missing
+    // (is actually in use, could be a nested pluralization key scenario)
+    // - add the source key to active
+    // - remove the source key from missing
+    // - remove the derived key from idle
+    const missingKeysShouldBeActive: string[] = []
+    idleKeys = idleKeys.filter((key) => {
+      for (const r of rules) {
+        const match = r.exec(key)
+        if (match && match[1] && missingKeys.includes(match[1])) {
+          missingKeysShouldBeActive.push(match[1])
+          return false
+        }
+      }
+      return true
+    })
+    activeKeys.push(...uniq(missingKeysShouldBeActive))
+    missingKeys = missingKeys.filter(i => !missingKeysShouldBeActive.includes(i))
 
     const report = {
       active: usages.filter(i => activeKeys.includes(i.keypath)),

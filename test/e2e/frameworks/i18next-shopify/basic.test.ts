@@ -1,7 +1,7 @@
 import { window } from 'vscode'
 import { openFile, Global, is, not, expect, timeout, setupTest, getExt, KeyDetector } from '../../ctx'
 
-setupTest('React with i18next', () => {
+setupTest('Shopify React i18next', () => {
   it('opens entry file', async() => {
     await openFile('package.json')
   })
@@ -15,7 +15,7 @@ setupTest('React with i18next', () => {
     not(Global, undefined)
     is(Global.enabled, true)
     is(Global.enabledFrameworks.length, 1)
-    is(Global.enabledFrameworks[0].id, 'react-i18next')
+    is(Global.enabledFrameworks[0].id, 'i18next-shopify')
   })
 
   it('get correct coverage report', async() => {

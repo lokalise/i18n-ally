@@ -198,7 +198,7 @@ export class Config {
 
   static get regexKey(): string {
     return this.getConfig('regex.key')
-      || this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      || this.getConfig('keyMatchRegex') // back compatible, deprecated.
       || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
@@ -365,7 +365,7 @@ export class Config {
 
   static get usageDerivedKeyRules() {
     return this.getConfig<string[]>('usage.derivedKeyRules')
-    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, deprecated.
     ?? undefined
   }
 
