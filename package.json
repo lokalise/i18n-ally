@@ -1024,7 +1024,8 @@
               "google",
               "google-cn",
               "deepl",
-              "libretranslate"
+              "libretranslate",
+              "openai"
             ]
           },
           "default": [
@@ -1071,6 +1072,33 @@
           "type": "string",
           "default": "http://localhost:5000",
           "description": "%config.libretranslate_api_root%"
+        },
+        "i18n-ally.translate.openai.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.openai_api_key%"
+        },
+        "i18n-ally.translate.openai.apiRoot": {
+          "type": "string",
+          "default": "https://api.openai.com",
+          "description": "%config.openai_api_root%"
+        },
+        "i18n-ally.translate.openai.apiModel": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-3.5-turbo-16k",
+            "gpt-3.5-turbo-0301",
+            "gpt-3.5-turbo-0613",
+            "gpt-4",
+            "gpt-4-0314",
+            "gpt-4-0613",
+            "gpt-4-32k",
+            "gpt-4-32k-0314",
+            "gpt-4-32k-0613"
+          ],
+          "description": "%config.openai_api_model%"
         },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",

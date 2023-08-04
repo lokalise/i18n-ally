@@ -556,6 +556,18 @@ export class Config {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
   }
 
+  static get openaiApiKey() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiKey')
+  }
+
+  static get openaiApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiRoot')
+  }
+
+  static get openaiApiModel() {
+    return this.getConfig<string>('translate.openai.apiModel') ?? 'gpt-3.5-turbo'
+  }
+
   static get telemetry(): boolean {
     return workspace.getConfiguration().get('telemetry.enableTelemetry') as boolean
   }
