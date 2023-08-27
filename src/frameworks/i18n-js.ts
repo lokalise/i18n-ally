@@ -1,6 +1,4 @@
-import { TextDocument } from 'vscode'
-import { Framework, ScopeRange } from './base'
-import { RewriteKeySource, RewriteKeyContext } from '~/core'
+import { Framework } from './base'
 import { LanguageId } from '~/utils'
 
 class I18js extends Framework {
