@@ -1166,7 +1166,8 @@
           "enum": [
             "slug",
             "random",
-            "empty"
+            "empty",
+            "source"
           ],
           "description": "%config.keygen_strategy%"
         },
