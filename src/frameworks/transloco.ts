@@ -25,7 +25,7 @@ export default class TranslocoFramework extends Framework {
     // https://ngneat.github.io/transloco/docs/translation-in-the-template#structural-directive
     '[^\\w\\d](?:t)\\([\\s\\n]*[\'"`]({key})[\'"`]',
     // https://ngneat.github.io/transloco/docs/translation-api
-    '[^\\w\\d](?:translate|selectTranslate|getTranslateObject|selectTranslateObject|getTranslation|setTranslationKey)\\([\\s\\n]*(.*?)[\\s\\n]*\\)',
+    '[^\\w\\d](?:translate|selectTranslate|getTranslateObject|selectTranslateObject|getTranslation|setTranslationKey)\\([\\s\\n]*["\'`](.*?)["\'`][\\s\\n]*\\)',
     // https://ngneat.github.io/transloco/docs/translation-in-the-template#attribute-directive
     '[^*\\w\\d]transloco=[\'"`]({key})[\'"`]',
   ]
