@@ -14,10 +14,8 @@ setupTest('React with i18next', () => {
   it('enables correct frameworks', async() => {
     not(Global, undefined)
     is(Global.enabled, true)
-    is(Global.enabledFrameworks.length, 3)
-    is(Global.enabledFrameworks[0].id, 'react')
-    is(Global.enabledFrameworks[1].id, 'i18next')
-    is(Global.enabledFrameworks[2].id, 'general')
+    is(Global.enabledFrameworks.length, 1)
+    is(Global.enabledFrameworks[0].id, 'react-i18next')
   })
 
   it('get correct coverage report', async() => {

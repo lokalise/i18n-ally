@@ -19,7 +19,7 @@ class JekyllFramework extends Framework {
     '\\{\\%\\s+t\\s+({key})\\s+\\%\\}',
   ]
 
-  perferredKeystyle = 'nested' as const
+  preferredKeystyle = 'nested' as const
 
   refactorTemplates(keypath: string) {
     return [

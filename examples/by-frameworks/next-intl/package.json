@@ -1,0 +1,22 @@
+{
+  "name": "next-intl",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "lint": "tsc",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^13.4.0",
+    "next-intl": "^2.14.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/react": "^18.2.5",
+    "typescript": "^5.0.0"
+  }
+}

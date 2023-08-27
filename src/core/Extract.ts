@@ -26,6 +26,9 @@ export function generateKeyFromText(text: string, filepath?: string, reuseExisti
   else if (keygenStrategy === 'empty') {
     key = ''
   }
+  else if (keygenStrategy === 'source') {
+    key = text
+  }
   else {
     text = text.replace(/\$/g, '')
     key = limax(text, { separator: Config.preferredDelimiter, tone: false })
@@ -33,7 +36,7 @@ export function generateKeyFromText(text: string, filepath?: string, reuseExisti
   }
 
   const keyPrefix = Config.keyPrefix
-  if (keyPrefix && keygenStrategy !== 'empty')
+  if (keyPrefix && keygenStrategy !== 'empty' && keygenStrategy !== 'source')
     key = keyPrefix + key
 
   if (filepath && key.includes('fileName')) {

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { dirname, join, basename, resolve } from 'path'
-import { spawnSync } from 'child_process'
-import { downloadAndUnzipVSCode, resolveCliPathFromVSCodeExecutablePath, runTests } from 'vscode-test'
+import { runTests } from '@vscode/test-electron'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { red, green, yellow, gray, cyan } from 'chalk'
@@ -56,7 +55,6 @@ export async function prepareFixture(info: FixtureInfo) {
 }
 
 async function run() {
-  await prepareVSCode()
   let fixtures = await listAll()
 
   if (args[0])
@@ -73,16 +71,6 @@ async function run() {
 
 let vscodeExecutablePath: string
 
-async function prepareVSCode() {
-  vscodeExecutablePath = await downloadAndUnzipVSCode('1.52.0')
-  const cliPath = resolveCliPathFromVSCodeExecutablePath(vscodeExecutablePath)
-
-  spawnSync(cliPath, ['--install-extension', 'johnsoncodehk.volar'], {
-    encoding: 'utf-8',
-    stdio: 'inherit',
-  })
-}
-
 async function testFixture(fixture: FixtureInfo) {
   const root = resolve(__dirname, '../..')
   const path = await prepareFixture(fixture)
@@ -92,7 +80,7 @@ async function testFixture(fixture: FixtureInfo) {
       extensionDevelopmentPath: root,
       extensionTestsPath: join(__dirname, 'runner.js'),
       vscodeExecutablePath,
-      launchArgs: [path],
+      launchArgs: [path, '--disable-extensions'],
     })
   }
   catch (e) {
