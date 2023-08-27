@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "",
   "config.target_picking_strategy.global-previous": "",
   "config.target_picking_strategy.most-similar": "",
+  "config.target_picking_strategy.most-similar-by-key": "Vul de uitgepakte kopie automatisch in het taalbestand dat het beste overeenkomt met de huidige i18n-sleutel",
   "config.target_picking_strategy.none": "",
   "config.translate.engines": "",
   "config.translate.fallbackToKey": "Gebruik de sleutel zelf als vertaling, als er geen originele vertaling bestaat",

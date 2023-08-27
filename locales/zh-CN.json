@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "自动填入上次抽取当前文件中的文案时选择的语言文件中",
   "config.target_picking_strategy.global-previous": "自动填入上次抽取(当前/其他)文件中的文案时选择的语言文件中",
   "config.target_picking_strategy.most-similar": "自动将抽取的文案填入与当前文件路径最匹配的语言文件中",
+  "config.target_picking_strategy.most-similar-by-key": "自动将抽取的文案填入与当前i18n key最匹配的语言文件中",
   "config.target_picking_strategy.none": "用户手动选择将文本抽取到哪个语言文件",
   "config.translate.engines": "翻译服务提供商",
   "config.translate.fallbackToKey": "当对应路径没有翻译时，使用路径本身进行翻译",

@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "Metni mevcut dosyanın önceki seçili dil dosyasına çıkartın",
   "config.target_picking_strategy.global-previous": "Metni (mevcut veya başka) dosyanın önceki seçili yerel ayar dosyasına çıkartın",
   "config.target_picking_strategy.most-similar": "Geçerli dosyanın bulunduğu alana en çok uyan yolu dosyaya otomatik olarak ayıklayın",
+  "config.target_picking_strategy.most-similar-by-key": "Çıkarılan kopyayı, geçerli i18n anahtarıyla en iyi eşleşen dil dosyasına otomatik olarak doldurun",
   "config.target_picking_strategy.none": "Kullanıcı metnin çıkarılacağı dosyayı el ile seçer",
   "config.translate.engines": "Çeviri hizmetleri.",
   "config.translate.fallbackToKey": "Bu anahtar için kaynak çevirisi olmadığında çeviri yapmak için anahtarın kendisini kullanın.",

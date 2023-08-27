@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "Text in die zuvor ausgewählte Sprachdatei der aktuellen Datei extrahieren",
   "config.target_picking_strategy.global-previous": "Text in die aktuell ausgewähle Datei extrahieren",
   "config.target_picking_strategy.most-similar": "Automatisches Extrahieren von Text in die Datei, deren Pfad am meisten mit dem Pfad der aktuellen Datei übereinstimmt",
+  "config.target_picking_strategy.most-similar-by-key": "Füllen Sie die extrahierte Kopie automatisch in die Sprachdatei ein, die am besten zum aktuellen i18n-Schlüssel passt",
   "config.target_picking_strategy.none": "Benutzer wählt manuell aus, in welche Datei der Text extrahiert werden soll",
   "config.translate.engines": "Übersetzungsdienste.",
   "config.translate.fallbackToKey": "Schlüssel selbst zum Übersetzen verwenden, wenn es keine Quellübersetzung für diesen Schlüssel gibt.",

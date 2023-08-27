@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "Extrahera text till nuvarande fils tidigare valda locale-fil",
   "config.target_picking_strategy.global-previous": "Extrahera text till (nuvarande elle annan) fils tidigare valda locale-fil",
   "config.target_picking_strategy.most-similar": "Extrahera text automatiskt till den fil vars sökväg mest stämmer överens med nuvarande filens sökväg",
+  "config.target_picking_strategy.most-similar-by-key": "Fyll automatiskt i den extraherade kopian i den språkfil som bäst matchar den aktuella i18n-nyckeln",
   "config.target_picking_strategy.none": "Välj själv vilken fil att extrahera text till",
   "config.translate.engines": "Översättningstjänster.",
   "config.translate.fallbackToKey": "Använd nyckeln själv för att översätta när det inte finns någon källspråksöversättning för den nyckeln.",

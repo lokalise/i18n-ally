@@ -179,8 +179,17 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
+
     if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilar && pending.textFromPath)
       return this.findBestMatchFile(pending.textFromPath, paths)
+
+    if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilarByKey && keypath) {
+      const splitSymbol = Config.namespace ? Global.getNamespaceDelimiter() : '.'
+      const prefixKey = keypath.split(splitSymbol)[0]
+      const matched = this.findBestMatchFile(`${this._locale_dirs}/${prefixKey}`, paths)
+      if (matched.includes(prefixKey))
+        return matched
+    }
 
     if (Config.targetPickingStrategy === TargetPickingStrategy.FilePrevious && pending.textFromPath)
       return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)

@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "",
   "config.target_picking_strategy.global-previous": "",
   "config.target_picking_strategy.most-similar": "",
+  "config.target_picking_strategy.most-similar-by-key": "Fyll automatisk den utpakkede kopien inn i språkfilen som passer best til gjeldende i18n-nøkkel",
   "config.target_picking_strategy.none": "",
   "config.translate.engines": "",
   "config.translate.fallbackToKey": "",

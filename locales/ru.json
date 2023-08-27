@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "Извлекать текст в предыдущий выбранный файл перевода текущего файла",
   "config.target_picking_strategy.global-previous": "Извлекать текст в (текущий или другой) файл предыдущего выбранного файла перевода",
   "config.target_picking_strategy.most-similar": "Автоматически заполнять извлеченную копию в файл перевода, который лучше всего соответствует текущему пути к файлу",
+  "config.target_picking_strategy.most-similar-by-key": "Автоматически заполнять извлеченную копию языковым файлом, который лучше всего соответствует текущему ключу i18n.",
   "config.target_picking_strategy.none": "Пользователь вручную выбирает файл для извлечения текста",
   "config.translate.engines": "Сервисы перевода.",
   "config.translate.fallbackToKey": "Использовать сам ключ для перевода, если для этого ключа нет перевода",

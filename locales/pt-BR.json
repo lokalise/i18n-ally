@@ -95,6 +95,7 @@
   "config.target_picking_strategy.file-previous": "",
   "config.target_picking_strategy.global-previous": "",
   "config.target_picking_strategy.most-similar": "",
+  "config.target_picking_strategy.most-similar-by-key": "Preencha automaticamente a cópia extraída no arquivo de idioma que melhor corresponde à chave i18n atual",
   "config.target_picking_strategy.none": "",
   "config.translate.engines": "",
   "config.translate.fallbackToKey": "",
