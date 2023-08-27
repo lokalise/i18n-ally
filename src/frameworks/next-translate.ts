@@ -42,7 +42,7 @@ class NextTranslateFramework extends Framework {
     return '{locale}/{namespace}.json'
   }
 
-  perferredKeystyle = 'nested' as const
+  preferredKeystyle = 'nested' as const
 
   enableFeatures = {
     namespace: true,

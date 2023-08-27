@@ -1,8 +1,8 @@
 import path from 'path'
 import fs from 'fs'
-import { workspace, FileSystemWatcher } from 'vscode'
+import { workspace, FileSystemWatcher, TextDocument } from 'vscode'
 import YAML from 'js-yaml'
-import { Framework } from './base'
+import { Framework, ScopeRange } from './base'
 import { Global } from '~/core'
 import { LanguageId, File, Log } from '~/utils'
 
@@ -11,10 +11,11 @@ const CustomFrameworkConfigFilename = './.vscode/i18n-ally-custom-framework.yml'
 interface CustomFrameworkConfig {
   languageIds?: LanguageId[] | LanguageId
   usageMatchRegex?: string[] | string
+  scopeRangeRegex?: string
   refactorTemplates?: string[]
   monopoly?: boolean
 
-  keyMatchReg?: string[] | string // depreacted. use "usageMatchRegex" instead
+  keyMatchReg?: string[] | string // deprecated. use "usageMatchRegex" instead
 }
 
 class CustomFramework extends Framework {
@@ -79,6 +80,38 @@ class CustomFramework extends Framework {
   refactorTemplates(keypath: string) {
     return (this.data?.refactorTemplates || ['$1'])
       .map(i => i.replace(/\$1/g, keypath))
+  }
+
+  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+    if (!this.data?.scopeRangeRegex)
+      return undefined
+
+    if (!this.languageIds.includes(document.languageId as any))
+      return
+
+    const ranges: ScopeRange[] = []
+    const text = document.getText()
+    const reg = new RegExp(this.data.scopeRangeRegex, 'g')
+
+    for (const match of text.matchAll(reg)) {
+      if (match?.index == null)
+        continue
+
+      // end previous scope
+      if (ranges.length)
+        ranges[ranges.length - 1].end = match.index
+
+      // start new scope if namespace provides
+      if (match[1]) {
+        ranges.push({
+          start: match.index,
+          end: text.length,
+          namespace: match[1] as string,
+        })
+      }
+    }
+
+    return ranges
   }
 
   startWatch(root?: string) {

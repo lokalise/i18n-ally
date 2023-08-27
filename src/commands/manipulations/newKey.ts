@@ -9,7 +9,7 @@ export async function NewKey(keypath?: string) {
 
   try {
     keypath = await window.showInputBox({
-      value: keypath || '',
+      value: typeof keypath === 'string' ? keypath : '',
       prompt: i18n.t('prompt.new_key_path'),
       ignoreFocusOut: true,
     })
@@ -61,7 +61,7 @@ export async function NewKey(keypath?: string) {
       })
     }
   }
-  catch (err) {
+  catch (err: any) {
     Log.error(err.toString())
   }
 }

@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "import/named": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

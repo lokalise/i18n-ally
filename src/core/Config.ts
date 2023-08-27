@@ -198,7 +198,7 @@ export class Config {
 
   static get regexKey(): string {
     return this.getConfig('regex.key')
-      || this.getConfig('keyMatchRegex') // back compatible, depreacted.
+      || this.getConfig('keyMatchRegex') // back compatible, deprecated.
       || (Config.disablePathParsing ? KEY_REG_ALL : KEY_REG_DEFAULT)
   }
 
@@ -365,7 +365,7 @@ export class Config {
 
   static get usageDerivedKeyRules() {
     return this.getConfig<string[]>('usage.derivedKeyRules')
-    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, deprecated.
     ?? undefined
   }
 
@@ -554,6 +554,18 @@ export class Config {
 
   static get libreTranslateApiRoot() {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
+
+  static get openaiApiKey() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiKey')
+  }
+
+  static get openaiApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiRoot')
+  }
+
+  static get openaiApiModel() {
+    return this.getConfig<string>('translate.openai.apiModel') ?? 'gpt-3.5-turbo'
   }
 
   static get telemetry(): boolean {
