@@ -58,6 +58,10 @@ export class Telemetry {
   private static _amplitude: amplitude.Types.NodeClient
 
   static async track(key: TelemetryKey, properties?: Record<string, any>, immediate = false) {
+    const isEnabled = Config.telemetry && !isTest
+    if (!isEnabled)
+      return
+
     try {
       this._initializeAmplitude()
 
