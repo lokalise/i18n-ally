@@ -37,6 +37,8 @@
   "config.annotation_max_length": "内联注释显示的最大字符数。超出的部分将显示为省略号（...）",
   "config.annotations": "启用内联注释",
   "config.auto_detection": "",
+  "config.baidu_app_secret": "百度平台分配的密钥",
+  "config.baidu_appid": "百度平台APPID",
   "config.deepl_api_key": "",
   "config.deepl_log": "",
   "config.deepl_use_free_api_entry": "",

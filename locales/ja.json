@@ -37,6 +37,8 @@
   "config.annotation_max_length": "インラインアノテーションの最大文字数です。超過している部分は(...)と表示されます。",
   "config.annotations": "インラインアノテーションを有効にする.",
   "config.auto_detection": "",
+  "config.baidu_app_secret": "",
+  "config.baidu_appid": "",
   "config.deepl_api_key": "",
   "config.deepl_log": "",
   "config.deepl_use_free_api_entry": "",

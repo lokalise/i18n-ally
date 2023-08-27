@@ -37,6 +37,8 @@
   "config.annotation_max_length": "Número máximo de caracteres exibidos nas anotações inline. O restante será exibido em forma de reticências (...)",
   "config.annotations": "Habilitar anotações inline",
   "config.auto_detection": "",
+  "config.baidu_app_secret": "",
+  "config.baidu_appid": "",
   "config.deepl_api_key": "",
   "config.deepl_log": "",
   "config.deepl_use_free_api_entry": "",

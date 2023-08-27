@@ -37,6 +37,8 @@
   "config.annotation_max_length": "Maximale Zeichenlänge für Hinweise die im Text angezeigt werden. Abgeschnitte Zeichen werden als (...) angezeigt",
   "config.annotations": "Hinweise im Text aktivieren",
   "config.auto_detection": "Automatische Erkennung von Übersetzung aktivieren",
+  "config.baidu_app_secret": "",
+  "config.baidu_appid": "",
   "config.deepl_api_key": "API key für die DeepL translate engine",
   "config.deepl_log": "DeepL debug logs anzeigen",
   "config.deepl_use_free_api_entry": "Kostenlose DeepL Version benutzen",

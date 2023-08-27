@@ -3,6 +3,7 @@ import GoogleTranslateEngine from './engines/google'
 import GoogleTranslateCnEngine from './engines/google-cn'
 import DeepLTranslateEngine from './engines/deepl'
 import LibreTranslateEngine from './engines/libretranslate'
+import BaiduTranslate from './engines/baidu'
 import OpenAITranslateEngine from './engines/openai'
 
 export class Translator {
@@ -11,6 +12,7 @@ export class Translator {
     'google-cn': new GoogleTranslateCnEngine(),
     'deepl': new DeepLTranslateEngine(),
     'libretranslate': new LibreTranslateEngine(),
+    'baidu': new BaiduTranslate(),
     'openai': new OpenAITranslateEngine(),
   }
 
@@ -26,6 +28,7 @@ export {
   GoogleTranslateCnEngine,
   DeepLTranslateEngine,
   LibreTranslateEngine,
+  BaiduTranslate,
   OpenAITranslateEngine,
 }
 
