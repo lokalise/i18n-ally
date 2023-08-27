@@ -31,6 +31,7 @@
   "i18n-ally.keystyle": "flat",
   "i18n-ally.preferredDelimiter": "_",
   "i18n-ally.sortKeys": true,
+  "i18n-ally.sortCompare": "binary",
   "i18n-ally.keepFulfilled": true,
   "i18n-ally.translate.promptSource": true,
   "i18n-ally.pathMatcher": "{locale}.json",

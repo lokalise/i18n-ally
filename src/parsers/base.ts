@@ -36,14 +36,14 @@ export abstract class Parser {
     return await this.parse(raw)
   }
 
-  async save(filepath: string, object: object, sort: boolean) {
-    const text = await this.dump(object, sort)
+  async save(filepath: string, object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
+    const text = await this.dump(object, sort, compare)
     await File.write(filepath, text)
   }
 
   abstract parse(text: string): Promise<object>
 
-  abstract dump(object: object, sort: boolean): Promise<string>
+  abstract dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined): Promise<string>
 
   parseAST(text: string): KeyInDocument[] {
     return []
