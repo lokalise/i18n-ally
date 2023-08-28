@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.9.1",
+  "version": "2.10.0",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -65,7 +65,7 @@
     "pofile": "^1.1.1",
     "properties": "^1.2.1",
     "qs": "^6.10.3",
-    "semver": "^7.3.5",
+    "semver": "^7.5.2",
     "string-similarity": "^4.0.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.5",
@@ -813,6 +813,7 @@
               "ngx-translate",
               "i18next",
               "react-i18next",
+              "i18next-shopify",
               "i18n-tag",
               "flutter",
               "vue-sfc",
@@ -831,7 +832,8 @@
               "lingui",
               "jekyll",
               "fluent-vue",
-              "fluent-vue-sfc"
+              "fluent-vue-sfc",
+              "next-intl"
             ]
           },
           "description": "%config.enabled_frameworks%"
@@ -866,6 +868,19 @@
           "type": "boolean",
           "default": false,
           "description": "%config.sort_keys%"
+        },
+        "i18n-ally.sortCompare": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "locale"
+          ],
+          "default": "binary",
+          "description": "%config.sort_compare%"
+        },
+        "i18n-ally.sortLocale": {
+          "type": "string",
+          "description": "%config.sort_locale%"
         },
         "i18n-ally.preferredDelimiter": {
           "type": "string",
@@ -1023,7 +1038,9 @@
               "google",
               "google-cn",
               "deepl",
-              "libretranslate"
+              "libretranslate",
+              "baidu",
+              "openai"
             ]
           },
           "default": [
@@ -1056,6 +1073,16 @@
           "default": null,
           "description": "%config.deepl_api_key%"
         },
+        "i18n-ally.translate.baidu.appid": {
+          "type": "string",
+          "default": null,
+          "description": "%config.baidu_appid%"
+        },
+        "i18n-ally.translate.baidu.apiSecret": {
+          "type": "string",
+          "default": null,
+          "description": "%config.baidu_app_secret%"
+        },
         "i18n-ally.translate.deepl.enableLog": {
           "type": "boolean",
           "default": false,
@@ -1070,6 +1097,33 @@
           "type": "string",
           "default": "http://localhost:5000",
           "description": "%config.libretranslate_api_root%"
+        },
+        "i18n-ally.translate.openai.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.openai_api_key%"
+        },
+        "i18n-ally.translate.openai.apiRoot": {
+          "type": "string",
+          "default": "https://api.openai.com",
+          "description": "%config.openai_api_root%"
+        },
+        "i18n-ally.translate.openai.apiModel": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-3.5-turbo-16k",
+            "gpt-3.5-turbo-0301",
+            "gpt-3.5-turbo-0613",
+            "gpt-4",
+            "gpt-4-0314",
+            "gpt-4-0613",
+            "gpt-4-32k",
+            "gpt-4-32k-0314",
+            "gpt-4-32k-0613"
+          ],
+          "description": "%config.openai_api_model%"
         },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
@@ -1136,7 +1190,8 @@
           "enum": [
             "slug",
             "random",
-            "empty"
+            "empty",
+            "source"
           ],
           "description": "%config.keygen_strategy%"
         },
@@ -1169,6 +1224,7 @@
           "enum": [
             "none",
             "most-similar",
+            "most-similar-by-key",
             "file-previous",
             "global-previous"
           ],
@@ -1176,7 +1232,8 @@
             "%config.target_picking_strategy.none%",
             "%config.target_picking_strategy.most-similar%",
             "%config.target_picking_strategy.file-previous%",
-            "%config.target_picking_strategy.global-previous%"
+            "%config.target_picking_strategy.global-previous%",
+            "%config.target_picking_strategy.most-similar-by-key%"
           ],
           "description": "%config.target_picking_strategy%"
         },
@@ -1225,7 +1282,7 @@
           "description": "%config.args_suffix%"
         },
         "i18n-ally.derivedKeyRules": {
-          "deprecationMessage": "Depreacted. Use \"i18n-ally.usage.derivedKeyRules\" instead."
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },
         "i18n-ally.filenameMatchRegex": {
           "deprecationMessage": "Deprecated. Use \"i18n-ally.pathMatcher\" instead."
@@ -1234,7 +1291,7 @@
           "deprecationMessage": "Deprecated. Use \"i18n-ally.namespace\" instead."
         },
         "i18n-ally.keyMatchRegex": {
-          "deprecationMessage": "Depreacted. Use \"i18n-ally.regex.key\" instead."
+          "deprecationMessage": "Deprecated. Use \"i18n-ally.regex.key\" instead."
         },
         "vue-i18n-ally.localesPaths": {
           "deprecationMessage": "%config.deprecated%"

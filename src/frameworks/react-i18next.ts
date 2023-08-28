@@ -1,7 +1,8 @@
 import { TextDocument } from 'vscode'
 import { Framework, ScopeRange } from './base'
 import { LanguageId } from '~/utils'
-import { RewriteKeySource, RewriteKeyContext } from '~/core'
+import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules } from '~/extraction'
+import { Config, RewriteKeySource, RewriteKeyContext } from '~/core'
 
 class ReactI18nextFramework extends Framework {
   id = 'react-i18next'
@@ -33,6 +34,14 @@ class ReactI18nextFramework extends Framework {
     '\\Wi18nKey=[\'"`]({key})[\'"`]',
   ]
 
+  supportAutoExtraction = [
+    'javascript',
+    'typescript',
+    'javascriptreact',
+    'typescriptreact',
+    'html',
+  ]
+
   derivedKeyRules = [
     '{key}_plural',
     '{key}_0',
@@ -51,8 +60,36 @@ class ReactI18nextFramework extends Framework {
     '{key}_two',
     '{key}_few',
     '{key}_many',
-    '{key}_other'
+    '{key}_other',
   ]
+
+  detectHardStrings(doc: TextDocument) {
+    const lang = doc.languageId
+    const text = doc.getText()
+
+    if (lang === 'html') {
+      return extractionsParsers.html.detect(
+        text,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+        Config.extractParserHTMLOptions,
+        // <script>
+        script => extractionsParsers.babel.detect(
+          script,
+          DefaultExtractionRules,
+          DefaultDynamicExtractionsRules,
+          Config.extractParserBabelOptions,
+        ),
+      )
+    }
+    else {
+      return extractionsParsers.babel.detect(
+        text,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+      )
+    }
+  }
 
   refactorTemplates(keypath: string, args: string[]) {
     return [
@@ -126,7 +163,7 @@ class ReactI18nextFramework extends Framework {
     // Add first namespace as a global scope resetting on each occurrence
     // useTranslation(ns1) and useTranslation(['ns1', ...])
     const regUse = /useTranslation\(\s*\[?\s*['"`](.*?)['"`]/g
-    let prevGlobalScope = false;
+    let prevGlobalScope = false
     for (const match of text.matchAll(regUse)) {
       if (typeof match.index !== 'number')
         continue
@@ -137,7 +174,7 @@ class ReactI18nextFramework extends Framework {
 
       // start a new scope if namespace is provided
       if (match[1]) {
-        prevGlobalScope = true;
+        prevGlobalScope = true
         ranges.push({
           start: match.index,
           end: text.length,

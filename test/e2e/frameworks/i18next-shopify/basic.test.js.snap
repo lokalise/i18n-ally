@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shopify React i18next get correct coverage report 1`] = `
+Object {
+  "allKeys": Array [
+    "pages.home.title",
+    "translation.count.one",
+    "translation.count.other",
+    "translation.description.part1",
+    "translation.description.part2",
+    "translation.foo.bar",
+    "translation.title",
+    "translation.titlew",
+  ],
+  "emptyKeys": Array [],
+  "locale": "en",
+  "missing": 0,
+  "missingKeys": Array [],
+  "total": 8,
+  "translated": 8,
+  "translatedKeys": Array [
+    "pages.home.title",
+    "translation.count.one",
+    "translation.count.other",
+    "translation.description.part1",
+    "translation.description.part2",
+    "translation.foo.bar",
+    "translation.title",
+    "translation.titlew",
+  ],
+}
+`;
+
+exports[`Shopify React i18next get keys 1`] = `
+Array [
+  Object {
+    "end": 530,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 513,
+  },
+  Object {
+    "end": 745,
+    "key": "translation.description.part1",
+    "quoted": true,
+    "start": 716,
+  },
+  Object {
+    "end": 1341,
+    "key": "translation.description.part2",
+    "quoted": true,
+    "start": 1312,
+  },
+  Object {
+    "end": 1436,
+    "key": "translation.description.part2",
+    "quoted": true,
+    "start": 1407,
+  },
+  Object {
+    "end": 1490,
+    "key": "translation.count",
+    "quoted": true,
+    "start": 1473,
+  },
+  Object {
+    "end": 1673,
+    "key": "translation.foo.bar",
+    "quoted": true,
+    "start": 1670,
+  },
+  Object {
+    "end": 1723,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1707,
+  },
+  Object {
+    "end": 1748,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1732,
+  },
+  Object {
+    "end": 1858,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 1853,
+  },
+  Object {
+    "end": 1909,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 1892,
+  },
+  Object {
+    "end": 2022,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 2017,
+  },
+  Object {
+    "end": 2061,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 2056,
+  },
+  Object {
+    "end": 2260,
+    "key": "pages.home.title",
+    "quoted": true,
+    "start": 2255,
+  },
+  Object {
+    "end": 2337,
+    "key": "translation.title",
+    "quoted": true,
+    "start": 2332,
+  },
+]
+`;

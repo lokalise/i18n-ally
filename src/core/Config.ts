@@ -4,7 +4,7 @@ import { workspace, extensions, ExtensionContext, commands, ConfigurationScope, 
 import { trimEnd, uniq } from 'lodash'
 import { TagSystems } from '../tagSystems'
 import { EXT_NAMESPACE, EXT_ID, EXT_LEGACY_NAMESPACE, KEY_REG_DEFAULT, KEY_REG_ALL, DEFAULT_LOCALE_COUNTRY_MAP } from '../meta'
-import { KeyStyle, DirStructureAuto, TargetPickingStrategy } from '.'
+import { KeyStyle, DirStructureAuto, SortCompare, TargetPickingStrategy } from '.'
 import i18n from '~/i18n'
 import { CaseStyles } from '~/utils/changeCase'
 import { ExtractionBabelOptions, ExtractionHTMLOptions } from '~/extraction/parsers/options'
@@ -174,6 +174,14 @@ export class Config {
 
   static get sortKeys(): boolean {
     return this.getConfig<boolean>('sortKeys') || false
+  }
+
+  static get sortCompare(): SortCompare {
+    return this.getConfig<SortCompare>('sortCompare') || 'binary'
+  }
+
+  static get sortLocale(): string | undefined{
+    return this.getConfig<string>('sortLocale')
   }
 
   static get readonly(): boolean {
@@ -365,7 +373,7 @@ export class Config {
 
   static get usageDerivedKeyRules() {
     return this.getConfig<string[]>('usage.derivedKeyRules')
-    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, depreacted.
+    ?? this.getConfig<string[]>('derivedKeyRules') // back compatible, deprecated.
     ?? undefined
   }
 
@@ -536,6 +544,14 @@ export class Config {
       .update(key, value, isGlobal)
   }
 
+  static get baiduApiSecret() {
+    return this.getConfig<string | null | undefined>('translate.baidu.apiSecret')
+  }
+
+  static get baiduAppid() {
+    return this.getConfig<string | null | undefined>('translate.baidu.appid')
+  }
+
   static get googleApiKey() {
     return this.getConfig<string | null | undefined>('translate.google.apiKey')
   }
@@ -554,6 +570,18 @@ export class Config {
 
   static get libreTranslateApiRoot() {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
+
+  static get openaiApiKey() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiKey')
+  }
+
+  static get openaiApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.openai.apiRoot')
+  }
+
+  static get openaiApiModel() {
+    return this.getConfig<string>('translate.openai.apiModel') ?? 'gpt-3.5-turbo'
   }
 
   static get telemetry(): boolean {
