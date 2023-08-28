@@ -9,8 +9,8 @@ import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CommandOptions } from '~/commands/manipulations/common'
 
 const AMPLIDUTE_API = isProd
-  ? '6459b23f8052370ad10d7734c7822d36' // Live
-  : '6459b23f8052370ad10d7734c7822d36' // Dev
+  ? '710028b04f0f9274085eec6885e94ceb' // Prod
+  : '63d2a7eb46b66d43e0d20b0ba2834cc3' // Dev
 
 const AMPLIDUTE_SERVER_ZONE = 'EU'
 
