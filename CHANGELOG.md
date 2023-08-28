@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.11.0](https://github.com/lokalise/i18n-ally/compare/v2.10.0...v2.11.0) (2023-08-28)
+
+### ⚡ Features
+
+Two new frameworks:
+
+* add `i18n-js` framework ([#690](https://github.com/lokalise/i18n-ally/issues/690)) ([1b0ffc0](https://github.com/lokalise/i18n-ally/commit/1b0ffc0521d4bc1f98083409efa7f6230491b630))
+* add `next-intl` framework ([#934](https://github.com/lokalise/i18n-ally/issues/934)) ([e25e1cd](https://github.com/lokalise/i18n-ally/commit/e25e1cd622dc409f7c0a416b805689bf59e98d38))
+
+Two new translation engines:
+
+* add Baidu translation engine support ([#768](https://github.com/lokalise/i18n-ally/issues/768)) ([fd4af07](https://github.com/lokalise/i18n-ally/commit/fd4af07b66ffbf9db507046b0c19c01bb0818bb7))
+* add OpenAI translate engine ([#983](https://github.com/lokalise/i18n-ally/issues/983)) ([b3749c8](https://github.com/lokalise/i18n-ally/commit/b3749c80c24d34bcb676b43ee38c8aaf0efb4641))
+
+Other improvements:
+
+* add `vite-plugin-vue-i18n` into `vue` framework detection ([#782](https://github.com/lokalise/i18n-ally/issues/782)) ([6815d55](https://github.com/lokalise/i18n-ally/commit/6815d554046e2657b9e02c452f8f118d641befdb)), closes [#751](https://github.com/lokalise/i18n-ally/issues/751)
+* add `@intlify/nuxt3` into `vue` framework detection ([#729](https://github.com/lokalise/i18n-ally/pull/729)) ([68ecd0a](https://github.com/lokalise/i18n-ally/commit/68ecd0a2fd65d97d9d9c554f1c5eda75d0c7e708))
+* add 'most-similar-by-key' mode for TargetPickingStrategy ([#758](https://github.com/lokalise/i18n-ally/issues/758)) ([93e2c46](https://github.com/lokalise/i18n-ally/commit/93e2c46a45fd872a89d05fc5ee18d2632117d89a))
+* allow using the source text as a keygen strategy ([#794](https://github.com/lokalise/i18n-ally/issues/794)) ([2e0def3](https://github.com/lokalise/i18n-ally/commit/2e0def3f6a9e413fe88376a3f46318a1fc33f01d))
+* add message sort by locale's order instead of binary ([#703](https://github.com/lokalise/i18n-ally/issues/703)) ([ae6972a](https://github.com/lokalise/i18n-ally/commit/ae6972a0216fd1c1f64f11896d14bd531c0804cd)), closes [#702](https://github.com/lokalise/i18n-ally/issues/702)
+* add new `scopeRangeRegex` config to the custom framework ([#926](https://github.com/lokalise/i18n-ally/issues/926)) ([ff7417c](https://github.com/lokalise/i18n-ally/commit/ff7417c7d963f3c989009e071ea63494202b5ffe))
+* set html format for libretranslate translation engine ([#724](https://github.com/lokalise/i18n-ally/issues/724)) ([68b01ec](https://github.com/lokalise/i18n-ally/commit/68b01ec835eac010e97e1a9b6ba854cfb5e050b2))
+* flags: add flags for Catalonia, Gallician and Basque languages  ([#967](https://github.com/lokalise/i18n-ally/issues/967)) ([852de50](https://github.com/lokalise/i18n-ally/commit/852de504eaf2f8af4f6e5cd1ae6131c3dbdd82c0))
+
+### 🐞 Bug Fixes
+
+* circular structure error on create new key ([#942](https://github.com/lokalise/i18n-ally/issues/942)) ([6aedf8f](https://github.com/lokalise/i18n-ally/commit/6aedf8fdfeb2208931a90e86074840eab418cca2))
+* **react-i18next:** show sub completion items when using scoped namespace ([#941](https://github.com/lokalise/i18n-ally/issues/941)) ([fb8a429](https://github.com/lokalise/i18n-ally/commit/fb8a429827fb81f277696f226fb00fcac6fddf16))
+* **transloco:** translate api not detected properly ([#984](https://github.com/lokalise/i18n-ally/issues/984)) ([03796e4](https://github.com/lokalise/i18n-ally/commit/03796e4ec84555378be6f835aa6fd97e6405fb5b))
+* **svelte:** support new lines and using get() for store ([#132](https://github.com/lokalise/i18n-ally/issues/132)) ([5ba4582](https://github.com/lokalise/i18n-ally/commit/5ba4582d2e29200927187e26a67463cf74825357))
+* **vue-i18n:** allow additional attributes on i18n component ([#865](https://github.com/lokalise/i18n-ally/issues/865)) ([d7916a5](https://github.com/lokalise/i18n-ally/commit/d7916a5711ec10b73eebc1119d89594c0e00de09))
+
+### 🌐 Translations
+* fix French grammar ([#985](https://github.com/lokalise/i18n-ally/issues/985)) ([5554a0b](https://github.com/lokalise/i18n-ally/commit/5554a0b508cdd450143ec31478b66c14039f3201))
+
+
 ## [2.10.0](https://github.com/lokalise/i18n-ally/compare/v2.9.1...v2.10.0) (2023-07-11)
 
 ### ⚡ Features
