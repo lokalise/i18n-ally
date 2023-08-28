@@ -8,15 +8,15 @@ import { Global } from '~/extension'
 import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CommandOptions } from '~/commands/manipulations/common'
 
-const AMPLIDUTE_API = isProd
+const AMPLITUDE_API = isProd
   ? '710028b04f0f9274085eec6885e94ceb' // Prod
   : '63d2a7eb46b66d43e0d20b0ba2834cc3' // Dev
 
-const AMPLIDUTE_SERVER_ZONE = 'EU'
+const AMPLITUDE_SERVER_ZONE = 'EU'
 
-const AMPLIDUTE_FLUSH_QUEUE_SIZE = 100
+const AMPLITUDE_FLUSH_QUEUE_SIZE = 100
 
-const AMPLIDUTE_FLUSH_INTERVAL_MILLIS = isProd
+const AMPLITUDE_FLUSH_INTERVAL_MILLIS = isProd
   ? 5 * 60 * 1000 // 5 minutes
   : 10 * 1000 // 10 seconds
 
@@ -90,11 +90,11 @@ export class Telemetry {
 
     this._amplitude = amplitude.createInstance()
 
-    this._amplitude.init(AMPLIDUTE_API, {
+    this._amplitude.init(AMPLITUDE_API, {
       optOut: !Config.telemetry || isTest,
-      serverZone: AMPLIDUTE_SERVER_ZONE,
-      flushQueueSize: AMPLIDUTE_FLUSH_QUEUE_SIZE,
-      flushIntervalMillis: AMPLIDUTE_FLUSH_INTERVAL_MILLIS,
+      serverZone: AMPLITUDE_SERVER_ZONE,
+      flushQueueSize: AMPLITUDE_FLUSH_QUEUE_SIZE,
+      flushIntervalMillis: AMPLITUDE_FLUSH_INTERVAL_MILLIS,
     })
 
     this._amplitude.identify(new amplitude.Identify(), this._getUserProperties())
