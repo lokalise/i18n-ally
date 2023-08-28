@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { v4 as uuid } from 'uuid'
+import { randomUUID } from 'crypto'
+import * as amplitude from '@amplitude/analytics-node'
 import { version } from '../../package.json'
 import { Config } from './Config'
 import { Log } from '~/utils'
@@ -8,10 +8,17 @@ import { Global } from '~/extension'
 import { LocaleTreeItem, ProgressSubmenuItem } from '~/views'
 import { CommandOptions } from '~/commands/manipulations/common'
 
-const HEAP_ID_DEV = '1082064308'
-const HEAP_ID_PROD = '4118173713'
+const AMPLITUDE_API = isProd
+  ? '710028b04f0f9274085eec6885e94ceb' // Prod
+  : '63d2a7eb46b66d43e0d20b0ba2834cc3' // Dev
 
-const HEAP_ID = isProd ? HEAP_ID_PROD : HEAP_ID_DEV
+const AMPLITUDE_SERVER_ZONE = 'EU'
+
+const AMPLITUDE_FLUSH_QUEUE_SIZE = 100
+
+const AMPLITUDE_FLUSH_INTERVAL_MILLIS = isProd
+  ? 5 * 60 * 1000 // 5 minutes
+  : 10 * 1000 // 10 seconds
 
 export enum TelemetryKey {
   Activated = 'activated',
@@ -46,96 +53,28 @@ export enum ActionSource {
   Review = 'review'
 }
 
-export interface TelemetryEvent {
-  event: TelemetryKey
-  timestamp: number
-  identity: string
-  properties?: Record<string, any>
-}
-
 export class Telemetry {
-  private static _id: string
-  private static _timer: any = null
-
-  static events: TelemetryEvent[] = []
-
-  static get userId() {
-    if (this._id)
-      return this._id
-    this._id = Config.ctx.globalState.get('i18n-ally.telemetry-user-id')!
-    if (!this._id) {
-      this._id = uuid()
-      Config.ctx.globalState.update('i18n-ally.telemetry-user-id', this._id)
-    }
-    Log.info(`📈 Telemetry id: ${this._id}`)
-
-    return this._id
-  }
-
-  static checkVersionChange() {
-    const previousVersion = Config.ctx.globalState.get('i18n-ally.previous-version')
-
-    if (!previousVersion)
-      Telemetry.track(TelemetryKey.Installed, { new_version: version })
-    else if (previousVersion !== version)
-      Telemetry.track(TelemetryKey.Updated, { new_version: version, previous_version: previousVersion })
-
-    Config.ctx.globalState.update('i18n-ally.previous-version', version)
-  }
-
-  static get isEnabled() {
-    return Config.telemetry && !isTest
-  }
+  private static _userProperties: object
+  private static _amplitude: amplitude.Types.NodeClient
 
   static async track(key: TelemetryKey, properties?: Record<string, any>, immediate = false) {
-    if (!this.isEnabled)
+    const isEnabled = Config.telemetry && !isTest
+    if (!isEnabled)
       return
 
-    const event: TelemetryEvent = {
-      event: key,
-      identity: this.userId,
-      timestamp: +new Date(),
-      properties,
-    }
+    try {
+      this._initializeAmplitude()
 
-    if (isDev)
-      Log.info(`[telemetry] ${key}: ${JSON.stringify(properties)}`)
+      this._amplitude.track(key, properties, this._getUserProperties())
 
-    if (immediate) {
-      try {
-        await axios({
-          url: 'https://heapanalytics.com/api/track',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: {
-            app_id: HEAP_ID,
-            ...event,
-          },
-        })
-      }
-      catch (e) {
-        Log.error(e, false)
-      }
-    }
-    else {
-      this.events.push(event)
-      this.schedule()
-    }
-  }
+      if (immediate)
+        this._amplitude.flush()
 
-  static schedule() {
-    if (this.events.length >= 100) {
-      this.sendBulk()
+      if (isDev)
+        Log.info(`[telemetry] ${key}: ${JSON.stringify(properties)}`)
     }
-    else if (!this._timer && this.events.length) {
-      this._timer = setInterval(
-        () => this.sendBulk(),
-        isDev
-          ? 10 * 1000 // 10 seconds
-          : 5 * 60 * 1000, // 5 minutes
-      )
+    catch (e) {
+      Log.error(e, false)
     }
   }
 
@@ -145,73 +84,53 @@ export class Telemetry {
       : item?.actionSource || ActionSource.CommandPattele
   }
 
-  static async updateUserProperties() {
-    if (!this.isEnabled)
+  private static _initializeAmplitude() {
+    if (this._amplitude)
       return
 
-    const data = {
-      version,
-      feature_auto_detection: !!Config.autoDetection,
-      feature_annotation_in_place: !!Config.annotationInPlace,
-      feature_annotations: !!Config.annotations,
-      feature_disable_path_parsing: !!Config.disablePathParsing,
-      feature_extract_auto_detect: !!Config.extractAutoDetect,
-      feature_keep_fulfilled: !!Config.keepFulfilled,
-      feature_prefer_editor: !!Config.preferEditor,
-      feature_review_enabled: !!Config.reviewEnabled,
-      feature_has_path_matcher: !!Config._pathMatcher,
-      feature_has_custom_framework: !!Global.enabledFrameworks.find(i => i.id === 'custom'),
-    }
+    this._amplitude = amplitude.createInstance()
 
-    if (isDev)
-      Log.info(`[telemetry] user: ${JSON.stringify(data)}`)
+    this._amplitude.init(AMPLITUDE_API, {
+      optOut: !Config.telemetry || isTest,
+      serverZone: AMPLITUDE_SERVER_ZONE,
+      flushQueueSize: AMPLITUDE_FLUSH_QUEUE_SIZE,
+      flushIntervalMillis: AMPLITUDE_FLUSH_INTERVAL_MILLIS,
+    })
 
-    try {
-      await axios({
-        url: 'https://heapanalytics.com/api/add_user_properties',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {
-          app_id: HEAP_ID,
-          identity: this.userId,
-          properties: data,
-        },
-      })
-    }
-    catch (e) {
-      Log.error(e, false)
-    }
+    this._amplitude.identify(new amplitude.Identify(), this._getUserProperties())
   }
 
-  static async sendBulk() {
-    if (!this.events.length) {
-      clearInterval(this._timer)
-      this._timer = null
-      return
+  private static _getUserId() {
+    let userId = Config.ctx.globalState.get('i18n-ally.telemetry-user-id') ?? ''
+    if (!userId) {
+      userId = randomUUID()
+      Config.ctx.globalState.update('i18n-ally.telemetry-user-id', userId)
+    }
+    Log.info(`📈 Telemetry id: ${userId}`)
+    return userId
+  }
+
+  private static _getUserProperties() {
+    if (!this._userProperties) {
+      this._userProperties = {
+        user_id: this._getUserId(),
+        app_version: version,
+        user_properties: {
+          feature_auto_detection: !!Config.autoDetection,
+          feature_annotation_in_place: !!Config.annotationInPlace,
+          feature_annotations: !!Config.annotations,
+          feature_disable_path_parsing: !!Config.disablePathParsing,
+          feature_extract_auto_detect: !!Config.extractAutoDetect,
+          feature_keep_fulfilled: !!Config.keepFulfilled,
+          feature_prefer_editor: !!Config.preferEditor,
+          feature_review_enabled: !!Config.reviewEnabled,
+          feature_has_path_matcher: !!Config._pathMatcher,
+          feature_has_custom_framework: !!Global.enabledFrameworks.find(i => i.id === 'custom'),
+          feature_frameworks: Global.enabledFrameworks.map(i => i.display),
+        },
+      }
     }
 
-    if (isDev)
-      Log.info('[telemetry] sending bulk')
-
-    const events = Array.from(this.events)
-    this.events.length = 0
-    try {
-      await axios({
-        url: 'https://heapanalytics.com/api/track',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {
-          app_id: HEAP_ID,
-          events,
-        },
-      })
-    }
-    catch (e) {
-      Log.error(e, false)
-    }
+    return this._userProperties
   }
 }
