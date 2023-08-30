@@ -1,5 +1,3 @@
-import { Config } from '~/core'
-
 /**
  * 'foo' + bar() + ' is cool' -> `foo${bar()} is cool`
  */
@@ -24,7 +22,7 @@ export function stringConcatenationToTemplate(text: string) {
   return text
 }
 
-export function parseHardString(text = '', languageId?: string, isDynamic = false) {
+export function parseHardString(text = '', languageId?: string, isDynamic = false, argsToStringCallback = (args:string[])=>`{${args.length - 1}}`) {
   const trimmed = text.trim().replace(/\s*\r?\n\s*/g, ' ')
   let processed = trimmed
   const args: string[] = []
@@ -36,7 +34,7 @@ export function parseHardString(text = '', languageId?: string, isDynamic = fals
 
   processed = processed.replace(/(?:\{\{(.*?)\}\}|\$\{(.*?)\})/g, (full, content, content2) => {
     args.push((content ?? content2 ?? '').trim())
-    return `${Config.argsPrefix}${args.length - 1}${Config.argsSuffix}`
+    return argsToStringCallback(args)
   })
 
   return {
