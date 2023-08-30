@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.1](https://github.com/lokalise/i18n-ally/compare/v2.11.0...v2.11.1) (2023-08-30)
+
+
+### 🐞 Bug Fixes
+
+* invalid Svelte regex ([#1001](https://github.com/lokalise/i18n-ally/issues/1001)) ([fe4e464](https://github.com/lokalise/i18n-ally/commit/fe4e46477f34d174de7ea72cde9a7b30a5d356ab))
+
 ## [2.11.0](https://github.com/lokalise/i18n-ally/compare/v2.10.0...v2.11.0) (2023-08-28)
 
 ### ⚡ Features
