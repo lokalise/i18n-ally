@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.10.0",
+  "version": "2.11.1",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -41,6 +41,7 @@
     "test:update": "cross-env CHAI_JEST_SNAPSHOT_UPDATE_ALL=true nr test:unit"
   },
   "dependencies": {
+    "@amplitude/analytics-node": "^1.3.3",
     "@babel/parser": "^7.15.3",
     "@babel/traverse": "^7.15.0",
     "bcp-47-normalize": "^2.0.1",
@@ -1375,5 +1376,6 @@
         "hidden": true
       }
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
