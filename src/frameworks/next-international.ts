@@ -82,7 +82,7 @@ class NextInternationalFramework extends Framework {
       const scopedText = text.slice(currentNamespaceMatch.index, nextNamespaceMatch?.index)
 
       const namespace = currentNamespaceMatch[2]
-      const scopedTRegex = /scopedT\(['"`](.*?)['"`]\)/g
+      const scopedTRegex = /scopedT\([\n\s]*['"`](.*?)['"`]/g
       for (const match of scopedText.matchAll(scopedTRegex)) {
         if (typeof match.index !== 'number')
           continue
