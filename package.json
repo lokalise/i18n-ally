@@ -834,7 +834,8 @@
               "jekyll",
               "fluent-vue",
               "fluent-vue-sfc",
-              "next-intl"
+              "next-intl",
+              "next-international"
             ]
           },
           "description": "%config.enabled_frameworks%"
