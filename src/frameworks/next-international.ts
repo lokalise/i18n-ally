@@ -1,8 +1,8 @@
-/* eslint-disable no-console */
 import { TextDocument } from 'vscode'
 import { Framework, ScopeRange } from './base'
 import { LanguageId } from '~/utils'
-import { RewriteKeySource, RewriteKeyContext, KeyStyle } from '~/core'
+import { RewriteKeySource, RewriteKeyContext, KeyStyle, Config } from '~/core'
+import { extractionsParsers, DefaultExtractionRules, DefaultDynamicExtractionsRules } from '~/extraction'
 
 class NextInternationalFramework extends Framework {
   id = 'next-international'
@@ -26,12 +26,54 @@ class NextInternationalFramework extends Framework {
     'typescriptreact',
   ]
 
+  supportAutoExtraction = [
+    'javascript',
+    'typescript',
+    'javascriptreact',
+    'typescriptreact',
+    'html',
+  ]
+
   usageMatchRegex = [
     // Basic usage
     '[^\\w\\d]t\\([\'"`]({key})[\'"`]',
     // Scoped usage
     '[^\\w\\d]scopedT\\([\'"`]({key})[\'"`]',
   ]
+
+  detectHardStrings(doc: TextDocument) {
+    const lang = doc.languageId
+    const text = doc.getText()
+
+    if (lang === 'html') {
+      return extractionsParsers.html.detect(
+        text,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+        Config.extractParserHTMLOptions,
+        // <script>
+        script => extractionsParsers.babel.detect(
+          script,
+          DefaultExtractionRules,
+          DefaultDynamicExtractionsRules,
+          Config.extractParserBabelOptions,
+        ),
+      )
+    }
+    else {
+      return extractionsParsers.babel.detect(
+        text,
+        DefaultExtractionRules,
+        DefaultDynamicExtractionsRules,
+        {},
+        (path, recordIgnore) => {
+          const callee = path.get('callee')
+          if (callee.node.name === 't' || callee.node.name === 'scopedT')
+            recordIgnore(path)
+        },
+      )
+    }
+  }
 
   refactorTemplates(keypath: string) {
     const keypaths = keypath.split('.').map((_, index, parts) => {
