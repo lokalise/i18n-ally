@@ -15,11 +15,11 @@ export class YamlParser extends Parser {
     return YAML.load(text, Config.parserOptions?.yaml?.load) as Object
   }
 
-  async dump(object: object, sort: boolean) {
+  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
     object = JSON.parse(JSON.stringify(object))
     return YAML.dump(object, {
       indent: this.options.indent,
-      sortKeys: sort,
+      sortKeys: sort ? (compare ?? true) : false,
       ...Config.parserOptions?.yaml?.dump,
     })
   }

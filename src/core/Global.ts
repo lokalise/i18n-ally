@@ -87,8 +87,8 @@ export class Global {
 
     // try to use frameworks preference
     for (const f of this.enabledFrameworks) {
-      if (f.perferredKeystyle && f.perferredKeystyle !== 'auto')
-        return f.perferredKeystyle
+      if (f.preferredKeystyle && f.preferredKeystyle !== 'auto')
+        return f.preferredKeystyle
     }
 
     // prompt to select
@@ -212,8 +212,8 @@ export class Global {
     let config = Config._dirStructure
     if (!config || config === 'auto') {
       for (const f of this.enabledFrameworks) {
-        if (f.perferredDirStructure)
-          config = f.perferredDirStructure
+        if (f.preferredDirStructure)
+          config = f.preferredDirStructure
       }
     }
     return config
@@ -252,7 +252,7 @@ export class Global {
       config = Config._localesPaths
 
     if (!config) {
-      config = this.enabledFrameworks.flatMap(f => f.perferredLocalePaths || [])
+      config = this.enabledFrameworks.flatMap(f => f.preferredLocalePaths || [])
       if (!config.length)
         config = undefined
     }
@@ -379,7 +379,6 @@ export class Global {
       commands.executeCommand('setContext', 'i18n-ally.extract.autoDetect', Config.extractAutoDetect)
 
       Telemetry.track(TelemetryKey.Enabled)
-      Telemetry.updateUserProperties()
 
       await this.initLoader(this._rootpath, reload)
     }

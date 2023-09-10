@@ -1,9 +1,7 @@
 {
   "i18n-ally.localesPaths": "public/locales",
   "i18n-ally.enabledFrameworks": [
-    "react",
-    "i18next",
-    "general"
+    "react-i18next"
   ],
   "i18n-ally.namespace": true,
   "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",

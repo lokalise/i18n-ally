@@ -11,7 +11,7 @@ import { AllyError, ErrorType } from '../Errors'
 import { Analyst, Global, Config } from '..'
 import { Telemetry, TelemetryKey } from '../Telemetry'
 import { Loader } from './Loader'
-import { ReplaceLocale, Log, applyPendingToObject, unflatten, NodeHelper, getCache, setCache } from '~/utils'
+import { ReplaceLocale, Log, applyPendingToObject, unflatten, NodeHelper, getCache, setCache, getLocaleCompare } from '~/utils'
 import i18n from '~/i18n'
 
 const THROTTLE_DELAY = 1500
@@ -179,8 +179,17 @@ export class LocaleLoader extends Loader {
         ignoreFocusOut: true,
       })
     }
+
     if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilar && pending.textFromPath)
       return this.findBestMatchFile(pending.textFromPath, paths)
+
+    if (Config.targetPickingStrategy === TargetPickingStrategy.MostSimilarByKey && keypath) {
+      const splitSymbol = Config.namespace ? Global.getNamespaceDelimiter() : '.'
+      const prefixKey = keypath.split(splitSymbol)[0]
+      const matched = this.findBestMatchFile(`${this._locale_dirs}/${prefixKey}`, paths)
+      if (matched.includes(prefixKey))
+        return matched
+    }
 
     if (Config.targetPickingStrategy === TargetPickingStrategy.FilePrevious && pending.textFromPath)
       return this.handleExtractToFilePrevious(pending.textFromPath, paths, keypath)
@@ -316,7 +325,10 @@ export class LocaleLoader extends Loader {
         const processingContext = { locale, targetFile: filepath }
         const processed = this.deprocessData(modified, processingContext)
 
-        await parser.save(filepath, processed, Config.sortKeys)
+        const compare = Config.sortCompare === 'locale'
+          ? getLocaleCompare(Config.sortLocale, locale)
+          : undefined
+        await parser.save(filepath, processed, Config.sortKeys, compare)
 
         if (this._files[filepath]) {
           this._files[filepath].value = modified

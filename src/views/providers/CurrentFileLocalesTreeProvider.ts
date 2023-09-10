@@ -12,6 +12,8 @@ export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTree
   private _onDidChangeTreeData: EventEmitter<BaseTreeItem | undefined> = new EventEmitter<BaseTreeItem | undefined>()
   readonly onDidChangeTreeData: Event<BaseTreeItem | undefined> = this._onDidChangeTreeData.event
 
+  private _pathsNotFound: string[] = []
+  private _pathsInUse: string[] = []
   public paths: string[] = []
   public pathsExists: string[] = []
 
@@ -61,15 +63,33 @@ export class CurrentFileLocalesTreeProvider implements TreeDataProvider<BaseTree
   }
 
   public get pathsInUse() {
-    return this.paths.filter(i => this.pathsExists.includes(i))
+    return this._pathsInUse
   }
 
   public get pathsNotFound() {
-    return this.paths.filter(i => !this.pathsExists.includes(i))
+    return this._pathsNotFound
   }
 
   updatePathsExists() {
     const roots = Object.values(CurrentFile?.loader?.flattenLocaleTree || {})
     this.pathsExists = roots.map(i => resolveFlattenRootKeypath(i.keypath))
+    this._pathsInUse = this.paths.filter(i => this.pathsExists.includes(i))
+    this._pathsNotFound = this.paths.filter(i => !this.pathsExists.includes(i))
+
+    // for paths not found, we want to exclude derived keys
+    // (derived keys are keys that are not actually in use, but are derived from a source key)
+    // (derived keys are not considered "not found")
+    const rules = Global.derivedKeyRules
+    for (let i = 0; i < this.pathsExists.length && this._pathsNotFound.length > 0; i++) {
+      const key = this.pathsExists[i]
+      for (const r of rules) {
+        const match = r.exec(key)
+        if (match && match[1] && this._pathsNotFound.includes(match[1])) {
+          this._pathsNotFound.splice(this._pathsNotFound.indexOf(match[1]), 1)
+          this._pathsInUse.push(match[1])
+          break
+        }
+      }
+    }
   }
 }

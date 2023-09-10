@@ -8,6 +8,8 @@ class VueSFCFramework extends Framework {
     packageJSON: [
       '@kazupon/vue-i18n-loader',
       '@intlify/vue-i18n-loader',
+      '@intlify/vite-plugin-vue-i18n',
+      '@intlify/unplugin-vue-i18n',
     ],
   }
 

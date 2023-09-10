@@ -16,11 +16,11 @@ export class JsonParser extends Parser {
     return JSON.parse(text)
   }
 
-  async dump(object: object, sort: boolean) {
+  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
     const indent = this.options.tab === '\t' ? this.options.tab : this.options.indent
 
     if (sort)
-      return `${SortedStringify(object, { space: indent })}\n`
+      return `${SortedStringify(object, { space: indent, cmp: compare ? (a, b) => compare(a.key, b.key) : undefined })}\n`
     else
       return `${JSON.stringify(object, null, indent)}\n`
   }

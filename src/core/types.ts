@@ -77,6 +77,8 @@ export interface NodeOptions {
 export type DirStructureAuto = 'auto' | 'file' | 'dir'
 export type DirStructure = 'file' | 'dir'
 
+export type SortCompare = 'binary' | 'locale'
+
 export interface Coverage {
   locale: string
   translated: number
@@ -152,6 +154,7 @@ export enum TargetPickingStrategy {
   MostSimilar = 'most-similar',
   FilePrevious ='file-previous',
   GlobalPrevious = 'global-previous',
+  MostSimilarByKey = 'most-similar-by-key',
 }
 
 export type DetectionSource = 'html-attribute' | 'html-inline' | 'js-string' | 'js-template' | 'jsx-text'

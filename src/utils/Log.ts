@@ -15,17 +15,17 @@ export class Log {
     this.outputChannel.appendLine(values.map(i => i.toString()).join(' '))
   }
 
-  static info(message: string, intend = 0) {
-    this.outputChannel.appendLine(`${'\t'.repeat(intend)}${message}`)
+  static info(message: string, indent = 0) {
+    this.outputChannel.appendLine(`${'\t'.repeat(indent)}${message}`)
   }
 
-  static warn(message: string, prompt = false, intend = 0) {
+  static warn(message: string, prompt = false, indent = 0) {
     if (prompt)
       window.showWarningMessage(message)
-    Log.info(`⚠ WARN: ${message}`, intend)
+    Log.info(`⚠ WARN: ${message}`, indent)
   }
 
-  static async error(err: Error | string | any = {}, prompt = true, intend = 0) {
+  static async error(err: Error | string | any = {}, prompt = true, indent = 0) {
     if (typeof err !== 'string') {
       const messages = [
         err.message,
@@ -34,7 +34,7 @@ export class Log {
         err.toJSON?.(),
       ]
         .filter(Boolean).join('\n')
-      Log.info(`🐛 ERROR: ${err.name}: ${messages}`, intend)
+      Log.info(`🐛 ERROR: ${err.name}: ${messages}`, indent)
     }
 
     if (prompt) {

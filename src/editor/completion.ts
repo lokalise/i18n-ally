@@ -16,11 +16,18 @@ class CompletionProvider implements CompletionItemProvider {
     if (key === undefined)
       return
 
+    const scopedKey = KeyDetector.getScopedKey(document, position)
+
     if (!key) {
       return Object
         .values(CurrentFile.loader.keys)
         .map((key) => {
-          const item = new CompletionItem(key, CompletionItemKind.Text)
+          let resolvedKey = key
+          if (scopedKey)
+          {
+            resolvedKey = key.replace(`${scopedKey}.`, "")
+          }
+          const item = new CompletionItem(resolvedKey, CompletionItemKind.Text)
           item.detail = loader.getValueByKey(key)
           return item
         })
@@ -34,6 +41,9 @@ class CompletionProvider implements CompletionItemProvider {
       parent = parts.slice(0, -1).join('.')
 
     let node: LocaleTree | LocaleNode | undefined
+
+    if (scopedKey && key)
+      node = loader.getTreeNodeByKey([scopedKey, key].join('.'))
 
     if (!key)
       node = loader.root
