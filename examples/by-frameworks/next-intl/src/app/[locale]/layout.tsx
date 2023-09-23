@@ -21,9 +21,6 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <head>
-        <title>next-intl</title>
-      </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
