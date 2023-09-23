@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/lokalise/i18n-ally/compare/v2.11.1...v2.12.0) (2023-09-23)
+
+### ⚡ Features
+
+* add `next-international` framework ([#1007](https://github.com/lokalise/i18n-ally/issues/1007)) ([378dfdd](https://github.com/lokalise/i18n-ally/commit/378dfdd7cc2015ddc9aa18189949bee6c671cf94))
+* support `getTranslator` API from `next-intl` ([#1017](https://github.com/lokalise/i18n-ally/issues/1017)) ([a66de32](https://github.com/lokalise/i18n-ally/commit/a66de322d97e1b40542f09fa99cbe7a73fbe4a28))
+
+
+### 🐞 Bug Fixes
+
+* `next-intl` support multilines key detection ([#1011](https://github.com/lokalise/i18n-ally/issues/1011)) ([#1014](https://github.com/lokalise/i18n-ally/issues/1014)) ([289af25](https://github.com/lokalise/i18n-ally/commit/289af25ba9c890929841e8fd3f6d48ce08cef47a))
+* `svelte` regex wrong first capturing group ([#1003](https://github.com/lokalise/i18n-ally/issues/1003)) ([#1013](https://github.com/lokalise/i18n-ally/issues/1013)) ([a29bee8](https://github.com/lokalise/i18n-ally/commit/a29bee8ec0c49435add017f1766886514de3339b))
+
+
+
 ### [2.11.1](https://github.com/lokalise/i18n-ally/compare/v2.11.0...v2.11.1) (2023-08-30)
 
 
