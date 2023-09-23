@@ -28,13 +28,13 @@ class NextIntlFramework extends Framework {
 
   usageMatchRegex = [
     // Basic usage
-    '[^\\w\\d]t\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Rich text
-    '[^\\w\\d]t\.rich\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\.rich\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Raw text
-    '[^\\w\\d]t\.raw\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\.raw\\s*\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
