@@ -1,5 +1,5 @@
 {
-  "name": "next-intl",
+  "name": "next-international",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "next": "^13.4.0",
-    "next-intl": "3.0.0-beta.17",
+    "next-international": "^0.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

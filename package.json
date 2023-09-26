@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.11.1",
+  "version": "2.12.0",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -834,7 +834,8 @@
               "jekyll",
               "fluent-vue",
               "fluent-vue-sfc",
-              "next-intl"
+              "next-intl",
+              "next-international"
             ]
           },
           "description": "%config.enabled_frameworks%"

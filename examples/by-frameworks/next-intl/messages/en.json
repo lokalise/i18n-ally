@@ -3,6 +3,9 @@
     "description": "Some description",
     "title": "next-intl example"
   },
+  "Metadata": {
+    "title": "Page title"
+  },
   "Test": {
     "title": "Test"
   }

@@ -1,0 +1,7 @@
+{
+  "i18n-ally.localesPaths": "src/locales",
+  "i18n-ally.enabledFrameworks": ["next-international"],
+  "eslint.enable": false,
+  "i18n-ally.enabledParsers": ["ts"],
+  "i18n-ally.keystyle": "flat"
+}

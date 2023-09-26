@@ -28,13 +28,13 @@ class NextIntlFramework extends Framework {
 
   usageMatchRegex = [
     // Basic usage
-    '[^\\w\\d]t\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Rich text
-    '[^\\w\\d]t\.rich\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\.rich\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Raw text
-    '[^\\w\\d]t\.raw\\([\'"`]({key})[\'"`]',
+    '[^\\w\\d]t\\s*\.raw\\s*\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
@@ -79,16 +79,16 @@ class NextIntlFramework extends Framework {
     const ranges: ScopeRange[] = []
     const text = document.getText()
 
-    // Find matches of `useTranslations`, later occurences will override
-    // previous ones (this allows for multiple components with different
+    // Find matches of `useTranslations` and `getTranslator`. Later occurences will
+    // override previous ones (this allows for multiple components with different
     // namespaces in the same file).
-    const regex = /useTranslations\(\s*(['"`](.*?)['"`])?/g
+    const regex = /(useTranslations\(\s*|getTranslator\(.*,\s*)(['"`](.*?)['"`])?/g
     let prevGlobalScope = false
     for (const match of text.matchAll(regex)) {
       if (typeof match.index !== 'number')
         continue
 
-      const namespace = match[2]
+      const namespace = match[3]
 
       // End previous scope
       if (prevGlobalScope)

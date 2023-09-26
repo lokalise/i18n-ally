@@ -15,6 +15,7 @@ export function detect(
   rules: ExtractionRule[] = DefaultExtractionRules,
   dynamicRules: ExtractionRule[] = DefaultDynamicExtractionsRules,
   userOptions: ExtractionBabelOptions = {},
+  customCallExpression?: (path: any, recordIgnore: (path: any) => void) => void,
 ) {
   const {
     ignoredJSXAttributes,
@@ -99,6 +100,7 @@ export function detect(
     },
     // ignore `console.xxx`
     CallExpression(path: any) {
+      if (customCallExpression) customCallExpression(path, recordIgnore)
       const callee = path.get('callee')
       if (!callee.isMemberExpression()) return
       if (isGlobalConsoleId(callee.get('object')))
