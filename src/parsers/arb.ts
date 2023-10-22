@@ -13,16 +13,17 @@ export class ArbParser extends Parser {
   async parse(text: string) {
     if (!text || !text.trim())
       return {}
-    return JSON.parse(text)
+    const json = JSON.parse(text)
+    return proxyArb(json)
   }
 
   async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
     const indent = this.options.tab === '\t' ? this.options.tab : this.options.indent
 
     if (sort)
-      return `${SortedStringify(object, { space: indent, cmp: compare ? (a, b) => compare(a.key, b.key) : undefined })}\n`
+      return `${SortedStringify(unproxyArb(object), { space: indent, cmp: wrapCompare(compare ?? ((a, b) => a.localeCompare(b))) })}\n`
     else
-      return `${JSON.stringify(object, null, indent)}\n`
+      return `${JSON.stringify(unproxyArb(object), null, indent)}\n`
   }
 
   annotationSupported = true
@@ -47,5 +48,44 @@ export class ArbParser extends Parser {
       }))
 
     return pairs
+  }
+}
+
+function proxyArb(arb: any) {
+  return new Proxy(arb, {
+    has(target, p) {
+      if (typeof p === 'string' && p.startsWith('@'))
+        return false
+      return Reflect.has(target, p)
+    },
+    ownKeys(target) {
+      return Object.keys(target).filter(it => !it.startsWith('@'))
+    },
+    get(target, p, receiver) {
+      if (p === '__raw__')
+        return target
+
+      return target[p]
+    },
+  })
+}
+
+function unproxyArb(arb: any) {
+  return arb.__raw__ ?? arb
+}
+
+function wrapCompare(compare: (x: string, y: string) => number): SortedStringify.Comparator {
+  return ({ key: x }, { key: y }): number => {
+    const xIsMeta = x.startsWith('@')
+    const yIsMeta = y.startsWith('@')
+    if (xIsMeta && !yIsMeta) {
+      const r = compare(x.substring(1), y)
+      return r === 0 ? 1 : r
+    }
+    if (!xIsMeta && yIsMeta) {
+      const r = compare(x, y.substring(1))
+      return r === 0 ? -1 : r
+    }
+    return compare(x, y)
   }
 }
