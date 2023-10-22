@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
+      onGenerateTitle: (context) => S.of(context).title,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       localizationsDelegates: const [
-        AppLocalizations.delegate,
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(AppLocalizations.of(context)!.home_page_title),
+        title: Text(S.of(context).home_page_title),
         actions: [
           IconButton(
             onPressed: widget.onLocaleButtonClick,
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              AppLocalizations.of(context)!.btn_text,
+              S.of(context).btn_text,
             ),
             Text(
               '$_counter',
