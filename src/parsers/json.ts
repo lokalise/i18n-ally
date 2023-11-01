@@ -2,6 +2,7 @@ import SortedStringify from 'json-stable-stringify'
 // @ts-ignore
 import JsonMap from 'json-source-map'
 import { Parser } from './base'
+import { determineJSONTabSize } from '~/utils/indent'
 
 export class JsonParser extends Parser {
   id = 'json'
@@ -16,13 +17,18 @@ export class JsonParser extends Parser {
     return JSON.parse(text)
   }
 
-  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
+  override detectIndentSize(text: string): number | null {
+    return determineJSONTabSize(text)
+  }
+
+  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined, detectedIndentSize: number) {
     const indent = this.options.tab === '\t' ? this.options.tab : this.options.indent
+    const finalIndent = this.options.useDetectIndent ? detectedIndentSize : indent
 
     if (sort)
-      return `${SortedStringify(object, { space: indent, cmp: compare ? (a, b) => compare(a.key, b.key) : undefined })}\n`
+      return `${SortedStringify(object, { space: finalIndent, cmp: compare ? (a, b) => compare(a.key, b.key) : undefined })}\n`
     else
-      return `${JSON.stringify(object, null, indent)}\n`
+      return `${JSON.stringify(object, null, finalIndent)}\n`
   }
 
   annotationSupported = true

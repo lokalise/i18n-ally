@@ -107,6 +107,7 @@ export interface PositionRange {
 
 export interface ParserOptions {
   indent: number
+  useDetectIndent: boolean
   tab: string
 }
 
