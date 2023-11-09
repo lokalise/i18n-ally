@@ -33,6 +33,9 @@ class NextIntlFramework extends Framework {
     // Rich text
     '[^\\w\\d]t\\s*\.rich\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
+    // Markup text
+    '[^\\w\\d]t\\s*\.markup\\s*\\(\\s*[\'"`]({key})[\'"`]',
+
     // Raw text
     '[^\\w\\d]t\\s*\.raw\\s*\\(\\s*[\'"`]({key})[\'"`]',
   ]
@@ -79,10 +82,10 @@ class NextIntlFramework extends Framework {
     const ranges: ScopeRange[] = []
     const text = document.getText()
 
-    // Find matches of `useTranslations` and `getTranslator`. Later occurences will
+    // Find matches of `useTranslations` and `getTranslations`. Later occurences will
     // override previous ones (this allows for multiple components with different
     // namespaces in the same file).
-    const regex = /(useTranslations\(\s*|getTranslator\(.*,\s*)(['"`](.*?)['"`])?/g
+    const regex = /(useTranslations\(\s*|getTranslations\(\s*)(['"`](.*?)['"`])?/g
     let prevGlobalScope = false
     for (const match of text.matchAll(regex)) {
       if (typeof match.index !== 'number')
