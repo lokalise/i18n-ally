@@ -2020,12 +2020,14 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.1:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+axios@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.0.tgz#f1e5292f26b2fd5c2e66876adc5b06cdbd7d2102"
+  integrity sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==
   dependencies:
-    follow-redirects "^1.10.0"
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 azure-devops-node-api@^11.0.1:
   version "11.0.1"
@@ -2916,7 +2918,7 @@ colorette@^1.2.2, colorette@^1.3.0:
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.3.0.tgz#ff45d2f0edb244069d3b772adeb04fed38d0a0af"
   integrity sha512-ecORCqbSFP7Wm8Y6lyqMJjexBQqXSF7SSeaTyGGphogUjBlFP9m9o08wy86HL2uB7fMTxtOUzLMk7ogKcxMg1w==
 
-combined-stream@^1.0.6, combined-stream@~1.0.6:
+combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -4953,10 +4955,10 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.10.0:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.2.tgz#cecb825047c00f5e66b142f90fed4f515dec789b"
-  integrity sha512-yLR6WaE2lbF0x4K2qE2p9PEXKLDjUjnR/xmjS3wHAYxtlsI9MLLBJUZirAHKzUZDGLxje7w/cXR49WOUo4rbsA==
+follow-redirects@^1.15.0:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
+  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -4972,6 +4974,15 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
+
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
 
 form-data@~2.3.2:
   version "2.3.3"
@@ -8830,6 +8841,11 @@ properties@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/properties/-/properties-1.2.1.tgz#0ee97a7fc020b1a2a55b8659eda4aa8d869094bd"
   integrity sha1-Dul6f8AgsaKlW4ZZ7aSqjYaQlL0=
+
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
 prr@~1.0.1:
   version "1.0.1"
