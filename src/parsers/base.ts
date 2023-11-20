@@ -10,6 +10,8 @@ export abstract class Parser {
 
   readonly readonly: boolean = false
 
+  private detectedIndentSize!: number
+
   constructor(
     public readonly languageIds: string[],
     public readonly supportedExts: string,
@@ -19,6 +21,9 @@ export abstract class Parser {
       },
       get tab() {
         return Config.tabStyle
+      },
+      get useDetectIndent() {
+        return Config.useDetectIndent
       },
     },
   ) {
@@ -33,17 +38,21 @@ export abstract class Parser {
     const raw = await File.read(filepath)
     if (!raw)
       return {}
+
+    this.detectedIndentSize = this.detectIndentSize(raw) ?? Config.indent
     return await this.parse(raw)
   }
 
+  detectIndentSize(text: string): number | null { return null }
+
   async save(filepath: string, object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
-    const text = await this.dump(object, sort, compare)
+    const text = await this.dump(object, sort, compare, this.detectedIndentSize)
     await File.write(filepath, text)
   }
 
   abstract parse(text: string): Promise<object>
 
-  abstract dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined): Promise<string>
+  abstract dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined, detectedIndentSize: number): Promise<string>
 
   parseAST(text: string): KeyInDocument[] {
     return []

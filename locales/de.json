@@ -36,6 +36,7 @@
   "config.annotation_in_place": "Zeige Hinweise im Text",
   "config.annotation_max_length": "Maximale Zeichenlänge für Hinweise die im Text angezeigt werden. Abgeschnitte Zeichen werden als (...) angezeigt",
   "config.annotations": "Hinweise im Text aktivieren",
+  "config.auto_detect_indent": "",
   "config.auto_detection": "Automatische Erkennung von Übersetzung aktivieren",
   "config.baidu_app_secret": "",
   "config.baidu_appid": "",
@@ -88,7 +89,9 @@
   "config.review_remove_on_resolved": "Kommentar löschen, anstatt ihn als behoben zu markieren. ",
   "config.review_username": "Nutzername zum Überprüfen",
   "config.show_flags": "Flaggen zusammen mit Lokalisierungscodes anzeigen",
+  "config.sort_compare": "",
   "config.sort_keys": "Schlüssel beim speichern von JSON/YAML sortierne",
+  "config.sort_locale": "",
   "config.source_language": "Quellsprache für machinelle Übersetzung",
   "config.tab_style": "Tabulatorstil",
   "config.target_picking_strategy": "Es wurde eine Strategie gefunden, die mit mehr als einer Lokalisierungsdatei arbeitet.",
@@ -234,5 +237,6 @@
   "view.usage_keys_in_use": "{0} Schlüssel sind in Verwendung",
   "view.usage_keys_missing": "{0} Schlüssel fehlen",
   "view.usage_keys_not_in_use": "{0} Schlüssel nicht in Verwendung",
-  "view.usage_report_none": "Neulanden um Schlüssel Benutzng zu analysieren"
+  "view.usage_report_none": "Neulanden um Schlüssel Benutzng zu analysieren",
+  "นามสกุล": ""
 }

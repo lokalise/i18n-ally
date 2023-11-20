@@ -923,6 +923,12 @@
           ],
           "description": "%config.tab_style%"
         },
+
+        "i18n-ally.useDetectIndent": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.auto_detect_indent%"
+        },
         "i18n-ally.namespace": {
           "type": "boolean",
           "description": "%config.namespace%"
