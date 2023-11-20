@@ -1,4 +1,3 @@
-import React from 'react'
 
 // @ts-ignore
 import Link from 'next-translate/Link'
@@ -10,9 +9,9 @@ import Header from '../components/header'
 
 // @ts-ignore
 export default function Home(props) {
-  const { t } = useTranslation()
-  const description = t('home:description')
-  const linkName = t('home:more-examples')
+  const { t } = useTranslation("home")
+  const description = t('description')
+  const linkName = t('more-examples')
 
   console.log(props)
 
