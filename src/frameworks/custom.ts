@@ -15,6 +15,13 @@ interface CustomFrameworkConfig {
   refactorTemplates?: string[]
   monopoly?: boolean
 
+  /**
+   * tsFileTemplates:
+   * - 'en/index.ts': "import type { BaseTranslation } from '../i18n-types'\n\nconst en = $1 satisfies BaseTranslation\n\nexport default en\n"
+   * - 'default': "import type { Translation } from '../i18n-types'\n\nexport default $1 satisfies Translation\n"
+   */
+  tsFileTemplates: Record<string, string>[]
+
   keyMatchReg?: string[] | string // deprecated. use "usageMatchRegex" instead
 }
 
@@ -60,6 +67,18 @@ class CustomFramework extends Framework {
       id = [id]
 
     return id
+  }
+
+  get tsFileTemplates(): Record<string, string> {
+    const templates = this.data?.tsFileTemplates ?? []
+
+    const result: Record<string, string> = {}
+    for (const teamplate of templates) {
+      const [key, value] = Object.entries(teamplate)[0]
+      result[key] = value
+    }
+
+    return result
   }
 
   get usageMatchRegex(): string[] {

@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.12.0",
+  "version": "2.12.1",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -21,10 +21,10 @@
     "release:minor": "standard-version --release-as minor && git push --follow-tags",
     "release:patch": "standard-version --release-as patch && git push --follow-tags",
     "gh:release": "conventional-github-releaser -p angular",
-    "build": "rimraf dist && nr i18n:build && nr main:build && nr editor:build && esno scripts/post-build.ts",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && rimraf dist && nr i18n:build && nr main:build && nr editor:build && esno scripts/post-build.ts",
     "dev": "run-p *:dev",
-    "main:build": "cross-env I18N_ALLY_ENV=production webpack --mode development",
-    "main:dev": "cross-env I18N_ALLY_ENV=development webpack --mode development --watch --info-verbosity verbose",
+    "main:build": "export NODE_OPTIONS=--openssl-legacy-provider && cross-env I18N_ALLY_ENV=production webpack --mode development",
+    "main:dev": "export NODE_OPTIONS=--openssl-legacy-provider && cross-env I18N_ALLY_ENV=development webpack --mode development --watch --info-verbosity verbose",
     "editor:build": "parcel build src/webview/src/index.html --out-dir dist/editor --no-minify",
     "editor:dev": "nodemon -w src/webview/src -e js,ts,vue,html --exec \"nr editor:build\"",
     "i18n:build": "esno scripts/build-i18n.ts",
