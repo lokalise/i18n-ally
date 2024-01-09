@@ -37,15 +37,15 @@ export function generateKeyFromText(text: string, filepath?: string, reuseExisti
 
   const keyPrefix = Config.keyPrefix
   if (keyPrefix && keygenStrategy !== 'empty' && keygenStrategy !== 'source')
-    key = keyPrefix + key
+    key = changeCase(key, Config.keygenStyle).trim()
+
+  key = keyPrefix + key
 
   if (filepath && key.includes('fileName')) {
     key = key
       .replace('{fileName}', basename(filepath))
       .replace('{fileNameWithoutExt}', basename(filepath, extname(filepath)))
   }
-
-  key = changeCase(key, Config.keygenStyle).trim()
 
   // some symbol can't convert to alphabet correctly, apply a default key to it
   if (!key)
