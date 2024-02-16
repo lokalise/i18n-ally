@@ -7,6 +7,7 @@ export interface TranslateOptions {
   text: string
   from?: string
   to?: string
+  description?: string
 }
 
 export interface TranslateResult {
