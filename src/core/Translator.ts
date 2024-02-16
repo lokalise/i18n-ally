@@ -77,7 +77,7 @@ export class Translator {
   }
 
   private static getDescriptionOfKey(keypath: string) {
-    return Global.reviews.getDescription(keypath);
+    return Global.reviews.getDescription(keypath)
   }
   // #endregion
 
