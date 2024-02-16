@@ -4,7 +4,7 @@ import { Config } from "~/core";
 
 export default class OpenAITranslate extends TranslateEngine {
   apiRoot = "https://api.openai.com";
-  systemPrompt = "You are a professional translation engine. Please translate text without explanation.";
+  systemPrompt = "You are a professional translation engine. Please translate text. Text inside '{{}}' or '{}' are variable substitutions and should be kept intact but they can be moved around if necessary and the variable name can be used for additional context. Text inside '$t()' are translation substitutions and must be kept as is but they can be moved around if necessary.";
 
   async translate(options: TranslateOptions) {
     let apiKey = Config.openaiApiKey;
