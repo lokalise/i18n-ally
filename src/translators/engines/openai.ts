@@ -82,7 +82,7 @@ export default class OpenAITranslate extends TranslateEngine {
     let generatedUserPrompt = `translate from ${sourceLang} to ${targetLang}`
 
     if (description)
-      generatedUserPrompt += `, description of the text is "${description}"`
+      generatedUserPrompt += `, description of the text is "${description}", use it to provide better translation but do not use it in the output directly.`
 
     generatedUserPrompt += `:\n\n${options.text}`
 
