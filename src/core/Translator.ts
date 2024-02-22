@@ -261,7 +261,7 @@ export class Translator {
     try {
       Log.info(`🌍 Translating "${keypath}" (${source}->${locale})`)
       this.start(keypath, locale)
-      const result = await this.translateText(value, source, locale, description)
+      const result = await this.translateText(keypath, value, source, locale, description)
       this.end(keypath, locale)
 
       if (token?.isCancellationRequested)
@@ -305,7 +305,7 @@ export class Translator {
     }
   }
 
-  private static async translateText(text: string, from: string, to: string, description?: string) {
+  private static async translateText(key: string, text: string, from: string, to: string, description?: string) {
     const engines = Config.translateEngines
     let trans_result: TranslateResult | undefined
 
@@ -316,7 +316,14 @@ export class Translator {
 
     for (const engine of engines) {
       try {
-        trans_result = await this._translator.translate({ engine, text, from, to, description })
+        trans_result = await this._translator.translate({
+          engine,
+          key,
+          text,
+          from,
+          to,
+          description,
+        })
         if (trans_result.error)
           throw trans_result.error
 

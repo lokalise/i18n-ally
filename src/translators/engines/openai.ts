@@ -68,8 +68,11 @@ export default class OpenAITranslate extends TranslateEngine {
 
     let systemPrompt = this.systemPrompt
 
-    if (frameworks.includes('i18next') || frameworks.includes('react-i18next'))
-      systemPrompt += ' Text inside "{{}}" or "{}" are variable substitutions and should be kept intact but they can be moved around if necessary and the variable name can be used for additional context. Text inside "$t()" are translation substitutions and must be kept as is but they can be moved around if necessary.'
+    if (frameworks.includes('i18next') || frameworks.includes('react-i18next')) {
+      systemPrompt += ' Text inside "{{}}" or "{}" are variable substitutions and should be kept intact but they can be moved around if necessary and the variable name can be used for additional context.'
+      systemPrompt += ' Text inside "$t()" are translation substitutions and must be kept as is but they can be moved around if necessary.'
+      systemPrompt += ' Use i18next plural rules for pluralization based on the translation key and the target locale.'
+    }
 
     return systemPrompt
   }
@@ -78,11 +81,14 @@ export default class OpenAITranslate extends TranslateEngine {
     const sourceLang = options.from
     const targetLang = options.to
     const description = options.description
+    const key = options.key
 
-    let generatedUserPrompt = `translate from ${sourceLang} to ${targetLang}`
+    let generatedUserPrompt = `Translate from ${sourceLang} to ${targetLang}.`
 
     if (description)
-      generatedUserPrompt += `, description of the text is "${description}", use it to provide better translation but do not use it in the output directly.`
+      generatedUserPrompt += `Description of the text is "${description}", use it to provide better translation but do not use it in the output directly.`
+
+    generatedUserPrompt += `The key for this translation is "${key}".`
 
     generatedUserPrompt += `:\n\n${options.text}`
 
