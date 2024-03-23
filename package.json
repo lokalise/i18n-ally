@@ -165,7 +165,9 @@
     "onLanguage:php",
     "onLanguage:handlebars",
     "onLanguage:ini",
-    "onLanguage:svelte"
+    "onLanguage:svelte",
+    "onLanguage:glimmer-js",
+    "onLanguage:glimmer-ts"
   ],
   "icon": "res/logo.png",
   "homepage": "https://github.com/lokalise/i18n-ally",

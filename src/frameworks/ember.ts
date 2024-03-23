@@ -17,6 +17,8 @@ class EmberFramework extends Framework {
     'javascriptreact',
     'typescriptreact',
     'handlebars',
+    'glimmer-js',
+    'glimmer-ts',
   ]
 
   // for visualize the regex, you can use https://regexper.com/
