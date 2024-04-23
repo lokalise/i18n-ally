@@ -11,6 +11,7 @@ export default class OpenAITranslate extends TranslateEngine {
     let apiRoot = this.apiRoot;
     if (Config.openaiApiRoot) apiRoot = Config.openaiApiRoot.replace(/\/$/, "");
     let model = Config.openaiApiModel;
+    let appContext = Config.openaiApiAppContext;
 
     const response = await axios.post(
       `${apiRoot}/v1/chat/completions`,
@@ -28,7 +29,7 @@ export default class OpenAITranslate extends TranslateEngine {
           },
           {
             role: "user",
-            content: this.generateUserPrompts(options),
+            content: this.generateUserPrompts(options,appContext),
           },
         ],
       },
@@ -61,12 +62,14 @@ export default class OpenAITranslate extends TranslateEngine {
     return r;
   }
 
-  generateUserPrompts(options: TranslateOptions): string {
+  generateUserPrompts(options: TranslateOptions, appContext: string): string {
     const sourceLang = options.from;
     const targetLang = options.to;
-
-    let generatedUserPrompt = `translate from ${sourceLang} to ${targetLang}:\n\n${options.text}`;
+    const contextInstruction = appContext ? `Please consider the following context for a more accurate translation:\n\nContext Information: ${appContext}\n\n` : '';
+    let generatedUserPrompt = `${contextInstruction}Given the above context, translate the following from ${sourceLang} to ${targetLang}:\n\n${options.text}`;
 
     return generatedUserPrompt;
   }
+
+
 }
