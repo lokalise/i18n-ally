@@ -1130,7 +1130,7 @@
         "i18n-ally.translate.openai.appContext": {
           "type": "string",
           "default": "",
-          "description": "Detailed context about the web application to provide enhanced understanding for translations with OpenAI. ",
+          "description": "Detailed context to provide enhanced understanding for translations with OpenAI. ",
           "editPresentation": "multilineText"
         },        
         "i18n-ally.usage.scanningIgnore": {
