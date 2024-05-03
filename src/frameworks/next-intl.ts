@@ -82,7 +82,7 @@ class NextIntlFramework extends Framework {
     // Find matches of `useTranslations` and `getTranslator`. Later occurences will
     // override previous ones (this allows for multiple components with different
     // namespaces in the same file).
-    const regex = /(useTranslations\(\s*|getTranslator\(.*,\s*)(['"`](.*?)['"`])?/g
+    const regex = /(useTranslations\(\s*|getTranslations\(.*,\s*)(['"`](.*?)['"`])?/g
     let prevGlobalScope = false
     for (const match of text.matchAll(regex)) {
       if (typeof match.index !== 'number')
