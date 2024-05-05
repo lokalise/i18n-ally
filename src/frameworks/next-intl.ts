@@ -1,7 +1,8 @@
 import { TextDocument } from 'vscode'
-import { Framework, ScopeRange } from './base'
+import { KeyStyle, RewriteKeyContext, RewriteKeySource } from '~/core'
 import { LanguageId } from '~/utils'
-import { RewriteKeySource, RewriteKeyContext, KeyStyle } from '~/core'
+
+import { Framework, ScopeRange } from './base'
 
 class NextIntlFramework extends Framework {
   id = 'next-intl'
@@ -79,10 +80,10 @@ class NextIntlFramework extends Framework {
     const ranges: ScopeRange[] = []
     const text = document.getText()
 
-    // Find matches of `useTranslations` and `getTranslator`. Later occurences will
+    // Find matches of `useTranslations` and `getTranslations`. Later occurences will
     // override previous ones (this allows for multiple components with different
     // namespaces in the same file).
-    const regex = /(useTranslations\(\s*|getTranslator\(.*,\s*)(['"`](.*?)['"`])?/g
+    const regex = /(useTranslations\(\s*|getTranslations\(\s*)(['"`](.*?)['"`])?/g
     let prevGlobalScope = false
     for (const match of text.matchAll(regex)) {
       if (typeof match.index !== 'number')
