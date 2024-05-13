@@ -46,9 +46,9 @@ export class EcmascriptParser extends Parser {
       const cmd = `${tsNode} --dir "${dir}" --transpile-only --compiler-options "${options}" "${loader}" "${filepath}"`
       // eslint-disable-next-line no-console
       console.log(`[i18n-ally] spawn: ${cmd}`)
-      child_process.exec(cmd, (err, stdout) => {
-        if (err)
-          return reject(err)
+      child_process.exec(cmd, (err, stdout, stderr) => {
+        if (err || stderr)
+          return reject(err || stderr)
         try {
           resolve(JSON.parse(stdout.trim()))
         }
