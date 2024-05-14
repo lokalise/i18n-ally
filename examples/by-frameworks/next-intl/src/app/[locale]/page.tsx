@@ -5,6 +5,7 @@ import UseTranslationsTest1 from './UseTranslationsTest1'
 import UseTranslationsTest2 from './UseTranslationsTest2'
 import GetTranslationsTest1 from './GetTranslationsTest1'
 import GetTranslationsTest2 from './GetTranslationsTest2'
+import GetTranslationsTest3 from './GetTranslationsTest3'
 
 export async function generateMetadata({ params: { locale } }) {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
@@ -30,6 +31,7 @@ export default function IndexPage() {
       <UseTranslationsTest2 />
       <GetTranslationsTest1 />
       <GetTranslationsTest2 />
+      <GetTranslationsTest3 />
       <InlineTest1 />
       <InlineTest2 />
       <InlineTest3 />
