@@ -958,11 +958,11 @@
         },
         "i18n-ally.theme.annotationBorder": {
           "type": "string",
-          "defult": "rgba(153, 153, 153, .2)"
+          "default": "rgba(153, 153, 153, .2)"
         },
         "i18n-ally.theme.annotationMissingBorder": {
           "type": "string",
-          "defult": "rgba(153, 153, 153, .2)"
+          "default": "rgba(153, 153, 153, .2)"
         },
         "i18n-ally.regex.key": {
           "type": "string",
