@@ -1252,7 +1252,7 @@
         "i18n-ally.extract.autoDetect": {
           "type": "boolean",
           "default": false,
-          "description": "Enables hard-coded strings detection automatically whenever opening supported a file"
+          "description": "Enables hard-coded strings detection automatically whenever opening a supported file"
         },
         "i18n-ally.extract.ignored": {
           "type": "array",
