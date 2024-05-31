@@ -8,7 +8,7 @@
     "i18n": "node ../../cli/builder.js"
   },
   "dependencies": {
-    "next": "10.2.3",
+    "next": "14.1.1",
     "next-translate": "link:../../",
     "react": "link:../../node_modules/react",
     "react-dom": "link:../../node_modules/react-dom"
