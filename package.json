@@ -1127,6 +1127,12 @@
           ],
           "description": "%config.openai_api_model%"
         },
+        "i18n-ally.translate.openai.appContext": {
+          "type": "string",
+          "default": "",
+          "description": "Detailed context to provide enhanced understanding for translations with OpenAI. ",
+          "editPresentation": "multilineText"
+        },        
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
           "items": {
