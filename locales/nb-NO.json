@@ -36,6 +36,7 @@
   "config.annotation_in_place": "",
   "config.annotation_max_length": "Maksimalt antall tegn vist i hjelpevindu. Resterende del vil bli vist som (...)",
   "config.annotations": "Slå på hjelpevindu",
+  "config.auto_detect_indent": "",
   "config.auto_detection": "",
   "config.baidu_app_secret": "",
   "config.baidu_appid": "",
@@ -88,7 +89,9 @@
   "config.review_remove_on_resolved": "",
   "config.review_username": "",
   "config.show_flags": "",
+  "config.sort_compare": "",
   "config.sort_keys": "Lagre med sortert json/yaml",
+  "config.sort_locale": "",
   "config.source_language": "Kildespråk for maskinoversettelse",
   "config.tab_style": "",
   "config.target_picking_strategy": "",
@@ -234,5 +237,6 @@
   "view.usage_keys_in_use": "",
   "view.usage_keys_missing": "",
   "view.usage_keys_not_in_use": "",
-  "view.usage_report_none": ""
+  "view.usage_report_none": "",
+  "นามสกุล": ""
 }

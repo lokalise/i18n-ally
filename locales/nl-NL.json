@@ -36,6 +36,7 @@
   "config.annotation_in_place": "",
   "config.annotation_max_length": "Max. aantal karakters zichtbaar binnen inline annotaties. Overschreden delen worden getoond als ellipses (...)",
   "config.annotations": "Inline annotaties inschakelen.",
+  "config.auto_detect_indent": "",
   "config.auto_detection": "",
   "config.baidu_app_secret": "",
   "config.baidu_appid": "",
@@ -88,7 +89,9 @@
   "config.review_remove_on_resolved": "",
   "config.review_username": "",
   "config.show_flags": "",
+  "config.sort_compare": "",
   "config.sort_keys": "Sleutels sorteren bij opslaan van JSON/YAML bestanden",
+  "config.sort_locale": "",
   "config.source_language": "Brontaal voor automatisch vertalen",
   "config.tab_style": "Tab stijl voor locale bestanden",
   "config.target_picking_strategy": "",
@@ -234,5 +237,6 @@
   "view.usage_keys_in_use": "{0} sleutels zijn in gebruik",
   "view.usage_keys_missing": "{0} ontbrekende sleutels",
   "view.usage_keys_not_in_use": "{0} sleutels zijn NIET in gebruik",
-  "view.usage_report_none": "Klik op verversen om sleutelgebruik te analyseren"
+  "view.usage_report_none": "Klik op verversen om sleutelgebruik te analyseren",
+  "นามสกุล": ""
 }

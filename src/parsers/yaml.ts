@@ -3,6 +3,7 @@ import YamlLex from 'yaml'
 import _ from 'lodash'
 import { Parser } from './base'
 import { KeyInDocument, Config } from '~/core'
+import { determineYamlTabSize } from '~/utils/indent'
 
 export class YamlParser extends Parser {
   id = 'yaml'
@@ -15,13 +16,18 @@ export class YamlParser extends Parser {
     return YAML.load(text, Config.parserOptions?.yaml?.load) as Object
   }
 
-  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined) {
+  async dump(object: object, sort: boolean, compare: ((x: string, y: string) => number) | undefined, detectedIndentSize: number) {
     object = JSON.parse(JSON.stringify(object))
+    const indent = this.options.useDetectIndent ? detectedIndentSize : this.options.indent
     return YAML.dump(object, {
-      indent: this.options.indent,
+      indent,
       sortKeys: sort ? (compare ?? true) : false,
       ...Config.parserOptions?.yaml?.dump,
     })
+  }
+
+  override detectIndentSize(text: string): number | null {
+    return determineYamlTabSize(text)
   }
 
   annotationSupported = true
