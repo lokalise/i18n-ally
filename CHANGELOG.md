@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.12.1](https://github.com/lokalise/i18n-ally/compare/v2.12.0...v2.12.1) (2024-04-15)
+
+
+### ⚡ Features
+
+* add support for `@jsverse/transloco` ([c08c5a7](https://github.com/lokalise/i18n-ally/commit/c08c5a7942e46f32fceac4d134f361d697478517))
+
 ## [2.12.0](https://github.com/lokalise/i18n-ally/compare/v2.11.1...v2.12.0) (2023-09-23)
 
 ### ⚡ Features

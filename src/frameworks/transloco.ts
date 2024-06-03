@@ -10,6 +10,7 @@ export default class TranslocoFramework extends Framework {
   detection = {
     packageJSON: [
       '@ngneat/transloco',
+      '@jsverse/transloco',
     ],
   }
 
