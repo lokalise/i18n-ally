@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.12.1",
+  "version": "2.12.0",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -18,8 +18,8 @@
   "main": "./dist/extension",
   "scripts": {
     "release": "nr release:patch",
-    "release:minor": "standard-version --release-as minor && git push fork --follow-tags",
-    "release:patch": "standard-version --release-as patch && git push fork --follow-tags",
+    "release:minor": "standard-version --release-as minor && git push --follow-tags",
+    "release:patch": "standard-version --release-as patch && git push --follow-tags",
     "gh:release": "conventional-github-releaser -p angular",
     "build": "rimraf dist && nr i18n:build && nr main:build && nr editor:build && esno scripts/post-build.ts",
     "dev": "run-p *:dev",

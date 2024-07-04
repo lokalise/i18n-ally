@@ -2,22 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [2.12.1](https://github.com/lokalise/i18n-ally/compare/v2.12.0...v2.12.1) (2024-07-04)
-
-
-### 🐞 Bug Fixes
-
-* fix word spelling errors ([#1129](https://github.com/lokalise/i18n-ally/issues/1129)) ([0427255](https://github.com/lokalise/i18n-ally/commit/0427255756876fff75493d9ba85648ce52b9c9e4))
-* upgrade babel to 7.23.5 ([#1080](https://github.com/lokalise/i18n-ally/issues/1080)) ([a4004a5](https://github.com/lokalise/i18n-ally/commit/a4004a57e2ed6c57c98180a9ae6e8c73e90e0585))
-
-
-### ⚡ Features
-
-* add key prefix sample to existent react-i18next example ([a5869db](https://github.com/lokalise/i18n-ally/commit/a5869db8d92b780b9c63dff1578506673a161cd8))
-* add key prefix support for react-i18next ([0cc5f3b](https://github.com/lokalise/i18n-ally/commit/0cc5f3b647cecd65b74eb65eb6372975fe6f2277))
-* add key prefix to completion ([eea5163](https://github.com/lokalise/i18n-ally/commit/eea51634facf63eeec8c233afcb866961a3a0fb3))
-* Update `next-intl` to support latest release ([#1048](https://github.com/lokalise/i18n-ally/issues/1048)) ([b5b16b2](https://github.com/lokalise/i18n-ally/commit/b5b16b2641e745018068e88099241405ff122119))
-
 ## [2.12.0](https://github.com/lokalise/i18n-ally/compare/v2.11.1...v2.12.0) (2023-09-23)
 
 ### ⚡ Features
