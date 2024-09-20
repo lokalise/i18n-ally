@@ -22,6 +22,7 @@ export class Config {
     'encoding',
     'namespace',
     'defaultNamespace',
+    'namespaceDelimiters',
     'disablePathParsing',
     'readonly',
     'languageTagSystem',
@@ -144,6 +145,10 @@ export class Config {
 
   static get defaultNamespace(): string | undefined {
     return this.getConfig<string>('defaultNamespace')
+  }
+
+  static get namespaceDelimiters(): string[] | undefined {
+    return this.getConfig<string[]>('namespaceDelimiters')
   }
 
   static get enabledFrameworks(): string[] | undefined {

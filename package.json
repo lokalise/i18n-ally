@@ -1273,6 +1273,13 @@
           "type": "string",
           "description": "%config.default_namespace%"
         },
+        "i18n-ally.namespaceDelimiters": {
+          "type": "array",
+          "item": {
+            "type": "string"
+          },
+          "description": "%config.namespace_delimiters%"
+        },
         "i18n-ally.derivedKeyRules": {
           "deprecationMessage": "Deprecated. Use \"i18n-ally.usage.derivedKeyRules\" instead."
         },

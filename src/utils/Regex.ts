@@ -10,9 +10,9 @@ export function handleRegexMatch(
   text: string,
   match: RegExpExecArray,
   dotEnding = false,
-  rewriteContext?: RewriteKeyContext,
-  scopes: ScopeRange[] = [],
-  namespaceDelimiters = [':', '/'],
+  rewriteContext: RewriteKeyContext | undefined,
+  scopes: ScopeRange[] | undefined,
+  namespaceDelimiters: string[],
   defaultNamespace?: string,
   starts: number[] = [],
 ): KeyInDocument | undefined {
@@ -23,7 +23,7 @@ export function handleRegexMatch(
 
   const start = match.index + matchString.lastIndexOf(key)
   const end = start + key.length
-  const scope = scopes.find(s => s.start <= start && s.end >= end)
+  const scope = (scopes ?? []).find(s => s.start <= start && s.end >= end)
   const quoted = QUOTE_SYMBOLS.includes(text[start - 1])
 
   const namespace = scope?.namespace || defaultNamespace
@@ -60,12 +60,12 @@ export function regexFindKeys(
   dotEnding = false,
   rewriteContext?: RewriteKeyContext,
   scopes: ScopeRange[] = [],
-  namespaceDelimiters?: string[],
 ): KeyInDocument[] {
   if (Config.disablePathParsing)
     dotEnding = true
 
   const defaultNamespace = Config.defaultNamespace
+  const namespaceDelimiters = Config.namespaceDelimiters || ['.', ':', '/', '|']
   const keys: KeyInDocument[] = []
   const starts: number[] = []
 
