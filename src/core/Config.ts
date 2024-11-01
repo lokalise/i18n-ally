@@ -180,7 +180,7 @@ export class Config {
     return this.getConfig<SortCompare>('sortCompare') || 'binary'
   }
 
-  static get sortLocale(): string | undefined{
+  static get sortLocale(): string | undefined {
     return this.getConfig<string>('sortLocale')
   }
 
@@ -333,6 +333,10 @@ export class Config {
 
   static get indent() {
     return this.getConfig<number>('indent') ?? 2
+  }
+
+  static get useDetectIndent() {
+    return this.getConfig<boolean>('useDetectIndent') ?? true
   }
 
   static get tabStyle() {
