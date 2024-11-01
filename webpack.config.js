@@ -15,6 +15,7 @@ const config = {
   },
   entry: './src/extension.ts',
   output: {
+    hashFunction: 'sha256',
     path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2',
