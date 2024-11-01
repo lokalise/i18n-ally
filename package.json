@@ -859,6 +859,13 @@
           },
           "description": "%config.enabled_parsers%"
         },
+        "i18n-ally.useTranslationFunctions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.use_translation_functions%"
+        },
         "i18n-ally.keysInUse": {
           "type": "array",
           "items": {
