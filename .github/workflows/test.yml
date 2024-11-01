@@ -16,10 +16,10 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 18
 
       # The vue I18next framework fixture tests rely on the documents getting recognized as `vue` documents by VSCode.
       # We set the `file.association` in the tests' .vscode/settings.json. However, `vue` is not a language identifier
