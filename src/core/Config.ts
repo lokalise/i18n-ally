@@ -18,6 +18,7 @@ export class Config {
     'includeSubfolders',
     'enabledFrameworks',
     'enabledParsers',
+    'useTranslationFunctions',
     'dirStructure',
     'encoding',
     'namespace',
@@ -148,6 +149,15 @@ export class Config {
 
   static get enabledFrameworks(): string[] | undefined {
     let ids = this.getConfig<string | string[]>('enabledFrameworks')
+    if (!ids || !ids.length)
+      return undefined
+    if (typeof ids === 'string')
+      ids = [ids]
+    return ids
+  }
+
+  static get useTranslationFunctions(): string[] | undefined {
+    let ids = this.getConfig<string | string[]>('useTranslationFunctions')
     if (!ids || !ids.length)
       return undefined
     if (typeof ids === 'string')

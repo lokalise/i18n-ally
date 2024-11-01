@@ -52,6 +52,7 @@
   "config.editor_prefer_editor": "Prefer to use webview editor for locale editing.",
   "config.enabled_frameworks": "Specify the supported framework(s) to enable. If no value is set, the extension will detect frameworks automatically.",
   "config.enabled_parsers": "Locale file format parsers. By default, It will be handled by activated frameworks",
+  "config.use_translation_functions": "Aliases for a useTranslation function that can set a scoped namespace. By default, It will use \"useTranslation\".",
   "config.encoding": "File encoding for reading and writing locale files",
   "config.full_reload_on_changed": "Perform a full reload on locale file changes. (for .js/.ts dynamic import)",
   "config.google_api_key": "API key for Google Translate (Optional)",
