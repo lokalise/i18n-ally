@@ -21,6 +21,8 @@ export const LanguageIdExtMap = {
   blade: 'php',
   svelte: 'svelte',
   xml: 'xml',
+  'glimmer-js': 'gjs',
+  'glimmer-ts': 'gts',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap
