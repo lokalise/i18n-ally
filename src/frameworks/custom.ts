@@ -77,9 +77,10 @@ class CustomFramework extends Framework {
 
   set monopoly(_) {}
 
-  refactorTemplates(keypath: string) {
+  refactorTemplates(keypath: string, args: string[] = []) {
     return (this.data?.refactorTemplates || ['$1'])
-      .map(i => i.replace(/\$1/g, keypath))
+      .filter(i => args.length || !i.includes('$2'))
+      .map(i => i.replace(/\$1/g, keypath).replace(/\$2/g, `[${args.join(',')}]`))
   }
 
   getScopeRange(document: TextDocument): ScopeRange[] | undefined {
