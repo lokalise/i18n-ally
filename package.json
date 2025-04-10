@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
   "name": "i18n-ally",
-  "version": "2.13.1",
+  "version": "2.13.2",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
@@ -1079,6 +1079,11 @@
           "type": "string",
           "default": null,
           "description": "%config.baidu_appid%"
+        },
+        "i18n-ally.translate.target.map": {
+          "type": "object",
+          "default": {},
+          "description": "%config.mapping_translation_locale%"
         },
         "i18n-ally.translate.baidu.apiSecret": {
           "type": "string",

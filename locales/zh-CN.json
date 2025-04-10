@@ -70,6 +70,7 @@
   "config.libretranslate_api_root": "",
   "config.locale_country_map": "将两个字母的区域设置代码映射到国家/地区代码的对象",
   "config.locales_paths": "翻译文件夹路径 (相对于项目根目录)，你也可以使用Glob匹配模式。",
+  "config.mapping_translation_locale": "机器翻译语言映射",
   "config.namespace": "启用命名空间。查看文档了解更多详细信息。",
   "config.openai_api_key": "",
   "config.openai_api_model": "",

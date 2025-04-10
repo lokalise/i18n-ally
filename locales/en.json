@@ -68,6 +68,7 @@
   "config.keystyle": "Locale key style",
   "config.language_tag_system": "Language tag system use are using.",
   "config.libretranslate_api_root": "LibreTranslate API root URL",
+  "config.mapping_translation_locale": "Machine translation language mapping",
   "config.locale_country_map": "An object to map two letters locale code to country code",
   "config.locales_paths": "Path to locales directory (relative to project root). Glob pattern is also acceptable.",
   "config.namespace": "Enable namespaces. Check out the docs for more details.",

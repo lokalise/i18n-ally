@@ -180,7 +180,7 @@ export class Config {
     return this.getConfig<SortCompare>('sortCompare') || 'binary'
   }
 
-  static get sortLocale(): string | undefined{
+  static get sortLocale(): string | undefined {
     return this.getConfig<string>('sortLocale')
   }
 
@@ -542,6 +542,10 @@ export class Config {
     return await workspace
       .getConfiguration(EXT_NAMESPACE)
       .update(key, value, isGlobal)
+  }
+
+  static get translateTargetMap() {
+    return this.getConfig<Record<string, string>>('translate.target.map') ?? {}
   }
 
   static get baiduApiSecret() {

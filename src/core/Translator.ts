@@ -136,7 +136,7 @@ export class Translator {
         catch (err) {
           // eslint-disable-next-line no-console
           console.error(err)
-          failedJobs.push([job, err])
+          failedJobs.push([job, err as Error])
         }
         finished += 1
         progress.report({ increment, message })
@@ -254,9 +254,11 @@ export class Translator {
     const value = this.getValueOfKey(loader, keypath, source)
 
     try {
-      Log.info(`🌍 Translating "${keypath}" (${source}->${locale})`)
+      // In order to adapt to different machine translations. Here the target language is translated via map.
+      const target = Config.translateTargetMap[locale] ?? locale
+      Log.info(`🌍 Translating "${keypath}" (${source}->${target})`)
       this.start(keypath, locale)
-      const result = await this.translateText(value, source, locale)
+      const result = await this.translateText(value, source, target)
       this.end(keypath, locale)
 
       if (token?.isCancellationRequested)
@@ -318,7 +320,7 @@ export class Translator {
         break
       }
       catch (e) {
-        errors.push(e)
+        errors.push(e as Error)
       }
     }
 
