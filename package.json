@@ -1127,6 +1127,11 @@
           ],
           "description": "%config.openai_api_model%"
         },
+        "i18n-ally.translate.openai.customApiModel": {
+          "type": "string",
+          "default": null,
+          "description": "%config.openai_custom_api_model%"
+        },
         "i18n-ally.usage.scanningIgnore": {
           "type": "array",
           "items": {

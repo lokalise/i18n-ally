@@ -180,7 +180,7 @@ export class Config {
     return this.getConfig<SortCompare>('sortCompare') || 'binary'
   }
 
-  static get sortLocale(): string | undefined{
+  static get sortLocale(): string | undefined {
     return this.getConfig<string>('sortLocale')
   }
 
@@ -582,6 +582,10 @@ export class Config {
 
   static get openaiApiModel() {
     return this.getConfig<string>('translate.openai.apiModel') ?? 'gpt-3.5-turbo'
+  }
+
+  static get openaiCustomApiModel() {
+    return this.getConfig<string>('translate.openai.customApiModel') ?? ''
   }
 
   static get telemetry(): boolean {

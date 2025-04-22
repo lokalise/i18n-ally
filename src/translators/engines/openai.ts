@@ -10,7 +10,7 @@ export default class OpenAITranslate extends TranslateEngine {
     let apiKey = Config.openaiApiKey;
     let apiRoot = this.apiRoot;
     if (Config.openaiApiRoot) apiRoot = Config.openaiApiRoot.replace(/\/$/, "");
-    let model = Config.openaiApiModel;
+    let model = Config.openaiCustomApiModel.length > 0 ? Config.openaiCustomApiModel : Config.openaiApiModel;
 
     const response = await axios.post(
       `${apiRoot}/v1/chat/completions`,

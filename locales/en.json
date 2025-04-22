@@ -73,6 +73,7 @@
   "config.namespace": "Enable namespaces. Check out the docs for more details.",
   "config.openai_api_key": "OpenAI API key",
   "config.openai_api_model": "OpenAI chatgpt model",
+  "config.openai_custom_api_model": "OpenAI custom chatgpt model",
   "config.openai_api_root": "OpenAI API root URL",
   "config.path_matcher": "Match path for custom locale/namespace. Check out the docs for more details.",
   "config.preferred_delimiter": "Preferred delimiter of composed keypath, default to \"-\"(dash)",
