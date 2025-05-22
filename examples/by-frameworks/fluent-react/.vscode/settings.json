@@ -1,0 +1,4 @@
+{
+	"i18n-ally.localesPaths": ["src/locales"],
+	"i18n-ally.enabledFrameworks": ["fluent-react"]
+}

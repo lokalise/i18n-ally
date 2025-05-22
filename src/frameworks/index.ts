@@ -31,6 +31,7 @@ import GeneralFramework from './general'
 import LinguiFramework from './lingui'
 import JekyllFramework from './jekyll'
 import FluentVueSFCFramework from './fluent-vue-sfc'
+import FluentReactFramework from './fluent-react'
 import i18n from '~/i18n'
 import { Log } from '~/utils'
 
@@ -55,6 +56,7 @@ export const frameworks: Framework[] = [
   new NextInternationalFramework(),
   new I18nTagFramework(),
   new FluentVueFramework(),
+  new FluentReactFramework(),
   new PhpJoomlaFramework(),
   new LaravelFramework(),
   new ChromeExtensionFramework(),
