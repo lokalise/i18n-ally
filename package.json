@@ -834,6 +834,7 @@
               "jekyll",
               "fluent-vue",
               "fluent-vue-sfc",
+              "fluent-react",
               "next-intl",
               "next-international"
             ]
