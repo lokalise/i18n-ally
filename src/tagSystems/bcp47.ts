@@ -8,7 +8,22 @@ export class BCP47 extends BaseTagSystem {
     if (!locale)
       return fallback
 
-    return bcp47.stringify(bcp47.parse(locale, { normalize: strict, forgiving: !strict })) || fallback
+    // First, parse with bcp47
+    const parsed = bcp47.parse(locale, { normalize: strict, forgiving: !strict })
+    // If the parsed result has a region, or language+region can restore the original locale, use stringify
+    if (parsed && parsed.language) {
+      if (parsed.region)
+        return bcp47.stringify(parsed)
+        // Compatible with underscore formats like zh_CN, zh_TW, en_US
+      if (locale.match(/^[a-z]{2,3}[_-][A-Z]{2,4}$/)) {
+        // Convert to standard BCP47 format zh-CN
+        return locale.replace('_', '-')
+      }
+      // Compatible with cases where only the main language is present
+      return parsed.language
+    }
+    // If parsing fails, return the original locale directly
+    return locale || fallback
   }
 
   toBCP47(locale: string) {

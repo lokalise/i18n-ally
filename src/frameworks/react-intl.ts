@@ -7,7 +7,7 @@ class ReactFramework extends Framework {
 
   detection= {
     packageJSON: [
-      'react-intl'
+      'react-intl',
     ],
   }
 
@@ -21,8 +21,11 @@ class ReactFramework extends Framework {
 
   // for visualize the regex, you can use https://regexper.com/
   usageMatchRegex = [
-    // general jsx attrs
-    '[^\\w\\d](?:i18nKey=|FormattedMessage[ (]\\s*id=|t\\(\\s*)[\'"`]({key})[\'"`]',
+    // Support for i18nKey= and t( calls, key supports single, double, and back quotes
+    '[^\\w\\d](?:i18nKey=|t\\(\\s*)[\'"`]({key})[\'"`]',
+    // Since <FormattedMessage ... id=... /> may have multiple attributes and line breaks, handle it separately
+    // Allow attribute line breaks and whitespace, support id="xxx.xxx", id={'xxx.xxx'}, etc.
+    '<FormattedMessage[\\s\\S]*?id=\\s*\\{?\\s*[\'"`]([a-zA-Z0-9_.\\-]+)[\'"`]\\s*\\}?',
     // useIntl() hooks, https://github.com/formatjs/react-intl/blob/master/docs/API.md#useintl-hook
     '[^\\w\\d](?:formatPlural|formatNumber|formatDate|formatTime|formatHTMLMessage|formatMessage|formatRelativeTime)\\(.*?[\'"`]?id[\'"`]?:\\s*[\'"`]({key})[\'"`]',
     '<Trans>({key})<\\/Trans>',
