@@ -37,7 +37,7 @@ export class EcmascriptParser extends Parser {
     const compilerOptions = {
       importHelpers: false,
       allowJs: true,
-      module: 'commonjs',
+      module: 'ESNext',
       ...Config.parsersTypescriptCompilerOption,
     }
     const options = JSON.stringify(compilerOptions).replace(/"/g, '\\"')
