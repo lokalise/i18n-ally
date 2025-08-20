@@ -180,7 +180,7 @@ export class Config {
     return this.getConfig<SortCompare>('sortCompare') || 'binary'
   }
 
-  static get sortLocale(): string | undefined{
+  static get sortLocale(): string | undefined {
     return this.getConfig<string>('sortLocale')
   }
 
@@ -570,6 +570,14 @@ export class Config {
 
   static get libreTranslateApiRoot() {
     return this.getConfig<string | null | undefined>('translate.libre.apiRoot')
+  }
+
+  static get languageWireApiKey() {
+    return this.getConfig<string | null | undefined>('translate.languagewire.apiKey')
+  }
+
+  static get languageWireApiRoot() {
+    return this.getConfig<string | null | undefined>('translate.languagewire.apiRoot')
   }
 
   static get openaiApiKey() {

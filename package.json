@@ -1042,7 +1042,8 @@
               "deepl",
               "libretranslate",
               "baidu",
-              "openai"
+              "openai",
+              "languagewire"
             ]
           },
           "default": [
@@ -1104,6 +1105,16 @@
           "type": "string",
           "default": null,
           "description": "%config.openai_api_key%"
+        },
+        "i18n-ally.translate.languagewire.apiKey": {
+          "type": "string",
+          "default": null,
+          "description": "%config.languagewire_api_key%"
+        },
+        "i18n-ally.translate.languagewire.apiRoot": {
+          "type": "string",
+          "default": "https://lwt.languagewire.com/p/api/v1",
+          "description": "%config.languagewire_api_root%"
         },
         "i18n-ally.translate.openai.apiRoot": {
           "type": "string",

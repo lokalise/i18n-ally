@@ -5,6 +5,7 @@ import DeepLTranslateEngine from './engines/deepl'
 import LibreTranslateEngine from './engines/libretranslate'
 import BaiduTranslate from './engines/baidu'
 import OpenAITranslateEngine from './engines/openai'
+import LanguageWireTranslate from './engines/languagewire'
 
 export class Translator {
   engines: Record<string, TranslateEngine> ={
@@ -14,6 +15,7 @@ export class Translator {
     'libretranslate': new LibreTranslateEngine(),
     'baidu': new BaiduTranslate(),
     'openai': new OpenAITranslateEngine(),
+    'languagewire': new LanguageWireTranslate(),
   }
 
   async translate(options: TranslateOptions & { engine: string }) {
@@ -30,6 +32,7 @@ export {
   LibreTranslateEngine,
   BaiduTranslate,
   OpenAITranslateEngine,
+  LanguageWireTranslate,
 }
 
 export * from './engines/base'
