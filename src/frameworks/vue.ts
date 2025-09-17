@@ -27,6 +27,7 @@ class VueFramework extends Framework {
     'javascriptreact',
     'typescriptreact',
     'ejs',
+    'mpx',
   ]
 
   // for visualize the regex, you can use https://regexper.com/

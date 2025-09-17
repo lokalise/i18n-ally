@@ -21,6 +21,7 @@ export const LanguageIdExtMap = {
   blade: 'php',
   svelte: 'svelte',
   xml: 'xml',
+  mpx: 'mpx',
 }
 
 export type LanguageId = keyof typeof LanguageIdExtMap
