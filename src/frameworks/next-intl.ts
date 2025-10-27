@@ -1,7 +1,15 @@
 import { TextDocument } from 'vscode'
 import { Framework, ScopeRange } from './base'
+import { KeyStyle, RewriteKeyContext, RewriteKeySource } from '~/core'
 import { LanguageId } from '~/utils'
-import { RewriteKeySource, RewriteKeyContext, KeyStyle } from '~/core'
+
+export interface NextIntlScopeRange extends ScopeRange {
+  functionName?: string
+}
+
+export const isNextIntlScopeRange = (scope: ScopeRange): scope is NextIntlScopeRange => {
+  return (scope as NextIntlScopeRange).functionName !== undefined
+}
 
 class NextIntlFramework extends Framework {
   id = 'next-intl'
@@ -27,17 +35,18 @@ class NextIntlFramework extends Framework {
   ]
 
   usageMatchRegex = [
+    // Match: t, tSpecific, tFoo (capture the full variable name to use in scope detection)
     // Basic usage
-    '[^\\w\\d]t\\s*\\(\\s*[\'"`]({key})[\'"`]',
+    '[^\\w\\d](t(?:[A-Z]\\w*)?)\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Rich text
-    '[^\\w\\d]t\\s*\.rich\\s*\\(\\s*[\'"`]({key})[\'"`]',
+    '[^\\w\\d](t(?:[A-Z]\\w*)?)\\s*\\.rich\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Markup text
-    '[^\\w\\d]t\\s*\.markup\\s*\\(\\s*[\'"`]({key})[\'"`]',
+    '[^\\w\\d](t(?:[A-Z]\\w*)?)\\s*\\.markup\\s*\\(\\s*[\'"`]({key})[\'"`]',
 
     // Raw text
-    '[^\\w\\d]t\\s*\.raw\\s*\\(\\s*[\'"`]({key})[\'"`]',
+    '[^\\w\\d](t(?:[A-Z]\\w*)?)\\s*\\.raw\\s*\\(\\s*[\'"`]({key})[\'"`]',
   ]
 
   refactorTemplates(keypath: string) {
@@ -75,36 +84,32 @@ class NextIntlFramework extends Framework {
     return dottedKey
   }
 
-  getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+  getScopeRange(document: TextDocument): NextIntlScopeRange[] | undefined {
     if (!this.languageIds.includes(document.languageId as any))
       return
 
-    const ranges: ScopeRange[] = []
+    const ranges: NextIntlScopeRange[] = []
     const text = document.getText()
 
-    // Find matches of `useTranslations` and `getTranslations`. Later occurences will
-    // override previous ones (this allows for multiple components with different
-    // namespaces in the same file). Note that `getTranslations` can either be called
-    // with a single string argument or an object with a `namespace` key.
-    const regex = /(useTranslations\(\s*|getTranslations\(\s*|namespace:\s+)(['"`](.*?)['"`])?/g
-    let prevGlobalScope = false
+    // Find matches of `useTranslations` and `getTranslations` and extracts the variable names.
+    // If there are multiple occurrences in the same file, there will be multiple, overlapping scopes.
+    // During resolution, the variable name will be used to determine which scope the key belongs to, allowing multiple namespaces in the same file.
+    const regex = /(?:const|let|var)\s+(t(?:[A-Z]\w*)?)\s*=\s*(?:await\s+)?(useTranslations|getTranslations)\s*\(\s*['"`](.*?)['"`]\)/g
+
     for (const match of text.matchAll(regex)) {
       if (typeof match.index !== 'number')
         continue
 
+      const variableName = match[1]
       const namespace = match[3]
 
-      // End previous scope
-      if (prevGlobalScope)
-        ranges[ranges.length - 1].end = match.index
-
-      // Start a new scope if a namespace is provided
+      // Add a new scope if a namespace is provided
       if (namespace) {
-        prevGlobalScope = true
         ranges.push({
           start: match.index,
           end: text.length,
           namespace,
+          functionName: variableName,
         })
       }
     }
