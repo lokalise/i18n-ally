@@ -100,6 +100,14 @@ export class KeyDetector {
     let filepath = ''
     if (typeof document !== 'string') {
       filepath = document.uri.fsPath
+
+      // Try framework-specific detection first (e.g. AST based)
+      for (const framework of Global.enabledFrameworks) {
+        const detected = framework.detectKeys?.(document)
+        if (detected)
+          return detected
+      }
+
       if (this._get_keys_cache[filepath])
         return this._get_keys_cache[filepath]
 

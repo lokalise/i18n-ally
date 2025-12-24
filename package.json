@@ -270,6 +270,12 @@
         "icon": "$(refresh)"
       },
       {
+        "command": "i18n-ally.export-usage-report",
+        "category": "%extname%",
+        "title": "%command.export_usage_report%",
+        "icon": "$(export)"
+      },
+      {
         "command": "i18n-ally.support",
         "category": "%extname%",
         "title": "%feedback.support%"
@@ -610,8 +616,13 @@
       "view/title": [
         {
           "command": "i18n-ally.refresh-usage",
-          "group": "navigation",
+          "group": "navigation@1",
           "when": "view =~ /i18n-ally-locales-usage/"
+        },
+        {
+          "command": "i18n-ally.export-usage-report",
+          "group": "navigation@2",
+          "when": "view =~ /i18n-ally-locales-usage/ && i18n-ally-has-report"
         },
         {
           "command": "i18n-ally.new-key",

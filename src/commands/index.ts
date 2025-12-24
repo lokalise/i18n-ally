@@ -12,6 +12,7 @@ import deepl from './deepl'
 import gotoRange from './gotoRange'
 import gotoNextUsage from './gotoNextUsage'
 import batchHardStringsExtract from './extractStringBulk'
+import exportUsageReport from './exportUsageReport'
 import { ExtensionModule } from '~/modules'
 
 const m: ExtensionModule = (ctx) => {
@@ -24,6 +25,7 @@ const m: ExtensionModule = (ctx) => {
     batchHardStringsExtract(ctx),
     help(ctx),
     refreshUsageReport(ctx),
+    exportUsageReport(ctx),
     editor(ctx),
     review(ctx),
     deepl(ctx),

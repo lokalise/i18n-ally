@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { TextDocument } from 'vscode'
 import { LanguageId } from '~/utils'
-import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle, Config } from '~/core'
+import { DirStructure, OptionalFeatures, RewriteKeySource, RewriteKeyContext, DataProcessContext, KeyStyle, Config, KeyInDocument } from '~/core'
 import { DetectionResult } from '~/core/types'
 
 export type FrameworkDetectionDefine = string[] | { none?: string[]; every?: string[]; any?: string[] } | ((packages: string[], root: string) => boolean)
@@ -59,6 +59,13 @@ export abstract class Framework {
    * Tell the key dector how to add prefix scopes
    */
   getScopeRange(document: TextDocument): ScopeRange[] | undefined {
+    return undefined
+  }
+
+  /**
+   * Detect keys using custom logic (e.g. AST) instead of regex
+   */
+  detectKeys(document: TextDocument): KeyInDocument[] | undefined {
     return undefined
   }
 
