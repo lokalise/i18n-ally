@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1350" height="900">
+	<rect width="1350" height="900" fill="#fff"/>
+	<rect x="600" width="1350" height="100" fill="#000"/>
+	<rect x="600" y="200" width="1350" height="100" fill="#000"/>
+	<rect y="400" width="1350" height="100" fill="#000"/>
+	<rect y="600" width="1350" height="100" fill="#000"/>
+	<rect y="800" width="1350" height="100" fill="#000"/>
+	<use xlink:href="#ermine" x="-225" y="-122.5"/>
+	<use xlink:href="#ermine" x="-75" y="-122.5"/>
+	<use xlink:href="#ermine" x="75" y="-122.5"/>
+	<use xlink:href="#ermine" x="225" y="-122.5"/>
+	<use xlink:href="#ermine" x="-150"/>
+	<g id="ermine" fill="#000">
+		<use xlink:href="#s" transform="rotate(-90 300,167.5)"/>
+		<path id="s" d="M 300,167.5 l -9,-13.5 l 9,-22.5 l 9,22.5 z"/>
+		<use xlink:href="#s" transform="rotate(90 300,167.5)"/>
+		<path d="M 300,167.5 l 40.5,99 l -31.5,-13.5 l -9,18 l -9,-18 l -31.5,13.5 z"/>
+	</g>
+	<use xlink:href="#ermine" x="150"/>
+	<use xlink:href="#ermine" x="-225" y="122.5"/>
+	<use xlink:href="#ermine" x="-75" y="122.5"/>
+	<use xlink:href="#ermine" x="75" y="122.5"/>
+	<use xlink:href="#ermine" x="225" y="122.5"/>
+<script xmlns=""/></svg>
