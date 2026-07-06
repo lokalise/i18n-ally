@@ -249,9 +249,13 @@ class DeeplGlossaries {
    */
   private async getGlossaryIds(targetLanguage: string, sourceLanguage: string): Promise<Array<string>> {
     const glossaries = await this.readGlossaryList()
+    const cleanSourceParam = sourceLanguage.split(/[-_]/)[0].toLowerCase();
+    const cleanTargetParam = targetLanguage.split(/[-_]/)[0].toLowerCase();
 
     return glossaries.filter(({ source_lang, target_lang }) => {
-          return source_lang === sourceLanguage && target_lang === targetLanguage
+          const cleanSourceGlossary = source_lang.split(/[-_]/)[0].toLowerCase();
+          const cleanTargetGlossary = target_lang.split(/[-_]/)[0].toLowerCase();
+          return cleanSourceGlossary === cleanSourceParam && cleanTargetGlossary === cleanTargetParam
         })
         .map(glossary => glossary.glossary_id)
   }

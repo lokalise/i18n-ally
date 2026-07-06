@@ -1,7 +1,7 @@
 {
   "publisher": "lokalise",
-  "name": "i18n-ally",
-  "version": "2.13.1",
+  "name": "i18n-ally-deepl-glossaries-version",
+  "version": "2.13.2",
   "displayName": "i18n Ally",
   "description": "🌍 All in one i18n extension for VS Code",
   "keywords": [
